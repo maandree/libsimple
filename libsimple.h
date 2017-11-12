@@ -499,15 +499,10 @@ extern int libsimple_default_failure_exit;
 #endif
 
 
-#define LIBSIMPLE_INTERFACE   0x0001
-#define LIBSIMPLE_NO_HOSTNAME 0x0002
-
-
 #define FREE(PTR) (free(PTR), (PTR) = NULL, 0)
 
 
 #define CLOSE(FD) ((FD) >= 0 ? (close(FD), (FD) = -1, 0) : 0)
-
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
