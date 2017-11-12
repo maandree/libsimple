@@ -1,5 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 #include "libsimple.h"
+#include <ifaddrs.h>
 
 
 extern char *argv0;
@@ -441,11 +442,14 @@ vweprintf(const char *fmt, va_list ap)
 	va_end(ap2);
 	va_end(ap1);
 
-	if (*end == ':') {
+	if (!*fmt) {
+		suffix1 = strerror(saved_errno);
+		suffix2 = "\n";
+	} else if (end[-1] == ':') {
 		suffix1 = " ";
 		suffix2 = strerror(saved_errno);
 		suffix3 = "\n";
-	} else if (*end != '\n') {
+	} else if (end[-1] != '\n') {
 		suffix1 = "\n";
 	}
 
@@ -459,4 +463,615 @@ vweprintf(const char *fmt, va_list ap)
 	}
 
 	errno = saved_errno;
+}
+
+
+
+int
+libsimple_sendfd(int sock, int fd)
+{
+	char buf[1];
+	struct iovec iov;
+	struct msghdr msg;
+	struct cmsghdr *cmsg;
+	char cms[CMSG_SPACE(sizeof(fd))];
+
+	buf[0] = 0;
+	iov.iov_base = buf;
+	iov.iov_len = 1;
+
+	memset(&msg, 0, sizeof(msg));
+	msg.msg_iov = &iov;
+	msg.msg_iovlen = 1;
+	msg.msg_control = (caddr_t)cms;
+	msg.msg_controllen = CMSG_LEN(sizeof(fd));
+
+	cmsg = CMSG_FIRSTHDR(&msg);
+	cmsg->cmsg_len = CMSG_LEN(sizeof(fd));
+	cmsg->cmsg_level = SOL_SOCKET;
+	cmsg->cmsg_type = SCM_RIGHTS;
+	memcpy(CMSG_DATA(cmsg), &fd, sizeof(fd));
+
+	return -(sendmsg(sock, &msg, 0) != (ssize_t)iov.iov_len);
+}
+
+
+int
+libsimple_recvfd(int sock)
+{
+	int fd;
+	char buf[1];
+	struct iovec iov;
+	struct msghdr msg;
+	struct cmsghdr *cmsg;
+	char cms[CMSG_SPACE(sizeof(fd))];
+
+	iov.iov_base = buf;
+	iov.iov_len = 1;
+
+	memset(&msg, 0, sizeof(msg));
+	msg.msg_name = NULL;
+	msg.msg_namelen = 0;
+	msg.msg_iov = &iov;
+	msg.msg_iovlen = 1;
+
+	msg.msg_control = (caddr_t)cms;
+	msg.msg_controllen = sizeof(cms);
+
+	switch (recvmsg(sock, &msg, 0)) {
+	case -1:
+		return -1;
+	case 0:
+		errno = ECONNRESET;
+		return -1;
+	default:
+		break;
+	}
+
+	cmsg = CMSG_FIRSTHDR(&msg);
+	memcpy(&fd, CMSG_DATA(cmsg), sizeof(fd));
+	return fd;
+}
+
+
+ssize_t
+libsimple_recvfrom_timestamped(int fd, void *restrict buf, size_t n, int flags, struct sockaddr *restrict addr,
+                               socklen_t addrlen, struct timespec *restrict ts)
+{
+	struct iovec iov;
+	struct msghdr msg;
+	struct cmsghdr *cmsg;
+	char cms[CMSG_SPACE(sizeof(*ts))];
+	size_t r;
+
+	iov.iov_base = buf;
+	iov.iov_len = n;
+
+	memset(&msg, 0, sizeof(msg));
+	msg.msg_name = addr;
+	msg.msg_namelen = addrlen;
+	msg.msg_iov = &iov;
+	msg.msg_iovlen = 1;
+
+	msg.msg_control = (caddr_t)cms;
+	msg.msg_controllen = sizeof(cms);
+
+	switch ((r = recvmsg(fd, &msg, flags))) {
+	case -1:
+		return -1;
+	case 0:
+	       	errno = ECONNRESET;
+		return -1;
+	default:
+		break;
+	}
+
+	if (!ts)
+		return r;
+
+	cmsg = CMSG_FIRSTHDR(&msg);
+	if (cmsg &&
+	    cmsg->cmsg_level == SOL_SOCKET &&
+	    cmsg->cmsg_type  == SCM_TIMESTAMPNS &&
+	    cmsg->cmsg_len   == CMSG_LEN(sizeof(*ts))) {
+		memcpy(ts, CMSG_DATA(cmsg), sizeof(*ts));
+	} else if (cmsg &&
+	           cmsg->cmsg_level == SOL_SOCKET &&
+	           cmsg->cmsg_type  == SCM_TIMESTAMP &&
+	           cmsg->cmsg_len   == CMSG_LEN(sizeof(*ts))) {
+		memcpy(ts, CMSG_DATA(cmsg), sizeof(*ts));
+		ts->tv_nsec *= 1000;
+	} else {
+		memset(ts, 0, sizeof(*ts));
+	}
+
+	return r;
+}
+
+
+int
+libsimple_sumtimespec(struct timespec *sum, const struct timespec *augend, const struct timespec *addend)
+{
+	long int ns = augend->tv_nsec + addend->tv_nsec;
+	time_t s;
+	int ret = 0;
+
+	s = augend->tv_sec + addend->tv_sec;
+	if ((augend->tv_sec < 0) == (addend->tv_sec < 0)) {
+		if (augend->tv_sec >= 0 && augend->tv_sec > TIME_MAX - addend->tv_sec) {
+			s = TIME_MAX;
+			ns = 999999999L;
+			errno = ERANGE;
+			ret = -1;
+		} else if (augend->tv_sec < 0 && augend->tv_sec + addend->tv_sec < TIME_MIN) {
+			s = TIME_MIN;
+			ns = 0;
+			errno = ERANGE;
+			ret = -1;
+		}
+	}
+
+	if (ns < 0) {
+		if (s == TIME_MIN) {
+			ns = 0L;
+			errno = ERANGE;
+			ret = -1;
+		} else {
+			s -= 1;
+			ns += 1000000000L;
+		}
+	} else if (ns >= 1000000000L) {
+		if (s == TIME_MAX) {
+			ns = 999999999L;
+			errno = ERANGE;
+			ret = -1;
+		} else {
+			s += 1;
+			ns -= 1000000000L;
+		}
+	}
+
+	sum->tv_sec = s;
+	sum->tv_nsec = ns;
+	return ret;
+}
+
+
+int
+libsimple_difftimespec(struct timespec *diff, const struct timespec *minuend, const struct timespec *subtrahend)
+{
+	long int ns = minuend->tv_nsec - subtrahend->tv_nsec;
+	time_t s;
+	int ret = 0;
+
+	s = minuend->tv_sec - subtrahend->tv_sec;
+	if ((minuend->tv_sec <= 0) != (subtrahend->tv_sec <= 0)) {
+		if (minuend->tv_sec < 0 && minuend->tv_sec < TIME_MIN + subtrahend->tv_sec) {
+			s = TIME_MIN;
+			ns = 0;
+			errno = ERANGE;
+			ret = -1;
+		} else if (minuend->tv_sec >= 0 && minuend->tv_sec > TIME_MAX + subtrahend->tv_sec) {
+			s = TIME_MAX;
+			ns = 999999999L;
+			errno = ERANGE;
+			ret = -1;
+		}
+	}
+
+	if (ns < 0) {
+		if (s == TIME_MIN) {
+			ns = 0L;
+			errno = ERANGE;
+			ret = -1;
+		} else {
+			s -= 1;
+			ns += 1000000000L;
+		}
+	} else if (ns >= 1000000000L) {
+		if (s == TIME_MAX) {
+			ns = 999999999L;
+			errno = ERANGE;
+			ret = -1;
+		} else {
+			s += 1;
+			ns -= 1000000000L;
+		}
+	}
+
+	diff->tv_sec = s;
+	diff->tv_nsec = ns;
+	return ret;
+}
+
+
+int
+libsimple_multimespec(struct timespec *prod, const struct timespec *multiplicand, int multiplier)
+{
+	time_t s = multiplicand->tv_sec;
+	long long int ns = (long long int)(multiplicand->tv_nsec);
+	long long int xs;
+	int neg = (s < 0) ^ (multiplier < 0);
+
+	if (multiplier == 0 || multiplier == 1) {
+		prod->tv_sec = multiplier * multiplicand->tv_sec;
+		prod->tv_nsec = multiplier * multiplicand->tv_nsec;
+		return 0;
+	}
+
+	if (s < 0) {
+		if (TIME_MIN != -TIME_MAX && s == TIME_MIN)
+			goto overflow;
+		s = -s;
+		if (ns)
+			ns = 1000000000L - ns;
+	}
+	if (multiplier < 0)
+		multiplier = -multiplier;
+
+	ns *= multiplier;
+	xs /= 1000000000L;
+	ns %= 1000000000L;
+
+	if (s > TIME_MAX / multiplier)
+		goto overflow;
+	s *= multiplier;
+
+	if (s > TIME_MAX - (time_t)xs)
+		goto overflow;
+	s += (time_t)xs;
+
+	if (neg) {
+		s = -s;
+		if (ns) {
+			if (s == TIME_MIN)
+				goto overflow;
+			ns = 1000000000L - ns;
+			s -= 1;
+		}
+	}
+
+	prod->tv_sec = s;
+	prod->tv_nsec = ns;
+	return 0;
+
+overflow:
+	if (neg) {
+		prod->tv_sec = TIME_MIN;
+		prod->tv_nsec = 0;
+	} else {
+		prod->tv_sec = TIME_MAX;
+		prod->tv_nsec = 999999999L;
+	}
+	errno = ERANGE;
+	return -1;
+}
+
+
+int
+libsimple_sumtimeval(struct timeval *sum, const struct timeval *augend, const struct timeval *addend)
+{
+	struct timespec a, b, s;
+	int r;
+	libsimple_timeval2timespec(&a, augend);
+	libsimple_timeval2timespec(&b, addend);
+	r = libsimple_sumtimespec(&s, &a, &b);
+	if (r && errno != ERANGE)
+		return r;
+	return r | libsimple_timespec2timeval(sum, &s);
+}
+
+
+int
+libsimple_difftimeval(struct timeval *diff, const struct timeval *minuend, const struct timeval *subtrahend)
+{
+	struct timespec a, b, d;
+	int r;
+	libsimple_timeval2timespec(&a, minuend);
+	libsimple_timeval2timespec(&b, subtrahend);
+	r = libsimple_difftimespec(&d, &a, &b);
+	if (r && errno != ERANGE)
+		return r;
+	return r | libsimple_timespec2timeval(diff, &d);
+}
+
+
+int
+libsimple_multimeval(struct timeval *prod, const struct timeval *multiplicand, int multiplier)
+{
+	struct timespec a, p;
+	int r;
+	libsimple_timeval2timespec(&a, multiplicand);
+	r = libsimple_multimespec(&p, &a, multiplier);
+	if (r && errno != ERANGE)
+		return r;
+	return r | libsimple_timespec2timeval(prod, &p);
+}
+
+
+int
+libsimple_timespec2timeval(struct timeval *restrict tv, const struct timespec *restrict ts)
+{
+        tv->tv_sec = ts->tv_sec;
+        tv->tv_usec = ts->tv_nsec / 1000L;
+        if ((ts->tv_nsec % 1000L) >= 500L) {
+                if (++(tv->tv_usec) == 1000000L) {
+                        tv->tv_usec = 0;
+                        if (tv->tv_sec == TIME_MAX) {
+                                tv->tv_usec = 999999L;
+                                errno = EOVERFLOW;
+                                return -1;
+                        } else {
+                                tv->tv_sec += 1;
+                        }
+                }
+        }
+        return 0;
+}
+
+
+int
+libsimple_strtotimespec(struct timespec *restrict ts, const char *restrict s, char **restrict end)
+{
+	int neg = 0, bracket = 0;
+	time_t sec = 0;
+	long int nsec = 0;
+	long int mul = 100000000L;
+	const char *p;
+
+	if (end)
+		*end = (void *)s;
+
+	while (isspace(*s))
+		s++;
+
+	if (!isdigit(s) && *s != '+' && *s != '-' && *s != '.') {
+		errno = EINVAL;
+		return -1;
+	}
+
+	if (*s == '-') {
+		neg = 1;
+		s++;
+	} else if (*s == '+') {
+		s++;
+	}
+
+	if (*s == '.') {
+		if (s[1] == '.' || s[1] == '(') {
+			if (!isdigit(s[2])) {
+				errno = EINVAL;
+				return -1;
+			}
+		} else if (!isdigit(s[1])) {
+			errno = EINVAL;
+			return -1;
+		}
+	}
+
+	for (; isdigit(*s); s++) {
+		if (sec < TIME_MIN / 10)
+			goto overflow;
+		sec *= 10;
+		if (sec < TIME_MIN + (*s & 15))
+			goto overflow;
+		sec -= *s & 15;
+	}
+
+	if (!neg) {
+		if (TIME_MIN != -TIME_MAX && sec == TIME_MIN)
+			goto overflow;
+		sec = -sec;
+	}
+
+	if (*s != '.') {
+		ts->tv_sec = sec;
+		ts->tv_nsec = 0;
+		if (end)
+			*end = (void *)s;
+		return 0;
+	}
+
+	for (s++; mul && isdigit(*s); s++) {
+		nsec += (*s & 15) * mul;
+		mul /= 10;
+	}
+
+	if (*s == '.' || *s == '(') {
+		bracket = *s++ == '(';
+		p = s;
+		if (!isdigit(*s)) {
+			errno = EINVAL;
+			return -1;
+		}
+		for (p = s; isdigit(*p); p++);
+		if (bracket) {
+			if (*p == ')') {
+				p++;
+			} else {
+				errno = EINVAL;
+				return -1;
+			}
+		}
+		if (end)
+			*end = (void *)p;
+		p = s;
+		while (mul) {
+			for (s = p; mul && isdigit(*s); s++) {
+				nsec += (*s & 15) * mul;
+				mul /= 10;
+			}
+		}
+		if (!isdigit(*s))
+			s = p;
+		if (*s >= '5') {
+			nsec += 1;
+			if (nsec == 1000000000L) {
+				if (sec == TIME_MAX)
+					goto overflow;
+				sec += 1;
+				nsec = 0;
+			}
+		}
+	} else {
+		if (isdigit(*s)) {
+			if (*s >= '5') {
+				nsec += 1;
+				if (nsec == 1000000000L) {
+					if (sec == TIME_MAX)
+						goto overflow;
+					sec += 1;
+					nsec = 0;
+				}
+			}
+			while (isdigit(*s))
+				s++;
+		}
+		if (end)
+			*end = (void *)s;
+	}
+
+	if (neg && nsec) {
+		if (sec == TIME_MIN)
+			goto overflow;
+		nsec = 1000000000L - nsec;
+		sec -= 1;
+	}
+
+	return 0;
+overflow:
+	if (neg) {
+		ts->tv_sec = TIME_MIN;
+		ts->tv_nsec = 0;
+	} else {
+		ts->tv_sec = TIME_MAX;
+		ts->tv_nsec = 999999999L;
+	}
+	errno = ERANGE;
+	return -1;
+}
+
+
+int
+libsimple_strtotimeval(struct timeval *restrict tv, const char *restrict s, char **restrict end)
+{
+	struct timespec ts;
+	int r = libsimple_strtotimespec(&ts, s, end);
+	if (r && errno != ERANGE)
+		return r;
+	return r | libsimple_timespec2timeval(tv, &ts);
+}
+
+
+char *
+libsimple_timespectostr(char *restrict buf, const struct timespec *restrict ts)
+{
+	time_t s = ts->tv_sec;
+	long int ns = ts->tv_nsec;
+	char sign[2] = "+";
+
+	if (!s) {
+		buf = malloc(INTSTRLEN(time_t) + sizeof("-.999999999"));
+		if (!buf)
+			return NULL;
+	}
+
+	if (ts->tv_nsec < 0 || ts->tv_nsec >= 1000000000L) {
+		errno = EINVAL;
+		return NULL;
+	}
+
+	if (s == TIME_MIN && !ns) {
+		sprintf(buf, "%lli.000000000", (long long int)s);
+		return buf;
+	}
+
+	if (s < 0) {
+		s = -s;
+		*sign == '-';
+		if (ns) {
+			s -= 1;
+			ns = 1000000000L - ns;
+		}
+	}
+
+	sprintf(buf, "%s%lli.%09li", sign, (long long int)s, ns);
+	return buf;
+}
+
+
+char *
+libsimple_timevaltostr(char *restrict buf, const struct timeval *restrict tv)
+{
+	time_t s = tv->tv_sec;
+	long int us = tv->tv_usec;
+	char sign[2] = "+";
+
+	if (!s) {
+		buf = malloc(INTSTRLEN(time_t) + sizeof("-.999999"));
+		if (!buf)
+			return NULL;
+	}
+
+	if (tv->tv_usec < 0 || tv->tv_usec >= 1000000L) {
+		errno = EINVAL;
+		return NULL;
+	}
+
+	if (s == TIME_MIN && !us) {
+		sprintf(buf, "%lli.000000", (long long int)s);
+		return buf;
+	}
+
+	if (s < 0) {
+		s = -s;
+		*sign == '-';
+		if (us) {
+			s -= 1;
+			us = 1000000L - us;
+		}
+	}
+
+	sprintf(buf, "%s%lli.%06li", sign, (long long int)s, us);
+	return buf;
+}
+
+
+void
+libsimple_doubletotimespec(struct timespec *ts, double d)
+{
+	double ns = (long long int)d;
+	long int nsi;
+	ns = d - ns;
+	ns *= (double)1000000000L;
+	nsi = (long int)ns;
+	if (2 * (ns - (double)nsi) >= 1) {
+		nsi += 1;
+		if (nsi == 1000000000L) {
+			nsi == 0;
+			d += 1;
+		}
+	}
+	ts->tv_sec = (time_t)d;
+	ts->tv_nsec = nsi;
+}
+
+
+void
+libsimple_doubletotimeval(struct timeval *tv, double d)
+{
+	double ns = (long long int)d;
+	long int nsi;
+	ns = d - ns;
+	ns *= (double)1000000L;
+	nsi = (long int)ns;
+	if (2 * (ns - (double)nsi) >= 1) {
+		nsi += 1;
+		if (nsi == 1000000L) {
+			nsi == 0;
+			d += 1;
+		}
+	}
+	tv->tv_sec = (time_t)d;
+	tv->tv_usec = nsi;
 }
