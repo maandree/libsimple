@@ -1,0 +1,334 @@
+libsimple.h includes most POSIX header files so you do need to include lots of
+headers in your code, and defines macros and functions that are useful for most
+programs and libraries to simplify the code. It also provides *_MIN and *_MAX
+values for integer data types.
+
+Most functions are namespaced with `libsimple_` and aliased with macro
+definitions to unnamespaced names unless there already is a macro with that
+name.
+
+Programs using this library should define `char *argv0` and set it to
+the 0:th command line argument.
+
+
+
+CLOCK_MONOTONIC_RAW is defined to CLOCK_MONOTONIC unless CLOCK_MONOTONIC_RAW
+already exists.
+
+AF_LOCAL, AF_UNIX, AF_FILE, PF_LOCAL, PF_UNIX, and PF_FILE are defined to
+appropriate values provided that AF_LOCAL, AF_UNIX, or AF_FILE is already
+defined.
+
+The following macros are defined, unless already defined:
+
+	MIN(A, B)
+		Select the least of two values.
+
+	MAX(A, B)
+		Select the greatest of two values.
+
+	MIN3(A, B, C)
+		Select the least of three values.
+
+	MAX3(A, B, C)
+		Select the greatest of three values.
+
+	ELEMSOF(ARR)
+		Gets the number of elements in an array.
+
+	STRLEN(STR)
+		Gets the length of a string literal.
+
+	INTSTRLEN(TYPE)
+		Gets the maximum length any value with the integer type TYPE can
+		have in base 10.
+
+	TYPE_MAX(TYPE)
+		Get the greatest value storable in an integer type.
+
+	TYPE_MIN(TYPE)
+		Get the least value storable in an integer type.
+
+	FREE(PTR)
+		(free(PTR), (PTR) = NULL, 0)
+		Ensures that a pointer is not freed twiced.
+
+	CLOSE(FD)
+		((FD) >= 0 ? (close(FD), (FD) = -1, 0) : 0)
+		Ensures that errno is not modified when closing an
+		already closed file descriptor.
+
+	Maximum values:
+		BLKCNT64_MAX, BLKCNT_MAX, BLKSIZE_MAX, CC_MAX, CLOCKID_MAX,
+		CLOCK_MAX, DEV_MAX, FSBLKCNT64_MAX, FSBLKCNT_MAX,
+		FSFILCNT64_MAX, FSFILCNT_MAX, FSID_MAX, FSWORD_MAX, GID_MAX,
+		ID_MAX, INO64_MAX, INO_MAX, KEY_MAX, LOFF_MAX, MODE_MAX,
+		NLINK_MAX, OFF64_MAX, OFF_MAX, PID_MAX, QUAD_MAX, REGISTER_MAX,
+		RLIM64_MAX, RLIM_MAX, SOCKLEN_MAX, SPEED_MAX, SUSECONDS_MAX,
+		TCFLAG_MAX, TIMER_MAX, TIME_MAX, UID_MAX, USECONDS_MAX,
+		U_QUAD_MAX
+
+	Minimum values:
+		BLKCNT64_MIN, BLKCNT_MIN, BLKSIZE_MIN, CC_MIN, CLOCKID_MIN,
+		CLOCK_MIN, DEV_MIN, FSBLKCNT64_MIN, FSBLKCNT_MIN,
+		FSFILCNT64_MIN, FSFILCNT_MIN, FSID_MIN, FSWORD_MIN, GID_MIN,
+		ID_MIN, INO64_MIN, INO_MIN, KEY_MIN, LOFF_MIN, MODE_MIN,
+		NLINK_MIN, OFF64_MIN, OFF_MIN, PID_MIN, QUAD_MIN, REGISTER_MIN,
+		RLIM64_MIN, RLIM_MIN, SOCKLEN_MIN, SPEED_MIN, SUSECONDS_MIN,
+		TCFLAG_MIN, TIMER_MIN, TIME_MIN, UID_MIN, USECONDS_MIN,
+		U_QUAD_MIN
+
+The following functions are defined (some as inline functions):
+
+	void *libsimple_rawmemchr(const void *, int)
+		Memchr without boundary check.
+
+	void *libsimple_memrchr(const void *, int, size_t)
+		Like memchr, except finds the last occurrence.
+
+	void *libsimple_rawmemrchr(const void *, int, size_t)
+		libsimple_memrchr without boundary check.
+
+	char *libsimple_strchrnul(const char *, int)
+		Like strchr, except returns the end if not found.
+
+	char *libsimple_strend(const char *s)
+		strchr(s, '\0')
+
+	char *libsimple_inchrset(int c, const char *s)
+		c && strchr(s, c)
+
+	void *libsimple_memdup(const void *, size_t)
+		Duplicate a memory segment.
+
+	char *libsimple_strndup(const char *, size_t)
+		Duplicate a substring.
+
+	void *libsimple_mempcpy(void *, const void *, size_t)
+		Like memcpy, except returns the byte after the
+		last written byte.
+
+	int libsimple_isutf8(const char *s, int allow_modified_nul)
+		Returns 1 if `s` is valid UTF-8 (Unicode codepoints are not
+		validated) and 0 otherwise. If `allow_modified_nul` is non-zero,
+		the byte sequence 0xC0 0x80 is allowed.
+
+	int libsimple_asprintf(char **, const char *, ...)
+		Like sprintf accept allocated the buffer.
+
+	int libsimple_vasprintf(char **, const char *, va_list);
+		Like vsprintf accept allocated the buffer.
+
+	void *libsimple_memmem(const void *s, size_t sn, const void *t, size_t tn)
+		Finds the first occurrence of `t` in `s`.
+		Length of `s` is `sn`. Length of `t` is `tn`.
+
+	int libsimple_memstarts(const void *s, size_t sn, const void *t, size_t tn)
+		Returns 1 if `s` starts with `t`, 0 otherwise.
+		Length of `s` is `sn`. Length of `t` is `tn`.
+
+	int libsimple_memends(const void *s, size_t sn, const void *t, size_t tn)
+		Returns 1 if `s` ends with `t`, 0 otherwise.
+		Length of `s` is `sn`. Length of `t` is `tn`.
+
+	int libsimple_strstarts(const char *s, const char *t)
+		Returns 1 if `s` starts with `t`, 0 otherwise.
+
+	int libsimple_strcasestarts(const char *, const char *)
+		Like strstarts except case-insensitive.
+
+	int libsimple_strends(const char *s, const char *t)
+		Returns 1 if `s` ends with `t`, 0 otherwise.
+
+	int libsimple_strcaseends(const char *, const char *)
+		Like strends except case-insensitive.
+
+	char *libsimple_strcasestr(const char *, const char *)
+		Like strstr except case-insensitive.
+
+	int libsimple_streq(const char *a, const char *b)
+		!strncmp(a, b)
+
+	int libsimple_strneq(const char *a, const char *b, size_t n)
+		!strncmp(a, b, n)
+
+	char *getenv_ne(const char *)
+		Like getenv, except returns NULL if the value
+		of the environment variable is the empty string.
+
+	int putenvf(const char *, ...)
+		Format a string a call putenv.
+
+	int vputenvf(const char *, va_list)
+		Format a string a call putenv.
+
+	int libsimple_sendfd(int sock, int fd)
+		Send a file descriptor over a socket.
+
+	int libsimple_recvfd(int sock)
+		Receive a file descriptor over a socket.
+
+	ssize_t libsimple_recvfrom_timestamped(int, void *restrict, size_t, int,
+	  struct sockaddr *restrict, socklen_t, struct timespec *restrict)
+		Like recvfrom except also returns the a SCM_TIMESTAMP or
+		SCM_TIMESTAMPNS timestamp, returns zero as the timestamp
+		if missing.
+
+	ssize_t libsimple_recv_timestamped(int, void *restrict, size_t, int,
+	  struct timespec *restrict)
+		Like recv except also returns the a SCM_TIMESTAMP or
+		SCM_TIMESTAMPNS timestamp, returns zero as the timestamp
+		if missing.
+
+	int libsimple_sumtimespec(struct timespec *, const struct timespec *,
+	  const struct timespec *)
+		Returns the sum of two timestamps.
+
+	int libsimple_difftimespec(struct timespec *, const struct timespec *,
+	  const struct timespec *)
+		Returns the difference of two timestamps.
+
+	int libsimple_multimespec(struct timespec *, const struct timespec *, int)
+		Multiplies a timestamp with an integer.
+
+	int libsimple_cmptimespec(const struct timespec *, const struct timespec *)
+		Compares two timestamps, same return semantics as strcmp.
+
+	int libsimple_sumtimeval(struct timeval *, const struct timeval *,
+	  const struct timeval *)
+		Returns the sum of two timestamps.
+
+	int libsimple_difftimeval(struct timeval *, const struct timeval *,
+	  const struct timeval *)
+		Returns the difference of two timestamps.
+
+	int libsimple_multimeval(struct timeval *, const struct timeval *, int)
+		Multiplies a timestamp with an integer.
+
+	int libsimple_cmptimeval(const struct timeval *, const struct timeval *)
+		Compares two timestamps, same return semantics as strcmp.
+
+	void libsimple_timeval2timespec(struct timespec *restrict,
+	  const struct timeval *restrict)
+		Converts a struct timeval to a struct timespec.
+
+	int libsimple_timespec2timeval(struct timeval *restrict,
+	  const struct timespec *restrict)
+		Converts a struct timespec to a struct timeval.
+
+	int libsimple_strtotimespec(struct timespec *restrict,
+	  const char *restrict, char **restrict)
+		Converts a string to a struct timespec.
+
+	int libsimple_strtotimeval(struct timeval *restrict,
+	  const char *restrict, char **restrict)
+		Converts a string to a struct timeval.
+
+	char *libsimple_timespectostr(char *restrict,
+	  const struct timespec *restrict)
+		Converts a struct timespec to a string.
+
+	char *libsimple_timevaltostr(char *restrict,
+	  const struct timeval *restrict)
+		Converts a struct timeval to a string.
+
+	double libsimple_timespectodouble(const struct timespec *)
+		Converts a struct timespec to a double.
+
+	double libsimple_timevaltodouble(const struct timeval *)
+		Converts a struct timeval to a double.
+
+	void libsimple_doubletotimespec(struct timespec *, double)
+		Converts a double to a struct timespec.
+
+	void libsimple_doubletotimeval(struct timeval *, double)
+		Converts a double to a struct timeval.
+
+	void libsimple_unlist(void *list, size_t i, size_t *np, size_t width)
+		Removes element `i` from the list `list`. `*np` shall be the
+		number of elements in the list, it will be updated by the
+		function. `width` shall be the byte-width of each element.
+
+		The macro LIBSIMPLE_UNLIST(LIST, I, NP) (alias to UNLIST if no
+		such macro already exists) is idential to libsimple_unlist
+		except `width` is automatically.
+
+	char *strdupa(const char *)
+		Like `strdup`, except the returned pointer is stack-allocated.
+		This function is implemented as a macro and is only available
+		when compiling with GCC or clang.
+
+	char *strndupa(const char *, size_t)
+		Like `strndup`, except the returned pointer is stack-allocated.
+		This function is implemented as a macro and is only available
+		when compiling with GCC or clang.
+
+	void *memdupa(const void *, size_t)
+		Like `memdup`, except the returned pointer is stack-allocated.
+		This function is implemented as a macro and is only available
+		when compiling with GCC or clang.
+
+	char *asprintfa(const char *, ...)
+		Like `asprintf` accept the the buffer is stack-allocated and
+		returned instead of stored in a pointer. This function is
+		implemented as a macro and is only available when compiling with
+		GCC or clang.
+
+	char *vasprintfa(const char *, va_list)
+		Like `vasprintf` accept the the buffer is stack-allocated and
+		returned instead of stored in a pointer. This function is
+		implemented as a macro and is only available when compiling with
+		GCC or clang.
+
+	void weprintf(const char *fmt, ...)
+		Similar to printf, except prints to stderr and:
+		* unless `fmt` starts with "usage: " the `argv` follow by
+		  ": " is prepended to the printed string,
+		* if `fmt` ends with ":", " " followed by `strerror(errno)`
+		  and "\n" and appended to the printed string, and
+		* if `fmt` does not end with ":" or "\n", "\n" and appended to
+		  the printed string.
+
+	void vweprintf(const char *, va_list)
+		Identical to weprintf, except using va_list.
+
+	void eprintf(const char *fmt, ...)
+		Like weprintf, but calls exit(libsimple_default_failure_exit)
+		afterwards.
+
+		libsimple.h defines `extern int libsimple_default_failure_exit`.
+
+	void veprintf(const char *fmt, va_list)
+		Like veprintf, but calls exit(libsimple_default_failure_exit)
+		afterwards.
+
+		libsimple.h defines `extern int libsimple_default_failure_exit`.
+
+	void enprintf(int status, const char *, ...)
+		Like weprintf, but calls exit(stats) afterwards.
+
+	void venprintf(int status, const char *, va_list)
+		Like vweprintf, but calls exit(stats) afterwards.
+
+The following functions, which call `eprintf` on failure, are also defined:
+
+	void eputenvf(const char *, ...)
+	void evputenvf(const char *, va_list)
+	void *emalloc(size_t)
+	void *ecalloc(size_t, size_t)
+	void *erealloc(void *, size_t)
+	char *estrdup(const char *)
+	char *estrndup(const char *, size_t)
+	void *ememdup(const void *, size_t)
+
+The following functions, which call `enprintf` on failure, are also defined,
+the first argument is used as the first argument for `enprintf`:
+
+	void enputenvf(int, const char *, ...)
+	void envputenvf(int, const char *, va_list)
+	void *enmalloc(int, size_t)
+	void *encalloc(int, size_t, size_t)
+	void *enrealloc(int, void *, size_t)
+	char *enstrdup(int, const char *)
+	char *enstrndup(int, const char *, size_t)
+	void *enmemdup(int, const void *, size_t)

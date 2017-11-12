@@ -717,9 +717,23 @@ int libsimple_strstarts(const char *, const char *);
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+int libsimple_strcasestarts(const char *__s, const char *__t) { return !strncasecmp(__s, __t, strlen(__t)); }
+#ifndef strcasestarts
+# define strcasestarts libsimple_strcasestarts
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 int libsimple_strends(const char *, const char *);
 #ifndef strends
 # define strends libsimple_strends
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+int libsimple_strcaseends(const char *, const char *);
+#ifndef strcaseends
+# define strcaseends libsimple_strcaseends
 #endif
 
 

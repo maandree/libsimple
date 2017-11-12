@@ -29,7 +29,7 @@ libsimple_isutf8(const char *string, int allow_modified_nul)
                         if ((c & 0xC0) == 0x80)
                                 /* Single-byte character marked as multibyte, or
                                    a non-first byte in a multibyte character. */
-                                return -1;
+                                return 0;
 
                         /* Multibyte character. */
                         while ((c & 0x80))
@@ -39,14 +39,14 @@ libsimple_isutf8(const char *string, int allow_modified_nul)
                         if (bytes > 6)
                                 /* 31-bit characters can be encoded with 6-bytes,
                                    and UTF-8 does not cover higher code points. */
-                                return -1;
+                                return 0;
                 } else {
                         /* Not first byte of the character. */
 
                         if ((c & 0xC0) != 0x80)
                                 /* Beginning of new character before a
                                    multibyte character has ended. */
-                                return -1;
+                                return 0;
 
                         character = (character << 6) | (c & 0x7F);
 
@@ -59,7 +59,7 @@ libsimple_isutf8(const char *string, int allow_modified_nul)
                                 character >>= 1, bits++;
                         bits = (!bits && bytes == 2 && allow_modified_nul) ? 8 : bits;
                         if (bits < BYTES_TO_MIN_BITS[bytes] || BYTES_TO_MAX_BITS[bytes] < bits)
-                                return -1;
+                                return 0;
 
                         read_bytes = bytes = bits = 0;
                 }

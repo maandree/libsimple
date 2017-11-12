@@ -34,6 +34,7 @@ OBJ =\
 	recvfd.o\
 	recvfrom_timestamped.o\
 	sendfd.o\
+	strcaseends.o\
 	strcasestr.o\
 	strchrnul.o\
 	strends.o\
