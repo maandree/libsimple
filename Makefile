@@ -1,8 +1,7 @@
 .POSIX:
 
-CFLAGS = -std=c99 -Wall -Wextra -O2 $(CPPFLAGS)
-CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700
-LDFLAGS = -s
+CONFIGFILE = config.mk
+include $(CONFIGFILE)
 
 OBJ =\
 	allocn.o\
@@ -56,15 +55,16 @@ OBJ =\
 	libsimple.o
 
 all: libsimple.a
-$(OBJ): libsimple.h
+$(OBJ): $(@:.o=.c) libsimple.h
 
 libsimple.a: $(OBJ)
 	$(AR) rc $@ $?
 	$(AR) -s $@
 
 clean:
-	-rm -r -- *.o libsimple.a libsimple.so libsimple.so.*
+	-rm -rf -- *.o *.su *.a *.so *.so.* *.gch *.gcda *.gcno *.gcov *.lo
 
-.SUFFIXES: .c.o
+.SUFFIXES:
+.SUFFIXES: .o .c
 
 .PHONY: all clean
