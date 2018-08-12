@@ -187,7 +187,7 @@ extern int libsimple_default_failure_exit;
 
 
 #ifndef INTSTRLEN
-# define INTSTRLEN(TYPE) ((sizeof(TYPE) == 1 ? 3 : 5 * (sizeof(TYPE) / 2)) + ((TYPE)-1 > 0))
+# define INTSTRLEN(TYPE) ((sizeof(TYPE) == 1 ? 3 : 5 * (sizeof(TYPE) / 2)) + ((TYPE)-1 < 0))
 #endif
 
 
@@ -243,14 +243,6 @@ extern int libsimple_default_failure_exit;
 
 #ifndef FSFILCNT_MAX
 # define FSFILCNT_MAX   TYPE_MAX(fsfilcnt_t)
-#endif
-
-#ifndef FSID_MAX
-# define FSID_MAX       TYPE_MAX(fsid_t)
-#endif
-
-#ifndef FSWORD_MAX
-# define FSWORD_MAX     TYPE_MAX(fsword_t)
 #endif
 
 #ifndef GID_MAX
@@ -329,10 +321,6 @@ extern int libsimple_default_failure_exit;
 # define TCFLAG_MAX     TYPE_MAX(tcflag_t)
 #endif
 
-#ifndef TIMER_MAX
-# define TIMER_MAX      TYPE_MAX(timer_t)
-#endif
-
 #ifndef TIME_MAX
 # define TIME_MAX       TYPE_MAX(time_t)
 #endif
@@ -392,14 +380,6 @@ extern int libsimple_default_failure_exit;
 
 #ifndef FSFILCNT_MIN
 # define FSFILCNT_MIN   TYPE_MIN(fsfilcnt_t)
-#endif
-
-#ifndef FSID_MIN
-# define FSID_MIN       TYPE_MIN(fsid_t)
-#endif
-
-#ifndef FSWORD_MIN
-# define FSWORD_MIN     TYPE_MIN(fsword_t)
 #endif
 
 #ifndef GID_MIN
@@ -476,10 +456,6 @@ extern int libsimple_default_failure_exit;
 
 #ifndef TCFLAG_MIN
 # define TCFLAG_MIN     TYPE_MAX(tcflag_t)
-#endif
-
-#ifndef TIMER_MIN
-# define TIMER_MIN      TYPE_MIN(timer_t)
 #endif
 
 #ifndef TIME_MIN
