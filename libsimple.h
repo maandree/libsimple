@@ -674,6 +674,13 @@ void *libsimple_memmem(const void *, size_t, const void *, size_t);
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+void *libsimple_memrmem(const void *, size_t, const void *, size_t);
+#ifndef memrmem
+# define memrmem libsimple_memrmem
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
 int libsimple_memstarts(const void *, size_t, const void *, size_t);
 #ifndef memstarts
 # define memstarts libsimple_memstarts
@@ -684,6 +691,13 @@ _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
 int libsimple_memends(const void *, size_t, const void *, size_t);
 #ifndef memends
 # define memends libsimple_memends
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+char *libsimple_strrstr(const char *, const char *);
+#ifndef strrstr
+# define strrstr libsimple_strrstr
 #endif
 
 
@@ -719,6 +733,13 @@ _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__
 char *libsimple_strcasestr(const char *, const char *);
 #ifndef strcasestr
 # define strcasestr libsimple_strcasestr
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+char *libsimple_strrcasestr(const char *, const char *);
+#ifndef strrcasestr
+# define strrcasestr libsimple_strrcasestr
 #endif
 
 

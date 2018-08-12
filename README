@@ -123,6 +123,10 @@ The following functions are defined (some as inline functions):
 		Finds the first occurrence of `t` in `s`.
 		Length of `s` is `sn`. Length of `t` is `tn`.
 
+	void *libsimple_memrmem(const void *s, size_t sn, const void *t, size_t tn)
+		Finds the last occurrence of `t` in `s`.
+		Length of `s` is `sn`. Length of `t` is `tn`.
+
 	int libsimple_memstarts(const void *s, size_t sn, const void *t, size_t tn)
 		Returns 1 if `s` starts with `t`, 0 otherwise.
 		Length of `s` is `sn`. Length of `t` is `tn`.
@@ -130,6 +134,9 @@ The following functions are defined (some as inline functions):
 	int libsimple_memends(const void *s, size_t sn, const void *t, size_t tn)
 		Returns 1 if `s` ends with `t`, 0 otherwise.
 		Length of `s` is `sn`. Length of `t` is `tn`.
+
+	char *libsimple_strrstr(const char *s, const char *t)
+		Finds the last occurrence of `t` in `s`.
 
 	int libsimple_strstarts(const char *s, const char *t)
 		Returns 1 if `s` starts with `t`, 0 otherwise.
@@ -145,6 +152,9 @@ The following functions are defined (some as inline functions):
 
 	char *libsimple_strcasestr(const char *, const char *)
 		Like strstr except case-insensitive.
+
+	char *libsimple_strrcasestr(const char *, const char *)
+		Like strrstr except case-insensitive.
 
 	int libsimple_streq(const char *a, const char *b)
 		!strncmp(a, b)

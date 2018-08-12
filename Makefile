@@ -25,6 +25,7 @@ OBJ =\
 	memends.o\
 	memmem.o\
 	memrchr.o\
+	memrmem.o\
 	memstarts.o\
 	multimespec.o\
 	multimeval.o\
@@ -39,6 +40,8 @@ OBJ =\
 	strchrnul.o\
 	strends.o\
 	strndup.o\
+	strrcasestr.o\
+	strrstr.o\
 	strstarts.o\
 	strtotimespec.o\
 	strtotimeval.o\
