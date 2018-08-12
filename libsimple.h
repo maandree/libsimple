@@ -50,8 +50,10 @@
 extern int libsimple_default_failure_exit;
 
 
-#ifndef CLOCK_MONOTONIC_RAW
-# define CLOCK_MONOTONIC_RAW CLOCK_MONOTONIC
+#ifndef DONT_DEFINE_CLOCK_MONOTONIC_RAW
+# ifndef CLOCK_MONOTONIC_RAW
+#  define CLOCK_MONOTONIC_RAW CLOCK_MONOTONIC
+# endif
 #endif
 
 
