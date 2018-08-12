@@ -24,3 +24,15 @@ fail:
 	*strp = NULL;
 	return -1;
 }
+
+
+#ifdef TEST
+#include <assert.h>
+
+int
+main(void)
+{
+	return 0; /* Tested via libsimple_asprintf */
+}
+
+#endif

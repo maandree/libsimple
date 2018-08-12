@@ -3,7 +3,7 @@
 
 
 int
-libsimple_sumtimeval(struct timeval *sum, const struct timeval *augend, const struct timeval *addend)
+libsimple_sumtimeval(struct timeval *sum, const struct timeval *augend, const struct timeval *addend) /* TODO test */
 {
 	struct timespec a, b, s;
 	int r;

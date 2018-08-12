@@ -68,3 +68,40 @@ libsimple_isutf8(const char *string, int allow_modified_nul)
         /* Make sure we did not stop at the middle of a multibyte character. */
         return !read_bytes;
 }
+
+
+#ifdef TEST
+#include <assert.h>
+
+int
+main(void)
+{
+	int i;
+	for (i = 0; i < 2; i++) {
+		assert(libsimple_isutf8("", i) == 1);
+		assert(libsimple_isutf8("a", i) == 1);
+		assert(libsimple_isutf8("abc", i) == 1);
+		assert(libsimple_isutf8("123", i) == 1);
+		assert(libsimple_isutf8("åäö", i) == 1);
+		assert(libsimple_isutf8("𝖆𝖇𝖈", i) == 1);
+		assert(libsimple_isutf8("\x1b", i) == 1);
+		assert(libsimple_isutf8("\n\r\t\f", i) == 1);
+		assert(libsimple_isutf8("\xFF", i) == 0);
+		assert(libsimple_isutf8("\x01", i) == 1);
+		assert(libsimple_isutf8("\x7F", i) == 1);
+		assert(libsimple_isutf8("\x80", i) == 0);
+		assert(libsimple_isutf8("\xC0", i) == 0);
+		assert(libsimple_isutf8("\xC0\x80", i) == i);
+		assert(libsimple_isutf8("\xC0\x81", i) == 0);
+		assert(libsimple_isutf8("\xC1\x80", i) == 0);
+		assert(libsimple_isutf8("\xC2\x80", i) == 1);
+		assert(libsimple_isutf8("\xE1\x80\x80\x80", i) == 1);
+		assert(libsimple_isutf8("\xE1\x80\xC0\x80", i) == 0);
+		assert(libsimple_isutf8("\xE1\x80\x00\x80", i) == 0);
+		assert(libsimple_isutf8("\xF1\x80\x80\x80", i) == 0);
+		assert(libsimple_isutf8("\xFF\x80\x80\x80\x80\x80\x80\x80", i) == 0);
+	}
+	return 0;
+}
+
+#endif

@@ -3,7 +3,7 @@
 
 
 int
-libsimple_sendfd(int sock, int fd)
+libsimple_sendfd(int sock, int fd) /* TODO test */
 {
 	char buf[1];
 	struct iovec iov;

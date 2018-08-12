@@ -9,3 +9,17 @@ libsimple_rawmemchr(const void *s_, int c)
 	while ((int)*s++ != c);
 	return &s[-1];
 }
+
+
+#ifdef TEST
+#include <assert.h>
+
+int
+main(void)
+{
+	assert(!strcmp(libsimple_rawmemchr("1234512345", '3'), "34512345"));
+	assert(!strcmp(libsimple_rawmemchr("1234512345", '1'), "1234512345"));
+	return 0;
+}
+
+#endif

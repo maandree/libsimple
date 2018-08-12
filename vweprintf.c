@@ -6,7 +6,7 @@ extern char *argv0;
 
 
 void
-vweprintf(const char *fmt, va_list ap)
+vweprintf(const char *fmt, va_list ap) /* TODO test */
 {
 	int saved_errno = errno, r;
 	const char *end = strchr(fmt, '\0');

@@ -3,7 +3,7 @@
 
 
 int
-libsimple_multimespec(struct timespec *prod, const struct timespec *multiplicand, int multiplier)
+libsimple_multimespec(struct timespec *prod, const struct timespec *multiplicand, int multiplier) /* TODO test */
 {
 	time_t s = multiplicand->tv_sec;
 	long long int ns = (long long int)(multiplicand->tv_nsec);

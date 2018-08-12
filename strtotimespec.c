@@ -3,7 +3,7 @@
 
 
 int
-libsimple_strtotimespec(struct timespec *restrict ts, const char *restrict s, char **restrict end)
+libsimple_strtotimespec(struct timespec *restrict ts, const char *restrict s, char **restrict end) /* TODO test */
 {
 	int neg = 0, bracket = 0;
 	time_t sec = 0;

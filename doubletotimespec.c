@@ -3,7 +3,7 @@
 
 
 void
-libsimple_doubletotimespec(struct timespec *ts, double d)
+libsimple_doubletotimespec(struct timespec *ts, double d) /* TODO test */
 {
 	double ns = (long long int)d;
 	long int nsi;

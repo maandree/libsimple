@@ -3,7 +3,7 @@
 
 
 int
-libsimple_timespec2timeval(struct timeval *restrict tv, const struct timespec *restrict ts)
+libsimple_timespec2timeval(struct timeval *restrict tv, const struct timespec *restrict ts) /* TODO test */
 {
         tv->tv_sec = ts->tv_sec;
         tv->tv_usec = ts->tv_nsec / 1000L;

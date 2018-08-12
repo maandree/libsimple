@@ -3,7 +3,7 @@
 
 
 static inline size_t
-alloc_size_product(size_t n, va_list ap)
+alloc_size_product(size_t n, va_list ap) /* TODO test */
 {
 	size_t prod = n;
 	if (!n) {
@@ -24,14 +24,14 @@ alloc_size_product(size_t n, va_list ap)
 }
 
 void *
-libsimple_vmalloczn(int clear, size_t n, va_list ap)
+libsimple_vmalloczn(int clear, size_t n, va_list ap) /* TODO test */
 {
 	n = alloc_size_product(n, ap);
 	return !n ? NULL : clear ? calloc(1, n) : malloc(n);
 }
 
 void *
-libsimple_vreallocn(void *ptr, size_t n, va_list ap)
+libsimple_vreallocn(void *ptr, size_t n, va_list ap) /* TODO test */
 {
 	n = alloc_size_product(n, ap);
 	return !n ? NULL : realloc(ptr, n);

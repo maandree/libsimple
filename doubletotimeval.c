@@ -3,7 +3,7 @@
 
 
 void
-libsimple_doubletotimeval(struct timeval *tv, double d)
+libsimple_doubletotimeval(struct timeval *tv, double d) /* TODO test */
 {
 	double ns = (long long int)d;
 	long int nsi;

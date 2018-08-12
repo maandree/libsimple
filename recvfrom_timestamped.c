@@ -3,7 +3,7 @@
 
 
 ssize_t
-libsimple_recvfrom_timestamped(int fd, void *restrict buf, size_t n, int flags, struct sockaddr *restrict addr,
+libsimple_recvfrom_timestamped(int fd, void *restrict buf, size_t n, int flags, struct sockaddr *restrict addr, /* TODO test */
                                socklen_t addrlen, struct timespec *restrict ts)
 {
 	struct iovec iov;

@@ -6,7 +6,7 @@ extern char *argv0;
 
 
 void *
-enrealloc(int status, void *ptr, size_t n)
+enrealloc(int status, void *ptr, size_t n) /* TODO test */
 {
 	char *ret = realloc(ptr, n);
 	if (!ret) {

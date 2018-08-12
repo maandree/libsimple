@@ -3,7 +3,7 @@
 
 
 int
-libsimple_sumtimespec(struct timespec *sum, const struct timespec *augend, const struct timespec *addend)
+libsimple_sumtimespec(struct timespec *sum, const struct timespec *augend, const struct timespec *addend) /* TODO test */
 {
 	long int ns = augend->tv_nsec + addend->tv_nsec;
 	time_t s;

@@ -3,7 +3,7 @@
 
 
 int
-libsimple_difftimeval(struct timeval *diff, const struct timeval *minuend, const struct timeval *subtrahend)
+libsimple_difftimeval(struct timeval *diff, const struct timeval *minuend, const struct timeval *subtrahend) /* TODO test */
 {
 	struct timespec a, b, d;
 	int r;

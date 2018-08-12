@@ -3,7 +3,7 @@
 
 
 int
-libsimple_recvfd(int sock)
+libsimple_recvfd(int sock) /* TODO test */
 {
 	int fd;
 	char buf[1];

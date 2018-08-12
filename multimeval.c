@@ -3,7 +3,7 @@
 
 
 int
-libsimple_multimeval(struct timeval *prod, const struct timeval *multiplicand, int multiplier)
+libsimple_multimeval(struct timeval *prod, const struct timeval *multiplicand, int multiplier) /* TODO test */
 {
 	struct timespec a, p;
 	int r;

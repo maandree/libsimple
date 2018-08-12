@@ -3,7 +3,7 @@
 
 
 int
-vputenvf(const char *fmt, va_list ap)
+vputenvf(const char *fmt, va_list ap) /* TODO test */
 {
 	va_list ap2;
 	int n;

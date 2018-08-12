@@ -6,7 +6,7 @@ extern char *argv0;
 
 
 void *
-encalloc(int status, size_t n, size_t m)
+encalloc(int status, size_t n, size_t m) /* TODO test */
 {
 	void *ret = calloc(n, m);
 	if (!ret) {

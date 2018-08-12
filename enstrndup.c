@@ -6,7 +6,7 @@ extern char *argv0;
 
 
 char *
-enstrndup(int status, const char *s, size_t n)
+enstrndup(int status, const char *s, size_t n) /* TODO test */
 {
 	void *ret = strndup(s, n);
 	if (!ret) {

@@ -6,7 +6,7 @@ extern char *argv0;
 
 
 void *
-enmemdup(int status, const void *s, size_t n)
+enmemdup(int status, const void *s, size_t n) /* TODO test */
 {
 	void *ret = memdup(s, n);
 	if (!ret) {

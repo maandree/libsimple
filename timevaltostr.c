@@ -3,7 +3,7 @@
 
 
 char *
-libsimple_timevaltostr(char *restrict buf, const struct timeval *restrict tv)
+libsimple_timevaltostr(char *restrict buf, const struct timeval *restrict tv) /* TODO test */
 {
 	time_t s = tv->tv_sec;
 	long int us = tv->tv_usec;

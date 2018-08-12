@@ -6,7 +6,7 @@ extern char *argv0;
 
 
 void *
-enmalloc(int status, size_t n)
+enmalloc(int status, size_t n) /* TODO test */
 {
 	void *ret = malloc(n);
 	if (!ret) {

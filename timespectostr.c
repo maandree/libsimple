@@ -3,7 +3,7 @@
 
 
 char *
-libsimple_timespectostr(char *restrict buf, const struct timespec *restrict ts)
+libsimple_timespectostr(char *restrict buf, const struct timespec *restrict ts) /* TODO test */
 {
 	time_t s = ts->tv_sec;
 	long int ns = ts->tv_nsec;

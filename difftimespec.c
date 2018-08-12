@@ -3,7 +3,7 @@
 
 
 int
-libsimple_difftimespec(struct timespec *diff, const struct timespec *minuend, const struct timespec *subtrahend)
+libsimple_difftimespec(struct timespec *diff, const struct timespec *minuend, const struct timespec *subtrahend) /* TODO test */
 {
 	long int ns = minuend->tv_nsec - subtrahend->tv_nsec;
 	time_t s;

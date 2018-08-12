@@ -159,47 +159,47 @@ extern int libsimple_default_failure_exit;
 
 
 #ifndef MIN
-# define MIN(A, B) ((A) < (B) ? (A) : (B))
+# define MIN(A, B) ((A) < (B) ? (A) : (B)) /* TODO test */
 #endif
 
 
 #ifndef MAX
-# define MAX(A, B) ((A) > (B) ? (A) : (B))
+# define MAX(A, B) ((A) > (B) ? (A) : (B)) /* TODO test */
 #endif
 
 
 #ifndef MIN3
-# define MIN3(A, B, C) MIN(MIN((A), (B)), (C))
+# define MIN3(A, B, C) MIN(MIN((A), (B)), (C)) /* TODO test */
 #endif
 
 
 #ifndef MAX3
-# define MAX3(A, B, C) MAX(MAX((A), (B)), (C))
+# define MAX3(A, B, C) MAX(MAX((A), (B)), (C)) /* TODO test */
 #endif
 
 
 #ifndef ELEMSOF
-# define ELEMSOF(ARR) (sizeof(ARR) / (sizeof(*(ARR))))
+# define ELEMSOF(ARR) (sizeof(ARR) / (sizeof(*(ARR)))) /* TODO test */
 #endif
 
 
 #ifndef STRLEN
-# define STRLEN(STR) (sizeof(STR) - 1)
+# define STRLEN(STR) (sizeof(STR) - 1) /* TODO test */
 #endif
 
 
 #ifndef INTSTRLEN
-# define INTSTRLEN(TYPE) ((sizeof(TYPE) == 1 ? 3 : 5 * (sizeof(TYPE) / 2)) + ((TYPE)-1 < 0))
+# define INTSTRLEN(TYPE) ((sizeof(TYPE) == 1 ? 3 : 5 * (sizeof(TYPE) / 2)) + ((TYPE)-1 < 0)) /* TODO test */
 #endif
 
 
 #ifndef TYPE_MAX
-# define TYPE_MAX(TYPE) ((TYPE)(((1ULL << (8 * sizeof(TYPE) - 1)) - 1) << ((TYPE)-1 > 0) | 1))
+# define TYPE_MAX(TYPE) ((TYPE)(((1ULL << (8 * sizeof(TYPE) - 1)) - 1) << ((TYPE)-1 > 0) | 1)) /* TODO test */
 #endif
 
 
 #ifndef TYPE_MIN
-# define TYPE_MIN(TYPE) ((TYPE)((TYPE)-1 > 0 ? 0 : (TYPE)~0 < (TYPE)-1 ? (TYPE)~0 : (TYPE)(1ULL << (8 * sizeof(TYPE) - 1))))
+# define TYPE_MIN(TYPE) ((TYPE)((TYPE)-1 > 0 ? 0 : (TYPE)~0 < (TYPE)-1 ? (TYPE)~0 : (TYPE)(1ULL << (8 * sizeof(TYPE) - 1)))) /* TODO test */
 #endif
 
 
@@ -477,10 +477,10 @@ extern int libsimple_default_failure_exit;
 #endif
 
 
-#define FREE(PTR) (free(PTR), (PTR) = NULL, 0)
+#define FREE(PTR) (free(PTR), (PTR) = NULL, 0) /* TODO test */
 
 
-#define CLOSE(FD) ((FD) >= 0 ? (close(FD), (FD) = -1, 0) : 0)
+#define CLOSE(FD) ((FD) >= 0 ? (close(FD), (FD) = -1, 0) : 0) /* TODO test */
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
@@ -512,14 +512,14 @@ char *libsimple_strchrnul(const char *, int);
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-static inline char *libsimple_strend(const char *__s) { return strchr(__s, '\0'); }
+static inline char *libsimple_strend(const char *__s) { return strchr(__s, '\0'); } /* TODO test */
 #ifndef strend
 # define strend libsimple_strend
 #endif
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-static inline int libsimple_inchrset(int __c, const char *__s) { return __c && strchr(__s, __c); }
+static inline int libsimple_inchrset(int __c, const char *__s) { return __c && strchr(__s, __c); } /* TODO test */
 #ifndef inchrset
 # define inchrset libsimple_inchrset
 #endif
@@ -540,7 +540,7 @@ char *libsimple_strndup(const char *, size_t);
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
-static inline void *libsimple_mempcpy(void *__d, const void *__s, size_t __n)
+static inline void *libsimple_mempcpy(void *__d, const void *__s, size_t __n) /* TODO test */
 { return &((char *)memcpy(__d, __s, __n))[__n]; }
 #ifndef mempcpy
 # define mempcpy libsimple_mempcpy
@@ -549,7 +549,7 @@ static inline void *libsimple_mempcpy(void *__d, const void *__s, size_t __n)
 
 #ifndef strdupa
 # if defined(__GNUC__) || defined(__clang__)
-#  define strdupa(s)\
+#  define strdupa(s) /* TODO test */\
 	({\
 		const char *__s = (s);\
 		size_t __n = strlen(__s) + 1;\
@@ -562,7 +562,7 @@ static inline void *libsimple_mempcpy(void *__d, const void *__s, size_t __n)
 
 #ifndef strdupa
 # if defined(__GNUC__) || defined(__clang__)
-#  define strndupa(s, n)\
+#  define strndupa(s, n) /* TODO test */\
 	({\
 		const char *__s = (s);\
 		size_t __n = (n);\
@@ -580,7 +580,7 @@ static inline void *libsimple_mempcpy(void *__d, const void *__s, size_t __n)
 
 #ifndef strdupa
 # if defined(__GNUC__) || defined(__clang__)
-#  define memdupa(s, n)\
+#  define memdupa(s, n) /* TODO test */\
 	({\
 		const char *__s = (s);\
 		size_t __n = (n);\
@@ -621,7 +621,7 @@ int libsimple_vasprintf(char **, const char *, va_list);
 
 #ifndef asprintfa
 # if defined(__GNUC__) && !defined(__clang__)
-#  define asprintfa(__fmt, ...)\
+#  define asprintfa(__fmt, ...) /* TODO test */\
 	({\
 		const char *__f = (__fmt);\
 		char *__ret = NULL;\
@@ -643,7 +643,7 @@ int libsimple_vasprintf(char **, const char *, va_list);
 
 #ifndef vasprintfa
 # if defined(__GNUC__) || defined(__clang__)
-#  define vasprintfa(__fmt, __ap)\
+#  define vasprintfa(__fmt, __ap) /* TODO test */\
 	({\
 		const char *__f = (__fmt);\
 		va_list __a = (__ap);\
@@ -723,29 +723,29 @@ char *libsimple_strcasestr(const char *, const char *);
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-static inline int streq(const char *__a, const char *__b) { return !strcmp(__a, __b); }
+static inline int streq(const char *__a, const char *__b) { return !strcmp(__a, __b); } /* TODO test */
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-static inline int strneq(const char *__a, const char *__b, size_t __n) { return !strncmp(__a, __b, __n); }
+static inline int strneq(const char *__a, const char *__b, size_t __n) { return !strncmp(__a, __b, __n); } /* TODO test */
 
 
-#define malloczn(CLEAR, ...) _libsimple_malloczn((CLEAR), __VA_ARGS__, (size_t)0)
-#define mallocn(...) malloczn(0, __VA_ARGS__)
-#define callocn(...) malloczn(1, __VA_ARGS__)
+#define malloczn(CLEAR, ...) _libsimple_malloczn((CLEAR), __VA_ARGS__, (size_t)0) /* TODO test */
+#define mallocn(...) malloczn(0, __VA_ARGS__) /* TODO test */
+#define callocn(...) malloczn(1, __VA_ARGS__) /* TODO test */
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
 void *libsimple_vmalloczn(int, size_t, va_list);
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
-static inline void *libsimple_vmallocn(size_t __n, va_list __ap) { return libsimple_vmalloczn(0, __n, __ap); }
+static inline void *libsimple_vmallocn(size_t __n, va_list __ap) { return libsimple_vmalloczn(0, __n, __ap); } /* TODO test */
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
-static inline void *libsimple_vcallocn(size_t __n, va_list __ap) { return libsimple_vmalloczn(1, __n, __ap); }
+static inline void *libsimple_vcallocn(size_t __n, va_list __ap) { return libsimple_vmalloczn(1, __n, __ap); } /* TODO test */
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
 static inline void *
-libsimple_malloczn(int __clear, size_t __n, ...)
+libsimple_malloczn(int __clear, size_t __n, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __n);
@@ -755,7 +755,7 @@ libsimple_malloczn(int __clear, size_t __n, ...)
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
 static inline void *
-libsimple_mallocn(size_t __n, ...)
+libsimple_mallocn(size_t __n, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __n);
@@ -765,7 +765,7 @@ libsimple_mallocn(size_t __n, ...)
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
 static inline void *
-libsimple_callocn(size_t __n, ...)
+libsimple_callocn(size_t __n, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __n);
@@ -774,13 +774,13 @@ libsimple_callocn(size_t __n, ...)
 }
 
 
-#define reallocn(PTR, ...) _libsimple_reallocn((PTR), __VA_ARGS__, (size_t)0)
+#define reallocn(PTR, ...) _libsimple_reallocn((PTR), __VA_ARGS__, (size_t)0) /* TODO test */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
 void *libsimple_vreallocn(void *, size_t, va_list);
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
 static inline void *
-libsimple_reallocn(void *__ptr, size_t __n, ...)
+libsimple_reallocn(void *__ptr, size_t __n, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __n);
@@ -807,10 +807,10 @@ char *enstrndup(int, const char *, size_t);
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
 void *enmemdup(int, const void *, size_t);
 
-#define enmalloczn(STATUS, CLEAR, ...) _libsimple_enmalloczn((STATUS), (CLEAR), __VA_ARGS__, (size_t)0)
-#define enmallocn(STATUS, ...) _libsimple_enmallocn((STATUS), (CLEAR), __VA_ARGS__, (size_t)0)
-#define encallocn(STATUS, ...) _libsimple_encallocn((STATUS), (CLEAR), __VA_ARGS__, (size_t)0)
-#define enreallocn(STATUS, PTR, ...) _libsimple_enreallocn((STATUS), (PTR), __VA_ARGS__, (size_t)0)
+#define enmalloczn(STATUS, CLEAR, ...) _libsimple_enmalloczn((STATUS), (CLEAR), __VA_ARGS__, (size_t)0) /* TODO test */
+#define enmallocn(STATUS, ...) _libsimple_enmallocn((STATUS), (CLEAR), __VA_ARGS__, (size_t)0) /* TODO test */
+#define encallocn(STATUS, ...) _libsimple_encallocn((STATUS), (CLEAR), __VA_ARGS__, (size_t)0) /* TODO test */
+#define enreallocn(STATUS, PTR, ...) _libsimple_enreallocn((STATUS), (PTR), __VA_ARGS__, (size_t)0) /* TODO test */
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
 void *libsimple_envmalloczn(int, int, size_t, va_list);
@@ -819,14 +819,14 @@ _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__))
 void *libsimple_envreallocn(int, void *, size_t, va_list);
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
-static inline void *libsimple_envmallocn(int __st, size_t __n, va_list __ap) { return libsimple_envmalloczn(__st, 0, __n, __ap); }
+static inline void *libsimple_envmallocn(int __st, size_t __n, va_list __ap) { return libsimple_envmalloczn(__st, 0, __n, __ap); } /* TODO test */
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
-static inline void *libsimple_envcallocn(int __st, size_t __n, va_list __ap) { return libsimple_envmalloczn(__st, 1, __n, __ap); }
+static inline void *libsimple_envcallocn(int __st, size_t __n, va_list __ap) { return libsimple_envmalloczn(__st, 1, __n, __ap); } /* TODO test */
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
 static inline void *
-libsimple_enmalloczn(int __status, int __clear, size_t __n, ...)
+libsimple_enmalloczn(int __status, int __clear, size_t __n, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __n);
@@ -836,7 +836,7 @@ libsimple_enmalloczn(int __status, int __clear, size_t __n, ...)
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
 static inline void *
-libsimple_enmallocn(int __status, size_t __n, ...)
+libsimple_enmallocn(int __status, size_t __n, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __n);
@@ -846,7 +846,7 @@ libsimple_enmallocn(int __status, size_t __n, ...)
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
 static inline void *
-libsimple_encallocn(int __status, size_t __n, ...)
+libsimple_encallocn(int __status, size_t __n, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __n);
@@ -856,7 +856,7 @@ libsimple_encallocn(int __status, size_t __n, ...)
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
 static inline void *
-libsimple_enreallocn(int __status, void *__ptr, size_t __n, ...)
+libsimple_enreallocn(int __status, void *__ptr, size_t __n, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __n);
@@ -866,47 +866,47 @@ libsimple_enreallocn(int __status, void *__ptr, size_t __n, ...)
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
-static inline void *emalloc(size_t __n) { return enmalloc(libsimple_default_failure_exit, __n); }
+static inline void *emalloc(size_t __n) { return enmalloc(libsimple_default_failure_exit, __n); } /* TODO test */
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
-static inline void *ecalloc(size_t __n, size_t __m) { return encalloc(libsimple_default_failure_exit, __n, __m); }
+static inline void *ecalloc(size_t __n, size_t __m) { return encalloc(libsimple_default_failure_exit, __n, __m); } /* TODO test */
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
-static inline void *erealloc(void *__ptr, size_t __n) { return enrealloc(libsimple_default_failure_exit, __ptr, __n); }
+static inline void *erealloc(void *__ptr, size_t __n) { return enrealloc(libsimple_default_failure_exit, __ptr, __n); } /* TODO test */
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((nonnull, __warn_unused_result__, __returns_nonnull__)))
-static inline char *estrdup(const char *__s) { return enstrdup(libsimple_default_failure_exit, __s); }
+static inline char *estrdup(const char *__s) { return enstrdup(libsimple_default_failure_exit, __s); } /* TODO test */
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((nonnull, __warn_unused_result__, __returns_nonnull__)))
-static inline char *estrndup(const char *__s, size_t __n) { return enstrndup(libsimple_default_failure_exit, __s, __n); }
+static inline char *estrndup(const char *__s, size_t __n) { return enstrndup(libsimple_default_failure_exit, __s, __n); } /* TODO test */
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
-static inline void *ememdup(const void *__s, size_t __n) { return enmemdup(libsimple_default_failure_exit, __s, __n); }
+static inline void *ememdup(const void *__s, size_t __n) { return enmemdup(libsimple_default_failure_exit, __s, __n); } /* TODO test */
 
-#define emalloczn(CLEAR, ...) enmalloczn(libsimple_default_failure_exit, (CLEAR), __VA_ARGS__)
-#define emallocn(...) enmallocn(libsimple_default_failure_exit, __VA_ARGS__)
-#define ecallocn(...) encallocn(libsimple_default_failure_exit, __VA_ARGS__)
-#define ereallocn(PTR, ...) enreallocn(libsimple_default_failure_exit, (PTR), __VA_ARGS__)
+#define emalloczn(CLEAR, ...) enmalloczn(libsimple_default_failure_exit, (CLEAR), __VA_ARGS__) /* TODO test */
+#define emallocn(...) enmallocn(libsimple_default_failure_exit, __VA_ARGS__) /* TODO test */
+#define ecallocn(...) encallocn(libsimple_default_failure_exit, __VA_ARGS__) /* TODO test */
+#define ereallocn(PTR, ...) enreallocn(libsimple_default_failure_exit, (PTR), __VA_ARGS__) /* TODO test */
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
-static inline void *libsimple_evmalloczn(int __clear, size_t __n, va_list __ap)
+static inline void *libsimple_evmalloczn(int __clear, size_t __n, va_list __ap) /* TODO test */
 { return libsimple_envmalloczn(libsimple_default_failure_exit, __clear, __n, __ap); }
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
-static inline void *libsimple_evmallocn(size_t __n, va_list __ap)
+static inline void *libsimple_evmallocn(size_t __n, va_list __ap) /* TODO test */
 { return libsimple_envcallocn(libsimple_default_failure_exit, __n, __ap); }
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
-static inline void *libsimple_evcallocn(size_t __n, va_list __ap)
+static inline void *libsimple_evcallocn(size_t __n, va_list __ap) /* TODO test */
 { return libsimple_envmallocn(libsimple_default_failure_exit, __n, __ap); }
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
-static inline void *libsimple_evreallocn(void *__ptr, size_t __n, va_list __ap)
+static inline void *libsimple_evreallocn(void *__ptr, size_t __n, va_list __ap) /* TODO test */
 { return libsimple_envreallocn(libsimple_default_failure_exit, __ptr, __n, __ap); }
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
 static inline void *
-libsimple_emalloczn(int __c, size_t __n, ...)
+libsimple_emalloczn(int __c, size_t __n, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __n);
@@ -916,7 +916,7 @@ libsimple_emalloczn(int __c, size_t __n, ...)
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
 static inline void *
-libsimple_emallocn(size_t __n, ...)
+libsimple_emallocn(size_t __n, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __n);
@@ -926,7 +926,7 @@ libsimple_emallocn(size_t __n, ...)
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
 static inline void *
-libsimple_ecallocn(size_t __n, ...)
+libsimple_ecallocn(size_t __n, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __n);
@@ -936,7 +936,7 @@ libsimple_ecallocn(size_t __n, ...)
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
 static inline void *
-libsimple_ereallocn(void *__p, size_t __n, ...)
+libsimple_ereallocn(void *__p, size_t __n, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __n);
@@ -953,7 +953,7 @@ libsimple_ereallocn(void *__p, size_t __n, ...)
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline char *
-getenv_ne(const char *__name)
+getenv_ne(const char *__name) /* TODO test */
 {
 	char *__env = getenv(__name);
 	return (__env && *__env) ? __env : NULL;
@@ -968,7 +968,7 @@ void envputenvf(int, const char *, va_list);
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __format__(__printf__, 1, 2))))
 static inline int
-putenvf(const char *__fmt, ...)
+putenvf(const char *__fmt, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __fmt);
@@ -978,7 +978,7 @@ putenvf(const char *__fmt, ...)
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __format__(__printf__, 1, 2))))
 static inline void
-eputenvf(const char *__fmt, ...)
+eputenvf(const char *__fmt, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __fmt);
@@ -988,14 +988,14 @@ eputenvf(const char *__fmt, ...)
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline void
-evputenvf(const char *__fmt, va_list __ap)
+evputenvf(const char *__fmt, va_list __ap) /* TODO test */
 {
 	envputenvf(libsimple_default_failure_exit, __fmt, __ap);
 }
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __format__(__printf__, 2, 3))))
 static inline void
-enputenvf(int __status, const char *__fmt, ...)
+enputenvf(int __status, const char *__fmt, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __fmt);
@@ -1010,7 +1010,7 @@ void vweprintf(const char *, va_list);
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(1), __format__(__printf__, 1, 2), __noreturn__)))
 static inline void
-eprintf(const char *__fmt, ...)
+eprintf(const char *__fmt, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __fmt);
@@ -1021,7 +1021,7 @@ eprintf(const char *__fmt, ...)
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(1), __noreturn__)))
 static inline void
-veprintf(const char *__fmt, va_list __ap)
+veprintf(const char *__fmt, va_list __ap) /* TODO test */
 {
 	vweprintf(__fmt, __ap);
 	exit(libsimple_default_failure_exit);
@@ -1029,7 +1029,7 @@ veprintf(const char *__fmt, va_list __ap)
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(2), __format__(__printf__, 2, 3), __noreturn__)))
 static inline void
-enprintf(int __status, const char *__fmt, ...)
+enprintf(int __status, const char *__fmt, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __fmt);
@@ -1040,7 +1040,7 @@ enprintf(int __status, const char *__fmt, ...)
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(2), __noreturn__)))
 static inline void
-venprintf(int __status, const char *__fmt, va_list __ap)
+venprintf(int __status, const char *__fmt, va_list __ap) /* TODO test */
 {
 	vweprintf(__fmt, __ap);
 	exit(__status);
@@ -1048,7 +1048,7 @@ venprintf(int __status, const char *__fmt, va_list __ap)
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(1), __format__(__printf__, 1, 2))))
 static inline void
-weprintf(const char *__fmt, ...)
+weprintf(const char *__fmt, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __fmt);
@@ -1081,7 +1081,7 @@ ssize_t libsimple_recvfrom_timestamped(int, void *restrict, size_t, int, struct 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
 static inline ssize_t
-libsimple_recv_timestamped(int __fd, void *restrict __buf, size_t __n,
+libsimple_recv_timestamped(int __fd, void *restrict __buf, size_t __n, /* TODO test */
                            int __flags, struct timespec *restrict __ts)
 {
 	return libsimple_recvfrom_timestamped(__fd, __buf, __n, __flags, NULL, 0, __ts);
@@ -1114,7 +1114,7 @@ int libsimple_multimespec(struct timespec *, const struct timespec *, int);
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __warn_unused_result__)))
 static inline int
-libsimple_cmptimespec(const struct timespec *__a, const struct timespec *__b)
+libsimple_cmptimespec(const struct timespec *__a, const struct timespec *__b) /* TODO test */
 {
         if (__a->tv_sec != __b->tv_sec)
                 return __a->tv_sec < __b->tv_sec ? -1 : +1;
@@ -1148,7 +1148,7 @@ int libsimple_multimeval(struct timeval *, const struct timeval *, int);
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __warn_unused_result__)))
 static inline int
-libsimple_cmptimeval(const struct timeval *__a, const struct timeval *__b)
+libsimple_cmptimeval(const struct timeval *__a, const struct timeval *__b) /* TODO test */
 {
         if (__a->tv_sec != __b->tv_sec)
                 return __a->tv_sec < __b->tv_sec ? -1 : +1;
@@ -1161,7 +1161,7 @@ libsimple_cmptimeval(const struct timeval *__a, const struct timeval *__b)
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline void
-libsimple_timeval2timespec(struct timespec *restrict __ts, const struct timeval *restrict __tv)
+libsimple_timeval2timespec(struct timespec *restrict __ts, const struct timeval *restrict __tv) /* TODO test */
 {
         __ts->tv_sec = __tv->tv_sec;
         __ts->tv_nsec = __tv->tv_usec;
@@ -1209,7 +1209,7 @@ char *libsimple_timevaltostr(char *restrict, const struct timeval *restrict);
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline double
-libsimple_timespectodouble(const struct timespec *__ts)
+libsimple_timespectodouble(const struct timespec *__ts) /* TODO test */
 {
 	double __ret = (double)(__ts->tv_nsec);
 	__ret /= (double)1000000000L;
@@ -1223,7 +1223,7 @@ libsimple_timespectodouble(const struct timespec *__ts)
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline double
-libsimple_timevaltodouble(const struct timeval *__tv)
+libsimple_timevaltodouble(const struct timeval *__tv) /* TODO test */
 {
 	double __ret = (double)(__tv->tv_usec);
 	__ret /= (double)1000000L;
@@ -1249,15 +1249,15 @@ void libsimple_doubletotimeval(struct timeval *, double);
 #endif
 
 
-#define LIBSIMPLE_UNLIST(LIST, I, NP) libsimple_unlist((LIST), (I), (NP), sizeof(*(LIST)))
+#define LIBSIMPLE_UNLIST(LIST, I, NP) libsimple_unlist((LIST), (I), (NP), sizeof(*(LIST))) /* TODO test */
 #ifndef UNLIST
-# define UNLIST(LIST, I, NP) libsimple_unlist((LIST), (I), (NP), sizeof(*(LIST)))
+# define UNLIST(LIST, I, NP) LIBSIMPLE_UNLIST((LIST), (I), (NP))
 #endif
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline void
-libsimple_unlist(void *__list, size_t __i, size_t *__np, size_t __width)
+libsimple_unlist(void *__list, size_t __i, size_t *__np, size_t __width) /* TODO test */
 {
         char *__lst = __list;
         memmove(&__lst[__i * __width], &__lst[(__i + 1) * __width], (--*__np - __i) * __width);
