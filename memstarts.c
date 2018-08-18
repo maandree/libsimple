@@ -1,5 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 #include "libsimple.h"
+#ifndef TEST
 
 
 int
@@ -14,8 +15,8 @@ libsimple_memstarts(const void *s_, size_t n, const void *t_, size_t m)
 }
 
 
-#ifdef TEST
-#include <assert.h>
+#else
+#include "test.h"
 
 int
 main(void)
@@ -32,7 +33,7 @@ main(void)
 	assert(libsimple_memstarts("test", 4, "x", 1) == 0);
 	assert(libsimple_memstarts("test", 4, "xx", 2) == 0);
 
-	assert(libsimple_memstarts("TEST", 4, "", 0) == 1;
+	assert(libsimple_memstarts("TEST", 4, "", 0) == 1);
 	assert(libsimple_memstarts("TEST", 4, "test", 4) == 0);
 	assert(libsimple_memstarts("TEST", 4, "test", 5) == 0);
 	assert(libsimple_memstarts("TEST", 4, "testx", 5) == 0);

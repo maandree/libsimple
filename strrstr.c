@@ -1,5 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 #include "libsimple.h"
+#ifndef TEST
 
 
 char *
@@ -9,8 +10,8 @@ libsimple_strrstr(const char *hay, const char *sub)
 }
 
 
-#ifdef TEST
-#include <assert.h>
+#else
+#include "test.h"
 
 int
 main(void)
@@ -33,37 +34,37 @@ main(void)
 	assert(!strcmp(libsimple_strrstr("abc", "abc"), "abc"));
 	assert(!strcmp(libsimple_strrstr("abcabc", "bc"), "bc"));
 
-	assert(!strcmp(libsimple_strrcasestr("TEST", "test"), "TEST"));
-	assert(!strcmp(libsimple_strrcasestr("TEST", ""), ""));
-	assert(!libsimple_strrcasestr("T", "test"));
-	assert(!strcmp(libsimple_strrcasestr("TEST", "t"), "T"));
-	assert(!strcmp(libsimple_strrcasestr("TEST", "e"), "EST"));
-	assert(!strcmp(libsimple_strrcasestr("TEST", "s"), "ST"));
-	assert(!libsimple_strrcasestr("TEST", "x"));
-	assert(!strcmp(libsimple_strrcasestr("TEST", "te"), "TEST"));
-	assert(!strcmp(libsimple_strrcasestr("TEST", "es"), "EST"));
-	assert(!strcmp(libsimple_strrcasestr("TEST", "st"), "ST"));
-	assert(!libsimple_strrcasestr("TEST", "xx"));
-	assert(!strcmp(libsimple_strrcasestr("ABC", "c"), "C"));
-	assert(!strcmp(libsimple_strrcasestr("ABC", "bc"), "BC"));
-	assert(!strcmp(libsimple_strrcasestr("ABC", "abc"), "ABC"));
-	assert(!strcmp(libsimple_strrcasestr("ABCABC", "bc"), "BC"));
+	assert(!libsimple_strrstr("TEST", "test"));
+	assert(!strcmp(libsimple_strrstr("TEST", ""), ""));
+	assert(!libsimple_strrstr("T", "test"));
+	assert(!libsimple_strrstr("TEST", "t"));
+	assert(!libsimple_strrstr("TEST", "e"));
+	assert(!libsimple_strrstr("TEST", "s"));
+	assert(!libsimple_strrstr("TEST", "x"));
+	assert(!libsimple_strrstr("TEST", "te"));
+	assert(!libsimple_strrstr("TEST", "es"));
+	assert(!libsimple_strrstr("TEST", "st"));
+	assert(!libsimple_strrstr("TEST", "xx"));
+	assert(!libsimple_strrstr("ABC", "c"));
+	assert(!libsimple_strrstr("ABC", "bc"));
+	assert(!libsimple_strrstr("ABC", "abc"));
+	assert(!libsimple_strrstr("ABCABC", "bc"));
 
-	assert(!strcmp(libsimple_strrcasestr("test", "TEST"), "test"));
-	assert(!libsimple_strrcasestr("", "TEST"));
-	assert(!libsimple_strrcasestr("t", "TEST"));
-	assert(!strcmp(libsimple_strrcasestr("test", "T"), "t"));
-	assert(!strcmp(libsimple_strrcasestr("test", "E"), "est"));
-	assert(!strcmp(libsimple_strrcasestr("test", "S"), "st"));
-	assert(!libsimple_strrcasestr("test", "X"));
-	assert(!strcmp(libsimple_strrcasestr("test", "TE"), "test"));
-	assert(!strcmp(libsimple_strrcasestr("test", "ES"), "est"));
-	assert(!strcmp(libsimple_strrcasestr("test", "ST"), "st"));
-	assert(!libsimple_strrcasestr("test", "XX"));
-	assert(!strcmp(libsimple_strrcasestr("abc", "C"), "c"));
-	assert(!strcmp(libsimple_strrcasestr("abc", "BC"), "bc"));
-	assert(!strcmp(libsimple_strrcasestr("abc", "ABC"), "abc"));
-	assert(!strcmp(libsimple_strrcasestr("abcabc", "BC"), "bc"));
+	assert(!libsimple_strrstr("test", "TEST"));
+	assert(!libsimple_strrstr("", "TEST"));
+	assert(!libsimple_strrstr("t", "TEST"));
+	assert(!libsimple_strrstr("test", "T"));
+	assert(!libsimple_strrstr("test", "E"));
+	assert(!libsimple_strrstr("test", "S"));
+	assert(!libsimple_strrstr("test", "X"));
+	assert(!libsimple_strrstr("test", "TE"));
+	assert(!libsimple_strrstr("test", "ES"));
+	assert(!libsimple_strrstr("test", "ST"));
+	assert(!libsimple_strrstr("test", "XX"));
+	assert(!libsimple_strrstr("abc", "C"));
+	assert(!libsimple_strrstr("abc", "BC"));
+	assert(!libsimple_strrstr("abc", "ABC"));
+	assert(!libsimple_strrstr("abcabc", "BC"));
 	return 0;
 }
 

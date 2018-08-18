@@ -1,5 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 #include "libsimple.h"
+#ifndef TEST
 
 
 void *
@@ -23,8 +24,8 @@ libsimple_memmem(const void *hay_, size_t hayn, const void *sub_, size_t subn)
 }
 
 
-#ifdef TEST
-#include <assert.h>
+#else
+#include "test.h"
 
 int
 main(void)

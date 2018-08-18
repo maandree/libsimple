@@ -1,5 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 #include "libsimple.h"
+#ifndef TEST
 
 
 int
@@ -13,8 +14,8 @@ libsimple_strcaseends(const char *s, const char *t)
 }
 
 
-#ifdef TEST
-#include <assert.h>
+#else
+#include "test.h"
 
 int
 main(void)

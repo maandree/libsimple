@@ -1,5 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 #include "libsimple.h"
+#ifndef TEST
 
 
 char *
@@ -8,25 +9,28 @@ libsimple_strrcasestr(const char *h_, const char *n)
 	char *h = *(char **)(void *)&h_;
 	size_t hn = strlen(h);
 	size_t nn = strlen(n);
+	if (!nn)
+		return &h[hn];
 	if (hn < nn)
 		return NULL;
 	for (h += hn -= nn; hn--; h--)
-		if (!strcasecmp(h, n))
+		if (!strncasecmp(h, n, nn))
 			return h;
+	if (!strncasecmp(h, n, nn))
+		return h;
 	return NULL;
 }
 
 
-#ifdef TEST
-#include <assert.h>
+#else
+#include "test.h"
 
 int
 main(void)
 {
 	assert(!strcmp(libsimple_strrcasestr("", ""), ""));
 	assert(!strcmp(libsimple_strrcasestr("test", ""), ""));
-	assert(!libsimple_strrcasestr("", ""));
-	assert(!libsimple_strrcasestr("t", "t"));
+	assert(!strcmp(libsimple_strrcasestr("t", "t"), "t"));
 	assert(!strcmp(libsimple_strrcasestr("test", "t"), "t"));
 	assert(!strcmp(libsimple_strrcasestr("test", "e"), "est"));
 	assert(!strcmp(libsimple_strrcasestr("test", "s"), "st"));

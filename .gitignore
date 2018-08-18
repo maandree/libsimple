@@ -3,5 +3,12 @@
 *.o
 *.a
 *.so
+*.so.*
 *.su
 *.out
+*.test
+*.gch
+*.gcda
+*.gcno
+*.gcov
+*.lo

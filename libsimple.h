@@ -709,7 +709,7 @@ int libsimple_strstarts(const char *, const char *);
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-int libsimple_strcasestarts(const char *__s, const char *__t) { return !strncasecmp(__s, __t, strlen(__t)); }
+static inline int libsimple_strcasestarts(const char *__s, const char *__t) { return !strncasecmp(__s, __t, strlen(__t)); }
 #ifndef strcasestarts
 # define strcasestarts libsimple_strcasestarts
 #endif

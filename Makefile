@@ -54,17 +54,48 @@ OBJ =\
 	vweprintf.o\
 	libsimple.o
 
-all: libsimple.a
+TESTS =\
+	asprintf.test\
+	isutf8.test\
+	memdup.test\
+	memends.test\
+	memmem.test\
+	memrchr.test\
+	memrmem.test\
+	memstarts.test\
+	rawmemchr.test\
+	rawmemrchr.test\
+	strcaseends.test\
+	strcasestr.test\
+	strends.test\
+	strndup.test\
+	strrcasestr.test\
+	strrstr.test\
+	strstarts.test\
+	vasprintf.test
+
+all: libsimple.a $(TESTS)
 $(OBJ): $(@:.o=.c) libsimple.h
+$(TESTS): $(@:=.o) libsimple.a
+$(TESTS:=.o): $(@:.test.o=.c) libsimple.h test.h
 
 libsimple.a: $(OBJ)
 	$(AR) rc $@ $?
 	$(AR) -s $@
 
+.test.o.test:
+	$(CC) -o $@ $< libsimple.a $(LDFLAGS)
+
+.c.test.o:
+	$(CC) -c -o $@ $< $(CFLAGS) -DTEST
+
+check: $(TESTS)
+	@set -e; for t in $(TESTS); do printf '%s\n' "./$$t"; "./$$t"; done
+
 clean:
-	-rm -rf -- *.o *.su *.a *.so *.so.* *.gch *.gcda *.gcno *.gcov *.lo
+	-rm -rf -- *.o *.su *.a *.so *.so.* *.gch *.gcda *.gcno *.gcov *.lo *.test
 
 .SUFFIXES:
-.SUFFIXES: .o .c
+.SUFFIXES: .test .test.o .o .c
 
-.PHONY: all clean
+.PHONY: all check clean
