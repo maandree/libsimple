@@ -39,8 +39,12 @@ OBJ =\
 	strchrnul.o\
 	strends.o\
 	strndup.o\
+	strnstr.o\
+	strncasestr.o\
 	strrcasestr.o\
 	strrstr.o\
+	strrncasestr.o\
+	strrnstr.o\
 	strstarts.o\
 	strtotimespec.o\
 	strtotimeval.o\

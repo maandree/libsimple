@@ -1,6 +1,0 @@
-strnstr
-strrnstr
-strncasestr
-strrncasestr
-strcmpnul
-strcasecmpnul

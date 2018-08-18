@@ -702,6 +702,34 @@ char *libsimple_strrstr(const char *, const char *);
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+char *libsimple_strrnstr(const char *, const char *, size_t); /* TODO test */
+#ifndef strrnstr
+# define strrnstr libsimple_strrnstr
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+char *libsimple_strnstr(const char *, const char *, size_t); /* TODO test */
+#ifndef strnstr
+# define strnstr libsimple_strnstr
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+char *libsimple_strrncasestr(const char *, const char *, size_t); /* TODO test */
+#ifndef strrncasestr
+# define strrncasestr libsimple_strrncasestr
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+char *libsimple_strnstr(const char *, const char *, size_t); /* TODO test */
+#ifndef strncasestr
+# define strncasestr libsimple_strncasestr
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 int libsimple_strstarts(const char *, const char *);
 #ifndef strstarts
 # define strstarts libsimple_strstarts
@@ -743,12 +771,65 @@ char *libsimple_strrcasestr(const char *, const char *);
 #endif
 
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-static inline int streq(const char *__a, const char *__b) { return !strcmp(__a, __b); } /* TODO test */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+static inline int libsimple_strcmpnul(const char *__a, const char *__b) /* TODO test */
+{ return (!__a || !__b) ? !__b - !__a : strcmp(__a, __b); }
+#ifndef strcmpnul
+# define strcmpnul libsimple_strcmpnul
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+static inline int libsimple_strcasecmpnul(const char *__a, const char *__b) /* TODO test */
+{ return (!__a || !__b) ? !__b - !__a : strcasecmp(__a, __b); }
+#ifndef strcasecmpnul
+# define strcasecmpnul libsimple_strcasecmpnul
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+static inline int libsimple_strncmpnul(const char *__a, const char *__b, size_t __n) /* TODO test */
+{ return (!__a || !__b) ? !__b - !__a : strncmp(__a, __b, __n); }
+#ifndef strncmpnul
+# define strncmpnul libsimple_strncmpnul
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+static inline int libsimple_strncasecmpnul(const char *__a, const char *__b, size_t __n) /* TODO test */
+{ return (!__a || !__b) ? !__b - !__a : strncasecmp(__a, __b, __n); }
+#ifndef strncasecmpnul
+# define strncasecmpnul libsimple_strncasecmpnul
+#endif
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-static inline int strneq(const char *__a, const char *__b, size_t __n) { return !strncmp(__a, __b, __n); } /* TODO test */
+static inline int libsimple_streq(const char *__a, const char *__b) { return !strcmp(__a, __b); } /* TODO test */
+#ifndef streq
+# define streq libsimple_streq
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+static inline int libsimple_strneq(const char *__a, const char *__b, size_t __n) { return !strncmp(__a, __b, __n); } /* TODO test */
+#ifndef strneq
+# define strneq libsimple_strneq
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+static inline int libsimple_streqnul(const char *__a, const char *__b) { return !strcmpnul(__a, __b); } /* TODO test */
+#ifndef streqnul
+# define streqnul libsimple_streqnul
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+static inline int libsimple_strneqnul(const char *__a, const char *__b, size_t __n) /* TODO test */
+{ return !strncmpnul(__a, __b, __n); }
+#ifndef strneqnul
+# define strneqnul libsimple_strneqnul
+#endif
 
 
 #define malloczn(CLEAR, ...) _libsimple_malloczn((CLEAR), __VA_ARGS__, (size_t)0) /* TODO test */

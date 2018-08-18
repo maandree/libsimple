@@ -9,11 +9,4 @@
 		exit(1);\
 	} while (0)
 
-
-
-#define strcmp(...) test_strcmp(__VA_ARGS__)
-static inline int
-test_strcmp(const char *a, const char *b)
-{
-	return (!a || !b) ? !b - !a : (strcmp)(a, b);
-}
+#define strcmp(...) strcmpnul(__VA_ARGS__)
