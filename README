@@ -138,6 +138,14 @@ The following functions are defined (some as inline functions):
 	char *libsimple_strrstr(const char *s, const char *t)
 		Finds the last occurrence of `t` in `s`.
 
+	char *libsimple_strnstr(const char *s, const char *t, size_t n)
+		Finds the first occurrence of the `n` first characters `t`
+		in `n` first characters `s`.
+
+	char *libsimple_strrnstr(const char *s, const char *t, size_t n)
+		Finds the last occurrence of the `n` first characters `t`
+		in `n` first characters `s`.
+
 	int libsimple_strstarts(const char *s, const char *t)
 		Returns 1 if `s` starts with `t`, 0 otherwise.
 
@@ -156,11 +164,51 @@ The following functions are defined (some as inline functions):
 	char *libsimple_strrcasestr(const char *, const char *)
 		Like strrstr except case-insensitive.
 
+	char *libsimple_strncasestr(const char *, const char *, size_t)
+		Like strnstr except case-insensitive.
+
+	char *libsimple_strrncasestr(const char *, const char *, size_t)
+		Like strrnstr except case-insensitive.
+
+	int libsimple_strcmpnul(const char *a, const char *b)
+		Like strcmp excepts NULL and gives it a value less than
+		the empty string
+
+	int libsimple_strncmpnul(const char *a, const char *b, size_t n)
+		Like strncmp excepts NULL and gives it a value less than
+		the empty string
+
+	int libsimple_strcasecmpnul(const char *a, const char *b)
+		Like strcasecmp excepts NULL and gives it a value less
+		than the empty string
+
+	int libsimple_strncasecmpnul(const char *a, const char *b, size_t n)
+		Like strncasecmp excepts NULL and gives it a value less
+		than the empty string
+
 	int libsimple_streq(const char *a, const char *b)
-		!strncmp(a, b)
+		!strcmp(a, b)
 
 	int libsimple_strneq(const char *a, const char *b, size_t n)
 		!strncmp(a, b, n)
+
+	int libsimple_strcaseeq(const char *a, const char *b)
+		!strcasecmp(a, b)
+
+	int libsimple_strncaseeq(const char *a, const char *b, size_t n)
+		!strncasecmp(a, b, n)
+
+	int libsimple_streqnul(const char *a, const char *b)
+		!strcmpnul(a, b)
+
+	int libsimple_strneqnul(const char *a, const char *b, size_t n)
+		!strncmpnul(a, b, n)
+
+	int libsimple_strcaseeqnul(const char *a, const char *b)
+		!strcasecmpnul(a, b)
+
+	int libsimple_strncaseeqnul(const char *a, const char *b, size_t n)
+		!strncasecmpnul(a, b, n)
 
 	char *getenv_ne(const char *)
 		Like getenv, except returns NULL if the value
