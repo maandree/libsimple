@@ -18,8 +18,8 @@ libsimple_rawmemchr(const void *s_, int c)
 int
 main(void)
 {
-	assert(!strcmp(libsimple_rawmemchr("1234512345", '3'), "34512345"));
-	assert(!strcmp(libsimple_rawmemchr("1234512345", '1'), "1234512345"));
+	assert(!strcmpnul(libsimple_rawmemchr("1234512345", '3'), "34512345"));
+	assert(!strcmpnul(libsimple_rawmemchr("1234512345", '1'), "1234512345"));
 	return 0;
 }
 

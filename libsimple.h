@@ -159,47 +159,47 @@ extern int libsimple_default_failure_exit;
 
 
 #ifndef MIN
-# define MIN(A, B) ((A) < (B) ? (A) : (B)) /* TODO test */
+# define MIN(A, B) ((A) < (B) ? (A) : (B))
 #endif
 
 
 #ifndef MAX
-# define MAX(A, B) ((A) > (B) ? (A) : (B)) /* TODO test */
+# define MAX(A, B) ((A) > (B) ? (A) : (B))
 #endif
 
 
 #ifndef MIN3
-# define MIN3(A, B, C) MIN(MIN((A), (B)), (C)) /* TODO test */
+# define MIN3(A, B, C) MIN(MIN((A), (B)), (C))
 #endif
 
 
 #ifndef MAX3
-# define MAX3(A, B, C) MAX(MAX((A), (B)), (C)) /* TODO test */
+# define MAX3(A, B, C) MAX(MAX((A), (B)), (C))
 #endif
 
 
 #ifndef ELEMSOF
-# define ELEMSOF(ARR) (sizeof(ARR) / (sizeof(*(ARR)))) /* TODO test */
+# define ELEMSOF(ARR) (sizeof(ARR) / (sizeof(*(ARR))))
 #endif
 
 
 #ifndef STRLEN
-# define STRLEN(STR) (sizeof(STR) - 1) /* TODO test */
+# define STRLEN(STR) (sizeof(STR) - 1)
 #endif
 
 
 #ifndef INTSTRLEN
-# define INTSTRLEN(TYPE) ((sizeof(TYPE) == 1 ? 3 : 5 * (sizeof(TYPE) / 2)) + ((TYPE)-1 < 0)) /* TODO test */
+# define INTSTRLEN(TYPE) ((sizeof(TYPE) == 1 ? 3 : 5 * (sizeof(TYPE) / 2)) + ((TYPE)-1 < 0))
 #endif
 
 
 #ifndef TYPE_MAX
-# define TYPE_MAX(TYPE) ((TYPE)(((1ULL << (8 * sizeof(TYPE) - 1)) - 1) << ((TYPE)-1 > 0) | 1)) /* TODO test */
+# define TYPE_MAX(TYPE) ((TYPE)(((1ULL << (8 * sizeof(TYPE) - 1)) - 1) << ((TYPE)-1 > 0) | 1))
 #endif
 
 
 #ifndef TYPE_MIN
-# define TYPE_MIN(TYPE) ((TYPE)((TYPE)-1 > 0 ? 0 : (TYPE)~0 < (TYPE)-1 ? (TYPE)~0 : (TYPE)(1ULL << (8 * sizeof(TYPE) - 1)))) /* TODO test */
+# define TYPE_MIN(TYPE) ((TYPE)((TYPE)-1 > 0 ? 0 : (TYPE)~0 < (TYPE)-1 ? (TYPE)~0 : (TYPE)(1ULL << (8 * sizeof(TYPE) - 1))))
 #endif
 
 
@@ -512,14 +512,14 @@ char *libsimple_strchrnul(const char *, int);
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-static inline char *libsimple_strend(const char *__s) { return strchr(__s, '\0'); } /* TODO test */
+static inline char *libsimple_strend(const char *__s) { return strchr(__s, '\0'); }
 #ifndef strend
 # define strend libsimple_strend
 #endif
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-static inline int libsimple_inchrset(int __c, const char *__s) { return __c && strchr(__s, __c); } /* TODO test */
+static inline int libsimple_inchrset(int __c, const char *__s) { return __c && strchr(__s, __c); }
 #ifndef inchrset
 # define inchrset libsimple_inchrset
 #endif
@@ -540,7 +540,7 @@ char *libsimple_strndup(const char *, size_t);
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
-static inline void *libsimple_mempcpy(void *__d, const void *__s, size_t __n) /* TODO test */
+static inline void *libsimple_mempcpy(void *__d, const void *__s, size_t __n)
 { return &((char *)memcpy(__d, __s, __n))[__n]; }
 #ifndef mempcpy
 # define mempcpy libsimple_mempcpy
@@ -804,7 +804,7 @@ static inline int libsimple_strncasecmpnul(const char *__a, const char *__b, siz
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-static inline int libsimple_streq(const char *__a, const char *__b) { return !strcmp(__a, __b); } /* TODO test */
+static inline int libsimple_streq(const char *__a, const char *__b) { return !strcmp(__a, __b); }
 #ifndef streq
 # define streq libsimple_streq
 #endif
@@ -818,7 +818,7 @@ static inline int libsimple_strneq(const char *__a, const char *__b, size_t __n)
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
-static inline int libsimple_streqnul(const char *__a, const char *__b) { return !strcmpnul(__a, __b); } /* TODO test */
+static inline int libsimple_streqnul(const char *__a, const char *__b) { return !strcmpnul(__a, __b); }
 #ifndef streqnul
 # define streqnul libsimple_streqnul
 #endif
@@ -829,6 +829,35 @@ static inline int libsimple_strneqnul(const char *__a, const char *__b, size_t _
 { return !strncmpnul(__a, __b, __n); }
 #ifndef strneqnul
 # define strneqnul libsimple_strneqnul
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+static inline int libsimple_strcaseeq(const char *__a, const char *__b) { return !strcasecmp(__a, __b); }
+#ifndef strcaseeq
+# define strcaseeq libsimple_strcaseeq
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+static inline int libsimple_strncaseeq(const char *__a, const char *__b, size_t __n) { return !strncasecmp(__a, __b, __n); } /* TODO test */
+#ifndef strncaseeq
+# define strncaseeq libsimple_strncaseeq
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+static inline int libsimple_strcaseeqnul(const char *__a, const char *__b) { return !strcasecmpnul(__a, __b); }
+#ifndef strcaseeqnul
+# define strcaseeqnul libsimple_strcaseeqnul
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+static inline int libsimple_strncaseeqnul(const char *__a, const char *__b, size_t __n) /* TODO test */
+{ return !strncasecmpnul(__a, __b, __n); }
+#ifndef strncaseeqnul
+# define strncaseeqnul libsimple_strncaseeqnul
 #endif
 
 

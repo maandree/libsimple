@@ -25,30 +25,30 @@ libsimple_strndup(const char *s, size_t n) /* FIXME */
 #include "test.h"
 
 int
-main(void)
+main(void) /* TODO valgrind */
 {
 	const char *s = "test";
 	void *p;
 
 	p = libsimple_memdup(s, 5);
 	assert(p && p != s);
-	assert(!strcmp(p, "test"));
+	assert(!strcmpnul(p, "test"));
 	memset(p, 0, 5);
-	assert(!strcmp(s, "test"));
+	assert(!strcmpnul(s, "test"));
 	free(p);
 
 	p = libsimple_memdup(s, 3);
 	assert(p && p != s);
-	assert(!strcmp(p, "tes"));
+	assert(!strcmpnul(p, "tes"));
 	memset(p, 0, 5);
-	assert(!strcmp(s, "test"));
+	assert(!strcmpnul(s, "test"));
 	free(p);
 
 	p = libsimple_memdup(s, 0);
 	assert(p && p != s);
-	assert(!strcmp(p, ""));
+	assert(!strcmpnul(p, ""));
 	memset(p, 0, 5);
-	assert(!strcmp(s, "test"));
+	assert(!strcmpnul(s, "test"));
 	free(p);
 
 	return 0;

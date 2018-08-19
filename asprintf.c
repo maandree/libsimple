@@ -26,7 +26,7 @@ main(void)
 
 	assert(libsimple_asprintf(&s, "%i %X", 99999, 255) == sizeof("99999 FF") - 1);
 	assert(s && s != old);
-	assert(!strcmp(s, "99999 FF"));
+	assert(!strcmpnul(s, "99999 FF"));
 	free(s);
 
 	return 0;

@@ -76,7 +76,8 @@ TESTS =\
 	strrcasestr.test\
 	strrstr.test\
 	strstarts.test\
-	vasprintf.test
+	vasprintf.test\
+	libsimple.test
 
 all: libsimple.a $(TESTS)
 $(OBJ): $(@:.o=.c) libsimple.h
@@ -94,7 +95,7 @@ libsimple.a: $(OBJ)
 	$(CC) -c -o $@ $< $(CFLAGS) -DTEST
 
 check: $(TESTS)
-	@set -e; for t in $(TESTS); do printf '%s\n' "./$$t"; "./$$t"; done
+	@set -e; for t in $(TESTS); do printf '%s\n' "./$$t"; $(CHECK_PREFIX) "./$$t"; done
 
 clean:
 	-rm -rf -- *.o *.su *.a *.so *.so.* *.gch *.gcda *.gcno *.gcov *.lo *.test

@@ -28,51 +28,51 @@ libsimple_strrcasestr(const char *h_, const char *n)
 int
 main(void)
 {
-	assert(!strcmp(libsimple_strrcasestr("", ""), ""));
-	assert(!strcmp(libsimple_strrcasestr("test", ""), ""));
-	assert(!strcmp(libsimple_strrcasestr("t", "t"), "t"));
-	assert(!strcmp(libsimple_strrcasestr("test", "t"), "t"));
-	assert(!strcmp(libsimple_strrcasestr("test", "e"), "est"));
-	assert(!strcmp(libsimple_strrcasestr("test", "s"), "st"));
+	assert(!strcmpnul(libsimple_strrcasestr("", ""), ""));
+	assert(!strcmpnul(libsimple_strrcasestr("test", ""), ""));
+	assert(!strcmpnul(libsimple_strrcasestr("t", "t"), "t"));
+	assert(!strcmpnul(libsimple_strrcasestr("test", "t"), "t"));
+	assert(!strcmpnul(libsimple_strrcasestr("test", "e"), "est"));
+	assert(!strcmpnul(libsimple_strrcasestr("test", "s"), "st"));
 	assert(!libsimple_strrcasestr("test", "x"));
-	assert(!strcmp(libsimple_strrcasestr("test", "te"), "test"));
-	assert(!strcmp(libsimple_strrcasestr("test", "es"), "est"));
-	assert(!strcmp(libsimple_strrcasestr("test", "st"), "st"));
+	assert(!strcmpnul(libsimple_strrcasestr("test", "te"), "test"));
+	assert(!strcmpnul(libsimple_strrcasestr("test", "es"), "est"));
+	assert(!strcmpnul(libsimple_strrcasestr("test", "st"), "st"));
 	assert(!libsimple_strrcasestr("test", "xx"));
-	assert(!strcmp(libsimple_strrcasestr("abc", "c"), "c"));
-	assert(!strcmp(libsimple_strrcasestr("abc", "bc"), "bc"));
-	assert(!strcmp(libsimple_strrcasestr("abc", "abc"), "abc"));
-	assert(!strcmp(libsimple_strrcasestr("abcabc", "bc"), "bc"));
+	assert(!strcmpnul(libsimple_strrcasestr("abc", "c"), "c"));
+	assert(!strcmpnul(libsimple_strrcasestr("abc", "bc"), "bc"));
+	assert(!strcmpnul(libsimple_strrcasestr("abc", "abc"), "abc"));
+	assert(!strcmpnul(libsimple_strrcasestr("abcabc", "bc"), "bc"));
 
-	assert(!strcmp(libsimple_strrcasestr("TEST", ""), ""));
+	assert(!strcmpnul(libsimple_strrcasestr("TEST", ""), ""));
 	assert(!libsimple_strrcasestr("T", "test"));
-	assert(!strcmp(libsimple_strrcasestr("TEST", "t"), "T"));
-	assert(!strcmp(libsimple_strrcasestr("TEST", "e"), "EST"));
-	assert(!strcmp(libsimple_strrcasestr("TEST", "s"), "ST"));
+	assert(!strcmpnul(libsimple_strrcasestr("TEST", "t"), "T"));
+	assert(!strcmpnul(libsimple_strrcasestr("TEST", "e"), "EST"));
+	assert(!strcmpnul(libsimple_strrcasestr("TEST", "s"), "ST"));
 	assert(!libsimple_strrcasestr("TEST", "x"));
-	assert(!strcmp(libsimple_strrcasestr("TEST", "te"), "TEST"));
-	assert(!strcmp(libsimple_strrcasestr("TEST", "es"), "EST"));
-	assert(!strcmp(libsimple_strrcasestr("TEST", "st"), "ST"));
+	assert(!strcmpnul(libsimple_strrcasestr("TEST", "te"), "TEST"));
+	assert(!strcmpnul(libsimple_strrcasestr("TEST", "es"), "EST"));
+	assert(!strcmpnul(libsimple_strrcasestr("TEST", "st"), "ST"));
 	assert(!libsimple_strrcasestr("TEST", "xx"));
-	assert(!strcmp(libsimple_strrcasestr("ABC", "c"), "C"));
-	assert(!strcmp(libsimple_strrcasestr("ABC", "bc"), "BC"));
-	assert(!strcmp(libsimple_strrcasestr("ABC", "abc"), "ABC"));
-	assert(!strcmp(libsimple_strrcasestr("ABCABC", "bc"), "BC"));
+	assert(!strcmpnul(libsimple_strrcasestr("ABC", "c"), "C"));
+	assert(!strcmpnul(libsimple_strrcasestr("ABC", "bc"), "BC"));
+	assert(!strcmpnul(libsimple_strrcasestr("ABC", "abc"), "ABC"));
+	assert(!strcmpnul(libsimple_strrcasestr("ABCABC", "bc"), "BC"));
 
 	assert(!libsimple_strrcasestr("", "TEST"));
 	assert(!libsimple_strrcasestr("t", "TEST"));
-	assert(!strcmp(libsimple_strrcasestr("test", "T"), "t"));
-	assert(!strcmp(libsimple_strrcasestr("test", "E"), "est"));
-	assert(!strcmp(libsimple_strrcasestr("test", "S"), "st"));
+	assert(!strcmpnul(libsimple_strrcasestr("test", "T"), "t"));
+	assert(!strcmpnul(libsimple_strrcasestr("test", "E"), "est"));
+	assert(!strcmpnul(libsimple_strrcasestr("test", "S"), "st"));
 	assert(!libsimple_strrcasestr("test", "X"));
-	assert(!strcmp(libsimple_strrcasestr("test", "TE"), "test"));
-	assert(!strcmp(libsimple_strrcasestr("test", "ES"), "est"));
-	assert(!strcmp(libsimple_strrcasestr("test", "ST"), "st"));
+	assert(!strcmpnul(libsimple_strrcasestr("test", "TE"), "test"));
+	assert(!strcmpnul(libsimple_strrcasestr("test", "ES"), "est"));
+	assert(!strcmpnul(libsimple_strrcasestr("test", "ST"), "st"));
 	assert(!libsimple_strrcasestr("test", "XX"));
-	assert(!strcmp(libsimple_strrcasestr("abc", "C"), "c"));
-	assert(!strcmp(libsimple_strrcasestr("abc", "BC"), "bc"));
-	assert(!strcmp(libsimple_strrcasestr("abc", "ABC"), "abc"));
-	assert(!strcmp(libsimple_strrcasestr("abcabc", "BC"), "bc"));
+	assert(!strcmpnul(libsimple_strrcasestr("abc", "C"), "c"));
+	assert(!strcmpnul(libsimple_strrcasestr("abc", "BC"), "bc"));
+	assert(!strcmpnul(libsimple_strrcasestr("abc", "ABC"), "abc"));
+	assert(!strcmpnul(libsimple_strrcasestr("abcabc", "BC"), "bc"));
 	return 0;
 }
 

@@ -23,9 +23,9 @@ main(void)
 	void *p = libsimple_memdup(s, 5);
 	assert(p);
 	assert(p != s);
-	assert(!strcmp(p, s));
+	assert(!strcmpnul(p, s));
 	memset(p, 0, 5);
-	assert(!strcmp(s, "test"));
+	assert(!strcmpnul(s, "test"));
 	free(p);
 	return 0;
 }

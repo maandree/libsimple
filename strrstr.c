@@ -16,26 +16,26 @@ libsimple_strrstr(const char *hay, const char *sub)
 int
 main(void)
 {
-	assert(!strcmp(libsimple_strrstr("test", "test"), "test"));
-	assert(!strcmp(libsimple_strrstr("", ""), ""));
-	assert(!strcmp(libsimple_strrstr("test", ""), ""));
+	assert(!strcmpnul(libsimple_strrstr("test", "test"), "test"));
+	assert(!strcmpnul(libsimple_strrstr("", ""), ""));
+	assert(!strcmpnul(libsimple_strrstr("test", ""), ""));
 	assert(!libsimple_strrstr("", "test"));
 	assert(!libsimple_strrstr("t", "test"));
-	assert(!strcmp(libsimple_strrstr("test", "t"), "t"));
-	assert(!strcmp(libsimple_strrstr("test", "e"), "est"));
-	assert(!strcmp(libsimple_strrstr("test", "s"), "st"));
+	assert(!strcmpnul(libsimple_strrstr("test", "t"), "t"));
+	assert(!strcmpnul(libsimple_strrstr("test", "e"), "est"));
+	assert(!strcmpnul(libsimple_strrstr("test", "s"), "st"));
 	assert(!libsimple_strrstr("test", "x"));
-	assert(!strcmp(libsimple_strrstr("test", "te"), "test"));
-	assert(!strcmp(libsimple_strrstr("test", "es"), "est"));
-	assert(!strcmp(libsimple_strrstr("test", "st"), "st"));
+	assert(!strcmpnul(libsimple_strrstr("test", "te"), "test"));
+	assert(!strcmpnul(libsimple_strrstr("test", "es"), "est"));
+	assert(!strcmpnul(libsimple_strrstr("test", "st"), "st"));
 	assert(!libsimple_strrstr("test", "xx"));
-	assert(!strcmp(libsimple_strrstr("abc", "c"), "c"));
-	assert(!strcmp(libsimple_strrstr("abc", "bc"), "bc"));
-	assert(!strcmp(libsimple_strrstr("abc", "abc"), "abc"));
-	assert(!strcmp(libsimple_strrstr("abcabc", "bc"), "bc"));
+	assert(!strcmpnul(libsimple_strrstr("abc", "c"), "c"));
+	assert(!strcmpnul(libsimple_strrstr("abc", "bc"), "bc"));
+	assert(!strcmpnul(libsimple_strrstr("abc", "abc"), "abc"));
+	assert(!strcmpnul(libsimple_strrstr("abcabc", "bc"), "bc"));
 
 	assert(!libsimple_strrstr("TEST", "test"));
-	assert(!strcmp(libsimple_strrstr("TEST", ""), ""));
+	assert(!strcmpnul(libsimple_strrstr("TEST", ""), ""));
 	assert(!libsimple_strrstr("T", "test"));
 	assert(!libsimple_strrstr("TEST", "t"));
 	assert(!libsimple_strrstr("TEST", "e"));

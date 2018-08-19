@@ -18,8 +18,8 @@ libsimple_rawmemrchr(const void *s_, int c, size_t n)
 int
 main(void)
 {
-	assert(!strcmp(libsimple_rawmemrchr("1234512345", '3', sizeof("1234512345") - 1), "345"));
-	assert(!strcmp(libsimple_rawmemrchr("1234512345", '5', sizeof("1234512345") - 1), "5"));
+	assert(!strcmpnul(libsimple_rawmemrchr("1234512345", '3', sizeof("1234512345") - 1), "345"));
+	assert(!strcmpnul(libsimple_rawmemrchr("1234512345", '5', sizeof("1234512345") - 1), "5"));
 	return 0;
 }
 
