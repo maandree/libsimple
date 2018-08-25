@@ -633,9 +633,8 @@ int libsimple_vasprintf(char **, const char *, va_list);
 #endif
 
 
-#ifndef asprintfa
-# if defined(__GNUC__) && !defined(__clang__)
-#  define asprintfa(__fmt, ...) /* TODO test */\
+#if defined(__GNUC__) && !defined(__clang__)
+# define libsimple_asprintfa(__fmt, ...) /* TODO test */\
 	({\
 		const char *__f = (__fmt);\
 		char *__ret = NULL;\
@@ -651,13 +650,14 @@ int libsimple_vasprintf(char **, const char *, va_list);
 			__ret;\
 		}\
 	})
+# ifndef asprintfa
+#  define asprintfa(...) libsimple_asprintfa(__VA_ARGS__)
 # endif
 #endif
 
 
-#ifndef vasprintfa
-# if defined(__GNUC__) || defined(__clang__)
-#  define vasprintfa(__fmt, __ap) /* TODO test */\
+#if defined(__GNUC__) || defined(__clang__)
+# define libsimple_vasprintfa(__fmt, __ap) /* TODO test */\
 	({\
 		const char *__f = (__fmt);\
 		va_list __a = (__ap);\
@@ -676,6 +676,8 @@ int libsimple_vasprintf(char **, const char *, va_list);
 		va_end(__a2);\
 		__ret;\
 	})
+# ifndef vasprintfa
+#  define vasprintfa(fmt, ap) libsimple_vasprintfa(fmt, ap)
 # endif
 #endif
 
