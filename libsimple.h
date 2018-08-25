@@ -479,8 +479,19 @@ extern int libsimple_default_failure_exit;
 
 #define FREE(PTR) (free(PTR), (PTR) = NULL, 0) /* TODO test */
 
+#define CLOSE(FD) libsimple_close(&(FD)) /* TODO test */
 
-#define CLOSE(FD) ((FD) >= 0 ? (close(FD), (FD) = -1, 0) : 0) /* TODO test */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
+static inline int
+libsimple_close(int *__fdp)
+{
+	int __ret;
+	if (*__fdp < 0)
+		return 0;
+	__ret = close(*__fdp);
+	*__fdp = -1;
+	return __ret;
+}
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
@@ -772,7 +783,7 @@ char *libsimple_strrcasestr(const char *, const char *);
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
-static inline int libsimple_strcmpnul(const char *__a, const char *__b) /* TODO test */
+static inline int libsimple_strcmpnul(const char *__a, const char *__b)
 { return (!__a || !__b) ? !__b - !__a : strcmp(__a, __b); }
 #ifndef strcmpnul
 # define strcmpnul libsimple_strcmpnul
@@ -780,7 +791,7 @@ static inline int libsimple_strcmpnul(const char *__a, const char *__b) /* TODO 
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
-static inline int libsimple_strcasecmpnul(const char *__a, const char *__b) /* TODO test */
+static inline int libsimple_strcasecmpnul(const char *__a, const char *__b)
 { return (!__a || !__b) ? !__b - !__a : strcasecmp(__a, __b); }
 #ifndef strcasecmpnul
 # define strcasecmpnul libsimple_strcasecmpnul
@@ -788,7 +799,7 @@ static inline int libsimple_strcasecmpnul(const char *__a, const char *__b) /* T
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
-static inline int libsimple_strncmpnul(const char *__a, const char *__b, size_t __n) /* TODO test */
+static inline int libsimple_strncmpnul(const char *__a, const char *__b, size_t __n)
 { return (!__a || !__b) ? !__b - !__a : strncmp(__a, __b, __n); }
 #ifndef strncmpnul
 # define strncmpnul libsimple_strncmpnul
@@ -796,7 +807,7 @@ static inline int libsimple_strncmpnul(const char *__a, const char *__b, size_t 
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
-static inline int libsimple_strncasecmpnul(const char *__a, const char *__b, size_t __n) /* TODO test */
+static inline int libsimple_strncasecmpnul(const char *__a, const char *__b, size_t __n)
 { return (!__a || !__b) ? !__b - !__a : strncasecmp(__a, __b, __n); }
 #ifndef strncasecmpnul
 # define strncasecmpnul libsimple_strncasecmpnul
@@ -811,7 +822,7 @@ static inline int libsimple_streq(const char *__a, const char *__b) { return !st
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-static inline int libsimple_strneq(const char *__a, const char *__b, size_t __n) { return !strncmp(__a, __b, __n); } /* TODO test */
+static inline int libsimple_strneq(const char *__a, const char *__b, size_t __n) { return !strncmp(__a, __b, __n); }
 #ifndef strneq
 # define strneq libsimple_strneq
 #endif
@@ -825,7 +836,7 @@ static inline int libsimple_streqnul(const char *__a, const char *__b) { return 
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
-static inline int libsimple_strneqnul(const char *__a, const char *__b, size_t __n) /* TODO test */
+static inline int libsimple_strneqnul(const char *__a, const char *__b, size_t __n)
 { return !strncmpnul(__a, __b, __n); }
 #ifndef strneqnul
 # define strneqnul libsimple_strneqnul
@@ -840,7 +851,7 @@ static inline int libsimple_strcaseeq(const char *__a, const char *__b) { return
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-static inline int libsimple_strncaseeq(const char *__a, const char *__b, size_t __n) { return !strncasecmp(__a, __b, __n); } /* TODO test */
+static inline int libsimple_strncaseeq(const char *__a, const char *__b, size_t __n) { return !strncasecmp(__a, __b, __n); }
 #ifndef strncaseeq
 # define strncaseeq libsimple_strncaseeq
 #endif
@@ -854,7 +865,7 @@ static inline int libsimple_strcaseeqnul(const char *__a, const char *__b) { ret
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
-static inline int libsimple_strncaseeqnul(const char *__a, const char *__b, size_t __n) /* TODO test */
+static inline int libsimple_strncaseeqnul(const char *__a, const char *__b, size_t __n)
 { return !strncasecmpnul(__a, __b, __n); }
 #ifndef strncaseeqnul
 # define strncaseeqnul libsimple_strncaseeqnul
@@ -1380,7 +1391,7 @@ void libsimple_doubletotimeval(struct timeval *, double);
 #endif
 
 
-#define LIBSIMPLE_UNLIST(LIST, I, NP) libsimple_unlist((LIST), (I), (NP), sizeof(*(LIST))) /* TODO test */
+#define LIBSIMPLE_UNLIST(LIST, I, NP) libsimple_unlist((LIST), (I), (NP), sizeof(*(LIST)))
 #ifndef UNLIST
 # define UNLIST(LIST, I, NP) LIBSIMPLE_UNLIST((LIST), (I), (NP))
 #endif
@@ -1388,7 +1399,7 @@ void libsimple_doubletotimeval(struct timeval *, double);
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline void
-libsimple_unlist(void *__list, size_t __i, size_t *__np, size_t __width) /* TODO test */
+libsimple_unlist(void *__list, size_t __i, size_t *__np, size_t __width)
 {
         char *__lst = __list;
         memmove(&__lst[__i * __width], &__lst[(__i + 1) * __width], (--*__np - __i) * __width);
