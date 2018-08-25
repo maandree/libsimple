@@ -4,7 +4,7 @@
 
 
 char *
-libsimple_strndup(const char *s, size_t n) /* FIXME */
+libsimple_strndup(const char *s, size_t n)
 {
 	char *ret;
 	size_t m = strlen(s);
@@ -25,29 +25,29 @@ libsimple_strndup(const char *s, size_t n) /* FIXME */
 #include "test.h"
 
 int
-main(void) /* TODO valgrind */
+main(void)
 {
 	const char *s = "test";
 	void *p;
 
-	p = libsimple_memdup(s, 5);
+	p = libsimple_strndup(s, 5);
 	assert(p && p != s);
 	assert(!strcmpnul(p, "test"));
 	memset(p, 0, 5);
 	assert(!strcmpnul(s, "test"));
 	free(p);
 
-	p = libsimple_memdup(s, 3);
+	p = libsimple_strndup(s, 3);
 	assert(p && p != s);
 	assert(!strcmpnul(p, "tes"));
-	memset(p, 0, 5);
+	memset(p, 0, 4);
 	assert(!strcmpnul(s, "test"));
 	free(p);
 
-	p = libsimple_memdup(s, 0);
+	p = libsimple_strndup(s, 0);
 	assert(p && p != s);
 	assert(!strcmpnul(p, ""));
-	memset(p, 0, 5);
+	memset(p, 0, 1);
 	assert(!strcmpnul(s, "test"));
 	free(p);
 

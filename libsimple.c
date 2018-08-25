@@ -12,7 +12,8 @@ int libsimple_default_failure_exit = 1;
 int
 main(void)
 {
-	char buf[1024];
+	const char *cs;
+	char buf[1024], *s;
 	int intarray[10];
 	size_t i, n;
 
@@ -202,7 +203,7 @@ main(void)
 
 	stpcpy(buf, "abcxyz");
 	assert(libsimple_mempcpy(buf, "123", 3) == &buf[3]);
-	/* assert(strcmpnul(buf, "123xyz")); FIXME */
+	assert(!strcmpnul(buf, "123xyz"));
 
 	assert(libsimple_streq("abc", "abc") == 1);
 	assert(libsimple_streq("abc", "ab") == 0);
@@ -557,6 +558,76 @@ main(void)
 	assert(libsimple_strncasecmpnul("AA", "Aa", 0) == 0);
 	assert(libsimple_strncasecmpnul("Aa", "AA", 0) == 0);
 	assert(libsimple_strncasecmpnul("AA", "AA", 0) == 0);
+
+#ifdef libsimple_strdupa
+	cs = "";
+	s = libsimple_strdupa(cs);
+	assert(s);
+	assert(s != cs);
+	assert(!strcmp(s, cs));
+
+	cs = "xyz";
+	s = libsimple_strdupa(cs);
+	assert(s);
+	assert(s != cs);
+	assert(!strcmp(s, cs));
+#else
+	fprintf(stderr, "warning: libsimple_strdupa missing\n");
+#endif
+
+#ifdef libsimple_strndupa
+	cs = "";
+	s = libsimple_strndupa(cs, 5);
+	assert(s);
+	assert(s != cs);
+	assert(!strcmp(s, ""));
+
+	cs = "xyz";
+
+	s = libsimple_strndupa(cs, 5);
+	assert(s);
+	assert(s != cs);
+	assert(!strcmp(s, "xyz"));
+
+	s = libsimple_strndupa(cs, 4);
+	assert(s);
+	assert(s != cs);
+	assert(!strcmp(s, "xyz"));
+
+	s = libsimple_strndupa(cs, 3);
+	assert(s);
+	assert(s != cs);
+	assert(!strcmp(s, "xyz"));
+
+	s = libsimple_strndupa(cs, 2);
+	assert(s);
+	assert(s != cs);
+	assert(!strcmp(s, "xy"));
+
+	s = libsimple_strndupa(cs, 1);
+	assert(s);
+	assert(s != cs);
+	assert(!strcmp(s, "x"));
+
+	s = libsimple_strndupa(cs, 0);
+	assert(s);
+	assert(s != cs);
+	assert(!strcmp(s, ""));
+#else
+	fprintf(stderr, "warning: libsimple_strndupa missing\n");
+#endif
+
+#ifdef libsimple_memdupa
+	cs = "xyz";
+	for (n = 1; n < 4; n++) {
+		s = libsimple_memdupa(cs, n);
+		assert(s);
+		assert(s != cs);
+		assert(!memcmp(s, cs, n));
+	}
+#else
+	fprintf(stderr, "warning: libsimple_memdupa missing\n");
+#endif
 
 	return 0;
 }

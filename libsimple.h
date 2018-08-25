@@ -558,22 +558,22 @@ static inline void *libsimple_mempcpy(void *__d, const void *__s, size_t __n)
 #endif
 
 
-#ifndef strdupa
-# if defined(__GNUC__) || defined(__clang__)
-#  define strdupa(s) /* TODO test */\
+#if defined(__GNUC__) || defined(__clang__)
+# define libsimple_strdupa(s)\
 	({\
 		const char *__s = (s);\
 		size_t __n = strlen(__s) + 1;\
 		char *__r = alloca(__n);\
 		memcpy(__r, __s, __n);\
 	})
+# ifndef strdupa
+#  define strdupa(s) libsimple_strdupa(s)
 # endif
 #endif
 
 
-#ifndef strdupa
-# if defined(__GNUC__) || defined(__clang__)
-#  define strndupa(s, n) /* TODO test */\
+#if defined(__GNUC__) || defined(__clang__)
+# define libsimple_strndupa(s, n)\
 	({\
 		const char *__s = (s);\
 		size_t __n = (n);\
@@ -582,22 +582,25 @@ static inline void *libsimple_mempcpy(void *__d, const void *__s, size_t __n)
 		__n = __n < __m ? __n : __m;\
 		__r = alloca(__n + 1);\
 		memcpy(__r, __s, __n);\
-		__r[n] = '\0';\
+		__r[__n] = '\0';\
 		__r;\
 	})
+# ifndef strndupa
+#  define strndupa(s, n) libsimple_strndupa(s, n)
 # endif
 #endif
 
 
-#ifndef strdupa
-# if defined(__GNUC__) || defined(__clang__)
-#  define memdupa(s, n) /* TODO test */\
+#if defined(__GNUC__) || defined(__clang__)
+# define libsimple_memdupa(s, n)\
 	({\
 		const char *__s = (s);\
 		size_t __n = (n);\
 		char *__r = alloca(__n);\
 		memcpy(__r, __s, __n);\
 	})
+# ifndef memdupa
+#  define memdupa(s, n) libsimple_memdupa(s, n)
 # endif
 #endif
 
