@@ -629,6 +629,30 @@ main(void)
 	fprintf(stderr, "warning: libsimple_memdupa missing\n");
 #endif
 
+	unsetenv("X");
+	assert(!getenv("X"));
+	assert(!libsimple_getenv_ne("X"));
+
+	putenv("X=xyz");
+	assert(!strcmpnul(getenv("X"), "xyz"));
+	assert(!strcmpnul(libsimple_getenv_ne("X"), "xyz"));
+
+	putenv("X=");
+	assert(!strcmpnul(getenv("X"), ""));
+	assert(!libsimple_getenv_ne("X"));
+
+	unsetenv("X");
+	assert(!getenv("X"));
+	assert(!strcmpnul(libsimple_getenv_e("X"), ""));
+
+	putenv("X=xyz");
+	assert(!strcmpnul(getenv("X"), "xyz"));
+	assert(!strcmpnul(libsimple_getenv_e("X"), "xyz"));
+
+	putenv("X=");
+	assert(!strcmpnul(getenv("X"), ""));
+	assert(!strcmpnul(libsimple_getenv_e("X"), ""));
+
 	return 0;
 }
 

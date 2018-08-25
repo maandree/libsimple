@@ -6,7 +6,7 @@ extern char *argv0;
 
 
 void
-envputenvf(int status, const char *fmt, va_list ap) /* TODO test */
+libsimple_envputenvf(int status, const char *fmt, va_list ap) /* TODO test */
 {
 	if (vputenvf(fmt, ap)) {
 		fprintf(stderr, "%s: putenvf: %s\n", argv0, strerror(errno));

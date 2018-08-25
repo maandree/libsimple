@@ -1098,66 +1098,106 @@ libsimple_ereallocn(void *__p, size_t __n, ...) /* TODO test */
  * @param   var  The environment variable's name
  * @return       The environment variable's value, `NULL` if empty or not defined
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __warn_unused_result__)))
 static inline char *
-getenv_ne(const char *__name) /* TODO test */
+libsimple_getenv_ne(const char *__name)
 {
 	char *__env = getenv(__name);
 	return (__env && *__env) ? __env : NULL;
 }
+#ifndef getenv_ne
+# define getenv_ne libsimple_getenv_ne
+#endif
 
+/**
+ * Read an environment variable, but handle it as empty if undefined
+ * 
+ * @param   var  The environment variable's name
+ * @return       The environment variable's value, "" if empty or not defined
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __warn_unused_result__, __returns_nonnull__)))
+static inline const char *
+libsimple_getenv_e(const char *__name)
+{
+	const char *__env = getenv(__name);
+	return (__env && *__env) ? __env : "";
+}
+#ifndef getenv_e
+# define getenv_e libsimple_getenv_e
+#endif
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
-int vputenvf(const char *, va_list);
+int libsimple_vputenvf(const char *, va_list);
+#ifndef vputenvf
+# define vputenvf libsimple_vputenvf
+#endif
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
-void envputenvf(int, const char *, va_list);
+void libsimple_envputenvf(int, const char *, va_list);
+#ifndef envputenvf
+# define envputenvf libsimple_envputenvf
+#endif
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __format__(__printf__, 1, 2))))
 static inline int
-putenvf(const char *__fmt, ...) /* TODO test */
+libsimple_putenvf(const char *__fmt, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __fmt);
 	return vputenvf(__fmt, __ap);
 	va_end(__ap);
 }
+#ifndef putenvf
+# define putenvf libsimple_putenvf
+#endif
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __format__(__printf__, 1, 2))))
 static inline void
-eputenvf(const char *__fmt, ...) /* TODO test */
+libsimple_eputenvf(const char *__fmt, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __fmt);
 	envputenvf(1, __fmt, __ap);
 	va_end(__ap);
 }
+#ifndef eputenvf
+# define eputenvf libsimple_eputenvf
+#endif
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline void
-evputenvf(const char *__fmt, va_list __ap) /* TODO test */
+libsimple_evputenvf(const char *__fmt, va_list __ap) /* TODO test */
 {
 	envputenvf(libsimple_default_failure_exit, __fmt, __ap);
 }
+#ifndef evputenvf
+# define evputenvf libsimple_evputenvf
+#endif
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __format__(__printf__, 2, 3))))
 static inline void
-enputenvf(int __status, const char *__fmt, ...) /* TODO test */
+libsimple_enputenvf(int __status, const char *__fmt, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __fmt);
 	envputenvf(__status, __fmt, __ap);
 	va_end(__ap);
 }
+#ifndef enputenvf
+# define enputenvf libsimple_enputenvf
+#endif
 
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(1))))
-void vweprintf(const char *, va_list);
+void libsimple_vweprintf(const char *, va_list);
+#ifndef vweprintf
+# define vweprintf libsimple_vweprintf
+#endif
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(1), __format__(__printf__, 1, 2), __noreturn__)))
 static inline void
-eprintf(const char *__fmt, ...) /* TODO test */
+libsimple_eprintf(const char *__fmt, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __fmt);
@@ -1165,18 +1205,24 @@ eprintf(const char *__fmt, ...) /* TODO test */
 	va_end(__ap);
 	exit(libsimple_default_failure_exit);
 }
+#ifndef eprintf
+# define eprintf libsimple_eprintf
+#endif
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(1), __noreturn__)))
 static inline void
-veprintf(const char *__fmt, va_list __ap) /* TODO test */
+libsimple_veprintf(const char *__fmt, va_list __ap) /* TODO test */
 {
 	vweprintf(__fmt, __ap);
 	exit(libsimple_default_failure_exit);
 }
+#ifndef veprintf
+# define veprintf libsimple_veprintf
+#endif
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(2), __format__(__printf__, 2, 3), __noreturn__)))
 static inline void
-enprintf(int __status, const char *__fmt, ...) /* TODO test */
+libsimple_enprintf(int __status, const char *__fmt, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __fmt);
@@ -1184,24 +1230,33 @@ enprintf(int __status, const char *__fmt, ...) /* TODO test */
 	va_end(__ap);
 	exit(__status);
 }
+#ifndef enprintf
+# define enprintf libsimple_enprintf
+#endif
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(2), __noreturn__)))
 static inline void
-venprintf(int __status, const char *__fmt, va_list __ap) /* TODO test */
+libsimple_venprintf(int __status, const char *__fmt, va_list __ap) /* TODO test */
 {
 	vweprintf(__fmt, __ap);
 	exit(__status);
 }
+#ifndef venprintf
+# define venprintf libsimple_venprintf
+#endif
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(1), __format__(__printf__, 1, 2))))
 static inline void
-weprintf(const char *__fmt, ...) /* TODO test */
+libsimple_weprintf(const char *__fmt, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __fmt);
 	vweprintf(__fmt, __ap);
 	va_end(__ap);
 }
+#ifndef weprintf
+# define weprintf libsimple_weprintf
+#endif
 
 
 int libsimple_sendfd(int, int);
@@ -1215,7 +1270,6 @@ int libsimple_recvfd(int);
 #ifndef recvfd
 # define recvfd libsimple_recvfd
 #endif
-
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
