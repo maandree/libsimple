@@ -1272,7 +1272,6 @@ libsimple_enputenvf(int __status, const char *__fmt, ...) /* TODO test */
 #endif
 
 
-
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(1))))
 void libsimple_vweprintf(const char *, va_list);
 #ifndef vweprintf
