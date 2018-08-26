@@ -6,7 +6,7 @@ extern char *argv0;
 
 
 char *
-enstrdup(int status, const char *s) /* TODO test */
+libsimple_enstrdup(int status, const char *s) /* TODO test */
 {
 	char *ret = strdup(s);
 	if (!ret) {
