@@ -1224,7 +1224,7 @@ void libsimple_envputenvf(int, const char *, va_list);
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __format__(__printf__, 1, 2))))
 static inline int
-libsimple_putenvf(const char *__fmt, ...) /* TODO test */
+libsimple_putenvf(const char *__fmt, ...)
 {
 	va_list __ap;
 	va_start(__ap, __fmt);

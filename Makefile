@@ -88,6 +88,7 @@ TESTS =\
 	timespectostr.test\
 	timevaltostr.test\
 	vasprintf.test\
+	vputenvf.test\
 	libsimple.test
 
 all: libsimple.a $(TESTS)
