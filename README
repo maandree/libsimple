@@ -210,15 +210,19 @@ The following functions are defined (some as inline functions):
 	int libsimple_strncaseeqnul(const char *a, const char *b, size_t n)
 		!strncasecmpnul(a, b, n)
 
-	char *getenv_ne(const char *)
+	char *libsimple_getenv_ne(const char *)
 		Like getenv, except returns NULL if the value
 		of the environment variable is the empty string.
 
-	int putenvf(const char *, ...)
-		Format a string a call putenv.
+	const char *libsimple_getenv_e(const char *)
+		Like getenv, except returns the empty string if the
+		value of the environment variable is undefined.
 
-	int vputenvf(const char *, va_list)
-		Format a string a call putenv.
+	int libsimple_putenvf(const char *, ...)
+		Format a string and call putenv.
+
+	int libsimple_vputenvf(const char *, va_list)
+		Format a string and call putenv.
 
 	int libsimple_sendfd(int sock, int fd)
 		Send a file descriptor over a socket.
@@ -302,6 +306,12 @@ The following functions are defined (some as inline functions):
 	void libsimple_doubletotimeval(struct timeval *, double)
 		Converts a double to a struct timeval.
 
+	char *libsimple_minimise_number_string(char *)
+		Assumes that the input string is a normal floating-point
+		number and removes redundant characters, such '+' sign,
+		leading zeroes and trailing zeroes after decimal point.
+		The input pointer is returned.
+
 	void libsimple_unlist(void *list, size_t i, size_t *np, size_t width)
 		Removes element `i` from the list `list`. `*np` shall be the
 		number of elements in the list, it will be updated by the
@@ -311,34 +321,34 @@ The following functions are defined (some as inline functions):
 		such macro already exists) is idential to libsimple_unlist
 		except `width` is automatically.
 
-	char *strdupa(const char *)
+	char *libsimple_strdupa(const char *)
 		Like `strdup`, except the returned pointer is stack-allocated.
 		This function is implemented as a macro and is only available
 		when compiling with GCC or clang.
 
-	char *strndupa(const char *, size_t)
+	char *libsimple_strndupa(const char *, size_t)
 		Like `strndup`, except the returned pointer is stack-allocated.
 		This function is implemented as a macro and is only available
 		when compiling with GCC or clang.
 
-	void *memdupa(const void *, size_t)
+	void *libsimple_memdupa(const void *, size_t)
 		Like `memdup`, except the returned pointer is stack-allocated.
 		This function is implemented as a macro and is only available
 		when compiling with GCC or clang.
 
-	char *asprintfa(const char *, ...)
+	char *libsimple_asprintfa(const char *, ...)
 		Like `asprintf` accept the the buffer is stack-allocated and
 		returned instead of stored in a pointer. This function is
-		implemented as a macro and is only available when compiling with
-		GCC or clang.
+		implemented as a macro and is only available when compiling
+		with GCC or clang.
 
-	char *vasprintfa(const char *, va_list)
+	char *libsimple_vasprintfa(const char *, va_list)
 		Like `vasprintf` accept the the buffer is stack-allocated and
 		returned instead of stored in a pointer. This function is
-		implemented as a macro and is only available when compiling with
-		GCC or clang.
+		implemented as a macro and is only available when compiling
+		with GCC or clang.
 
-	void weprintf(const char *fmt, ...)
+	void libsimple_weprintf(const char *fmt, ...)
 		Similar to printf, except prints to stderr and:
 		* unless `fmt` starts with "usage: " the `argv` follow by
 		  ": " is prepended to the printed string,
@@ -347,46 +357,46 @@ The following functions are defined (some as inline functions):
 		* if `fmt` does not end with ":" or "\n", "\n" and appended to
 		  the printed string.
 
-	void vweprintf(const char *, va_list)
-		Identical to weprintf, except using va_list.
+	void libsimple_vweprintf(const char *, va_list)
+		Identical to libsimple_weprintf, except using va_list.
 
-	void eprintf(const char *fmt, ...)
-		Like weprintf, but calls exit(libsimple_default_failure_exit)
+	void libsimple_eprintf(const char *fmt, ...)
+		Like libsimple_weprintf, but calls exit(libsimple_default_failure_exit)
 		afterwards.
 
 		libsimple.h defines `extern int libsimple_default_failure_exit`.
 
-	void veprintf(const char *fmt, va_list)
-		Like veprintf, but calls exit(libsimple_default_failure_exit)
+	void libsimple_veprintf(const char *fmt, va_list)
+		Like libsimple_veprintf, but calls exit(libsimple_default_failure_exit)
 		afterwards.
 
 		libsimple.h defines `extern int libsimple_default_failure_exit`.
 
-	void enprintf(int status, const char *, ...)
-		Like weprintf, but calls exit(stats) afterwards.
+	void libsimple_enprintf(int status, const char *, ...)
+		Like libsimple_weprintf, but calls exit(stats) afterwards.
 
-	void venprintf(int status, const char *, va_list)
-		Like vweprintf, but calls exit(stats) afterwards.
+	void libsimple_venprintf(int status, const char *, va_list)
+		Like libsimple_vweprintf, but calls exit(stats) afterwards.
 
 The following functions, which call `eprintf` on failure, are also defined:
 
-	void eputenvf(const char *, ...)
-	void evputenvf(const char *, va_list)
-	void *emalloc(size_t)
-	void *ecalloc(size_t, size_t)
-	void *erealloc(void *, size_t)
-	char *estrdup(const char *)
-	char *estrndup(const char *, size_t)
-	void *ememdup(const void *, size_t)
+	void libsimple_eputenvf(const char *, ...)
+	void libsimple_evputenvf(const char *, va_list)
+	void *libsimple_emalloc(size_t)
+	void *libsimple_ecalloc(size_t, size_t)
+	void *libsimple_erealloc(void *, size_t)
+	char *libsimple_estrdup(const char *)
+	char *libsimple_estrndup(const char *, size_t)
+	void *libsimple_ememdup(const void *, size_t)
 
 The following functions, which call `enprintf` on failure, are also defined,
 the first argument is used as the first argument for `enprintf`:
 
-	void enputenvf(int, const char *, ...)
-	void envputenvf(int, const char *, va_list)
-	void *enmalloc(int, size_t)
-	void *encalloc(int, size_t, size_t)
-	void *enrealloc(int, void *, size_t)
-	char *enstrdup(int, const char *)
-	char *enstrndup(int, const char *, size_t)
-	void *enmemdup(int, const void *, size_t)
+	void libsimple_enputenvf(int, const char *, ...)
+	void libsimple_envputenvf(int, const char *, va_list)
+	void *libsimple_enmalloc(int, size_t)
+	void *libsimple_encalloc(int, size_t, size_t)
+	void *libsimple_enrealloc(int, void *, size_t)
+	char *libsimple_enstrdup(int, const char *)
+	char *libsimple_enstrndup(int, const char *, size_t)
+	void *libsimple_enmemdup(int, const void *, size_t)
