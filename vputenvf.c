@@ -8,7 +8,7 @@ libsimple_vputenvf(const char *fmt, va_list ap)
 {
 	va_list ap2;
 	int n;
-	char *s;
+	char *s, *p;
 	va_copy(ap2, ap);
 	n = vsnprintf(NULL, 0, fmt, ap2);
 	va_end(ap2);
@@ -16,7 +16,14 @@ libsimple_vputenvf(const char *fmt, va_list ap)
 		return -1;
 	s = alloca((size_t)n + 1);
 	vsprintf(s, fmt, ap);
-	return putenv(s);
+	p = strchr(s, '=');
+	if (p) {
+		*p++ = '\0';
+		return setenv(s, p, 1);
+	} else {
+		s = strdup(s);
+		return s ? putenv(s) : -1;
+	}
 }
 
 
