@@ -9,6 +9,90 @@ int libsimple_default_failure_exit = 1;
 #else
 #include "test.h"
 
+static int
+test_timespec(double d, time_t sec, long int nsec, double rd, const char *s, const char *ss)
+{
+	char buf[1000], *str;
+	struct timespec t;
+	double dt;
+
+	libsimple_doubletotimespec(&t, d);
+	if (t.tv_sec != sec)
+		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+	if (t.tv_nsec != nsec)
+		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+
+	dt = libsimple_timespectodouble(&t);
+	if (dt < rd - 0.0000000001)
+		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+	if (dt > rd + 0.0000000001)
+		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+
+	str = libsimple_timespectostr(buf, &t);
+	if (str != buf)
+		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+	if (strcmp(str, s))
+		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+
+	str = libsimple_timespectostr(NULL, &t);
+	if (!str)
+		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+	if (strcmp(str, s))
+		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+
+	strcpy(buf, str);
+	free(str);
+	str = libsimple_minimise_number_string(buf);
+	if (str != buf)
+		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+	if (strcmp(str, ss))
+		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+
+	return 1;
+}
+
+static int
+test_timeval(double d, time_t sec, long int usec, double rd, const char *s, const char *ss)
+{
+	char buf[1000], *str;
+	struct timeval t;
+	double dt;
+
+	libsimple_doubletotimeval(&t, d);
+	if (t.tv_sec != sec)
+		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+	if (t.tv_usec != usec)
+		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+
+	dt = libsimple_timevaltodouble(&t);
+	if (dt < rd - 0.0000001)
+		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+	if (dt > rd + 0.0000001)
+		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+
+	str = libsimple_timevaltostr(buf, &t);
+	if (str != buf)
+		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+	if (strcmp(str, s))
+		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+
+	str = libsimple_timevaltostr(NULL, &t);
+	if (!str)
+		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+	if (strcmp(str, s))
+		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+
+	strcpy(buf, str);
+	free(str);
+	str = libsimple_minimise_number_string(buf);
+	if (str != buf)
+		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+	if (strcmp(str, ss))
+		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+
+	return 1;
+}
+
 int
 main(void)
 {
@@ -632,11 +716,9 @@ main(void)
 	unsetenv("X");
 	assert(!getenv("X"));
 	assert(!libsimple_getenv_ne("X"));
-
 	putenv("X=xyz");
 	assert(!strcmpnul(getenv("X"), "xyz"));
 	assert(!strcmpnul(libsimple_getenv_ne("X"), "xyz"));
-
 	putenv("X=");
 	assert(!strcmpnul(getenv("X"), ""));
 	assert(!libsimple_getenv_ne("X"));
@@ -644,14 +726,36 @@ main(void)
 	unsetenv("X");
 	assert(!getenv("X"));
 	assert(!strcmpnul(libsimple_getenv_e("X"), ""));
-
 	putenv("X=xyz");
 	assert(!strcmpnul(getenv("X"), "xyz"));
 	assert(!strcmpnul(libsimple_getenv_e("X"), "xyz"));
-
 	putenv("X=");
 	assert(!strcmpnul(getenv("X"), ""));
 	assert(!strcmpnul(libsimple_getenv_e("X"), ""));
+
+	assert(test_timespec(10.3000200010, 10, 300020001L, 10.300020001, "+10.300020001", "10.300020001"));
+	assert(test_timespec(10.3000200014, 10, 300020001L, 10.300020001, "+10.300020001", "10.300020001"));
+	assert(test_timespec(10.3000200015, 10, 300020002L, 10.300020002, "+10.300020002", "10.300020002"));
+	assert(test_timespec(10.9999999999, 11, 0, 11, "+11.000000000", "11"));
+	assert(test_timespec(-10.3000200010, -11, 699979999L, -10.300020001, "-10.300020001", "-10.300020001"));
+	assert(test_timespec(-10.3000200014, -11, 699979999L, -10.300020001, "-10.300020001", "-10.300020001"));
+	assert(test_timespec(-10.3000200015, -11, 699979998L, -10.300020002, "-10.300020002", "-10.300020002"));
+	assert(test_timespec(-10.9999999999, -11, 0, -11, "-11.000000000", "-11"));
+	assert(test_timespec(10, 10, 0, 10, "+10.000000000", "10"));
+	assert(test_timespec(0, 0, 0, 0, "+0.000000000", "0"));
+	assert(test_timespec(-10, -10, 0, -10, "-10.000000000", "-10"));
+
+	assert(test_timeval(10.3000201000, 10, 300020L, 10.300020, "+10.300020", "10.30002"));
+	assert(test_timeval(10.3000204000, 10, 300020L, 10.300020, "+10.300020", "10.30002"));
+	assert(test_timeval(10.3000205000, 10, 300021L, 10.300021, "+10.300021", "10.300021"));
+	assert(test_timeval(10.9999999000, 11, 0, 11, "+11.000000", "11"));
+	assert(test_timeval(-10.3000201000, -11, 699980L, -10.300020, "-10.300020", "-10.30002"));
+	assert(test_timeval(-10.3000204000, -11, 699980L, -10.300020, "-10.300020", "-10.30002"));
+	assert(test_timeval(-10.3000205000, -11, 699979L, -10.300021, "-10.300021", "-10.300021"));
+	assert(test_timeval(-10.9999999000, -11, 0, -11, "-11.000000", "-11"));
+	assert(test_timeval(10, 10, 0, 10, "+10.000000", "10"));
+	assert(test_timeval(0, 0, 0, 0, "+0.000000", "0"));
+	assert(test_timeval(-10, -10, 0, -10, "-10.000000", "-10"));
 
 	return 0;
 }

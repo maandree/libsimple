@@ -1157,7 +1157,7 @@ libsimple_eputenvf(const char *__fmt, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __fmt);
-	envputenvf(1, __fmt, __ap);
+	envputenvf(libsimple_default_failure_exit, __fmt, __ap);
 	va_end(__ap);
 }
 #ifndef eputenvf
@@ -1410,7 +1410,7 @@ char *libsimple_timevaltostr(char *restrict, const struct timeval *restrict);
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline double
-libsimple_timespectodouble(const struct timespec *__ts) /* TODO test */
+libsimple_timespectodouble(const struct timespec *__ts)
 {
 	double __ret = (double)(__ts->tv_nsec);
 	__ret /= (double)1000000000L;
@@ -1424,7 +1424,7 @@ libsimple_timespectodouble(const struct timespec *__ts) /* TODO test */
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline double
-libsimple_timevaltodouble(const struct timeval *__tv) /* TODO test */
+libsimple_timevaltodouble(const struct timeval *__tv)
 {
 	double __ret = (double)(__tv->tv_usec);
 	__ret /= (double)1000000L;
@@ -1447,6 +1447,13 @@ _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 void libsimple_doubletotimeval(struct timeval *, double);
 #ifndef doubletotimeval
 # define doubletotimeval libsimple_doubletotimeval
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__returns_nonnull__, __nonnull__)))
+char *libsimple_minimise_number_string(char *);
+#ifndef minimise_number_string
+# define minimise_number_string libsimple_minimise_number_string
 #endif
 
 

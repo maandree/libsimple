@@ -3,13 +3,13 @@
 
 
 char *
-libsimple_timevaltostr(char *restrict buf, const struct timeval *restrict tv) /* TODO test */
+libsimple_timevaltostr(char *restrict buf, const struct timeval *restrict tv)
 {
 	time_t s = tv->tv_sec;
 	long int us = tv->tv_usec;
 	char sign[2] = "+";
 
-	if (!s) {
+	if (!buf) {
 		buf = malloc(INTSTRLEN(time_t) + sizeof("-.999999"));
 		if (!buf)
 			return NULL;

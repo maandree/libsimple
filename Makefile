@@ -26,6 +26,7 @@ OBJ =\
 	memrchr.o\
 	memrmem.o\
 	memstarts.o\
+	minimise_number_string.o\
 	multimespec.o\
 	multimeval.o\
 	rawmemchr.o\
@@ -67,6 +68,7 @@ TESTS =\
 	memrchr.test\
 	memrmem.test\
 	memstarts.test\
+	minimise_number_string.test\
 	rawmemchr.test\
 	rawmemrchr.test\
 	strcaseends.test\

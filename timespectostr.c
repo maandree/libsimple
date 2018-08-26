@@ -3,13 +3,13 @@
 
 
 char *
-libsimple_timespectostr(char *restrict buf, const struct timespec *restrict ts) /* TODO test */
+libsimple_timespectostr(char *restrict buf, const struct timespec *restrict ts)
 {
 	time_t s = ts->tv_sec;
 	long int ns = ts->tv_nsec;
 	char sign[2] = "+";
 
-	if (!s) {
+	if (!buf) {
 		buf = malloc(INTSTRLEN(time_t) + sizeof("-.999999999"));
 		if (!buf)
 			return NULL;
