@@ -477,7 +477,7 @@ extern int libsimple_default_failure_exit;
 #endif
 
 
-#define FREE(PTR) (free(PTR), (PTR) = NULL, 0) /* TODO test */
+#define FREE(PTR) ((void)(free(PTR), (PTR) = NULL)) /* TODO test */
 
 #define CLOSE(FD) libsimple_close(&(FD)) /* TODO test */
 
@@ -1398,7 +1398,7 @@ int libsimple_multimespec(struct timespec *, const struct timespec *, int);
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __warn_unused_result__)))
 static inline int
-libsimple_cmptimespec(const struct timespec *__a, const struct timespec *__b) /* TODO test */
+libsimple_cmptimespec(const struct timespec *__a, const struct timespec *__b)
 {
         if (__a->tv_sec != __b->tv_sec)
                 return __a->tv_sec < __b->tv_sec ? -1 : +1;
@@ -1432,7 +1432,7 @@ int libsimple_multimeval(struct timeval *, const struct timeval *, int);
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __warn_unused_result__)))
 static inline int
-libsimple_cmptimeval(const struct timeval *__a, const struct timeval *__b) /* TODO test */
+libsimple_cmptimeval(const struct timeval *__a, const struct timeval *__b)
 {
         if (__a->tv_sec != __b->tv_sec)
                 return __a->tv_sec < __b->tv_sec ? -1 : +1;
