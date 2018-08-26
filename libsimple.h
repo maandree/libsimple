@@ -731,7 +731,7 @@ char *libsimple_strrncasestr(const char *, const char *, size_t); /* TODO test *
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-char *libsimple_strnstr(const char *, const char *, size_t); /* TODO test */
+char *libsimple_strncasestr(const char *, const char *, size_t); /* TODO test */
 #ifndef strncasestr
 # define strncasestr libsimple_strncasestr
 #endif

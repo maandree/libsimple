@@ -13,7 +13,9 @@ libsimple_sumtimeval(struct timeval *sum, const struct timeval *augend, const st
 	r = libsimple_sumtimespec(&s, &a, &b);
 	if (r && errno != ERANGE)
 		return r;
-	return r | libsimple_timespec2timeval(sum, &s);
+	if (libsimple_timespec2timeval(sum, &s) && r)
+		errno = ERANGE;
+	return r;
 }
 
 

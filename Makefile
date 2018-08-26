@@ -73,6 +73,8 @@ TESTS =\
 	memrmem.test\
 	memstarts.test\
 	minimise_number_string.test\
+	multimespec.test\
+	multimeval.test\
 	rawmemchr.test\
 	rawmemrchr.test\
 	strcaseends.test\

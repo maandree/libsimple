@@ -9,5 +9,7 @@ libsimple_strtotimeval(struct timeval *restrict tv, const char *restrict s, char
 	int r = libsimple_strtotimespec(&ts, s, end);
 	if (r && errno != ERANGE)
 		return r;
-	return r | libsimple_timespec2timeval(tv, &ts);
+	if (libsimple_timespec2timeval(tv, &ts) && r)
+		errno = ERANGE;
+	return r;
 }
