@@ -80,8 +80,12 @@ TESTS =\
 	strcaseends.test\
 	strcasestr.test\
 	strends.test\
+	strncasestr.test\
 	strndup.test\
+	strnstr.test\
 	strrcasestr.test\
+	strrncasestr.test\
+	strrnstr.test\
 	strrstr.test\
 	strstarts.test\
 	sumtimespec.test\
