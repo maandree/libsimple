@@ -639,16 +639,11 @@ int libsimple_vasprintf(char **, const char *, va_list);
 		const char *__f = (__fmt);\
 		char *__ret = NULL;\
 		int __r = snprintf(NULL, 0, __f, __VA_ARGS__);\
-		if (__r < 0) {\
-			__ret;\
-		} else if ((size_t)__r == SIZE_MAX) {\
-			errno = ENOMEM;\
-			__ret;\
-		} else {\
+		if (__r >= 0) {\
 			__ret = alloca((size_t)__r + 1);\
 			sprintf(__ret, __f, __VA_ARGS__);\
-			__ret;\
 		}\
+		__ret;\
 	})
 # ifndef asprintfa
 #  define asprintfa(...) libsimple_asprintfa(__VA_ARGS__)
@@ -666,10 +661,7 @@ int libsimple_vasprintf(char **, const char *, va_list);
 		int __r;\
 		va_copy(__a2, __a);\
 		__r = vsnprintf(NULL, 0, __f, __a);\
-		if (__r < 0);\
-		else if ((size_t)__r == SIZE_MAX) {\
-			errno = ENOMEM;\
-		} else {\
+		if (__r >= 0) {\
 			__ret = alloca((size_t)__r + 1);\
 			vsprintf(__ret, __f, __a2);\
 		}\
