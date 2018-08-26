@@ -78,6 +78,8 @@ TESTS =\
 	strrcasestr.test\
 	strrstr.test\
 	strstarts.test\
+	timespectostr.test\
+	timevaltostr.test\
 	vasprintf.test\
 	libsimple.test
 

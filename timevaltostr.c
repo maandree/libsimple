@@ -1,5 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 #include "libsimple.h"
+#ifndef TEST
 
 
 char *
@@ -37,3 +38,28 @@ libsimple_timevaltostr(char *restrict buf, const struct timeval *restrict tv)
 	sprintf(buf, "%s%lli.%06li", sign, (long long int)s, us);
 	return buf;
 }
+
+
+#else
+#include "test.h"
+
+int
+main(void)
+{
+	char buf[1000];
+
+	/* Mostly tested in libsimple.c */
+
+	errno = 0;
+	assert(!libsimple_timevaltostr(buf, &(struct timeval){.tv_sec = 0, .tv_usec = -1}) && errno == EINVAL);
+	errno = 0;
+	assert(!libsimple_timevaltostr(buf, &(struct timeval){.tv_sec = 0, .tv_usec = -2}) && errno == EINVAL);
+	errno = 0;
+	assert(!libsimple_timevaltostr(buf, &(struct timeval){.tv_sec = 0, .tv_usec = 1000000L}) && errno == EINVAL);
+	errno = 0;
+	assert(!libsimple_timevaltostr(buf, &(struct timeval){.tv_sec = 0, .tv_usec = 1000001L}) && errno == EINVAL);
+
+	return 0;
+}
+
+#endif
