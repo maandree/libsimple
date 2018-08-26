@@ -1,5 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 #include "libsimple.h"
+#ifndef TEST
 
 
 void
@@ -30,3 +31,15 @@ libsimple_doubletotimeval(struct timeval *tv, double d)
 		tv->tv_usec += 1000000L;
 	}
 }
+
+
+#else
+#include "test.h"
+
+int
+main(void)
+{
+	return 0; /* Tested in libsimple.c */
+}
+
+#endif

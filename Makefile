@@ -61,6 +61,10 @@ OBJ =\
 
 TESTS =\
 	asprintf.test\
+	difftimespec.test\
+	difftimeval.test\
+	doubletotimespec.test\
+	doubletotimeval.test\
 	isutf8.test\
 	memdup.test\
 	memends.test\

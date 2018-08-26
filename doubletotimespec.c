@@ -1,5 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 #include "libsimple.h"
+#ifndef TEST
 
 
 void
@@ -30,3 +31,15 @@ libsimple_doubletotimespec(struct timespec *ts, double d)
 		ts->tv_nsec += 1000000000L;
 	}
 }
+
+
+#else
+#include "test.h"
+
+int
+main(void)
+{
+	return 0; /* Tested in libsimple.c */
+}
+
+#endif
