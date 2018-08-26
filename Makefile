@@ -78,6 +78,9 @@ TESTS =\
 	strrcasestr.test\
 	strrstr.test\
 	strstarts.test\
+	sumtimespec.test\
+	sumtimeval.test\
+	timespec2timeval.test\
 	timespectostr.test\
 	timevaltostr.test\
 	vasprintf.test\

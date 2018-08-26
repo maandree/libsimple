@@ -96,6 +96,7 @@ test_timeval(double d, time_t sec, long int usec, double rd, const char *s, cons
 int
 main(void)
 {
+	struct timespec ts;
 	const char *cs;
 	char buf[1024], *s;
 	int intarray[10];
@@ -756,6 +757,28 @@ main(void)
 	assert(test_timeval(10, 10, 0, 10, "+10.000000", "10"));
 	assert(test_timeval(0, 0, 0, 0, "+0.000000", "0"));
 	assert(test_timeval(-10, -10, 0, -10, "-10.000000", "-10"));
+
+	libsimple_timeval2timespec(&ts, &(struct timeval){0, 0L});
+	assert(ts.tv_sec  == 0);
+	assert(ts.tv_nsec == 0L);
+	libsimple_timeval2timespec(&ts, &(struct timeval){0, 1L});
+	assert(ts.tv_sec  == 0);
+	assert(ts.tv_nsec == 1000L);
+	libsimple_timeval2timespec(&ts, &(struct timeval){0, 999999L});
+	assert(ts.tv_sec  == 0);
+	assert(ts.tv_nsec == 999999000L);
+	libsimple_timeval2timespec(&ts, &(struct timeval){10, 0L});
+	assert(ts.tv_sec  == 10);
+	assert(ts.tv_nsec == 0L);
+	libsimple_timeval2timespec(&ts, &(struct timeval){10, 1L});
+	assert(ts.tv_sec  == 10);
+	assert(ts.tv_nsec == 1000L);
+	libsimple_timeval2timespec(&ts, &(struct timeval){-10, 0L});
+	assert(ts.tv_sec  == -10);
+	assert(ts.tv_nsec == 0L);
+	libsimple_timeval2timespec(&ts, &(struct timeval){-10, 1L});
+	assert(ts.tv_sec  == -10);
+	assert(ts.tv_nsec == 1000L);
 
 	return 0;
 }

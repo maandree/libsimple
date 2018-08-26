@@ -1454,7 +1454,7 @@ libsimple_cmptimeval(const struct timeval *__a, const struct timeval *__b) /* TO
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline void
-libsimple_timeval2timespec(struct timespec *restrict __ts, const struct timeval *restrict __tv) /* TODO test */
+libsimple_timeval2timespec(struct timespec *restrict __ts, const struct timeval *restrict __tv)
 {
         __ts->tv_sec = __tv->tv_sec;
         __ts->tv_nsec = __tv->tv_usec;
