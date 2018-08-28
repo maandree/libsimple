@@ -63,15 +63,16 @@ TESTS = $(OBJ:.o=.test)
 
 all: libsimple.a $(TESTS)
 $(OBJ): $(@:.o=.c) libsimple.h
-$(TESTS): $(@:=.o) libsimple.a
+$(TESTS): $(@:=.o) test.o libsimple.a
 $(TESTS:=.o): $(@:.test.o=.c) libsimple.h test.h
+test.o: test.c libsimple.h test.h
 
 libsimple.a: $(OBJ)
 	$(AR) rc $@ $?
 	$(AR) -s $@
 
 .test.o.test:
-	$(CC) -o $@ $< libsimple.a $(LDFLAGS)
+	$(CC) -o $@ $< libsimple.a test.o $(LDFLAGS)
 
 .c.test.o:
 	$(CC) -c -o $@ $< $(CFLAGS) -DTEST

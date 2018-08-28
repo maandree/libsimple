@@ -876,26 +876,26 @@ void *libsimple_vmalloczn(int, size_t, va_list);
 #endif
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
-static inline void *libsimple_vmallocn(size_t __n, va_list __ap) { return libsimple_vmalloczn(0, __n, __ap); } /* TODO test */
+static inline void *libsimple_vmallocn(size_t __n, va_list __ap) { return libsimple_vmalloczn(0, __n, __ap); }
 #ifndef vmallocn
 # define vmallocn libsimple_vmallocn
 #endif
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
-static inline void *libsimple_vcallocn(size_t __n, va_list __ap) { return libsimple_vmalloczn(1, __n, __ap); } /* TODO test */
+static inline void *libsimple_vcallocn(size_t __n, va_list __ap) { return libsimple_vmalloczn(1, __n, __ap); }
 #ifndef vcallocn
 # define vcallocn libsimple_vcallocn
 #endif
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
-void *libsimple_vreallocn(void *, size_t, va_list); /* TODO test */
+void *libsimple_vreallocn(void *, size_t, va_list);
 #ifndef vreallocn
 # define vreallocn libsimple_vreallocn
 #endif
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
 static inline void *
-libsimple_malloczn(int __clear, size_t __n, ...) /* TODO test */
+libsimple_malloczn(int __clear, size_t __n, ...)
 {
 	va_list __ap;
 	va_start(__ap, __n);
@@ -908,7 +908,7 @@ libsimple_malloczn(int __clear, size_t __n, ...) /* TODO test */
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
 static inline void *
-libsimple_mallocn(size_t __n, ...) /* TODO test */
+libsimple_mallocn(size_t __n, ...)
 {
 	va_list __ap;
 	va_start(__ap, __n);
@@ -921,7 +921,7 @@ libsimple_mallocn(size_t __n, ...) /* TODO test */
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
 static inline void *
-libsimple_callocn(size_t __n, ...) /* TODO test */
+libsimple_callocn(size_t __n, ...)
 {
 	va_list __ap;
 	va_start(__ap, __n);
@@ -934,7 +934,7 @@ libsimple_callocn(size_t __n, ...) /* TODO test */
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
 static inline void *
-libsimple_reallocn(void *__ptr, size_t __n, ...) /* TODO test */
+libsimple_reallocn(void *__ptr, size_t __n, ...)
 {
 	va_list __ap;
 	va_start(__ap, __n);
