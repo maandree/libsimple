@@ -990,6 +990,12 @@ main(void)
 	tv2.tv_sec =  1, tv2.tv_usec = 0L;
 	assert(libsimple_cmptimeval(&tv1, &tv2) == -1);
 
+	if (!have_custom_malloc()) {
+		stderr_real = 1;
+		fprintf(stderr, "\nSome tests have not been ran because malloc(3) was not "
+		                "replaced, this is normal if running under valgrind(1).\n\n");
+	}
+
 	return 0;
 }
 
