@@ -1,6 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 #include "libsimple.h"
 #include "test.h"
+#include <sys/syscall.h>
 #include <malloc.h>
 
 #undef strndup
@@ -8,6 +9,13 @@
 
 
 size_t alloc_fail_in = 0;
+int exit_real = 0;
+int exit_ok = 0;
+int exit_status;
+jmp_buf exit_jmp;
+char stderr_buf[8 << 10];
+size_t stderr_n = 0;
+int stderr_real = 0;
 
 static int custom_malloc = 0;
 
@@ -221,4 +229,59 @@ free(void *ptr)
 	if (info->refcount-- > 1)
 		return;
 	assert(!munmap(info->real_beginning, info->real_size));
+}
+
+
+void
+exit(int status)
+{
+	exit_status = status;
+	if (exit_real) {
+#ifdef SYS_exit_group
+		syscall(SYS_exit_group, status);
+#else
+		syscall(SYS_exit, status);
+#endif
+	}
+	assert(exit_ok);
+	longjmp(exit_jmp, 1);
+}
+
+
+int
+fprintf(FILE *restrict stream, const char *restrict format, ...)
+{
+	va_list ap;
+	va_start(ap, format);
+	return vfprintf(stream, format, ap);
+	va_end(ap);
+}
+
+
+int
+vfprintf(FILE *restrict stream, const char *restrict format, va_list ap)
+{
+	va_list ap2;
+	int r;
+	char *buf;
+	size_t n;
+
+	va_copy(ap2, ap);
+	r = vsnprintf(NULL, 0, format, ap2);
+	va_end(ap2);
+
+	if (r >= 0) {
+		n = (size_t)r;
+		buf = alloca(n + 1);
+		n = vsnprintf(buf, n + 1, format, ap);
+		if (fileno(stream) != STDERR_FILENO) {
+			fwrite(buf, 1, n, stream);
+		} else {
+			assert(stderr_n + n <= sizeof(stderr_buf));
+			memcpy(&stderr_buf[stderr_n], buf, n);
+			stderr_n += n;
+		}
+	}
+
+	return r;
 }

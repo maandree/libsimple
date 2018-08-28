@@ -17,36 +17,25 @@ test_timespec(double d, time_t sec, long int nsec, double rd, const char *s, con
 	double dt;
 
 	libsimple_doubletotimespec(&t, d);
-	if (t.tv_sec != sec)
-		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
-	if (t.tv_nsec != nsec)
-		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+	subassert(t.tv_sec == sec);
+	subassert(t.tv_nsec == nsec);
 
 	dt = libsimple_timespectodouble(&t);
-	if (dt < rd - 0.0000000001)
-		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
-	if (dt > rd + 0.0000000001)
-		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+	subassert(dt >= rd - 0.0000000001);
+	subassert(dt <= rd + 0.0000000001);
 
 	str = libsimple_timespectostr(buf, &t);
-	if (str != buf)
-		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
-	if (strcmp(str, s))
-		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+	subassert(str == buf);
+	subassert(!strcmp(str, s));
 
-	str = libsimple_timespectostr(NULL, &t);
-	if (!str)
-		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
-	if (strcmp(str, s))
-		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+	subassert((str = libsimple_timespectostr(NULL, &t)));
+	subassert(!strcmp(str, s));
 
 	strcpy(buf, str);
 	free(str);
 	str = libsimple_minimise_number_string(buf);
-	if (str != buf)
-		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
-	if (strcmp(str, ss))
-		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+	subassert(str == buf);
+	subassert(!strcmp(str, ss));
 
 	return 1;
 }
@@ -59,36 +48,26 @@ test_timeval(double d, time_t sec, long int usec, double rd, const char *s, cons
 	double dt;
 
 	libsimple_doubletotimeval(&t, d);
-	if (t.tv_sec != sec)
-		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
-	if (t.tv_usec != usec)
-		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+	subassert(t.tv_sec == sec);
+	subassert(t.tv_usec == usec);
 
 	dt = libsimple_timevaltodouble(&t);
-	if (dt < rd - 0.0000001)
-		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
-	if (dt > rd + 0.0000001)
-		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+	subassert(dt >= rd - 0.0000001);
+	subassert(dt <= rd + 0.0000001);
 
 	str = libsimple_timevaltostr(buf, &t);
-	if (str != buf)
-		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
-	if (strcmp(str, s))
-		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+	subassert(str == buf);
+	subassert(!strcmp(str, s));
 
 	str = libsimple_timevaltostr(NULL, &t);
-	if (!str)
-		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
-	if (strcmp(str, s))
-		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+	subassert(str);
+	subassert(!strcmp(str, s));
 
 	strcpy(buf, str);
 	free(str);
 	str = libsimple_minimise_number_string(buf);
-	if (str != buf)
-		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
-	if (strcmp(str, ss))
-		return fprintf(stderr, "Failed at %s:%i\n", __FILE__, __LINE__ - 1), 0;
+	subassert(str == buf);
+	subassert(!strcmp(str, ss));
 
 	return 1;
 }

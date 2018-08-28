@@ -5,8 +5,19 @@
 	do {\
 		if (EXPR)\
 			break;\
+		stderr_real = 1;\
 		fprintf(stderr, "Failed at %s:%i: %s\n", __FILE__, __LINE__, #EXPR);\
+		exit_real = 1;\
 		exit(1);\
+	} while (0)
+
+#define subassert(EXPR)\
+	do {\
+		if (EXPR)\
+			break;\
+		stderr_real = 1;\
+		fprintf(stderr, "Failed at %s:%i: %s\n", __FILE__, __LINE__, #EXPR);\
+		return 0;\
 	} while (0)
 
 
@@ -22,6 +33,13 @@ struct allocinfo {
 
 
 extern size_t alloc_fail_in;
+extern int exit_real;
+extern int exit_ok;
+extern int exit_status;
+extern jmp_buf exit_jmp;
+extern char stderr_buf[8 << 10];
+extern size_t stderr_n;
+extern int stderr_real;
 
 
 size_t get_pagesize(void);
