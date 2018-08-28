@@ -3,6 +3,9 @@
 #include "test.h"
 #include <malloc.h>
 
+#undef strndup
+#undef memdup
+
 
 size_t alloc_fail_in = 0;
 
@@ -182,6 +185,28 @@ void *
 pvalloc(size_t size)
 {
 	return memalign(get_pagesize(), round_up(size));
+}
+
+
+char *
+strdup(const char *s)
+{
+	char *r = malloc(strlen(s) + 1);
+	return r ? strcpy(r, s) : r;
+}
+
+
+char *
+strndup(const char *s, size_t size)
+{
+	return libsimple_strndup(s, size);
+}
+
+
+void *
+memdup(const void *s, size_t size)
+{
+	return libsimple_memdup(s, size);
 }
 
 

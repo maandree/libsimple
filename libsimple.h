@@ -1228,7 +1228,7 @@ libsimple_putenvf(const char *__fmt, ...)
 {
 	va_list __ap;
 	va_start(__ap, __fmt);
-	return vputenvf(__fmt, __ap);
+	return libsimple_vputenvf(__fmt, __ap);
 	va_end(__ap);
 }
 #ifndef putenvf
@@ -1241,7 +1241,7 @@ libsimple_eputenvf(const char *__fmt, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __fmt);
-	envputenvf(libsimple_default_failure_exit, __fmt, __ap);
+	libsimple_envputenvf(libsimple_default_failure_exit, __fmt, __ap);
 	va_end(__ap);
 }
 #ifndef eputenvf
@@ -1252,7 +1252,7 @@ _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline void
 libsimple_evputenvf(const char *__fmt, va_list __ap) /* TODO test */
 {
-	envputenvf(libsimple_default_failure_exit, __fmt, __ap);
+	libsimple_envputenvf(libsimple_default_failure_exit, __fmt, __ap);
 }
 #ifndef evputenvf
 # define evputenvf libsimple_evputenvf
@@ -1264,7 +1264,7 @@ libsimple_enputenvf(int __status, const char *__fmt, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __fmt);
-	envputenvf(__status, __fmt, __ap);
+	libsimple_envputenvf(__status, __fmt, __ap);
 	va_end(__ap);
 }
 #ifndef enputenvf
@@ -1284,7 +1284,7 @@ libsimple_eprintf(const char *__fmt, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __fmt);
-	vweprintf(__fmt, __ap);
+	libsimple_vweprintf(__fmt, __ap);
 	va_end(__ap);
 	exit(libsimple_default_failure_exit);
 }
@@ -1296,7 +1296,7 @@ _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(1), __noreturn__)))
 static inline void
 libsimple_veprintf(const char *__fmt, va_list __ap) /* TODO test */
 {
-	vweprintf(__fmt, __ap);
+	libsimple_vweprintf(__fmt, __ap);
 	exit(libsimple_default_failure_exit);
 }
 #ifndef veprintf
@@ -1309,7 +1309,7 @@ libsimple_enprintf(int __status, const char *__fmt, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __fmt);
-	vweprintf(__fmt, __ap);
+	libsimple_vweprintf(__fmt, __ap);
 	va_end(__ap);
 	exit(__status);
 }
@@ -1321,7 +1321,7 @@ _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(2), __noreturn__)))
 static inline void
 libsimple_venprintf(int __status, const char *__fmt, va_list __ap) /* TODO test */
 {
-	vweprintf(__fmt, __ap);
+	libsimple_vweprintf(__fmt, __ap);
 	exit(__status);
 }
 #ifndef venprintf
@@ -1334,7 +1334,7 @@ libsimple_weprintf(const char *__fmt, ...) /* TODO test */
 {
 	va_list __ap;
 	va_start(__ap, __fmt);
-	vweprintf(__fmt, __ap);
+	libsimple_vweprintf(__fmt, __ap);
 	va_end(__ap);
 }
 #ifndef weprintf

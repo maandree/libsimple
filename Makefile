@@ -72,7 +72,7 @@ libsimple.a: $(OBJ)
 	$(AR) -s $@
 
 .test.o.test:
-	$(CC) -o $@ $< libsimple.a test.o $(LDFLAGS)
+	$(CC) -o $@ $< test.o libsimple.a $(LDFLAGS)
 
 .c.test.o:
 	$(CC) -c -o $@ $< $(CFLAGS) -DTEST

@@ -6,7 +6,7 @@
 void
 libsimple_envputenvf(int status, const char *fmt, va_list ap) /* TODO test */
 {
-	if (vputenvf(fmt, ap))
+	if (libsimple_vputenvf(fmt, ap))
 		enprintf(status, "putenvf:");
 }
 
