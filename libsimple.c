@@ -75,12 +75,16 @@ test_timeval(double d, time_t sec, long int usec, double rd, const char *s, cons
 int
 main(void)
 {
+	struct allocinfo *info;
+	void *ptr;
 	struct timespec ts, ts1, ts2;
 	struct timeval tv1, tv2;
 	const char *cs;
 	char buf[1024], *s;
 	int intarray[10];
 	size_t i, n;
+
+	assert(libsimple_default_failure_exit == 1);
 
 	assert(MIN(1, 3) == 1);
 	assert(MIN(1, 1) == 1);
@@ -990,12 +994,95 @@ main(void)
 	tv2.tv_sec =  1, tv2.tv_usec = 0L;
 	assert(libsimple_cmptimeval(&tv1, &tv2) == -1);
 
+	assert((ptr = libsimple_mallocz(0, 11)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 11);
+		assert(!info->zeroed);
+	}
+	free(ptr);
+
+	assert((ptr = libsimple_mallocz(1, 12)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 12);
+		assert(info->zeroed == 12);
+	}
+	free(ptr);
+
+	assert((ptr = libsimple_emallocz(0, 13)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 13);
+		assert(!info->zeroed);
+	}
+	free(ptr);
+
+	assert((ptr = libsimple_emallocz(1, 14)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 14);
+		assert(info->zeroed == 14);
+	}
+	free(ptr);
+
+	assert((ptr = libsimple_enmallocz(10, 0, 15)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 15);
+		assert(!info->zeroed);
+	}
+	free(ptr);
+
+	assert((ptr = libsimple_enmallocz(10, 1, 16)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 16);
+		assert(info->zeroed == 16);
+	}
+	free(ptr);
+
+	if (have_custom_malloc()) {
+		alloc_fail_in = 1;
+		assert_exit_ptr(libsimple_enmallocz(5, 0, 20));
+		assert(exit_status == 5);
+		assert_stderr("%s: malloc: %s\n", argv0, strerror(ENOMEM));
+		assert(!alloc_fail_in);
+
+		alloc_fail_in = 1;
+		assert_exit_ptr(libsimple_enmallocz(6, 1, 20));
+		assert(exit_status == 6);
+		assert_stderr("%s: calloc: %s\n", argv0, strerror(ENOMEM));
+		assert(!alloc_fail_in);
+
+		libsimple_default_failure_exit = 7;
+		alloc_fail_in = 1;
+		assert_exit_ptr(libsimple_emallocz(0, 20));
+		assert(exit_status == 7);
+		assert_stderr("%s: malloc: %s\n", argv0, strerror(ENOMEM));
+		assert(!alloc_fail_in);
+
+		libsimple_default_failure_exit = 8;
+		alloc_fail_in = 1;
+		assert_exit_ptr(libsimple_emallocz(1, 20));
+		assert(exit_status == 8);
+		assert_stderr("%s: calloc: %s\n", argv0, strerror(ENOMEM));
+		assert(!alloc_fail_in);
+
+		alloc_fail_in = 1;
+		assert(!(ptr = libsimple_mallocz(0, 20)) && errno == ENOMEM);
+		assert(!alloc_fail_in);
+
+		alloc_fail_in = 1;
+		assert(!(ptr = libsimple_mallocz(1, 20)) && errno == ENOMEM);
+		assert(!alloc_fail_in);
+	}
+
 	if (!have_custom_malloc()) {
 		stderr_real = 1;
 		fprintf(stderr, "\nSome tests have not been ran because malloc(3) was not "
 		                "replaced, this is normal if running under valgrind(1).\n\n");
 	}
-
 	return 0;
 }
 

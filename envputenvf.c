@@ -4,7 +4,7 @@
 
 
 void
-libsimple_envputenvf(int status, const char *fmt, va_list ap) /* TODO test */
+libsimple_envputenvf(int status, const char *fmt, va_list ap) /* TODO test (enputenvf, evputenvf, eputenvf) */
 {
 	if (libsimple_vputenvf(fmt, ap))
 		enprintf(status, "putenvf:");

@@ -8,6 +8,8 @@
 #undef memdup
 
 
+char *argv0 = (char []){"<test>"};
+
 size_t alloc_fail_in = 0;
 int exit_real = 0;
 int exit_ok = 0;
@@ -16,6 +18,7 @@ jmp_buf exit_jmp;
 char stderr_buf[8 << 10];
 size_t stderr_n = 0;
 int stderr_real = 0;
+int stderr_ok = 0;
 
 static int custom_malloc = 0;
 
@@ -274,9 +277,10 @@ vfprintf(FILE *restrict stream, const char *restrict format, va_list ap)
 		n = (size_t)r;
 		buf = alloca(n + 1);
 		n = vsnprintf(buf, n + 1, format, ap);
-		if (fileno(stream) != STDERR_FILENO) {
+		if (fileno(stream) != STDERR_FILENO || stderr_real) {
 			fwrite(buf, 1, n, stream);
 		} else {
+			assert(stderr_ok);
 			assert(stderr_n + n <= sizeof(stderr_buf));
 			memcpy(&stderr_buf[stderr_n], buf, n);
 			stderr_n += n;

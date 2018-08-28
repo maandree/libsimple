@@ -7,7 +7,7 @@ extern char *argv0;
 
 
 void
-libsimple_vweprintf(const char *fmt, va_list ap) /* TODO test */
+libsimple_vweprintf(const char *fmt, va_list ap) /* TODO test (weprintf, enprintf, eprintf) */
 {
 	int saved_errno = errno, r;
 	const char *end = strchr(fmt, '\0');

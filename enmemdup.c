@@ -4,7 +4,7 @@
 
 
 void *
-libsimple_enmemdup(int status, const void *s, size_t n) /* TODO test */
+libsimple_enmemdup(int status, const void *s, size_t n) /* TODO test (libsimple_ememdup) */
 {
 	void *ret = memdup(s, n);
 	if (!ret)

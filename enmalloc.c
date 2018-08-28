@@ -4,7 +4,7 @@
 
 
 void *
-libsimple_enmalloc(int status, size_t n) /* TODO test */
+libsimple_enmalloc(int status, size_t n)
 {
 	void *ret = malloc(n);
 	if (!ret)
@@ -19,6 +19,41 @@ libsimple_enmalloc(int status, size_t n) /* TODO test */
 int
 main(void)
 {
+	struct allocinfo *info;
+	void *ptr;
+
+	assert((ptr = libsimple_enmalloc(1, 5)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 5);
+		assert(!info->zeroed);
+	}
+	free(ptr);
+
+	assert((ptr = libsimple_emalloc(4)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 4);
+		assert(!info->zeroed);
+	}
+	free(ptr);
+
+	if (have_custom_malloc()) {
+		alloc_fail_in = 1;
+		assert_exit_ptr(libsimple_enmalloc(3, 4));
+		assert(exit_status == 3);
+		assert_stderr("%s: malloc: %s\n", argv0, strerror(ENOMEM));
+		assert(!alloc_fail_in);
+
+		libsimple_default_failure_exit = 102;
+		alloc_fail_in = 1;
+		assert_exit_ptr(libsimple_emalloc(3));
+		assert(exit_status == 102);
+		assert_stderr("%s: malloc: %s\n", argv0, strerror(ENOMEM));
+		assert(!alloc_fail_in);
+		libsimple_default_failure_exit = 1;
+	}
+
 	return 0;
 }
 

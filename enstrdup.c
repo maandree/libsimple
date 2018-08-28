@@ -4,7 +4,7 @@
 
 
 char *
-libsimple_enstrdup(int status, const char *s) /* TODO test */
+libsimple_enstrdup(int status, const char *s) /* TODO test (libsimple_estrdup) */
 {
 	char *ret = strdup(s);
 	if (!ret)

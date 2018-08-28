@@ -4,7 +4,7 @@
 
 
 void *
-libsimple_envreallocn(int status, void *ptr, size_t n, va_list ap) /* TODO test */
+libsimple_envreallocn(int status, void *ptr, size_t n, va_list ap) /* TODO test (enreallocn, ereallocn) */
 {
 	void *ret = libsimple_vreallocn(ptr, n, ap);
 	if (!ret)
