@@ -3,17 +3,12 @@
 #ifndef TEST
 
 
-extern char *argv0;
-
-
 void *
 libsimple_enmemdup(int status, const void *s, size_t n) /* TODO test */
 {
 	void *ret = memdup(s, n);
-	if (!ret) {
-		fprintf(stderr, "%s: memdup: %s\n", argv0, strerror(errno));
-		exit(status);
-	}
+	if (!ret)
+		enprintf(status, "memdup:");
 	return ret;
 }
 

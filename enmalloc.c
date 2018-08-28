@@ -3,17 +3,12 @@
 #ifndef TEST
 
 
-extern char *argv0;
-
-
 void *
 libsimple_enmalloc(int status, size_t n) /* TODO test */
 {
 	void *ret = malloc(n);
-	if (!ret) {
-		fprintf(stderr, "%s: malloc: %s\n", argv0, strerror(errno));
-		exit(status);
-	}
+	if (!ret)
+		enprintf(status, "malloc:");
 	return ret;
 }
 
