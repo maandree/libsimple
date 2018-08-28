@@ -59,43 +59,7 @@ OBJ =\
 	vweprintf.o\
 	libsimple.o
 
-TESTS =\
-	asprintf.test\
-	difftimespec.test\
-	difftimeval.test\
-	doubletotimespec.test\
-	doubletotimeval.test\
-	isutf8.test\
-	memdup.test\
-	memends.test\
-	memmem.test\
-	memrchr.test\
-	memrmem.test\
-	memstarts.test\
-	minimise_number_string.test\
-	multimespec.test\
-	multimeval.test\
-	rawmemchr.test\
-	rawmemrchr.test\
-	strcaseends.test\
-	strcasestr.test\
-	strends.test\
-	strncasestr.test\
-	strndup.test\
-	strnstr.test\
-	strrcasestr.test\
-	strrncasestr.test\
-	strrnstr.test\
-	strrstr.test\
-	strstarts.test\
-	sumtimespec.test\
-	sumtimeval.test\
-	timespec2timeval.test\
-	timespectostr.test\
-	timevaltostr.test\
-	vasprintf.test\
-	vputenvf.test\
-	libsimple.test
+TESTS = $(OBJ:.o=.test)
 
 all: libsimple.a $(TESTS)
 $(OBJ): $(@:.o=.c) libsimple.h

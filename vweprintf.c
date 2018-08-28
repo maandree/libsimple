@@ -1,5 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 #include "libsimple.h"
+#ifndef TEST
 
 
 extern char *argv0;
@@ -54,3 +55,15 @@ libsimple_vweprintf(const char *fmt, va_list ap) /* TODO test */
 
 	errno = saved_errno;
 }
+
+
+#else
+#include "test.h"
+
+int
+main(void)
+{
+	return 0;
+}
+
+#endif

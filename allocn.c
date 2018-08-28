@@ -1,5 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 #include "libsimple.h"
+#ifndef TEST
 
 
 static inline size_t
@@ -36,3 +37,15 @@ libsimple_vreallocn(void *ptr, size_t n, va_list ap) /* TODO test */
 	n = alloc_size_product(n, ap);
 	return !n ? NULL : realloc(ptr, n);
 }
+
+
+#else
+#include "test.h"
+
+int
+main(void)
+{
+	return 0;
+}
+
+#endif

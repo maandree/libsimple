@@ -1,5 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 #include "libsimple.h"
+#ifndef TEST
 
 
 ssize_t
@@ -55,3 +56,15 @@ libsimple_recvfrom_timestamped(int fd, void *restrict buf, size_t n, int flags, 
 
 	return r;
 }
+
+
+#else
+#include "test.h"
+
+int
+main(void)
+{
+	return 0;
+}
+
+#endif

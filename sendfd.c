@@ -1,5 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 #include "libsimple.h"
+#ifndef TEST
 
 
 int
@@ -29,3 +30,15 @@ libsimple_sendfd(int sock, int fd) /* TODO test */
 
 	return -(sendmsg(sock, &msg, 0) != (ssize_t)iov.iov_len);
 }
+
+
+#else
+#include "test.h"
+
+int
+main(void)
+{
+	return 0;
+}
+
+#endif

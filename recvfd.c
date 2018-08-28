@@ -1,5 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 #include "libsimple.h"
+#ifndef TEST
 
 
 int
@@ -38,3 +39,15 @@ libsimple_recvfd(int sock) /* TODO test */
 	memcpy(&fd, CMSG_DATA(cmsg), sizeof(fd));
 	return fd;
 }
+
+
+#else
+#include "test.h"
+
+int
+main(void)
+{
+	return 0;
+}
+
+#endif
