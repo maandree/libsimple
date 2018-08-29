@@ -319,24 +319,6 @@ The following functions are defined (some as inline functions):
 
 		libsimple.h defines `extern int libsimple_default_failure_exit`.
 
-	int libsimple_sendfd(int sock, int fd)
-		Send a file descriptor over a socket.
-
-	int libsimple_recvfd(int sock)
-		Receive a file descriptor over a socket.
-
-	ssize_t libsimple_recvfrom_timestamped(int, void *restrict, size_t, int,
-	  struct sockaddr *restrict, socklen_t, struct timespec *restrict)
-		Like recvfrom except also returns the a SCM_TIMESTAMP or
-		SCM_TIMESTAMPNS timestamp, returns zero as the timestamp
-		if missing.
-
-	ssize_t libsimple_recv_timestamped(int, void *restrict, size_t, int,
-	  struct timespec *restrict)
-		Like recv except also returns the a SCM_TIMESTAMP or
-		SCM_TIMESTAMPNS timestamp, returns zero as the timestamp
-		if missing.
-
 	int libsimple_sumtimespec(struct timespec *, const struct timespec *,
 	  const struct timespec *)
 		Returns the sum of two timestamps.

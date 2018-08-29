@@ -32,9 +32,6 @@ OBJ =\
 	rawmemchr.o\
 	rawmemrchr.o\
 	rawmemrchr.o\
-	recvfd.o\
-	recvfrom_timestamped.o\
-	sendfd.o\
 	strcaseends.o\
 	strcasestr.o\
 	strchrnul.o\

@@ -1346,36 +1346,6 @@ libsimple_eprintf(const char *__fmt, ...)
 #endif
 
 
-int libsimple_sendfd(int, int);
-#ifndef sendfd
-# define sendfd libsimple_sendfd
-#endif
-
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
-int libsimple_recvfd(int);
-#ifndef recvfd
-# define recvfd libsimple_recvfd
-#endif
-
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
-ssize_t libsimple_recvfrom_timestamped(int, void *restrict, size_t, int, struct sockaddr *restrict,
-                                       socklen_t, struct timespec *restrict);
-#ifndef recvfrom_timestamped
-# define recvfrom_timestamped libsimple_recvfrom_timestamped
-#endif
-
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
-static inline ssize_t
-libsimple_recv_timestamped(int __fd, void *restrict __buf, size_t __n, /* TODO test */
-                           int __flags, struct timespec *restrict __ts)
-{
-	return libsimple_recvfrom_timestamped(__fd, __buf, __n, __flags, NULL, 0, __ts);
-}
-#ifndef recv_timestamped
-# define recv_timestamped libsimple_recv_timestamped
-#endif
-
-
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 int libsimple_sumtimespec(struct timespec *, const struct timespec *, const struct timespec *);
 #ifndef sumtimespec
