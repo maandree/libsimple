@@ -43,7 +43,9 @@ round_up(size_t size)
 int
 have_custom_malloc(void)
 {
+	size_t old_alloc_fail_in = alloc_fail_in;
 	free(malloc(1));
+	alloc_fail_in = old_alloc_fail_in;
 	return custom_malloc;
 }
 

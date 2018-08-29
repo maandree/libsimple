@@ -87,6 +87,9 @@ test_vasprintfa(const char *expected, const char *format, ...)
 }
 #endif
 
+#ifdef __clang__
+__attribute__((optnone))
+#endif
 int
 main(void)
 {
