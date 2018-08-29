@@ -77,10 +77,22 @@ libsimple.a: $(OBJ)
 check: $(TESTS)
 	@set -e; for t in $(TESTS); do printf '%s\n' "./$$t"; $(CHECK_PREFIX) "./$$t"; done
 
+install: libsimple.a
+	mkdir -p -- "$(DESTDIR)$(PREFIX)/lib"
+	mkdir -p -- "$(DESTDIR)$(PREFIX)/include"
+	cp -- libsimple.a "$(DESTDIR)$(PREFIX)/lib"
+	cp -- libsimple.h "$(DESTDIR)$(PREFIX)/include"
+	cp -- libsimple-arg.h "$(DESTDIR)$(PREFIX)/include"
+
+uninstall:
+	-rm -f -- "$(DESTDIR)$(PREFIX)/lib/libsimple.a"
+	-rm -f -- "$(DESTDIR)$(PREFIX)/include/libsimple.h"
+	-rm -f -- "$(DESTDIR)$(PREFIX)/include/libsimple-arg.h"
+
 clean:
 	-rm -rf -- *.o *.su *.a *.so *.so.* *.gch *.gcda *.gcno *.gcov *.lo *.test
 
 .SUFFIXES:
 .SUFFIXES: .test .test.o .o .c
 
-.PHONY: all check clean
+.PHONY: all check install uninstall clean
