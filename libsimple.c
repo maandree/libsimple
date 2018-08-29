@@ -72,16 +72,31 @@ test_timeval(double d, time_t sec, long int usec, double rd, const char *s, cons
 	return 1;
 }
 
+#ifdef libsimple_vasprintfa
+static int
+test_vasprintfa(const char *expected, const char *format, ...)
+{
+	char *s;
+	va_list ap;
+	va_start(ap, format);
+	s = libsimple_vasprintfa(format, ap);
+	subassert(s);
+	subassert(!strcmp(s, expected));
+	va_end(ap);
+	return 1;
+}
+#endif
+
 int
 main(void)
 {
 	struct allocinfo *info;
-	void *ptr;
+	void *ptr, *ptr2;
 	struct timespec ts, ts1, ts2;
 	struct timeval tv1, tv2;
 	const char *cs;
 	char buf[1024], *s;
-	int intarray[10];
+	int intarray[10], fds[2], oldfd;
 	size_t i, n;
 
 	assert(libsimple_default_failure_exit == 1);
@@ -1077,6 +1092,46 @@ main(void)
 		assert(!(ptr = libsimple_mallocz(1, 20)) && errno == ENOMEM);
 		assert(!alloc_fail_in);
 	}
+
+	assert((ptr = malloc(1)));
+	ptr2 = ptr;
+	if (have_custom_malloc()) {
+		info = get_allocinfo(ptr);
+		info->refcount = 2;
+	}
+	FREE(ptr);
+	assert(ptr == NULL);
+	if (have_custom_malloc()) {
+		assert(info->refcount == 1);
+		free(ptr2);
+	}
+
+	assert(!pipe(fds));
+	assert(fds[0] > 2 && fds[1] > 2 && fds[0] != fds[1]);
+	oldfd = fds[1];
+	assert(!CLOSE(fds[1]));
+	assert(fds[1] == -1);
+	assert(!CLOSE(fds[1]));
+	errno = 0;
+	assert(CLOSE(oldfd) == -1 && errno == EBADF);
+	errno = 0;
+	assert(oldfd == -1);
+	assert(!read(fds[0], buf, sizeof(buf)));
+	close(fds[0]);
+
+#ifdef libsimple_asprintfa
+	s = libsimple_asprintfa("%sxyz%s", "abc", "123");
+	assert(s);
+	assert(!strcmp(s, "abcxyz123"));
+#else
+	fprintf(stderr, "warning: libsimple_asprintfa missing\n");
+#endif
+
+#ifdef libsimple_vasprintfa
+	assert(test_vasprintfa("abcxyz123", "%sxyz%s", "abc", "123"));
+#else
+	fprintf(stderr, "warning: libsimple_vasprintfa missing\n");
+#endif
 
 	if (!have_custom_malloc()) {
 		stderr_real = 1;

@@ -34,14 +34,14 @@
 			stderr_ok = old_stderr_ok__;\
 			break;\
 		}\
-		assert(EXPR);\
+		EXPR;\
 		assert_unreached();\
 	} while (0)
 
 #define assert_exit_ptr(EXPR)\
 	do {\
 		void *volatile ptr__;\
-		assert_exit((ptr__ = (EXPR)));\
+		assert_exit((void)(ptr__ = (EXPR)));\
 	} while (0)
 
 #define assert_stderr(FMT, ...)\

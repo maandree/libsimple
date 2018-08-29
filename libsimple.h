@@ -477,9 +477,9 @@ extern int libsimple_default_failure_exit;
 #endif
 
 
-#define FREE(PTR) ((void)(free(PTR), (PTR) = NULL)) /* TODO test */
+#define FREE(PTR) ((void)(free(PTR), (PTR) = NULL))
 
-#define CLOSE(FD) libsimple_close(&(FD)) /* TODO test */
+#define CLOSE(FD) libsimple_close(&(FD))
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline int
@@ -627,7 +627,7 @@ int libsimple_vasprintf(char **, const char *, va_list);
 #endif
 
 #if defined(__GNUC__) && !defined(__clang__)
-# define libsimple_asprintfa(__fmt, ...) /* TODO test */\
+# define libsimple_asprintfa(__fmt, ...)\
 	({\
 		const char *__f = (__fmt);\
 		char *__ret = NULL;\
@@ -644,20 +644,22 @@ int libsimple_vasprintf(char **, const char *, va_list);
 #endif
 
 #if defined(__GNUC__) || defined(__clang__)
-# define libsimple_vasprintfa(__fmt, __ap) /* TODO test */\
+# define libsimple_vasprintfa(__fmt, __ap)\
 	({\
 		const char *__f = (__fmt);\
-		va_list __a = (__ap);\
+		va_list __a1;\
 		va_list __a2;\
 		char *__ret = NULL;\
 		int __r;\
-		va_copy(__a2, __a);\
-		__r = vsnprintf(NULL, 0, __f, __a);\
+		va_copy(__a1, __ap);\
+		va_copy(__a2, __a1);\
+		__r = vsnprintf(NULL, 0, __f, __a1);\
 		if (__r >= 0) {\
 			__ret = alloca((size_t)__r + 1);\
 			vsprintf(__ret, __f, __a2);\
 		}\
 		va_end(__a2);\
+		va_end(__a1);\
 		__ret;\
 	})
 # ifndef vasprintfa
