@@ -626,7 +626,7 @@ int libsimple_vasprintf(char **, const char *, va_list);
 # define vasprintf libsimple_vasprintf
 #endif
 
-#if defined(__GNUC__) && !defined(__clang__)
+#if defined(__GNUC__) || defined(__clang__)
 # define libsimple_asprintfa(__fmt, ...)\
 	({\
 		const char *__f = (__fmt);\
