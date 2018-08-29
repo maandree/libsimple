@@ -51,7 +51,7 @@
 		len__ = sprintf(buf__, FMT, __VA_ARGS__);\
 		assert(len__ >= 0);\
 		assert((size_t)len__ == stderr_n);\
-		assert(!memcmp(buf__, stderr_buf, stderr_n));\
+		assert(!memcmp(buf__, (char **)(void *)(&stderr_buf), stderr_n)); \
 	} while (0);
 
 
@@ -68,15 +68,15 @@ struct allocinfo {
 
 extern char *argv0;
 
-extern size_t alloc_fail_in;
-extern int exit_real;
-extern int exit_ok;
-extern int exit_status;
+extern volatile size_t alloc_fail_in;
+extern volatile int exit_real;
+extern volatile int exit_ok;
+extern volatile int exit_status;
 extern jmp_buf exit_jmp;
-extern char stderr_buf[8 << 10];
-extern size_t stderr_n;
-extern int stderr_real;
-extern int stderr_ok;
+extern volatile char stderr_buf[8 << 10];
+extern volatile size_t stderr_n;
+extern volatile int stderr_real;
+extern volatile int stderr_ok;
 
 
 size_t get_pagesize(void);

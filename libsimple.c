@@ -90,7 +90,7 @@ test_vasprintfa(const char *expected, const char *format, ...)
 int
 main(void)
 {
-	struct allocinfo *info;
+	struct allocinfo *volatile info;
 	void *ptr, *ptr2;
 	struct timespec ts, ts1, ts2;
 	struct timeval tv1, tv2;

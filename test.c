@@ -10,17 +10,17 @@
 
 char *argv0 = (char []){"<test>"};
 
-size_t alloc_fail_in = 0;
-int exit_real = 0;
-int exit_ok = 0;
-int exit_status;
+volatile size_t alloc_fail_in = 0;
+volatile int exit_real = 0;
+volatile int exit_ok = 0;
+volatile int exit_status;
 jmp_buf exit_jmp;
-char stderr_buf[8 << 10];
-size_t stderr_n = 0;
-int stderr_real = 0;
-int stderr_ok = 0;
+volatile char stderr_buf[8 << 10];
+volatile size_t stderr_n = 0;
+volatile int stderr_real = 0;
+volatile int stderr_ok = 0;
 
-static int custom_malloc = 0;
+static volatile int custom_malloc = 0;
 
 
 size_t
@@ -72,7 +72,7 @@ void *
 calloc(size_t nelem, size_t elsize)
 {
 	struct allocinfo *info;
-	void *ret;
+	void *volatile ret;
 	assert(nelem && elsize); /* unspecified behaviour otherwise */
 	if (nelem > SIZE_MAX / elsize) {
 		errno = ENOMEM;
@@ -92,7 +92,7 @@ void *
 realloc(void *ptr, size_t size)
 {
 	struct allocinfo *info;
-	void *ret;
+	void *volatile ret;
 	size_t n;
 	assert(size); /* unspecified behaviour otherwise */
 	if (!ptr)
@@ -113,7 +113,7 @@ void *
 memalign(size_t alignment, size_t size)
 {
 	struct allocinfo *info;
-	void *ptr;
+	void *volatile ptr;
 	size_t n;
 	uintptr_t off;
 
@@ -166,7 +166,7 @@ int
 posix_memalign(void **memptr, size_t alignment, size_t size)
 {
 	int ret, saved_errno = errno;
-	void **volatile ptrp = memptr;
+	void *volatile *volatile ptrp = memptr;
 	assert(!(alignment % sizeof(void *)));
 	assert(ptrp);
 	*memptr = memalign(alignment, size);
@@ -264,6 +264,7 @@ fprintf(FILE *restrict stream, const char *restrict format, ...)
 int
 vfprintf(FILE *restrict stream, const char *restrict format, va_list ap)
 {
+	size_t old_alloc_fail_in = alloc_fail_in;
 	va_list ap2;
 	int r;
 	char *buf;
@@ -275,17 +276,20 @@ vfprintf(FILE *restrict stream, const char *restrict format, va_list ap)
 
 	if (r >= 0) {
 		n = (size_t)r;
-		buf = alloca(n + 1);
+		alloc_fail_in = 0;
+		assert((buf = malloc(n + 1)));
 		n = vsnprintf(buf, n + 1, format, ap);
 		if (fileno(stream) != STDERR_FILENO || stderr_real) {
 			fwrite(buf, 1, n, stream);
 		} else {
 			assert(stderr_ok);
 			assert(stderr_n + n <= sizeof(stderr_buf));
-			memcpy(&stderr_buf[stderr_n], buf, n);
+			memcpy((char *)(void *)(&stderr_buf[stderr_n]), buf, n);
 			stderr_n += n;
 		}
+		free(buf);
 	}
 
+	alloc_fail_in = old_alloc_fail_in;
 	return r;
 }
