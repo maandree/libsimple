@@ -3,7 +3,7 @@ headers in your code, and defines macros and functions that are useful for most
 programs and libraries to simplify the code. It also provides *_MIN and *_MAX
 values for integer data types.
 
-Most functions are namespaced with `libsimple_` and aliased with macro
+All functions are namespaced with `libsimple_` and aliased with macro
 definitions to unnamespaced names unless there already is a macro with that
 name.
 
@@ -13,7 +13,7 @@ the 0:th command line argument.
 
 
 CLOCK_MONOTONIC_RAW is defined to CLOCK_MONOTONIC unless CLOCK_MONOTONIC_RAW
-already exists.
+already exists and unless DONT_DEFINE_CLOCK_MONOTONIC_RAW is defined.
 
 AF_LOCAL, AF_UNIX, AF_FILE, PF_LOCAL, PF_UNIX, and PF_FILE are defined to
 appropriate values provided that AF_LOCAL, AF_UNIX, or AF_FILE is already
