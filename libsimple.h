@@ -534,13 +534,13 @@ static inline int libsimple_inchrset(int __c, const char *__s)
 #endif
 
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __warn_unused_result__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __nonnull__, __warn_unused_result__)))
 void *libsimple_memdup(const void *, size_t);
 #ifndef memdup
 # define memdup libsimple_memdup
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __warn_unused_result__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __nonnull__, __warn_unused_result__)))
 char *libsimple_strndup(const char *, size_t);
 #ifndef strndup
 # define strndup libsimple_strndup
@@ -845,33 +845,33 @@ static inline int libsimple_strncaseeqnul(const char *__a, const char *__b, size
 #endif
 
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__)))
 void *libsimple_vmalloczn(int, size_t, va_list);
 #ifndef vmalloczn
 # define vmalloczn libsimple_vmalloczn
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__)))
 static inline void *libsimple_vmallocn(size_t __n, va_list __ap)
 { return libsimple_vmalloczn(0, __n, __ap); }
 #ifndef vmallocn
 # define vmallocn libsimple_vmallocn
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__)))
 static inline void *libsimple_vcallocn(size_t __n, va_list __ap)
 { return libsimple_vmalloczn(1, __n, __ap); }
 #ifndef vcallocn
 # define vcallocn libsimple_vcallocn
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__)))
 void *libsimple_vreallocn(void *, size_t, va_list);
 #ifndef vreallocn
 # define vreallocn libsimple_vreallocn
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__)))
 static inline void *
 libsimple_mallocz(int __clear, size_t __n)
 { return __clear ? calloc(1, __n) : malloc(__n); }
@@ -879,7 +879,7 @@ libsimple_mallocz(int __clear, size_t __n)
 # define mallocn libsimple_mallocn
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__)))
 static inline void *
 libsimple_malloczn(int __clear, size_t __n, ... /*, (size_t)0 */)
 {
@@ -892,7 +892,7 @@ libsimple_malloczn(int __clear, size_t __n, ... /*, (size_t)0 */)
 # define malloczn libsimple_malloczn
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__)))
 static inline void *
 libsimple_mallocn(size_t __n, ... /*, (size_t)0 */)
 {
@@ -905,7 +905,7 @@ libsimple_mallocn(size_t __n, ... /*, (size_t)0 */)
 # define mallocn libsimple_mallocn
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__)))
 static inline void *
 libsimple_callocn(size_t __n, ... /*, (size_t)0 */)
 {
@@ -918,7 +918,7 @@ libsimple_callocn(size_t __n, ... /*, (size_t)0 */)
 # define callocn libsimple_callocn
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__)))
 static inline void *
 libsimple_reallocn(void *__ptr, size_t __n, ... /*, (size_t)0 */)
 {
@@ -931,76 +931,76 @@ libsimple_reallocn(void *__ptr, size_t __n, ... /*, (size_t)0 */)
 # define reallocn libsimple_reallocn
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 void *libsimple_enmalloc(int, size_t);
 #ifndef enmalloc
 # define enmalloc libsimple_enmalloc
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 void *libsimple_encalloc(int, size_t, size_t);
 #ifndef encalloc
 # define encalloc libsimple_encalloc
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 void *libsimple_enrealloc(int, void *, size_t);
 #ifndef enrealloc
 # define enrealloc libsimple_enrealloc
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_enmallocz(int __status, int __clear, size_t __n)
 { return __clear ? libsimple_encalloc(__status, 1, __n) : libsimple_enmalloc(__status, __n); }
 #ifndef enmallocz
 # define enmallocz libsimple_enmallocz
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __nonnull__, __warn_unused_result__, __returns_nonnull__)))
 char *libsimple_enstrdup(int, const char *);
 #ifndef enstrdup
 # define enstrdup libsimple_enstrdup
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __nonnull__, __warn_unused_result__, __returns_nonnull__)))
 char *libsimple_enstrndup(int, const char *, size_t);
 #ifndef enstrndup
 # define enstrndup libsimple_enstrndup
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 void *libsimple_enmemdup(int, const void *, size_t);
 #ifndef enmemdup
 # define enmemdup libsimple_enmemdup
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 void *libsimple_envmalloczn(int, int, size_t, va_list);
 #ifndef envmalloczn
 # define envmalloczn libsimple_envmalloczn
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_envmallocn(int __st, size_t __n, va_list __ap)
 { return libsimple_envmalloczn(__st, 0, __n, __ap); }
 #ifndef envmallocn
 # define envmallocn libsimple_envmallocn
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_envcallocn(int __st, size_t __n, va_list __ap)
 { return libsimple_envmalloczn(__st, 1, __n, __ap); }
 #ifndef envcallocn
 # define envcallocn libsimple_envcallocn
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 void *libsimple_envreallocn(int, void *, size_t, va_list);
 #ifndef envreallocn
 # define envreallocn libsimple_envreallocn
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *
 libsimple_enmalloczn(int __status, int __clear, size_t __n, ... /*, (size_t)0 */)
 {
@@ -1013,7 +1013,7 @@ libsimple_enmalloczn(int __status, int __clear, size_t __n, ... /*, (size_t)0 */
 # define enmalloczn libsimple_enmalloczn
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *
 libsimple_enmallocn(int __status, size_t __n, ... /*, (size_t)0 */)
 {
@@ -1026,7 +1026,7 @@ libsimple_enmallocn(int __status, size_t __n, ... /*, (size_t)0 */)
 # define enmallocn libsimple_enmallocn
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *
 libsimple_encallocn(int __status, size_t __n, ... /*, (size_t)0 */)
 {
@@ -1039,7 +1039,7 @@ libsimple_encallocn(int __status, size_t __n, ... /*, (size_t)0 */)
 # define encallocn libsimple_encallocn
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *
 libsimple_enreallocn(int __status, void *__ptr, size_t __n, ... /*, (size_t)0 */)
 {
@@ -1052,84 +1052,84 @@ libsimple_enreallocn(int __status, void *__ptr, size_t __n, ... /*, (size_t)0 */
 # define enreallocn libsimple_enreallocn
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_emallocz(int __clear, size_t __n)
 { return libsimple_enmallocz(libsimple_default_failure_exit, __clear, __n); }
 #ifndef emallocz
 # define emallocz libsimple_emallocz
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_emalloc(size_t __n)
 { return libsimple_enmalloc(libsimple_default_failure_exit, __n); }
 #ifndef emalloc
 # define emalloc libsimple_emalloc
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_ecalloc(size_t __n, size_t __m)
 { return encalloc(libsimple_default_failure_exit, __n, __m); }
 #ifndef ecalloc
 # define ecalloc libsimple_ecalloc
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_erealloc(void *__ptr, size_t __n)
 { return enrealloc(libsimple_default_failure_exit, __ptr, __n); }
 #ifndef erealloc
 # define erealloc libsimple_erealloc
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((nonnull, __warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __nonnull__, __warn_unused_result__, __returns_nonnull__)))
 static inline char *libsimple_estrdup(const char *__s)
 { return enstrdup(libsimple_default_failure_exit, __s); }
 #ifndef estrdup
 # define estrdup libsimple_estrdup
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((nonnull, __warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __nonnull__, __warn_unused_result__, __returns_nonnull__)))
 static inline char *libsimple_estrndup(const char *__s, size_t __n)
 { return enstrndup(libsimple_default_failure_exit, __s, __n); }
 #ifndef estrndup
 # define estrndup libsimple_estrndup
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_ememdup(const void *__s, size_t __n)
 { return enmemdup(libsimple_default_failure_exit, __s, __n); }
 #ifndef ememdup
 # define ememdup libsimple_ememdup
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_evmalloczn(int __clear, size_t __n, va_list __ap)
 { return libsimple_envmalloczn(libsimple_default_failure_exit, __clear, __n, __ap); }
 #ifndef evmalloczn
 # define evmalloczn libsimple_evmalloczn
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_evmallocn(size_t __n, va_list __ap)
 { return libsimple_envmallocn(libsimple_default_failure_exit, __n, __ap); }
 #ifndef evmallocn
 # define evmallocn libsimple_evmallocn
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_evcallocn(size_t __n, va_list __ap)
 { return libsimple_envcallocn(libsimple_default_failure_exit, __n, __ap); }
 #ifndef evcallocn
 # define evcallocn libsimple_evcallocn
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_evreallocn(void *__ptr, size_t __n, va_list __ap)
 { return libsimple_envreallocn(libsimple_default_failure_exit, __ptr, __n, __ap); }
 #ifndef evreallocn
 # define evreallocn libsimple_evreallocn
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *
 libsimple_emalloczn(int __clear, size_t __n, ... /*, (size_t)0 */)
 {
@@ -1142,7 +1142,7 @@ libsimple_emalloczn(int __clear, size_t __n, ... /*, (size_t)0 */)
 # define emalloczn libsimple_emalloczn
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *
 libsimple_emallocn(size_t __n, ... /*, (size_t)0 */)
 {
@@ -1155,7 +1155,7 @@ libsimple_emallocn(size_t __n, ... /*, (size_t)0 */)
 # define emallocn libsimple_emallocn
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *
 libsimple_ecallocn(size_t __n, ... /*, (size_t)0 */)
 {
@@ -1168,7 +1168,7 @@ libsimple_ecallocn(size_t __n, ... /*, (size_t)0 */)
 # define ecallocn libsimple_ecallocn
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *
 libsimple_ereallocn(void *__ptr, size_t __n, ... /*, (size_t)0 */)
 {
