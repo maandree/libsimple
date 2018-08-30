@@ -201,19 +201,19 @@ The following functions are defined (some as inline functions):
 	char *libsimple_strrncasestr(const char *, const char *, size_t)
 		Like strrnstr except case-insensitive.
 
-	int libsimple_strcmpnul(const char *a, const char *b)
+	int libsimple_strcmpnul(const char *, const char *)
 		Like strcmp excepts NULL and gives it a value less than
 		the empty string
 
-	int libsimple_strncmpnul(const char *a, const char *b, size_t n)
+	int libsimple_strncmpnul(const char *, const char *, size_t)
 		Like strncmp excepts NULL and gives it a value less than
 		the empty string
 
-	int libsimple_strcasecmpnul(const char *a, const char *b)
+	int libsimple_strcasecmpnul(const char *, const char *)
 		Like strcasecmp excepts NULL and gives it a value less
 		than the empty string
 
-	int libsimple_strncasecmpnul(const char *a, const char *b, size_t n)
+	int libsimple_strncasecmpnul(const char *, const char *, size_t)
 		Like strncasecmp excepts NULL and gives it a value less
 		than the empty string
 
@@ -304,16 +304,16 @@ The following functions are defined (some as inline functions):
 		libsimple.h defines `extern int libsimple_default_failure_exit`.
 
 	void libsimple_venprintf(int status, const char *, va_list)
-		Like libsimple_vweprintf, but calls exit(stats) afterwards.
+		Like libsimple_vweprintf, but calls exit(status) afterwards.
 
 	void libsimple_enprintf(int status, const char *, ...)
-		Like libsimple_weprintf, but calls exit(stats) afterwards.
+		Like libsimple_weprintf, but calls exit(status) afterwards.
 
-	void libsimple_veprintf(const char *fmt, va_list)
+	void libsimple_veprintf(const char *, va_list)
 		Like libsimple_veprintf, but calls exit(libsimple_default_failure_exit)
 		afterwards.
 
-	void libsimple_eprintf(const char *fmt, ...)
+	void libsimple_eprintf(const char *, ...)
 		Like libsimple_weprintf, but calls exit(libsimple_default_failure_exit)
 		afterwards.
 
