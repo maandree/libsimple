@@ -1,0 +1,10 @@
+Document:
+	memeq
+	mempset
+	aligned_alloc functions
+	posix_memalign functions
+	memalign functions
+	valloc functions
+	pvalloc functions
+	memalloc functions
+	arrayalloc functions
