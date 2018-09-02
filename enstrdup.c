@@ -6,9 +6,11 @@
 char *
 libsimple_enstrdup(int status, const char *s)
 {
-	char *ret = strdup(s);
+	size_t n = strlen(s) + 1;
+	char *ret = aligned_alloc(1, n);
 	if (!ret)
 		enprintf(status, "strdup:");
+	memcpy(ret, s, n);
 	return ret;
 }
 
@@ -26,6 +28,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(s)));
 		assert(info->size == 6);
+		assert(info->alignment == 1);
 		assert(!info->zeroed);
 	}
 	assert(!strcmp(s, "hello"));
@@ -35,6 +38,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(s)));
 		assert(info->size == 5);
+		assert(info->alignment == 1);
 		assert(!info->zeroed);
 	}
 	assert(!strcmp(s, "test"));

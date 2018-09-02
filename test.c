@@ -2,10 +2,12 @@
 #include "libsimple.h"
 #include "test.h"
 #include <sys/syscall.h>
-#include <malloc.h>
 
 #undef strndup
 #undef memdup
+#undef memalign
+#undef valloc
+#undef pvalloc
 
 
 char *argv0 = (char []){"<test>"};
@@ -21,6 +23,7 @@ volatile int stderr_real = 0;
 volatile int stderr_ok = 0;
 
 static volatile int custom_malloc = 0;
+static volatile void *just_alloced = NULL;
 
 
 size_t
@@ -55,6 +58,61 @@ get_allocinfo(void *ptr)
 {
 	assert(ptr);
 	return (void *)((char *)ptr - sizeof(struct allocinfo));
+}
+
+
+void *
+memalign(size_t alignment, size_t size)
+{
+	struct allocinfo *info;
+	void *volatile ptr;
+	size_t n;
+	uintptr_t off;
+
+	custom_malloc = 1;
+
+	assert(alignment);
+	assert(!(alignment & (alignment - 1UL)));
+	assert(size); /* unspecified behaviour otherwise */
+
+	if (alloc_fail_in && alloc_fail_in-- == 1)
+		goto enomem;
+
+	n = size;
+	if (n > SIZE_MAX - alignment)
+		goto enomem;
+	n += alignment;
+	if (n > SIZE_MAX - sizeof(struct allocinfo))
+		goto enomem;
+	n += sizeof(struct allocinfo);
+
+	ptr = mmap(NULL, n, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+	if (!ptr)
+		goto enomem;
+
+	off = (uintptr_t)ptr;
+	off += sizeof(struct allocinfo);
+	off += (alignment - off % alignment) % alignment;
+	off -= (uintptr_t)ptr;
+
+	ptr = (char *)ptr + off;
+	info = get_allocinfo(ptr);
+
+	info->real_beginning = (char *)ptr - off;
+	info->real_size      = n;
+	info->size           = size;
+	info->extent         = n - size - off;
+	info->alignment      = alignment;
+	info->zeroed         = 0;
+	info->refcount       = 1;
+
+	just_alloced = ptr;
+	return ptr;
+
+enomem:
+	just_alloced = NULL;
+	errno = ENOMEM;
+	return NULL;
 }
 
 
@@ -111,59 +169,6 @@ realloc(void *ptr, size_t size)
 }
 
 
-void *
-memalign(size_t alignment, size_t size)
-{
-	struct allocinfo *info;
-	void *volatile ptr;
-	size_t n;
-	uintptr_t off;
-
-	custom_malloc = 1;
-
-	assert(alignment);
-	assert(!(alignment & (alignment - 1UL)));
-	assert(size); /* unspecified behaviour otherwise */
-
-	if (alloc_fail_in && alloc_fail_in-- == 1)
-		goto enomem;
-
-	n = size;
-	if (n > SIZE_MAX - alignment)
-		goto enomem;
-	n += alignment;
-	if (n > SIZE_MAX - sizeof(struct allocinfo))
-		goto enomem;
-	n += sizeof(struct allocinfo);
-
-	ptr = mmap(NULL, n, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-	if (!ptr)
-		goto enomem;
-
-	off = (uintptr_t)ptr;
-	off += sizeof(struct allocinfo);
-	off += (alignment - off % alignment) % alignment;
-	off -= (uintptr_t)ptr;
-
-	ptr = (char *)ptr + off;
-	info = get_allocinfo(ptr);
-
-	info->real_beginning = (char *)ptr - off;
-	info->real_size      = n;
-	info->size           = size;
-	info->extent         = n - size - off;
-	info->alignment      = alignment;
-	info->zeroed         = 0;
-	info->refcount       = 1;
-
-	return ptr;
-
-enomem:
-	errno = ENOMEM;
-	return NULL;
-}
-
-
 int
 posix_memalign(void **memptr, size_t alignment, size_t size)
 {
@@ -171,8 +176,9 @@ posix_memalign(void **memptr, size_t alignment, size_t size)
 	void *volatile *volatile ptrp = memptr;
 	assert(!(alignment % sizeof(void *)));
 	assert(ptrp);
+	errno = 0;
 	*memptr = memalign(alignment, size);
-	ret = *memptr ? ENOMEM : 0;
+	ret = errno;
 	errno = saved_errno;
 	return ret;
 }
@@ -234,6 +240,21 @@ free(void *ptr)
 	if (info->refcount-- > 1)
 		return;
 	assert(!munmap(info->real_beginning, info->real_size));
+}
+
+
+void *
+memset(void *s, int c, size_t n)
+{
+	char *str = s;
+	struct allocinfo *info;
+	if (just_alloced && s == just_alloced) {
+		info = get_allocinfo(s);
+		info->zeroed = MAX(info->zeroed, n);
+	}
+	while (n--)
+		str[n] = (char)c;
+	return s;
 }
 
 

@@ -27,6 +27,7 @@ main(void)
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 15);
 		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
 	free(ptr);
 
@@ -35,6 +36,7 @@ main(void)
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 20);
 		assert(info->zeroed == 20);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
 	free(ptr);
 
@@ -43,6 +45,7 @@ main(void)
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 12);
 		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
 	free(ptr);
 
@@ -51,6 +54,7 @@ main(void)
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 16);
 		assert(info->zeroed == 16);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
 	free(ptr);
 
@@ -102,6 +106,7 @@ main(void)
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 30);
 		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
 	free(ptr);
 
@@ -110,6 +115,7 @@ main(void)
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 40);
 		assert(info->zeroed == 40);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
 	free(ptr);
 
@@ -118,6 +124,7 @@ main(void)
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 24);
 		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
 	free(ptr);
 
@@ -126,6 +133,7 @@ main(void)
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 32);
 		assert(info->zeroed == 32);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
 	free(ptr);
 

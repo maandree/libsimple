@@ -27,6 +27,7 @@ main(void)
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 5);
 		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 		info->refcount += 1;
 	}
 	stpcpy(ptr, "test");
@@ -36,6 +37,7 @@ main(void)
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 10);
 		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 		assert(ptr != old);
 		free(old);
 	}
@@ -46,6 +48,7 @@ main(void)
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 5);
 		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 		info->refcount += 1;
 	}
 	stpcpy(ptr, "test");
@@ -55,6 +58,7 @@ main(void)
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 10);
 		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 		assert(ptr != old);
 		free(old);
 	}

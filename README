@@ -5,7 +5,8 @@ values for integer data types.
 
 All functions are namespaced with `libsimple_` and aliased with macro
 definitions to unnamespaced names unless there already is a macro with that
-name.
+name. However, the `libsimple_{,e,en}{,v}{mem,array}alloc` functions do
+not have unnamespaced aliases as they are libsimple specific.
 
 Programs using this library should define `char *argv0` and set it to
 the 0:th command line argument.

@@ -3,20 +3,59 @@
 CONFIGFILE = config.mk
 include $(CONFIGFILE)
 
+SUBHDR =\
+	libsimple/definitions.h\
+	libsimple/memalloc.h\
+	libsimple/strdup.h\
+	libsimple/strndup.h\
+	libsimple/memdup.h\
+	libsimple/aligned_memdup.h\
+	libsimple/mallocz.h\
+	libsimple/malloc.h\
+	libsimple/calloc.h\
+	libsimple/realloc.h\
+	libsimple/memalignz.h\
+	libsimple/memalign.h\
+	libsimple/vallocz.h\
+	libsimple/valloc.h\
+	libsimple/pvallocz.h\
+	libsimple/pvalloc.h\
+	libsimple/aligned_allocz.h\
+	libsimple/aligned_alloc.h\
+	libsimple/posix_memalignz.h\
+	libsimple/posix_memalign.h\
+	libsimple/env.h\
+	libsimple/time.h\
+	libsimple/printf.h\
+	libsimple/str.h\
+	libsimple/strn.h\
+	libsimple/mem.h
+
+HDR =\
+	$(SUBHDR)\
+	libsimple.h
+
 OBJ =\
+	aligned_memdup.o\
 	allocn.o\
 	asprintf.o\
 	difftimespec.o\
 	difftimeval.o\
 	doubletotimespec.o\
 	doubletotimeval.o\
+	enaligned_memdup.o\
+	enaligned_allocz.o\
+	enposix_memalignz.o\
 	encalloc.o\
 	enmalloc.o\
 	enmemdup.o\
 	enrealloc.o\
 	enstrdup.o\
 	enstrndup.o\
+	envaligned_alloczn.o\
 	envmalloczn.o\
+	envmemalloc.o\
+	envposix_memalignzn.o\
 	envputenvf.o\
 	envreallocn.o\
 	isutf8.o\
@@ -52,6 +91,7 @@ OBJ =\
 	timespectostr.o\
 	timevaltostr.o\
 	vasprintf.o\
+	vmemalloc.o\
 	vputenvf.o\
 	vweprintf.o\
 	libsimple.o
@@ -59,10 +99,10 @@ OBJ =\
 TESTS = $(OBJ:.o=.test)
 
 all: libsimple.a $(TESTS)
-$(OBJ): $(@:.o=.c) libsimple.h
+$(OBJ): $(@:.o=.c) $(HDR)
 $(TESTS): $(@:=.o) test.o libsimple.a
-$(TESTS:=.o): $(@:.test.o=.c) libsimple.h test.h
-test.o: test.c libsimple.h test.h
+$(TESTS:=.o): $(@:.test.o=.c) $(HDR) test.h
+test.o: test.c $(HDR) test.h
 
 libsimple.a: $(OBJ)
 	$(AR) rc $@ $?
@@ -72,22 +112,24 @@ libsimple.a: $(OBJ)
 	$(CC) -o $@ $< test.o libsimple.a $(LDFLAGS)
 
 .c.test.o:
-	$(CC) -c -o $@ $< $(CFLAGS) -DTEST
+	$(CC) -c -o $@ $< $(CFLAGS) -DTEST -O0
 
 check: $(TESTS)
 	@set -e; for t in $(TESTS); do printf '%s\n' "./$$t"; $(CHECK_PREFIX) "./$$t"; done
 
 install: libsimple.a
 	mkdir -p -- "$(DESTDIR)$(PREFIX)/lib"
-	mkdir -p -- "$(DESTDIR)$(PREFIX)/include"
+	mkdir -p -- "$(DESTDIR)$(PREFIX)/include/libsimple"
 	cp -- libsimple.a "$(DESTDIR)$(PREFIX)/lib"
 	cp -- libsimple.h "$(DESTDIR)$(PREFIX)/include"
 	cp -- libsimple-arg.h "$(DESTDIR)$(PREFIX)/include"
+	cp -- $(SUBHDR) "$(DESTDIR)$(PREFIX)/include/libsimple"
 
 uninstall:
 	-rm -f -- "$(DESTDIR)$(PREFIX)/lib/libsimple.a"
 	-rm -f -- "$(DESTDIR)$(PREFIX)/include/libsimple.h"
 	-rm -f -- "$(DESTDIR)$(PREFIX)/include/libsimple-arg.h"
+	-rm -rf -- "$(DESTDIR)$(PREFIX)/include/libsimple"
 
 clean:
 	-rm -rf -- *.o *.su *.a *.so *.so.* *.gch *.gcda *.gcno *.gcov *.lo *.test

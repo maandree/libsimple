@@ -87,9 +87,6 @@ test_vasprintfa(const char *expected, const char *format, ...)
 }
 #endif
 
-#ifdef __clang__
-__attribute__((optnone))
-#endif
 int
 main(void)
 {
@@ -716,6 +713,19 @@ main(void)
 	fprintf(stderr, "warning: libsimple_memdupa missing\n");
 #endif
 
+#ifdef libsimple_aligned_memdupa
+	cs = "xyz";
+	for (n = 1; n < 4; n++) {
+		s = libsimple_aligned_memdupa(cs, 4 + i, n);
+		assert(s);
+		assert(s != cs);
+		assert(!((uintptr_t)s % (4 + i)));
+		assert(!memcmp(s, cs, n));
+	}
+#else
+	fprintf(stderr, "warning: libsimple_aligned_memdupa missing\n");
+#endif
+
 	unsetenv("X");
 	assert(!getenv("X"));
 	assert(!libsimple_getenv_ne("X"));
@@ -1017,6 +1027,7 @@ main(void)
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 11);
 		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
 	free(ptr);
 
@@ -1025,6 +1036,7 @@ main(void)
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 12);
 		assert(info->zeroed == 12);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
 	free(ptr);
 
@@ -1033,6 +1045,7 @@ main(void)
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 13);
 		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
 	free(ptr);
 
@@ -1041,6 +1054,7 @@ main(void)
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 14);
 		assert(info->zeroed == 14);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
 	free(ptr);
 
@@ -1049,6 +1063,7 @@ main(void)
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 15);
 		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
 	free(ptr);
 
@@ -1057,8 +1072,55 @@ main(void)
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 16);
 		assert(info->zeroed == 16);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
 	free(ptr);
+
+	assert((ptr = libsimple_aligned_allocz(0, 8, 8)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 8);
+		assert(info->alignment == 8);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+
+	assert((ptr = libsimple_aligned_allocz(1, 8, 16)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 16);
+		assert(info->alignment == 8);
+		assert(info->zeroed == 16);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+
+	ptr = NULL;
+
+	assert(!libsimple_posix_memalignz(&ptr, 0, 8 * sizeof(void *), 8));
+	assert(ptr);
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 8);
+		assert(info->alignment == 8 * sizeof(void *));
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert(!libsimple_posix_memalignz(&ptr, 1, 4 * sizeof(void *), 16));
+	assert(ptr);
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 16);
+		assert(info->alignment == 4 * sizeof(void *));
+		assert(info->zeroed == 16);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+	ptr = NULL;
 
 	if (have_custom_malloc()) {
 		alloc_fail_in = 1;
@@ -1094,6 +1156,24 @@ main(void)
 		alloc_fail_in = 1;
 		assert(!(ptr = libsimple_mallocz(1, 20)) && errno == ENOMEM);
 		assert(!alloc_fail_in);
+
+		alloc_fail_in = 1;
+		assert(!(ptr = libsimple_aligned_allocz(0, 8, 8)) && errno == ENOMEM);
+		assert(!alloc_fail_in);
+
+		alloc_fail_in = 1;
+		assert(!(ptr = libsimple_aligned_allocz(1, 8, 16)) && errno == ENOMEM);
+		assert(!alloc_fail_in);
+
+		errno = 0;
+
+		alloc_fail_in = 1;
+		assert(libsimple_posix_memalignz(&ptr, 0, 4 * sizeof(void *), 8) == ENOMEM && !errno);
+		assert(!alloc_fail_in);
+
+		alloc_fail_in = 1;
+		assert(libsimple_posix_memalignz(&ptr, 1, 16 * sizeof(void *), 16) == ENOMEM && !errno);
+		assert(!alloc_fail_in);
 	}
 
 	assert((ptr = malloc(1)));
@@ -1121,6 +1201,16 @@ main(void)
 	assert(oldfd == -1);
 	assert(!read(fds[0], buf, sizeof(buf)));
 	close(fds[0]);
+
+	assert(libsimple_memeq("abcxyz", "abc123", 3));
+	assert(!libsimple_memeq("abcxyz", "abc123", 4));
+	assert(libsimple_memeq("abcxyz", "abcx23", 4));
+	assert(libsimple_memeq("1", "2", 0));
+	assert(!libsimple_memeq("1", "2", 1));
+
+	stpcpy(buf, "abc123");
+	assert(!strcmpnul(libsimple_mempset(buf, '.', 3), "123"));
+	assert(!strcmp(buf, "...123"));
 
 #ifdef libsimple_asprintfa
 	s = libsimple_asprintfa("%sxyz%s", "abc", "123");

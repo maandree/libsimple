@@ -13,7 +13,7 @@ libsimple_strndup(const char *s, size_t n)
 		errno = ENOMEM;
 		return NULL;
 	}
-	if (!(ret = malloc(n + 1)))
+	if (!(ret = aligned_alloc(1, n + 1)))
 		return NULL;
 	memcpy(ret, s, n);
 	ret[n] = '\0';
@@ -27,6 +27,7 @@ libsimple_strndup(const char *s, size_t n)
 int
 main(void)
 {
+	struct allocinfo *info;
 	const char *s = "test";
 	void *p;
 
@@ -35,6 +36,10 @@ main(void)
 	assert(!strcmpnul(p, "test"));
 	memset(p, 0, 5);
 	assert(!strcmpnul(s, "test"));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(p)));
+		assert(info->alignment == 1);
+	}
 	free(p);
 
 	p = libsimple_strndup(s, 3);
@@ -42,6 +47,10 @@ main(void)
 	assert(!strcmpnul(p, "tes"));
 	memset(p, 0, 4);
 	assert(!strcmpnul(s, "test"));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(p)));
+		assert(info->alignment == 1);
+	}
 	free(p);
 
 	p = libsimple_strndup(s, 0);
@@ -49,6 +58,10 @@ main(void)
 	assert(!strcmpnul(p, ""));
 	memset(p, 0, 1);
 	assert(!strcmpnul(s, "test"));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(p)));
+		assert(info->alignment == 1);
+	}
 	free(p);
 
 	return 0;

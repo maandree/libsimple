@@ -26,6 +26,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(s)));
 		assert(info->size == 6);
+		assert(info->alignment == 1);
 		assert(!info->zeroed);
 	}
 	assert(!strcmp(s, "hello"));
@@ -35,6 +36,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(s)));
 		assert(info->size == 5);
+		assert(info->alignment == 1);
 		assert(!info->zeroed);
 	}
 	assert(!strcmp(s, "test"));
@@ -44,6 +46,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(s)));
 		assert(info->size == 3);
+		assert(info->alignment == 1);
 		assert(!info->zeroed);
 	}
 	assert(!strcmp(s, "he"));
@@ -53,6 +56,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(s)));
 		assert(info->size == 4);
+		assert(info->alignment == 1);
 		assert(!info->zeroed);
 	}
 	assert(!strcmp(s, "tes"));
@@ -62,6 +66,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(s)));
 		assert(info->size == 1);
+		assert(info->alignment == 1);
 		assert(!info->zeroed);
 	}
 	assert(!strcmp(s, ""));
@@ -71,6 +76,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(s)));
 		assert(info->size == 1);
+		assert(info->alignment == 1);
 		assert(!info->zeroed);
 	}
 	assert(!strcmp(s, ""));
