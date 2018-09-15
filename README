@@ -52,7 +52,7 @@ The following macros are defined, unless already defined:
 
 	FREE(PTR)
 		(free(PTR), (PTR) = NULL, 0)
-		Ensures that a pointer is not freed twiced.
+		Ensures that a pointer is not freed twice.
 
 	CLOSE(FD)
 		((FD) >= 0 ? (close(FD), (FD) = -1, 0) : 0)
