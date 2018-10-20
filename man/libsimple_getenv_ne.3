@@ -1,0 +1,82 @@
+.\" -*- nroff -*-
+.TH LIBSIMPLE_GETENV_NE 3 2018-10-20 libsimple
+.SH NAME
+libsimple_getenv_ne \- get non-empty value of an environment variable
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+static inline char *libsimple_getenv_ne(const char *\fIname\fP);
+
+#ifndef getenv_ne
+# define getenv_ne libsimple_getenv_ne
+#endif
+.fi
+
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_getenv_ne ()
+function searches the environment of the calling
+process for the environment variable
+.IR name .
+If it exists, its value is returned unless the value
+is the empty string.
+.PP
+Modifications to the environment variable made from
+within the process, its parent, or other ancestor,
+that have not be come visible to other process via
+replacement of the process image, are visible to the
+.BR libsimple_getenv_ne ()
+function.
+.SH RETURN VALUE
+If the environment variable
+.I name
+is defined with a non-empty value, its value
+is returned, otherwise
+.I NULL
+is returned.
+.PP
+The returned pointer must not be deallocated and
+its content should not be modified. The returned
+pointer becomes invalid when the environment variable
+.I name
+is unset or modified.
+.SH ERRORS
+The
+.BR libsimple_getenv_ne ()
+function cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_getenv_ne ()
+T}	Thread safety	MT-Safe env
+T{
+.BR libsimple_getenv_ne ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_getenv_ne ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_getenv_e (3),
+.BR getenv (3)

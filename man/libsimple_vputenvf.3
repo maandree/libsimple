@@ -1,0 +1,197 @@
+.\" -*- nroff -*-
+.TH LIBSIMPLE_VPUTENVF 3 2018-10-20 libsimple
+.SH NAME
+libsimple_vputenvf \- change or add a string formatted value to the environment
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+int libsimple_vputenvf(const char *\fIfmt\fP, va_list \fIap\fP);
+static inline int libsimple_putenvf(const char *\fIfmt\fP, ...);
+void libsimple_envputenvf(int \fIstatus\fP, const char *\fIfmt\fP, va_list \fIap\fP);
+static inline void libsimple_enputenvf(int \fIstatus\fP, const char *\fIfmt\fP, ...);
+static inline void libsimple_evputenvf(const char *\fIfmt\fP, va_list \fIap\fP);
+static inline void libsimple_eputenvf(const char *\fIfmt\fP, ...);
+
+#ifndef vputenvf
+# define vputenvf libsimple_vputenvf
+#endif
+#ifndef putenvf
+# define putenvf libsimple_putenvf
+#endif
+#ifndef envputenvf
+# define envputenvf libsimple_envputenvf
+#endif
+#ifndef enputenvf
+# define enputenvf libsimple_enputenvf
+#endif
+#ifndef evputenvf
+# define evputenvf libsimple_evputenvf
+#endif
+#ifndef eputenvf
+# define eputenvf libsimple_eputenvf
+#endif
+.fi
+
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_vputenvf ()
+function constructs a string using the
+.BR vsprintf (3)
+function, and adds it to the environment, overriding
+its old value if it already exists. The string shall be on
+the format \fB\(dq\fP\fIname\fP\fB=\fP\fIvalue\fP\fB\(dq\fP;
+however this is not strictly enforced, see
+.BR NOTES .
+The parameter
+.I fmt
+is used as the format string for the
+.BR vsprintf (3)
+function, and the parameter
+.I ap
+is used as the formatting arguments.
+.PP
+The
+.BR libsimple_putenvf ()
+function is a version of the
+.BR libsimple_vputenvf ()
+that uses variadic arguments instead of
+.IR va_list .
+.PP
+The
+.BR libsimple_envputenvf ()
+and
+.BR libsimple_evputenvf ()
+functions are versions of the
+.BR libsimple_vputenvf ()
+function that call the
+.BR libsimple_enprintf (3)
+function on failure, causing the process to print
+an error message and exit. See
+.BR libsimple_enprintf ()
+for more information.
+.PP
+The
+.BR libsimple_enputenvf ()
+and
+.BR libsimple_eputenvf ()
+functions are versions of the
+.BR libsimple_putenvf ()
+function that call the
+.BR libsimple_enprintf (3)
+function on failure, causing the process to print
+an error message and exit. See
+.BR libsimple_enprintf ()
+for more information.
+.PP
+Modifications made to the environment do not become
+visible to other process until the process image is
+changed.
+.SH RETURN VALUE
+Upon  successful  completion, the
+.BR libsimple_vputenvf ()
+and
+.BR libsimple_putenvf ()
+functions return 0; otherwise, they return \-1 and set
+.I errno
+to indicate the error.
+.SH ERRORS
+The
+.BR libsimple_vputenvf ()
+and
+.BR libsimple_putenvf ()
+functions will fail if:
+.TP
+.B EINVAL
+The construct string is empty or starts with the
+.B '='
+character.
+.TP
+.B ENOMEM
+Insufficient memory was available.
+.PP
+They may also fail for any reason specified for the
+.BR vsnprintf (3)
+function.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_vputenvf (),
+.br
+.BR libsimple_putenvf (),
+.br
+.BR libsimple_envputenvf (),
+.br
+.BR libsimple_enputenvf (),
+.br
+.BR libsimple_evputenvf (),
+.br
+.BR libsimple_eputenvf ()
+T}	Thread safety	MT-Safe env
+T{
+.BR libsimple_vputenvf (),
+.br
+.BR libsimple_putenvf (),
+.br
+.BR libsimple_envputenvf (),
+.br
+.BR libsimple_enputenvf (),
+.br
+.BR libsimple_evputenvf (),
+.br
+.BR libsimple_eputenvf ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_vputenvf (),
+.br
+.BR libsimple_putenvf (),
+.br
+.BR libsimple_envputenvf (),
+.br
+.BR libsimple_enputenvf (),
+.br
+.BR libsimple_evputenvf (),
+.br
+.BR libsimple_eputenvf ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+If the construct does not contain the
+.B '='
+character, it may still be added to the environment,
+however this can cause problem for some programs, and
+the behaviour is unspecified when countered by the
+.BR getenv (3),
+.BR putenv (3),
+.BR setenv (3),
+and
+.BR unsetenv (3)
+functions.
+.SH BUGS
+There is no mechanism for detecting which entries in the
+environment are statically allocated and which are
+dynamically allocated, this can lead to memory leaks
+with are detected by
+.BR valgrind (1).
+.SH SEE ALSO
+.BR putenv (3),
+.BR setenv (3),
+.BR unsetenv (3),
+.BR getenv (3),
+.BR environ (3)
