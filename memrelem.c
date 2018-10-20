@@ -70,12 +70,34 @@ libsimple_memrelem(const void *hay_, size_t hayn, const void *sub_, size_t subn)
 int
 main(void)
 {
-	assert(!strcmpnul(libsimple_memrelem("12345634", 4, "", 0), "12345634"));
+	assert(!strcmpnul(libsimple_memrelem("12345634", 8, "", 0), "12345634"));
+	assert(!strcmpnul(libsimple_memrelem("12345634", 0, "", 0), "12345634"));
+
+	assert(!strcmpnul(libsimple_memrelem("12345634", 8, "3", 1), "34"));
+	assert(!libsimple_memrelem("12345634", 8, "x", 1));;
+	assert(!strcmpnul(libsimple_memrelem("13456342", 8, "3", 1), "342"));
+	assert(!libsimple_memrelem("12345634", 0, "3", 1));
+
 	assert(!strcmpnul(libsimple_memrelem("12345634", 4, "34", 2), "34"));
 	assert(!libsimple_memrelem("12345634", 4, "xx", 2));
 	assert(!libsimple_memrelem("13456342", 4, "34", 2));
 	assert(!libsimple_memrelem("12345634", 0, "34", 2));
-	assert(!strcmpnul(libsimple_memrelem("12345634", 0, "34", 0), "12345634"));
+
+	assert(!strcmpnul(libsimple_memrelem("abcd1234abcd1234", 4, "1234", 4), "1234"));
+	assert(!libsimple_memrelem("abcd1234abcd1234", 4, "zzzz", 4));
+	assert(!libsimple_memrelem("cd1234abcd1234ab", 4, "1234", 4));
+	assert(!libsimple_memrelem("abcd1234abcd1234", 0, "1234", 4));
+
+	assert(!strcmpnul(libsimple_memrelem("abcdefgh12345678abcdefgh12345678", 4, "12345678", 8), "12345678"));
+	assert(!libsimple_memrelem("abcdefgh12345678abcdefgh12345678", 4, "zzzzzzzz", 8));
+	assert(!libsimple_memrelem("efgh12345678abcdefgh12345678abcd", 4, "12345678", 8));
+	assert(!libsimple_memrelem("abcdefgh12345678abcdefgh12345678", 0, "12345678", 8));
+
+	assert(!strcmpnul(libsimple_memrelem("abc123abc123", 4, "123", 3), "123"));
+	assert(!libsimple_memrelem("abc123abc123", 4, "zzz", 3));
+	assert(!libsimple_memrelem("bc123abc123a", 4, "123", 3));
+	assert(!libsimple_memrelem("abc123abc123", 0, "123", 3));
+
 	return 0;
 }
 

@@ -1,14 +1,14 @@
-.TH LIBSIMPLE_MEMPSET 3 2018-10-20 libsimple
+.TH LIBSIMPLE_MEMSETELEM 3 2018-10-20 libsimple
 .SH NAME
-libsimple_mempset \- fill an array of bytes
+libsimple_memsetelem \- fill an array with a value
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-void *libsimple_mempset(void *\fIs\fP, int \fIc\fP, size_t \fIn\fP);
+static inline void *libsimple_memsetelem(void *\fIbuf\fP, const void *\fIitem\fP, size_t \fIsize\fP, size_t \fInitems\fP);
 
-#ifndef mempset
-# define mempset libsimple_mempset
+#ifndef memsetelem
+# define memsetelem libsimple_memsetelem
 #endif
 .fi
 
@@ -16,26 +16,23 @@ Link with
 .IR \-lsimple .
 .SH DESCRIPTION
 The
-.BR libsimple_mempset ()
-function fills the first
-.I n
-bytes of
-.I s
-with the value
-.I c
-coverted to a
-.BR char .
+.BR libsimple_memsetelem ()
+function fills the beginning of
+.I buf
+with
+.I nitems
+copies of the element
+.I item
+with the size
+.IR size .
 .SH RETURN VALUE
 The
-.BR libsimple_mempset ()
+.BR libsimple_memsetelem ()
 function returns the pointer
-.I s
-with the offset
-.I n
-(the byte where the copy stopped).
+.IR buf .
 .SH ERRORS
 The
-.BR libsimple_mempset ()
+.BR libsimple_memsetelem ()
 function cannot fail.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
@@ -46,13 +43,13 @@ lb lb lb
 l l l.
 Interface	Attribute	Value
 T{
-.BR libsimple_mempset ()
+.BR libsimple_memsetelem ()
 T}	Thread safety	MT-Safe
 T{
-.BR libsimple_mempset ()
+.BR libsimple_memsetelem ()
 T}	Async-signal safety	AS-Safe
 T{
-.BR libsimple_mempset ()
+.BR libsimple_memsetelem ()
 T}	Async-cancel safety	AC-Safe
 .TE
 .SH EXAMPLES
@@ -69,5 +66,4 @@ None.
 None.
 .SH SEE ALSO
 .BR libsimple_mempsetelem (3),
-.BR libsimple_mempcpy (3),
 .BR memset (3)

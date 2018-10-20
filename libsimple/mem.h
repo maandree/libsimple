@@ -211,3 +211,34 @@ static inline void *libsimple_mempset(void *__s, int __c, size_t __n)
 #ifndef mempset
 # define mempset libsimple_mempset
 #endif
+
+
+/**
+ * Fills an array with a number of copies of an item
+ * 
+ * @param   buf     The array to fill
+ * @param   item    The element to fill `buf` with
+ * @param   size    The size of `item`
+ * @param   nitems  The number of copies to fill `buf` with
+ * @return          `&buf[nelems * size]`
+ */
+void *libsimple_mempsetelem(void *__buf, const void *__item, size_t __size, size_t __nitems);
+#ifndef libsimple_mempsetelem
+# define libsimple_mempsetelem libsimple_mempsetelem
+#endif
+
+
+/**
+ * Fills an array with a number of copies of an item
+ * 
+ * @param   buf     The array to fill
+ * @param   item    The element to fill `buf` with
+ * @param   size    The size of `item`
+ * @param   nitems  The number of copies to fill `buf` with
+ * @return          `buf`
+ */
+static inline void *libsimple_memsetelem(void *__buf, const void *__item, size_t __size, size_t __nitems)
+{ return libsimple_mempsetelem(__buf, __item, __size, __nitems), __buf; }
+#ifndef libsimple_memsetelem
+# define libsimple_memsetelem libsimple_memsetelem
+#endif

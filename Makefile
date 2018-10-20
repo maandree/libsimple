@@ -63,6 +63,7 @@ OBJ =\
 	memelem.o\
 	memends.o\
 	memmem.o\
+	mempsetelem.o\
 	memrchr.o\
 	memrelem.o\
 	memrmem.o\
