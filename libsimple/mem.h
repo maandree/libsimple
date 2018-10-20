@@ -11,7 +11,8 @@
  * 
  * @param   s  The array of bytes to search
  * @param   c  The byte value to search for
- * @return     `s` with a miminal offset such that `*s == c`
+ * @return     `s` with a miminal offset such that `*r == c`,
+ *             where `r` is the returned pointer
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 void *libsimple_rawmemchr(const void *, int);
@@ -26,8 +27,9 @@ void *libsimple_rawmemchr(const void *, int);
  * @param   s  The array of bytes to search
  * @param   c  The byte value to search for
  * @param   n  The number of bytes in the byte array
- * @return     `s` with a maximal offset such that `*s == c`,
- *             `NULL` if no such offset exists within [0, n)
+ * @return     `s` with a maximal offset such that `*r == c`,
+ *             where `r` is the returned pointer `NULL` if no
+ *             such offset exists within [s, &s[n])
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 void *libsimple_memrchr(const void *, int, size_t);
@@ -47,7 +49,8 @@ void *libsimple_memrchr(const void *, int, size_t);
  * @param   s  The array of bytes to search
  * @param   c  The byte value to search for
  * @param   n  The number of bytes in the byte array
- * @return     `s` with a maximal offset such that `*s == c`
+ * @return     `s` with a maximal offset such that `*r == c`,
+ *             where `r` is the returned pointer
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 void *libsimple_rawmemrchr(const void *, int, size_t);
@@ -56,6 +59,17 @@ void *libsimple_rawmemrchr(const void *, int, size_t);
 #endif
 
 
+/**
+ * Finds the first substring in an array of bytes
+ * 
+ * @param   haystack   The array of bytes to search
+ * @param   nhaystack  The length of `haystack`
+ * @param   needle     The substring to search for
+ * @param   nneedle    The length of `needle`
+ * @return             `haystack` with a minimal offset such that,
+ *                     `!memcmp(r, needle, nneedle)` where `r` is the
+ *                     returned pointer, `NULL` if no such offset exists
+ */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
 void *libsimple_memmem(const void *, size_t, const void *, size_t);
 #ifndef memmem
@@ -63,6 +77,17 @@ void *libsimple_memmem(const void *, size_t, const void *, size_t);
 #endif
 
 
+/**
+ * Finds the last substring in an array of bytes
+ * 
+ * @param   haystack   The array of bytes to search
+ * @param   nhaystack  The length of `haystack`
+ * @param   needle     The substring to search for
+ * @param   nneedle    The length of `needle`
+ * @return             `haystack` with a maximal offset such that,
+ *                     `!memcmp(r, needle, nneedle)` where `r` is the
+ *                     returned pointer, `NULL` if no such offset exists
+ */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
 void *libsimple_memrmem(const void *, size_t, const void *, size_t);
 #ifndef memrmem

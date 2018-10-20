@@ -1,0 +1,77 @@
+.TH LIBSIMPLE_MEMRMEM 3 2018-10-20 libsimple
+.SH NAME
+libsimple_memrmem \- find byte string in memory
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+void *libsimple_memrmem(const void *haystack, size_t nhaystack, const void *needle, size_t nneedle);
+
+#ifndef memrmem
+# define memrmem libsimple_memrmem
+#endif
+.fi
+
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_memrmem ()
+function scans the memory segment
+.IR haystack ,
+with the size
+.IR nhaystack ,
+for the last occurence of the byte string
+.I needle
+with the size
+.IR nneedle .
+.SH RETURN VALUE
+The
+.BR libsimple_memrmem ()
+function returns the pointer
+.I s
+with a maximal offset such that
+.IR !memcmp(r,needle,nneedle) ,
+where
+.I r
+is the returned pointer.
+If no such offset exists,
+.B NULL
+is returned.
+.SH ERRORS
+The
+.BR libsimple_memrmem ()
+function cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_memrmem ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_memrmem ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_memrmem ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_memmem (3),
+.BR libsimple_memrchr (3)
