@@ -4,11 +4,11 @@
 
 
 void *
-libsimple_memrchr(const void *s_, int c, size_t n_)
+libsimple_memrchr(const void *s_, int c_, size_t n_)
 {
-	char *s = *(char **)(void *)&s_;
+	char *s = *(char **)(void *)&s_, c = (char)c_;
 	ssize_t n = n_;
-	while (n-- && (int)s[n] != c);
+	while (n-- && s[n] != c);
 	return n < 0 ? NULL : &s[n];
 }
 

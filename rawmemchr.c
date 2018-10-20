@@ -4,10 +4,10 @@
 
 
 void *
-libsimple_rawmemchr(const void *s_, int c)
+libsimple_rawmemchr(const void *s_, int c_)
 {
-	char *s = *(char **)(void *)&s_;
-	while ((int)*s++ != c);
+	char *s = *(char **)(void *)&s_, c = (char)c_;
+	while (*s++ != c);
 	return &s[-1];
 }
 

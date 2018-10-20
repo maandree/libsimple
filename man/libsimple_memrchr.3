@@ -1,0 +1,78 @@
+.TH LIBSIMPLE_MEMRCHR 3 2018-10-20 libsimple
+.SH NAME
+libsimple_memrchr \- find byte in memory
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+void *libsimple_memrchr(const void *s, int c, size_t n);
+
+#ifndef memrchr
+# define memrchr libsimple_memrchr
+#endif
+.fi
+
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_memrchr ()
+function scans the memory segment
+.IR s ,
+with the size
+.IR n ,
+for the last occurence of the byte
+.I c
+(it is converted to a
+.BR char ).
+.SH RETURN VALUE
+The
+.BR libsimple_memrchr ()
+function returns the pointer
+.I s
+with a maximal offset such that
+.IR *r==c ,
+where
+.I r
+is the returned pointer.
+If no such offset exists,
+.B NULL
+is returned.
+.SH ERRORS
+The
+.BR libsimple_memrchr ()
+function cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_memrchr ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_memrchr ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_memrchr ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_rawmemrchr (3),
+.BR libsimple_memrmem (3),
+.BR memchr (3)
