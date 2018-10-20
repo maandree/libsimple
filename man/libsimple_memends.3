@@ -1,0 +1,78 @@
+.TH LIBSIMPLE_MEMENDS 3 2018-10-20 libsimple
+.SH NAME
+libsimple_memends \- checks end of memory
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+void *libsimple_memends(const void *\fIs\fP, size_t \fIn\fP, const void *\fIt\fP, size_t \fIm\fP);
+
+#ifndef memends
+# define memends libsimple_memends
+#endif
+.fi
+
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_memends ()
+function checks whether the
+.I n
+is at least as great as
+.I m
+and that the
+.I m
+last bytes of
+.IR s ,
+with the size
+.IR n ,
+is the same as the
+.I m
+first bytes of
+.IR t .
+.SH RETURN VALUE
+The
+.BR libsimple_memends ()
+function returns 1 if
+.I s
+ends with
+.IR t ,
+otherwise it returns 0.
+.SH ERRORS
+The
+.BR libsimple_memends ()
+function cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_memends ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_memends ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_memends ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_memstarts (3),
+.BR libsimple_memrmem (3)

@@ -133,6 +133,15 @@ void *libsimple_memrelem(const void *, size_t, const void *, size_t);
 #endif
 
 
+/**
+ * Checks the beginning of an array of bytes
+ * 
+ * @param   s  The array of bytes to check
+ * @param   n  The length of `s`
+ * @param   t  The desired beginning of `s`
+ * @param   m  The length of `t`
+ * @return     1 if `s` begins with `t`, 0 otherwise
+ */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
 int libsimple_memstarts(const void *, size_t, const void *, size_t);
 #ifndef memstarts
@@ -140,6 +149,15 @@ int libsimple_memstarts(const void *, size_t, const void *, size_t);
 #endif
 
 
+/**
+ * Checks the end of an array of bytes
+ * 
+ * @param   s  The array of bytes to check
+ * @param   n  The length of `s`
+ * @param   t  The desired ending of `s`
+ * @param   m  The length of `t`
+ * @return     1 if `s` ends with `t`, 0 otherwise
+ */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
 int libsimple_memends(const void *, size_t, const void *, size_t);
 #ifndef memends

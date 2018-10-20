@@ -1,11 +1,11 @@
 .TH LIBSIMPLE_MEMELEM 3 2018-10-20 libsimple
 .SH NAME
-libsimple_memelem \- find byte string in memory
+libsimple_memelem \- find aligned byte string in memory
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-void *libsimple_memelem(const void *haystack, size_t nhaystack, const void *needle, size_t nneedle);
+void *libsimple_memelem(const void *\fIhaystack\fP, size_t \fInhaystack\fP, const void *\fIneedle\fP, size_t \fInneedle\fP);
 
 #ifndef memelem
 # define memelem libsimple_memelem
