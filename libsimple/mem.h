@@ -95,6 +95,44 @@ void *libsimple_memrmem(const void *, size_t, const void *, size_t);
 #endif
 
 
+/**
+ * Finds the first element in an array
+ * 
+ * @param   haystack   The array of bytes to search
+ * @param   nhaystack  The length of `haystack`, divided by `needle`
+ * @param   needle     The substring to search for
+ * @param   nneedle    The length of `needle`
+ * @return             `haystack` with a minimal offset such that,
+ *                     `!memcmp(r, needle, nneedle)` where `r` is the
+ *                     returned pointer and such that `(r - haystack) % nneedle == 0`,
+ *                     `NULL` if no such offset exists
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+void *libsimple_memelem(const void *, size_t, const void *, size_t);
+#ifndef memelem
+# define memelem libsimple_memelem
+#endif
+
+
+/**
+ * Finds the last element in an array
+ * 
+ * @param   haystack   The array of bytes to search
+ * @param   nhaystack  The length of `haystack`, divided by `needle`
+ * @param   needle     The substring to search for
+ * @param   nneedle    The length of `needle`
+ * @return             `haystack` with a maximal offset such that,
+ *                     `!memcmp(r, needle, nneedle)` where `r` is the
+ *                     returned pointer and such that `(r - haystack) % nneedle == 0`,
+ *                     `NULL` if no such offset exists
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+void *libsimple_memrelem(const void *, size_t, const void *, size_t);
+#ifndef memrelem
+# define memrelem libsimple_memrelem
+#endif
+
+
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
 int libsimple_memstarts(const void *, size_t, const void *, size_t);
 #ifndef memstarts

@@ -60,9 +60,11 @@ OBJ =\
 	envreallocn.o\
 	isutf8.o\
 	memdup.o\
+	memelem.o\
 	memends.o\
 	memmem.o\
 	memrchr.o\
+	memrelem.o\
 	memrmem.o\
 	memstarts.o\
 	minimise_number_string.o\
