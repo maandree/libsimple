@@ -1,0 +1,70 @@
+.TH LIBSIMPLE_MEMPCPY 3 2018-10-20 libsimple
+.SH NAME
+libsimple_mempcpy \- check two memory segments for equality
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+void *libsimple_mempcpy(void *\fIdest\fP, const void *\fIsrc\fP, size_t \fIn\fP);
+
+#ifndef mempcpy
+# define mempcpy libsimple_mempcpy
+#endif
+.fi
+
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_mempcpy ()
+function copies the first
+.I n
+bytes of
+.I src
+into
+.IR dest .
+.SH RETURN VALUE
+The
+.BR libsimple_mempcpy ()
+function returns the pointer
+.I dest
+with the offset
+.I n
+(the byte where the copy stopped).
+.SH ERRORS
+The
+.BR libsimple_mempcpy ()
+function cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_mempcpy ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_mempcpy ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_mempcpy ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_mempset (3)
+.BR memcpy (3)

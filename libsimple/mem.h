@@ -165,14 +165,30 @@ int libsimple_memends(const void *, size_t, const void *, size_t);
 #endif
 
 
+/**
+ * Checks two arrays of bytes for equality
+ * 
+ * @param   a  One of the arrays of bytes
+ * @param   b  The other arrays of bytes
+ * @param   n  The lengths of the arrays
+ * @return     1 if the arrays are equal, 0 otherwise
+ */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
-static inline int libsimple_memeq(const void *__s1, const void *__s2, size_t __n)
-{ return !memcmp(__s1, __s2, __n); }
+static inline int libsimple_memeq(const void *__a, const void *__b, size_t __n)
+{ return !memcmp(__a, __b, __n); }
 #ifndef memeq
 # define memeq libsimple_memeq
 #endif
 
 
+/**
+ * Copies an array of bytes into another
+ * 
+ * @param   d  The array the bytes should be copied into
+ * @param   s  The array of bytes that should be copied
+ * @param   n  The number of bytes to copy
+ * @return     `&s[n]`
+ */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
 static inline void *libsimple_mempcpy(void *__d, const void *__s, size_t __n)
 { return &((char *)memcpy(__d, __s, __n))[__n]; }
@@ -181,6 +197,14 @@ static inline void *libsimple_mempcpy(void *__d, const void *__s, size_t __n)
 #endif
 
 
+/**
+ * Fill an array of bytes with a specified byte
+ * 
+ * @param   s  The array of bytes to fill
+ * @param   c  The byte to fill the array with
+ * @param   n  The number of bytes to write to `s`
+ * @return     `&s[n]`
+ */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
 static inline void *libsimple_mempset(void *__s, int __c, size_t __n)
 { return &((char *)memset(__s, __c, __n))[__n]; }

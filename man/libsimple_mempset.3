@@ -1,0 +1,72 @@
+.TH LIBSIMPLE_MEMPSET 3 2018-10-20 libsimple
+.SH NAME
+libsimple_mempset \- check two memory segments for equality
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+void *libsimple_mempset(void *\fIs\fP, int \fIc\fP, size_t \fIn\fP);
+
+#ifndef mempset
+# define mempset libsimple_mempset
+#endif
+.fi
+
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_mempset ()
+function fills the first
+.I n
+bytes of
+.I s
+with the value
+.I c
+coverted to a
+.BR char .
+.SH RETURN VALUE
+The
+.BR libsimple_mempset ()
+function returns the pointer
+.I s
+with the offset
+.I n
+(the byte where the copy stopped).
+.SH ERRORS
+The
+.BR libsimple_mempset ()
+function cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_mempset ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_mempset ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_mempset ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_mempcpy (3)
+.BR memset (3)
