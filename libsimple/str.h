@@ -1,12 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 
 
-/* TODO streqlen */
-/* TODO strcaseeqlen */
-/* TODO strreqlen */
-/* TODO strrcaseeqlen */
-
-
 /**
  * Scans for a character in a string, the scan is case-sensitive
  * 
@@ -104,7 +98,7 @@ int libsimple_strstarts(const char *, const char *);
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 static inline int libsimple_strcasestarts(const char *__s, const char *__t)
-{ return !strncasecmp(__s, __t, strlen(__t)); }
+{ return !strncasecmp(__s, __t, (strlen)(__t)); }
 #ifndef strcasestarts
 # define strcasestarts libsimple_strcasestarts
 #endif
@@ -283,4 +277,66 @@ static inline int libsimple_strcaseeqnul(const char *__a, const char *__b)
 { return !strcasecmpnul(__a, __b); }
 #ifndef strcaseeqnul
 # define strcaseeqnul libsimple_strcaseeqnul
+#endif
+
+
+/**
+ * Compares the beginning of two strings, the comparison is case-sensitive
+ * 
+ * @param   a  One of the strings
+ * @param   b  The other string
+ * @return     The number of bytes `a` and `b` have
+ *             in common in their beginnings
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+size_t libsimple_streqlen(const char *, const char *);
+#ifndef streqlen
+# define streqlen libsimple_streqlen
+#endif
+
+
+/**
+ * Compares the beginning of two strings, the comparison is case-insensitive
+ * 
+ * @param   a  One of the strings
+ * @param   b  The other string
+ * @return     The number of bytes `a` and `b` have
+ *             in common in their beginnings
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+size_t libsimple_strcaseeqlen(const char *, const char *);
+#ifndef strcaseeqlen
+# define strcaseeqlen libsimple_strcaseeqlen
+#endif
+
+
+/**
+ * Compares the end of two strings, the comparison is case-sensitive
+ * 
+ * @param   a  One of the strings
+ * @param   b  The other string
+ * @return     The number of bytes `a` and `b` have
+ *             in common in their ends
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+static inline size_t libsimple_strreqlen(const char *__a, const char *__b)
+{ return libsimple_memreqlen(__a, (strlen)(__a), __b, (strlen)(__b)); }
+#ifndef strreqlen
+# define strreqlen libsimple_strreqlen
+#endif
+
+
+/**
+ * Compares the end of two strings, the comparison is case-insensitive
+ * 
+ * @param   a  One of the strings
+ * @param   b  The other string
+ * @return     The number of bytes `a` and `b` have
+ *             in common in their ends
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+static inline size_t libsimple_strrcaseeqlen(const char *__a, const char *__b)
+{ return libsimple_memrcaseeqlen(__a, (strlen)(__a), __b, (strlen)(__b)); }
+#ifndef strrcaseeqlen
+# define strrcaseeqlen libsimple_strrcaseeqlen
 #endif

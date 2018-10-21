@@ -11,7 +11,7 @@ void *libsimple_memrmem(const void *\fIhaystack\fP, size_t \fInhaystack\fP, cons
 # define memrmem libsimple_memrmem
 #endif
 .fi
-
+.PP
 Link with
 .IR \-lsimple .
 .SH DESCRIPTION
@@ -25,6 +25,8 @@ for the last occurence of the byte string
 .I needle
 with the size
 .IR nneedle .
+.PP
+The comparison is case-sensitive.
 .SH RETURN VALUE
 The
 .BR libsimple_memrmem ()

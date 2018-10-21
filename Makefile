@@ -43,12 +43,12 @@ OBJ =\
 	difftimeval.o\
 	doubletotimespec.o\
 	doubletotimeval.o\
-	enaligned_memdup.o\
 	enaligned_allocz.o\
-	enposix_memalignz.o\
+	enaligned_memdup.o\
 	encalloc.o\
 	enmalloc.o\
 	enmemdup.o\
+	enposix_memalignz.o\
 	enrealloc.o\
 	enstrdup.o\
 	enstrndup.o\
@@ -59,13 +59,17 @@ OBJ =\
 	envputenvf.o\
 	envreallocn.o\
 	isutf8.o\
+	memcaseeqlen.o\
 	memdup.o\
 	memelem.o\
 	memends.o\
+	memeqlen.o\
 	memmem.o\
 	mempsetelem.o\
+	memrcaseeqlen.o\
 	memrchr.o\
 	memrelem.o\
+	memreqlen.o\
 	memrmem.o\
 	memstarts.o\
 	minimise_number_string.o\
@@ -77,9 +81,11 @@ OBJ =\
 	strcasechr.o\
 	strcasechrnul.o\
 	strcaseends.o\
+	strcaseeqlen.o\
 	strcasestr.o\
 	strchrnul.o\
 	strends.o\
+	streqlen.o\
 	strncasestr.o\
 	strndup.o\
 	strnstr.o\

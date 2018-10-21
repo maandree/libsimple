@@ -11,7 +11,7 @@ void *libsimple_rawmemchr(const void *\fIs\fP, int \fIc\fP);
 # define rawmemchr libsimple_rawmemchr
 #endif
 .fi
-
+.PP
 Link with
 .IR \-lsimple .
 .SH DESCRIPTION
@@ -29,6 +29,8 @@ The
 function assumes there is at least one
 occurence, its behaviour is undefined
 if this is not the case.
+.PP
+The comparison is case-sensitive.
 .SH RETURN VALUE
 The
 .BR libsimple_rawmemchr ()

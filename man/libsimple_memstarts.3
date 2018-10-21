@@ -11,7 +11,7 @@ void *libsimple_memstarts(const void *\fIs\fP, size_t \fIn\fP, const void *\fIt\
 # define memstarts libsimple_memstarts
 #endif
 .fi
-
+.PP
 Link with
 .IR \-lsimple .
 .SH DESCRIPTION
@@ -29,6 +29,8 @@ is the same as the
 .I m
 first bytes of
 .IR t .
+.PP
+The comparison is case-sensitive.
 .SH RETURN VALUE
 The
 .BR libsimple_memstarts ()

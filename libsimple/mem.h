@@ -1,8 +1,21 @@
 /* See LICENSE file for copyright and license details. */
 
 
+/* TODO memcasechr */
+/* TODO rawmemcasechr */
+/* TODO memrcasechr */
+/* TODO rawmemrcasechr */
+/* TODO memcasemem */
+/* TODO memrcasemem */
+/* TODO memcasestarts */
+/* TODO memcaseends */
+/* TODO memcasecmp */
+/* TODO memcaseeq */
+
+
 /**
- * Finds the first occurence of a byte value in an array of bytes
+ * Finds the first occurence of a byte value in an array of bytes,
+ * the comparison is case-sensitive
  * 
  * This function is optimised for instances where it is already
  * known that there is at least one occurence; if is no occurence
@@ -22,7 +35,8 @@ void *libsimple_rawmemchr(const void *, int);
 
 
 /**
- * Finds the last occurence of a byte value in an array of bytes
+ * Finds the last occurence of a byte value in an array of bytes,
+ * the comparison is case-sensitive
  * 
  * @param   s  The array of bytes to search
  * @param   c  The byte value to search for
@@ -39,7 +53,8 @@ void *libsimple_memrchr(const void *, int, size_t);
 
 
 /**
- * Finds the last occurence of a byte value in an array of bytes
+ * Finds the last occurence of a byte value in an array of bytes,
+ * the comparison is case-sensitive
  * 
  * This function is optimised for instances where it is already
  * known that there is at least one occurence; if is no occurence
@@ -60,7 +75,7 @@ void *libsimple_rawmemrchr(const void *, int, size_t);
 
 
 /**
- * Finds the first substring in an array of bytes
+ * Finds the first substring in an array of bytes, the comparison is case-sensitive
  * 
  * @param   haystack   The array of bytes to search
  * @param   nhaystack  The length of `haystack`
@@ -78,7 +93,7 @@ void *libsimple_memmem(const void *, size_t, const void *, size_t);
 
 
 /**
- * Finds the last substring in an array of bytes
+ * Finds the last substring in an array of bytes, the comparison is case-sensitive
  * 
  * @param   haystack   The array of bytes to search
  * @param   nhaystack  The length of `haystack`
@@ -96,7 +111,7 @@ void *libsimple_memrmem(const void *, size_t, const void *, size_t);
 
 
 /**
- * Finds the first element in an array
+ * Finds the first element in an array, the comparison is case-sensitive
  * 
  * @param   haystack   The array of bytes to search
  * @param   nhaystack  The length of `haystack`, divided by `needle`
@@ -115,7 +130,7 @@ void *libsimple_memelem(const void *, size_t, const void *, size_t);
 
 
 /**
- * Finds the last element in an array
+ * Finds the last element in an array, the comparison is case-sensitive
  * 
  * @param   haystack   The array of bytes to search
  * @param   nhaystack  The length of `haystack`, divided by `needle`
@@ -134,7 +149,7 @@ void *libsimple_memrelem(const void *, size_t, const void *, size_t);
 
 
 /**
- * Checks the beginning of an array of bytes
+ * Checks the beginning of an array of bytes, the comparison is case-sensitive
  * 
  * @param   s  The array of bytes to check
  * @param   n  The length of `s`
@@ -150,7 +165,7 @@ int libsimple_memstarts(const void *, size_t, const void *, size_t);
 
 
 /**
- * Checks the end of an array of bytes
+ * Checks the end of an array of bytes, the comparison is case-sensitive
  * 
  * @param   s  The array of bytes to check
  * @param   n  The length of `s`
@@ -166,7 +181,7 @@ int libsimple_memends(const void *, size_t, const void *, size_t);
 
 
 /**
- * Checks two arrays of bytes for equality
+ * Checks two arrays of bytes for equality, the comparison is case-sensitive
  * 
  * @param   a  One of the arrays of bytes
  * @param   b  The other arrays of bytes
@@ -222,9 +237,10 @@ static inline void *libsimple_mempset(void *__s, int __c, size_t __n)
  * @param   nitems  The number of copies to fill `buf` with
  * @return          `&buf[nelems * size]`
  */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
 void *libsimple_mempsetelem(void *__buf, const void *__item, size_t __size, size_t __nitems);
-#ifndef libsimple_mempsetelem
-# define libsimple_mempsetelem libsimple_mempsetelem
+#ifndef mempsetelem
+# define mempsetelem libsimple_mempsetelem
 #endif
 
 
@@ -237,8 +253,77 @@ void *libsimple_mempsetelem(void *__buf, const void *__item, size_t __size, size
  * @param   nitems  The number of copies to fill `buf` with
  * @return          `buf`
  */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
 static inline void *libsimple_memsetelem(void *__buf, const void *__item, size_t __size, size_t __nitems)
 { return libsimple_mempsetelem(__buf, __item, __size, __nitems), __buf; }
-#ifndef libsimple_memsetelem
-# define libsimple_memsetelem libsimple_memsetelem
+#ifndef memsetelem
+# define memsetelem libsimple_memsetelem
+#endif
+
+
+/**
+ * Compares the beginning of two memory segments, the comparison is case-sensitive
+ * 
+ * @param   a  One of the arrays
+ * @param   n  The length of `a`
+ * @param   b  The other array
+ * @param   m  The length of `b`
+ * @return     The number of bytes `a` and `b` have
+ *             in common in their beginnings
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+size_t libsimple_memeqlen(const void *, size_t, const void *, size_t);
+#ifndef memeqlen
+# define memeqlen libsimple_memeqlen
+#endif
+
+
+/**
+ * Compares the beginning of two memory segments, the comparison is case-insensitive
+ * 
+ * @param   a  One of the arrays
+ * @param   n  The length of `a`
+ * @param   b  The other array
+ * @param   m  The length of `b`
+ * @return     The number of bytes `a` and `b` have
+ *             in common in their beginnings
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+size_t libsimple_memcaseeqlen(const void *, size_t, const void *, size_t);
+#ifndef memcaseeqlen
+# define memcaseeqlen libsimple_memcaseeqlen
+#endif
+
+
+/**
+ * Compares the end of two memory segments, the comparison is case-sensitive
+ * 
+ * @param   a  One of the arrays
+ * @param   n  The length of `a`
+ * @param   b  The other array
+ * @param   m  The length of `b`
+ * @return     The number of bytes `a` and `b` have
+ *             in common in their ends
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+size_t libsimple_memreqlen(const void *, size_t, const void *, size_t);
+#ifndef memreqlen
+# define memreqlen libsimple_memreqlen
+#endif
+
+
+/**
+ * Compares the end of two memory segments, the comparison is case-insensitive
+ * 
+ * @param   a  One of the arrays
+ * @param   n  The length of `a`
+ * @param   b  The other array
+ * @param   m  The length of `b`
+ * @return     The number of bytes `a` and `b` have
+ *             in common in their ends
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+size_t libsimple_memrcaseeqlen(const void *, size_t, const void *, size_t);
+#ifndef memrcaseeqlen
+# define memrcaseeqlen libsimple_memrcaseeqlen
 #endif

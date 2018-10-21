@@ -97,7 +97,7 @@ main(void)
 	const char *cs;
 	char buf[1024], *s;
 	int intarray[10], fds[2], oldfd;
-	size_t i, n;
+	size_t i, j, n;
 
 	assert(libsimple_default_failure_exit == 1);
 
@@ -1225,6 +1225,46 @@ main(void)
 #else
 	fprintf(stderr, "warning: libsimple_vasprintfa missing\n");
 #endif
+
+	{
+		char a[] = "abcdefgh", b[] = "abcdefgh";
+		assert(libsimple_strreqlen("", "") == 0);
+		assert(libsimple_strreqlen("x", "") == 0);
+		assert(libsimple_strreqlen("x", "y") == 0);
+		assert(libsimple_strreqlen("", "y") == 0);
+		for (i = 0; i <= 8; i++) {
+			for (j = 0; j <= 8; j++) {
+				assert(libsimple_strreqlen(&a[i], &b[j]) == 8 - (i > j ? i : j));
+				a[i] = b[j] = '\0';
+				assert(libsimple_strreqlen(a, b) == (i == j ? i : 0));
+				a[i] = "abcdefgh"[i];
+				b[j] = "abcdefgh"[j];
+			}
+		}
+		assert(libsimple_strreqlen("abc", "ABC") == 0);
+		assert(libsimple_strreqlen("123", "123") == 3);
+	}
+
+	{
+		char a[] = "abcdefgh", b[] = "ABCDEFGH";
+		assert(libsimple_strrcaseeqlen("", "") == 0);
+		assert(libsimple_strrcaseeqlen("x", "") == 0);
+		assert(libsimple_strrcaseeqlen("x", "y") == 0);
+		assert(libsimple_strrcaseeqlen("", "y") == 0);
+		for (i = 0; i <= 8; i++) {
+			for (j = 0; j <= 8; j++) {
+				assert(libsimple_strrcaseeqlen(&a[i], &b[j]) == 8 - (i > j ? i : j));
+				assert(libsimple_strrcaseeqlen(&b[i], &a[j]) == 8 - (i > j ? i : j));
+				a[i] = b[j] = '\0';
+				assert(libsimple_strrcaseeqlen(a, b) == (i == j ? i : 0));
+				assert(libsimple_strrcaseeqlen(b, a) == (i == j ? i : 0));
+				a[i] = "abcdefgh"[i];
+				b[j] = "ABCDEFGH"[j];
+			}
+		}
+		assert(libsimple_strrcaseeqlen("abc", "abc") == 3);
+		assert(libsimple_strrcaseeqlen("123", "123") == 3);
+	}
 
 	if (!have_custom_malloc()) {
 		stderr_real = 1;

@@ -1,0 +1,75 @@
+.TH LIBSIMPLE_MEMREQLEN 3 2018-10-21 libsimple
+.SH NAME
+libsimple_memreqlen \- check terminal commonality
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+size_t libsimple_memreqlen(const void *\fIa\fP, size_t \fIn\fP, const void *\fIb\fP, size_t \fIm\fP);
+
+#ifndef memreqlen
+# define memreqlen libsimple_memreqlen
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_memreqlen ()
+function scans the number of bytes the byte array
+.IR a ,
+with size
+.IR n ,
+have in common the byte array
+.IR b ,
+with size
+.IR m ,
+at their ends.
+.PP
+The comparison is case-sensitive.
+.SH RETURN VALUE
+The
+.BR libsimple_memreqlen ()
+function returns the number of bytes
+.I a
+and
+.I b
+have in common at their ends.
+.SH ERRORS
+The
+.BR libsimple_memreqlen ()
+function cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_memreqlen ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_memreqlen ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_memreqlen ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_memrcaseeqlen (3),
+.BR libsimple_memeqlen (3)

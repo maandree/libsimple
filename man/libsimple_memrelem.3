@@ -11,7 +11,7 @@ void *libsimple_memrelem(const void *\fIhaystack\fP, size_t \fInhaystack\fP, con
 # define memrelem libsimple_memrelem
 #endif
 .fi
-
+.PP
 Link with
 .IR \-lsimple .
 .SH DESCRIPTION
@@ -27,6 +27,8 @@ with the size
 .IR nneedle ,
 and with an offset equivalent to zero modulo
 .IR nneedle .
+.PP
+The comparison is case-sensitive.
 .SH RETURN VALUE
 The
 .BR libsimple_memrelem ()

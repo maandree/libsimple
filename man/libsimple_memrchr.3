@@ -11,7 +11,7 @@ void *libsimple_memrchr(const void *\fIs\fP, int \fIc\fP, size_t \fIn\fP);
 # define memrchr libsimple_memrchr
 #endif
 .fi
-
+.PP
 Link with
 .IR \-lsimple .
 .SH DESCRIPTION
@@ -25,6 +25,8 @@ for the last occurence of the byte
 .I c
 (it is converted to a
 .BR char ).
+.PP
+The comparison is case-sensitive.
 .SH RETURN VALUE
 The
 .BR libsimple_memrchr ()
