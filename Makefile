@@ -74,17 +74,19 @@ OBJ =\
 	rawmemchr.o\
 	rawmemrchr.o\
 	rawmemrchr.o\
+	strcasechr.o\
+	strcasechrnul.o\
 	strcaseends.o\
 	strcasestr.o\
 	strchrnul.o\
 	strends.o\
+	strncasestr.o\
 	strndup.o\
 	strnstr.o\
-	strncasestr.o\
 	strrcasestr.o\
-	strrstr.o\
 	strrncasestr.o\
 	strrnstr.o\
+	strrstr.o\
 	strstarts.o\
 	strtotimespec.o\
 	strtotimeval.o\

@@ -1,14 +1,14 @@
-.TH LIBSIMPLE_STRCHRNUL 3 2018-10-21 libsimple
+.TH LIBSIMPLE_STRCASECHR 3 2018-10-21 libsimple
 .SH NAME
-libsimple_strchrnul \- find a character in a string
+libsimple_strcasechr \- find a character in a string
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-char *libsimple_strchrnul(const char *\fIs\fP, int \fIc\fP);
+char *libsimple_strcasechr(const char *\fIs\fP, int \fIc\fP);
 
-#ifndef strchrnul
-# define strchrnul libsimple_strchrnul
+#ifndef strcasechr
+# define strcasechr libsimple_strcasechr
 #endif
 .fi
 
@@ -16,7 +16,7 @@ Link with
 .IR \-lsimple .
 .SH DESCRIPTION
 The
-.BR libsimple_strchrnul ()
+.BR libsimple_strcasechr ()
 function scans the string
 .I s
 for the first occurence of the character
@@ -26,20 +26,22 @@ for the first occurence of the character
 If no such character exist in the string,
 the string's end is returned.
 .PP
-The comparison is case-sensitive.
+The comparison is case-insensitive.
 .SH RETURN VALUE
 The
-.BR libsimple_strchrnul ()
+.BR libsimple_strcasechr ()
 function returns the pointer
 .I s
 with a minimal offset such that
-.IR *r==c||!*r ,
+.IR tolower(*r)==tolower(c) ,
 where
 .I r
-is the returned pointer.
+is the returned pointer, if no such
+offset exists, it returns
+.IR NULL .
 .SH ERRORS
 The
-.BR libsimple_strchrnul ()
+.BR libsimple_strcasechr ()
 function cannot fail.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
@@ -50,13 +52,13 @@ lb lb lb
 l l l.
 Interface	Attribute	Value
 T{
-.BR libsimple_strchrnul ()
+.BR libsimple_strcasechr ()
 T}	Thread safety	MT-Safe
 T{
-.BR libsimple_strchrnul ()
+.BR libsimple_strcasechr ()
 T}	Async-signal safety	AS-Safe
 T{
-.BR libsimple_strchrnul ()
+.BR libsimple_strcasechr ()
 T}	Async-cancel safety	AC-Safe
 .TE
 .SH EXAMPLES
@@ -73,5 +75,4 @@ None.
 None.
 .SH SEE ALSO
 .BR libsimple_strcasechrnul (3),
-.BR libsimple_strend (3),
 .BR strchr (3)

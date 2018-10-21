@@ -1,8 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 
 
-/* TODO strcasechr */
-/* TODO strcasechrnul */
 /* TODO strrcasechr */
 /* TODO streqlen */
 /* TODO strcaseeqlen */
@@ -18,10 +16,40 @@
  * @return     `s` with a minimal offset such that `*r == c || !*r`,
  *             where `r` is the returned pointer
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
 char *libsimple_strchrnul(const char *, int);
 #ifndef strchrnul
 # define strchrnul libsimple_strchrnul
+#endif
+
+
+/**
+ * Scans for a character in a string, the scan is case-insensitive
+ * 
+ * @param   s  The string to scan
+ * @param   c  The character for scan for
+ * @return     `s` with a minimal offset such that `tolower(*r) == tolower(c)`,
+ *             where `r` is the returned pointer, `NULL` if no such offset exists
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+char *libsimple_strcasechr(const char *, int);
+#ifndef strcasechr
+# define strcasechr libsimple_strcasechr
+#endif
+
+
+/**
+ * Scans for a character in a string, the scan is case-insensitive
+ * 
+ * @param   s  The string to scan
+ * @param   c  The character for scan for
+ * @return     `s` with a minimal offset such that `tolower(*r) == tolower(c) || !*r`,
+ *             where `r` is the returned pointer
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
+char *libsimple_strcasechrnul(const char *, int);
+#ifndef strcasechrnul
+# define strcasechrnul libsimple_strcasechrnul
 #endif
 
 
