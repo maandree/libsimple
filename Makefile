@@ -60,7 +60,11 @@ OBJ =\
 	envreallocn.o\
 	isutf8.o\
 	memcasechr.o\
+	memcasecmp.o\
+	memcaseends.o\
 	memcaseeqlen.o\
+	memcasemem.o\
+	memcasestarts.o\
 	memdup.o\
 	memelem.o\
 	memends.o\
@@ -69,6 +73,7 @@ OBJ =\
 	mempsetelem.o\
 	memrcasechr.o\
 	memrcaseeqlen.o\
+	memrcasemem.o\
 	memrchr.o\
 	memrelem.o\
 	memreqlen.o\

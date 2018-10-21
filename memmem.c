@@ -49,6 +49,9 @@ main(void)
 	assert(!strcmpnul(libsimple_memmem("abc", 3, "abc", 3), "abc"));
 	assert(!libsimple_memmem("abc", 3, "abc", 4));
 	assert(!strcmpnul(libsimple_memmem("abcabc", 6, "bc", 2), "bcabc"));
+	assert(!strcmpnul(libsimple_memmem("ABCABC", 6, "BC", 2), "BCABC"));
+	assert(!libsimple_memmem("ABCDEF", 6, "bc", 2));
+	assert(!libsimple_memmem("abcdef", 6, "BC", 2));
 	return 0;
 }
 

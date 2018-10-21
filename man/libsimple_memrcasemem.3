@@ -1,14 +1,14 @@
-.TH LIBSIMPLE_MEMMEM 3 2018-10-21 libsimple
+.TH LIBSIMPLE_MEMRCASEMEM 3 2018-10-21 libsimple
 .SH NAME
-libsimple_memmem \- find byte string in memory
+libsimple_memrcasemem \- find byte string in memory
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-void *libsimple_memmem(const void *\fIhaystack\fP, size_t \fInhaystack\fP, const void *\fIneedle\fP, size_t \fInneedle\fP);
+void *libsimple_memrcasemem(const void *\fIhaystack\fP, size_t \fInhaystack\fP, const void *\fIneedle\fP, size_t \fInneedle\fP);
 
-#ifndef memmem
-# define memmem libsimple_memmem
+#ifndef memrcasemem
+# define memrcasemem libsimple_memrcasemem
 #endif
 .fi
 .PP
@@ -16,24 +16,24 @@ Link with
 .IR \-lsimple .
 .SH DESCRIPTION
 The
-.BR libsimple_memmem ()
+.BR libsimple_memrcasemem ()
 function scans the memory segment
 .IR haystack ,
 with the size
 .IR nhaystack ,
-for the first occurence of the byte string
+for the last occurence of the byte string
 .I needle
 with the size
 .IR nneedle .
 .PP
-The comparison is case-sensitive.
+The comparison is case-insensitive.
 .SH RETURN VALUE
 The
-.BR libsimple_memmem ()
+.BR libsimple_memrcasemem ()
 function returns the pointer
 .I s
-with a minimal offset such that
-.IR !memcmp(r,needle,nneedle) ,
+with a maximal offset such that
+.IR !memcasecmp(r,needle,nneedle) ,
 where
 .I r
 is the returned pointer.
@@ -42,7 +42,7 @@ If no such offset exists,
 is returned.
 .SH ERRORS
 The
-.BR libsimple_memmem ()
+.BR libsimple_memrcasemem ()
 function cannot fail.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
@@ -53,13 +53,13 @@ lb lb lb
 l l l.
 Interface	Attribute	Value
 T{
-.BR libsimple_memmem ()
+.BR libsimple_memrcasemem ()
 T}	Thread safety	MT-Safe
 T{
-.BR libsimple_memmem ()
+.BR libsimple_memrcasemem ()
 T}	Async-signal safety	AS-Safe
 T{
-.BR libsimple_memmem ()
+.BR libsimple_memrcasemem ()
 T}	Async-cancel safety	AC-Safe
 .TE
 .SH EXAMPLES
@@ -75,7 +75,6 @@ None.
 .SH BUGS
 None.
 .SH SEE ALSO
-.BR libsimple_memrcasemem (3),
 .BR libsimple_memrmem (3),
-.BR libsimple_memelem (3),
-.BR memchr (3)
+.BR libsimple_memcasemem (3),
+.BR libsimple_memrcasechr (3)

@@ -1,14 +1,14 @@
-.TH LIBSIMPLE_MEMSTARTS 3 2018-10-21 libsimple
+.TH LIBSIMPLE_MEMCASEENDS 3 2018-10-21 libsimple
 .SH NAME
-libsimple_memstarts \- checks beginning of memory
+libsimple_memcaseends \- checks end of memory
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-void *libsimple_memstarts(const void *\fIs\fP, size_t \fIn\fP, const void *\fIt\fP, size_t \fIm\fP);
+void *libsimple_memcaseends(const void *\fIs\fP, size_t \fIn\fP, const void *\fIt\fP, size_t \fIm\fP);
 
-#ifndef memstarts
-# define memstarts libsimple_memstarts
+#ifndef memcaseends
+# define memcaseends libsimple_memcaseends
 #endif
 .fi
 .PP
@@ -16,32 +16,34 @@ Link with
 .IR \-lsimple .
 .SH DESCRIPTION
 The
-.BR libsimple_memstarts ()
+.BR libsimple_memcaseends ()
 function checks whether the
 .I n
 is at least as great as
 .I m
 and that the
 .I m
-first bytes of
-.I s
+last bytes of
+.IR s ,
+with the size
+.IR n ,
 is the same as the
 .I m
 first bytes of
 .IR t .
 .PP
-The comparison is case-sensitive.
+The comparison is case-insensitive.
 .SH RETURN VALUE
 The
-.BR libsimple_memstarts ()
+.BR libsimple_memcaseends ()
 function returns 1 if
 .I s
-begins with
+ends with
 .IR t ,
 otherwise it returns 0.
 .SH ERRORS
 The
-.BR libsimple_memstarts ()
+.BR libsimple_memcaseends ()
 function cannot fail.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
@@ -52,13 +54,13 @@ lb lb lb
 l l l.
 Interface	Attribute	Value
 T{
-.BR libsimple_memstarts ()
+.BR libsimple_memcaseends ()
 T}	Thread safety	MT-Safe
 T{
-.BR libsimple_memstarts ()
+.BR libsimple_memcaseends ()
 T}	Async-signal safety	AS-Safe
 T{
-.BR libsimple_memstarts ()
+.BR libsimple_memcaseends ()
 T}	Async-cancel safety	AC-Safe
 .TE
 .SH EXAMPLES
@@ -74,6 +76,6 @@ None.
 .SH BUGS
 None.
 .SH SEE ALSO
-.BR libsimple_memcasestarts (3),
 .BR libsimple_memends (3),
-.BR libsimple_memmem (3)
+.BR libsimple_memcasestarts (3),
+.BR libsimple_memrcasemem (3)

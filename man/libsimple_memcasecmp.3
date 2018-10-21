@@ -1,14 +1,14 @@
-.TH LIBSIMPLE_STRCASECMPNUL 3 2018-10-21 libsimple
+.TH LIBSIMPLE_MEMCASECMP 3 2018-10-21 libsimple
 .SH NAME
-libsimple_strcasecmpnul \- compare two strings
+libsimple_memcasecmp \- compare two memory segments
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-static inline int libsimple_strcasecmpnul(const char *\fIa\fP, const char *\fIb\fP);
+static inline int libsimple_memcasecmp(const void *\fIa\fP, const void *\fIb\fP, size_t \fIn\fP);
 
-#ifndef strcasecmpnul
-# define strcasecmpnul libsimple_strcasecmpnul
+#ifndef memcasecmp
+# define memcasecmp libsimple_memcasecmp
 #endif
 .fi
 .PP
@@ -16,25 +16,20 @@ Link with
 .IR \-lsimple .
 .SH DESCRIPTION
 The
-.BR libsimple_strcasecmpnul ()
-function compares the strings
+.BR libsimple_memcasecmp ()
+function compares the first
+.I n
+bytes of
 .I a
 and
-.IR b ,
-both of which may be
-.BR NULL ,
-which is treated as less than the empty string.
-.PP
-If one of the strings begins with the other string
-but is longer, the longer string is treated as
-greater than the shorter string.
+.IR b .
 .PP
 The comparison is case-insensitive and made as
 if the strings were converted to lowercase and as
 .IR "unsigned char *" s.
 .SH RETURN VALUE
 The
-.BR libsimple_strcasecmpnul ()
+.BR libsimple_memcasecmp ()
 function returns a negative value if
 .I a
 is less than
@@ -46,7 +41,7 @@ is greater than
 and 0 otherwise.
 .SH ERRORS
 The
-.BR libsimple_strcasecmpnul ()
+.BR libsimple_memcasecmp ()
 function cannot fail.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
@@ -57,13 +52,13 @@ lb lb lb
 l l l.
 Interface	Attribute	Value
 T{
-.BR libsimple_strcasecmpnul ()
+.BR libsimple_memcasecmp ()
 T}	Thread safety	MT-Safe
 T{
-.BR libsimple_strcasecmpnul ()
+.BR libsimple_memcasecmp ()
 T}	Async-signal safety	AS-Safe
 T{
-.BR libsimple_strcasecmpnul ()
+.BR libsimple_memcasecmp ()
 T}	Async-cancel safety	AC-Safe
 .TE
 .SH EXAMPLES
@@ -79,6 +74,6 @@ None.
 .SH BUGS
 None.
 .SH SEE ALSO
-.BR libsimple_strcmpnul (3),
-.BR libsimple_strcaseeqnul (3),
-.BR strcasecmp (3)
+.BR libsimple_memcaseeq (3),
+.BR libsimple_memcaseeqlen (3),
+.BR memcmp (3)

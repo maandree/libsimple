@@ -1207,6 +1207,18 @@ main(void)
 	assert(libsimple_memeq("abcxyz", "abcx23", 4));
 	assert(libsimple_memeq("1", "2", 0));
 	assert(!libsimple_memeq("1", "2", 1));
+	assert(!libsimple_memeq("abc", "ABC", 3));
+	assert(!libsimple_memeq("ABC", "abc", 3));
+	assert(libsimple_memeq("ABC", "ABC", 3));
+
+	assert(libsimple_memcaseeq("abcxyz", "abc123", 3));
+	assert(!libsimple_memcaseeq("abcxyz", "abc123", 4));
+	assert(libsimple_memcaseeq("abcxyz", "abcx23", 4));
+	assert(libsimple_memcaseeq("1", "2", 0));
+	assert(!libsimple_memcaseeq("1", "2", 1));
+	assert(libsimple_memcaseeq("abc", "ABC", 3));
+	assert(libsimple_memcaseeq("ABC", "abc", 3));
+	assert(libsimple_memcaseeq("ABC", "ABC", 3));
 
 	stpcpy(buf, "abc123");
 	assert(!strcmpnul(libsimple_mempset(buf, '.', 3), "123"));

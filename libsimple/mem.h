@@ -1,14 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 
 
-/* TODO memcasemem */
-/* TODO memrcasemem */
-/* TODO memcasestarts */
-/* TODO memcaseends */
-/* TODO memcasecmp */
-/* TODO memcaseeq */
-
-
 /**
  * Finds the first occurence of a byte value in an array of bytes,
  * the comparison is case-insensitive
@@ -41,7 +33,7 @@ void *libsimple_memcasechr(const void *, int, size_t);
  * @return     `s` with a miminal offset such that `*r == c`,
  *             where `r` is the returned pointer
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
 void *libsimple_rawmemchr(const void *, int);
 #ifndef rawmemchr
 # define rawmemchr libsimple_rawmemchr
@@ -62,7 +54,7 @@ void *libsimple_rawmemchr(const void *, int);
  * @return     `s` with a miminal offset such that `tolower(*r) == tolower(c)`,
  *             where `r` is the returned pointer
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
 void *libsimple_rawmemcasechr(const void *, int);
 #ifndef rawmemcasechr
 # define rawmemcasechr libsimple_rawmemcasechr
@@ -120,7 +112,7 @@ void *libsimple_memrcasechr(const void *, int, size_t);
  * @return     `s` with a maximal offset such that `*r == c`,
  *             where `r` is the returned pointer
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
 void *libsimple_rawmemrchr(const void *, int, size_t);
 #ifndef rawmemrchr
 # define rawmemrchr libsimple_rawmemrchr
@@ -142,7 +134,7 @@ void *libsimple_rawmemrchr(const void *, int, size_t);
  * @return     `s` with a maximal offset such that `tolower(*r) == tolower(c)`,
  *             where `r` is the returned pointer
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
 void *libsimple_rawmemrcasechr(const void *, int, size_t);
 #ifndef rawmemrcasechr
 # define rawmemrcasechr libsimple_rawmemrcasechr
@@ -168,6 +160,24 @@ void *libsimple_memmem(const void *, size_t, const void *, size_t);
 
 
 /**
+ * Finds the first substring in an array of bytes, the comparison is case-insensitive
+ * 
+ * @param   haystack   The array of bytes to search
+ * @param   nhaystack  The length of `haystack`
+ * @param   needle     The substring to search for
+ * @param   nneedle    The length of `needle`
+ * @return             `haystack` with a minimal offset such that,
+ *                     `!memcasecmp(r, needle, nneedle)` where `r` is the
+ *                     returned pointer, `NULL` if no such offset exists
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+void *libsimple_memcasemem(const void *, size_t, const void *, size_t);
+#ifndef memcasemem
+# define memcasemem libsimple_memcasemem
+#endif
+
+
+/**
  * Finds the last substring in an array of bytes, the comparison is case-sensitive
  * 
  * @param   haystack   The array of bytes to search
@@ -182,6 +192,24 @@ _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
 void *libsimple_memrmem(const void *, size_t, const void *, size_t);
 #ifndef memrmem
 # define memrmem libsimple_memrmem
+#endif
+
+
+/**
+ * Finds the last substring in an array of bytes, the comparison is case-insensitive
+ * 
+ * @param   haystack   The array of bytes to search
+ * @param   nhaystack  The length of `haystack`
+ * @param   needle     The substring to search for
+ * @param   nneedle    The length of `needle`
+ * @return             `haystack` with a maximal offset such that,
+ *                     `!memcasecmp(r, needle, nneedle)` where `r` is the
+ *                     returned pointer, `NULL` if no such offset exists
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+void *libsimple_memrcasemem(const void *, size_t, const void *, size_t);
+#ifndef memrcasemem
+# define memrcasemem libsimple_memrcasemem
 #endif
 
 
@@ -240,6 +268,22 @@ int libsimple_memstarts(const void *, size_t, const void *, size_t);
 
 
 /**
+ * Checks the beginning of an array of bytes, the comparison is case-insensitive
+ * 
+ge  * @param   s  The array of bytes to check
+ * @param   n  The length of `s`
+ * @param   t  The desired beginning of `s`
+ * @param   m  The length of `t`
+ * @return     1 if `s` begins with `t`, 0 otherwise
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+int libsimple_memcasestarts(const void *, size_t, const void *, size_t);
+#ifndef memcasestarts
+# define memcasestarts libsimple_memcasestarts
+#endif
+
+
+/**
  * Checks the end of an array of bytes, the comparison is case-sensitive
  * 
  * @param   s  The array of bytes to check
@@ -256,6 +300,37 @@ int libsimple_memends(const void *, size_t, const void *, size_t);
 
 
 /**
+ * Checks the end of an array of bytes, the comparison is case-insensitive
+ * 
+ * @param   s  The array of bytes to check
+ * @param   n  The length of `s`
+ * @param   t  The desired ending of `s`
+ * @param   m  The length of `t`
+ * @return     1 if `s` ends with `t`, 0 otherwise
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+int libsimple_memcaseends(const void *, size_t, const void *, size_t);
+#ifndef memcaseends
+# define memcaseends libsimple_memcaseends
+#endif
+
+
+/**
+ * Checks two arrays of bytes for equality, the comparison is case-insensitive
+ * 
+ * @param   a  One of the arrays of bytes
+ * @param   b  The other arrays of bytes
+ * @param   n  The lengths of the arrays
+ * @return     1 if the arrays are equal, 0 otherwise
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+int libsimple_memcasecmp(const void *__a, const void *__b, size_t __n);
+#ifndef memcasecmp
+# define memcasecmp libsimple_memcasecmp
+#endif
+
+
+/**
  * Checks two arrays of bytes for equality, the comparison is case-sensitive
  * 
  * @param   a  One of the arrays of bytes
@@ -268,6 +343,22 @@ static inline int libsimple_memeq(const void *__a, const void *__b, size_t __n)
 { return !memcmp(__a, __b, __n); }
 #ifndef memeq
 # define memeq libsimple_memeq
+#endif
+
+
+/**
+ * Checks two arrays of bytes for equality, the comparison is case-insensitive
+ * 
+ * @param   a  One of the arrays of bytes
+ * @param   b  The other arrays of bytes
+ * @param   n  The lengths of the arrays
+ * @return     1 if the arrays are equal, 0 otherwise
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+static inline int libsimple_memcaseeq(const void *__a, const void *__b, size_t __n)
+{ return !memcasecmp(__a, __b, __n); }
+#ifndef memcaseeq
+# define memcaseeq libsimple_memcaseeq
 #endif
 
 
