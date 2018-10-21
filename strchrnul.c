@@ -4,10 +4,10 @@
 
 
 char *
-libsimple_strchrnul(const char *s_, int c)
+libsimple_strchrnul(const char *s_, char c_)
 {
-	char *s = *(char **)(void *)&s_;
-	for (; *s && (int)*s != c; s++);
+	char *s = *(char **)(void *)&s_, c = (char)c_;
+	for (; *s && *s != c; s++);
 	return s;
 }
 

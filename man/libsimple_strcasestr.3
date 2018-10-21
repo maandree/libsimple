@@ -1,0 +1,74 @@
+.TH LIBSIMPLE_STRCASESTR 3 2018-10-21 libsimple
+.SH NAME
+libsimple_strcasestr \- find a substring in a string
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+char *libsimple_strcasestr(const char *\fIhaystack\fP, const char *\fIneedle\fP);
+
+#ifndef strcasestr
+# define strcasestr libsimple_strcasestr
+#endif
+.fi
+
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_strcasestr ()
+function scans the string
+.I haystack
+the first occurrence of the substring
+.IR needle .
+.SH RETURN VALUE
+The
+.BR libsimple_strcasestr ()
+function returns the pointer
+.I haystack
+with a minimal offset such that
+.I !*r
+begins with
+.IR needle ,
+where
+.I r
+is the returned pointer.
+.PP
+The comparison is case-insensitive.
+.SH ERRORS
+The
+.BR libsimple_strcasestr ()
+function cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_strcasestr ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_strcasestr ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_strcasestr ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_strrcasestr (3),
+.BR strstr (3)

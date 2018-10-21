@@ -1,11 +1,18 @@
 /* See LICENSE file for copyright and license details. */
 
+/* TODO strncasechr */
+/* TODO strncasechrnul */
+/* TODO strrncasechr */
 /* TODO strnchrnul */
 /* TODO strnend */
 /* TODO strnstarts */
 /* TODO strncasestarts */
 /* TODO strnends */
 /* TODO strncaseends */
+/* TODO stpncmp */
+/* TODO stpncmpnul */
+/* TODO stpncasecmp */
+/* TODO stpncasecmpnul */
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 char *libsimple_strnstr(const char *, const char *, size_t);

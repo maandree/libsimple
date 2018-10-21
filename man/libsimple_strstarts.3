@@ -1,0 +1,73 @@
+.TH LIBSIMPLE_STRSTARTS 3 2018-10-21 libsimple
+.SH NAME
+libsimple_strstarts \- check the beginning of a string
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+int libsimple_strstarts(const char *\fIs\fP, const char *\fIt\fP);
+
+#ifndef strstarts
+# define strstarts libsimple_strstarts
+#endif
+.fi
+
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_strstarts ()
+function checks whether the string
+.I s
+starts with the string
+.IR t .
+.SH RETURN VALUE
+The
+.BR libsimple_strstarts ()
+function returns 1 if the string
+.I s
+begins with the string
+.IR t ,
+otherwise it returns 0.
+.PP
+The comparison is case-sensitive.
+.SH ERRORS
+The
+.BR libsimple_strstarts ()
+function cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_strstarts ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_strstarts ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_strstarts ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_strcasestarts (3),
+.BR libsimple_strends (3),
+.BR strstr (3),
+.BR strcmp (3),
+.BR strncmp (3)
