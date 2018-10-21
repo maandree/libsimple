@@ -5,7 +5,7 @@ libsimple_strreqlen \- check terminal commonality
 .nf
 #include <libsimple.h>
 
-size_t libsimple_strreqlen(const char *\fIa\fP, const char *\fIb\fP);
+static inline size_t libsimple_strreqlen(const char *\fIa\fP, const char *\fIb\fP);
 
 #ifndef strreqlen
 # define strreqlen libsimple_strreqlen

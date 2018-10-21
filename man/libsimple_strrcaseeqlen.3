@@ -5,7 +5,7 @@ libsimple_strrcaseeqlen \- check terminal commonality
 .nf
 #include <libsimple.h>
 
-size_t libsimple_strrcaseeqlen(const char *\fIa\fP, const char *\fIb\fP);
+static inline size_t libsimple_strrcaseeqlen(const char *\fIa\fP, const char *\fIb\fP);
 
 #ifndef strrcaseeqlen
 # define strrcaseeqlen libsimple_strrcaseeqlen
