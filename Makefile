@@ -83,6 +83,7 @@ OBJ =\
 	strncasestr.o\
 	strndup.o\
 	strnstr.o\
+	strrcasechr.o\
 	strrcasestr.o\
 	strrncasestr.o\
 	strrnstr.o\

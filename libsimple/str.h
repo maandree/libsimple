@@ -1,7 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 
 
-/* TODO strrcasechr */
 /* TODO streqlen */
 /* TODO strcaseeqlen */
 /* TODO strreqlen */
@@ -50,6 +49,21 @@ _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, _
 char *libsimple_strcasechrnul(const char *, int);
 #ifndef strcasechrnul
 # define strcasechrnul libsimple_strcasechrnul
+#endif
+
+
+/**
+ * Scans for a character in a string, the scan is case-insensitive
+ * 
+ * @param   s  The string to scan
+ * @param   c  The character for scan for
+ * @return     `s` with a maximal offset such that `tolower(*r) == tolower(c)`,
+ *             where `r` is the returned pointer, `NULL` if no such offset exists
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+char *libsimple_strrcasechr(const char *, int);
+#ifndef strrcasechr
+# define strrcasechr libsimple_strrcasechr
 #endif
 
 
