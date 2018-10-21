@@ -18,8 +18,14 @@ libsimple_rawmemrchr(const void *s_, int c_, size_t n)
 int
 main(void)
 {
-	assert(!strcmpnul(libsimple_rawmemrchr("1234512345", '3', sizeof("1234512345") - 1), "345"));
-	assert(!strcmpnul(libsimple_rawmemrchr("1234512345", '5', sizeof("1234512345") - 1), "5"));
+	assert(!strcmpnul(libsimple_rawmemrchr("abcABCabcABC", 'a', sizeof("abcABCabcABC") - 1), "abcABC"));
+	assert(!strcmpnul(libsimple_rawmemrchr("abcABCabcABC", 'c', sizeof("abcABCabcABC") - 1), "cABC"));
+	assert(!strcmpnul(libsimple_rawmemrchr("abcABCabcABC", 'A', sizeof("abcABCabcABC") - 1), "ABC"));
+	assert(!strcmpnul(libsimple_rawmemrchr("abcABCabcABC", 'C', sizeof("abcABCabcABC") - 1), "C"));
+	assert(!strcmpnul(libsimple_rawmemrchr("ABCabcABCabc", 'a', sizeof("ABCabcABCabc") - 1), "abc"));
+	assert(!strcmpnul(libsimple_rawmemrchr("ABCabcABCabc", 'c', sizeof("ABCabcABCabc") - 1), "c"));
+	assert(!strcmpnul(libsimple_rawmemrchr("ABCabcABCabc", 'A', sizeof("ABCabcABCabc") - 1), "ABCabc"));
+	assert(!strcmpnul(libsimple_rawmemrchr("ABCabcABCabc", 'C', sizeof("ABCabcABCabc") - 1), "Cabc"));
 	return 0;
 }
 

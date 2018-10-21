@@ -1,14 +1,14 @@
-.TH LIBSIMPLE_MEMRCHR 3 2018-10-21 libsimple
+.TH LIBSIMPLE_RAWMEMRCASECHR 3 2018-10-21 libsimple
 .SH NAME
-libsimple_memrchr \- find byte in memory
+libsimple_rawmemrcasechr \- find byte in memory
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-void *libsimple_memrchr(const void *\fIs\fP, int \fIc\fP, size_t \fIn\fP);
+void *libsimple_rawmemrcasechr(const void *s, int c, size_t n);
 
-#ifndef memrchr
-# define memrchr libsimple_memrchr
+#ifndef rawmemrcasechr
+# define rawmemrcasechr libsimple_rawmemrcasechr
 #endif
 .fi
 .PP
@@ -16,7 +16,7 @@ Link with
 .IR \-lsimple .
 .SH DESCRIPTION
 The
-.BR libsimple_memrchr ()
+.BR libsimple_rawmemrcasechr ()
 function scans the memory segment
 .IR s ,
 with the size
@@ -26,23 +26,26 @@ for the last occurence of the byte
 (it is converted to a
 .BR char ).
 .PP
-The comparison is case-sensitive.
+The
+.BR libsimple_rawmemrcasechr ()
+function assumes there is at least one
+occurence, its behaviour is undefined
+if this is not the case.
+.PP
+The comparison is case-insensitive.
 .SH RETURN VALUE
 The
-.BR libsimple_memrchr ()
+.BR libsimple_rawmemrcasechr ()
 function returns the pointer
 .I s
 with a maximal offset such that
-.IR *r==c ,
+.IR tolower(*r)==tolower(c) ,
 where
 .I r
 is the returned pointer.
-If no such offset exists,
-.B NULL
-is returned.
 .SH ERRORS
 The
-.BR libsimple_memrchr ()
+.BR libsimple_rawmemrcasechr ()
 function cannot fail.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
@@ -53,13 +56,13 @@ lb lb lb
 l l l.
 Interface	Attribute	Value
 T{
-.BR libsimple_memrchr ()
+.BR libsimple_rawmemrcasechr ()
 T}	Thread safety	MT-Safe
 T{
-.BR libsimple_memrchr ()
+.BR libsimple_rawmemrcasechr ()
 T}	Async-signal safety	AS-Safe
 T{
-.BR libsimple_memrchr ()
+.BR libsimple_rawmemrcasechr ()
 T}	Async-cancel safety	AC-Safe
 .TE
 .SH EXAMPLES
@@ -75,7 +78,6 @@ None.
 .SH BUGS
 None.
 .SH SEE ALSO
-.BR libsimple_memrcasechr (3),
 .BR libsimple_rawmemrchr (3),
-.BR libsimple_memrmem (3),
-.BR memchr (3)
+.BR libsimple_memrcasechr (3),
+.BR libsimple_rawmemcasechr (3)

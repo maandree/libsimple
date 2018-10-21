@@ -112,6 +112,28 @@ void *libsimple_rawmemrchr(const void *, int, size_t);
 
 
 /**
+ * Finds the last occurence of a byte value in an array of bytes,
+ * the comparison is case-insensitive
+ * 
+ * This function is optimised for instances where it is already
+ * known that there is at least one occurence; if is no occurence
+ * of the specified byte value in the specified byte array, this
+ * behaviour is undefined
+ * 
+ * @param   s  The array of bytes to search
+ * @param   c  The byte value to search for
+ * @param   n  The number of bytes in the byte array
+ * @return     `s` with a maximal offset such that `tolower(*r) == tolower(c)`,
+ *             where `r` is the returned pointer
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+void *libsimple_rawmemrcasechr(const void *, int, size_t);
+#ifndef rawmemrcasechr
+# define rawmemrcasechr libsimple_rawmemrcasechr
+#endif
+
+
+/**
  * Finds the first substring in an array of bytes, the comparison is case-sensitive
  * 
  * @param   haystack   The array of bytes to search

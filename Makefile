@@ -78,7 +78,7 @@ OBJ =\
 	multimeval.o\
 	rawmemcasechr.o\
 	rawmemchr.o\
-	rawmemrchr.o\
+	rawmemrcasechr.o\
 	rawmemrchr.o\
 	strcasechr.o\
 	strcasechrnul.o\
