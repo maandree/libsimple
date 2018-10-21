@@ -1,14 +1,30 @@
 /* See LICENSE file for copyright and license details. */
 
 
-/* TODO memcasechr */
-/* TODO rawmemrcasechr */
 /* TODO memcasemem */
 /* TODO memrcasemem */
 /* TODO memcasestarts */
 /* TODO memcaseends */
 /* TODO memcasecmp */
 /* TODO memcaseeq */
+
+
+/**
+ * Finds the first occurence of a byte value in an array of bytes,
+ * the comparison is case-insensitive
+ * 
+ * @param   s  The array of bytes to search
+ * @param   c  The byte value to search for
+ * @param   n  The number of bytes in the byte array
+ * @return     `s` with a minimal offset such that `tolower(*r) == tolower(c)`,
+ *             where `r` is the returned pointer `NULL` if no
+ *             such offset exists within [s, &s[n])
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+void *libsimple_memcasechr(const void *, int, size_t);
+#ifndef memcasechr
+# define memcasechr libsimple_memcasechr
+#endif
 
 
 /**
@@ -78,7 +94,7 @@ void *libsimple_memrchr(const void *, int, size_t);
  * @param   s  The array of bytes to search
  * @param   c  The byte value to search for
  * @param   n  The number of bytes in the byte array
- * @return     `s` with a maximal offset such that `*r == c`,
+ * @return     `s` with a maximal offset such that `tolower(*r) == tolower(c)`,
  *             where `r` is the returned pointer `NULL` if no
  *             such offset exists within [s, &s[n])
  */

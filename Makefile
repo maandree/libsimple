@@ -59,6 +59,7 @@ OBJ =\
 	envputenvf.o\
 	envreallocn.o\
 	isutf8.o\
+	memcasechr.o\
 	memcaseeqlen.o\
 	memdup.o\
 	memelem.o\
