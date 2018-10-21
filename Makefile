@@ -66,6 +66,7 @@ OBJ =\
 	memeqlen.o\
 	memmem.o\
 	mempsetelem.o\
+	memrcasechr.o\
 	memrcaseeqlen.o\
 	memrchr.o\
 	memrelem.o\
@@ -75,6 +76,7 @@ OBJ =\
 	minimise_number_string.o\
 	multimespec.o\
 	multimeval.o\
+	rawmemcasechr.o\
 	rawmemchr.o\
 	rawmemrchr.o\
 	rawmemrchr.o\

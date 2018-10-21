@@ -1,14 +1,14 @@
-.TH LIBSIMPLE_MEMRCHR 3 2018-10-20 libsimple
+.TH LIBSIMPLE_MEMRCASECHR 3 2018-10-20 libsimple
 .SH NAME
-libsimple_memrchr \- find byte in memory
+libsimple_memrcasechr \- find byte in memory
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-void *libsimple_memrchr(const void *\fIs\fP, int \fIc\fP, size_t \fIn\fP);
+void *libsimple_memrcasechr(const void *\fIs\fP, int \fIc\fP, size_t \fIn\fP);
 
-#ifndef memrchr
-# define memrchr libsimple_memrchr
+#ifndef memrcasechr
+# define memrcasechr libsimple_memrcasechr
 #endif
 .fi
 .PP
@@ -16,7 +16,7 @@ Link with
 .IR \-lsimple .
 .SH DESCRIPTION
 The
-.BR libsimple_memrchr ()
+.BR libsimple_memrcasechr ()
 function scans the memory segment
 .IR s ,
 with the size
@@ -26,14 +26,14 @@ for the last occurence of the byte
 (it is converted to a
 .BR char ).
 .PP
-The comparison is case-sensitive.
+The comparison is case-insensitive.
 .SH RETURN VALUE
 The
-.BR libsimple_memrchr ()
+.BR libsimple_memrcasechr ()
 function returns the pointer
 .I s
 with a maximal offset such that
-.IR *r==c ,
+.IR tolower(*r)==tolower(c) ,
 where
 .I r
 is the returned pointer.
@@ -42,7 +42,7 @@ If no such offset exists,
 is returned.
 .SH ERRORS
 The
-.BR libsimple_memrchr ()
+.BR libsimple_memrcasechr ()
 function cannot fail.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
@@ -53,13 +53,13 @@ lb lb lb
 l l l.
 Interface	Attribute	Value
 T{
-.BR libsimple_memrchr ()
+.BR libsimple_memrcasechr ()
 T}	Thread safety	MT-Safe
 T{
-.BR libsimple_memrchr ()
+.BR libsimple_memrcasechr ()
 T}	Async-signal safety	AS-Safe
 T{
-.BR libsimple_memrchr ()
+.BR libsimple_memrcasechr ()
 T}	Async-cancel safety	AC-Safe
 .TE
 .SH EXAMPLES
@@ -75,7 +75,7 @@ None.
 .SH BUGS
 None.
 .SH SEE ALSO
-.BR libsimple_memrcasechr (3),
-.BR libsimple_rawmemrchr (3),
-.BR libsimple_memrmem (3),
-.BR memchr (3)
+.BR libsimple_memrchr (3),
+.BR libsimple_rawmemrcasechr (3),
+.BR libsimple_memrcasemem (3),
+.BR libsimple_memcasechr (3)

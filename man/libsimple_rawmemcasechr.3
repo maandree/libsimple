@@ -1,14 +1,14 @@
-.TH LIBSIMPLE_RAWMEMCHR 3 2018-10-20 libsimple
+.TH LIBSIMPLE_RAWMEMCASECHR 3 2018-10-20 libsimple
 .SH NAME
-libsimple_rawmemchr \- find byte in memory
+libsimple_rawmemcasechr \- find byte in memory
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-void *libsimple_rawmemchr(const void *\fIs\fP, int \fIc\fP);
+void *libsimple_rawmemcasechr(const void *\fIs\fP, int \fIc\fP);
 
-#ifndef rawmemchr
-# define rawmemchr libsimple_rawmemchr
+#ifndef rawmemcasechr
+# define rawmemcasechr libsimple_rawmemcasechr
 #endif
 .fi
 .PP
@@ -16,7 +16,7 @@ Link with
 .IR \-lsimple .
 .SH DESCRIPTION
 The
-.BR libsimple_rawmemchr ()
+.BR libsimple_rawmemcasechr ()
 function scans the memory segment
 .I s
 for the first occurence of the byte
@@ -25,25 +25,25 @@ for the first occurence of the byte
 .BR char ).
 .PP
 The
-.BR libsimple_rawmemchr ()
+.BR libsimple_rawmemcasechr ()
 function assumes there is at least one
 occurence, its behaviour is undefined
 if this is not the case.
 .PP
-The comparison is case-sensitive.
+The comparison is case-insensitive.
 .SH RETURN VALUE
 The
-.BR libsimple_rawmemchr ()
+.BR libsimple_rawmemcasechr ()
 function returns the pointer
 .I s
 with a minimal offset such that
-.IR *r==c ,
+.IR tolower(*r)==tolower(c) ,
 where
 .I r
 is the returned pointer.
 .SH ERRORS
 The
-.BR libsimple_rawmemchr ()
+.BR libsimple_rawmemcasechr ()
 function cannot fail.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
@@ -54,13 +54,13 @@ lb lb lb
 l l l.
 Interface	Attribute	Value
 T{
-.BR libsimple_rawmemchr ()
+.BR libsimple_rawmemcasechr ()
 T}	Thread safety	MT-Safe
 T{
-.BR libsimple_rawmemchr ()
+.BR libsimple_rawmemcasechr ()
 T}	Async-signal safety	AS-Safe
 T{
-.BR libsimple_rawmemchr ()
+.BR libsimple_rawmemcasechr ()
 T}	Async-cancel safety	AC-Safe
 .TE
 .SH EXAMPLES
@@ -76,6 +76,6 @@ None.
 .SH BUGS
 None.
 .SH SEE ALSO
-.BR libsimple_rawmemcasechr (3),
-.BR libsimple_rawmemrchr (3),
-.BR memchr (3)
+.BR libsimple_rawmemchr (3),
+.BR libsimple_rawmemrcasechr (3),
+.BR libsimple_memcasechr (3)
