@@ -9,10 +9,10 @@
 /* TODO strncasestarts */
 /* TODO strnends */
 /* TODO strncaseends */
-/* TODO stpncmp */
-/* TODO stpncmpnul */
-/* TODO stpncasecmp */
-/* TODO stpncasecmpnul */
+/* TODO strneqlen */
+/* TODO strncaseeqlen */
+/* TODO strrneqlen */
+/* TODO strrncaseeqlen */
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 char *libsimple_strnstr(const char *, const char *, size_t);

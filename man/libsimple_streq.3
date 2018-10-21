@@ -1,14 +1,14 @@
-.TH LIBSIMPLE_STRENDS 3 2018-10-21 libsimple
+.TH LIBSIMPLE_STREQ 3 2018-10-21 libsimple
 .SH NAME
-libsimple_strends \- check the beginning of a string
+libsimple_streq \- compare two strings
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-int libsimple_strends(const char *\fIs\fP, const char *\fIt\fP);
+static inline int libsimple_streq(const char *\fIa\fP, const char *\fIb\fP);
 
-#ifndef strends
-# define strends libsimple_strends
+#ifndef streq
+# define streq libsimple_streq
 #endif
 .fi
 
@@ -16,24 +16,24 @@ Link with
 .IR \-lsimple .
 .SH DESCRIPTION
 The
-.BR libsimple_strends ()
-function checks whether the string
-.I s
-ends with the string
-.IR t .
+.BR libsimple_streq ()
+function compares the strings
+.I a
+and
+.IR b ,
+neither of which may be
+.BR NULL .
 .PP
 The comparison is case-sensitive.
+.IR "unsigned char *" s.
 .SH RETURN VALUE
 The
-.BR libsimple_strends ()
-function returns 1 if the string
-.I s
-ends with the string
-.IR t ,
+.BR libsimple_streq ()
+function returns 1 if the strings are equals,
 otherwise it returns 0.
 .SH ERRORS
 The
-.BR libsimple_strends ()
+.BR libsimple_streq ()
 function cannot fail.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
@@ -44,13 +44,13 @@ lb lb lb
 l l l.
 Interface	Attribute	Value
 T{
-.BR libsimple_strends ()
+.BR libsimple_streq ()
 T}	Thread safety	MT-Safe
 T{
-.BR libsimple_strends ()
+.BR libsimple_streq ()
 T}	Async-signal safety	AS-Safe
 T{
-.BR libsimple_strends ()
+.BR libsimple_streq ()
 T}	Async-cancel safety	AC-Safe
 .TE
 .SH EXAMPLES
@@ -66,6 +66,6 @@ None.
 .SH BUGS
 None.
 .SH SEE ALSO
-.BR libsimple_strcaseends (3),
-.BR libsimple_strstarts (3),
-.BR libsimple_strrstr (3),
+.BR libsimple_streqnul (3),
+.BR libsimple_strcaseeq (3),
+.BR strcmp (3)

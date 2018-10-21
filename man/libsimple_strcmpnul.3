@@ -1,0 +1,84 @@
+.TH LIBSIMPLE_STRCMPNUL 3 2018-10-21 libsimple
+.SH NAME
+libsimple_strcmpnul \- compare two strings
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+static inline int libsimple_strcmpnul(const char *\fIa\fP, const char *\fIb\fP);
+
+#ifndef strcmpnul
+# define strcmpnul libsimple_strcmpnul
+#endif
+.fi
+
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_strcmpnul ()
+function compares the strings
+.I a
+and
+.IR b ,
+both of which may be
+.BR NULL ,
+which is treated as less than the empty string.
+.PP
+If one of the strings begins with the other string
+but is longer, the longer string is treated as
+greater than the shorter string.
+.PP
+The comparison is case-sensitive and made as if
+the strings were
+.IR "unsigned char *" s.
+.SH RETURN VALUE
+The
+.BR libsimple_strcmpnul ()
+function returns a negative value if
+.I a
+is less than
+.IR b ,
+a positive value if
+.I a
+is greater than
+.IR b ,
+and 0 otherwise.
+.SH ERRORS
+The
+.BR libsimple_strcmpnul ()
+function cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_strcmpnul ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_strcmpnul ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_strcmpnul ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_strcasecmpnul (3),
+.BR libsimple_streqnul (3),
+.BR strcmp (3)

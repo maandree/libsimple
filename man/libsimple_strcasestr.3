@@ -21,6 +21,8 @@ function scans the string
 .I haystack
 the first occurrence of the substring
 .IR needle .
+.PP
+The comparison is case-insensitive.
 .SH RETURN VALUE
 The
 .BR libsimple_strcasestr ()
@@ -33,8 +35,6 @@ begins with
 where
 .I r
 is the returned pointer.
-.PP
-The comparison is case-insensitive.
 .SH ERRORS
 The
 .BR libsimple_strcasestr ()

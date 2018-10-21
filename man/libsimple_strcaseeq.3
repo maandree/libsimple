@@ -1,0 +1,72 @@
+.TH LIBSIMPLE_STRCASEEQ 3 2018-10-21 libsimple
+.SH NAME
+libsimple_strcaseeq \- compare two strings
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+static inline int libsimple_strcaseeq(const char *\fIa\fP, const char *\fIb\fP);
+
+#ifndef strcaseeq
+# define strcaseeq libsimple_strcaseeq
+#endif
+.fi
+
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_strcaseeq ()
+function compares the strings
+.I a
+and
+.IR b ,
+neither of which may be
+.BR NULL .
+.PP
+The comparison is case-insensitive.
+.IR "unsigned char *" s.
+.SH RETURN VALUE
+The
+.BR libsimple_strcaseeq ()
+function returns 1 if the strings are equals,
+with the possible exception of the case,
+otherwise it returns 0.
+.SH ERRORS
+The
+.BR libsimple_strcaseeq ()
+function cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_strcaseeq ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_strcaseeq ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_strcaseeq ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_strcaseeqnul (3),
+.BR libsimple_streq (3),
+.BR strcasecmp (3)

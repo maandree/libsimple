@@ -4,10 +4,10 @@
 /* TODO strcasechr */
 /* TODO strcasechrnul */
 /* TODO strrcasechr */
-/* TODO stpcmp */
-/* TODO stpcmpnul */
-/* TODO stpcasecmp */
-/* TODO stpcasecmpnul */
+/* TODO streqlen */
+/* TODO strcaseeqlen */
+/* TODO strreqlen */
+/* TODO strrcaseeqlen */
 
 
 /**
@@ -144,6 +144,16 @@ char *libsimple_strrcasestr(const char *, const char *);
 #endif
 
 
+/**
+ * Compare two strings, and support `NULL` as less than
+ * the empty string, the comparison is case-sensitive
+ * 
+ * @param   a  One of the strings, may be `NULL`
+ * @param   b  The other string, may be `NULL`
+ * @return     A negative value if `a` is less than `b`,
+ *             a positive value if `a` is greater than `b`,
+ *             0 otherwise
+ */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
 static inline int libsimple_strcmpnul(const char *__a, const char *__b)
 { return (!__a || !__b) ? !__b - !__a : strcmp(__a, __b); }
@@ -152,6 +162,16 @@ static inline int libsimple_strcmpnul(const char *__a, const char *__b)
 #endif
 
 
+/**
+ * Compare two strings, and support `NULL` as less than
+ * the empty string, the comparison is case-insensitive
+ * 
+ * @param   a  One of the strings, may be `NULL`
+ * @param   b  The other string, may be `NULL`
+ * @return     A negative value if `a` is less than `b`,
+ *             a positive value if `a` is greater than `b`,
+ *             0 otherwise
+ */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
 static inline int libsimple_strcasecmpnul(const char *__a, const char *__b)
 { return (!__a || !__b) ? !__b - !__a : strcasecmp(__a, __b); }
@@ -160,6 +180,14 @@ static inline int libsimple_strcasecmpnul(const char *__a, const char *__b)
 #endif
 
 
+/**
+ * Compare two strings, without support for `NULL`,
+ * the comparison is case-sensitive
+ * 
+ * @param   a  One of the strings, may not be `NULL`
+ * @param   b  The other string, may not be `NULL`
+ * @return     1 if the strings are equal, 0 otherwise
+ */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 static inline int libsimple_streq(const char *__a, const char *__b)
 { return !strcmp(__a, __b); }
@@ -168,6 +196,14 @@ static inline int libsimple_streq(const char *__a, const char *__b)
 #endif
 
 
+/**
+ * Compare two strings, with support for `NULL`,
+ * the comparison is case-sensitive
+ * 
+ * @param   a  One of the strings, may be `NULL`
+ * @param   b  The other string, may be `NULL`
+ * @return     1 if the strings are equal, 0 otherwise
+ */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
 static inline int libsimple_streqnul(const char *__a, const char *__b)
 { return !strcmpnul(__a, __b); }
@@ -176,6 +212,14 @@ static inline int libsimple_streqnul(const char *__a, const char *__b)
 #endif
 
 
+/**
+ * Compare two strings, without support for `NULL`,
+ * the comparison is case-insensitive
+ * 
+ * @param   a  One of the strings, may not be `NULL`
+ * @param   b  The other string, may not be `NULL`
+ * @return     1 if the strings are equal, 0 otherwise
+ */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 static inline int libsimple_strcaseeq(const char *__a, const char *__b)
 { return !strcasecmp(__a, __b); }
@@ -184,6 +228,14 @@ static inline int libsimple_strcaseeq(const char *__a, const char *__b)
 #endif
 
 
+/**
+ * Compare two strings, with support for `NULL`,
+ * the comparison is case-insensitive
+ * 
+ * @param   a  One of the strings, may be `NULL`
+ * @param   b  The other string, may be `NULL`
+ * @return     1 if the strings are equal, 0 otherwise
+ */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
 static inline int libsimple_strcaseeqnul(const char *__a, const char *__b)
 { return !strcasecmpnul(__a, __b); }
