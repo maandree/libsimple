@@ -94,12 +94,19 @@ OBJ =\
 	strchrnul.o\
 	strends.o\
 	streqlen.o\
+	strncasechr.o\
+	strncasechrnul.o\
 	strncasestr.o\
+	strnchr.o\
+	strnchrnul.o\
 	strndup.o\
+	strnend.o\
 	strnstr.o\
 	strrcasechr.o\
 	strrcasestr.o\
+	strrncasechr.o\
 	strrncasestr.o\
+	strrnchr.o\
 	strrnstr.o\
 	strrstr.o\
 	strstarts.o\
