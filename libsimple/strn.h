@@ -1,10 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 
 
-/* TODO strnstarts */
-/* TODO strncasestarts */
-/* TODO strnends */
-/* TODO strncaseends */
 /* TODO strneqlen */
 /* TODO strncaseeqlen */
 /* TODO strrneqlen */
@@ -68,13 +64,6 @@ char *libsimple_strnstr(const char *, const char *, size_t);
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-char *libsimple_strrnstr(const char *, const char *, size_t);
-#ifndef strrnstr
-# define strrnstr libsimple_strrnstr
-#endif
-
-
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 char *libsimple_strncasestr(const char *, const char *, size_t);
 #ifndef strncasestr
 # define strncasestr libsimple_strncasestr
@@ -82,9 +71,44 @@ char *libsimple_strncasestr(const char *, const char *, size_t);
 
 
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+char *libsimple_strrnstr(const char *, const char *, size_t);
+#ifndef strrnstr
+# define strrnstr libsimple_strrnstr
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 char *libsimple_strrncasestr(const char *, const char *, size_t);
 #ifndef strrncasestr
 # define strrncasestr libsimple_strrncasestr
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+int libsimple_strnstarts(const char *, const char *, size_t);
+#ifndef strnstarts
+# define strnstarts libsimple_strnstarts
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+int libsimple_strncasestarts(const char *, const char *, size_t);
+#ifndef strncasestarts
+# define strncasestarts libsimple_strncasestarts
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+int libsimple_strnends(const char *, const char *, size_t);
+#ifndef strnends
+# define strnends libsimple_strnends
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+int libsimple_strncaseends(const char *, const char *, size_t);
+#ifndef strncaseends
+# define strncaseends libsimple_strncaseends
 #endif
 
 

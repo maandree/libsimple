@@ -96,11 +96,15 @@ OBJ =\
 	streqlen.o\
 	strncasechr.o\
 	strncasechrnul.o\
+	strncaseends.o\
+	strncasestarts.o\
 	strncasestr.o\
 	strnchr.o\
 	strnchrnul.o\
 	strndup.o\
 	strnend.o\
+	strnends.o\
+	strnstarts.o\
 	strnstr.o\
 	strrcasechr.o\
 	strrcasestr.o\
