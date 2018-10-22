@@ -1,12 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 
 
-/* TODO strneqlen */
-/* TODO strncaseeqlen */
-/* TODO strrneqlen */
-/* TODO strrncaseeqlen */
-
-
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 char *libsimple_strnchr(const char *, int, size_t);
 #ifndef strnchr
@@ -157,4 +151,34 @@ static inline int libsimple_strncaseeqnul(const char *__a, const char *__b, size
 { return !strncasecmpnul(__a, __b, __n); }
 #ifndef strncaseeqnul
 # define strncaseeqnul libsimple_strncaseeqnul
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+size_t libsimple_strneqlen(const char *, const char *, size_t);
+#ifndef strneqlen
+# define strneqlen libsimple_strneqlen
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+size_t libsimple_strncaseeqlen(const char *, const char *, size_t);
+#ifndef strncaseeqlen
+# define strncaseeqlen libsimple_strncaseeqlen
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+static inline size_t libsimple_strrneqlen(const char *__a, const char *__b, size_t __n)
+{ return memreqlen(__a, (strnlen)(__a, __n), __b, (strnlen)(__b, __n)); }
+#ifndef strrneqlen
+# define strrneqlen libsimple_strrneqlen
+#endif
+
+
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+static inline size_t libsimple_strrncaseeqlen(const char *__a, const char *__b, size_t __n)
+{ return memrcaseeqlen(__a, (strnlen)(__a, __n), __b, (strnlen)(__b, __n)); }
+#ifndef strrncaseeqlen
+# define strrncaseeqlen libsimple_strrncaseeqlen
 #endif

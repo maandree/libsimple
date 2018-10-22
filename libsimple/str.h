@@ -320,7 +320,7 @@ size_t libsimple_strcaseeqlen(const char *, const char *);
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 static inline size_t libsimple_strreqlen(const char *__a, const char *__b)
-{ return libsimple_memreqlen(__a, (strlen)(__a), __b, (strlen)(__b)); }
+{ return memreqlen(__a, (strlen)(__a), __b, (strlen)(__b)); }
 #ifndef strreqlen
 # define strreqlen libsimple_strreqlen
 #endif
@@ -336,7 +336,7 @@ static inline size_t libsimple_strreqlen(const char *__a, const char *__b)
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 static inline size_t libsimple_strrcaseeqlen(const char *__a, const char *__b)
-{ return libsimple_memrcaseeqlen(__a, (strlen)(__a), __b, (strlen)(__b)); }
+{ return memrcaseeqlen(__a, (strlen)(__a), __b, (strlen)(__b)); }
 #ifndef strrcaseeqlen
 # define strrcaseeqlen libsimple_strrcaseeqlen
 #endif

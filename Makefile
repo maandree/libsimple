@@ -97,6 +97,7 @@ OBJ =\
 	strncasechr.o\
 	strncasechrnul.o\
 	strncaseends.o\
+	strncaseeqlen.o\
 	strncasestarts.o\
 	strncasestr.o\
 	strnchr.o\
@@ -104,6 +105,7 @@ OBJ =\
 	strndup.o\
 	strnend.o\
 	strnends.o\
+	strneqlen.o\
 	strnstarts.o\
 	strnstr.o\
 	strrcasechr.o\

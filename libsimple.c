@@ -1278,6 +1278,52 @@ main(void)
 		assert(libsimple_strrcaseeqlen("123", "123") == 3);
 	}
 
+	for (n = 0; n < 10; n++) {
+		char a[] = "abcdefgh", b[] = "abcdefgh";
+		size_t I, J;
+		assert(libsimple_strrneqlen("", "", n) == 0);
+		assert(libsimple_strrneqlen("x", "", n) == 0);
+		assert(libsimple_strrneqlen("x", "y", n) == 0);
+		assert(libsimple_strrneqlen("", "y", n) == 0);
+		for (i = 0; i <= 8; i++) {
+			for (j = 0; j <= 8; j++) {
+				I = 8 - i;
+				J = 8 - j;
+				assert(libsimple_strrneqlen(&a[i], &b[j], n) == (I == J ? MIN(I,n) : MIN(I,J) * (n >= MAX(I,J))));
+				a[i] = b[j] = '\0';
+				assert(libsimple_strrneqlen(a, b, n) == (MIN(i, n) == MIN(j, n) ? MIN(i, n) : 0));
+				a[i] = "abcdefgh"[i];
+				b[j] = "abcdefgh"[j];
+			}
+		}
+		assert(libsimple_strrneqlen("abc", "ABC", n) == 0);
+		assert(libsimple_strrneqlen("123", "123", n) == MIN(3, n));
+	}
+
+	for (n = 0; n < 10; n++) {
+		char a[] = "abcdefgh", b[] = "ABCDEFGH";
+		size_t I, J;
+		assert(libsimple_strrncaseeqlen("", "", n) == 0);
+		assert(libsimple_strrncaseeqlen("x", "", n) == 0);
+		assert(libsimple_strrncaseeqlen("x", "y", n) == 0);
+		assert(libsimple_strrncaseeqlen("", "y", n) == 0);
+		for (i = 0; i <= 8; i++) {
+			for (j = 0; j <= 8; j++) {
+				I = 8 - i;
+				J = 8 - j;
+				assert(libsimple_strrncaseeqlen(&a[i], &b[j], n) == (I == J ? MIN(I,n) : MIN(I,J) * (n >= MAX(I,J))));
+				assert(libsimple_strrncaseeqlen(&b[i], &a[j], n) == (I == J ? MIN(I,n) : MIN(I,J) * (n >= MAX(I,J))));
+				a[i] = b[j] = '\0';
+				assert(libsimple_strrncaseeqlen(a, b, n) == (MIN(i, n) == MIN(j, n) ? MIN(i, n) : 0));
+				assert(libsimple_strrncaseeqlen(b, a, n) == (MIN(i, n) == MIN(j, n) ? MIN(i, n) : 0));
+				a[i] = "abcdefgh"[i];
+				b[j] = "ABCDEFGH"[j];
+			}
+		}
+		assert(libsimple_strrncaseeqlen("abc", "abc", n) == MIN(3, n));
+		assert(libsimple_strrncaseeqlen("123", "123", n) == MIN(3, n));
+	}
+
 	if (!have_custom_malloc()) {
 		stderr_real = 1;
 		fprintf(stderr, "\nSome tests have not been ran because malloc(3) was not "
