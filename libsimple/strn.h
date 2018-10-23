@@ -112,7 +112,7 @@ char *libsimple_strrncasechr(const char *, int, size_t); /* TODO doc */
  *             if `s`, `&s[n]` is returned
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
-char *libsimple_strnend(const char *, size_t); /* TODO doc */
+char *libsimple_strnend(const char *, size_t);
 #ifndef strnend
 # define strnend libsimple_strnend
 #endif

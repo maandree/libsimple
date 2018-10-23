@@ -1,14 +1,14 @@
-.TH LIBSIMPLE_STREND 3 2018-10-23 libsimple
+.TH LIBSIMPLE_STRNEND 3 2018-10-23 libsimple
 .SH NAME
-libsimple_strend \- find a character in a string
+libsimple_strnend \- find a character in a string
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-static inline char *libsimple_strend(const char *\fIs\fP);
+static inline char *libsimple_strnend(const char *\fIs\fP, size_t \fIn\fP);
 
-#ifndef strend
-# define strend libsimple_strend
+#ifndef strnend
+# define strnend libsimple_strnend
 #endif
 .fi
 .PP
@@ -16,23 +16,31 @@ Link with
 .IR \-lsimple .
 .SH DESCRIPTION
 The
-.BR libsimple_strend ()
+.BR libsimple_strnend ()
 function scans the string
-.I s
+.IR s ,
+truncated to
+.I n
+bytes unless it is shorter,
 for its end.
 .SH RETURN VALUE
 The
-.BR libsimple_strend ()
+.BR libsimple_strnend ()
 function returns the pointer
 .I s
 with an offset such that
 .IR !*r ,
 where
 .I r
-is the returned pointer.
+is the returned pointer. However,
+if no such offset less than
+.I n
+exists,
+.I &s[n]
+is returned.
 .SH ERRORS
 The
-.BR libsimple_strend ()
+.BR libsimple_strnend ()
 function cannot fail.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
@@ -43,13 +51,13 @@ lb lb lb
 l l l.
 Interface	Attribute	Value
 T{
-.BR libsimple_strend ()
+.BR libsimple_strnend ()
 T}	Thread safety	MT-Safe
 T{
-.BR libsimple_strend ()
+.BR libsimple_strnend ()
 T}	Async-signal safety	AS-Safe
 T{
-.BR libsimple_strend ()
+.BR libsimple_strnend ()
 T}	Async-cancel safety	AC-Safe
 .TE
 .SH EXAMPLES
@@ -65,6 +73,6 @@ None.
 .SH BUGS
 None.
 .SH SEE ALSO
-.BR libsimple_strchrnul (3),
-.BR libsimple_strnend (3),
-.BR strchr (3)
+.BR libsimple_strnchrnul (3),
+.BR libsimple_strnchr (3),
+.BR libsimple_strend (3)
