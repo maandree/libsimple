@@ -1,14 +1,14 @@
-.TH LIBSIMPLE_STRCASECMPNUL 3 2018-10-23 libsimple
+.TH LIBSIMPLE_STRNCASECMPNUL 3 2018-10-23 libsimple
 .SH NAME
-libsimple_strcasecmpnul \- compare two strings
+libsimple_strncasecmpnul \- compare two strings
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-static inline int libsimple_strcasecmpnul(const char *\fIa\fP, const char *\fIb\fP);
+static inline int libsimple_strncasecmpnul(const char *\fIa\fP, const char *\fIb\fP, size_t \fIn\fP);
 
-#ifndef strcasecmpnul
-# define strcasecmpnul libsimple_strcasecmpnul
+#ifndef strncasecmpnul
+# define strncasecmpnul libsimple_strncasecmpnul
 #endif
 .fi
 .PP
@@ -16,11 +16,17 @@ Link with
 .IR \-lsimple .
 .SH DESCRIPTION
 The
-.BR libsimple_strcasecmpnul ()
+.BR libsimple_strncasecmpnul ()
 function compares the strings
-.I a
+.IR a ,
+truncated to
+.I n
+bytes unless it is shorter,
 and
 .IR b ,
+truncated to
+.I n
+bytes unless it is shorter,
 both of which may be
 .BR NULL ,
 which is treated as less than the empty string.
@@ -34,7 +40,7 @@ if the strings were converted to lowercase and as
 .IR "unsigned char *" s.
 .SH RETURN VALUE
 The
-.BR libsimple_strcasecmpnul ()
+.BR libsimple_strncasecmpnul ()
 function returns a negative value if
 .I a
 is less than
@@ -46,7 +52,7 @@ is greater than
 and 0 otherwise.
 .SH ERRORS
 The
-.BR libsimple_strcasecmpnul ()
+.BR libsimple_strncasecmpnul ()
 function cannot fail.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
@@ -57,13 +63,13 @@ lb lb lb
 l l l.
 Interface	Attribute	Value
 T{
-.BR libsimple_strcasecmpnul ()
+.BR libsimple_strncasecmpnul ()
 T}	Thread safety	MT-Safe
 T{
-.BR libsimple_strcasecmpnul ()
+.BR libsimple_strncasecmpnul ()
 T}	Async-signal safety	AS-Safe
 T{
-.BR libsimple_strcasecmpnul ()
+.BR libsimple_strncasecmpnul ()
 T}	Async-cancel safety	AC-Safe
 .TE
 .SH EXAMPLES
@@ -79,7 +85,7 @@ None.
 .SH BUGS
 None.
 .SH SEE ALSO
-.BR libsimple_strcmpnul (3),
-.BR libsimple_strcaseeqnul (3),
-.BR libsimple_strncasecmpnul (3),
-.BR strcasecmp (3)
+.BR libsimple_strncmpnul (3),
+.BR libsimple_strncaseeqnul (3),
+.BR libsimple_strcasecmpnul (3),
+.BR strncasecmp (3)

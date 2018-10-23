@@ -260,7 +260,7 @@ char *libsimple_strrncasestr(const char *, const char *, size_t); /* TODO doc */
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
 static inline int libsimple_strncmpnul(const char *__a, const char *__b, size_t __n)
-{ return (!__a || !__b) ? !__b - !__a : strncmp(__a, __b, __n); } /* TODO doc */
+{ return (!__a || !__b) ? !__b - !__a : strncmp(__a, __b, __n); }
 #ifndef strncmpnul
 # define strncmpnul libsimple_strncmpnul
 #endif
@@ -279,7 +279,7 @@ static inline int libsimple_strncmpnul(const char *__a, const char *__b, size_t 
  *             0 otherwise
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
-static inline int libsimple_strncasecmpnul(const char *__a, const char *__b, size_t __n) /* TODO doc */
+static inline int libsimple_strncasecmpnul(const char *__a, const char *__b, size_t __n)
 { return (!__a || !__b) ? !__b - !__a : strncasecmp(__a, __b, __n); }
 #ifndef strncasecmpnul
 # define strncasecmpnul libsimple_strncasecmpnul
