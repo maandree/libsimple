@@ -1,14 +1,14 @@
-.TH LIBSIMPLE_STRREQLEN 3 2018-10-23 libsimple
+.TH LIBSIMPLE_STRRNEQLEN 3 2018-10-23 libsimple
 .SH NAME
-libsimple_strreqlen \- check terminal commonality
+libsimple_strrneqlen \- check terminal commonality
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-static inline size_t libsimple_strreqlen(const char *\fIa\fP, const char *\fIb\fP);
+static inline size_t libsimple_strrneqlen(const char *\fIa\fP, const char *\fIb\fP, size_t \fIn\fP);
 
-#ifndef strreqlen
-# define strreqlen libsimple_strreqlen
+#ifndef strrneqlen
+# define strrneqlen libsimple_strrneqlen
 #endif
 .fi
 .PP
@@ -16,25 +16,33 @@ Link with
 .IR \-lsimple .
 .SH DESCRIPTION
 The
-.BR libsimple_strreqlen ()
+.BR libsimple_strrneqlen ()
 function scans the number of bytes the string
-.I a
+.IR a ,
+truncated to
+.I n
+bytes unless it is shorter,
 have in common the string
-.I b
+.IR b ,
+truncated to
+.I n
+bytes unless it is shorter,
 at their ends.
 .PP
 The comparison is case-sensitive.
 .SH RETURN VALUE
 The
-.BR libsimple_strreqlen ()
+.BR libsimple_strrneqlen ()
 function returns the number of bytes
 .I a
 and
 .I b
-have in common at their ends.
+(both truncated to
+.I n
+bytes) have in common at their ends.
 .SH ERRORS
 The
-.BR libsimple_strreqlen ()
+.BR libsimple_strrneqlen ()
 function cannot fail.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
@@ -45,13 +53,13 @@ lb lb lb
 l l l.
 Interface	Attribute	Value
 T{
-.BR libsimple_strreqlen ()
+.BR libsimple_strrneqlen ()
 T}	Thread safety	MT-Safe
 T{
-.BR libsimple_strreqlen ()
+.BR libsimple_strrneqlen ()
 T}	Async-signal safety	AS-Safe
 T{
-.BR libsimple_strreqlen ()
+.BR libsimple_strrneqlen ()
 T}	Async-cancel safety	AC-Safe
 .TE
 .SH EXAMPLES
@@ -67,7 +75,7 @@ None.
 .SH BUGS
 None.
 .SH SEE ALSO
-.BR libsimple_strreqlen (3),
-.BR libsimple_streqlen (3),
 .BR libsimple_strrneqlen (3),
+.BR libsimple_strneqlen (3),
+.BR libsimple_strreqlen (3),
 .BR libsimple_memreqlen (3)

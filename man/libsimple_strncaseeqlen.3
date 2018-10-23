@@ -1,14 +1,14 @@
-.TH LIBSIMPLE_STRCASEEQLEN 3 2018-10-23 libsimple
+.TH LIBSIMPLE_STRNCASEEQLEN 3 2018-10-23 libsimple
 .SH NAME
-libsimple_strcaseeqlen \- check initial commonality
+libsimple_strncaseeqlen \- check initial commonality
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-size_t libsimple_strcaseeqlen(const char *\fIa\fP, const char *\fIb\fP);
+size_t libsimple_strncaseeqlen(const char *\fIa\fP, const char *\fIb\fP, size_t \fIn\fP);
 
-#ifndef strcaseeqlen
-# define strcaseeqlen libsimple_strcaseeqlen
+#ifndef strncaseeqlen
+# define strncaseeqlen libsimple_strncaseeqlen
 #endif
 .fi
 .PP
@@ -16,25 +16,33 @@ Link with
 .IR \-lsimple .
 .SH DESCRIPTION
 The
-.BR libsimple_strcaseeqlen ()
+.BR libsimple_strncaseeqlen ()
 function scans the number of bytes the string
-.I a
+.IR a ,
+truncated to
+.I n
+bytes unless it is shorter,
 have in common the string
-.I b
+.IR b ,
+truncated to
+.I n
+bytes unless it is shorter,
 at their beginnings.
 .PP
 The comparison is case-insensitive.
 .SH RETURN VALUE
 The
-.BR libsimple_strcaseeqlen ()
+.BR libsimple_strncaseeqlen ()
 function returns the number of bytes
 .I a
 and
 .I b
-have in common at their beginnings.
+(both truncated to
+.I n
+bytes) have in common at their beginnings.
 .SH ERRORS
 The
-.BR libsimple_strcaseeqlen ()
+.BR libsimple_strncaseeqlen ()
 function cannot fail.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
@@ -45,13 +53,13 @@ lb lb lb
 l l l.
 Interface	Attribute	Value
 T{
-.BR libsimple_strcaseeqlen ()
+.BR libsimple_strncaseeqlen ()
 T}	Thread safety	MT-Safe
 T{
-.BR libsimple_strcaseeqlen ()
+.BR libsimple_strncaseeqlen ()
 T}	Async-signal safety	AS-Safe
 T{
-.BR libsimple_strcaseeqlen ()
+.BR libsimple_strncaseeqlen ()
 T}	Async-cancel safety	AC-Safe
 .TE
 .SH EXAMPLES
@@ -70,5 +78,5 @@ None.
 .BR libsimple_strcaseeq (3),
 .BR libsimple_streqlen (3),
 .BR libsimple_strrcaseeqlen (3),
-.BR libsimple_strncaseeqlen (3),
+.BR libsimple_strcaseeqlen (3),
 .BR libsimple_memcaseeqlen (3)

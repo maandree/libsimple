@@ -1,14 +1,14 @@
-.TH LIBSIMPLE_STREQ 3 2018-10-23 libsimple
+.TH LIBSIMPLE_STRNEQ 3 2018-10-23 libsimple
 .SH NAME
-libsimple_streq \- compare two strings
+libsimple_strneq \- compare two strings
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-static inline int libsimple_streq(const char *\fIa\fP, const char *\fIb\fP);
+static inline int libsimple_strneq(const char *\fIa\fP, const char *\fIb\fP, size_t \fIn\fP);
 
-#ifndef streq
-# define streq libsimple_streq
+#ifndef strneq
+# define strneq libsimple_strneq
 #endif
 .fi
 .PP
@@ -16,11 +16,17 @@ Link with
 .IR \-lsimple .
 .SH DESCRIPTION
 The
-.BR libsimple_streq ()
+.BR libsimple_strneq ()
 function compares the strings
-.I a
+.IR a ,
+truncated to
+.I n
+bytes unless it is shorter,
 and
 .IR b ,
+truncated to
+.I n
+bytes unless it is shorter,
 neither of which may be
 .BR NULL .
 .PP
@@ -28,12 +34,12 @@ The comparison is case-sensitive.
 .IR "unsigned char *" s.
 .SH RETURN VALUE
 The
-.BR libsimple_streq ()
+.BR libsimple_strneq ()
 function returns 1 if the strings are equals,
 otherwise it returns 0.
 .SH ERRORS
 The
-.BR libsimple_streq ()
+.BR libsimple_strneq ()
 function cannot fail.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
@@ -44,13 +50,13 @@ lb lb lb
 l l l.
 Interface	Attribute	Value
 T{
-.BR libsimple_streq ()
+.BR libsimple_strneq ()
 T}	Thread safety	MT-Safe
 T{
-.BR libsimple_streq ()
+.BR libsimple_strneq ()
 T}	Async-signal safety	AS-Safe
 T{
-.BR libsimple_streq ()
+.BR libsimple_strneq ()
 T}	Async-cancel safety	AC-Safe
 .TE
 .SH EXAMPLES
@@ -66,9 +72,9 @@ None.
 .SH BUGS
 None.
 .SH SEE ALSO
-.BR libsimple_streqnul (3),
-.BR libsimple_strcaseeq (3),
-.BR libsimple_streqlen (3),
-.BR libsimple_strneq (3),
+.BR libsimple_strneqnul (3),
+.BR libsimple_strncaseeq (3),
+.BR libsimple_strneqlen (3),
+.BR libsimple_streq (3),
 .BR libsimple_memeq (3),
-.BR strcmp (3)
+.BR strncmp (3)
