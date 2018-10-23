@@ -1,14 +1,14 @@
-.TH LIBSIMPLE_STRCASECHR 3 2018-10-23 libsimple
+.TH LIBSIMPLE_STRNCASECHRNUL 3 2018-10-21 libsimple
 .SH NAME
-libsimple_strcasechr \- find a character in a string
+libsimple_strncasechrnul \- find a character in a string
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-char *libsimple_strcasechr(const char *\fIs\fP, int \fIc\fP);
+char *libsimple_strncasechrnul(const char *\fIs\fP, int \fIc\fP, size_t \fIn\fP);
 
-#ifndef strcasechr
-# define strcasechr libsimple_strcasechr
+#ifndef strncasechrnul
+# define strncasechrnul libsimple_strncasechrnul
 #endif
 .fi
 .PP
@@ -16,9 +16,12 @@ Link with
 .IR \-lsimple .
 .SH DESCRIPTION
 The
-.BR libsimple_strcasechr ()
+.BR libsimple_strncasechrnul ()
 function scans the string
-.I s
+.IR s ,
+truncated to
+.I n
+bytes unless it is shorter,
 for the first occurence of the character
 .I c
 (it is converted to a
@@ -29,19 +32,22 @@ the string's end is returned.
 The comparison is case-insensitive.
 .SH RETURN VALUE
 The
-.BR libsimple_strcasechr ()
+.BR libsimple_strncasechrnul ()
 function returns the pointer
 .I s
 with a minimal offset such that
-.IR tolower(*r)==tolower(c) ,
+.IR tolower(*r)==tolower(c)||!*r ,
 where
 .I r
-is the returned pointer, if no such
-offset exists, it returns
-.IR NULL .
+is the returned pointer. However if no such
+offset less than
+.I n
+exists,
+.B NULL
+is returned.
 .SH ERRORS
 The
-.BR libsimple_strcasechr ()
+.BR libsimple_strncasechrnul ()
 function cannot fail.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
@@ -52,13 +58,13 @@ lb lb lb
 l l l.
 Interface	Attribute	Value
 T{
-.BR libsimple_strcasechr ()
+.BR libsimple_strncasechrnul ()
 T}	Thread safety	MT-Safe
 T{
-.BR libsimple_strcasechr ()
+.BR libsimple_strncasechrnul ()
 T}	Async-signal safety	AS-Safe
 T{
-.BR libsimple_strcasechr ()
+.BR libsimple_strncasechrnul ()
 T}	Async-cancel safety	AC-Safe
 .TE
 .SH EXAMPLES
@@ -74,8 +80,6 @@ None.
 .SH BUGS
 None.
 .SH SEE ALSO
-.BR libsimple_strcasechrnul (3),
-.BR libsimple_strrcasechr (3),
 .BR libsimple_strncasechr (3),
-.BR libsimple_memcasechr (3),
-.BR strchr (3)
+.BR libsimple_strnchrnul (3),
+.BR libsimple_strcasechrnul (3)

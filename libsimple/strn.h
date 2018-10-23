@@ -12,7 +12,7 @@
  *             within the first `n` bytes
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-char *libsimple_strnchr(const char *, int, size_t); /* TODO doc */
+char *libsimple_strnchr(const char *, int, size_t);
 #ifndef strnchr
 # define strnchr libsimple_strnchr
 #endif
@@ -29,7 +29,7 @@ char *libsimple_strnchr(const char *, int, size_t); /* TODO doc */
  *             within the first `n` bytes
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-char *libsimple_strncasechr(const char *, int, size_t); /* TODO doc */
+char *libsimple_strncasechr(const char *, int, size_t);
 #ifndef strncasechr
 # define strncasechr libsimple_strncasechr
 #endif
@@ -46,7 +46,7 @@ char *libsimple_strncasechr(const char *, int, size_t); /* TODO doc */
  *             offset exists within the first `n` bytes, `&s[n]` is returned
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
-char *libsimple_strnchrnul(const char *, int, size_t); /* TODO doc */
+char *libsimple_strnchrnul(const char *, int, size_t);
 #ifndef strnchrnul
 # define strnchrnul libsimple_strnchrnul
 #endif
@@ -63,7 +63,7 @@ char *libsimple_strnchrnul(const char *, int, size_t); /* TODO doc */
  *             exists within the first `n` bytes, `&s[n]` is returned
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
-char *libsimple_strncasechrnul(const char *, int, size_t); /* TODO doc */
+char *libsimple_strncasechrnul(const char *, int, size_t);
 #ifndef strncasechrnul
 # define strncasechrnul libsimple_strncasechrnul
 #endif
@@ -79,7 +79,7 @@ char *libsimple_strncasechrnul(const char *, int, size_t); /* TODO doc */
  *             where `r` is the returned pointer, `NULL` if no such offset exists
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-char *libsimple_strrnchr(const char *, int, size_t); /* TODO doc */
+char *libsimple_strrnchr(const char *, int, size_t);
 #ifndef strrnchr
 # define strrnchr libsimple_strrnchr
 #endif
@@ -95,7 +95,7 @@ char *libsimple_strrnchr(const char *, int, size_t); /* TODO doc */
  *             where `r` is the returned pointer, `NULL` if no such offset exists
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-char *libsimple_strrncasechr(const char *, int, size_t); /* TODO doc */
+char *libsimple_strrncasechr(const char *, int, size_t);
 #ifndef strrncasechr
 # define strrncasechr libsimple_strrncasechr
 #endif
