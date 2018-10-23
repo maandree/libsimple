@@ -1,4 +1,4 @@
-.TH LIBSIMPLE_STRRSTR 3 2018-10-21 libsimple
+.TH LIBSIMPLE_STRRSTR 3 2018-10-23 libsimple
 .SH NAME
 libsimple_strrstr \- find a substring in a string
 .SH SYNOPSIS
@@ -29,12 +29,15 @@ The
 function returns the pointer
 .I haystack
 with a maximal offset such that
-.I !*r
+.I r
 begins with
 .IR needle ,
 where
 .I r
 is the returned pointer.
+If no such offset exists,
+.B NULL
+is returned.
 .SH ERRORS
 The
 .BR libsimple_strrstr ()
@@ -71,4 +74,6 @@ None.
 None.
 .SH SEE ALSO
 .BR libsimple_strrcasestr (3),
+.BR libsimple_strrnstr (3),
+.BR libsimple_memrmem (3),
 .BR strstr (3)

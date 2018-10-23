@@ -189,7 +189,7 @@ int libsimple_strncaseends(const char *, const char *, size_t); /* TODO doc */
  *                    exists
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-char *libsimple_strnstr(const char *, const char *, size_t); /* TODO doc */
+char *libsimple_strnstr(const char *, const char *, size_t);
 #ifndef strnstr
 # define strnstr libsimple_strnstr
 #endif
@@ -206,7 +206,7 @@ char *libsimple_strnstr(const char *, const char *, size_t); /* TODO doc */
  *                    exists
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-char *libsimple_strncasestr(const char *, const char *, size_t); /* TODO doc */
+char *libsimple_strncasestr(const char *, const char *, size_t);
 #ifndef strncasestr
 # define strncasestr libsimple_strncasestr
 #endif
@@ -223,7 +223,7 @@ char *libsimple_strncasestr(const char *, const char *, size_t); /* TODO doc */
  *                    exists
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-char *libsimple_strrnstr(const char *, const char *, size_t); /* TODO doc */
+char *libsimple_strrnstr(const char *, const char *, size_t);
 #ifndef strrnstr
 # define strrnstr libsimple_strrnstr
 #endif
@@ -240,7 +240,7 @@ char *libsimple_strrnstr(const char *, const char *, size_t); /* TODO doc */
  *                    exists
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-char *libsimple_strrncasestr(const char *, const char *, size_t); /* TODO doc */
+char *libsimple_strrncasestr(const char *, const char *, size_t);
 #ifndef strrncasestr
 # define strrncasestr libsimple_strrncasestr
 #endif
