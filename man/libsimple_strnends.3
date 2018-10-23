@@ -1,14 +1,14 @@
-.TH LIBSIMPLE_STRENDS 3 2018-10-23 libsimple
+.TH LIBSIMPLE_STRNENDS 3 2018-10-23 libsimple
 .SH NAME
-libsimple_strends \- check the beginning of a string
+libsimple_strnends \- check the beginning of a string
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-int libsimple_strends(const char *\fIs\fP, const char *\fIt\fP);
+int libsimple_strnends(const char *\fIs\fP, const char *\fIt\fP, size_t \fIn\fP);
 
-#ifndef strends
-# define strends libsimple_strends
+#ifndef strnends
+# define strnends libsimple_strnends
 #endif
 .fi
 .PP
@@ -16,16 +16,19 @@ Link with
 .IR \-lsimple .
 .SH DESCRIPTION
 The
-.BR libsimple_strends ()
+.BR libsimple_strnends ()
 function checks whether the string
-.I s
+.IR s ,
+truncated to
+.I n
+bytes unless it is shorter,
 ends with the string
 .IR t .
 .PP
 The comparison is case-sensitive.
 .SH RETURN VALUE
 The
-.BR libsimple_strends ()
+.BR libsimple_strnends ()
 function returns 1 if the string
 .I s
 ends with the string
@@ -33,7 +36,7 @@ ends with the string
 otherwise it returns 0.
 .SH ERRORS
 The
-.BR libsimple_strends ()
+.BR libsimple_strnends ()
 function cannot fail.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
@@ -44,13 +47,13 @@ lb lb lb
 l l l.
 Interface	Attribute	Value
 T{
-.BR libsimple_strends ()
+.BR libsimple_strnends ()
 T}	Thread safety	MT-Safe
 T{
-.BR libsimple_strends ()
+.BR libsimple_strnends ()
 T}	Async-signal safety	AS-Safe
 T{
-.BR libsimple_strends ()
+.BR libsimple_strnends ()
 T}	Async-cancel safety	AC-Safe
 .TE
 .SH EXAMPLES
@@ -66,8 +69,8 @@ None.
 .SH BUGS
 None.
 .SH SEE ALSO
-.BR libsimple_strcaseends (3),
-.BR libsimple_strstarts (3),
-.BR libsimple_strrstr (3),
-.BR libsimple_strnends (3),
+.BR libsimple_strncaseends (3),
+.BR libsimple_strnstarts (3),
+.BR libsimple_strrnstr (3),
+.BR libsimple_strends (3),
 .BR libsimple_memends (3)

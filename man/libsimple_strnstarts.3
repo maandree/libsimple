@@ -1,14 +1,14 @@
-.TH LIBSIMPLE_STRCASESTARTS 3 2018-10-23 libsimple
+.TH LIBSIMPLE_STRNSTARTS 3 2018-10-23 libsimple
 .SH NAME
-libsimple_strcasestarts \- check the beginning of a string
+libsimple_strnstarts \- check the beginning of a string
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-static inline int libsimple_strcasestarts(const char *\fIs\fP, const char *\fIt\fP);
+int libsimple_strnstarts(const char *\fIs\fP, const char *\fIt\fP, size_t \fIn\fP);
 
-#ifndef strcasestarts
-# define strcasestarts libsimple_strcasestarts
+#ifndef strnstarts
+# define strnstarts libsimple_strnstarts
 #endif
 .fi
 .PP
@@ -16,16 +16,19 @@ Link with
 .IR \-lsimple .
 .SH DESCRIPTION
 The
-.BR libsimple_strcasestarts ()
+.BR libsimple_strnstarts ()
 function checks whether the string
-.I s
+.IR s ,
+truncated to
+.I n
+bytes unless it is shorter,
 starts with the string
 .IR t .
 .PP
-The comparison is case-insensitive.
+The comparison is case-sensitive.
 .SH RETURN VALUE
 The
-.BR libsimple_strcasestarts ()
+.BR libsimple_strnstarts ()
 function returns 1 if the string
 .I s
 begins with the string
@@ -33,7 +36,7 @@ begins with the string
 otherwise it returns 0.
 .SH ERRORS
 The
-.BR libsimple_strcasestarts ()
+.BR libsimple_strnstarts ()
 function cannot fail.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
@@ -44,13 +47,13 @@ lb lb lb
 l l l.
 Interface	Attribute	Value
 T{
-.BR libsimple_strcasestarts ()
+.BR libsimple_strnstarts ()
 T}	Thread safety	MT-Safe
 T{
-.BR libsimple_strcasestarts ()
+.BR libsimple_strnstarts ()
 T}	Async-signal safety	AS-Safe
 T{
-.BR libsimple_strcasestarts ()
+.BR libsimple_strnstarts ()
 T}	Async-cancel safety	AC-Safe
 .TE
 .SH EXAMPLES
@@ -66,10 +69,9 @@ None.
 .SH BUGS
 None.
 .SH SEE ALSO
-.BR libsimple_strstarts (3),
-.BR libsimple_strcaseends (3),
-.BR libsimple_strcasestr (3),
 .BR libsimple_strncasestarts (3),
-.BR libsimple_memcasestarts (3),
-.BR strcasecmp (3),
-.BR strncasecmp (3)
+.BR libsimple_strnends (3),
+.BR libsimple_strstarts (3),
+.BR libsimple_memstarts (3),
+.BR strnstr (3),
+.BR strncmp (3)

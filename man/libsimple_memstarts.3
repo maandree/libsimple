@@ -1,11 +1,11 @@
-.TH LIBSIMPLE_MEMSTARTS 3 2018-10-21 libsimple
+.TH LIBSIMPLE_MEMSTARTS 3 2018-10-23 libsimple
 .SH NAME
 libsimple_memstarts \- checks beginning of memory
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-void *libsimple_memstarts(const void *\fIs\fP, size_t \fIn\fP, const void *\fIt\fP, size_t \fIm\fP);
+int libsimple_memstarts(const void *\fIs\fP, size_t \fIn\fP, const void *\fIt\fP, size_t \fIm\fP);
 
 #ifndef memstarts
 # define memstarts libsimple_memstarts
@@ -76,4 +76,6 @@ None.
 .SH SEE ALSO
 .BR libsimple_memcasestarts (3),
 .BR libsimple_memends (3),
-.BR libsimple_memmem (3)
+.BR libsimple_memmem (3),
+.BR libsimple_strnstarts (3),
+.BR libsimple_strstarts (3)

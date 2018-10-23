@@ -1,11 +1,11 @@
-.TH LIBSIMPLE_MEMENDS 3 2018-10-21 libsimple
+.TH LIBSIMPLE_MEMENDS 3 2018-10-23 libsimple
 .SH NAME
 libsimple_memends \- checks end of memory
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-void *libsimple_memends(const void *\fIs\fP, size_t \fIn\fP, const void *\fIt\fP, size_t \fIm\fP);
+int libsimple_memends(const void *\fIs\fP, size_t \fIn\fP, const void *\fIt\fP, size_t \fIm\fP);
 
 #ifndef memends
 # define memends libsimple_memends
@@ -78,4 +78,6 @@ None.
 .SH SEE ALSO
 .BR libsimple_memcaseends (3),
 .BR libsimple_memstarts (3),
-.BR libsimple_memrmem (3)
+.BR libsimple_memrmem (3),
+.BR libsimple_strnends (3),
+.BR libsimple_strends (3)

@@ -127,7 +127,7 @@ char *libsimple_strnend(const char *, size_t);
  * @return     1 if `s` starts with `t`, 0 otherwise
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-int libsimple_strnstarts(const char *, const char *, size_t); /* TODO doc */
+int libsimple_strnstarts(const char *, const char *, size_t);
 #ifndef strnstarts
 # define strnstarts libsimple_strnstarts
 #endif
@@ -142,7 +142,7 @@ int libsimple_strnstarts(const char *, const char *, size_t); /* TODO doc */
  * @return     1 if `s` starts with `t`, 0 otherwise
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-int libsimple_strncasestarts(const char *, const char *, size_t); /* TODO doc */
+int libsimple_strncasestarts(const char *, const char *, size_t);
 #ifndef strncasestarts
 # define strncasestarts libsimple_strncasestarts
 #endif
@@ -157,7 +157,7 @@ int libsimple_strncasestarts(const char *, const char *, size_t); /* TODO doc */
  * @return     1 if `s` ends with `t`, 0 otherwise
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-int libsimple_strnends(const char *, const char *, size_t); /* TODO doc */
+int libsimple_strnends(const char *, const char *, size_t);
 #ifndef strnends
 # define strnends libsimple_strnends
 #endif
@@ -172,7 +172,7 @@ int libsimple_strnends(const char *, const char *, size_t); /* TODO doc */
  * @return     1 if `s` end with `t`, 0 otherwise
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-int libsimple_strncaseends(const char *, const char *, size_t); /* TODO doc */
+int libsimple_strncaseends(const char *, const char *, size_t);
 #ifndef strncaseends
 # define strncaseends libsimple_strncaseends
 #endif
