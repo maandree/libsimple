@@ -18,12 +18,6 @@
 # endif
 #endif
 
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __assume_aligned__(1), __nonnull__, __warn_unused_result__)))
-char *libsimple_strndup(const char *, size_t);
-#ifndef strndup
-# define strndup libsimple_strndup
-#endif
-
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __assume_aligned__(1), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
 char *libsimple_enstrndup(int, const char *, size_t);
 #ifndef enstrndup

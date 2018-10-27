@@ -106,9 +106,6 @@ The following functions are defined (some as inline functions):
 	void *libsimple_memdup(const void *, size_t)
 		Duplicate a memory segment.
 
-	char *libsimple_strndup(const char *, size_t)
-		Duplicate a substring.
-
 	void *libsimple_mempcpy(void *, const void *, size_t)
 		Like memcpy, except returns the byte after the
 		last written byte.

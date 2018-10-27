@@ -102,7 +102,6 @@ OBJ =\
 	strncasestr.o\
 	strnchr.o\
 	strnchrnul.o\
-	strndup.o\
 	strnend.o\
 	strnends.o\
 	strneqlen.o\

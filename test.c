@@ -216,9 +216,16 @@ strdup(const char *s)
 
 
 char *
-strndup(const char *s, size_t size)
+strndup(const char *s, size_t n)
 {
-	return libsimple_strndup(s, size);
+	char *ret;
+	size_t m = strlen(s);
+	n = MIN(n, m);
+	if (!(ret = aligned_alloc(1, n + 1)))
+		return NULL;
+	memcpy(ret, s, n);
+	ret[n] = '\0';
+	return ret;
 }
 
 
