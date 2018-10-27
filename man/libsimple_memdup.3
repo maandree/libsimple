@@ -1,0 +1,148 @@
+.TH LIBSIMPLE_MEMDUP 3 2018-10-27 libsimple
+.SH NAME
+libsimple_memdup \- duplicate bytes in memory
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+void *libsimple_memdupa(const void *\fIs\fP, size_t \fIn\fP);
+void *libsimple_memdup(const void *\fIs\fP, size_t \fIn\fP);
+void *libsimple_enmemdup(int \fIstatus\fP, const void *\fIs\fP, size_t \fIn\fP);
+static inline void *libsimple_ememdup(const void *\fIs\fP, size_t \fIn\fP);
+
+#ifndef memdupa
+# define memdupa libsimple_memdupa
+#endif
+#ifndef memdup
+# define memdup libsimple_memdup
+#endif
+#ifndef enmemdup
+# define enmemdup libsimple_enmemdup
+#endif
+#ifndef ememdup
+# define ememdup libsimple_ememdup
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_memdup ()
+function constructs allocates memory and copies
+.I n
+first bytes from
+.I s
+into the new allocation.
+.PP
+The
+.BR libsimple_enmemdup ()
+and
+.BR libsimple_ememdup ()
+functions are versions of the
+.BR libsimple_memdup ()
+function that call the
+.BR libsimple_enprintf (3)
+function on failure, causing the process to print
+an error message and exit. See
+.BR libsimple_enprintf (3)
+for more information.
+.PP
+The
+.BR libsimple_memdupa ()
+function is implemented as a macro and is a version
+of the
+.BR libsimple_memdup ()
+function that uses allocates the memory on the stack
+rather than on the heap, causing the return pointer
+to become invalid when the calling function returns.
+.SH RETURN VALUE
+Upon successful completion, the
+.BR libsimple_memdupa (),
+.BR libsimple_memdup (),
+.BR libsimple_enmemdup (),
+and
+.BR libsimple_ememdup ()
+functions return a non-null pointer, on failure the
+.BR libsimple_memdup ()
+function returns
+.B NULL
+and set
+.I errno
+to indicate the error, and the
+.BR libsimple_enmemdup (),
+and
+.BR libsimple_ememdup ()
+functions exit the process group. The
+.BR libsimple_memdupa ()
+function cannot fail, however the kernel
+can kill the process with a
+.B SIGSEGV
+signal if the memory cannot be allocated.
+.PP
+The returned pointer should be deallocated when it
+is no longer needed, except for the pointer returned
+by the
+.BR libsimple_memdupa ()
+function, it is automatically deallocated when the
+calling function returns.
+.SH ERRORS
+The
+.BR libsimple_memdup ()
+function may fail for any reason specified for the
+.BR alloc (3)
+function.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_memdupa (),
+.br
+.BR libsimple_memdup (),
+.br
+.BR libsimple_enmemdup (),
+.br
+.BR libsimple_ememdup (),
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_memdupa (),
+.br
+.BR libsimple_memdup (),
+.br
+.BR libsimple_enmemdup (),
+.br
+.BR libsimple_ememdup (),
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_memdupa (),
+.br
+.BR libsimple_memdup (),
+.br
+.BR libsimple_enmemdup (),
+.br
+.BR libsimple_ememdup (),
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_aligned_memdup (3),
+.BR libsimple_enstrndup (3),
+.BR libsimple_enstrdup (3),
+.BR strndup (3),
+.BR strdup (3)

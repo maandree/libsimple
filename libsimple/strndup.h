@@ -4,10 +4,8 @@
 # define libsimple_strndupa(s, n)\
 	({\
 		const char *__s = (s);\
-		size_t __n = (n);\
-		size_t __m = strlen(__s);\
+		size_t __n = strnlen(__s, n);\
 		char *__r;\
-		__n = __n < __m ? __n : __m;\
 		__r = alloca(__n + 1);\
 		memcpy(__r, __s, __n);\
 		__r[__n] = '\0';\
