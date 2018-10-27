@@ -6,7 +6,7 @@
 void *
 libsimple_memdup(const void *s, size_t n)
 {
-	void *ret = malloc(n);
+	void *ret = malloc(n ? n : (size_t)1);
 	if (!ret)
 		return NULL;
 	return memcpy(ret, s, n);

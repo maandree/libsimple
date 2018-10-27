@@ -6,7 +6,9 @@
 void *
 libsimple_aligned_memdup(const void *s, size_t alignment, size_t n)
 {
-	void *ret = aligned_alloc(alignment, n + (alignment - n % alignment) % alignment);
+	void *ret;
+	n = n ? n : 1;
+	ret = aligned_alloc(alignment, n + (alignment - n % alignment) % alignment);
 	if (!ret)
 		return NULL;
 	return memcpy(ret, s, n);
