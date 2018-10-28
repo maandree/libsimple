@@ -50,10 +50,14 @@ libsimple_memrelem(const void *hay_, size_t hayn, const void *sub_, size_t subn)
 		{
 			char *hay = (void *)hay_;
 			const char *sub = sub_;
+			size_t i;
 			for (hay += hayn * subn; hayn--;) {
 				hay -= subn;
-				if (!memcmp(hay, sub, subn))
-					return hay;
+				for (i = 0; i < subn; i++)
+					if (hay[i] != sub[i])
+						goto next;
+				return hay;
+			next:;
 			}
 			break;
 

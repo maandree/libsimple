@@ -43,9 +43,14 @@ libsimple_memelem(const void *hay_, size_t hayn, const void *sub_, size_t subn)
 		{
 			char *hay = (void *)hay_;
 			const char *sub = sub_;
-			for (; hayn--; hay += subn)
-				if (!memcmp(hay, sub, subn))
-					return hay;
+			size_t i;
+			for (; hayn--; hay += subn) {
+				for (i = 0; i < subn; i++)
+					if (hay[i] != sub[i])
+						goto next;
+				return hay;
+			next:;
+			}
 			break;
 
 		}

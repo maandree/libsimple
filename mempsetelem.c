@@ -4,7 +4,7 @@
 
 
 void *
-libsimple_mempsetelem(void *buf_, const void *item, size_t size, size_t nitems)
+libsimple_mempsetelem(void *buf_, const void *item, size_t size, size_t nitems) /* TODO test */
 {
 	switch (size) {
 	case 0:
@@ -38,8 +38,10 @@ libsimple_mempsetelem(void *buf_, const void *item, size_t size, size_t nitems)
 	default:
 		{
 			char *buf = buf_;
+			size_t i;
 			for (; nitems--; buf += size)
-				memcpy(buf, item, size);
+				for (i = 0; i < size; i++)
+					buf[i] = ((const char *)item)[i];
 			return buf;
 		}
 	}
