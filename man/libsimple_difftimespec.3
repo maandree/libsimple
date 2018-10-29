@@ -1,0 +1,118 @@
+.TH LIBSIMPLE_DIFFTIMESPEC 3 2018-10-29 libsimple
+.SH NAME
+libsimple_difftimespec \- calculate the difference of two durations
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+int libsimple_difftimespec(struct timespec *\fIdiff\fP, const struct timespec *\fIminuend\fP, const struct timespec *\fIsubtrahend\fP);
+int libsimple_difftimeval(struct timeval *\fIdiff\fP, const struct timeval *\fIminuend\fP, const struct timeval *\fIsubtrahend\fP);
+
+#ifndef difftimespec
+# define difftimespec libsimple_difftimespec
+#endif
+#ifndef difftimeval
+# define difftimeval libsimple_difftimeval
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_difftimespec ()
+and
+.BR libsimple_difftimeval ()
+functions calculates the diffence of
+.I minuend
+and
+.I subtrahend
+.RI ( minuend
+is subtracted by
+.IR subtrahend )
+and stores the result in
+.IR diff .
+.SH RETURN VALUE
+The
+.BR libsimple_difftimespec ()
+and
+.BR libsimple_difftimeval ()
+functions return 0 on successful completion;
+otherwise, \−1 is returned and
+.I errno
+is set to indicate the error.
+.SH ERRORS
+The
+.BR libsimple_difftimespec ()
+and
+.BR libsimple_difftimeval ()
+functions fail if:
+.TP
+.B ERANGE
+The result is too large or too small to be stored; if the
+result is too large
+.I *diff
+will be set to
+.I {.tv_sec=TIME_MAX,tv_nsec=999999999L}
+for the
+.BR libsimple_difftimespec ()
+function and to
+.I {.tv_sec=TIME_MAX,tv_usec=999999L}
+for the
+.BR libsimple_difftimeval ()
+function, if the result is too small
+.I *diff
+will be set to
+.I {.tv_sec=TIME_MIN,tv_nsec=0}
+for the
+.BR libsimple_difftimespec ()
+function and to
+.I {.tv_sec=TIME_MIN,tv_usec=0}
+for the
+.BR libsimple_difftimeval ()
+function.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_difftimespec ()
+.br
+.BR libsimple_difftimeval ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_difftimespec ()
+.br
+.BR libsimple_difftimeval ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_difftimespec ()
+.br
+.BR libsimple_difftimeval ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_sumtimespec (3),
+.BR libsimple_multimespec (3),
+.BR libsimple_cmptimespec (3),
+.BR libsimple_timespectostr (3),
+.BR libsimple_strtotimespec (3),
+.BR libsimple_timespectodouble (3),
+.BR libsimple_doubletotimespec (3),
+.BR libsimple_timeval2timespec (3)

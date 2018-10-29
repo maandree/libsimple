@@ -1,0 +1,115 @@
+.TH LIBSIMPLE_SUMTIMESPEC 3 2018-10-29 libsimple
+.SH NAME
+libsimple_sumtimespec \- calculate the sum of two durations
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+int libsimple_sumtimespec(struct timespec *\fIsum\fP, const struct timespec *\fIaugend\fP, const struct timespec *\fIaddend\fP);
+int libsimple_sumtimeval(struct timeval *\fIsum\fP, const struct timeval *\fIaugend\fP, const struct timeval *\fIaddend\fP);
+
+#ifndef sumtimespec
+# define sumtimespec libsimple_sumtimespec
+#endif
+#ifndef sumtimeval
+# define sumtimeval libsimple_sumtimeval
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_sumtimespec ()
+and
+.BR libsimple_sumtimeval ()
+functions calculates the sum of
+.I augend
+and
+.I addend
+and stores the result in
+.IR sum .
+.SH RETURN VALUE
+The
+.BR libsimple_sumtimespec ()
+and
+.BR libsimple_sumtimeval ()
+functions return 0 on successful completion;
+otherwise, \−1 is returned and
+.I errno
+is set to indicate the error.
+.SH ERRORS
+The
+.BR libsimple_sumtimespec ()
+and
+.BR libsimple_sumtimeval ()
+functions fail if:
+.TP
+.B ERANGE
+The result is too large or too small to be stored; if the
+result is too large
+.I *sum
+will be set to
+.I {.tv_sec=TIME_MAX,tv_nsec=999999999L}
+for the
+.BR libsimple_sumtimespec ()
+function and to
+.I {.tv_sec=TIME_MAX,tv_usec=999999L}
+for the
+.BR libsimple_sumtimeval ()
+function, if the result is too small
+.I *sum
+will be set to
+.I {.tv_sec=TIME_MIN,tv_nsec=0}
+for the
+.BR libsimple_sumtimespec ()
+function and to
+.I {.tv_sec=TIME_MIN,tv_usec=0}
+for the
+.BR libsimple_sumtimeval ()
+function.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_sumtimespec ()
+.br
+.BR libsimple_sumtimeval ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_sumtimespec ()
+.br
+.BR libsimple_sumtimeval ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_sumtimespec ()
+.br
+.BR libsimple_sumtimeval ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_difftimespec (3),
+.BR libsimple_multimespec (3),
+.BR libsimple_cmptimespec (3),
+.BR libsimple_timespectostr (3),
+.BR libsimple_strtotimespec (3),
+.BR libsimple_timespectodouble (3),
+.BR libsimple_doubletotimespec (3),
+.BR libsimple_timeval2timespec (3)

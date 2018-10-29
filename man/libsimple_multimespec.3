@@ -1,0 +1,115 @@
+.TH LIBSIMPLE_MULTIMESPEC 3 2018-10-29 libsimple
+.SH NAME
+libsimple_multimespec \- multiply a duration with an integer
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+int libsimple_multimespec(struct timespec *\fIprod\fP, const struct timespec *\fImultiplicand\fP, int \fImultiplier\fP);
+int libsimple_multimeval(struct timeval *\fIprod\fP, const struct timeval *\fImultiplicand\fP, int \fImultiplier\fP);
+
+#ifndef multimespec
+# define multimespec libsimple_multimespec
+#endif
+#ifndef multimeval
+# define multimeval libsimple_multimeval
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_multimespec ()
+and
+.BR libsimple_multimeval ()
+functions calculates the product of
+.I multiplicand
+and
+.I multiplier
+and stores the result in
+.IR prod .
+.SH RETURN VALUE
+The
+.BR libsimple_multimespec ()
+and
+.BR libsimple_multimeval ()
+functions return 0 on successful completion;
+otherwise, \−1 is returned and
+.I errno
+is set to indicate the error.
+.SH ERRORS
+The
+.BR libsimple_multimespec ()
+and
+.BR libsimple_multimeval ()
+functions fail if:
+.TP
+.B ERANGE
+The result is too large or too small to be stored; if the
+result is too large
+.I *diff
+will be set to
+.I {.tv_sec=TIME_MAX,tv_nsec=999999999L}
+for the
+.BR libsimple_multimespec ()
+function and to
+.I {.tv_sec=TIME_MAX,tv_usec=999999L}
+for the
+.BR libsimple_multimeval ()
+function, if the result is too small
+.I *diff
+will be set to
+.I {.tv_sec=TIME_MIN,tv_nsec=0}
+for the
+.BR libsimple_multimespec ()
+function and to
+.I {.tv_sec=TIME_MIN,tv_usec=0}
+for the
+.BR libsimple_multimeval ()
+function.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_multimespec ()
+.br
+.BR libsimple_multimeval ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_multimespec ()
+.br
+.BR libsimple_multimeval ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_multimespec ()
+.br
+.BR libsimple_multimeval ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_sumtimespec (3),
+.BR libsimple_difftimespec (3),
+.BR libsimple_cmptimespec (3),
+.BR libsimple_timespectostr (3),
+.BR libsimple_strtotimespec (3),
+.BR libsimple_timespectodouble (3),
+.BR libsimple_doubletotimespec (3),
+.BR libsimple_timeval2timespec (3)

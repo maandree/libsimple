@@ -1,0 +1,95 @@
+.TH LIBSIMPLE_CMPTIMESPEC 3 2018-10-29 libsimple
+.SH NAME
+libsimple_cmptimespec \- calculate the sum of two durations
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+static inline int libsimple_cmptimespec(const struct timespec *\fIa\fP, const struct timespec *\fIb\fP);
+static inline int libsimple_cmptimeval(const struct timeval *\fIa\fP, const struct timeval *\fIb\fP);
+
+#ifndef cmptimespec
+# define cmptimespec libsimple_cmptimespec
+#endif
+#ifndef cmptimeval
+# define cmptimeval libsimple_cmptimeval
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_cmptimespec ()
+and
+.BR libsimple_cmptimeval ()
+functions compares the values of
+.I a
+and
+.IR b ,
+returning a value indicating which is larger, if any.
+.SH RETURN VALUE
+The
+.BR libsimple_cmptimespec ()
+and
+.BR libsimple_cmptimeval ()
+functions return \-1 if
+.I a
+is less than
+.IR b ,
++1 if
+.I a
+is greater than
+.IR b ,
+and 0 otherwise.
+.SH ERRORS
+The
+.BR libsimple_cmptimespec ()
+and
+.BR libsimple_cmptimeval ()
+functions cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_cmptimespec ()
+.br
+.BR libsimple_cmptimeval ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_cmptimespec ()
+.br
+.BR libsimple_cmptimeval ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_cmptimespec ()
+.br
+.BR libsimple_cmptimeval ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_sumtimespec (3),
+.BR libsimple_difftimespec (3),
+.BR libsimple_multimespec (3),
+.BR libsimple_timespectostr (3),
+.BR libsimple_strtotimespec (3),
+.BR libsimple_timespectodouble (3),
+.BR libsimple_doubletotimespec (3),
+.BR libsimple_timeval2timespec (3)
