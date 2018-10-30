@@ -1,6 +1,6 @@
 .TH LIBSIMPLE_DIFFTIMESPEC 3 2018-10-29 libsimple
 .SH NAME
-libsimple_difftimespec \- calculate the difference of two durations
+libsimple_difftimespec, libsimple_difftimeval \- calculate the difference of two durations
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -38,7 +38,7 @@ The
 and
 .BR libsimple_difftimeval ()
 functions return 0 on successful completion;
-otherwise, \−1 is returned and
+otherwise, \-1 is returned and
 .I errno
 is set to indicate the error.
 .SH ERRORS
@@ -53,21 +53,21 @@ The result is too large or too small to be stored; if the
 result is too large
 .I *diff
 will be set to
-.I {.tv_sec=TIME_MAX,tv_nsec=999999999L}
+.I {.tv_sec=TIME_MAX,.tv_nsec=999999999L}
 for the
 .BR libsimple_difftimespec ()
 function and to
-.I {.tv_sec=TIME_MAX,tv_usec=999999L}
+.I {.tv_sec=TIME_MAX,.tv_usec=999999L}
 for the
 .BR libsimple_difftimeval ()
 function, if the result is too small
 .I *diff
 will be set to
-.I {.tv_sec=TIME_MIN,tv_nsec=0}
+.I {.tv_sec=TIME_MIN,.tv_nsec=0}
 for the
 .BR libsimple_difftimespec ()
 function and to
-.I {.tv_sec=TIME_MIN,tv_usec=0}
+.I {.tv_sec=TIME_MIN,.tv_usec=0}
 for the
 .BR libsimple_difftimeval ()
 function.

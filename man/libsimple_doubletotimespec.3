@@ -1,0 +1,88 @@
+.TH LIBSIMPLE_DOUBLETOTIMESPEC 3 2018-10-30 libsimple
+.SH NAME
+libsimple_doubletotimespec, libsimple_doubletotimeval \- convert a double to a duration data structure
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+void libsimple_doubletotimespec(struct timespec *\fIts\fP, double \fId\fP);
+void libsimple_doubletotimeval(struct timeval *\fItv\fP, double \fId\fP);
+
+#ifndef doubletotimespec
+# define doubletotimespec libsimple_doubletotimespec
+#endif
+#ifndef doubletotimeval
+# define doubletotimeval libsimple_doubletotimeval
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_doubletotimespec ()
+function converts the real value
+.I d
+to a
+.B struct timespec
+and stores the result in
+.IR ts .
+The
+.BR libsimple_doubletotimeval ()
+function converts the real value
+.I d
+to a
+.B struct timeval
+and stores the result in
+.IR tv .
+.PP
+Neither of these functions perform an overflow check.
+.SH RETURN VALUE
+None.
+.SH ERRORS
+No error checks are made.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_doubletotimespec ()
+.br
+.BR libsimple_doubletotimeval ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_doubletotimespec ()
+.br
+.BR libsimple_doubletotimeval ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_doubletotimespec ()
+.br
+.BR libsimple_doubletotimeval ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_sumtimespec (3),
+.BR libsimple_difftimespec (3),
+.BR libsimple_multimespec (3),
+.BR libsimple_cmptimespec (3),
+.BR libsimple_timespectostr (3),
+.BR libsimple_strtotimespec (3),
+.BR libsimple_timespectodouble (3),
+.BR libsimple_timeval2timespec (3)

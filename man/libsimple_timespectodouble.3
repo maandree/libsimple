@@ -1,0 +1,90 @@
+.TH LIBSIMPLE_TIMESPECTODOUBLE 3 2018-10-30 libsimple
+.SH NAME
+libsimple_timespectodouble, libsimple_timevaltodouble \- convert a duration data structure to a double
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+static inline double libsimple_timespectodouble(const struct timespec *\fIts\fP);
+static inline double libsimple_timevaltodouble(const struct timeval *\fItv\fP);
+
+#ifndef timespectodouble
+# define timespectodouble libsimple_timespectodouble
+#endif
+#ifndef timevaltodouble
+# define timevaltodouble libsimple_timevaltodouble
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_timespectodouble ()
+and
+.BR libsimple_timevaltodouble ()
+functions convert
+.I ts
+and
+.IR tv ,
+respectively, to a
+.B double
+and return the result.
+.SH RETURN VALUE
+The
+.BR libsimple_timespectodouble ()
+and
+.BR libsimple_timevaltodouble ()
+functions return the input argument as a
+.BR double .
+.SH ERRORS
+The
+.BR libsimple_timespectodouble ()
+and
+.BR libsimple_timevaltodouble ()
+functions cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_timespectodouble ()
+.br
+.BR libsimple_timevaltodouble ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_timespectodouble ()
+.br
+.BR libsimple_timevaltodouble ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_timespectodouble ()
+.br
+.BR libsimple_timevaltodouble ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_sumtimespec (3),
+.BR libsimple_difftimespec (3),
+.BR libsimple_multimespec (3),
+.BR libsimple_cmptimespec (3),
+.BR libsimple_timespectostr (3),
+.BR libsimple_strtotimespec (3),
+.BR libsimple_doubletotimespec (3),
+.BR libsimple_timeval2timespec (3)
