@@ -1,0 +1,145 @@
+.TH LIBSIMPLE_TIMESPECTOSTR 3 2018-10-30 libsimple
+.SH NAME
+libsimple_timespectostr, libsimple_timevaltostr \- convert a duration data structure to a string
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+char *libsimple_timespectostr(char *restrict \fIbuf\fP, const struct timespec *restrict \fIts\fP);
+char *libsimple_timevaltostr(char *restrict \fIbuf\fP, const struct timeval *restrict \fItv\fP);
+
+#ifndef timespectostr
+# define timespectostr libsimple_timespectostr
+#endif
+#ifndef timevaltostr
+# define timevaltostr libsimple_timevaltostr
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_timespectostr ()
+and
+.BR libsimple_timevaltostr ()
+functions convert
+.I ts
+and
+.IR tv ,
+respectively, to a textual represention contain only a
+real value of the number of seconds the input represents.
+.PP
+If
+.I buf
+is
+.BR NULL ,
+a new pointer is allocated, otherwise
+.I buf
+is used as storage buffer for the string and is returned.
+Unless
+.I buf
+is
+.BR NULL ,
+it should be at least
+.I INTSTRLEN(time_t)+12
+bytes for the
+.BR libsimple_timespectostr ()
+function, and less 3 bytes
+for the
+.BR libsimple_timevaltostr ()
+function.
+.PP
+The returned string will always start with either a
+.B +
+or a
+.BR \- ,
+and will always contain 9 (for the
+.BR libsimple_timespectostr ()
+function) or 6 (for the
+.BR libsimple_timevaltostr ()
+function) decimals.
+.SH RETURN VALUE
+The
+.BR libsimple_timespectostr ()
+and
+.BR libsimple_timevaltostr ()
+functions return the duration as a textual
+representation of the it as a real value of
+seconds, without any unit included in the text,
+upon successful completion. If
+.I buf
+is
+.BR NULL ,
+the returned pointer is a deallocatable, unique,
+pointer, otherwise the pointer
+.I buf
+is returned. On failure,
+.B NULL
+is returned.
+.SH ERRORS
+The
+.BR libsimple_timespectostr ()
+and
+.BR libsimple_timevaltostr ()
+functions fail if:
+.TP
+.B ENOMEM
+.I buf
+is
+.B NULL
+and the call to
+.BR malloc (3)
+failed because it could not allocate enough memory.
+.TP
+.B EINVAL
+.I ts->tv_nsec
+is negative or greater than 999\ 999\ 999, or
+.I tv->tv_usec
+is negative or greater than 999\ 999, or
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_timespectostr ()
+.br
+.BR libsimple_timevaltostr ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_timespectostr ()
+.br
+.BR libsimple_timevaltostr ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_timespectostr ()
+.br
+.BR libsimple_timevaltostr ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_minimise_number_string (3),
+.BR libsimple_sumtimespec (3),
+.BR libsimple_difftimespec (3),
+.BR libsimple_multimespec (3),
+.BR libsimple_cmptimespec (3),
+.BR libsimple_strtotimespec (3),
+.BR libsimple_timespectodouble (3),
+.BR libsimple_doubletotimespec (3),
+.BR libsimple_timeval2timespec (3)
