@@ -1,0 +1,112 @@
+.TH LIBSIMPLE_TIMEVAL2TIMESPEC 3 2018-10-30 libsimple
+.SH NAME
+libsimple_timeval2timespec, libsimple_timespec2timeval \- convert between timespec and timeval
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+static inline void libsimple_timeval2timespec(struct timespec *restrict \fIts\fP, const struct timeval *restrict \fItv\fP);
+int libsimple_timespec2timeval(struct timeval *restrict \fItv\fP, const struct timespec *restrict \fIts\fP);
+
+#ifndef timeval2timespec
+# define timeval2timespec libsimple_timeval2timespec
+#endif
+#ifndef timespec2timeval
+# define timespec2timeval libsimple_timespec2timeval
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_timeval2timespec ()
+converts the value
+.I *tv
+to a
+.B struct timespec
+and stores the result in
+.IR ts .
+.PP
+The
+.BR libsimple_timespec2timeval ()
+converts the value
+.I *ts
+to a
+.BR "struct timeval" ,
+rounding to nearest microsecond,
+and stores the result in
+.IR tv .
+.SH RETURN VALUE
+The
+.BR libsimple_timespec2timeval ()
+function returns 0 on successful completion; otherwise -1 is returned
+and sets
+.I errno
+to indicate the error.
+.PP
+The
+.BR libsimple_timeval2timespec ()
+function does not return a value.
+.SH ERRORS
+The
+.BR libsimple_timespec2timeval ()
+function fail if:
+.TP
+.B EOVERFLOW
+The value
+.I {.tv_sec=TIME_MAX,.tv_nsec=999999500L}
+or a greater value converted, which would lead to overflow.
+The value
+.I {.tv_sec=TIME_MAX,.tv_usec=999999L}
+will be stored in
+.IR tv .
+.PP
+The
+.BR libsimple_timeval2timespec ()
+function cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_timeval2timespec ()
+.br
+.BR libsimple_timespec2timeval ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_timeval2timespec ()
+.br
+.BR libsimple_timespec2timeval ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_timeval2timespec ()
+.br
+.BR libsimple_timespec2timeval ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_sumtimespec (3),
+.BR libsimple_difftimespec (3),
+.BR libsimple_multimespec (3),
+.BR libsimple_cmptimespec (3),
+.BR libsimple_timespectostr (3),
+.BR libsimple_strtotimespec (3),
+.BR libsimple_timespectodouble (3),
+.BR libsimple_doubletotimespec (3)
