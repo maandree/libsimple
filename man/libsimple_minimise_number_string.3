@@ -1,0 +1,64 @@
+.TH LIBSIMPLE_MINIMISE_NUMBER_STRING 3 2018-10-31 libsimple
+.SH NAME
+libsimple_minimise_number_string \- ninimise a numerical string
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+char *libsimple_minimise_number_string(char *\fIs\fP);
+
+#ifndef minimise_number_string
+# define minimise_number_string libsimple_minimise_number_string
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_minimise_number_string ()
+function minimises a string representing a real value with
+the assumption that the string is on the format
+.B [+-]\e?[0-9]*\e(\e.[0-9]*\e)\e?
+(repeating decimals are not supported).
+.SH RETURN VALUE
+The
+.BR libsimple_minimise_number_string ()
+function returns the pointer
+.IR s .
+.SH ERRORS
+The
+.BR libsimple_minimise_number_string ()
+function cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_minimise_number_string ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_minimise_number_string ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_minimise_number_string ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_timespectostr (3)

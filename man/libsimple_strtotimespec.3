@@ -1,0 +1,133 @@
+.TH LIBSIMPLE_STRTOTIMESPEC 3 2018-10-31 libsimple
+.SH NAME
+libsimple_strtotimespec, libsimple_strtotimeval \- convert a string to a duration data structure
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+int libsimple_strtotimespec(struct timespec *restrict \fIts\fP, const char *\fIs\fP, char **\fIend\fP);
+int libsimple_strtotimeval(struct timeval *restrict \fItv\fP, const char *\fIs\fP, char **\fIend\fP);
+
+#ifndef strtotimespec
+# define strtotimespec libsimple_strtotimespec
+#endif
+#ifndef strtotimeval
+# define strtotimeval libsimple_strtotimeval
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_strtotimespec ()
+and
+.BR libsimple_strtotimeval ()
+functions will parse the string
+.IR s ,
+representing a real value of number of seconds,
+and store the value in
+.I ts
+and
+.R tv
+respectively, rounding to the nearest nanosecond
+(for the
+.BR libsimple_strtotimespec ())
+or microsecond
+(for the
+.BR libsimple_strtotimeval ()).
+These functions will ignore any leading whitespace
+and byte where the parsing stopped, as
+.I s
+with an offset, to
+.IR end .
+The parsed part of
+.I s
+must contain atleast one digit and be on the
+format
+.BR [+-]\e?[0-9]*\e(\e.[0-9]*\e(\e.[0-9]*\e|([0-9]*)\e)\e?\e)\e? .
+where the digits in
+.BR \e2 ,
+if any, are repeating decimals and must contain atleast
+one digit if it is included.
+.SH RETURN VALUE
+The
+.BR libsimple_strtotimespec ()
+and
+.BR libsimple_strtotimeval ()
+functions return 0 upon successful completion;
+otherwise \-1 is returned.
+.SH ERRORS
+The
+.BR libsimple_strtotimespec ()
+and
+.BR libsimple_strtotimeval ()
+functions fail if:
+.TP
+.B EINVAL
+.I s
+does not represent a real value in a recognised format.
+.I *end
+will not be set.
+.TP
+.B ERANGE
+The result is too large or too small to be store. Either
+.I *ts
+will be set to
+.I {.tv_sec=TIME_MAX,.tv_nsec=999999999L}
+and
+.I *tv
+set to
+.I {.tv_sec=TIME_MAX,.tv_usec=999999L}
+(if the result is too large) or to
+.I {.tv_sec=TIME_MIN,.tv_nsec=0L}
+and
+.I {.tv_sec=TIME_MIN,.tv_usec=0L}
+(if the result is too small).
+.I *end
+will be set.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_strtotimespec ()
+.br
+.BR libsimple_strtotimeval ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_strtotimespec ()
+.br
+.BR libsimple_strtotimeval ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_strtotimespec ()
+.br
+.BR libsimple_strtotimeval ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_sumtimespec (3),
+.BR libsimple_difftimespec (3),
+.BR libsimple_multimespec (3),
+.BR libsimple_cmptimespec (3),
+.BR libsimple_timespectostr (3),
+.BR libsimple_timespectodouble (3),
+.BR libsimple_doubletotimespec (3),
+.BR libsimple_timeval2timespec (3)

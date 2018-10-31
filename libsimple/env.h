@@ -93,9 +93,9 @@ libsimple_putenvf(const char *__fmt, ...)
  * only the name, but this can couse problems in some programs
  * and should not done; the name however must not be empty
  * 
- * On failure, the libsimple_enprintf function is called,
+ * On failure, the `libsimple_enprintf` function is called,
  * cause the program to print an error message and exit,
- * see libsimple_enprintf for more information
+ * see `libsimple_enprintf` for more information
  * 
  * @param  status  The exit value for the process in case of failure
  * @param  fmt     Format string, see vsprintf(3)
@@ -117,9 +117,9 @@ void libsimple_envputenvf(int, const char *, va_list);
  * only the name, but this can couse problems in some programs
  * and should not done; the name however must not be empty
  * 
- * On failure, the libsimple_enprintf function is called,
+ * On failure, the `libsimple_enprintf` function is called,
  * cause the program to print an error message and exit,
- * see libsimple_enprintf for more information
+ * see `libsimple_enprintf` for more information
  * 
  * @param  status  The exit value for the process in case of failure
  * @param  fmt     Format string, see vsprintf(3)
@@ -148,9 +148,9 @@ libsimple_enputenvf(int __status, const char *__fmt, ...)
  * only the name, but this can couse problems in some programs
  * and should not done; the name however must not be empty
  * 
- * On failure, the libsimple_eprintf function is called,
+ * On failure, the `libsimple_eprintf` function is called,
  * cause the program to print an error message and exit,
- * see libsimple_eprintf for more information
+ * see `libsimple_eprintf` for more information
  * 
  * @param  fmt  Format string, see vsprintf(3)
  * @param  ap   Format arguments, see vsprintf(3)
@@ -172,9 +172,9 @@ static inline void libsimple_evputenvf(const char *__fmt, va_list __ap)
  * only the name, but this can couse problems in some programs
  * and should not done; the name however must not be empty
  * 
- * On failure, the libsimple_eprintf function is called,
+ * On failure, the `libsimple_eprintf` function is called,
  * cause the program to print an error message and exit,
- * see libsimple_eprintf for more information
+ * see `libsimple_eprintf` for more information
  * 
  * @param  fmt  Format string, see vsprintf(3)
  * @param  ap   Format arguments, see vsprintf(3)
