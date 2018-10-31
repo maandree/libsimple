@@ -1,5 +1,9 @@
 /* See LICENSE file for copyright and license details. */
 
+/*
+ * Alignment must be a power of 2.
+ */
+
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __warn_unused_result__)))
 static inline void *
 libsimple_vmemalignzn(int __clear, size_t __alignment, size_t __n, va_list __ap) /* TODO test ([v]memalign[z]n) */

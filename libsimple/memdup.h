@@ -37,7 +37,7 @@ void *libsimple_memdup(const void *, size_t);
 
 
 /**
- * Version of `libsimple_memdup` that calles `libsimple_enprintf` on error
+ * Version of `libsimple_memdup` that calls `libsimple_enprintf` on error
  * 
  * @param   status  Exit value in case of failure
  * @param   s       The bytes to copy
@@ -52,7 +52,7 @@ void *libsimple_enmemdup(int, const void *, size_t);
 
 
 /**
- * Version of `libsimple_memdup` that calles `libsimple_eprintf` on error
+ * Version of `libsimple_memdup` that calls `libsimple_eprintf` on error
  * 
  * @param   s  The bytes to copy
  * @param   n  The number of bytes to copy

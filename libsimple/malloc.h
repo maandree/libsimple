@@ -69,8 +69,7 @@ libsimple_mallocn(size_t __n, ... /*, (size_t)0 */)
  * @param   n       The number of bytes to allocate, the behaviour of
  *                  this function is unspecified for the value 0
  * @return          A unique pointer with at least the specified size
- *                  and with the alignment `alignof(max_align_t)`;
- *                  `NULL` on failure
+ *                  and with the alignment `alignof(max_align_t)`
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_size__(2), __warn_unused_result__, __returns_nonnull__)))
 void *libsimple_enmalloc(int, size_t);
@@ -83,8 +82,8 @@ void *libsimple_enmalloc(int, size_t);
  * Dynamically allocates heap allocated, uninitialised,
  * memory with default alignment (`alignof(max_align_t)`)
  * 
- * The product of all arguments, up to the first 0,
- * will be used as the number of bytes to allocated
+ * The product of all arguments except `status`, up to the
+ * first 0, will be used as the number of bytes to allocated
  * 
  * On failure, the `libsimple_enprintf` function is called,
  * cause the program to print an error message and exit,
@@ -96,8 +95,7 @@ void *libsimple_enmalloc(int, size_t);
  *                  all arguments should have the type `size_t`, and
  *                  list must end with 0 (which is not factor)
  * @return          A unique pointer with at least the specified size
- *                  and with the alignment `alignof(max_align_t)`;
- *                  `NULL` on failure
+ *                  and with the alignment `alignof(max_align_t)`
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_envmallocn(int __status, size_t __n, va_list __ap)
@@ -111,8 +109,8 @@ static inline void *libsimple_envmallocn(int __status, size_t __n, va_list __ap)
  * Dynamically allocates heap allocated, uninitialised,
  * memory with default alignment (`alignof(max_align_t)`)
  * 
- * The product of all arguments, up to the first 0,
- * will be used as the number of bytes to allocated
+ * The product of all arguments except `status`, up to the
+ * first 0, will be used as the number of bytes to allocated
  * 
  * On failure, the `libsimple_enprintf` function is called,
  * cause the program to print an error message and exit,
@@ -124,8 +122,7 @@ static inline void *libsimple_envmallocn(int __status, size_t __n, va_list __ap)
  *                  all arguments should have the type `size_t`, and
  *                  list must end with 0 (which is not factor)
  * @return          A unique pointer with at least the specified size
- *                  and with the alignment `alignof(max_align_t)`;
- *                  `NULL` on failure
+ *                  and with the alignment `alignof(max_align_t)`
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *
@@ -152,8 +149,7 @@ libsimple_enmallocn(int __status, size_t __n, ... /*, (size_t)0 */)
  * @param   n  The number of bytes to allocate, the behaviour of
  *             this function is unspecified for the value 0
  * @return     A unique pointer with at least the specified size
- *             and with the alignment `alignof(max_align_t)`;
- *             `NULL` on failure
+ *             and with the alignment `alignof(max_align_t)`
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_size__(1), __warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_emalloc(size_t __n)
@@ -174,14 +170,12 @@ static inline void *libsimple_emalloc(size_t __n)
  * cause the program to print an error message and exit,
  * see `libsimple_eprintf` for more information
  * 
- * @param   status  The exit value for the process in case of failure
- * @param   n       First factor for the allocation size, must not be 0
- * @param   ap      The rest of the factors for the allocation size,
- *                  all arguments should have the type `size_t`, and
- *                  list must end with 0 (which is not factor)
- * @return          A unique pointer with at least the specified size
- *                  and with the alignment `alignof(max_align_t)`;
- *                  `NULL` on failure
+ * @param   n   First factor for the allocation size, must not be 0
+ * @param   ap  The rest of the factors for the allocation size,
+ *              all arguments should have the type `size_t`, and
+ *              list must end with 0 (which is not factor)
+ * @return      A unique pointer with at least the specified size
+ *              and with the alignment `alignof(max_align_t)`
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_evmallocn(size_t __n, va_list __ap)
@@ -202,14 +196,12 @@ static inline void *libsimple_evmallocn(size_t __n, va_list __ap)
  * cause the program to print an error message and exit,
  * see `libsimple_eprintf` for more information
  * 
- * @param   status  The exit value for the process in case of failure
- * @param   n       First factor for the allocation size, must not be 0
- * @param   ...     The rest of the factors for the allocation size,
- *                  all arguments should have the type `size_t`, and
- *                  list must end with 0 (which is not factor)
- * @return          A unique pointer with at least the specified size
- *                  and with the alignment `alignof(max_align_t)`;
- *                  `NULL` on failure
+ * @param   n    First factor for the allocation size, must not be 0
+ * @param   ...  The rest of the factors for the allocation size,
+ *               all arguments should have the type `size_t`, and
+ *               list must end with 0 (which is not factor)
+ * @return       A unique pointer with at least the specified size
+ *               and with the alignment `alignof(max_align_t)`
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *

@@ -1,5 +1,10 @@
 /* See LICENSE file for copyright and license details. */
 
+/*
+ * The alignment will be the page size.
+ * The allocation size is rounded up to the next multiple of the alignment.
+ */
+
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__)))
 static inline void *
 libsimple_vpvalloczn(int __clear, size_t __n, va_list __ap) /* TODO test ([v]pvalloc[z]n) */

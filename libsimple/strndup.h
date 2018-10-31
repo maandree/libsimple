@@ -26,7 +26,7 @@
 
 
 /**
- * Version of strndup(3) that calles `libsimple_enprintf` on error
+ * Version of strndup(3) that calls `libsimple_enprintf` on error
  * 
  * @param   status  Exit value in case of failure
  * @param   s       The string to copy
@@ -41,7 +41,7 @@ char *libsimple_enstrndup(int, const char *, size_t);
 
 
 /**
- * Version of strndup(3) that calles `libsimple_eprintf` on error
+ * Version of strndup(3) that calls `libsimple_eprintf` on error
  * 
  * @param   s  The string to copy
  * @param   n  The maximum number of bytes to copy

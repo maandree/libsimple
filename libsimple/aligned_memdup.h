@@ -46,7 +46,7 @@ void *libsimple_aligned_memdup(const void *, size_t, size_t);
 
 
 /**
- * Version of `libsimple_aligned_memdup` that calles `libsimple_enprintf` on error
+ * Version of `libsimple_aligned_memdup` that calls `libsimple_enprintf` on error
  * 
  * @param   status     Exit value in case of failure
  * @param   s          The bytes to copy
@@ -62,7 +62,7 @@ void *libsimple_enaligned_memdup(int, const void *, size_t, size_t);
 
 
 /**
- * Version of `libsimple_aligned_memdup` that calles `libsimple_eprintf` on error
+ * Version of `libsimple_aligned_memdup` that calls `libsimple_eprintf` on error
  * 
  * @param   s          The bytes to copy
  * @param   alignment  The alignment of the returned pointer

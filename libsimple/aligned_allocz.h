@@ -1,5 +1,10 @@
 /* See LICENSE file for copyright and license details. */
 
+/*
+ * Alignment must be a power of 2.
+ * Allocation size must be a mutiple of the alignment.
+ */
+
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __warn_unused_result__)))
 void *libsimple_valigned_alloczn(int, size_t, size_t, va_list);
 #ifndef valigned_alloczn

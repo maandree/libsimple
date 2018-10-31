@@ -22,7 +22,7 @@
 
 
 /**
- * Version of strdup(3) that calles `libsimple_enprintf` on error
+ * Version of strdup(3) that calls `libsimple_enprintf` on error
  * 
  * @param   status  Exit value in case of failure
  * @param   s       The string to copy
@@ -36,7 +36,7 @@ char *libsimple_enstrdup(int, const char *);
 
 
 /**
- * Version of strdup(3) that calles `libsimple_eprintf` on error
+ * Version of strdup(3) that calls `libsimple_eprintf` on error
  * 
  * @param   s  The string to copy
  * @return     Duplicate of `s`

@@ -1,5 +1,9 @@
 /* See LICENSE file for copyright and license details. */
 
+/*
+ * Alignment must be a power of 2 and a multiple of `sizeof(void *)`.
+ */
+
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(1))))
 int libsimple_vposix_memalignzn(void **, int, size_t, size_t, va_list);
 #ifndef vposix_memalignzn
