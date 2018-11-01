@@ -74,10 +74,10 @@ to indicate the error, and the
 .BR libsimple_enmemdup (),
 and
 .BR libsimple_ememdup ()
-functions exit the process group. The
+functions exit the process. The
 .BR libsimple_memdupa ()
 function cannot fail, however the kernel
-can kill the process with a
+can kill the thread, and possibly the process, with a
 .B SIGSEGV
 signal if the memory cannot be allocated.
 .PP

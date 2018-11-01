@@ -55,10 +55,10 @@ functions return a non-null pointer, on failure the
 .BR libsimple_enstrdup (),
 and
 .BR libsimple_estrdup ()
-functions exit the process group. The
+functions exit the process. The
 .BR libsimple_strdupa ()
 function cannot fail, however the kernel
-can kill the process with a
+can kill the thread, and possibly the process, with a
 .B SIGSEGV
 signal if the memory cannot be allocated.
 .PP

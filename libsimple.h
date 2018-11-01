@@ -47,6 +47,11 @@
 #endif
 
 
+/**
+ * Exit value for `libsimple_eprintf`
+ * 
+ * Default value is 1
+ */
 extern int libsimple_default_failure_exit;
 
 
@@ -82,6 +87,17 @@ extern int libsimple_default_failure_exit;
 
 #define CLOSE(FD) libsimple_close(&(FD))
 
+
+/**
+ * Wrapper for close(3) that only calls close(3)
+ * if the file descriptor number is non-negative,
+ * and that will set it to -1 after closing
+ * 
+ * @param   fdp  Pointer to file descriptor number, will
+ *               be update to -1 if it is non-negative
+ * @return       Return value of close(3) (0 on success,
+ *               -1 on error), 0 if `*fdp < 0`
+ */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline int
 libsimple_close(int *__fdp)
@@ -94,6 +110,15 @@ libsimple_close(int *__fdp)
 	return __ret;
 }
 
+
+/**
+ * Check whether a byte is in a string of bytes
+ * 
+ * @param   c  The byte to look for, will not be found if it is the NUL byte
+ * @param   s  The string to look in
+ * @return     1 if the byte `c` is not the NUL byte and can be found in `s`,
+ *             0 otherwise
+ */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 static inline int libsimple_inchrset(int __c, const char *__s)
 { return __c && strchr(__s, __c); }
@@ -101,11 +126,13 @@ static inline int libsimple_inchrset(int __c, const char *__s)
 # define inchrset libsimple_inchrset
 #endif
 
+
 /**
  * Check whether a NUL-terminated string is encoded in UTF-8
  * 
  * @param   string              The string
- * @param   allow_modified_nul  Whether Modified UTF-8 is allowed, which allows a two-byte encoding for NUL
+ * @param   allow_modified_nul  Whether Modified UTF-8 is allowed, which
+ *                              allows a two-byte encoding for NUL
  * @return                      1 if good, 0 on encoding error
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
@@ -114,11 +141,32 @@ int libsimple_isutf8(const char *, int);
 # define isutf8 libsimple_isutf8
 #endif
 
+
+/**
+ * Remove an item from a list, keeping the list ordered
+ * 
+ * `list` must be non-void pointer to a complete type,
+ * the type of the pointer will be used to infer the
+ * width of the items in the list
+ * 
+ * @param  list:non-void pointer  The list
+ * @param  i:size_t               The index of the item to remove
+ * @param  n:size_t               Pointer to the number of items in the list, will be updated
+ */
 #define LIBSIMPLE_UNLIST(LIST, I, NP) libsimple_unlist((LIST), (I), (NP), sizeof(*(LIST)))
 #ifndef UNLIST
 # define UNLIST(LIST, I, NP) LIBSIMPLE_UNLIST((LIST), (I), (NP))
 #endif
 
+
+/**
+ * Remove an item from a list, keeping the list ordered
+ * 
+ * @param  list   The list
+ * @param  i      The index of the item to remove
+ * @param  n      Pointer to the number of items in the list, will be updated
+ * @param  width  The width, in bytes, of each item in the list
+ */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline void
 libsimple_unlist(void *__list, size_t __i, size_t *__np, size_t __width)

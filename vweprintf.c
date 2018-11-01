@@ -20,13 +20,13 @@ libsimple_vweprintf(const char *fmt, va_list ap)
 	va_list ap1;
 	va_list ap2;
 
-	if (!argv0 || !strncmp(fmt, "usage: ", strlen("usage: ")))
+	if (!argv0 || !strncmp(fmt, "usage: ", sizeof("usage: ") - 1))
 		prefix1 = prefix2 = "";
 
 	va_copy(ap1, ap);
 	va_copy(ap2, ap);
 	r = vsnprintf(NULL, 0, fmt, ap1);
-	if (0 <= r && (size_t)r < SIZE_MAX) {
+	if (0 <= r && r < 8096) {
 		message = alloca((size_t)r + 1);
 		vsprintf(message, fmt, ap2);
 	}

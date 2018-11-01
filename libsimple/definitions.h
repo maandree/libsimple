@@ -108,44 +108,125 @@
 #endif
 
 
+/**
+ * Get the smallest of two numerical values
+ * 
+ * @param   A  One of the values
+ * @param   B  The other value
+ * @return     The smallest of `A` and `B`
+ */
 #ifndef MIN
 # define MIN(A, B) ((A) < (B) ? (A) : (B))
 #endif
 
+
+/**
+ * Get the largest of two numerical values
+ * 
+ * @param   A  One of the values
+ * @param   B  The other value
+ * @return     The largest of `A` and `B`
+ */
 #ifndef MAX
 # define MAX(A, B) ((A) > (B) ? (A) : (B))
 #endif
 
+
+/**
+ * Get the smallest of three numerical values
+ * 
+ * @param   A  One of the values
+ * @param   B  Another one of the values
+ * @param   C  The last value
+ * @return     The smallest of `A`, `B`, and `C`
+ */
 #ifndef MIN3
 # define MIN3(A, B, C) MIN(MIN((A), (B)), (C))
 #endif
 
+
+/**
+ * Get the largest of three numerical values
+ * 
+ * @param   A  One of the values
+ * @param   B  Another one of the values
+ * @param   C  The last value
+ * @return     The largest of `A`, `B`, and `C`
+ */
 #ifndef MAX3
 # define MAX3(A, B, C) MAX(MAX((A), (B)), (C))
 #endif
 
 
+/**
+ * Get the number of elements in an array
+ * 
+ * @param   ARR      The array, must not be a pointer
+ * @return  :size_t  The number of elements in `ARR` (constant
+ *                   expression, unless its size is dynamic)
+ */
 #ifndef ELEMSOF
 # define ELEMSOF(ARR) (sizeof(ARR) / (sizeof(*(ARR))))
 #endif
 
+	
+/**
+ * Get the length of a string literal
+ * 
+ * This macro does not support the wide-character strings
+ * 
+ * @param   STR:const char []  The string, must be a literal
+ * @return  :size_t            The value of `strlen(STR)` as a constant expression
+ */
 #ifndef STRLEN
 # define STRLEN(STR) (sizeof(STR) - 1)
 #endif
 
+
+/**
+ * Get an approximation for the longest string an
+ * integer of the specific integer type can be
+ * converted to assuming it will not having an
+ * explicit '+' sign or any leading zeroes or
+ * other superfluous characters
+ * 
+ * The calculated approximation will not be less
+ * than the real limit
+ * 
+ * @param   TYPE:integer type  The type, must be an integer type, may be signed or unsigned
+ * @return  :size_t            A value close to, but not less than, the longest string a
+ *                             value of the type `TYPE` can be converted to without any
+ *                             superfluous characters (such as explitict '+' or leading zeroes')
+ *                             (constant expression)
+ */
 #ifndef INTSTRLEN
 # define INTSTRLEN(TYPE) ((sizeof(TYPE) == 1 ? 3 : 5 * (sizeof(TYPE) / 2)) + ((TYPE)-1 < 0))
 #endif
 
 
+/**
+ * Get the maximum value for an integer type
+ * 
+ * @param   TYPE:integer type  The type, must be an integer type, may be signed or unsigned
+ * @return  :TYPE              The largest value that can be stored in `TYPE` (constant expression)
+ */
 #ifndef TYPE_MAX
 # define TYPE_MAX(TYPE) ((TYPE)(((1ULL << (8 * sizeof(TYPE) - 1)) - 1) << ((TYPE)-1 > 0) | 1))
 #endif
 
+
+/**
+ * Get the minimum value for an integer type
+ * 
+ * @param   TYPE:integer type  The type, must be an integer type, may be signed or unsigned
+ * @return  :TYPE              The smallest value that can be stored in `TYPE` (constant expression)
+ */
 #ifndef TYPE_MIN
 # define TYPE_MIN(TYPE) ((TYPE)((TYPE)-1 > 0 ? 0 : (TYPE)~0 < (TYPE)-1 ? (TYPE)~0 : (TYPE)(1ULL << (8 * sizeof(TYPE) - 1))))
 #endif
 
+
+/* --- Maximum values --- */
 
 #ifndef BLKCNT64_MAX
 # define BLKCNT64_MAX   TYPE_MAX(blkcnt64_t)
@@ -283,6 +364,8 @@
 # define U_QUAD_MAX     TYPE_MAX(u_quad_t)
 #endif
 
+
+/* --- Minimum values --- */
 
 #ifndef BLKCNT64_MIN
 # define BLKCNT64_MIN   TYPE_MIN(blkcnt64_t)
