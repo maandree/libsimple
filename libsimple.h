@@ -83,11 +83,6 @@ extern int libsimple_default_failure_exit;
 #include "libsimple/strn.h"
 
 
-#define FREE(PTR) ((void)(free(PTR), (PTR) = NULL))
-
-#define CLOSE(FD) libsimple_close(&(FD))
-
-
 /**
  * Wrapper for close(3) that only calls close(3)
  * if the file descriptor number is non-negative,

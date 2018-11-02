@@ -50,15 +50,6 @@ The following macros are defined, unless already defined:
 	TYPE_MIN(TYPE)
 		Get the least value storable in an integer type.
 
-	FREE(PTR)
-		(free(PTR), (PTR) = NULL, 0)
-		Ensures that a pointer is not freed twice.
-
-	CLOSE(FD)
-		((FD) >= 0 ? (close(FD), (FD) = -1, 0) : 0)
-		Ensures that errno is not modified when closing an
-		already closed file descriptor.
-
 	Maximum values:
 		BLKCNT64_MAX, BLKCNT_MAX, BLKSIZE_MAX, CC_MAX, CLOCKID_MAX,
 		CLOCK_MAX, DEV_MAX, FSBLKCNT64_MAX, FSBLKCNT_MAX,

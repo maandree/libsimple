@@ -91,12 +91,12 @@ int
 main(void)
 {
 	struct allocinfo *volatile info;
-	void *ptr, *ptr2;
+	void *ptr;
 	struct timespec ts, ts1, ts2;
 	struct timeval tv1, tv2;
 	const char *cs;
 	char buf[1024], *s;
-	int intarray[10], fds[2], oldfd;
+	int intarray[10];
 	size_t i, j, n;
 
 	assert(libsimple_default_failure_exit == 1);
@@ -1175,32 +1175,6 @@ main(void)
 		assert(libsimple_posix_memalignz(&ptr, 1, 16 * sizeof(void *), 16) == ENOMEM && !errno);
 		assert(!alloc_fail_in);
 	}
-
-	assert((ptr = malloc(1)));
-	ptr2 = ptr;
-	if (have_custom_malloc()) {
-		info = get_allocinfo(ptr);
-		info->refcount = 2;
-	}
-	FREE(ptr);
-	assert(ptr == NULL);
-	if (have_custom_malloc()) {
-		assert(info->refcount == 1);
-		free(ptr2);
-	}
-
-	assert(!pipe(fds));
-	assert(fds[0] > 2 && fds[1] > 2 && fds[0] != fds[1]);
-	oldfd = fds[1];
-	assert(!CLOSE(fds[1]));
-	assert(fds[1] == -1);
-	assert(!CLOSE(fds[1]));
-	errno = 0;
-	assert(CLOSE(oldfd) == -1 && errno == EBADF);
-	errno = 0;
-	assert(oldfd == -1);
-	assert(!read(fds[0], buf, sizeof(buf)));
-	close(fds[0]);
 
 	assert(libsimple_memeq("abcxyz", "abc123", 3));
 	assert(!libsimple_memeq("abcxyz", "abc123", 4));
