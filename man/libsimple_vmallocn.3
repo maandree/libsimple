@@ -1,0 +1,228 @@
+.TH LIBSIMPLE_VMALLOCN 3 2018-11-03 libsimple
+.SH NAME
+libsimple_vmallocn \- allocate memory
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+static inline void *libsimple_vmallocn(size_t \fIn\fP, va_list \fIap\fP);
+static inline void *libsimple_envmallocn(int \fIstatus\fP, size_t \fIn\fP, va_list \fIap\fP);
+static inline void *libsimple_evmallocn(size_t \fIn\fP, va_list \fIap\fP);
+static inline void *libsimple_mallocn(size_t \fIn\fP, ..., /* (size_t)0 */);
+static inline void *libsimple_enmallocn(int \fIstatus\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+static inline void *libsimple_emallocn(size_t \fIn\fP, ..., /* (size_t)0 */);
+
+#ifndef vmallocn
+# define vmallocn libsimple_vmallocn
+#endif
+#ifndef envmallocn
+# define envmallocn libsimple_envmallocn
+#endif
+#ifndef evmallocn
+# define evmallocn libsimple_evmallocn
+#endif
+#ifndef mallocn
+# define mallocn libsimple_mallocn
+#endif
+#ifndef enmallocn
+# define enmallocn libsimple_enmallocn
+#endif
+#ifndef emallocn
+# define emallocn libsimple_emallocn
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_mallocn (),
+.BR libsimple_enmallocn (),
+and
+.BR libsimple_emallocn ()
+functions are wrappers for the
+.BR malloc (3)
+function, they allocate
+.I N
+uninitialised bytes to the heap and return a
+pointer with an alignment of
+.I alignof(max_align_t)
+to the allocated memory, where
+.I N
+is the product of
+.I n
+and all following arguments (which should have the type
+.BR size_t )
+up to the first 0;
+.I n
+must not be 0. The function
+.BR free (3)
+shall be called with the returned pointer as
+input when the allocated memory is no longer needed.
+.PP
+The
+.BR libsimple_enmallocn ()
+and
+.BR libsimple_emallocn ()
+functions will terminate the process if the memory
+cannot be allocated, by calling the
+.BR libsimple_enprintf ()
+and
+.BR libsimple_eprintf ()
+functions, respectively.
+On failure, the process's exit value will be
+.I status
+if the
+.BR libsimple_enmallocn ()
+function is used or
+.IR libsimple_default_failure_exit (3)
+if the
+.BR libsimple_emallocn ()
+function is used.
+.PP
+The
+.BR libsimple_vmallocn (),
+.BR libsimple_envmallocn (),
+and
+.BR libsimple_evmallocn ()
+functions are versions of the
+.BR libsimple_mallocn (),
+.BR libsimple_enmallocn (),
+and
+.BR libsimple_emallocn (),
+respectively, that use
+.B va_list
+instead of variadic arguments.
+.SH RETURN VALUE
+The
+.BR libsimple_vmallocn (),
+.BR libsimple_envmallocn (),
+.BR libsimple_evmallocn (),
+.BR libsimple_mallocn (),
+.BR libsimple_enmallocn (),
+and
+.BR libsimple_emallocn ()
+functions return a pointer to the allocated memory
+upon success completion; otherwise the
+.BR libsimple_vmallocn ()
+and
+.BR libsimple_mallocn ()
+functions return
+.B NULL
+and set
+.I errno
+it indicate the error, and the
+.BR libsimple_envmallocn (),
+.BR libsimple_evmallocn (),
+.BR libsimple_enmallocn (),
+and
+.BR libsimple_emallocn ()
+functions terminated the process.
+.SH ERRORS
+The
+.BR libsimple_vmallocn (),
+.BR libsimple_mallocn ()
+function will fail for the reasons specified for the
+.BR malloc (3)
+function, and if:
+.TP
+.B EINVAL
+.I n
+is 0.
+.PP
+The
+.BR libsimple_envmallocn (),
+.BR libsimple_evmallocn (),
+.BR libsimple_enmallocn (),
+and
+.BR libsimple_emallocn ()
+functions will terminate the process on failure.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_vmallocn (),
+.br
+.BR libsimple_envmallocn (),
+.br
+.BR libsimple_evmallocn (),
+.br
+.BR libsimple_mallocn (),
+.br
+.BR libsimple_enmallocn (),
+.br
+.BR libsimple_emallocn ()
+T}	Thread safety	MT-Safe env
+T{
+.BR libsimple_vmallocn (),
+.br
+.BR libsimple_envmallocn (),
+.br
+.BR libsimple_evmallocn (),
+.br
+.BR libsimple_mallocn (),
+.br
+.BR libsimple_enmallocn (),
+.br
+.BR libsimple_emallocn ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_vmallocn (),
+.br
+.BR libsimple_envmallocn (),
+.br
+.BR libsimple_evmallocn (),
+.br
+.BR libsimple_mallocn (),
+.br
+.BR libsimple_enmallocn (),
+.br
+.BR libsimple_emallocn ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None,
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_enmalloc (3),
+.BR libsimple_mallocz (3),
+.BR libsimple_vmalloczn (3),
+.BR libsimple_encalloc (3),
+.BR libsimple_vcallocn (3),
+.BR libsimple_enrealloc (3),
+.BR libsimple_vreallocn (3),
+.BR libsimple_vmemalignn (3),
+.BR libsimple_vmemalignzn (3),
+.BR libsimple_enmemalign (3),
+.BR libsimple_memalignz (3),
+.BR libsimple_enposix_memalign (3),
+.BR libsimple_posix_memalignz (3),
+.BR libsimple_vposix_memalignn (3),
+.BR libsimple_vposix_memalignzn (3),
+.BR libsimple_enaligned_alloc (3),
+.BR libsimple_aligned_allocz (3),
+.BR libsimple_valigned_allocn (3),
+.BR libsimple_valigned_alloczn (3),
+.BR libsimple_pvalloc (3),
+.BR libsimple_pvallocz (3),
+.BR libsimple_vpvallocn (3),
+.BR libsimple_vpvalloczn (3),
+.BR libsimple_valloc (3),
+.BR libsimple_vallocz (3),
+.BR libsimple_vvallocn (3),
+.BR libsimple_vvalloczn (3),
+.BR malloc (3)

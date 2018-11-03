@@ -1,0 +1,152 @@
+.TH LIBSIMPLE_ENCALLOC 3 2018-11-03 libsimple
+.SH NAME
+libsimple_encalloc \- allocate initialised memory or die
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+void *libsimple_encalloc(int \fIstatus\fP, size_t \fIn\fP, size_t \fIm\fP);
+static inline void *libsimple_ecalloc(size_t \fIn\fP, size_t \fIm\fP);
+
+#ifndef encalloc
+# define encalloc libsimple_encalloc
+#endif
+#ifndef ecalloc
+# define ecalloc libsimple_ecalloc
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_encalloc ()
+and
+.BR libsimple_ecalloc ()
+functions are wrappers for the
+.BR calloc (3)
+function, they allocate
+.I n*m
+zero-initialised bytes to the heap and return a
+pointer with an alignment of
+.I alignof(max_align_t)
+to the allocated memory. The function
+.BR free (3)
+shall be called with the returned pointer as
+input when the allocated memory is no longer needed.
+.PP
+The
+.BR libsimple_encalloc ()
+and
+.BR libsimple_ecalloc ()
+functions will terminate the process if the memory
+cannot be allocated (or if
+.I n
+or
+.I m
+is 0 and
+.BR calloc (3)
+returns
+.B NULL
+when it is used to allocate 0 bytes), by calling the
+.BR libsimple_enprintf ()
+and
+.BR libsimple_eprintf ()
+functions, respectively.
+On failure, the process's exit value will be
+.I status
+if the
+.BR libsimple_encalloc ()
+function is used or
+.IR libsimple_default_failure_exit (3)
+if the
+.BR libsimple_ecalloc ()
+function is used.
+.PP
+The
+.BR libsimple_encalloc ()
+and
+.BR libsimple_ecalloc ()
+functions behaviour is unspecified if
+.I n
+or
+.I m
+is 0.
+.SH RETURN VALUE
+The
+.BR libsimple_encalloc ()
+and
+.BR libsimple_ecalloc ()
+functions return a pointer to the allocated memory
+upon success completion; otherwise the process is terminated.
+.SH ERRORS
+The
+.BR libsimple_encalloc ()
+and
+.BR libsimple_ecalloc ()
+functions will terminate the process on failure.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_encalloc (),
+.br
+.BR libsimple_ecalloc ()
+T}	Thread safety	MT-Safe env
+T{
+.BR libsimple_encalloc (),
+.br
+.BR libsimple_ecalloc ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_encalloc (),
+.br
+.BR libsimple_ecalloc ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None,
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_enmalloc (3),
+.BR libsimple_mallocz (3),
+.BR libsimple_vmallocn (3),
+.BR libsimple_vmalloczn (3),
+.BR libsimple_vcallocn (3),
+.BR libsimple_enrealloc (3),
+.BR libsimple_vreallocn (3),
+.BR libsimple_vmemalignn (3),
+.BR libsimple_vmemalignzn (3),
+.BR libsimple_enmemalign (3),
+.BR libsimple_memalignz (3),
+.BR libsimple_enposix_memalign (3),
+.BR libsimple_posix_memalignz (3),
+.BR libsimple_vposix_memalignn (3),
+.BR libsimple_vposix_memalignzn (3),
+.BR libsimple_enaligned_alloc (3),
+.BR libsimple_aligned_allocz (3),
+.BR libsimple_valigned_allocn (3),
+.BR libsimple_valigned_alloczn (3),
+.BR libsimple_pvalloc (3),
+.BR libsimple_pvallocz (3),
+.BR libsimple_vpvallocn (3),
+.BR libsimple_vpvalloczn (3),
+.BR libsimple_valloc (3),
+.BR libsimple_vallocz (3),
+.BR libsimple_vvallocn (3),
+.BR libsimple_vvalloczn (3),
+.BR calloc (3)

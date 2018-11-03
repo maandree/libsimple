@@ -1,0 +1,171 @@
+.TH LIBSIMPLE_VALLOCZ 3 2018-11-03 libsimple
+.SH NAME
+libsimple_vallocz \- allocate optionally initialised memory with page size alignment
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+static inline void *libsimple_vallocz(int \fIclear\fP, size_t \fIn\fP);
+static inline void *libsimple_envallocz(int \fIstatus\fP, int \fIclear\fP, size_t \fIn\fP);
+static inline void *libsimple_evallocz(int \fIclear\fP, size_t \fIn\fP);
+
+#ifndef vallocz
+# define vallocz libsimple_vallocz
+#endif
+#ifndef envallocz
+# define envallocz libsimple_envallocz
+#endif
+#ifndef evallocz
+# define evallocz libsimple_evallocz
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_vallocz (),
+.BR libsimple_envallocz (),
+and
+.BR libsimple_evallocz ()
+functions allocate
+.I n
+bytes to the heap and return a pointer with an
+alignment of the page size
+to the allocated memory. The memory will be
+initialised with zeroes if
+.I clear
+is a non-zero value. The function
+.BR free (3)
+shall be called with the returned pointer as
+input when the allocated memory is no longer needed.
+.PP
+The
+.BR libsimple_envallocz ()
+and
+.BR libsimple_evallocz ()
+functions will terminate the process if the memory
+cannot be allocated of if the user tries to allocate
+0 bytes, by calling the
+.BR libsimple_enprintf ()
+and
+.BR libsimple_eprintf ()
+functions, respectively.
+On failure, the process's exit value will be
+.I status
+if the
+.BR libsimple_envallocz ()
+function is used or
+.IR libsimple_default_failure_exit (3)
+if the
+.BR libsimple_evallocz ()
+function is used.
+.PP
+The
+.BR libsimple_envallocz ()
+and
+.BR libsimple_evallocz ()
+functions behaviour is unspecified if
+.I n
+is 0.
+.SH RETURN VALUE
+The
+.BR libsimple_vallocz (),
+.BR libsimple_envallocz (),
+and
+.BR libsimple_evallocz ()
+functions return a pointer to the allocated memory
+upon success completion; otherwise the
+.BR libsimple_vallocz ()
+function return
+.B NULL
+and set
+.I errno
+it indicate the error, and the
+.BR libsimple_envallocz ()
+and
+.BR libsimple_evallocz ()
+functions terminated the process.
+.SH ERRORS
+The
+.BR libsimple_vallocz ()
+function will fail if:
+.TP
+.B ENOMEM
+Enough memory could not be allocated.
+.PP
+The
+.BR libsimple_envallocz ()
+and
+.BR libsimple_evallocz ()
+functions will terminate the process on failure.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_vallocz (),
+.br
+.BR libsimple_envallocz (),
+.br
+.BR libsimple_evallocz ()
+T}	Thread safety	MT-Safe env
+T{
+.BR libsimple_vallocz (),
+.br
+.BR libsimple_envallocz (),
+.br
+.BR libsimple_evallocz ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_vallocz (),
+.br
+.BR libsimple_envallocz (),
+.br
+.BR libsimple_evallocz ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None,
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_enmalloc (3),
+.BR libsimple_mallocz (3),
+.BR libsimple_vmallocn (3),
+.BR libsimple_vmalloczn (3),
+.BR libsimple_encalloc (3),
+.BR libsimple_vcallocn (3),
+.BR libsimple_enrealloc (3),
+.BR libsimple_vreallocn (3),
+.BR libsimple_vmemalignn (3),
+.BR libsimple_vmemalignzn (3),
+.BR libsimple_enmemalign (3),
+.BR libsimple_memalignz (3),
+.BR libsimple_enposix_memalign (3),
+.BR libsimple_posix_memalignz (3),
+.BR libsimple_vposix_memalignn (3),
+.BR libsimple_vposix_memalignzn (3),
+.BR libsimple_enaligned_alloc (3),
+.BR libsimple_aligned_allocz (3),
+.BR libsimple_valigned_allocn (3),
+.BR libsimple_valigned_alloczn (3),
+.BR libsimple_pvalloc (3),
+.BR libsimple_pvallocz (3),
+.BR libsimple_vpvallocn (3),
+.BR libsimple_vpvalloczn (3),
+.BR libsimple_valloc (3),
+.BR libsimple_vvallocn (3),
+.BR libsimple_vvalloczn (3)

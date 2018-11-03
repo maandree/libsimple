@@ -1,0 +1,228 @@
+.TH LIBSIMPLE_VPVALLOCZN 3 2018-11-03 libsimple
+.SH NAME
+libsimple_vpvalloczn \- allocate optionally initialised memory with page size alignment
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+static inline void *libsimple_vpvalloczn(int \fIclear\fP, size_t \fIn\fP, va_list \fIap\fP);
+static inline void *libsimple_envpvalloczn(int \fIstatus\fP, int \fIclear\fP, size_t \fIn\fP, va_list \fIap\fP);
+static inline void *libsimple_evpvalloczn(int \fIclear\fP, size_t \fIn\fP, va_list \fIap\fP);
+static inline void *libsimple_pvalloczn(int \fIclear\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+static inline void *libsimple_enpvalloczn(int \fIstatus\fP, int \fIclear\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+static inline void *libsimple_epvalloczn(int \fIclear\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+
+#ifndef vpvalloczn
+# define vpvalloczn libsimple_vpvalloczn
+#endif
+#ifndef envpvalloczn
+# define envpvalloczn libsimple_envpvalloczn
+#endif
+#ifndef evpvalloczn
+# define evpvalloczn libsimple_evpvalloczn
+#endif
+#ifndef pvalloczn
+# define pvalloczn libsimple_pvalloczn
+#endif
+#ifndef enpvalloczn
+# define enpvalloczn libsimple_enpvalloczn
+#endif
+#ifndef epvalloczn
+# define epvalloczn libsimple_epvalloczn
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_pvalloczn (),
+.BR libsimple_enpvalloczn (),
+and
+.BR libsimple_epvalloczn ()
+functions allocate
+.I N
+bytes, rounded up to the next multiple of the page size,
+to the heap and return a pointer with an alignment of
+the page size to the allocated memory, where
+.I N
+is the product of
+.I n
+and all following arguments (which should have the type
+.BR size_t )
+up to the first 0;
+.I n
+must not be 0. The memory will be initialised
+with zeroes if
+.I clear
+is a non-zero value. The function
+.BR free (3)
+shall be called with the returned pointer as
+input when the allocated memory is no longer needed.
+.PP
+The
+.BR libsimple_enpvallocz ()
+and
+.BR libsimple_epvallocz ()
+functions will terminate the process if the memory
+cannot be allocated, by calling the
+.BR libsimple_enprintf ()
+and
+.BR libsimple_eprintf ()
+functions, respectively.
+On failure, the process's exit value will be
+.I status
+if the
+.BR libsimple_enpvallocz ()
+function is used or
+.IR libsimple_default_failure_exit (3)
+if the
+.BR libsimple_epvallocz ()
+function is used.
+.PP
+The
+.BR libsimple_vpvalloczn (),
+.BR libsimple_envpvalloczn (),
+and
+.BR libsimple_evpvalloczn ()
+functions are versions of the
+.BR libsimple_pvalloczn (),
+.BR libsimple_enpvalloczn (),
+and
+.BR libsimple_epvalloczn (),
+respectively, that use
+.B va_list
+instead of variadic arguments.
+.SH RETURN VALUE
+The
+.BR libsimple_vpvalloczn (),
+.BR libsimple_envpvalloczn (),
+.BR libsimple_evpvalloczn (),
+.BR libsimple_pvalloczn (),
+.BR libsimple_enpvalloczn (),
+and
+.BR libsimple_epvalloczn ()
+functions return a pointer to the allocated memory
+upon success completion; otherwise the
+.BR libsimple_vpvalloczn ()
+and
+.BR libsimple_pvalloczn ()
+functions return
+.B NULL
+and set
+.I errno
+it indicate the error, and the
+.BR libsimple_envpvalloczn (),
+.BR libsimple_evpvalloczn (),
+.BR libsimple_enpvalloczn (),
+and
+.BR libsimple_epvalloczn ()
+functions terminated the process.
+.SH ERRORS
+The
+.BR libsimple_vpvalloczn (),
+.BR libsimple_pvalloczn ()
+function will fail if:
+.TP
+.B EINVAL
+.I n
+is 0.
+.TP
+.B ENOMEM
+Enough memory could not be allocated.
+.PP
+The
+.BR libsimple_envpvallocz (),
+.BR libsimple_evpvallocz (),
+.BR libsimple_enpvallocz (),
+and
+.BR libsimple_epvallocz ()
+functions will terminate the process on failure.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_vpvalloczn (),
+.br
+.BR libsimple_envpvalloczn (),
+.br
+.BR libsimple_evpvalloczn (),
+.br
+.BR libsimple_pvalloczn (),
+.br
+.BR libsimple_enpvalloczn (),
+.br
+.BR libsimple_epvalloczn ()
+T}	Thread safety	MT-Safe env
+T{
+.BR libsimple_vpvalloczn (),
+.br
+.BR libsimple_envpvalloczn (),
+.br
+.BR libsimple_evpvalloczn (),
+.br
+.BR libsimple_pvalloczn (),
+.br
+.BR libsimple_enpvalloczn (),
+.br
+.BR libsimple_epvalloczn ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_vpvalloczn (),
+.br
+.BR libsimple_envpvalloczn (),
+.br
+.BR libsimple_evpvalloczn (),
+.br
+.BR libsimple_pvalloczn (),
+.br
+.BR libsimple_enpvalloczn (),
+.br
+.BR libsimple_epvalloczn ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None,
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_enmalloc (3),
+.BR libsimple_mallocz (3),
+.BR libsimple_vmallocn (3),
+.BR libsimple_vmalloczn (3),
+.BR libsimple_encalloc (3),
+.BR libsimple_vcallocn (3),
+.BR libsimple_enrealloc (3),
+.BR libsimple_vreallocn (3),
+.BR libsimple_vmemalignn (3),
+.BR libsimple_vmemalignzn (3),
+.BR libsimple_enmemalign (3),
+.BR libsimple_memalignz (3),
+.BR libsimple_enposix_memalign (3),
+.BR libsimple_posix_memalignz (3),
+.BR libsimple_vposix_memalignn (3),
+.BR libsimple_vposix_memalignzn (3),
+.BR libsimple_enaligned_alloc (3),
+.BR libsimple_aligned_allocz (3),
+.BR libsimple_valigned_allocn (3),
+.BR libsimple_valigned_alloczn (3),
+.BR libsimple_pvalloc (3),
+.BR libsimple_pvallocz (3),
+.BR libsimple_vpvallocn (3),
+.BR libsimple_valloc (3),
+.BR libsimple_vallocz (3),
+.BR libsimple_vvallocn (3),
+.BR libsimple_vvalloczn (3)

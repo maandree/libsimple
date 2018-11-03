@@ -1,0 +1,186 @@
+.TH LIBSIMPLE_MALLOCZ 3 2018-11-03 libsimple
+.SH NAME
+libsimple_mallocz \- allocate optionally initialised memory
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+static inline void *libsimple_mallocz(int \fIclear\fP, size_t \fIn\fP);
+static inline void *libsimple_enmallocz(int \fIstatus\fP, int \fIclear\fP, size_t \fIn\fP);
+static inline void *libsimple_emallocz(int \fIclear\fP, size_t \fIn\fP);
+
+#ifndef mallocz
+# define mallocz libsimple_mallocz
+#endif
+#ifndef enmallocz
+# define enmallocz libsimple_enmallocz
+#endif
+#ifndef emallocz
+# define emallocz libsimple_emallocz
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_mallocz (),
+.BR libsimple_enmallocz (),
+and
+.BR libsimple_emallocz ()
+functions are wrappers for the
+.BR malloc (3)
+and
+.BR calloc (3)
+functions, they allocate
+.I n
+bytes to the heap and return a pointer with an
+alignment of
+.I alignof(max_align_t)
+to the allocated memory. The memory will be
+initialised with zeroes if
+.I clear
+is a non-zero value. The function
+.BR free (3)
+shall be called with the returned pointer as
+input when the allocated memory is no longer needed.
+.PP
+The
+.BR libsimple_enmallocz ()
+and
+.BR libsimple_emallocz ()
+functions will terminate the process if the memory
+cannot be allocated (or if
+.I n
+is 0 and
+.BR malloc (3)
+and
+.BR calloc (3)
+returns
+.B NULL
+when it is used to allocate 0 bytes), by calling the
+.BR libsimple_enprintf ()
+and
+.BR libsimple_eprintf ()
+functions, respectively.
+On failure, the process's exit value will be
+.I status
+if the
+.BR libsimple_enmallocz ()
+function is used or
+.IR libsimple_default_failure_exit (3)
+if the
+.BR libsimple_emallocz ()
+function is used.
+.PP
+The
+.BR libsimple_enmallocz ()
+and
+.BR libsimple_emallocz ()
+functions behaviour is unspecified if
+.I n
+is 0.
+.SH RETURN VALUE
+The
+.BR libsimple_mallocz (),
+.BR libsimple_enmallocz (),
+and
+.BR libsimple_emallocz ()
+functions return a pointer to the allocated memory
+upon success completion; otherwise the
+.BR libsimple_mallocz ()
+function return
+.B NULL
+and set
+.I errno
+it indicate the error, and the
+.BR libsimple_enmallocz ()
+and
+.BR libsimple_emallocz ()
+functions terminated the process.
+.SH ERRORS
+The
+.BR libsimple_mallocz ()
+function will fail for the reasons specified for the
+.BR malloc (3)
+and
+.BR calloc (3)
+functions.
+.PP
+The
+.BR libsimple_enmallocz ()
+and
+.BR libsimple_emallocz ()
+functions will terminate the process on failure.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_mallocz (),
+.br
+.BR libsimple_enmallocz (),
+.br
+.BR libsimple_emallocz ()
+T}	Thread safety	MT-Safe env
+T{
+.BR libsimple_mallocz (),
+.br
+.BR libsimple_enmallocz (),
+.br
+.BR libsimple_emallocz ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_mallocz (),
+.br
+.BR libsimple_enmallocz (),
+.br
+.BR libsimple_emallocz ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None,
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_enmalloc (3),
+.BR libsimple_vmallocn (3),
+.BR libsimple_vmalloczn (3),
+.BR libsimple_encalloc (3),
+.BR libsimple_vcallocn (3),
+.BR libsimple_enrealloc (3),
+.BR libsimple_vreallocn (3),
+.BR libsimple_vmemalignn (3),
+.BR libsimple_vmemalignzn (3),
+.BR libsimple_enmemalign (3),
+.BR libsimple_memalignz (3),
+.BR libsimple_enposix_memalign (3),
+.BR libsimple_posix_memalignz (3),
+.BR libsimple_vposix_memalignn (3),
+.BR libsimple_vposix_memalignzn (3),
+.BR libsimple_enaligned_alloc (3),
+.BR libsimple_aligned_allocz (3),
+.BR libsimple_valigned_allocn (3),
+.BR libsimple_valigned_alloczn (3),
+.BR libsimple_pvalloc (3),
+.BR libsimple_pvallocz (3),
+.BR libsimple_vpvallocn (3),
+.BR libsimple_vpvalloczn (3),
+.BR libsimple_valloc (3),
+.BR libsimple_vallocz (3),
+.BR libsimple_vvallocn (3),
+.BR libsimple_vvalloczn (3),
+.BR malloc (3),
+.BR calloc (3)
