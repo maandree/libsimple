@@ -111,7 +111,7 @@ T{
 .BR libsimple_enpvalloc (),
 .br
 .BR libsimple_epvalloc ()
-T}	Thread safety	MT-Safe env
+T}	Thread safety	MT-Safe
 T{
 .BR libsimple_pvalloc (),
 .br
@@ -136,7 +136,9 @@ None.
 .SH FUTURE DIRECTIONS
 None.
 .SH NOTES
-None,
+The GNU implementation of
+.BR pvalloc (3)
+is \(dqMT-Unsafe init\(dq.
 .SH BUGS
 None.
 .SH SEE ALSO
