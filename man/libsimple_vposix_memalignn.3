@@ -1,0 +1,233 @@
+.TH LIBSIMPLE_VPOSIX_MEMALIGNN 3 2018-11-03 libsimple
+.SH NAME
+libsimple_vposix_memalignn \- allocate memory with custom alignment
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+static inline int libsimple_vposix_memalignn(void **\fImemptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
+static inline void libsimple_envposix_memalignn(int \fIstatus\fP, void **\fImemptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
+static inline void libsimple_evposix_memalignn(void **\fImemptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
+static inline int libsimple_posix_memalignn(void **\fImemptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+static inline void libsimple_enposix_memalignn(int \fIstatus\fP, void **\fImemptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+static inline void libsimple_eposix_memalignn(void **\fImemptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+
+#ifndef vposix_memalignn
+# define vposix_memalignn libsimple_vposix_memalignn
+#endif
+#ifndef envposix_memalignn
+# define envposix_memalignn libsimple_envposix_memalignn
+#endif
+#ifndef evposix_memalignn
+# define evposix_memalignn libsimple_evposix_memalignn
+#endif
+#ifndef posix_memalignn
+# define posix_memalignn libsimple_posix_memalignn
+#endif
+#ifndef enposix_memalignn
+# define enposix_memalignn libsimple_enposix_memalignn
+#endif
+#ifndef eposix_memalignn
+# define eposix_memalignn libsimple_eposix_memalignn
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_posix_memalignn (),
+.BR libsimple_enposix_memalignn (),
+and
+.BR libsimple_eposix_memalignn ()
+functions allocate
+.I N
+uninitialised bytes to the heap and store a
+pointer with an alignment of
+.I alignment
+bytes to the allocated memory in
+.IR memptr ,
+where
+.I N
+is the product of
+.I n
+and all following arguments (which should have the type
+.BR size_t )
+up to the first 0;
+.I n
+must not be 0. The function
+.BR free (3)
+shall be called with the pointer stored in
+.I memptr
+as input when the allocated memory is no longer needed.
+.I *memptr
+remains unmodified on failure.
+.PP
+The
+.BR libsimple_enposix_memalignn ()
+and
+.BR libsimple_eposix_memalignn ()
+functions will terminate the process if the memory
+cannot be allocated, by calling the
+.BR libsimple_enprintf ()
+and
+.BR libsimple_eprintf ()
+functions, respectively.
+On failure, the process's exit value will be
+.I status
+if the
+.BR libsimple_enposix_memalignn ()
+function is used or
+.IR libsimple_default_failure_exit (3)
+if the
+.BR libsimple_eposix_memalignn ()
+function is used.
+.PP
+The
+.BR libsimple_vposix_memalignn (),
+.BR libsimple_envposix_memalignn (),
+and
+.BR libsimple_evposix_memalignn ()
+functions are versions of the
+.BR libsimple_posix_memalignn (),
+.BR libsimple_enposix_memalignn (),
+and
+.BR libsimple_eposix_memalignn (),
+respectively, that use
+.B va_list
+instead of variadic arguments.
+.SH RETURN VALUE
+The
+.BR libsimple_vposix_memalignn ()
+and
+.BR libsimple_posix_memalignn ()
+functions return 0 upon successful completion;
+otherwise an error code is returned to indicate
+the error.
+.PP
+The
+.BR libsimple_envposix_memalignn (),
+.BR libsimple_evposix_memalignn (),
+.BR libsimple_enposix_memalignn (),
+and
+.BR libsimple_eposix_memalignn ()
+functions to not return a value, but
+terminated the process on failure.
+.SH ERRORS
+The
+.BR libsimple_vposix_memalignn (),
+.BR libsimple_posix_memalignn ()
+function will fail if:
+.TP
+.B EINVAL
+.I n
+is 0.
+.TP
+.B EINVAL
+.I alignment
+is not a power of two.
+.TP
+.B EINVAL
+.I alignment
+is not a multiple of
+.IR "sizeof(void *)" .
+.TP
+.B ENOMEM
+Enough memory could not be allocated.
+.PP
+The
+.BR libsimple_envposix_memalignn (),
+.BR libsimple_evposix_memalignn (),
+.BR libsimple_enposix_memalignn (),
+and
+.BR libsimple_eposix_memalignn ()
+functions will terminate the process on failure.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_vposix_memalignn (),
+.br
+.BR libsimple_envposix_memalignn (),
+.br
+.BR libsimple_evposix_memalignn (),
+.br
+.BR libsimple_posix_memalignn (),
+.br
+.BR libsimple_enposix_memalignn (),
+.br
+.BR libsimple_eposix_memalignn ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_vposix_memalignn (),
+.br
+.BR libsimple_envposix_memalignn (),
+.br
+.BR libsimple_evposix_memalignn (),
+.br
+.BR libsimple_posix_memalignn (),
+.br
+.BR libsimple_enposix_memalignn (),
+.br
+.BR libsimple_eposix_memalignn ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_vposix_memalignn (),
+.br
+.BR libsimple_envposix_memalignn (),
+.br
+.BR libsimple_evposix_memalignn (),
+.br
+.BR libsimple_posix_memalignn (),
+.br
+.BR libsimple_enposix_memalignn (),
+.br
+.BR libsimple_eposix_memalignn ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_enmalloc (3),
+.BR libsimple_mallocz (3),
+.BR libsimple_vmallocn (3),
+.BR libsimple_vmalloczn (3),
+.BR libsimple_encalloc (3),
+.BR libsimple_vcallocn (3),
+.BR libsimple_enrealloc (3),
+.BR libsimple_vreallocn (3),
+.BR libsimple_memalign (3),
+.BR libsimple_memalignz (3),
+.BR libsimple_vmemalignn (3),
+.BR libsimple_vmemalignzn (3),
+.BR libsimple_enposix_memalign (3),
+.BR libsimple_posix_memalignz (3),
+.BR libsimple_vposix_memalignzn (3),
+.BR libsimple_enaligned_alloc (3),
+.BR libsimple_aligned_allocz (3),
+.BR libsimple_valigned_allocn (3),
+.BR libsimple_valigned_alloczn (3),
+.BR libsimple_pvalloc (3),
+.BR libsimple_pvallocz (3),
+.BR libsimple_vpvallocn (3),
+.BR libsimple_vpvalloczn (3),
+.BR libsimple_valloc (3),
+.BR libsimple_vallocz (3),
+.BR libsimple_vvallocn (3),
+.BR libsimple_vvalloczn (3),
+.BR posix_memalign (3)

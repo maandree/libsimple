@@ -1,0 +1,151 @@
+.TH LIBSIMPLE_ENPOSIX_MEMALIGN 3 2018-11-03 libsimple
+.SH NAME
+libsimple_enposix_memalign \- allocate memory with custom alignment or die
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+static inline void libsimple_enposix_memalign(int \fIstatus\fP, void **\fImemptr\fP, size_t \fIalignment\fP, size_t \fIn\fP);
+static inline void libsimple_eposix_memalign(void **\fImemptr\fP, size_t \fIalignment\fP, size_t \fIn\fP);
+
+#ifndef enposix_memalign
+# define enposix_memalign libsimple_enposix_memalign
+#endif
+#ifndef eposix_memalign
+# define eposix_memalign libsimple_eposix_memalign
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_enposix_memalign ()
+and
+.BR libsimple_eposix_memalign ()
+functions allocate
+.I n
+uninitialised bytes to the heap and store a
+pointer with an alignment of
+.I alignment
+bytes to the allocated memory in
+.IR memptr .
+The function
+.BR free (3)
+shall be called with the pointer stored in
+.I memptr
+as input when the allocated memory is no longer needed.
+.I *memptr
+remains unmodified on failure.
+.PP
+The
+.BR libsimple_enposix_memalign ()
+and
+.BR libsimple_eposix_memalign ()
+functions will terminate the process if the memory
+cannot be allocated of if the user tries to allocate
+0 bytes, by calling the
+.BR libsimple_enprintf ()
+and
+.BR libsimple_eprintf ()
+functions, respectively.
+On failure, the process's exit value will be
+.I status
+if the
+.BR libsimple_enposix_memalign ()
+function is used or
+.IR libsimple_default_failure_exit (3)
+if the
+.BR libsimple_eposix_memalign ()
+function is used. Failure include,
+.I alignment
+not being a power of two, or
+.I alignment
+not being a multiple of
+.IR "sizeof(void *)" .
+.PP
+The
+.BR libsimple_enposix_memalign ()
+and
+.BR libsimple_eposix_memalign ()
+functions behaviour is unspecified if
+.I n
+is 0.
+.SH RETURN VALUE
+The
+.BR libsimple_enposix_memalign ()
+and
+.BR libsimple_eposix_memalign ()
+functions do not return a value, but
+terminated the process on failure.
+.SH ERRORS
+The
+.BR libsimple_enposix_memalign ()
+and
+.BR libsimple_eposix_memalign ()
+functions will terminate the process on failure.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_enposix_memalign (),
+.br
+.BR libsimple_eposix_memalign ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_enposix_memalign (),
+.br
+.BR libsimple_eposix_memalign ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_enposix_memalign (),
+.br
+.BR libsimple_eposix_memalign ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_enmalloc (3),
+.BR libsimple_mallocz (3),
+.BR libsimple_vmallocn (3),
+.BR libsimple_vmalloczn (3),
+.BR libsimple_encalloc (3),
+.BR libsimple_vcallocn (3),
+.BR libsimple_enrealloc (3),
+.BR libsimple_vreallocn (3),
+.BR libsimple_memalign (3),
+.BR libsimple_memalignz (3),
+.BR libsimple_vmemalignn (3),
+.BR libsimple_vmemalignzn (3),
+.BR libsimple_posix_memalignz (3),
+.BR libsimple_vposix_memalignn (3),
+.BR libsimple_vposix_memalignzn (3),
+.BR libsimple_enaligned_alloc (3),
+.BR libsimple_aligned_allocz (3),
+.BR libsimple_valigned_allocn (3),
+.BR libsimple_valigned_alloczn (3),
+.BR libsimple_pvalloc (3),
+.BR libsimple_pvallocz (3),
+.BR libsimple_vpvallocn (3),
+.BR libsimple_vpvalloczn (3),
+.BR libsimple_valloc (3),
+.BR libsimple_vallocz (3),
+.BR libsimple_vvallocn (3),
+.BR libsimple_vvalloczn (3),
+.BR posix_memalign (3)
