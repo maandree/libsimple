@@ -1,0 +1,241 @@
+.TH LIBSIMPLE_VREALLOCN 3 2018-11-03 libsimple
+.SH NAME
+libsimple_vreallocn \- reallocate memory
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+void *libsimple_vreallocn(void *\fIptr\fP, size_t \fIn\fP, va_list \fIap\fP);
+void *libsimple_envreallocn(int \fIstatus\fP, void *\fIptr\fP, size_t \fIn\fP, va_list \fIap\fP);
+static inline void *libsimple_evreallocn(void *\fIptr\fP, size_t \fIn\fP, va_list \fIap\fP);
+static inline void *libsimple_reallocn(void *\fIptr\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+static inline void *libsimple_enreallocn(int \fIstatus\fP, void *\fIptr\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+static inline void *libsimple_ereallocn(void *\fIptr\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+
+#ifndef vreallocn
+# define vreallocn libsimple_vreallocn
+#endif
+#ifndef envreallocn
+# define envreallocn libsimple_envreallocn
+#endif
+#ifndef evreallocn
+# define evreallocn libsimple_evreallocn
+#endif
+#ifndef reallocn
+# define reallocn libsimple_reallocn
+#endif
+#ifndef enreallocn
+# define enreallocn libsimple_enreallocn
+#endif
+#ifndef ereallocn
+# define ereallocn libsimple_ereallocn
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_reallocn (),
+.BR libsimple_enreallocn (),
+and
+.BR libsimple_ereallocn ()
+functions are wrappers for the
+.BR realloc (3)
+function, they reallocate memory allocated on
+the heap and return the older pointer ot a new
+pointer with the alignment of
+.I alignof(max_align_t)
+to the allocated memory of 
+.I N
+bytes, where
+.I N
+is the product of
+.I n
+and all following arguments (which should have the type
+.BR size_t )
+up to the first 0;
+.I n
+must not be 0. The returned pointer will contain the
+same content as
+.IR ptr ,
+but truncated to
+.I N
+bytes if it is smaller or with the new bytes
+unitialised if it is larger. If a new pointer
+is returned, rather than
+.IR ptr ,
+.I ptr
+is deallocated;
+.I ptr
+is not deallocated on failure. The function
+.BR free (3)
+shall be called with the returned pointer as
+input when the allocated memory is no longer needed.
+.PP
+The
+.BR libsimple_enreallocn ()
+and
+.BR libsimple_ereallocn ()
+functions will terminate the process if the memory
+cannot be allocated, by calling the
+.BR libsimple_enprintf ()
+and
+.BR libsimple_eprintf ()
+functions, respectively.
+On failure, the process's exit value will be
+.I status
+if the
+.BR libsimple_enreallocn ()
+function is used or
+.IR libsimple_default_failure_exit (3)
+if the
+.BR libsimple_ereallocn ()
+function is used.
+.PP
+The
+.BR libsimple_vreallocn (),
+.BR libsimple_envreallocn (),
+and
+.BR libsimple_evreallocn ()
+functions are versions of the
+.BR libsimple_reallocn (),
+.BR libsimple_enreallocn (),
+and
+.BR libsimple_ereallocn (),
+respectively, that use
+.B va_list
+instead of variadic arguments.
+.SH RETURN VALUE
+The
+.BR libsimple_vreallocn (),
+.BR libsimple_envreallocn (),
+.BR libsimple_evreallocn (),
+.BR libsimple_reallocn (),
+.BR libsimple_enreallocn (),
+and
+.BR libsimple_ereallocn ()
+functions return a pointer to the allocated memory
+upon success completion; otherwise the
+.BR libsimple_vreallocn ()
+and
+.BR libsimple_reallocn ()
+functions return
+.B NULL
+and set
+.I errno
+it indicate the error, and the
+.BR libsimple_envreallocn (),
+.BR libsimple_evreallocn (),
+.BR libsimple_enreallocn (),
+and
+.BR libsimple_ereallocn ()
+functions terminated the process.
+.SH ERRORS
+The
+.BR libsimple_vreallocn (),
+.BR libsimple_reallocn ()
+function will fail for the reasons specified for the
+.BR realloc (3)
+function, and if:
+.TP
+.B EINVAL
+.I n
+is 0.
+.PP
+The
+.BR libsimple_envreallocn (),
+.BR libsimple_evreallocn (),
+.BR libsimple_enreallocn (),
+and
+.BR libsimple_ereallocn ()
+functions will terminate the process on failure.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_vreallocn (),
+.br
+.BR libsimple_envreallocn (),
+.br
+.BR libsimple_evreallocn (),
+.br
+.BR libsimple_reallocn (),
+.br
+.BR libsimple_enreallocn (),
+.br
+.BR libsimple_ereallocn ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_vreallocn (),
+.br
+.BR libsimple_envreallocn (),
+.br
+.BR libsimple_evreallocn (),
+.br
+.BR libsimple_reallocn (),
+.br
+.BR libsimple_enreallocn (),
+.br
+.BR libsimple_ereallocn ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_vreallocn (),
+.br
+.BR libsimple_envreallocn (),
+.br
+.BR libsimple_evreallocn (),
+.br
+.BR libsimple_reallocn (),
+.br
+.BR libsimple_enreallocn (),
+.br
+.BR libsimple_ereallocn ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_enmalloc (3),
+.BR libsimple_mallocz (3),
+.BR libsimple_vmallocn (3),
+.BR libsimple_vmalloczn (3),
+.BR libsimple_encalloc (3),
+.BR libsimple_vcallocn (3),
+.BR libsimple_enrealloc (3),
+.BR libsimple_memalign (3),
+.BR libsimple_memalignz (3),
+.BR libsimple_vmemalignn (3),
+.BR libsimple_vmemalignzn (3),
+.BR libsimple_enposix_memalign (3),
+.BR libsimple_posix_memalignz (3),
+.BR libsimple_vposix_memalignn (3),
+.BR libsimple_vposix_memalignzn (3),
+.BR libsimple_enaligned_alloc (3),
+.BR libsimple_aligned_allocz (3),
+.BR libsimple_valigned_allocn (3),
+.BR libsimple_valigned_alloczn (3),
+.BR libsimple_pvalloc (3),
+.BR libsimple_pvallocz (3),
+.BR libsimple_vpvallocn (3),
+.BR libsimple_vpvalloczn (3),
+.BR libsimple_valloc (3),
+.BR libsimple_vallocz (3),
+.BR libsimple_vvallocn (3),
+.BR libsimple_vvalloczn (3),
+.BR malloc (3)
