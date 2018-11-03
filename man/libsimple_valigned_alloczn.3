@@ -1,0 +1,239 @@
+.TH LIBSIMPLE_VALIGNED_ALLOCZN 3 2018-11-03 libsimple
+.SH NAME
+libsimple_valigned_alloczn \- allocate optionally initialised memory with custom alignment
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+void *libsimple_valigned_alloczn(int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
+void *libsimple_envaligned_alloczn(int \fIstatus\fP, int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
+static inline void *libsimple_evaligned_alloczn(int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
+static inline void *libsimple_aligned_alloczn(int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+static inline void *libsimple_enaligned_alloczn(int \fIstatus\fP, int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+static inline void *libsimple_ealigned_alloczn(int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+
+#ifndef valigned_alloczn
+# define valigned_alloczn libsimple_valigned_alloczn
+#endif
+#ifndef envaligned_alloczn
+# define envaligned_alloczn libsimple_envaligned_alloczn
+#endif
+#ifndef evaligned_alloczn
+# define evaligned_alloczn libsimple_evaligned_alloczn
+#endif
+#ifndef aligned_alloczn
+# define aligned_alloczn libsimple_aligned_alloczn
+#endif
+#ifndef enaligned_alloczn
+# define enaligned_alloczn libsimple_enaligned_alloczn
+#endif
+#ifndef ealigned_alloczn
+# define ealigned_alloczn libsimple_ealigned_alloczn
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_aligned_alloczn (),
+.BR libsimple_enaligned_alloczn (),
+and
+.BR libsimple_ealigned_alloczn ()
+functions allocate
+.I N
+bytes to the heap and return a pointer with an
+alignment of
+.I alignment
+bytes to the allocated memory, where
+.I N
+is the product of
+.I n
+and all following arguments (which should have the type
+.BR size_t )
+up to the first 0;
+.I n
+must not be 0. The memory will be initialised
+with zeroes if
+.I clear
+is a non-zero value. The function
+.BR free (3)
+shall be called with the returned pointer as
+input when the allocated memory is no longer needed.
+.PP
+The
+.BR libsimple_enaligned_alloczn ()
+and
+.BR libsimple_ealigned_alloczn ()
+functions will terminate the process if the memory
+cannot be allocated, by calling the
+.BR libsimple_enprintf ()
+and
+.BR libsimple_eprintf ()
+functions, respectively.
+On failure, the process's exit value will be
+.I status
+if the
+.BR libsimple_enaligned_alloczn ()
+function is used or
+.IR libsimple_default_failure_exit (3)
+if the
+.BR libsimple_ealigned_alloczn ()
+function is used.
+.PP
+The
+.BR libsimple_valigned_alloczn (),
+.BR libsimple_envaligned_alloczn (),
+and
+.BR libsimple_evaligned_alloczn ()
+functions are versions of the
+.BR libsimple_aligned_alloczn (),
+.BR libsimple_enaligned_alloczn (),
+and
+.BR libsimple_ealigned_alloczn (),
+respectively, that use
+.B va_list
+instead of variadic arguments.
+.SH RETURN VALUE
+The
+.BR libsimple_valigned_alloczn (),
+.BR libsimple_envaligned_alloczn (),
+.BR libsimple_evaligned_alloczn (),
+.BR libsimple_aligned_alloczn (),
+.BR libsimple_enaligned_alloczn (),
+and
+.BR libsimple_ealigned_alloczn ()
+functions return a pointer to the allocated memory
+upon success completion; otherwise the
+.BR libsimple_valigned_alloczn ()
+and
+.BR libsimple_aligned_alloczn ()
+functions return
+.B NULL
+and set
+.I errno
+it indicate the error, and the
+.BR libsimple_envaligned_alloczn (),
+.BR libsimple_evaligned_alloczn (),
+.BR libsimple_enaligned_alloczn (),
+and
+.BR libsimple_ealigned_alloczn ()
+functions terminated the process.
+.SH ERRORS
+The
+.BR libsimple_valigned_alloczn (),
+.BR libsimple_aligned_alloczn ()
+function will fail if:
+.TP
+.B EINVAL
+.I n
+is 0.
+.TP
+.B EINVAL
+.I n
+is not a multiple of
+.IR alignment .
+.TP
+.B EINVAL
+.I alignment
+is not a power of two.
+.TP
+.B ENOMEM
+Enough memory could not be allocated.
+.PP
+The
+.BR libsimple_envaligned_alloczn (),
+.BR libsimple_evaligned_alloczn (),
+.BR libsimple_enaligned_alloczn (),
+and
+.BR libsimple_ealigned_alloczn ()
+functions will terminate the process on failure.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_valigned_alloczn (),
+.br
+.BR libsimple_envaligned_alloczn (),
+.br
+.BR libsimple_evaligned_alloczn (),
+.br
+.BR libsimple_aligned_alloczn (),
+.br
+.BR libsimple_enaligned_alloczn (),
+.br
+.BR libsimple_ealigned_alloczn ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_valigned_alloczn (),
+.br
+.BR libsimple_envaligned_alloczn (),
+.br
+.BR libsimple_evaligned_alloczn (),
+.br
+.BR libsimple_aligned_alloczn (),
+.br
+.BR libsimple_enaligned_alloczn (),
+.br
+.BR libsimple_ealigned_alloczn ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_valigned_alloczn (),
+.br
+.BR libsimple_envaligned_alloczn (),
+.br
+.BR libsimple_evaligned_alloczn (),
+.br
+.BR libsimple_aligned_alloczn (),
+.br
+.BR libsimple_enaligned_alloczn (),
+.br
+.BR libsimple_ealigned_alloczn ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_enmalloc (3),
+.BR libsimple_mallocz (3),
+.BR libsimple_vmallocn (3),
+.BR libsimple_vmalloczn (3),
+.BR libsimple_encalloc (3),
+.BR libsimple_vcallocn (3),
+.BR libsimple_enrealloc (3),
+.BR libsimple_vreallocn (3),
+.BR libsimple_memalign (3),
+.BR libsimple_memalignz (3),
+.BR libsimple_vmemalignn (3),
+.BR libsimple_vmemalignzn (3),
+.BR libsimple_enposix_memalign (3),
+.BR libsimple_posix_memalignz (3),
+.BR libsimple_vposix_memalignn (3),
+.BR libsimple_vposix_memalignzn (3),
+.BR libsimple_enaligned_alloc (3),
+.BR libsimple_aligned_allocz (3),
+.BR libsimple_valigned_allocn (3),
+.BR libsimple_pvalloc (3),
+.BR libsimple_pvallocz (3),
+.BR libsimple_vpvallocn (3),
+.BR libsimple_vpvalloczn (3),
+.BR libsimple_valloc (3),
+.BR libsimple_vallocz (3),
+.BR libsimple_vvallocn (3),
+.BR libsimple_vvalloczn (3),
+.BR aligned_alloc (3)

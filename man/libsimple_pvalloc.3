@@ -58,14 +58,6 @@ function is used or
 if the
 .BR libsimple_epvalloc ()
 function is used.
-.PP
-The
-.BR libsimple_enpvalloc ()
-and
-.BR libsimple_epvalloc ()
-functions behaviour is unspecified if
-.I n
-is 0.
 .SH RETURN VALUE
 The
 .BR libsimple_pvalloc (),
@@ -88,6 +80,10 @@ functions terminated the process.
 The
 .BR libsimple_pvalloc ()
 function will fail if:
+.TP
+.B EINVAL
+.I n
+is 0.
 .TP
 .B ENOMEM
 Enough memory could not be allocated.

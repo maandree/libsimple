@@ -61,9 +61,9 @@ shall be called with the returned pointer as
 input when the allocated memory is no longer needed.
 .PP
 The
-.BR libsimple_enpvallocz ()
+.BR libsimple_enpvalloczn ()
 and
-.BR libsimple_epvallocz ()
+.BR libsimple_epvalloczn ()
 functions will terminate the process if the memory
 cannot be allocated, by calling the
 .BR libsimple_enprintf ()
@@ -73,11 +73,11 @@ functions, respectively.
 On failure, the process's exit value will be
 .I status
 if the
-.BR libsimple_enpvallocz ()
+.BR libsimple_enpvalloczn ()
 function is used or
 .IR libsimple_default_failure_exit (3)
 if the
-.BR libsimple_epvallocz ()
+.BR libsimple_epvalloczn ()
 function is used.
 .PP
 The
@@ -132,11 +132,11 @@ is 0.
 Enough memory could not be allocated.
 .PP
 The
-.BR libsimple_envpvallocz (),
-.BR libsimple_evpvallocz (),
-.BR libsimple_enpvallocz (),
+.BR libsimple_envpvalloczn (),
+.BR libsimple_evpvalloczn (),
+.BR libsimple_enpvalloczn (),
 and
-.BR libsimple_epvallocz ()
+.BR libsimple_epvalloczn ()
 functions will terminate the process on failure.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see

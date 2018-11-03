@@ -1,22 +1,18 @@
-.TH LIBSIMPLE_VALLOC 3 2018-11-03 libsimple
+.TH LIBSIMPLE_ENALIGNED_ALLOC 3 2018-11-03 libsimple
 .SH NAME
-libsimple_valloc \- allocate memory with page size alignment
+libsimple_enaligned_alloc \- allocate memory with custom alignment or die
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_valloc(size_t \fIn\fP);
-static inline void *libsimple_envalloc(int \fIstatus\fP, size_t \fIn\fP);
-static inline void *libsimple_evalloc(size_t \fIn\fP);
+static inline void *libsimple_enaligned_alloc(int \fIstatus\fP, size_t \fIalignment\fP, size_t \fIn\fP);
+static inline void *libsimple_ealigned_alloc(size_t \fIalignment\fP, size_t \fIn\fP);
 
-#ifndef valloc
-# define valloc libsimple_valloc
+#ifndef enaligned_alloc
+# define enaligned_alloc libsimple_enaligned_alloc
 #endif
-#ifndef envalloc
-# define envalloc libsimple_envalloc
-#endif
-#ifndef evalloc
-# define evalloc libsimple_evalloc
+#ifndef ealigned_alloc
+# define ealigned_alloc libsimple_ealigned_alloc
 #endif
 .fi
 .PP
@@ -24,23 +20,23 @@ Link with
 .IR \-lsimple .
 .SH DESCRIPTION
 The
-.BR libsimple_valloc (),
-.BR libsimple_envalloc (),
+.BR libsimple_enaligned_alloc ()
 and
-.BR libsimple_evalloc ()
+.BR libsimple_ealigned_alloc ()
 functions allocate
 .I n
 uninitialised bytes to the heap and return a
-pointer with an alignment of the page size
-to the allocated memory. The function
+pointer with an alignment of
+.I alignment
+bytes to the allocated memory. The function
 .BR free (3)
 shall be called with the returned pointer as
 input when the allocated memory is no longer needed.
 .PP
 The
-.BR libsimple_envalloc ()
+.BR libsimple_enaligned_alloc ()
 and
-.BR libsimple_evalloc ()
+.BR libsimple_ealigned_alloc ()
 functions will terminate the process if the memory
 cannot be allocated of if the user tries to allocate
 0 bytes, by calling the
@@ -51,45 +47,38 @@ functions, respectively.
 On failure, the process's exit value will be
 .I status
 if the
-.BR libsimple_envalloc ()
+.BR libsimple_enaligned_alloc ()
 function is used or
 .IR libsimple_default_failure_exit (3)
 if the
-.BR libsimple_evalloc ()
-function is used.
-.SH RETURN VALUE
-The
-.BR libsimple_valloc (),
-.BR libsimple_envalloc (),
-and
-.BR libsimple_evalloc ()
-functions return a pointer to the allocated memory
-upon success completion; otherwise the
-.BR libsimple_valloc ()
-function return
-.B NULL
-and set
-.I errno
-it indicate the error, and the
-.BR libsimple_envalloc ()
-and
-.BR libsimple_evalloc ()
-functions terminated the process.
-.SH ERRORS
-The
-.BR libsimple_valloc ()
-function will fail if:
-.TP
-.B n
-is 0
-.TP
-.B ENOMEM
-Enough memory could not be allocated.
+.BR libsimple_ealigned_alloc ()
+function is used. Failure include,
+.I alignment
+not being a power of two, or
+.I n
+not being a multiple of
+.IR alignment .
 .PP
 The
-.BR libsimple_envalloc ()
+.BR libsimple_enaligned_alloc ()
 and
-.BR libsimple_evalloc ()
+.BR libsimple_ealigned_alloc ()
+functions behaviour is unspecified if
+.I n
+is 0.
+.SH RETURN VALUE
+The
+.BR libsimple_enaligned_alloc (),
+and
+.BR libsimple_ealigned_alloc ()
+functions return a pointer to the allocated memory
+upon success completion; otherwise the process is
+terminated.
+.SH ERRORS
+The
+.BR libsimple_enaligned_alloc ()
+and
+.BR libsimple_ealigned_alloc ()
 functions will terminate the process on failure.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
@@ -100,25 +89,19 @@ lb lb lb
 l l l.
 Interface	Attribute	Value
 T{
-.BR libsimple_valloc (),
+.BR libsimple_enaligned_alloc (),
 .br
-.BR libsimple_envalloc (),
-.br
-.BR libsimple_evalloc ()
+.BR libsimple_ealigned_alloc ()
 T}	Thread safety	MT-Safe
 T{
-.BR libsimple_valloc (),
+.BR libsimple_enaligned_alloc (),
 .br
-.BR libsimple_envalloc (),
-.br
-.BR libsimple_evalloc ()
+.BR libsimple_ealigned_alloc ()
 T}	Async-signal safety	AS-Safe
 T{
-.BR libsimple_valloc (),
+.BR libsimple_enaligned_alloc (),
 .br
-.BR libsimple_envalloc (),
-.br
-.BR libsimple_evalloc ()
+.BR libsimple_ealigned_alloc ()
 T}	Async-cancel safety	AC-Safe
 .TE
 .SH EXAMPLES
@@ -130,9 +113,7 @@ None.
 .SH FUTURE DIRECTIONS
 None.
 .SH NOTES
-The GNU implementation of
-.BR valloc (3)
-is \(dqMT-Unsafe init\(dq.
+None.
 .SH BUGS
 None.
 .SH SEE ALSO
@@ -152,7 +133,6 @@ None.
 .BR libsimple_posix_memalignz (3),
 .BR libsimple_vposix_memalignn (3),
 .BR libsimple_vposix_memalignzn (3),
-.BR libsimple_enaligned_alloc (3),
 .BR libsimple_aligned_allocz (3),
 .BR libsimple_valigned_allocn (3),
 .BR libsimple_valigned_alloczn (3),
@@ -160,6 +140,8 @@ None.
 .BR libsimple_pvallocz (3),
 .BR libsimple_vpvallocn (3),
 .BR libsimple_vpvalloczn (3),
+.BR libsimple_valloc (3),
 .BR libsimple_vallocz (3),
 .BR libsimple_vvallocn (3),
-.BR libsimple_vvalloczn (3)
+.BR libsimple_vvalloczn (3),
+.BR aligned_alloc (3)
