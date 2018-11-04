@@ -1,0 +1,195 @@
+.TH LIBSIMPLE_VASPRINTF 3 2018-11-04 libsimple
+.SH NAME
+libsimple_vasprintf \- allocate and format a string
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+int libsimple_vasprintf(char **\fIstrp\fP, const char *\fIfmt\fP, va_list \fIap\fP);
+int libsimple_asprintf(char **\fIstrp\fP, const char *\fIfmt\fP, ...);
+char *libsimple_vasprintfa(const char *\fIfmt\fP, va_list \fIap\fP);
+char *libsimple_asprintfa(const char *\fIfmt\fP, ...);
+
+#ifndef vasprintf
+# define vasprintf libsimple_vasprintf
+#endif
+#ifndef asprintf
+# define asprintf libsimple_asprintf
+#endif
+#ifndef vasprintfa
+# define vasprintfa libsimple_vasprintfa
+#endif
+#ifndef asprintfa
+# define asprintfa libsimple_asprintfa
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_vasprintf ()
+function is a version of the
+.BR vsprintf (3)
+function that allocates a sufficiently large string,
+writes the string to it, and stores it in
+.IR strp .
+The parameter
+.I fmt
+is used as the format string for the
+.BR vfprintf (3)
+function, and the parameter
+.I ap
+is used as the formatting arguments.
+On failure
+.I *strp
+is set to
+.BR NULL ,
+portable applications shall not assume this
+is true if the shorthand aliases
+.BR vasprintf
+and
+.BR asprintf
+are used.
+.PP
+The
+.BR libsimple_asprintf ()
+function is a version of the
+.BR libsimple_vasprintf ()
+that uses variadic arguments instead of
+.BR va_list .
+.PP
+The
+.BR libsimple_vasprintfa ()
+and
+.BR libsimple_asprintfa ()
+functions are versions of the
+.BR libsimple_vasprintf ()
+and
+.BR libsimple_asprintf ()
+functions that allocates the string on the stack
+rather than the heap.
+.PP
+The string stored in
+.I strp
+by the
+.BR libsimple_vasprintf ()
+and
+.BR libsimple_asprintf ()
+functions shall be deallocated with the
+.BR free (3)
+function when it is no longer needed; the string
+returned by the
+.BR libsimple_vasprintfa ()
+and
+.BR libsimple_asprintfa ()
+functions shall not be freed but are automatically
+deallocated when the calling function returns.
+.PP
+The
+.BR libsimple_vasprintfa ()
+and
+.BR libsimple_asprintfa ()
+functions are implemented as macros and are only
+available if compiling with GCC or Clang.
+.SH RETURN VALUE
+The
+.BR libsimple_vasprintf ()
+and
+.BR libsimple_asprintf ()
+functions return
+.I strlen(*strp)
+upon successful completion; otherwise -1 is returned and
+.I errno
+set to indicate the error.
+.PP
+The
+.BR libsimple_vasprintfa ()
+and
+.BR libsimple_asprintfa ()
+functions return the constructed string upon successful
+completion; otherwise
+.B NULL
+is returned and
+.I errno
+set to indicate the error.
+.SH ERRORS
+The
+.BR libsimple_vasprintf (),
+.BR libsimple_asprintf (),
+.BR libsimple_vasprintfa (),
+and
+.BR libsimple_asprintfa ()
+functions will fail for any reason specified for the
+.BR fprintf (3)
+function. The
+.BR libsimple_vasprintf ()
+and
+.BR libsimple_asprintf ()
+functions will also fail if:
+.TP
+.B EMFILE
+{FOPEN_MAX} streams are currently open in the calling process.
+.TP
+.B ENOMEM
+Could not allocate enough memory.
+.PP
+If enough memory cannot be allocated by the
+.BR libsimple_vasprintfa ()
+and
+.BR libsimple_asprintfa ()
+functions, the kernel will kill the thread with a
+.B SIGSEGV
+signal.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_vasprintf (),
+.br
+.BR libsimple_asprintf (),
+.br
+.BR libsimple_vasprintfa (),
+.br
+.BR libsimple_asprintfa ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_vasprintf (),
+.br
+.BR libsimple_asprintf (),
+.br
+.BR libsimple_vasprintfa (),
+.br
+.BR libsimple_asprintfa ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_vasprintf (),
+.br
+.BR libsimple_asprintf (),
+.br
+.BR libsimple_vasprintfa (),
+.br
+.BR libsimple_asprintfa ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_vweprintf (3),
+.BR sprintf (3),
+.BR snprintf (3)
