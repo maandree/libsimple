@@ -1,0 +1,98 @@
+.TH LIBSIMPLE_UNLIST 3 2018-11-05 libsimple
+.SH NAME
+libsimple_unlist \- remove item for array and keep order
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+void libsimple_unlist(void *\fIlist\fP, size_t \fIi\fP, size_t *\fInp\fP, size_t \fIwidth\fP);
+void LIBSIMPLE_UNLIST(\fItype\fP *\fIlist\fP, size_t \fIi\fP, size_t *\fInp\fP);
+
+#ifndef unlist
+# define unlist libsimple_unlist
+#endif
+#ifndef UNLIST
+# define UNLIST LIBSIMPLE_UNLIST
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_unlist ()
+function removes the
+.IR i th
+element from
+.IR list ,
+and pushes up all following elements one step, so
+next element take the removed elements position. The
+.I width
+parameter shall be the size of each element, in bytes,
+.RI ( sizeof(*list)
+in all sane circumstances).
+.I np
+shall be a pointer to the number of elements stored in
+.IR list ,
+.I *np
+will be set to
+.IR *np-1 .
+The function assumes that
+.IR i<*np .
+.PP
+.BR LIBSIMPLE_UNLIST ()
+is a macro-wrapper for the
+.BR libsimple_unlist ()
+function which does not have the parameter
+.IR width ,
+instead it is inferred from the type of
+.IR list ;
+as such,
+.I type
+must be a complete, non-void type.
+.SH RETURN VALUE
+None.
+.SH ERRORS
+The
+.BR libsimple_unlist ()
+and
+.BR LIBSIMPLE_UNLIST ()
+functions cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_unlist (),
+.br
+.BR LIBSIMPLE_UNLIST ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_unlist (),
+.br
+.BR LIBSIMPLE_UNLIST ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_unlist (),
+.br
+.BR LIBSIMPLE_UNLIST ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR memmove (3)
