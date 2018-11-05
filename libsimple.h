@@ -55,6 +55,7 @@
 extern int libsimple_default_failure_exit;
 
 
+#include "libsimple/printf.h"
 #include "libsimple/definitions.h"
 #include "libsimple/memalloc.h"
 #include "libsimple/strdup.h"
@@ -77,7 +78,6 @@ extern int libsimple_default_failure_exit;
 #include "libsimple/posix_memalign.h"
 #include "libsimple/env.h"
 #include "libsimple/time.h"
-#include "libsimple/printf.h"
 #include "libsimple/mem.h"
 #include "libsimple/str.h"
 #include "libsimple/strn.h"

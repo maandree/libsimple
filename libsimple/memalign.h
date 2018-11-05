@@ -187,6 +187,7 @@ static inline void *libsimple_ememalign(size_t __alignment, size_t __n)
 #endif
 
 
+
 /**
  * Dynamically allocates heap allocated, uninitialised,
  * memory with custom alignment

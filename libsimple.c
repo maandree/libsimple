@@ -98,6 +98,9 @@ main(void)
 	char buf[1024], *s;
 	int intarray[10];
 	size_t i, j, n;
+	size_t pagesize;
+
+	pagesize = (size_t)sysconf(_SC_PAGESIZE);
 
 	assert(libsimple_default_failure_exit == 1);
 
@@ -1095,7 +1098,6 @@ main(void)
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
 	free(ptr);
-
 	ptr = NULL;
 
 	assert(!libsimple_posix_memalignz(&ptr, 0, 8 * sizeof(void *), 8));
@@ -1118,6 +1120,628 @@ main(void)
 		assert(info->alignment == 4 * sizeof(void *));
 		assert(info->zeroed == 16);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_memalignz(0, 4, 9)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 9 || info->size == 12);
+		assert(info->alignment == 4);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_memalignz(1, 2, 7)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 7 || info->size == 8);
+		assert(info->alignment == 2);
+		assert(info->zeroed == 7 || info->zeroed == info->size);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_memalign(2, 5)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 5 || info->size == 6);
+		assert(info->alignment == 2);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert(!libsimple_memalignzn(0, 128, 0) && errno == EINVAL);
+	errno = 0;
+	assert(!libsimple_memalignzn(1, 128, 0) && errno == EINVAL);
+	errno = 0;
+	assert(!libsimple_memalignn(128, 0) && errno == EINVAL);
+	errno = 0;
+
+	assert(!libsimple_memalignzn(0, 1024, SIZE_MAX, 2, 0) && errno == ENOMEM);
+	errno = 0;
+	assert(!libsimple_memalignzn(1, 1024, SIZE_MAX, 2, 0) && errno == ENOMEM);
+	errno = 0;
+	assert(!libsimple_memalignn(1024, SIZE_MAX, 2, 0) && errno == ENOMEM);
+	errno = 0;
+
+	assert(!libsimple_memalignz(0, 65, 100) && errno == EINVAL);
+	errno = 0;
+	assert(!libsimple_memalignz(1, 65, 100) && errno == EINVAL);
+	errno = 0;
+	assert(!libsimple_memalign(65, 100) && errno == EINVAL);
+	errno = 0;
+
+	assert(!libsimple_memalignzn(0, 65, 100, 0) && errno == EINVAL);
+	errno = 0;
+	assert(!libsimple_memalignzn(1, 65, 100, 0) && errno == EINVAL);
+	errno = 0;
+	assert(!libsimple_memalignn(65, 100, 0) && errno == EINVAL);
+	errno = 0;
+
+	assert(!libsimple_memalignz(0, 0, 100) && errno == EINVAL);
+	errno = 0;
+	assert(!libsimple_memalignz(1, 0, 100) && errno == EINVAL);
+	errno = 0;
+	assert(!libsimple_memalign(0, 100) && errno == EINVAL);
+	errno = 0;
+
+	assert(!libsimple_memalignzn(0, 0, 100, 0) && errno == EINVAL);
+	errno = 0;
+	assert(!libsimple_memalignzn(1, 0, 100, 0) && errno == EINVAL);
+	errno = 0;
+	assert(!libsimple_memalignn(0, 100, 0) && errno == EINVAL);
+	errno = 0;
+
+	assert((ptr = libsimple_memalignzn(0, 1, 9, 9, 0)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 81);
+		assert(info->alignment == 1);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
+	}
+	free(ptr);
+
+	assert((ptr = libsimple_memalignzn(1, 2, 9, 9, 2, 0)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 162);
+		assert(info->alignment == 2);
+		assert(info->zeroed == 162);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
+	}
+	free(ptr);
+
+	assert((ptr = libsimple_memalignn(4, 9, 9, 3, 0)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 243 || info->size == 244);
+		assert(info->alignment == 4);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
+	}
+	free(ptr);
+
+	assert((ptr = libsimple_enmemalignz(1, 1, 2, 9)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 9 || info->size == 10);
+		assert(info->alignment == 2);
+		assert(info->zeroed == 9 || info->zeroed == info->size);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_ememalignz(1, 2, 7)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 7 || info->size == 8);
+		assert(info->alignment == 2);
+		assert(info->zeroed == 7 || info->zeroed == info->size);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_enmemalignz(1, 0, 2, 8)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 8);
+		assert(info->alignment == 2);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_ememalignz(0, 4, 4)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 4);
+		assert(info->alignment == 4);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_enmemalign(1, 4, 8)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 8);
+		assert(info->alignment == 4);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_ememalign(8, 3)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 3 || info->size == 8);
+		assert(info->alignment == 8);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_vallocz(0, 9)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 9 || info->size == pagesize);
+		assert(info->alignment == pagesize);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_vallocz(1, 7)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 7 || info->size == pagesize);
+		assert(info->alignment == pagesize);
+		assert(info->zeroed == 7 || info->zeroed == info->size);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_valloc(5)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 5 || info->size == pagesize);
+		assert(info->alignment == pagesize);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_vallocz(1, 3 * pagesize)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 3 * pagesize);
+		assert(info->alignment == pagesize);
+		assert(info->zeroed == 3 * pagesize);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_vallocz(0, 4 * pagesize)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 4 * pagesize);
+		assert(info->alignment == pagesize);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_valloc(5 * pagesize)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 5 * pagesize);
+		assert(info->alignment == pagesize);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_valloczn(1, 3 * pagesize, 2, 0)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 6 * pagesize);
+		assert(info->alignment == pagesize);
+		assert(info->zeroed == 6 * pagesize);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_valloczn(0, 4 * pagesize, 2, 0)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 8 * pagesize);
+		assert(info->alignment == pagesize);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_vallocn(5 * pagesize, 2, 0)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 10 * pagesize);
+		assert(info->alignment == pagesize);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert(!libsimple_valloczn(0, 0) && errno == EINVAL);
+	errno = 0;
+	assert(!libsimple_valloczn(1, 0) && errno == EINVAL);
+	errno = 0;
+	assert(!libsimple_vallocn(0) && errno == EINVAL);
+	errno = 0;
+
+	assert(!libsimple_valloczn(0, SIZE_MAX, 2, 0) && errno == ENOMEM);
+	errno = 0;
+	assert(!libsimple_valloczn(1, SIZE_MAX, 2, 0) && errno == ENOMEM);
+	errno = 0;
+	assert(!libsimple_vallocn(SIZE_MAX, 2, 0) && errno == ENOMEM);
+	errno = 0;
+
+	assert((ptr = libsimple_pvallocz(0, 9)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == pagesize);
+		assert(info->alignment == pagesize);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_pvallocz(1, 7)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == pagesize);
+		assert(info->alignment == pagesize);
+		assert(info->zeroed == pagesize);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_pvalloc(5)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 5 || info->size == pagesize);
+		assert(info->alignment == pagesize);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_pvallocz(1, pagesize - 1)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == pagesize);
+		assert(info->alignment == pagesize);
+		assert(info->zeroed == pagesize);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_pvallocz(1, pagesize)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == pagesize);
+		assert(info->alignment == pagesize);
+		assert(info->zeroed == pagesize);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_pvallocz(1, pagesize + 1)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 2 * pagesize);
+		assert(info->alignment == pagesize);
+		assert(info->zeroed == 2 * pagesize);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_pvallocz(1, 3 * pagesize - 1)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 3 * pagesize);
+		assert(info->alignment == pagesize);
+		assert(info->zeroed == 3 * pagesize);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_pvallocz(0, 4 * pagesize - 1)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 4 * pagesize);
+		assert(info->alignment == pagesize);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_pvalloc(5 * pagesize - 1)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 5 * pagesize);
+		assert(info->alignment == pagesize);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_pvalloczn(1, 3 * pagesize - 1, 2, 0)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 6 * pagesize);
+		assert(info->alignment == pagesize);
+		assert(info->zeroed == 6 * pagesize);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_pvalloczn(0, 4 * pagesize - 1, 2, 0)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 8 * pagesize);
+		assert(info->alignment == pagesize);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_pvallocn(5 * pagesize - 1, 2, 0)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 10 * pagesize);
+		assert(info->alignment == pagesize);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert(!libsimple_pvalloczn(0, 0) && errno == EINVAL);
+	errno = 0;
+	assert(!libsimple_pvalloczn(1, 0) && errno == EINVAL);
+	errno = 0;
+	assert(!libsimple_pvallocn(0) && errno == EINVAL);
+	errno = 0;
+
+	assert(!libsimple_pvalloczn(0, SIZE_MAX, 2, 0) && errno == ENOMEM);
+	errno = 0;
+	assert(!libsimple_pvalloczn(1, SIZE_MAX, 2, 0) && errno == ENOMEM);
+	errno = 0;
+	assert(!libsimple_pvallocn(SIZE_MAX, 2, 0) && errno == ENOMEM);
+	errno = 0;
+
+	assert((ptr = libsimple_valloczn(0, 9, 9, pagesize - 1, 0)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 81 * (pagesize - 1));
+		assert(info->alignment == pagesize);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
+	}
+	free(ptr);
+
+	assert((ptr = libsimple_valloczn(1, 9, 8, pagesize - 2, 0)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 72 * (pagesize - 2));
+		assert(info->alignment == pagesize);
+		assert(info->zeroed == info->size);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
+	}
+	free(ptr);
+
+	assert((ptr = libsimple_vallocn(9, (pagesize - 1), 0)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 9 * (pagesize - 1));
+		assert(info->alignment == pagesize);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
+	}
+	free(ptr);
+
+	assert((ptr = libsimple_envallocz(1, 1, 5 * pagesize - 1)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 5 * pagesize - 1);
+		assert(info->alignment == pagesize);
+		assert(info->zeroed == info->size);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_evallocz(1, 3 * pagesize + 1)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 3 * pagesize + 1);
+		assert(info->alignment == pagesize);
+		assert(info->zeroed == info->size);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_envallocz(1, 0, pagesize - 1)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == pagesize - 1);
+		assert(info->alignment == pagesize);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_evallocz(0, pagesize + 1)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == pagesize + 1);
+		assert(info->alignment == pagesize);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_envalloc(1, 127)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 127);
+		assert(info->alignment == pagesize);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_evalloc(3 * pagesize - 1)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 3 * pagesize - 1);
+		assert(info->alignment == pagesize);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_pvalloczn(0, 9, 9, pagesize - 1, 0)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 81 * pagesize);
+		assert(info->alignment == pagesize);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
+	}
+	free(ptr);
+
+	assert((ptr = libsimple_pvalloczn(1, 9, 8, pagesize - 2, 0)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 72 * pagesize);
+		assert(info->alignment == pagesize);
+		assert(info->zeroed == info->size);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
+	}
+	free(ptr);
+
+	assert((ptr = libsimple_pvallocn(9, (pagesize - 1), 0)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 9 * pagesize);
+		assert(info->alignment == pagesize);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
+	}
+	free(ptr);
+
+	assert((ptr = libsimple_enpvallocz(1, 1, 5 * pagesize - 1)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 5 * pagesize);
+		assert(info->alignment == pagesize);
+		assert(info->zeroed == info->size);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_epvallocz(1, 3 * pagesize + 1)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 4 * pagesize);
+		assert(info->alignment == pagesize);
+		assert(info->zeroed == info->size);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_enpvallocz(1, 0, pagesize - 1)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == pagesize);
+		assert(info->alignment == pagesize);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_epvallocz(0, pagesize + 1)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 2 * pagesize);
+		assert(info->alignment == pagesize);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_enpvalloc(1, 127)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == pagesize);
+		assert(info->alignment == pagesize);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
+	}
+	free(ptr);
+	ptr = NULL;
+
+	assert((ptr = libsimple_epvalloc(3 * pagesize - 1)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 3 * pagesize);
+		assert(info->alignment == pagesize);
+		assert(!info->zeroed);
+		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
 	free(ptr);
 	ptr = NULL;
@@ -1174,7 +1798,217 @@ main(void)
 		alloc_fail_in = 1;
 		assert(libsimple_posix_memalignz(&ptr, 1, 16 * sizeof(void *), 16) == ENOMEM && !errno);
 		assert(!alloc_fail_in);
+
+		alloc_fail_in = 1;
+		assert(!libsimple_memalignz(0, 4 * sizeof(void *), 8) && errno == ENOMEM);
+		assert(!alloc_fail_in);
+
+		alloc_fail_in = 1;
+		assert(!libsimple_memalignz(1, 16 * sizeof(void *), 16) && errno == ENOMEM);
+		assert(!alloc_fail_in);
+
+		alloc_fail_in = 1;
+		assert_exit_ptr(libsimple_enmemalignz(3, 1, sizeof(void *), 4));
+		assert(exit_status == 3);
+		assert_stderr("%s: libsimple_vmemalloc: %s\n", argv0, strerror(ENOMEM));
+		assert(!alloc_fail_in);
+
+		libsimple_default_failure_exit = 102;
+		alloc_fail_in = 1;
+		assert_exit_ptr(libsimple_ememalignz(1, sizeof(void *), 4));
+		assert(exit_status == 102);
+		assert_stderr("%s: libsimple_vmemalloc: %s\n", argv0, strerror(ENOMEM));
+		assert(!alloc_fail_in);
+		libsimple_default_failure_exit = 1;
+
+		alloc_fail_in = 1;
+		assert_exit_ptr(libsimple_enmemalignz(5, 0, sizeof(void *), 4));
+		assert(exit_status == 5);
+		assert_stderr("%s: libsimple_vmemalloc: %s\n", argv0, strerror(ENOMEM));
+		assert(!alloc_fail_in);
+
+		libsimple_default_failure_exit = 103;
+		alloc_fail_in = 1;
+		assert_exit_ptr(libsimple_ememalignz(0, sizeof(void *), 4));
+		assert(exit_status == 103);
+		assert_stderr("%s: libsimple_vmemalloc: %s\n", argv0, strerror(ENOMEM));
+		assert(!alloc_fail_in);
+		libsimple_default_failure_exit = 1;
+
+		alloc_fail_in = 1;
+		assert_exit_ptr(libsimple_enmemalign(7, sizeof(void *), 4));
+		assert(exit_status == 7);
+		assert_stderr("%s: libsimple_vmemalloc: %s\n", argv0, strerror(ENOMEM));
+		assert(!alloc_fail_in);
+
+		libsimple_default_failure_exit = 104;
+		alloc_fail_in = 1;
+		assert_exit_ptr(libsimple_ememalign(sizeof(void *), 4));
+		assert(exit_status == 104);
+		assert_stderr("%s: libsimple_vmemalloc: %s\n", argv0, strerror(ENOMEM));
+		assert(!alloc_fail_in);
+		libsimple_default_failure_exit = 1;
+
+		alloc_fail_in = 1;
+		assert(!libsimple_vallocz(0, 8) && errno == ENOMEM);
+		assert(!alloc_fail_in);
+
+		alloc_fail_in = 1;
+		assert(!libsimple_vallocz(1, 16) && errno == ENOMEM);
+		assert(!alloc_fail_in);
+
+		alloc_fail_in = 1;
+		assert_exit_ptr(libsimple_envallocz(3, 1, 4));
+		assert(exit_status == 3);
+		assert_stderr("%s: libsimple_vmemalloc: %s\n", argv0, strerror(ENOMEM));
+		assert(!alloc_fail_in);
+
+		libsimple_default_failure_exit = 102;
+		alloc_fail_in = 1;
+		assert_exit_ptr(libsimple_evallocz(1, 4));
+		assert(exit_status == 102);
+		assert_stderr("%s: libsimple_vmemalloc: %s\n", argv0, strerror(ENOMEM));
+		assert(!alloc_fail_in);
+		libsimple_default_failure_exit = 1;
+
+		alloc_fail_in = 1;
+		assert_exit_ptr(libsimple_envallocz(5, 0, 4));
+		assert(exit_status == 5);
+		assert_stderr("%s: libsimple_vmemalloc: %s\n", argv0, strerror(ENOMEM));
+		assert(!alloc_fail_in);
+
+		libsimple_default_failure_exit = 103;
+		alloc_fail_in = 1;
+		assert_exit_ptr(libsimple_evallocz(0, 4));
+		assert(exit_status == 103);
+		assert_stderr("%s: libsimple_vmemalloc: %s\n", argv0, strerror(ENOMEM));
+		assert(!alloc_fail_in);
+		libsimple_default_failure_exit = 1;
+
+		alloc_fail_in = 1;
+		assert_exit_ptr(libsimple_envalloc(7, 4));
+		assert(exit_status == 7);
+		assert_stderr("%s: libsimple_vmemalloc: %s\n", argv0, strerror(ENOMEM));
+		assert(!alloc_fail_in);
+
+		libsimple_default_failure_exit = 104;
+		alloc_fail_in = 1;
+		assert_exit_ptr(libsimple_evalloc(4));
+		assert(exit_status == 104);
+		assert_stderr("%s: libsimple_vmemalloc: %s\n", argv0, strerror(ENOMEM));
+		assert(!alloc_fail_in);
+		libsimple_default_failure_exit = 1;
+
+		alloc_fail_in = 1;
+		assert(!libsimple_pvallocz(0, 8) && errno == ENOMEM);
+		assert(!alloc_fail_in);
+
+		alloc_fail_in = 1;
+		assert(!libsimple_pvallocz(1, 16) && errno == ENOMEM);
+		assert(!alloc_fail_in);
+
+		alloc_fail_in = 1;
+		assert_exit_ptr(libsimple_enpvallocz(3, 1, 4));
+		assert(exit_status == 3);
+		assert_stderr("%s: libsimple_vmemalloc: %s\n", argv0, strerror(ENOMEM));
+		assert(!alloc_fail_in);
+
+		libsimple_default_failure_exit = 102;
+		alloc_fail_in = 1;
+		assert_exit_ptr(libsimple_epvallocz(1, 4));
+		assert(exit_status == 102);
+		assert_stderr("%s: libsimple_vmemalloc: %s\n", argv0, strerror(ENOMEM));
+		assert(!alloc_fail_in);
+		libsimple_default_failure_exit = 1;
+
+		alloc_fail_in = 1;
+		assert_exit_ptr(libsimple_enpvallocz(5, 0, 4));
+		assert(exit_status == 5);
+		assert_stderr("%s: libsimple_vmemalloc: %s\n", argv0, strerror(ENOMEM));
+		assert(!alloc_fail_in);
+
+		libsimple_default_failure_exit = 103;
+		alloc_fail_in = 1;
+		assert_exit_ptr(libsimple_epvallocz(0, 4));
+		assert(exit_status == 103);
+		assert_stderr("%s: libsimple_vmemalloc: %s\n", argv0, strerror(ENOMEM));
+		assert(!alloc_fail_in);
+		libsimple_default_failure_exit = 1;
+
+		alloc_fail_in = 1;
+		assert_exit_ptr(libsimple_enpvalloc(7, 4));
+		assert(exit_status == 7);
+		assert_stderr("%s: libsimple_vmemalloc: %s\n", argv0, strerror(ENOMEM));
+		assert(!alloc_fail_in);
+
+		libsimple_default_failure_exit = 104;
+		alloc_fail_in = 1;
+		assert_exit_ptr(libsimple_epvalloc(4));
+		assert(exit_status == 104);
+		assert_stderr("%s: libsimple_vmemalloc: %s\n", argv0, strerror(ENOMEM));
+		assert(!alloc_fail_in);
+		libsimple_default_failure_exit = 1;
 	}
+
+	assert_exit_ptr(libsimple_enmemalignz(3, 1, 0, 4));
+	assert(exit_status == 3);
+	assert_stderr("%s: libsimple_vmemalignz: %s\n", argv0, strerror(EINVAL));
+
+	libsimple_default_failure_exit = 102;
+	assert_exit_ptr(libsimple_ememalignz(1, 0, 4));
+	assert(exit_status == 102);
+	assert_stderr("%s: libsimple_vmemalignz: %s\n", argv0, strerror(EINVAL));
+	assert(!alloc_fail_in);
+
+	assert_exit_ptr(libsimple_enmemalignz(5, 0, 0, 4));
+	assert(exit_status == 5);
+	assert_stderr("%s: libsimple_vmemalignz: %s\n", argv0, strerror(EINVAL));
+
+	libsimple_default_failure_exit = 103;
+	assert_exit_ptr(libsimple_ememalignz(0, 0, 4));
+	assert(exit_status == 103);
+	assert_stderr("%s: libsimple_vmemalignz: %s\n", argv0, strerror(EINVAL));
+	assert(!alloc_fail_in);
+
+	assert_exit_ptr(libsimple_enmemalign(7, 0, 4));
+	assert(exit_status == 7);
+	assert_stderr("%s: libsimple_vmemalignz: %s\n", argv0, strerror(EINVAL));
+
+	libsimple_default_failure_exit = 104;
+	assert_exit_ptr(libsimple_ememalign(0, 4));
+	assert(exit_status == 104);
+	assert_stderr("%s: libsimple_vmemalignz: %s\n", argv0, strerror(EINVAL));
+	libsimple_default_failure_exit = 1;
+
+	assert_exit_ptr(libsimple_enmemalignz(3, 1, 3, 4));
+	assert(exit_status == 3);
+	assert_stderr("%s: libsimple_vmemalignz: %s\n", argv0, strerror(EINVAL));
+
+	libsimple_default_failure_exit = 102;
+	assert_exit_ptr(libsimple_ememalignz(1, 3, 4));
+	assert(exit_status == 102);
+	assert_stderr("%s: libsimple_vmemalignz: %s\n", argv0, strerror(EINVAL));
+	assert(!alloc_fail_in);
+
+	assert_exit_ptr(libsimple_enmemalignz(5, 0, 3, 4));
+	assert(exit_status == 5);
+	assert_stderr("%s: libsimple_vmemalignz: %s\n", argv0, strerror(EINVAL));
+
+	libsimple_default_failure_exit = 103;
+	assert_exit_ptr(libsimple_ememalignz(0, 3, 4));
+	assert(exit_status == 103);
+	assert_stderr("%s: libsimple_vmemalignz: %s\n", argv0, strerror(EINVAL));
+	assert(!alloc_fail_in);
+
+	assert_exit_ptr(libsimple_enmemalign(7, 3, 4));
+	assert(exit_status == 7);
+	assert_stderr("%s: libsimple_vmemalignz: %s\n", argv0, strerror(EINVAL));
+
+	libsimple_default_failure_exit = 104;
+	assert_exit_ptr(libsimple_ememalign(3, 4));
+	assert(exit_status == 104);
+	assert_stderr("%s: libsimple_vmemalignz: %s\n", argv0, strerror(EINVAL));
+	libsimple_default_failure_exit = 1;
 
 	assert(libsimple_memeq("abcxyz", "abc123", 3));
 	assert(!libsimple_memeq("abcxyz", "abc123", 4));

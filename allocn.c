@@ -223,7 +223,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 432);
-		assert(info->alignment == 2  *sizeof(void *));
+		assert(info->alignment == 2 * sizeof(void *));
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}

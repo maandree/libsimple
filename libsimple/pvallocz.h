@@ -24,7 +24,7 @@
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__)))
 static inline void *
-libsimple_vpvalloczn(int __clear, size_t __n, va_list __ap) /* TODO test ([v]pvalloc[z]n) */
+libsimple_vpvalloczn(int __clear, size_t __n, va_list __ap)
 {
 	return libsimple_memalloc(0, LIBSIMPLE_MEMALLOC_1_VA_PRODUCT_SIZE, __n, __ap,
 	                          LIBSIMPLE_MEMALLOC_CONDITIONAL_ZERO_INIT, __clear,
@@ -54,7 +54,7 @@ libsimple_vpvalloczn(int __clear, size_t __n, va_list __ap) /* TODO test ([v]pva
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_size__(2), __warn_unused_result__)))
 static inline void *
-libsimple_pvallocz(int __clear, size_t __n) /* TODO test (pvalloc[z]) */
+libsimple_pvallocz(int __clear, size_t __n)
 {
 	return libsimple_memalloc(__n,
 	                          LIBSIMPLE_MEMALLOC_CONDITIONAL_ZERO_INIT, __clear,
@@ -123,7 +123,7 @@ libsimple_pvalloczn(int __clear, size_t __n, ... /*, (size_t)0 */)
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_size__(3), __warn_unused_result__, __returns_nonnull__)))
 static inline void *
-libsimple_enpvallocz(int __status, int __clear, size_t __n) /* TODO test (e[n]pvalloc[z]) */
+libsimple_enpvallocz(int __status, int __clear, size_t __n)
 {
 	return libsimple_enmemalloc(__status, __n,
 	                            LIBSIMPLE_MEMALLOC_CONDITIONAL_ZERO_INIT, __clear,
@@ -163,7 +163,7 @@ libsimple_enpvallocz(int __status, int __clear, size_t __n) /* TODO test (e[n]pv
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *
-libsimple_envpvalloczn(int __status, int __clear, size_t __n, va_list __ap) /* TODO test (e[n][v]pvalloc[z]n) */
+libsimple_envpvalloczn(int __status, int __clear, size_t __n, va_list __ap)
 {
 	return libsimple_enmemalloc(__status,
 	                            0, LIBSIMPLE_MEMALLOC_1_VA_PRODUCT_SIZE, __n, __ap,
