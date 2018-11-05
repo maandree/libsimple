@@ -1,0 +1,96 @@
+.TH LIBSIMPLE_STRCHRNUL 3 2018-11-05 libsimple
+.SH NAME
+libsimple_inchrset, libsimple_inchrcaseset \- the whether a character belongs to a set
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+static inline int libsimple_inchrset(int \fIc\fP, const char *\fIs\fP);
+static inline int libsimple_inchrcaseset(int \fIc\fP, const char *\fIs\fP);
+
+#ifndef inchrset
+# define inchrset libsimple_inchrset
+#endif
+#ifndef inchrcaseset
+# define inchrcaseset libsimple_inchrcaseset
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_inchrset ()
+and
+.BR libsimple_inchrcaseset ()
+functions scans the string
+.I s
+for an occurence of the character
+.I c
+(it is converted to a
+.BR char ),
+and returns a value indicating whether it exists in the string,
+the scan will always fail if
+.I c
+is the NUL byte.
+.PP
+The comparison is case-sensitive for the
+.BR libsimple_inchrset ()
+function, and case-insensitive for the
+.BR libsimple_inchrcaseset ()
+function.
+.SH RETURN VALUE
+The
+.BR libsimple_inchrset ()
+and
+.BR libsimple_inchrcaseset ()
+functions returns 1 if
+.I c
+is not the NUL byte but can be found in
+.IR s ;
+otherwise 0 is returned.
+.SH ERRORS
+The
+.BR libsimple_inchrset ()
+and
+.BR libsimple_inchrcaseset ()
+functions cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_inchrset (),
+.br
+.BR libsimple_inchrcaseset ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_inchrset (),
+.br
+.BR libsimple_strchrnul ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_inchrset (),
+.br
+.BR libsimple_strchrnul ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_strcasechr (3),
+.BR strchr (3)

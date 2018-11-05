@@ -1,0 +1,179 @@
+.TH LIBSIMPLE_VWEPRINTF 3 2018-11-05 libsimple
+.SH NAME
+libsimple_vweprintf \- print an error message
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+void libsimple_vweprintf(const char *\fIfmt\fP, va_list \fIap\fP);
+static inline void libsimple_weprintf(const char *\fIfmt\fP, ...);
+static inline void libsimple_venprintf(int \fIstatus\fP, const char *\fIfmt\fP, va_list \fIap\fP);
+static inline void libsimple_enprintf(int \fIstatus\fP, const char *\fIfmt\fP, ...);
+static inline void libsimple_veprintf(const char *\fIfmt\fP, va_list \fIap\fP);
+static inline void libsimple_eprintf(const char *\fIfmt\fP, ...);
+
+#ifndef vweprintf
+# define vweprintf libsimple_vweprintf
+#endif
+#ifndef weprintf
+# define weprintf libsimple_weprintf
+#endif
+#ifndef venprintf
+# define venprintf libsimple_venprintf
+#endif
+#ifndef enprintf
+# define enprintf libsimple_enprintf
+#endif
+#ifndef veprintf
+# define veprintf libsimple_veprintf
+#endif
+#ifndef eprintf
+# define eprintf libsimple_eprintf
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_vweprintf ()
+function is a version of the
+.BR printf (3)
+function. It prints the string to the standard error
+(rather than the standard output), and attempts to
+avoid output mangling in case multiple processes are
+writting. Additionally, the output is suffixed with
+.nf
+
+	\fB\(dq %s\en\(dq, \fP<\fIerror message\fP>
+
+.fi
+if
+.I fmt
+ends with a colon
+.RB ( : ),
+otherwise it is suffixed with a <newline> if
+.I fmt
+does not end with a <newline>; otherwise, if
+.I fmt
+is the empty string, the output is suffixed with
+.nf
+
+	\fB\(dq%s\en\(dq, \fP<\fIerror message\fP>
+
+.fi
+Furthermore, if
+.I argv0
+.RB ( "char *" )
+is non-null and
+.I fmt
+does not start with
+.RB \(dq "usage :" \(dq,
+the output is preffixed with
+.nf
+
+	\fB\(dq%s: \(dq, \fPIargv0\fP
+.fi
+.PP
+The
+.BR libsimple_weprintf ()
+function is a version of the
+.BR libsimple_vweprintf ()
+function that uses variadic arguments instead of
+.BR va_list .
+.PP
+The
+.BR libsimple_venprintf ()
+and
+.BR libsimple_enprintf ()
+functions are versions of the
+.BR libsimple_vweprintf ()
+and
+.BR libsimple_weprintf ()
+functions that terminate the process by calling
+.BR exit (3),
+the exit value of the process will be
+.IR status .
+.PP
+The
+.BR libsimple_veprintf ()
+and
+.BR libsimple_eprintf ()
+functions are versions of the
+.BR libsimple_vweprintf ()
+and
+.BR libsimple_weprintf ()
+functions that terminate the process by calling
+.BR exit (3),
+the exit value of the process will be
+.IR libsimple_default_failure_exit (3),
+which is 1 by default.
+.SH RETURN VALUE
+None.
+.SH ERRORS
+None.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_vweprintf (),
+.br
+.BR libsimple_weprintf (),
+.br
+.BR libsimple_venprintf (),
+.br
+.BR libsimple_enprintf (),
+.br
+.BR libsimple_veprintf (),
+.br
+.BR libsimple_eprintf ()
+T}	Thread safety	MT-Unsafe race:strerror
+T{
+.BR libsimple_vweprintf (),
+.br
+.BR libsimple_weprintf (),
+.br
+.BR libsimple_venprintf (),
+.br
+.BR libsimple_enprintf (),
+.br
+.BR libsimple_veprintf (),
+.br
+.BR libsimple_eprintf ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_vweprintf (),
+.br
+.BR libsimple_weprintf (),
+.br
+.BR libsimple_venprintf (),
+.br
+.BR libsimple_enprintf (),
+.br
+.BR libsimple_veprintf (),
+.br
+.BR libsimple_eprintf ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_vweprintf (3),
+.BR perror (3),
+.BR fprintf (3),
+.BR exit (3)

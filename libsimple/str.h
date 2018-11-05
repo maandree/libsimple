@@ -98,7 +98,7 @@ int libsimple_strstarts(const char *, const char *);
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 static inline int libsimple_strcasestarts(const char *__s, const char *__t)
-{ return !strncasecmp(__s, __t, (strlen)(__t)); }
+{ return !strncasecmp(__s, __t, strlen(__t)); }
 #ifndef strcasestarts
 # define strcasestarts libsimple_strcasestarts
 #endif
@@ -320,7 +320,7 @@ size_t libsimple_strcaseeqlen(const char *, const char *);
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 static inline size_t libsimple_strreqlen(const char *__a, const char *__b)
-{ return memreqlen(__a, (strlen)(__a), __b, (strlen)(__b)); }
+{ return memreqlen(__a, strlen(__a), __b, strlen(__b)); }
 #ifndef strreqlen
 # define strreqlen libsimple_strreqlen
 #endif
@@ -336,7 +336,54 @@ static inline size_t libsimple_strreqlen(const char *__a, const char *__b)
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 static inline size_t libsimple_strrcaseeqlen(const char *__a, const char *__b)
-{ return memrcaseeqlen(__a, (strlen)(__a), __b, (strlen)(__b)); }
+{ return memrcaseeqlen(__a, strlen(__a), __b, strlen(__b)); }
 #ifndef strrcaseeqlen
 # define strrcaseeqlen libsimple_strrcaseeqlen
+#endif
+
+
+/**
+ * Check whether a byte is in a string of bytes, the scan is case-sensitive
+ * 
+ * @param   c  The byte to look for, will not be found if it is the NUL byte
+ * @param   s  The string to look in
+ * @return     1 if the byte `c` is not the NUL byte and can be found in `s`,
+ *             0 otherwise
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+static inline int libsimple_inchrset(int __c, const char *__s)
+{ return __c && strchr(__s, __c); }
+#ifndef inchrset
+# define inchrset libsimple_inchrset
+#endif
+
+
+/**
+ * Check whether a byte is in a string of bytes, the scan is case-insensitive
+ * 
+ * @param   c  The byte to look for, will not be found if it is the NUL byte
+ * @param   s  The string to look in
+ * @return     1 if the byte `c` is not the NUL byte and can be found in `s`,
+ *             0 otherwise
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+static inline int libsimple_inchrcaseset(int __c, const char *__s)
+{ return __c && strcasechr(__s, __c); }
+#ifndef inchrcaseset
+# define inchrcaseset libsimple_inchrcaseset
+#endif
+
+
+/**
+ * Check whether a NUL-terminated string is encoded in UTF-8
+ * 
+ * @param   string              The string
+ * @param   allow_modified_nul  Whether Modified UTF-8 is allowed, which
+ *                              allows a two-byte encoding for NUL
+ * @return                      1 if good, 0 on encoding error
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+int libsimple_isutf8(const char *, int);
+#ifndef isutf8
+# define isutf8 libsimple_isutf8
 #endif

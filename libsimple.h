@@ -107,37 +107,6 @@ libsimple_close(int *__fdp)
 
 
 /**
- * Check whether a byte is in a string of bytes
- * 
- * @param   c  The byte to look for, will not be found if it is the NUL byte
- * @param   s  The string to look in
- * @return     1 if the byte `c` is not the NUL byte and can be found in `s`,
- *             0 otherwise
- */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-static inline int libsimple_inchrset(int __c, const char *__s)
-{ return __c && strchr(__s, __c); }
-#ifndef inchrset
-# define inchrset libsimple_inchrset
-#endif
-
-
-/**
- * Check whether a NUL-terminated string is encoded in UTF-8
- * 
- * @param   string              The string
- * @param   allow_modified_nul  Whether Modified UTF-8 is allowed, which
- *                              allows a two-byte encoding for NUL
- * @return                      1 if good, 0 on encoding error
- */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-int libsimple_isutf8(const char *, int);
-#ifndef isutf8
-# define isutf8 libsimple_isutf8
-#endif
-
-
-/**
  * Remove an item from a list, keeping the list ordered
  * 
  * `list` must be non-void pointer to a complete type,
