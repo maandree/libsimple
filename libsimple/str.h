@@ -383,7 +383,7 @@ static inline int libsimple_inchrcaseset(int __c, const char *__s)
  * @return                      1 if good, 0 on encoding error
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-int libsimple_isutf8(const char *, int);
-#ifndef isutf8
-# define isutf8 libsimple_isutf8
+int libsimple_strisutf8(const char *, int);
+#ifndef strisutf8
+# define strisutf8 libsimple_strisutf8
 #endif

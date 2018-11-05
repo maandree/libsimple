@@ -58,7 +58,6 @@ OBJ =\
 	envposix_memalignzn.o\
 	envputenvf.o\
 	envreallocn.o\
-	isutf8.o\
 	memcasechr.o\
 	memcasecmp.o\
 	memcaseends.o\
@@ -94,6 +93,7 @@ OBJ =\
 	strchrnul.o\
 	strends.o\
 	streqlen.o\
+	strisutf8.o\
 	strncasechr.o\
 	strncasechrnul.o\
 	strncaseends.o\

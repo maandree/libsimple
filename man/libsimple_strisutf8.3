@@ -1,0 +1,74 @@
+.TH LIBSIMPLE_strisutf8 3 2018-11-05 libsimple
+.SH NAME
+libsimple_strisutf8 \- check if a string is encoded in UTF-8
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+int libsimple_strisutf8(const char *\fIstring\fP, int \fIallow_modified_nul\fP);
+
+#ifndef strisutf8
+# define strisutf8 libsimple_strisutf8
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_strisutf8 ()
+function checks if
+.I string
+is in valid UTF-8. If
+.I allow_modified_nul
+is non-zero, NUL encoded with 2 bytes is accepted.
+.SH RETURN VALUE
+The
+.BR libsimple_strisutf8 ()
+returns 1 if the
+.I string
+is in valid UTF-8 (Modified UTF-8 if
+.I allow_modified_nul
+is non-zero); otherwise 0 is returned.
+.SH ERRORS
+The
+.BR libsimple_strisutf8 ()
+function cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_inchrset (),
+.br
+.BR libsimple_inchrcaseset ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_inchrset (),
+.br
+.BR libsimple_strchrnul ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_inchrset (),
+.br
+.BR libsimple_strchrnul ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+None.
