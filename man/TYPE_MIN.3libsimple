@@ -1,0 +1,77 @@
+.TH TYPE_MIN 3 2018-11-05 libsimple
+.SH NAME
+TYPE_MIN \- get smallest value for an integer type
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+#ifndef TYPE_MIN
+# define TYPE_MIN(type) /* implementation omitted */
+#endif
+.fi
+.SH DESCRIPTION
+The
+.BR TYPE_MIN ()
+macro assumes
+.I type
+is an integer type and expands to the smallest value
+that can be stored in the
+.IR TYPE ,
+as a constant expression; however it is not suitable for
+.BR #if .
+.PP
+The
+.IB <libsimple.h>
+heading contains macro constants, using the
+.BR TYPE_MIN ()
+macro, for the minimum value for multiple integer types:
+.BR BLKCNT64_MIN ,
+.BR BLKCNT_MIN ,
+.BR BLKSIZE_MIN ,
+.BR CC_MIN ,
+.BR CLOCKID_MIN ,
+.BR CLOCK_MIN ,
+.BR DEV_MIN ,
+.BR FSBLKCNT64_MIN ,
+.BR FSBLKCNT_MIN ,
+.BR FSFILCNT64_MIN ,
+.BR FSFILCNT_MIN ,
+.BR GID_MIN ,
+.BR ID_MIN ,
+.BR INO64_MIN ,
+.BR INO_MIN ,
+.BR KEY_MIN ,
+.BR LOFF_MIN ,
+.BR MODE_MIN ,
+.BR NLINK_MIN ,
+.BR OFF64_MIN ,
+.BR OFF_MIN ,
+.BR PID_MIN ,
+.BR QUAD_MIN ,
+.BR REGISTER_MIN ,
+.BR RLIM64_MIN ,
+.BR RLIM_MIN ,
+.BR SOCKLEN_MIN ,
+.BR SPEED_MIN ,
+.BR SUSECONDS_MIN ,
+.BR TCFLAG_MIN ,
+.BR TIME_MIN ,
+.BR UID_MIN ,
+.BR USECONDS_MIN ,
+and
+.BR U_QUAD_MIN .
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR TYPE_MAX (3libsimple)
+.BR INTSTRLEN (3libsimple)

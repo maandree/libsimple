@@ -1,0 +1,77 @@
+.TH TYPE_MAX 3 2018-11-05 libsimple
+.SH NAME
+TYPE_MAX \- get largest value for an integer type
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+#ifndef TYPE_MAX
+# define TYPE_MAX(type) /* implementation omitted */
+#endif
+.fi
+.SH DESCRIPTION
+The
+.BR TYPE_MAX ()
+macro assumes
+.I type
+is an integer type and expands to the largest value
+that can be stored in the
+.IR TYPE ,
+as a constant expression; however it is not suitable for
+.BR #if .
+.PP
+The
+.IB <libsimple.h>
+heading contains macro constants, using the
+.BR TYPE_MAX ()
+macro, for the maximum value for multiple integer types:
+.BR BLKCNT64_MAX ,
+.BR BLKCNT_MAX ,
+.BR BLKSIZE_MAX ,
+.BR CC_MAX ,
+.BR CLOCKID_MAX ,
+.BR CLOCK_MAX ,
+.BR DEV_MAX ,
+.BR FSBLKCNT64_MAX ,
+.BR FSBLKCNT_MAX ,
+.BR FSFILCNT64_MAX ,
+.BR FSFILCNT_MAX ,
+.BR GID_MAX ,
+.BR ID_MAX ,
+.BR INO64_MAX ,
+.BR INO_MAX ,
+.BR KEY_MAX ,
+.BR LOFF_MAX ,
+.BR MODE_MAX ,
+.BR NLINK_MAX ,
+.BR OFF64_MAX ,
+.BR OFF_MAX ,
+.BR PID_MAX ,
+.BR QUAD_MAX ,
+.BR REGISTER_MAX ,
+.BR RLIM64_MAX ,
+.BR RLIM_MAX ,
+.BR SOCKLEN_MAX ,
+.BR SPEED_MAX ,
+.BR SUSECONDS_MAX ,
+.BR TCFLAG_MAX ,
+.BR TIME_MAX ,
+.BR UID_MAX ,
+.BR USECONDS_MAX ,
+and
+.BR U_QUAD_MAX .
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR TYPE_MIN (3libsimple)
+.BR INTSTRLEN (3libsimple)

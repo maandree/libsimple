@@ -1,0 +1,46 @@
+.TH INTSTRLEN 3 2018-11-05 libsimple
+.SH NAME
+INTSTRLEN \- get the maximum length of an integer string
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+#ifndef INTSTRLEN
+# define INTSTRLEN(type) /* implementation omitted */
+#endif
+.fi
+.SH DESCRIPTION
+The
+.BR INTSTRLEN ()
+macro assumes
+.I type
+is an integer type, and expends to a value representing
+a number of bytes sufficiently large to store any value
+of the specified integer type as a string without leading
+zeroes or plus sign, and
+.IR "without a terminating NUL byte" ,
+as a constant expression in the type
+.BR size_t ;
+however it is not suitable for
+.BR #if .
+.PP
+The resulting value can depend in either the type is
+signed or unsigned, and can be slightly larger than
+necessary, it can however not be smaller. (For integers
+up to 64 bits, the result is only off by one for signed
+64-bit integer types.)
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR TYPE_MIN (3libsimple)
+.BR TYPE_MAX (3libsimple)
