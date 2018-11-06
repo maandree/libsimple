@@ -1,9 +1,11 @@
-.TH LIBSIMPLE_VWEPRINTF 3 2018-11-05 libsimple
+.TH LIBSIMPLE_VWEPRINTF 3 2018-11-06 libsimple
 .SH NAME
 libsimple_vweprintf \- print an error message
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
+
+extern int libsimple_default_failure_exit;
 
 void libsimple_vweprintf(const char *\fIfmt\fP, va_list \fIap\fP);
 static inline void libsimple_weprintf(const char *\fIfmt\fP, ...);
@@ -173,7 +175,6 @@ None.
 .SH BUGS
 None.
 .SH SEE ALSO
-.BR libsimple_vweprintf (3),
 .BR perror (3),
 .BR fprintf (3),
 .BR exit (3)

@@ -420,8 +420,8 @@ void *libsimple_mempsetelem(void *__buf, const void *__item, size_t __size, size
  * @return          `buf`
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
-static inline void *libsimple_memsetelem(void *__buf, const void *__item, size_t __size, size_t __nitems) /* TODO test */
-{ return libsimple_mempsetelem(__buf, __item, __size, __nitems), __buf; }
+static inline void *libsimple_memsetelem(void *__buf, const void *__item, size_t __size, size_t __nitems)
+{ return __item = libsimple_mempsetelem(__buf, __item, __size, __nitems), __buf; }
 #ifndef memsetelem
 # define memsetelem libsimple_memsetelem
 #endif
