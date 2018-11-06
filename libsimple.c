@@ -3,9 +3,6 @@
 #ifndef TEST
 
 
-int libsimple_default_failure_exit = 1;
-
-
 #else
 #include "test.h"
 

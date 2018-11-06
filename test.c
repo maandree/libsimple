@@ -294,6 +294,13 @@ fprintf(FILE *restrict stream, const char *restrict format, ...)
 int
 vfprintf(FILE *restrict stream, const char *restrict format, va_list ap)
 {
+	return test_vfprintf(stream, format, ap);
+}
+
+
+int
+test_vfprintf(FILE *restrict stream, const char *restrict format, va_list ap)
+{
 	size_t old_alloc_fail_in = alloc_fail_in;
 	va_list ap2;
 	int r;

@@ -6,6 +6,11 @@
 extern char *argv0;
 
 
+int libsimple_default_failure_exit = 1;
+void (*libsimple_eprintf_preprint)(void) = NULL;
+void (*libsimple_eprintf_postprint)(void) = NULL;
+
+
 void
 libsimple_vweprintf(const char *fmt, va_list ap)
 {
@@ -44,6 +49,8 @@ libsimple_vweprintf(const char *fmt, va_list ap)
 		suffix1 = "\n";
 	}
 
+	if (libsimple_eprintf_preprint)
+		libsimple_eprintf_preprint();
 	if (message) {
 		/* This is to avoid mangling when multiple processes are writting. */
 		fprintf(stderr, "%s%s%s%s%s%s", prefix1, prefix2, message, suffix1, suffix2, suffix3);
@@ -52,6 +59,8 @@ libsimple_vweprintf(const char *fmt, va_list ap)
 		vfprintf(stderr, fmt, ap);
 		fprintf(stderr, "%s%s%s", suffix1, suffix2, suffix3);
 	}
+	if (libsimple_eprintf_postprint)
+		libsimple_eprintf_postprint();
 
 	errno = saved_errno;
 }
@@ -63,6 +72,18 @@ libsimple_vweprintf(const char *fmt, va_list ap)
 #if defined(__GNUC__) && !defined(__clang__)
 # pragma GCC diagnostic ignored "-Wformat-zero-length"
 #endif
+
+static void
+preprint(void)
+{
+	test_fprintf(stderr, "pre\n");
+}
+
+static void
+postprint(void)
+{
+	test_fprintf(stderr, "post\n");
+}
 
 int
 main(void)
@@ -92,15 +113,23 @@ main(void)
 		for (j = 0; j < 3; j++) {
 			T("%s%s%s\n", "abc", "123", "xyz");
 			assert_stderr("%s%s\n", prefix, "abc123xyz");
+			libsimple_eprintf_preprint = preprint;
 			T("%s%s%s\n", "abc", "123", "\n");
-			assert_stderr("%s%s\n", prefix, "abc123\n");
+			assert_stderr("pre\n%s%s\n", prefix, "abc123\n");
+			libsimple_eprintf_preprint = NULL;
+			libsimple_eprintf_postprint = postprint;
 			T("%s%s%s", "abc", "123", "xyz");
-			assert_stderr("%s%s\n", prefix, "abc123xyz");
+			assert_stderr("%s%s\npost\n", prefix, "abc123xyz");
+			libsimple_eprintf_postprint = NULL;
 			T("%s%s%s", "abc", "123", "\n");
 			assert_stderr("%s%s\n", prefix, "abc123\n");
 			errno = EDOM;
+			libsimple_eprintf_preprint = preprint;
+			libsimple_eprintf_postprint = postprint;
 			T("%s%s%s:", "abc", "123", "\n");
-			assert_stderr("%s%s: %s\n", prefix, "abc123\n", strerror(EDOM));
+			assert_stderr("pre\n%s%s: %s\npost\n", prefix, "abc123\n", strerror(EDOM));
+			libsimple_eprintf_preprint = NULL;
+			libsimple_eprintf_postprint = NULL;
 			errno = ERANGE;
 			T("%s%s%s:", "abc", "123", "\n");
 			assert_stderr("%s%s: %s\n", prefix, "abc123\n", strerror(ERANGE));

@@ -2,6 +2,40 @@
 
 
 /**
+ * Exit value for `libsimple_eprintf`
+ * 
+ * Default value is 1
+ */
+extern int libsimple_default_failure_exit;
+
+
+/**
+ * Unless `NULL`, called from `libsimple_vweprintf`
+ * before the `eprintf`-family of functions print
+ * the message.
+ * 
+ * `errno` is not necessarily the same value as
+ * it was when `libsimple_vweprintf` was called.
+ * 
+ * Default value is `NULL`
+ */
+extern void (*libsimple_eprintf_preprint)(void);
+
+
+/**
+ * Unless `NULL`, called from `libsimple_vweprintf`
+ * after the `eprintf`-family of functions print
+ * the message.
+ * 
+ * `errno` is not necessarily the same value as
+ * it was when `libsimple_vweprintf` was called.
+ * 
+ * Default value is `NULL`
+ */
+extern void (*libsimple_eprintf_postprint)(void);
+
+
+/**
  * Version of `printf` that allocates, on the heap, a
  * sufficiently large string and writes the output to it
  * 

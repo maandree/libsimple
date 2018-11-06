@@ -47,14 +47,6 @@
 #endif
 
 
-/**
- * Exit value for `libsimple_eprintf`
- * 
- * Default value is 1
- */
-extern int libsimple_default_failure_exit;
-
-
 #include "libsimple/printf.h"
 #include "libsimple/definitions.h"
 #include "libsimple/memalloc.h"

@@ -83,3 +83,15 @@ size_t get_pagesize(void);
 size_t round_up(size_t);
 int have_custom_malloc(void); /* return 0 if run under valgrind(1) */
 struct allocinfo *get_allocinfo(void *);
+
+
+int test_vfprintf(FILE *restrict stream, const char *restrict format, va_list ap);
+
+static inline int
+test_fprintf(FILE *restrict stream, const char *restrict format, ...)
+{
+	va_list ap;
+	va_start(ap, format);
+	return test_vfprintf(stream, format, ap);
+	va_end(ap);
+}
