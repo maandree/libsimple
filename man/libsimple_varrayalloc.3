@@ -1,0 +1,215 @@
+.TH LIBSIMPLE_VARRAYALLOC 3 2018-11-03 libsimple
+.SH NAME
+libsimple_varrayalloc \- allocate memory in a flexible manner
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+enum libsimple_arrayalloc_option {
+	/* constants omitted, see \fBDESCRIPTION\fP */
+};
+
+void *libsimple_varrayalloc(\fItype\fP, size_t \fIn\fP, va_list \fIap\fP);
+void *libsimple_envarrayalloc(int \fIstatus\fP, \fItype\fP, size_t \fIn\fP, va_list \fIap\fP);
+void *libsimple_evarrayalloc(\fItype\fP, size_t \fIn\fP, va_list \fIap\fP);
+void *libsimple_arrayalloc(\fItype\fP, size_t \fIn\fP, ..., /* LIBSIMPLE_ARRAYALLOC_END */);
+void *libsimple_enarrayalloc(int \fIstatus\fP, \fItype\fP, size_t \fIn\fP, ..., /* LIBSIMPLE_ARRAYALLOC_END */);
+void *libsimple_earrayalloc(\fItype\fP, size_t \fIn\fP, ..., /* LIBSIMPLE_ARRAYALLOC_END */);
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_varrayalloc (),
+.BR libsimple_envarrayalloc (),
+.BR libsimple_earrayalloc (),
+.BR libsimple_arrayalloc (),
+.BR libsimple_enarrayalloc (),
+and
+.BR libsimple_earrayalloc ()
+functions are versions of the
+.BR libsimple_vmemalloc (),
+.BR libsimple_envmemalloc (),
+.BR libsimple_ememalloc (),
+.BR libsimple_memalloc (),
+.BR libsimple_enmemalloc (),
+and
+.BR libsimple_ememalloc ()
+functions, respectively, implemented as macros,
+and are identical to those functions with the
+following excepts:
+.TP
+*
+The namespaces
+.B libsimple_arrayalloc
+and
+.B LIBSIMPLE_ARRAYALLOC
+instead of
+.B libsimple_memalloc
+and
+.BR LIBSIMPLE_MEMALLOC .
+.TP
+*
+The constants
+.BR LIBSIMPLE_MEMALLOC_ALIGNMENT ,
+.BR LIBSIMPLE_MEMALLOC_PAGE_ALIGNMENT ,
+and
+.B LIBSIMPLE_MEMALLOC_ELEMENT_SIZE
+are not defined.
+.TP
+*
+The additional parameter
+.I type
+which shall be a type, or an identifier, for which
+.I sizeof(type)
+and
+.I _Alignof(type)
+can be evaluated.
+.TP
+*
+.I _Alignof(type)
+will be used as the alignment for the returned pointer.
+.TP
+*
+The specified allocatio size will be multiplied by
+.IR sizeof(type) .
+.SH RETURN VALUE
+The
+.BR libsimple_varrayalloc (),
+.BR libsimple_envarrayalloc (),
+.BR libsimple_earrayalloc (),
+.BR libsimple_arrayalloc (),
+.BR libsimple_enarrayalloc (),
+and
+.BR libsimple_earrayalloc ()
+functions return the a pointer to the allocated
+memory upon successful completion; otherwise the
+.BR libsimple_varrayalloc ()
+and
+.BR libsimple_arrayalloc ()
+functions return
+.B NULL
+and set
+.I errno
+to indicate the error, whereas the
+.BR libsimple_envarrayalloc (),
+.BR libsimple_earrayalloc (),
+.BR libsimple_enarrayalloc (),
+and
+.BR libsimple_earrayalloc ()
+functions terminate the process.
+.SH ERRORS
+The
+.BR libsimple_varrayalloc ()
+and
+.BR libsimple_arrayalloc ()
+functions will fail if
+.TP
+.B EINVAL
+An invalid argument is specified.
+.TP
+.B EINVAL
+An option is specified twice or in
+conjunction with a mutually exclusive option.
+.TP
+.B ENOMEM
+Enough memory could not be allocated.
+.PP
+The
+.BR libsimple_envarrayalloc (),
+.BR libsimple_earrayalloc (),
+.BR libsimple_enarrayalloc (),
+and
+.BR libsimple_earrayalloc ()
+functions terminate the process on failure.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_varrayalloc (),
+.br
+.BR libsimple_envarrayalloc (),
+.br
+.BR libsimple_earrayalloc (),
+.br
+.BR libsimple_arrayalloc (),
+.br
+.BR libsimple_enarrayalloc (),
+.br
+.BR libsimple_earrayalloc ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_varrayalloc (),
+.br
+.BR libsimple_envarrayalloc (),
+.br
+.BR libsimple_earrayalloc (),
+.br
+.BR libsimple_arrayalloc (),
+.br
+.BR libsimple_enarrayalloc (),
+.br
+.BR libsimple_earrayalloc ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_varrayalloc (),
+.br
+.BR libsimple_envarrayalloc (),
+.br
+.BR libsimple_earrayalloc (),
+.br
+.BR libsimple_arrayalloc (),
+.br
+.BR libsimple_enarrayalloc (),
+.br
+.BR libsimple_earrayalloc ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_vmemalloc (3),
+.BR libsimple_enmalloc (3),
+.BR libsimple_mallocz (3),
+.BR libsimple_vmallocn (3),
+.BR libsimple_vmalloczn (3),
+.BR libsimple_encalloc (3),
+.BR libsimple_vcallocn (3),
+.BR libsimple_enrealloc (3),
+.BR libsimple_vreallocn (3),
+.BR libsimple_memalign (3),
+.BR libsimple_memalignz (3),
+.BR libsimple_vmemalignn (3),
+.BR libsimple_vmemalignzn (3),
+.BR libsimple_enposix_memalign (3),
+.BR libsimple_posix_memalignz (3),
+.BR libsimple_vposix_memalignn (3),
+.BR libsimple_vposix_memalignzn (3),
+.BR libsimple_enaligned_alloc (3),
+.BR libsimple_aligned_allocz (3),
+.BR libsimple_valigned_allocn (3),
+.BR libsimple_valigned_alloczn (3),
+.BR libsimple_pvalloc (3),
+.BR libsimple_pvallocz (3),
+.BR libsimple_vpvallocn (3),
+.BR libsimple_vpvalloczn (3),
+.BR libsimple_valloc (3),
+.BR libsimple_vallocz (3),
+.BR libsimple_vvallocn (3),
+.BR libsimple_vvalloczn (3)
