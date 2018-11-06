@@ -1,0 +1,300 @@
+.TH LIBSIMPLE_VMEMALLOC 3 2018-11-03 libsimple
+.SH NAME
+libsimple_vmemalloc \- allocate memory with custom alignment
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+enum libsimple_memalloc_option {
+	/* constants omitted, see \fBDESCRIPTION\fP */
+};
+
+void *libsimple_vmemalloc(size_t \fIn\fP, va_list \fIap\fP);
+void *libsimple_envmemalloc(int \fIstatus\fP, size_t \fIn\fP, va_list \fIap\fP);
+static inline void *libsimple_evmemalloc(size_t \fIn\fP, va_list \fIap\fP);
+static inline void *libsimple_memalloc(size_t \fIn\fP, ..., /* LIBSIMPLE_MEMALLOC_END */);
+static inline void *libsimple_enmemalloc(int \fIstatus\fP, size_t \fIn\fP, ..., /* LIBSIMPLE_MEMALLOC_END */);
+static inline void *libsimple_ememalloc(size_t \fIn\fP, ..., /* LIBSIMPLE_MEMALLOC_END */);
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_vmemalloc ()
+function is a flexible alternative to standard allocation
+functions.
+.PP
+.I va
+is a list of options that specify the behaviour, its
+end is marked by
+.BR LIBSIMPLE_MEMALLOC_END ,
+the following options (which is the type
+.BR "enum libsimple_memalloc_option" )
+are recognised:
+.TP
+.B LIBSIMPLE_MEMALLOC_ZERO_INIT
+The allocated memory shall be initialisd with NUL bytes.
+.TP
+.B LIBSIMPLE_MEMALLOC_CONDITIONAL_ZERO_INIT
+The allocated memory shall be initialisd with NUL bytes
+with the argument, which should be of the type
+.BR int ,
+is nonzero.
+.TP
+.B LIBSIMPLE_MEMALLOC_UNIQUE_IF_ZERO
+If attempting to allocate 0 bytes,
+rather than failing with
+.I errno
+set to
+.BR EINVAL ,
+a unique pointer (that can be deallocated)
+should be returned.
+.TP
+.B LIBSIMPLE_MEMALLOC_NULL_IF_ZERO
+If attempting to allocate 0 bytes,
+rather than failing with
+.I errno
+set to
+.BR EINVAL ,
+a
+.B NULL
+should be returned.
+.TP
+.B LIBSIMPLE_MEMALLOC_ALIGNMENT
+The value of the next argument, which should be of the type
+.BR size_t ,
+should be used as the alignment of the returned pointer.
+By default the alignment is
+.IR "alignof(max_align_t)" .
+.TP
+.B LIBSIMPLE_MEMALLOC_PAGE_ALIGNMENT
+The alignment of the returned pointer should be the page size.
+By default the alignment is
+.IR "alignof(max_align_t)" .
+.TP
+.B LIBSIMPLE_MEMALLOC_ROUND_UP_SIZE_TO_ALIGNMENT
+The number of bytes to allocated should be rounded up to
+the next multiple of the alignment, unless it already is
+a multiple of the alignment.
+.TP
+.B LIBSIMPLE_MEMALLOC_ELEMENT_SIZE
+The next argument, which should be of the type
+.BR size_t ,
+shall act as a multiplier for the number of bytes to allocate
+(default multiplier is 1), effectively, making the specified
+allocation size specified in elements rather than in bytes.
+.TP
+.B LIBSIMPLE_MEMALLOC_PRODUCT_SIZE
+If
+.I n
+is zero, the product of the following arguments,
+which should be of the type
+.BR size_t ,
+up to the first 0, shall be used as the allocation size.
+If
+.I n
+is not zero, the product of the following
+.I n
+arguments, also of type
+.BR size_t ,
+shall be used as the allocation size.
+By default
+.I n
+bytes are allocated.
+.TP
+.B LIBSIMPLE_MEMALLOC_VA_PRODUCT_SIZE
+Like
+.BR LIBSIMPLE_MEMALLOC_PRODUCT_SIZE ,
+the arguments are read from the next argument,
+which should be of the type
+.BR va_list .
+.TP
+.B LIBSIMPLE_MEMALLOC_1_VA_PRODUCT_SIZE
+Like
+.BR LIBSIMPLE_MEMALLOC_PRODUCT_SIZE ,
+except two arguments read from
+.IR ap :
+a
+.BR size_t ,
+which act as the first factor, and a
+.B va_list
+with the rest of the factors.
+.TP
+.B LIBSIMPLE_MEMALLOC_VA_LIST
+Arguments from the next argument, which should be of the type
+.B va_list
+and should end with
+.BR LIBSIMPLE_MEMALLOC_END ,
+shall be parsed as options for the memory allocation.
+.PP
+Each
+.B enum libsimple_memalloc_option
+constant have a self-referencing macros defined
+which can be used to test which constants are defined.
+.PP
+The
+.BR libsimple_envmemalloc ()
+and
+.BR libsimple_evmemalloc ()
+functions are versions of the
+.BR libsimple_vmemalloc ()
+that terminate the process by calling the
+.BR libsimple_enprintf (3)
+(with
+.I status
+as the exit value) and
+.BR libsimple_eprintf (3)
+functions, respectively.
+.PP
+The
+.BR libsimple_memalloc (),
+.BR libsimple_enmemalloc (),
+and
+.BR libsimple_ememalloc ()
+functions are versions of the
+.BR libsimple_vmemalloc (),
+.BR libsimple_envmemalloc (),
+and
+.BR libsimple_evmemalloc ()
+functions, respectively, that use variadic arguments
+instead of
+.BR va_list .
+.SH RETURN VALUE
+The
+.BR libsimple_vmemalloc (),
+.BR libsimple_envmemalloc (),
+.BR libsimple_ememalloc (),
+.BR libsimple_memalloc (),
+.BR libsimple_enmemalloc (),
+and
+.BR libsimple_ememalloc ()
+functions return the a pointer to the allocated
+memory upon successful completion; otherwise the
+.BR libsimple_vmemalloc ()
+and
+.BR libsimple_memalloc ()
+functions return
+.B NULL
+and set
+.I errno
+to indicate the error, whereas the
+.BR libsimple_envmemalloc (),
+.BR libsimple_ememalloc (),
+.BR libsimple_enmemalloc (),
+and
+.BR libsimple_ememalloc ()
+functions terminate the process.
+.SH ERRORS
+The
+.BR libsimple_vmemalloc ()
+and
+.BR libsimple_memalloc ()
+functions will fail if
+.TP
+.B EINVAL
+An invalid argument is specified.
+.TP
+.B EINVAL
+An option is specified twice or in
+conjunction with a mutually exclusive option.
+.TP
+.B ENOMEM
+Enough memory could not be allocated.
+.PP
+The
+.BR libsimple_envmemalloc (),
+.BR libsimple_ememalloc (),
+.BR libsimple_enmemalloc (),
+and
+.BR libsimple_ememalloc ()
+functions terminate the process on failure.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_vmemalloc (),
+.br
+.BR libsimple_envmemalloc (),
+.br
+.BR libsimple_ememalloc (),
+.br
+.BR libsimple_memalloc (),
+.br
+.BR libsimple_enmemalloc (),
+.br
+.BR libsimple_ememalloc ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_vmemalloc (),
+.br
+.BR libsimple_envmemalloc (),
+.br
+.BR libsimple_ememalloc (),
+.br
+.BR libsimple_memalloc (),
+.br
+.BR libsimple_enmemalloc (),
+.br
+.BR libsimple_ememalloc ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_vmemalloc (),
+.br
+.BR libsimple_envmemalloc (),
+.br
+.BR libsimple_ememalloc (),
+.br
+.BR libsimple_memalloc (),
+.br
+.BR libsimple_enmemalloc (),
+.br
+.BR libsimple_ememalloc ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_enmalloc (3),
+.BR libsimple_mallocz (3),
+.BR libsimple_vmallocn (3),
+.BR libsimple_vmalloczn (3),
+.BR libsimple_encalloc (3),
+.BR libsimple_vcallocn (3),
+.BR libsimple_enrealloc (3),
+.BR libsimple_vreallocn (3),
+.BR libsimple_memalign (3),
+.BR libsimple_memalignz (3),
+.BR libsimple_vmemalignn (3),
+.BR libsimple_vmemalignzn (3),
+.BR libsimple_enposix_memalign (3),
+.BR libsimple_posix_memalignz (3),
+.BR libsimple_vposix_memalignn (3),
+.BR libsimple_vposix_memalignzn (3),
+.BR libsimple_enaligned_alloc (3),
+.BR libsimple_aligned_allocz (3),
+.BR libsimple_valigned_allocn (3),
+.BR libsimple_valigned_alloczn (3),
+.BR libsimple_pvalloc (3),
+.BR libsimple_pvallocz (3),
+.BR libsimple_vpvallocn (3),
+.BR libsimple_vpvalloczn (3),
+.BR libsimple_valloc (3),
+.BR libsimple_vallocz (3),
+.BR libsimple_vvallocn (3),
+.BR libsimple_vvalloczn (3)

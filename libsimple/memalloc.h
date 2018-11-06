@@ -13,7 +13,7 @@ enum libsimple_memalloc_option {
 	LIBSIMPLE_MEMALLOC_PRODUCT_SIZE,
 	LIBSIMPLE_MEMALLOC_VA_PRODUCT_SIZE,
 	LIBSIMPLE_MEMALLOC_1_VA_PRODUCT_SIZE,
-	LIBSIMPLE_MEMALLOC_VA_LIST,
+	LIBSIMPLE_MEMALLOC_VA_LIST
 };
 #define libsimple_arrayalloc_option libsimple_memalloc_option
 
