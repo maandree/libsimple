@@ -1,0 +1,325 @@
+.TH LIBSIMPLE-ARG.H 0 2018-11-08 libsimple
+.SH NAME
+libsimple-arg.h \- command line argument parsing header for libsimple
+.SH SYNOPSIS
+.nf
+#include <libsimple-arg.h>
+
+extern char *\fIargv0\fP;
+
+struct longopt {
+	const char *long_flag;
+	char short_flag;
+	int with_arg;
+};
+
+#define ARGBEGIN                          ARGBEGIN3(1, argc, argv)
+#define SUBARGBEGIN                       ARGBEGIN3(0, argc, argv)
+#define ARGBEGIN3(\fIWITH_ARGV0\fP, \fIargc\fP, \fIargv\fP) /* implementation omitted */
+#define ARGMAPLONG(\fILONGOPTS\fP)              /* implementation omitted */
+#define ARGALT(\fISYMBOL\fP)                    /* implementation omitted */
+#define ARGEND                            /* implementation omitted */
+#define ARGNUM                            /* implementation omitted */
+#define FLAG()                            /* implementation omitted */
+#define LFLAG()                           /* implementation omitted */
+#define ARG()                             /* implementation omitted */
+#define ARGHERE()                         /* implementation omitted */
+#define NOFLAGS(...)                      /* implementation omitted */
+#define TESTLONG(\fIFLG\fP, \fIWARG\fP)               /* implementation omitted */
+#define USAGE(\fISYNOPSIS\fP)                   /* implementation omitted */
+#define NUSAGE(\fISTATUS\fP, \fISYNOPSIS\fP)          /* implementation omitted */
+.fi
+.SH DESCRIPTION
+The
+.I <libsimple-arg.h>
+header define a collection of macros for parsing the
+command line arguments, thatis, the data in the
+two first parameters of the
+.IR main ()
+function, according to the default behaviour specified
+by POSIX (extensions of the specification is available).
+It also includes the three headers the macros need:
+.IR <stdio.h> ,
+.IR <stdlib.h> ,
+and
+.IR <string.h> ,
+additionally in defines the variable
+.I argv0
+which the macros set to the command line argument with
+index zero which is the process was invoked with, normally,
+but not always, this the filename of or the path to the
+binary the process runs; one common exception to this is
+for login shells: when a user logs in, the shell that is
+started is started with the filename of the shell's binary
+prefix with a dash
+.RB ( - )
+as the zeroth command line argument. Assuming the second
+argument in the
+.IR main ()
+function is named
+.IR argv ,
+the program should set
+.I argv0
+to
+.I argv[0]
+if the process may call a either of the
+.BR libsimple_eprintf (3),
+.BR libsimple_enprintf (3),
+.BR libsimple_weprintf (3),
+.BR libsimple_veprintf (3),
+.BR libsimple_venprintf (3),
+and
+.BR libsimple_vweprintf (3)
+functions before the either of the
+.B ARGBEGIN
+macro is used, and must do so if the function
+.BR usage (),
+defined by the
+.B USAGE
+and
+.B NUSAGE
+macros, is called before the
+.B ARGBEGIN
+macro is used.
+.PP
+Applications should normally parse or validate the command
+line arguments and print usage information on usage error.
+The macros
+.BI USAGE( SYNOPSIS )
+and
+.BI NUSAGE( STATUS ,\  SYNOPSIS )
+define a
+.RI ( static )
+function, name
+.IR usage (),
+that print the usage information and terminate the process,
+the also declare the variable
+.IR argv0 .
+.IR usage ()
+does take any arguments.
+.IR usage ()
+defined by
+.B USAGE
+terminate the process with exit value 1.
+.IR usage ()
+defined by
+.B NUSAGE
+terminate the process with exit value
+.IR STATUS.
+Both print the an error message to the standard error
+in the following format:
+.nf
+
+	\fB\(dqusage: %s %s\en\(dq,\fP \fIargv0\fP\fB, \fP\fISYNOPSIS\fP
+
+.fi
+However, if
+.I SYNOPSIS
+is
+.B NULL
+or the empty string, the error message printed in the
+following format.
+.nf
+
+	\fB\(dqusage: %s\en\(dq,\fP \fIargv0\fP
+.fi
+.PP
+The macros
+.B ARGBEGIN
+and
+.B ARGEND
+are used to parse command line arguments, they use the variable
+named
+.I argc
+(number of command line arguments)
+and
+.I argv
+(command line arguments) and set
+.I argv0
+to
+.IR argv[0] ,
+.I argv[argc]
+must be
+.BR NULL ,
+which is the case for the
+.IR main ()
+function. The
+value that should be stored to
+.I argv0
+is not available at
+.IR argv[0] ,
+the macro
+.B SUBARGBEGIN
+should be used instead of
+.BR ARGBEGIN .
+These macros work similar to a switch statement in a loop:
+.nf
+
+	ARGBEGIN {
+	case 'a':
+		/* handle -a */
+		break;
+	case 'b':
+		/* handle -b */
+		break;
+	case ARGNUM:
+		/* handle -0, -1, -2, ..., -9 */
+		break;
+	default:
+		/* print usage information for other flags */
+		usage();
+	} ARGEND;
+
+.fi
+After
+.BR ARGEND ,
+.I argc
+and
+.I argv
+are set to only contain the remaining, unparsed, arguments.
+.PP
+The
+.BR ARGBEGIN3 ()
+macro can be used instead of the
+.B ARGBEGIN
+and
+.B SUBARGBEGIN
+macros for greater flexibility. If
+.I WITH_ARGV0
+is non-zero it behaves like the
+.B ARGBEGIN
+macro, otherwise it behaves like the
+.B SUBARGBEGIN
+macro. The
+.BR ARGBEGIN3 ()
+also lets the user choose which variables to use as
+.I argc
+and
+.IR argv .
+.PP
+If the application should support flags starting with
+another symbol than a dash
+.RB ( - ),
+the macro
+.BR ARGALT ()
+can be used. Its argument, 
+.IR SYMBOL ,
+should be
+.B char
+and it is used thusly:
+.nf
+
+	ARGBEGIN {
+	case 'a':
+		/* handle -a */
+		break;
+	default:
+		usage();
+	} ARGALT('+') {
+	case 'a':
+		/* handle +a */
+		break;
+	default:
+		usage();
+	} ARGALT('/') {
+	case 'a':
+		/* handle /a */
+		break;
+	default:
+		usage();
+	} ARGEND;
+.fi
+.PP
+In multicase statement (any case statement actually), the
+.BR FLAG ()
+macro can be used to identify which flag is being parsed.
+For example, in
+.I case 'a'
+.BR FLAG ()
+returns
+.IR 'a' .
+The
+.BR LFLAG ()
+macro returns the entire element in
+.IR argv .
+Note that one such element can contain multiple flags,
+and the it can contain the flags argument, but the
+argument can also be in the next element.
+.PP
+The macros
+.BR ARG (),
+.BR ARGNULL (),
+and
+.BR ARGHERE ()
+are used the get the value provided with an option, one
+of the must be used to let the parse know that the option
+should have a value.
+.BR ARG ()
+returns the current option's value, or terminates the
+by calling
+.IR usage ()
+if the option does not have a value.
+.BR ARGNULL ()
+returns the current option's value, or returns
+.B NULL
+if the option does not have a value.
+.BR ARGHERE ()
+Remaining part of the current argument in the command
+line, including the character the specifies the flag.
+It can be used together with
+.B ARGNUM
+to parse numerical options (a dash followed by a
+multidigit number). It can also be used to parse
+options where the value is optional be must appear
+in the same argument, for example, if the current
+argument is
+.BR -n1000 ,
+.BR ARGHERE ()
+will return
+.B \(dqn1000\(dq
+when the
+.B -n
+option is parsed, but if the argument is just
+.BR -n ,
+.BR ARGHERE ()
+will return
+.BR \(dqn\(dq ,
+even if the next argument is
+.BR 1000 .
+.PP
+If your application, does not recognise any options,
+but should still have like normal programs and support
+.BR -- ,
+the macro
+.BR NOFLAGS ()
+can be used instead of the
+.B ARGBEGIN
+and
+.B ARGEND
+macros. It behaves just like
+.nf
+
+	ARGBEGIN {
+	default:
+		usage();
+	} ARGEND;
+
+.fi
+but is optimised. Additionally, if the last argument
+is non-zero, the
+.IR usage ()
+function is called. All arguments evaluated exactly
+once, or if flags are used, never. So if your application
+should not have any options or operands,
+.I NOFLAGS(argc)
+can be used.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH SEE ALSO
+.BR libsimple.h (0)
