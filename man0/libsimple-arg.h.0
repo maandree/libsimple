@@ -1,9 +1,9 @@
-.TH LIBSIMPLE-ARG.H 0 2018-11-08 libsimple
+.TH LIBSIMPLE\-ARG.H 0 2018-11-08 libsimple
 .SH NAME
-libsimple-arg.h \- command line argument parsing header for libsimple
+libsimple\-arg.h \- command line argument parsing header for libsimple
 .SH SYNOPSIS
 .nf
-#include <libsimple-arg.h>
+#include <libsimple\-arg.h>
 
 extern char *\fIargv0\fP;
 
@@ -13,25 +13,25 @@ struct longopt {
 	int with_arg;
 };
 
-#define ARGBEGIN                          ARGBEGIN3(1, argc, argv)
-#define SUBARGBEGIN                       ARGBEGIN3(0, argc, argv)
-#define ARGBEGIN3(\fIWITH_ARGV0\fP, \fIargc\fP, \fIargv\fP) /* implementation omitted */
-#define ARGMAPLONG(\fILONGOPTS\fP)              /* implementation omitted */
-#define ARGALT(\fISYMBOL\fP)                    /* implementation omitted */
-#define ARGEND                            /* implementation omitted */
-#define ARGNUM                            /* implementation omitted */
-#define FLAG()                            /* implementation omitted */
-#define LFLAG()                           /* implementation omitted */
-#define ARG()                             /* implementation omitted */
-#define ARGHERE()                         /* implementation omitted */
-#define NOFLAGS(...)                      /* implementation omitted */
-#define TESTLONG(\fIFLG\fP, \fIWARG\fP)               /* implementation omitted */
-#define USAGE(\fISYNOPSIS\fP)                   /* implementation omitted */
-#define NUSAGE(\fISTATUS\fP, \fISYNOPSIS\fP)          /* implementation omitted */
+#define ARGBEGIN                                         ARGBEGIN4(1, 1, argc, argv)
+#define SUBARGBEGIN                                      ARGBEGIN4(0, 1, argc, argv)
+#define ARGBEGIN4(\fIWITH_ARGV0\fP, \fIKEEP_DASHDASH\fP, \fIargc\fP, \fIargv\fP) /* implementation omitted */
+#define ARGMAPLONG(\fILONGOPTS\fP)                             /* implementation omitted */
+#define ARGALT(\fISYMBOL\fP)                                   /* implementation omitted */
+#define ARGEND                                           /* implementation omitted */
+#define ARGNUM                                           /* implementation omitted */
+#define FLAG()                                           /* implementation omitted */
+#define LFLAG()                                          /* implementation omitted */
+#define ARG()                                            /* implementation omitted */
+#define ARGHERE()                                        /* implementation omitted */
+#define NOFLAGS(...)                                     /* implementation omitted */
+#define TESTLONG(\fIFLG\fP, \fIWARG\fP)                              /* implementation omitted */
+#define USAGE(\fISYNOPSIS\fP)                                  /* implementation omitted */
+#define NUSAGE(\fISTATUS\fP, \fISYNOPSIS\fP)                         /* implementation omitted */
 .fi
 .SH DESCRIPTION
 The
-.I <libsimple-arg.h>
+.I <libsimple\-arg.h>
 header define a collection of macros for parsing the
 command line arguments, thatis, the data in the
 two first parameters of the
@@ -52,7 +52,7 @@ binary the process runs; one common exception to this is
 for login shells: when a user logs in, the shell that is
 started is started with the filename of the shell's binary
 prefix with a dash
-.RB ( - )
+.RB ( \- )
 as the zeroth command line argument. Assuming the second
 argument in the
 .IR main ()
@@ -157,13 +157,13 @@ These macros work similar to a switch statement in a loop:
 
 	ARGBEGIN {
 	case 'a':
-		/* handle -a */
+		/* handle \-a */
 		break;
 	case 'b':
-		/* handle -b */
+		/* handle \-b */
 		break;
 	case ARGNUM:
-		/* handle -0, -1, -2, ..., -9 */
+		/* handle \-0, \-1, \-2, ..., \-9 */
 		break;
 	default:
 		/* print usage information for other flags */
@@ -179,19 +179,43 @@ and
 are set to only contain the remaining, unparsed, arguments.
 .PP
 The
-.BR ARGBEGIN3 ()
+.BR ARGBEGIN4 ()
 macro can be used instead of the
 .B ARGBEGIN
 and
 .B SUBARGBEGIN
 macros for greater flexibility. If
 .I WITH_ARGV0
-is non-zero it behaves like the
+is non-zero, it behaves like the
 .B ARGBEGIN
 macro, otherwise it behaves like the
 .B SUBARGBEGIN
-macro. The
-.BR ARGBEGIN3 ()
+macro. If
+.I KEEP_DASHDASH
+is zero,
+.B --
+is removed from
+.I argv
+and
+.I argc
+decreased by one
+before the parsing is stopped when
+.B --
+is encounted, this is normal behaviour,
+the application code not need to handle
+.B --
+especially; on the other hand if
+.I KEEP_DASHDASH
+is non-zero
+.B --
+is not removed before parsing is stopped when
+.B --
+is encounted, and it becomes visible to the application
+code, implement GNU behaviour by running the parsing
+in a loop and stop when the application code sees
+.BR -- .
+The
+.BR ARGBEGIN4 ()
 also lets the user choose which variables to use as
 .I argc
 and
@@ -199,7 +223,7 @@ and
 .PP
 If the application should support flags starting with
 another symbol than a dash
-.RB ( - ),
+.RB ( \- ),
 the macro
 .BR ARGALT ()
 can be used. Its argument, 
@@ -211,7 +235,7 @@ and it is used thusly:
 
 	ARGBEGIN {
 	case 'a':
-		/* handle -a */
+		/* handle \-a */
 		break;
 	default:
 		usage();
@@ -273,23 +297,159 @@ multidigit number). It can also be used to parse
 options where the value is optional be must appear
 in the same argument, for example, if the current
 argument is
-.BR -n1000 ,
+.BR \-n1000 ,
 .BR ARGHERE ()
 will return
 .B \(dqn1000\(dq
 when the
-.B -n
+.B \-n
 option is parsed, but if the argument is just
-.BR -n ,
+.BR \-n ,
 .BR ARGHERE ()
 will return
 .BR \(dqn\(dq ,
 even if the next argument is
 .BR 1000 .
 .PP
+The
+.BR TESTLONG ()
+macro can be used to implement support for long
+options (for example
+.B \-\-long
+or
+.BR \-long ).
+.I FLG
+shall be the full string of the flag, and
+.I WARG
+shall be non-zero if and only if the option should
+have a value. If the value must be specified in the
+same argument (that is for example
+.B \-\-long=value
+rather than
+.BR \-\-long\ value ),
+.I FLG
+must end with an equals sign
+.RB ( = )
+in addition to a non-zero value on
+.IR WARG .
+Example:
+.nf
+
+	ARGBEGIN {
+	case 'x':
+	handle_dash_x:
+		/* handle \-x */
+		break;
+	case '\-':
+		if (TESTLONG(\(dq\-\-xdev\(dq, 0))
+			goto handle_dash_x;
+		else
+			usage();
+		break;
+	default:
+		usage();
+	} ARGEND;
+
+.fi
+.I FLG
+must not have side-effects,
+.I WARG
+should not have side-effects.
+.PP
+If your application have many long options with short
+option aliases, the
+.BR ARGMAPLONG ()
+macro can be used.
+.I LONGOPTS
+shall be a
+.B struct longopt *
+with multiple
+.BR "struct longopt" s,
+the end of the last shall be marked with a
+.B struct longopt
+where
+.I long_flag
+is
+.BR NULL .
+The
+.BR ARGMAPLONG ()
+macro will test each entry, in order, using the
+.BR TESTLONG ()
+macro with
+.I long_flag
+as
+.I FLG
+and with
+.I with_arg
+as
+.IR WARG .
+If the test passes, the keyword
+.B break
+is used to break the
+.B case
+(so the
+.BR ARGMAPLONG ()
+macro shall be used directly in a
+.B case
+(or
+.BR default )
+for
+.IR ARGBEGIN ,
+.IR SUBARGBEGIN ,
+or
+.IR ARGBEGIN4 ,
+and not inside a loop or inner
+.BR switch ),
+and in the next iteration of the argument parsing loop,
+the flag will be the short flag consisting of the two
+characters
+.B long_flag[0]
+and
+.B short_flag
+(in that order). Example:
+.nf
+
+	struct longopt map[] = {
+		{\(dq--long-a\(dq, 'a', 0},
+		{\(dq--long-b\(dq, 'b', 0},
+		{NULL, 0, 0}
+	}
+	ARGBEGIN {
+	case 'a':
+		/* handle \-a and \-\-long\-a */
+		break;
+	case 'b':
+		/* handle \-b and \-\-long\-b */
+		break;
+	case '\-':
+		ARGMAPLONG(map);
+		usage();
+	default:
+		usage();
+	} ARGEND;
+.fi
+.PP
+NB! Long options with optional arguments should                                                                                      
+have to map entries, one where
+.I long_flag
+ends with
+.RB ' = '
+and
+.B with_arg
+is non-zero, and one where
+.B long_flag
+does not end with
+.RB ' = '
+and
+.B with_arg
+is zero. These
+.I cannot
+have the same
+.IR short_flag .
+.PP
 If your application, does not recognise any options,
 but should still have like normal programs and support
-.BR -- ,
+.BR \-\- ,
 the macro
 .BR NOFLAGS ()
 can be used instead of the

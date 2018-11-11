@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+/* TODO add tests */
+
 
 /**
  * The zeroth command line argument, the name of the process,
@@ -14,9 +16,34 @@
 extern char *argv0;
 
 
+/**
+ * Map from a long option to a short option
+ * 
+ * NB! Long options with optional arguments should
+ * have to map entries, one where `.long_flag` ends
+ * with '=' and `.with_arg` is non-zero, and one
+ * where `.long_flag` does not end with '=' and
+ * `.with_arg` is zero. These *cannot* have the same
+ * `.short_flag`
+ */
 struct longopt {
+	/**
+	 * The long option, if the value must be attached
+	 * to the flag, this must end with '='
+	 */
 	const char *long_flag;
+
+	/**
+	 * The equivalent short option
+	 * 
+	 * The first symbol in the short option
+	 * (normally '-') will be `.long_flag[0]`
+	 */
 	char short_flag;
+
+	/**
+	 * Whether the option takes an argument
+	 */
 	int with_arg;
 };
 
@@ -59,7 +86,7 @@ struct longopt {
  *                 usage();
  *         } ARGEND;
  */
-#define ARGBEGIN ARGBEGIN3(1, argc, argv)
+#define ARGBEGIN ARGBEGIN4(1, 1, argc, argv)
 
 /**
  * `SUBARGBEGIN {} ARGEND;` is similar to
@@ -67,23 +94,26 @@ struct longopt {
  * is not set to `argv[0]`, instead `argv[0]`
  * is handled like any other element in `argv`
  */
-#define SUBARGBEGIN ARGBEGIN3(0, argc, argv)
+#define SUBARGBEGIN ARGBEGIN4(0, 1, argc, argv)
 
 /**
  * Flexible alternative to `ARGBEGIN`
  * 
- * @param  WITH_ARGV0    If 0, behave like `SUBARGBEGIN`,
- *                       otherwise, behave like `ARGBEGIN`
- * @param  argc:int      The number of elements in `argv`, will be
- *                       update to the number of arguments remaining
- *                       after parsing stopped
- * @param  argv:char **  The command line arguments to parse,
- *                       `argv[argc]` must be `NULL`; will be updated,
- *                       via offseting, to the arguments remaining
- *                       after parsing stopped, `argv[argc]` will
- *                       still be `NULL`
+ * @param  WITH_ARGV0             If 0, behave like `SUBARGBEGIN`,
+ *                                otherwise, behave like `ARGBEGIN`
+ * @param  KEEP_DASHDASH          If and only if 0, "--" is not removed
+ *                                `argv` before parsing is stopped when it
+ *                                is encountered
+ * @param  argc:int variable      The number of elements in `argv`, will be
+ *                                update to the number of arguments remaining
+ *                                after parsing stopped
+ * @param  argv:char ** variable  The command line arguments to parse,
+ *                                `argv[argc]` must be `NULL`; will be updated,
+ *                                via offseting, to the arguments remaining
+ *                                after parsing stopped, `argv[argc]` will
+ *                                still be `NULL`
  */
-#define ARGBEGIN3(WITH_ARGV0, argc, argv)\
+#define ARGBEGIN4(WITH_ARGV0, argc, argv)\
 	do {\
 		char flag_, *lflag_, *arg_;\
 		int brk_ = 0, again_;\
@@ -93,11 +123,15 @@ struct longopt {
 			argv += !!argv0;\
 			argc -= !!argv0;\
 		}\
+		(void) arg_;\
+		(void) i_;\
+		(void) n_;\
 		for (; argv[0] && argv[0][0] && argv[0][1]; argc--, argv++) {\
 			lflag_ = argv[0];\
 			if (argv[0][0] == '-') {\
 				if (argv[0][1] == '-' && !argv[0][2]) {\
-					argv++, argc--;\
+					if (!(KEEP_DASHDASH))\
+						argv++, argc--;\
 					break;\
 				}\
 				for (argv[0]++; argv[0][0]; argv[0]++) {\
@@ -110,7 +144,18 @@ struct longopt {
 						switch (flag_) {
 
 /**
- * TODO doc ARGMAPLONG
+ * Test multiple long options and go to
+ * corresponding short option case
+ * 
+ * If the long option is found (see documentation
+ * for `struct longopt` for details), the keyword
+ * `break` is used to break the `case` (or `default`),
+ * and at the next iteration of the parsing loop, the
+ * case will be `.short_flag` for the entry where the
+ * argument matched `.long_flag` and `.with_arg`
+ * 
+ * @param  LONGOPTS:struct longopt *  The options, list shall end
+ *                                    with `NULL` as `.long_flag`
  */
 #define ARGMAPLONG(LONGOPTS)\
 						for (i_ = 0; (LONGOPTS)[i_].long_flag; i_++) {\
@@ -305,11 +350,34 @@ struct longopt {
 
 
 /**
- * TODO doc NOFLAGS
+ * Test if the argument is a specific long option
+ * 
+ * Example:
+ *
+ *     ARGBEGIN {
+ *     case 'x':
+ *     handle_dash_x:
+ *         // handle -x
+ *         break;
+ *     case '-':
+ *         if (TESTLONG("--xdev", 0))
+ *             goto handle_dash_x;
+ *         else
+ *             usage();
+ *         break;
+ *     default:
+ *         usage();
+ *     } ARGEND;
+ * 
+ * @param  FLAG:const char *  The flag, must end with '=' if the
+ *                            value must be attached to the flag,
+ *                            must not have side-effects
+ * @param  WARG:int           Whether the option takes an argument,
+ *                            should not have side-effects
  */
 #define TESTLONG(FLG, WARG)\
 	((WARG)\
-	 ? ((!strncmp(lflag_, (FLG), n_ = strlen(FLG)) && lflag_[n_] == '=')\
+	 ? ((!strncmp(lflag_, (FLG), (n_ = strlen(FLG), n_ -= ((FLG)[n_ - !!n_] == '='))) && lflag_[n_] == '=') \
 	    ? (lflag_[n_] = '\0',\
 	       (arg_ = &lflag_[n_ + 1]),\
 	       (brk_ = 1))\
