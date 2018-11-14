@@ -44,11 +44,11 @@
 		assert_exit((void)(ptr__ = (EXPR)));\
 	} while (0)
 
-#define assert_stderr(FMT, ...)\
+#define assert_stderr(...)\
 	do {\
 		char buf__[1024];\
 		int len__;\
-		len__ = sprintf(buf__, FMT, __VA_ARGS__);\
+		len__ = sprintf(buf__, __VA_ARGS__);\
 		assert(len__ >= 0);\
 		assert((size_t)len__ == stderr_n);\
 		assert(!memcmp(buf__, (char **)(void *)(&stderr_buf), stderr_n)); \

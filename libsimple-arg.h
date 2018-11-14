@@ -6,8 +6,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-/* TODO add tests */
-
 
 /**
  * The zeroth command line argument, the name of the process,
@@ -86,7 +84,7 @@ struct longopt {
  *                 usage();
  *         } ARGEND;
  */
-#define ARGBEGIN ARGBEGIN4(1, 1, argc, argv)
+#define ARGBEGIN ARGBEGIN2(1, 0)
 
 /**
  * `SUBARGBEGIN {} ARGEND;` is similar to
@@ -94,26 +92,18 @@ struct longopt {
  * is not set to `argv[0]`, instead `argv[0]`
  * is handled like any other element in `argv`
  */
-#define SUBARGBEGIN ARGBEGIN4(0, 1, argc, argv)
+#define SUBARGBEGIN ARGBEGIN2(0, 0)
 
 /**
  * Flexible alternative to `ARGBEGIN`
  * 
- * @param  WITH_ARGV0             If 0, behave like `SUBARGBEGIN`,
- *                                otherwise, behave like `ARGBEGIN`
- * @param  KEEP_DASHDASH          If and only if 0, "--" is not removed
- *                                `argv` before parsing is stopped when it
- *                                is encountered
- * @param  argc:int variable      The number of elements in `argv`, will be
- *                                update to the number of arguments remaining
- *                                after parsing stopped
- * @param  argv:char ** variable  The command line arguments to parse,
- *                                `argv[argc]` must be `NULL`; will be updated,
- *                                via offseting, to the arguments remaining
- *                                after parsing stopped, `argv[argc]` will
- *                                still be `NULL`
+ * @param  WITH_ARGV0     If 0, behave like `SUBARGBEGIN`,
+ *                        otherwise, behave like `ARGBEGIN`
+ * @param  KEEP_DASHDASH  If and only if 0, "--" is not removed
+ *                        `argv` before parsing is stopped when it
+ *                        is encountered
  */
-#define ARGBEGIN4(WITH_ARGV0, argc, argv)\
+#define ARGBEGIN2(WITH_ARGV0, KEEP_DASHDASH)\
 	do {\
 		char flag_, *lflag_, *arg_;\
 		int brk_ = 0, again_;\
@@ -157,7 +147,7 @@ struct longopt {
  * @param  LONGOPTS:struct longopt *  The options, list shall end
  *                                    with `NULL` as `.long_flag`
  */
-#define ARGMAPLONG(LONGOPTS)\
+#define ARGMAPLONG(LONGOPTS)/* TODO test */\
 						for (i_ = 0; (LONGOPTS)[i_].long_flag; i_++) {\
 							if (TESTLONG((LONGOPTS)[i_].long_flag, (LONGOPTS)[i_].with_arg)) {\
 								flag_ = (LONGOPTS)[i_].short_flag;\
@@ -214,7 +204,7 @@ struct longopt {
 						switch (flag_) {
 
 /**
- * Refer to `ARGBEGIN`, `SUBARGBEGIN`, and `ARGBEGIN3`
+ * Refer to `ARGBEGIN`, `SUBARGBEGIN`, and `ARGBEGIN4`
  */
 #define ARGEND\
 						}\
@@ -323,33 +313,6 @@ struct longopt {
 
 
 /**
- * `NOFLAG(x);` is an optimised shorthand for
- * 
- *     ARGBEGIN {
- *     default:
- *         usage();
- *     } ARGEND;
- * 
- *     if (x)
- *         usage();
- * 
- * @param  ...  If non-zero, the `usage` function
- *              will be called
- */
-#define NOFLAGS(...)\
-	do {\
-		if (*argv)\
-			argv0 = *argv++, argc--;\
-		if (argv[0] && argv[0][0] == '-' && argv[0][1] == '-' && !argv[0][2])\
-			argv++, argc--;\
-		else if (argv[0] && argv[0][0] == '-')\
-			usage();\
-		if (__VA_ARGS__)\
-			usage();\
-	} while (0)
-
-
-/**
  * Test if the argument is a specific long option
  * 
  * Example:
@@ -375,9 +338,9 @@ struct longopt {
  * @param  WARG:int           Whether the option takes an argument,
  *                            should not have side-effects
  */
-#define TESTLONG(FLG, WARG)\
+#define TESTLONG(FLG, WARG)/* TODO test */\
 	((WARG)\
-	 ? ((!strncmp(lflag_, (FLG), (n_ = strlen(FLG), n_ -= ((FLG)[n_ - !!n_] == '='))) && lflag_[n_] == '=') \
+	 ? ((!strncmp(lflag_, (FLG), (n_ = strlen(FLG), n_ -= ((FLG)[n_ - !!n_] == '='))) && lflag_[n_] == '=')\
 	    ? (lflag_[n_] = '\0',\
 	       (arg_ = &lflag_[n_ + 1]),\
 	       (brk_ = 1))\
@@ -390,6 +353,33 @@ struct longopt {
 	 : (!strcmp(lflag_, (FLG))\
 	    ? (brk_ = 1)\
 	    : 0))
+
+
+/**
+ * `NOFLAG(x);` is an optimised shorthand for
+ * 
+ *     ARGBEGIN {
+ *     default:
+ *         usage();
+ *     } ARGEND;
+ * 
+ *     if (x)
+ *         usage();
+ * 
+ * @param  ...  If non-zero, the `usage` function
+ *              will be called
+ */
+#define NOFLAGS(...)\
+	do {\
+		if (*argv)\
+			argv0 = *argv++, argc--;\
+		if (argv[0] && argv[0][0] == '-' && argv[0][1] == '-' && !argv[0][2])\
+			argv++, argc--;\
+		else if (argv[0] && argv[0][0] == '-' && argv[0][1])\
+			usage();\
+		if (__VA_ARGS__)\
+			usage();\
+	} while (0)
 
 
 /**
@@ -407,7 +397,6 @@ struct longopt {
  */
 #define USAGE(SYNOPSIS)\
 	NUSAGE(1, SYNOPSIS)
-
 
 /**
  * Define the function `static void usage(void)`

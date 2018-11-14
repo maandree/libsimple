@@ -128,7 +128,7 @@ OBJ =\
 	vweprintf.o\
 	libsimple.o
 
-TESTS = $(OBJ:.o=.test)
+TESTS = $(OBJ:.o=.test) libsimple-arg.test
 
 all: libsimple.a $(TESTS)
 $(OBJ): $(@:.o=.c) $(HDR)

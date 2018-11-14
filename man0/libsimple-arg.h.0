@@ -13,21 +13,21 @@ struct longopt {
 	int with_arg;
 };
 
-#define ARGBEGIN                                         ARGBEGIN4(1, 1, argc, argv)
-#define SUBARGBEGIN                                      ARGBEGIN4(0, 1, argc, argv)
-#define ARGBEGIN4(\fIWITH_ARGV0\fP, \fIKEEP_DASHDASH\fP, \fIargc\fP, \fIargv\fP) /* implementation omitted */
-#define ARGMAPLONG(\fILONGOPTS\fP)                             /* implementation omitted */
-#define ARGALT(\fISYMBOL\fP)                                   /* implementation omitted */
-#define ARGEND                                           /* implementation omitted */
-#define ARGNUM                                           /* implementation omitted */
-#define FLAG()                                           /* implementation omitted */
-#define LFLAG()                                          /* implementation omitted */
-#define ARG()                                            /* implementation omitted */
-#define ARGHERE()                                        /* implementation omitted */
-#define NOFLAGS(...)                                     /* implementation omitted */
-#define TESTLONG(\fIFLG\fP, \fIWARG\fP)                              /* implementation omitted */
-#define USAGE(\fISYNOPSIS\fP)                                  /* implementation omitted */
-#define NUSAGE(\fISTATUS\fP, \fISYNOPSIS\fP)                         /* implementation omitted */
+#define ARGBEGIN                             ARGBEGIN2(1, 0)
+#define SUBARGBEGIN                          ARGBEGIN2(0, 0)
+#define ARGBEGIN2(\fIWITH_ARGV0\fP, \fIKEEP_DASHDASH\fP) /* implementation omitted */
+#define ARGMAPLONG(\fILONGOPTS\fP)                 /* implementation omitted */
+#define ARGALT(\fISYMBOL\fP)                       /* implementation omitted */
+#define ARGEND                               /* implementation omitted */
+#define ARGNUM                               /* implementation omitted */
+#define FLAG()                               /* implementation omitted */
+#define LFLAG()                              /* implementation omitted */
+#define ARG()                                /* implementation omitted */
+#define ARGHERE()                            /* implementation omitted */
+#define NOFLAGS(...)                         /* implementation omitted */
+#define TESTLONG(\fIFLG\fP, \fIWARG\fP)                  /* implementation omitted */
+#define USAGE(\fISYNOPSIS\fP)                      /* implementation omitted */
+#define NUSAGE(\fISTATUS\fP, \fISYNOPSIS\fP)             /* implementation omitted */
 .fi
 .SH DESCRIPTION
 The
@@ -179,7 +179,7 @@ and
 are set to only contain the remaining, unparsed, arguments.
 .PP
 The
-.BR ARGBEGIN4 ()
+.BR ARGBEGIN2 ()
 macro can be used instead of the
 .B ARGBEGIN
 and
@@ -214,12 +214,6 @@ is encounted, and it becomes visible to the application
 code, implement GNU behaviour by running the parsing
 in a loop and stop when the application code sees
 .BR -- .
-The
-.BR ARGBEGIN4 ()
-also lets the user choose which variables to use as
-.I argc
-and
-.IR argv .
 .PP
 If the application should support flags starting with
 another symbol than a dash
@@ -394,18 +388,18 @@ macro shall be used directly in a
 (or
 .BR default )
 for
-.IR ARGBEGIN ,
-.IR SUBARGBEGIN ,
+.BR ARGBEGIN ,
+.BR SUBARGBEGIN ,
 or
-.IR ARGBEGIN4 ,
+.BR ARGBEGIN2 ,
 and not inside a loop or inner
 .BR switch ),
 and in the next iteration of the argument parsing loop,
 the flag will be the short flag consisting of the two
 characters
-.B long_flag[0]
+.I long_flag[0]
 and
-.B short_flag
+.I short_flag
 (in that order). Example:
 .nf
 
@@ -435,13 +429,13 @@ have to map entries, one where
 ends with
 .RB ' = '
 and
-.B with_arg
+.I with_arg
 is non-zero, and one where
-.B long_flag
+.I long_flag
 does not end with
 .RB ' = '
 and
-.B with_arg
+.I with_arg
 is zero. These
 .I cannot
 have the same

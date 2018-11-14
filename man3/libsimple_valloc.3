@@ -35,7 +35,9 @@ pointer with an alignment of the page size
 to the allocated memory. The function
 .BR free (3)
 shall be called with the returned pointer as
-input when the allocated memory is no longer needed.
+input when the allocated memory is no longer needed,
+but see
+.BR NOTES .
 .PP
 The
 .BR libsimple_envalloc ()
@@ -131,6 +133,15 @@ None.
 .SH FUTURE DIRECTIONS
 None.
 .SH NOTES
+Portable applications shall assume that pointer
+returned by the
+.BR valloc ()
+function can be deallocated with the
+.BR free (3)
+functon, unless the namespaced alias
+.BR libsimple_valloc ()
+is used explicitly.
+.PP
 The GNU implementation of
 .BR valloc (3)
 is \(dqMT-Unsafe init\(dq.
