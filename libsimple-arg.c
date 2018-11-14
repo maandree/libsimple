@@ -332,6 +332,7 @@ parser6(int argc, char *argv[])
 	PARSER_BEGIN;
 	ARGBEGIN2(1, 1) {
 	default:
+		assert(ARGHERE() == &LFLAG()[1]);
 		argv[0] = LFLAG();
 		goto stop;
 	} ARGALT('+') {
