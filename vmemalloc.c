@@ -1,16 +1,20 @@
 /* See LICENSE file for copyright and license details. */
 #include "libsimple.h"
+#include <stdalign.h>
 #ifndef TEST
 
 
 struct memalloc_state {
-	int zero_init;
-	int if_zero;
-	int round_up_size;
-	int have_size;
 	size_t alignment;
 	size_t elem_size;
 	size_t size_prod;
+	char zero_init;
+	char if_zero;
+	char round_up_size;
+	char have_size;
+	char cache_align;
+	char cache_split;
+	char pad__[(4 * sizeof(size_t) - 6) % sizeof(size_t)];
 };
 
 static int
@@ -102,6 +106,16 @@ vmemalloc_parse_args(struct memalloc_state *state, size_t n, va_list ap)
 			state->alignment = (size_t)page_size;
 			break;
 
+		case LIBSIMPLE_MEMALLOC_ALIGNMENT_TO_CACHE_LINE:
+			if (state->cache_align++)
+				goto inval;
+			break;
+
+		case LIBSIMPLE_MEMALLOC_ALLOW_CACHE_LINE_SPLITTING:
+			if (state->cache_split++)
+				goto inval;
+			break;
+
 		case LIBSIMPLE_MEMALLOC_ROUND_UP_SIZE_TO_ALIGNMENT:
 			if (state->round_up_size++)
 				goto inval;
@@ -152,21 +166,39 @@ inval:
 	return -1;
 }
 
+static size_t
+gcd(size_t u, size_t v)
+{
+	size_t t;
+	int shift = 0;
+	/* Not needed because u>0, v>0: if (!(u | v)) return u + v; */
+	while (!((u | v) & 1)) u >>= 1, v >>= 1, shift++;
+	while (!(u & 1))       u >>= 1;
+	do {
+		while (!(v & 1)) v >>= 1;
+		if (u > v)       t = u, u = v, v = t;
+	} while (v -= u);
+	return u << shift;
+}
+
 void *
 libsimple_vmemalloc(size_t n, va_list ap) /* TODO test ([v]{mem,array}alloc) */
 {
 	struct memalloc_state state;
-	size_t misalignment, size;
+	size_t misalignment, size, cacheline, min, max;
 	void *ptr = NULL;
 	int saved_errno;
+	long int tmp;
 
+	state.alignment     = 0;
+	state.elem_size     = 0;
+	state.size_prod     = 1;
 	state.zero_init     = -1;
 	state.if_zero       = -1;
 	state.round_up_size = 0;
 	state.have_size     = 0;
-	state.alignment     = 0;
-	state.elem_size     = 0;
-	state.size_prod     = 1;
+	state.cache_align   = 0;
+	state.cache_split   = 0;
 
 	if (vmemalloc_parse_args(&state, n, ap))
 		return NULL;
@@ -192,6 +224,35 @@ libsimple_vmemalloc(size_t n, va_list ap) /* TODO test ([v]{mem,array}alloc) */
 	if (!n && state.if_zero == 0)
 		return NULL;
 	n = n ? n : (state.if_zero > 0);
+
+	if (state.cache_align || !state.cache_split) {
+		tmp = sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
+		cacheline = (size_t)(tmp < 1 ? 64L : tmp);
+	}
+
+	if (state.cache_align) {
+		if (!state.alignment)
+			state.alignment = alignof(max_align_t);
+	align_to_cacheline:
+		if (!(cacheline % state.alignment)) {
+			state.alignment = cacheline;
+		} else if (state.alignment % cacheline) {
+			min = MIN(state.alignment, cacheline);
+			max = MAX(state.alignment, cacheline);
+			size = max / gcd(state.alignment, cacheline);
+			if (size > SIZE_MAX / min) {
+				errno = ENOMEM;
+				return NULL;
+			}
+			state.alignment = size = min;
+		}
+	} else if (!state.cache_split) {
+		if (!state.alignment)
+			state.alignment = alignof(max_align_t);
+		misalignment = cacheline - state.alignment % cacheline;
+		if (n % cacheline + misalignment % cacheline > cacheline)
+			goto align_to_cacheline;
+	}
 
 	saved_errno = errno;
 	errno = 0;

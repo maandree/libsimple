@@ -6,6 +6,27 @@
 #else
 #include "test.h"
 
+static size_t
+gcd(size_t u, size_t v)
+{
+	size_t t;
+	int shift = 0;
+	/* Not needed because u>0, v>0: if (!(u | v)) return u + v; */
+	while (!((u | v) & 1)) u >>= 1, v >>= 1, shift++;
+	while (!(u & 1))       u >>= 1;
+	do {
+		while (!(v & 1)) v >>= 1;
+		if (u > v)       t = u, u = v, v = t;
+	} while (v -= u);
+	return u << shift;
+}
+
+static size_t
+lcm(size_t u, size_t v)
+{
+	return u / gcd(u, v) * v;
+}
+
 static int
 test_timespec(double d, time_t sec, long int nsec, double rd, const char *s, const char *ss)
 {
@@ -95,9 +116,10 @@ main(void)
 	char buf[1024], *s;
 	int intarray[10];
 	size_t i, j, n;
-	size_t pagesize;
+	size_t pagesize, cacheline;
 
 	pagesize = (size_t)sysconf(_SC_PAGESIZE);
+	cacheline = (size_t)sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
 
 	assert(libsimple_default_failure_exit == 1);
 
@@ -1022,6 +1044,14 @@ main(void)
 	tv2.tv_sec =  1, tv2.tv_usec = 0L;
 	assert(libsimple_cmptimeval(&tv1, &tv2) == -1);
 
+#define ASSERT_ALIGNMENT(INFO, ALIGN)\
+	do {\
+		assert((INFO)->alignment <= lcm(cacheline, ALIGN));\
+		assert(!((INFO)->alignment % (ALIGN)));\
+		if ((cacheline - (ALIGN) % cacheline) % cacheline + (INFO)->size % (ALIGN) > cacheline)\
+			assert(!((INFO)->alignment % cacheline));\
+	} while (0)
+
 	assert((ptr = libsimple_mallocz(0, 11)));
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
@@ -1080,7 +1110,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 8);
-		assert(info->alignment == 8);
+		ASSERT_ALIGNMENT(info, 8);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
@@ -1090,7 +1120,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 16);
-		assert(info->alignment == 8);
+		ASSERT_ALIGNMENT(info, 8);
 		assert(info->zeroed == 16);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
@@ -1102,7 +1132,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 8);
-		assert(info->alignment == 8 * sizeof(void *));
+		ASSERT_ALIGNMENT(info, 8 * sizeof(void *));
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
@@ -1114,7 +1144,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 16);
-		assert(info->alignment == 4 * sizeof(void *));
+		ASSERT_ALIGNMENT(info, 4 * sizeof(void *));
 		assert(info->zeroed == 16);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
@@ -1125,7 +1155,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 9 || info->size == 12);
-		assert(info->alignment == 4);
+		ASSERT_ALIGNMENT(info, 4);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
@@ -1136,7 +1166,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 7 || info->size == 8);
-		assert(info->alignment == 2);
+		ASSERT_ALIGNMENT(info, 2);
 		assert(info->zeroed == 7 || info->zeroed == info->size);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
@@ -1147,7 +1177,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 5 || info->size == 6);
-		assert(info->alignment == 2);
+		ASSERT_ALIGNMENT(info, 2);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
@@ -1200,7 +1230,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 81);
-		assert(info->alignment == 1);
+		ASSERT_ALIGNMENT(info, 1);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
@@ -1210,7 +1240,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 162);
-		assert(info->alignment == 2);
+		ASSERT_ALIGNMENT(info, 2);
 		assert(info->zeroed == 162);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
@@ -1220,7 +1250,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 243 || info->size == 244);
-		assert(info->alignment == 4);
+		ASSERT_ALIGNMENT(info, 4);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
@@ -1230,7 +1260,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 9 || info->size == 10);
-		assert(info->alignment == 2);
+		ASSERT_ALIGNMENT(info, 2);
 		assert(info->zeroed == 9 || info->zeroed == info->size);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
@@ -1241,7 +1271,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 7 || info->size == 8);
-		assert(info->alignment == 2);
+		ASSERT_ALIGNMENT(info, 2);
 		assert(info->zeroed == 7 || info->zeroed == info->size);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
@@ -1252,7 +1282,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 8);
-		assert(info->alignment == 2);
+		ASSERT_ALIGNMENT(info, 2);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
@@ -1263,7 +1293,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 4);
-		assert(info->alignment == 4);
+		ASSERT_ALIGNMENT(info, 4);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
@@ -1274,7 +1304,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 8);
-		assert(info->alignment == 4);
+		ASSERT_ALIGNMENT(info, 4);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
@@ -1285,7 +1315,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 3 || info->size == 8);
-		assert(info->alignment == 8);
+		ASSERT_ALIGNMENT(info, 8);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
@@ -1296,7 +1326,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 9 || info->size == pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
@@ -1307,7 +1337,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 7 || info->size == pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(info->zeroed == 7 || info->zeroed == info->size);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
@@ -1318,7 +1348,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 5 || info->size == pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
@@ -1329,7 +1359,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 3 * pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(info->zeroed == 3 * pagesize);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
@@ -1340,7 +1370,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 4 * pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
@@ -1351,7 +1381,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 5 * pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
@@ -1362,7 +1392,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 6 * pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(info->zeroed == 6 * pagesize);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
@@ -1373,7 +1403,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 8 * pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
@@ -1384,7 +1414,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 10 * pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
@@ -1409,7 +1439,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
@@ -1420,7 +1450,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(info->zeroed == pagesize);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
@@ -1431,7 +1461,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 5 || info->size == pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
@@ -1442,7 +1472,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(info->zeroed == pagesize);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
@@ -1453,7 +1483,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(info->zeroed == pagesize);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
@@ -1464,7 +1494,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 2 * pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(info->zeroed == 2 * pagesize);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
@@ -1475,7 +1505,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 3 * pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(info->zeroed == 3 * pagesize);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
@@ -1486,7 +1516,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 4 * pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
@@ -1497,7 +1527,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 5 * pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
@@ -1508,7 +1538,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 6 * pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(info->zeroed == 6 * pagesize);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
@@ -1519,7 +1549,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 8 * pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
@@ -1530,7 +1560,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 10 * pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)info->alignment));
 	}
@@ -1555,7 +1585,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 81 * (pagesize - 1));
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
@@ -1565,7 +1595,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 72 * (pagesize - 2));
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(info->zeroed == info->size);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
@@ -1575,7 +1605,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 9 * (pagesize - 1));
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
@@ -1585,7 +1615,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 5 * pagesize - 1);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(info->zeroed == info->size);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
@@ -1596,7 +1626,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 3 * pagesize + 1);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(info->zeroed == info->size);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
@@ -1607,7 +1637,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == pagesize - 1);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
@@ -1618,7 +1648,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == pagesize + 1);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
@@ -1629,7 +1659,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 127);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
@@ -1640,7 +1670,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 3 * pagesize - 1);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
@@ -1651,7 +1681,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 81 * pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
@@ -1661,7 +1691,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 72 * pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(info->zeroed == info->size);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
@@ -1671,7 +1701,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 9 * pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
@@ -1681,7 +1711,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 5 * pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(info->zeroed == info->size);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
@@ -1692,7 +1722,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 4 * pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(info->zeroed == info->size);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
@@ -1703,7 +1733,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
@@ -1714,7 +1744,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 2 * pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
@@ -1725,7 +1755,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}
@@ -1736,7 +1766,7 @@ main(void)
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 3 * pagesize);
-		assert(info->alignment == pagesize);
+		ASSERT_ALIGNMENT(info, pagesize);
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}

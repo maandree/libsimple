@@ -73,6 +73,24 @@ The alignment of the returned pointer should be the page size.
 By default the alignment is
 .IR "alignof(max_align_t)" .
 .TP
+.B LIBSIMPLE_MEMALLOC_ALIGNMENT_TO_CACHE_LINE
+Align the pointer to the cache line (usuallly 64 bytes),
+in addition other specific or default alignment.
+.TP
+.B LIBSIMPLE_MEMALLOC_ALLOW_CACHE_LINE_SPLITTING
+Allow the allocated memory to misaligned to the
+cache line such that the memory is stored over
+one more cache line than necessary. For example,
+if the cache line is 64 bytes and the requested
+alignment is 8 bytes, pointer can be aligned to
+the cache line or off by 8, 16, 24, 32, 40, 48,
+or 56 bytes. If 32 is allocated, an misalignment
+to the cache line by 0, 8, 16, 24, or 32 is
+normally used, by if
+.B LIBSIMPLE_MEMALLOC_ALLOW_CACHE_LINE_SPLITTING
+is used, the alignment can be of with 0, 8, 16,
+24, 32, 40, 48, or 56 bytes.
+.TP
 .B LIBSIMPLE_MEMALLOC_ROUND_UP_SIZE_TO_ALIGNMENT
 The number of bytes to allocated should be rounded up to
 the next multiple of the alignment, unless it already is
