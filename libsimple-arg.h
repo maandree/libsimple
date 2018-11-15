@@ -147,7 +147,7 @@ struct longopt {
  * @param  LONGOPTS:struct longopt *  The options, list shall end
  *                                    with `NULL` as `.long_flag`
  */
-#define ARGMAPLONG(LONGOPTS)/* TODO test */\
+#define ARGMAPLONG(LONGOPTS)\
 						for (i_ = 0; (LONGOPTS)[i_].long_flag; i_++) {\
 							if (TESTLONG((LONGOPTS)[i_].long_flag, (LONGOPTS)[i_].with_arg)) {\
 								flag_ = (LONGOPTS)[i_].short_flag;\
@@ -338,7 +338,7 @@ struct longopt {
  * @param  WARG:int           Whether the option takes an argument,
  *                            should not have side-effects
  */
-#define TESTLONG(FLG, WARG)/* TODO test */\
+#define TESTLONG(FLG, WARG)\
 	((WARG)\
 	 ? ((!strncmp(lflag_, (FLG), (n_ = strlen(FLG), n_ -= ((FLG)[n_ - !!n_] == '='))) && lflag_[n_] == '=')\
 	    ? (lflag_[n_] = '\0',\
@@ -393,7 +393,7 @@ struct longopt {
  * 
  * This macro also defines `char *argv0`
  * 
- * @param  SYNOPSIS  Description of the command line argument syntax
+ * @param  SYNOPSIS:const char *  Description of the command line argument syntax
  */
 #define USAGE(SYNOPSIS)\
 	NUSAGE(1, SYNOPSIS)
@@ -409,8 +409,8 @@ struct longopt {
  * 
  * This macro also defines `char *argv0`
  * 
- * @param  SYNOPSIS  Description of the command line argument syntax
- * @parma  STATUS    The exit value for the process
+ * @param  SYNOPSIS:const char *  Description of the command line argument syntax
+ * @parma  STATUS:int             The exit value for the process
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define NUSAGE(STATUS, SYNOPSIS)\

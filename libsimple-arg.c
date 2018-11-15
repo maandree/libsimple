@@ -88,6 +88,50 @@
 	} while (0)
 
 
+#define LONG_WITHOUT_ARG(LONG_FLAG)\
+	do {\
+		assert(nparsed < sizeof(parsed) / sizeof(*parsed));\
+		assert(FLAG() == LONG_FLAG[1]);\
+		assert(!strcmp(LFLAG(), LONG_FLAG));\
+		parsed[nparsed].short_used = 0;\
+		parsed[nparsed].long_used = 1;\
+		parsed[nparsed].have_arg = 0;\
+		parsed[nparsed].short_flag[0] = '\0';\
+		parsed[nparsed].short_flag[1] = '\0';\
+		parsed[nparsed].short_flag[2] = '\0';\
+		stpcpy(parsed[nparsed].long_flag, LONG_FLAG);\
+		parsed[nparsed].argument[0] = '\0';\
+		nparsed += 1;\
+	} while (0)
+
+
+#define LONG_WITH_ARG(LONG_FLAG)\
+	do {\
+		char *arg__;\
+		assert(nparsed < sizeof(parsed) / sizeof(*parsed));\
+		assert(FLAG() == LONG_FLAG[1]);\
+		assert(!strcmp(LFLAG(), LONG_FLAG) || !strncmp(LFLAG(), LONG_FLAG"=", sizeof(LONG_FLAG"=")));\
+		parsed[nparsed].short_used = 0;\
+		parsed[nparsed].long_used = 1;\
+		parsed[nparsed].have_arg = 1;\
+		parsed[nparsed].short_flag[0] = '\0';\
+		parsed[nparsed].short_flag[1] = '\0';\
+		parsed[nparsed].short_flag[2] = '\0';\
+		stpcpy(parsed[nparsed].long_flag, LONG_FLAG);\
+		assert(strlen(ARG()) < sizeof(parsed[nparsed].argument));\
+		assert((arg__ = ARG()));\
+		assert(arg__ == ARGNULL());\
+		stpcpy(parsed[nparsed].argument, ARG());\
+		nparsed += 1;\
+	} while (0)
+
+
+#define LONG_WITH_MISSING_ARG(LONG_FLAG)\
+	do {\
+		assert_unreached();\
+	} while (0)
+
+
 #define ASSERT_ENTRY(SHORT_FLAG, LONG_FLAG, ARGUMENT)\
 	do {\
 		const char *volatile short_flag__ = (SHORT_FLAG);\
@@ -363,6 +407,102 @@ stop:
 }
 
 
+static int
+parser7(int argc, char *argv[])
+{
+	PARSER_BEGIN;
+	ARGBEGIN {
+	case '-':
+		if (TESTLONG("--alpha", 0))
+			LONG_WITHOUT_ARG("--alpha");
+		else if (TESTLONG("--alpha=", 0))
+			LONG_WITHOUT_ARG("--alpha=");
+		else if (TESTLONG("--beta", 1))
+			LONG_WITH_ARG("--beta");
+		else if (TESTLONG("--gamma=", 1))
+			LONG_WITH_ARG("--gamma");
+		else if (TESTLONG("--gamma", 0))
+			LONG_WITHOUT_ARG("--gamma");
+		else if (TESTLONG("--missing", 1))
+			LONG_WITH_MISSING_ARG("--missing");
+		else
+			usage();
+		break;
+	default:
+		usage();
+	} ARGALT('+') {
+	case '+':
+		if (TESTLONG("++alpha", 0))
+			LONG_WITHOUT_ARG("++alpha");
+		else if (TESTLONG("++alpha=", 0))
+			LONG_WITHOUT_ARG("++alpha=");
+		else if (TESTLONG("++beta", 1))
+			LONG_WITH_ARG("++beta");
+		else if (TESTLONG("++gamma=", 1))
+			LONG_WITH_ARG("++gamma");
+		else if (TESTLONG("++gamma", 0))
+			LONG_WITHOUT_ARG("++gamma");
+		else if (TESTLONG("++missing", 1))
+			LONG_WITH_MISSING_ARG("++missing");
+		else
+			usage();
+		break;
+	default:
+		usage();
+	} ARGEND;
+	PARSER_END;
+}
+
+
+static int
+parser8(int argc, char *argv[])
+{
+	PARSER_BEGIN;
+	ARGBEGIN {
+	case 'a': SHORT_WITHOUT_ARG("-a"); break;
+	case 'A': SHORT_WITHOUT_ARG("-A"); break;
+	case 'b': SHORT_WITH_ARG("-b"); break;
+	case 'g': SHORT_WITH_ARG("-g"); break;
+	case 'G': SHORT_WITHOUT_ARG("-G"); break;
+	case 'm': SHORT_WITH_MISSING_ARG("-m"); break;
+	case '-':
+		ARGMAPLONG(((struct longopt []){
+			{"--alpha", 'a', 0},
+			{"--alpha=", 'A', 0},
+			{"--beta", 'b', 1},
+			{"--gamma=", 'g', 1},
+			{"--gamma", 'G', 0},
+			{"--missing", 'm', 1},
+			{NULL, '\0', 0},
+		}));
+		/* fall through */
+	default:
+		usage();
+	} ARGALT('+') {
+	case 'a': SHORT_WITHOUT_ARG("+a"); break;
+	case 'A': SHORT_WITHOUT_ARG("+A"); break;
+	case 'b': SHORT_WITH_ARG("+b"); break;
+	case 'g': SHORT_WITH_ARG("+g"); break;
+	case 'G': SHORT_WITHOUT_ARG("+G"); break;
+	case 'm': SHORT_WITH_MISSING_ARG("+m"); break;
+	case '+':
+		ARGMAPLONG(((struct longopt []){
+			{"++alpha", 'a', 0},
+			{"++alpha=", 'A', 0},
+			{"++beta", 'b', 1},
+			{"++gamma=", 'g', 1},
+			{"++gamma", 'G', 0},
+			{"++missing", 'm', 1},
+			{NULL, '\0', 0},
+		}));
+		/* fall through */
+	default:
+		usage();
+	} ARGEND;
+	PARSER_END;
+}
+
+
 int
 main(void)
 {
@@ -483,6 +623,78 @@ main(void)
 		ASSERT_ENTRY("+y", NULL, "+Y");
 		ASSERT_END();
 	}
+
+	assert(apply(parser7, "", "--alpha", "++alpha", "--alpha=", "++alpha=", "--missing") == -1);
+	ASSERT_ENTRY(NULL, "--alpha", NULL);
+	ASSERT_ENTRY(NULL, "++alpha", NULL);
+	ASSERT_ENTRY(NULL, "--alpha=", NULL);
+	ASSERT_ENTRY(NULL, "++alpha=", NULL);
+	ASSERT_END();
+
+	assert(apply(parser7, "", "++alpha", "--alpha", "++alpha=", "--alpha=", "++missing") == -1);
+	ASSERT_ENTRY(NULL, "++alpha", NULL);
+	ASSERT_ENTRY(NULL, "--alpha", NULL);
+	ASSERT_ENTRY(NULL, "++alpha=", NULL);
+	ASSERT_ENTRY(NULL, "--alpha=", NULL);
+	ASSERT_END();
+
+	assert(apply(parser7, "", "--beta", "abc", "--beta=xyz", "--betax") == -1);
+	ASSERT_ENTRY(NULL, "--beta", "abc");
+	ASSERT_ENTRY(NULL, "--beta", "xyz");
+	ASSERT_END();
+
+	assert(apply(parser7, "", "++beta", "abc", "++beta=xyz", "++betax") == -1);
+	ASSERT_ENTRY(NULL, "++beta", "abc");
+	ASSERT_ENTRY(NULL, "++beta", "xyz");
+	ASSERT_END();
+
+	assert(apply(parser7, "", "--gamma=123", "--gamma=", "--gamma", "789") == 1);
+	ASSERT_ENTRY(NULL, "--gamma", "123");
+	ASSERT_ENTRY(NULL, "--gamma", "");
+	ASSERT_ENTRY(NULL, "--gamma", NULL);
+	ASSERT_END();
+
+	assert(apply(parser7, "", "++gamma=123", "++gamma=", "++gamma", "789") == 1);
+	ASSERT_ENTRY(NULL, "++gamma", "123");
+	ASSERT_ENTRY(NULL, "++gamma", "");
+	ASSERT_ENTRY(NULL, "++gamma", NULL);
+	ASSERT_END();
+
+	assert(apply(parser8, "", "--alpha", "++alpha", "--alpha=", "++alpha=", "--missing") == -1);
+	ASSERT_ENTRY("-a", NULL, NULL);
+	ASSERT_ENTRY("+a", NULL, NULL);
+	ASSERT_ENTRY("-A", NULL, NULL);
+	ASSERT_ENTRY("+A", NULL, NULL);
+	ASSERT_END();
+
+	assert(apply(parser8, "", "++alpha", "--alpha", "++alpha=", "--alpha=", "++missing") == -1);
+	ASSERT_ENTRY("+a", NULL, NULL);
+	ASSERT_ENTRY("-a", NULL, NULL);
+	ASSERT_ENTRY("+A", NULL, NULL);
+	ASSERT_ENTRY("-A", NULL, NULL);
+	ASSERT_END();
+
+	assert(apply(parser8, "", "--beta", "abc", "--beta=xyz", "--betax") == -1);
+	ASSERT_ENTRY("-b", NULL, "abc");
+	ASSERT_ENTRY("-b", NULL, "xyz");
+	ASSERT_END();
+
+	assert(apply(parser8, "", "++beta", "abc", "++beta=xyz", "++betax") == -1);
+	ASSERT_ENTRY("+b", NULL, "abc");
+	ASSERT_ENTRY("+b", NULL, "xyz");
+	ASSERT_END();
+
+	assert(apply(parser8, "", "--gamma=123", "--gamma=", "--gamma", "789") == 1);
+	ASSERT_ENTRY("-g", NULL, "123");
+	ASSERT_ENTRY("-g", NULL, "");
+	ASSERT_ENTRY("-G", NULL, NULL);
+	ASSERT_END();
+
+	assert(apply(parser8, "", "++gamma=123", "++gamma=", "++gamma", "789") == 1);
+	ASSERT_ENTRY("+g", NULL, "123");
+	ASSERT_ENTRY("+g", NULL, "");
+	ASSERT_ENTRY("+G", NULL, NULL);
+	ASSERT_END();
 
 	argv0_1 = "[1]";
 	assert_exit(usage1());
