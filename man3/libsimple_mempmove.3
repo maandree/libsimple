@@ -1,14 +1,14 @@
-.TH LIBSIMPLE_MEMPCPY 3 2018-11-16 libsimple
+.TH LIBSIMPLE_MEMPMOVE 3 2018-10-23 libsimple
 .SH NAME
-libsimple_mempcpy \- copy an array of bytes into another
+libsimple_mempmove \- move bytes within an array of bytes
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_mempcpy(void *restrict \fIdest\fP, const void *restrict \fIsrc\fP, size_t \fIn\fP);
+static inline void *libsimple_mempmove(void *\fIdest\fP, const void *\fIsrc\fP, size_t \fIn\fP);
 
-#ifndef mempcpy
-# define mempcpy libsimple_mempcpy
+#ifndef mempmove
+# define mempmove libsimple_mempmove
 #endif
 .fi
 .PP
@@ -16,24 +16,17 @@ Link with
 .IR \-lsimple .
 .SH DESCRIPTION
 The
-.BR libsimple_mempcpy ()
+.BR libsimple_mempmove ()
 function copies the first
 .I n
 bytes of
 .I src
 into
 .IR dest .
-The first
-.I n
-bytes of
-.I dest
-must not overlap with the first
-.I n
-bytes of
-.IR src .
+The arrays may overlap.
 .SH RETURN VALUE
 The
-.BR libsimple_mempcpy ()
+.BR libsimple_mempmove ()
 function returns the pointer
 .I dest
 with the offset
@@ -41,7 +34,7 @@ with the offset
 (the byte where the copy stopped).
 .SH ERRORS
 The
-.BR libsimple_mempcpy ()
+.BR libsimple_mempmove ()
 function cannot fail.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
@@ -52,13 +45,13 @@ lb lb lb
 l l l.
 Interface	Attribute	Value
 T{
-.BR libsimple_mempcpy ()
+.BR libsimple_mempmove ()
 T}	Thread safety	MT-Safe
 T{
-.BR libsimple_mempcpy ()
+.BR libsimple_mempmove ()
 T}	Async-signal safety	AS-Safe
 T{
-.BR libsimple_mempcpy ()
+.BR libsimple_mempmove ()
 T}	Async-cancel safety	AC-Safe
 .TE
 .SH EXAMPLES
@@ -74,8 +67,6 @@ None.
 .SH BUGS
 None.
 .SH SEE ALSO
-.BR libsimple_mempmove (3),
+.BR libsimple_mempcpy (3),
 .BR libsimple_mempset (3),
-.BR memcpy (3),
-.BR stpncpy (3),
-.BR stpcpy (3)
+.BR memmove (3)

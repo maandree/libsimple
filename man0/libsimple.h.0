@@ -585,6 +585,12 @@ Version of
 that returns the end of the written array.
 
 .TP
+.BR libsimple_mempmove (3)
+Version of
+.BR memmove
+that returns the end of the written array.
+
+.TP
 .BR libsimple_mempset (3)
 Version of
 .BR memset

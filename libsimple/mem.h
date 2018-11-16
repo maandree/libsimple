@@ -368,13 +368,29 @@ static inline int libsimple_memcaseeq(const void *__a, const void *__b, size_t _
  * @param   d  The array the bytes should be copied into
  * @param   s  The array of bytes that should be copied
  * @param   n  The number of bytes to copy
- * @return     `&s[n]`
+ * @return     `&d[n]`
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
-static inline void *libsimple_mempcpy(void *__d, const void *__s, size_t __n)
+static inline void *libsimple_mempcpy(void *restrict __d, const void *restrict __s, size_t __n)
 { return &((char *)memcpy(__d, __s, __n))[__n]; }
 #ifndef mempcpy
 # define mempcpy libsimple_mempcpy
+#endif
+
+
+/**
+ * Moves bytes within an array of bytes
+ * 
+ * @param   d  The location in the array the bytes should be moved to
+ * @param   s  The bytes that should be moved
+ * @param   n  The number of bytes to move
+ * @return     `&d[n]`
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
+static inline void *libsimple_mempmove(void *__d, const void *__s, size_t __n)
+{ return &((char *)memmove(__d, __s, __n))[__n]; }
+#ifndef mempmove
+# define mempmove libsimple_mempmove
 #endif
 
 
