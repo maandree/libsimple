@@ -1,4 +1,4 @@
-.TH LIBSIMPLE.H 0 2018-11-07 libsimple
+.TH LIBSIMPLE.H 0 2018-11-16 libsimple
 .SH NAME
 libsimple.h \- main header for libsimple
 .SH SYNOPSIS
@@ -78,6 +78,19 @@ is defined to
 .BR CLOCK_MONOTONIC ,
 unless the system defines
 .BR CLOCK_MONOTONIC_RAW .
+.PP
+The header
+.I <libsimple.h>
+also defines, without a value,
+.B TWOS_COMPLEMENT
+if two's complement is used to represent signed integers,
+.B ONES_COMPLEMENT
+if ones' complement is used to represent signed integers, or
+.B SIGN_MAGNITUDE
+if sign\-magnitude is used to represent signed integers. Since
+no other representation is permitted in C, the header
+.I <libsimple.h>
+will define exactly one of these macros.
 .PP
 The header
 .I <libsimple.h>

@@ -1,4 +1,4 @@
-.TH LIBSIMPLE\-ARG.H 0 2018-11-08 libsimple
+.TH LIBSIMPLE\-ARG.H 0 2018-11-15 libsimple
 .SH NAME
 libsimple\-arg.h \- command line argument parsing header for libsimple
 .SH SYNOPSIS

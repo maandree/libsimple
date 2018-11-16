@@ -108,6 +108,33 @@
 #endif
 
 
+#if -1 ^ 1 == -2
+/**
+ * Defined if two's complement is used
+ * for signed number representation
+ */
+# ifndef TWOS_COMPLEMENT
+#  define TWOS_COMPLEMENT
+# endif
+#elif -1 << 1 == 2
+/**
+ * Defined if sign–magnitude is used
+ * for signed number representation
+ */
+# ifndef SIGN_MAGNITUDE
+#  define SIGN_MAGNITUDE
+# endif
+#else
+/**
+ * Defined if ones' complement is used
+ * for signed number representation
+ */
+# ifndef ONES_COMPLEMENT
+#  define ONES_COMPLEMENT
+# endif
+#endif
+
+
 /**
  * Get the smallest of two numerical values
  * 
