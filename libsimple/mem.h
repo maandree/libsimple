@@ -270,7 +270,7 @@ int libsimple_memstarts(const void *, size_t, const void *, size_t);
 /**
  * Checks the beginning of an array of bytes, the comparison is case-insensitive
  * 
-ge  * @param   s  The array of bytes to check
+ * @param   s  The array of bytes to check
  * @param   n  The length of `s`
  * @param   t  The desired beginning of `s`
  * @param   m  The length of `t`
