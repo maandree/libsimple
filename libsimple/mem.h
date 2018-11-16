@@ -504,7 +504,7 @@ size_t libsimple_memrcaseeqlen(const void *, size_t, const void *, size_t);
  *                              allows a two-byte encoding for NUL
  * @return                      1 if good, 0 on encoding error
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
 int libsimple_memisutf8(const char *, size_t, int);
 #ifndef memisutf8
 # define memisutf8 libsimple_memisutf8
