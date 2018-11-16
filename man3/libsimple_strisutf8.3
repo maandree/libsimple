@@ -1,14 +1,22 @@
-.TH LIBSIMPLE_strisutf8 3 2018-11-05 libsimple
+.TH LIBSIMPLE_STRISUTF8 3 2018-11-16 libsimple
 .SH NAME
-libsimple_strisutf8 \- check if a string is encoded in UTF-8
+libsimple_strisutf8, libsimple_strnisutf8, libsimple_memisutf8 \- check if a string is encoded in UTF-8
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-int libsimple_strisutf8(const char *\fIstring\fP, int \fIallow_modified_nul\fP);
+static inline int libsimple_strisutf8(const char *\fIstring\fP, int \fIallow_modified_nul\fP);
+static inline int libsimple_strnisutf8(const char *\fIstring\fP, size_t \fIn\fP, int \fIallow_modified_nul\fP);
+int libsimple_memisutf8(const char *\fIstring\fP, size_t \fIn\fP, int \fIallow_modified_nul\fP);
 
 #ifndef strisutf8
 # define strisutf8 libsimple_strisutf8
+#endif
+#ifndef strnisutf8
+# define strnisutf8 libsimple_strnisutf8
+#endif
+#ifndef memisutf8
+# define memisutf8 libsimple_memisutf8
 #endif
 .fi
 .PP
@@ -16,24 +24,65 @@ Link with
 .IR \-lsimple .
 .SH DESCRIPTION
 The
-.BR libsimple_strisutf8 ()
-function checks if
+.BR libsimple_strisutf8 (),
+.BR libsimple_strnisutf8 (),
+and
+.BR libsimple_memisutf8 ()
+functions checks if
 .I string
 is in valid UTF-8. If
 .I allow_modified_nul
 is non-zero, NUL encoded with 2 bytes is accepted.
-.SH RETURN VALUE
+.PP
 The
 .BR libsimple_strisutf8 ()
-returns 1 if the
+function reads
+.I string
+until the first NUL byte.
+.PP
+The
+.BR libsimple_strnisutf8 ()
+function reads
+.I string
+until the first NUL byte or the first
+.I n
+bytes, whichever is shorter.
+.PP
+The
+.BR libsimple_memisutf8 ()
+function reads the first
+.I n
+bytes from string
+.IR string ,
+allowing the checked text to contain NUL bytes.
+Note that unlike other
+.BR mem *
+functions, the
+.I string
+parameter for the
+.BR libsimple_memisutf8 ()
+function is a
+.B const char *
+rather than a
+.BR "const void *" .
+.SH RETURN VALUE
+The
+.BR libsimple_strisutf8 (),
+.BR libsimple_strnisutf8 (),
+and
+.BR libsimple_memisutf8 ()
+function returns 1 if the
 .I string
 is in valid UTF-8 (Modified UTF-8 if
 .I allow_modified_nul
 is non-zero); otherwise 0 is returned.
 .SH ERRORS
 The
-.BR libsimple_strisutf8 ()
-function cannot fail.
+.BR libsimple_strisutf8 (),
+.BR libsimple_strnisutf8 (),
+and
+.BR libsimple_memisutf8 ()
+functions cannot fail.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -43,19 +92,25 @@ lb lb lb
 l l l.
 Interface	Attribute	Value
 T{
-.BR libsimple_inchrset (),
+.BR libsimple_strisutf8 (),
 .br
-.BR libsimple_inchrcaseset ()
+.BR libsimple_strnisutf8 (),
+.br
+.BR libsimple_memisutf8 ()
 T}	Thread safety	MT-Safe
 T{
-.BR libsimple_inchrset (),
+.BR libsimple_strisutf8 (),
 .br
-.BR libsimple_strchrnul ()
+.BR libsimple_strnisutf8 (),
+.br
+.BR libsimple_memisutf8 ()
 T}	Async-signal safety	AS-Safe
 T{
-.BR libsimple_inchrset (),
+.BR libsimple_strisutf8 (),
 .br
-.BR libsimple_strchrnul ()
+.BR libsimple_strnisutf8 (),
+.br
+.BR libsimple_memisutf8 ()
 T}	Async-cancel safety	AC-Safe
 .TE
 .SH EXAMPLES
@@ -70,5 +125,5 @@ None.
 None.
 .SH BUGS
 None.
-.SH SEE ALSO
+.SH SEE ALSO,
 None.

@@ -1004,8 +1004,15 @@ that support
 .RE
 
 .TP
-.BR libsimple_strisutf8 (3)
+.BR libsimple_strisutf8 (3),
+.RS 0
+.BR libsimple_strnisutf8 (3),
+.br
+.BR libsimple_memisutf8 (3)
+.RE
+.RS
 Check if a string is valid UTF-8.
+.RE
 
 .TP
 .BR libsimple_strnchr (3),

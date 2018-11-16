@@ -426,3 +426,23 @@ static inline size_t libsimple_strrncaseeqlen(const char *__a, const char *__b, 
 #ifndef strrncaseeqlen
 # define strrncaseeqlen libsimple_strrncaseeqlen
 #endif
+
+
+/**
+ * Check whether a string, that may be or may not be NUL-terminated,
+ * is encoded in UTF-8
+ * 
+ * @param   string              The string
+ * @param   n                   The maximum length of `string`, its
+ *                              length is `strlen(string)` if there is a
+ *                              NUL byte at any position lower than `n`
+ * @param   allow_modified_nul  Whether Modified UTF-8 is allowed, which
+ *                              allows a two-byte encoding for NUL
+ * @return                      1 if good, 0 on encoding error
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+static inline int libsimple_strnisutf8(const char *__string, size_t __n, int __allow_modified_nul)
+{ return libsimple_memisutf8(__string, strnlen(__string, __n) ,__allow_modified_nul); }
+#ifndef strnisutf8
+# define strnisutf8 libsimple_strnisutf8
+#endif

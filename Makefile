@@ -68,6 +68,7 @@ OBJ =\
 	memelem.o\
 	memends.o\
 	memeqlen.o\
+	memisutf8.o\
 	memmem.o\
 	mempsetelem.o\
 	memrcasechr.o\
@@ -93,7 +94,6 @@ OBJ =\
 	strchrnul.o\
 	strends.o\
 	streqlen.o\
-	strisutf8.o\
 	strncasechr.o\
 	strncasechrnul.o\
 	strncaseends.o\

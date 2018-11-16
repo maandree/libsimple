@@ -4,11 +4,12 @@
 
 
 int
-libsimple_strisutf8(const char *string, int allow_modified_nul)
+libsimple_memisutf8(const char *string, size_t n, int allow_modified_nul)
 {
 	static long BYTES_TO_MIN_BITS[] = {0, 0,  8, 12, 17, 22, 27};
         static long BYTES_TO_MAX_BITS[] = {0, 7, 11, 16, 21, 26, 31};
         long int bytes = 0, read_bytes = 0, bits = 0, c, character;
+	size_t i;
 
         /*                                                      min bits  max bits
           0.......                                                 0         7
@@ -19,7 +20,9 @@ libsimple_strisutf8(const char *string, int allow_modified_nul)
           1111110. 10...... 10...... 10...... 10...... 10......   27        31
         */
 
-	while ((c = (long int)(*string++))) {
+	for (i = 0; i < n; i++) {
+		c = (long int)string[i];
+
                 if (!read_bytes) {
                         /* First byte of the character. */
 
@@ -77,58 +80,71 @@ libsimple_strisutf8(const char *string, int allow_modified_nul)
 int
 main(void)
 {
+#define ASSERT(STRING, GOOD)\
+	do {\
+		assert(libsimple_memisutf8(STRING, sizeof(STRING) - 1, i) == (GOOD));\
+		assert(libsimple_memisutf8(STRING "\xFF", sizeof(STRING) - 1, i) == (GOOD));\
+		assert(libsimple_memisutf8(STRING "\x00", sizeof(STRING) - 1, i) == (GOOD));\
+		assert(libsimple_strisutf8(STRING, i) == (GOOD));\
+		assert(libsimple_strnisutf8(STRING, sizeof(STRING) - 1, i) == (GOOD));\
+		assert(libsimple_strnisutf8(STRING "\xFF", sizeof(STRING) - 1, i) == (GOOD));\
+		assert(libsimple_strnisutf8(STRING "\x00", sizeof(STRING) - 1, i) == (GOOD));\
+	} while (0)
+
 	int i;
 	for (i = 0; i < 2; i++) {
-		assert(libsimple_strisutf8("", i) == 1);
-		assert(libsimple_strisutf8("a", i) == 1);
-		assert(libsimple_strisutf8("abc", i) == 1);
-		assert(libsimple_strisutf8("123", i) == 1);
-		assert(libsimple_strisutf8("åäö", i) == 1);
-		assert(libsimple_strisutf8("𝖆𝖇𝖈", i) == 1);
-		assert(libsimple_strisutf8("\x1b", i) == 1);
-		assert(libsimple_strisutf8("\n\r\t\f", i) == 1);
-		assert(libsimple_strisutf8("\xFF", i) == 0);
-		assert(libsimple_strisutf8("\x01", i) == 1);
-		assert(libsimple_strisutf8("\x7F", i) == 1);
-		assert(libsimple_strisutf8("\x80", i) == 0);
-		assert(libsimple_strisutf8("\xC0", i) == 0);
-		assert(libsimple_strisutf8("\xC0\x80", i) == i);
-		assert(libsimple_strisutf8("\xC0\x81", i) == 0);
-		assert(libsimple_strisutf8("\xCF", i) == 0);
-		assert(libsimple_strisutf8("\xEF", i) == 0);
-		assert(libsimple_strisutf8("\xEF\x8F", i) == 0);
-		assert(libsimple_strisutf8("\xF7", i) == 0);
-		assert(libsimple_strisutf8("\xF7\x8F", i) == 0);
-		assert(libsimple_strisutf8("\xF7\x8F\x8F", i) == 0);
-		assert(libsimple_strisutf8("\xFA", i) == 0);
-		assert(libsimple_strisutf8("\xFA\x8F", i) == 0);
-		assert(libsimple_strisutf8("\xFA\x8F\x8F", i) == 0);
-		assert(libsimple_strisutf8("\xFA\x8F\x8F\x8F", i) == 0);
-		assert(libsimple_strisutf8("\xFD", i) == 0);
-		assert(libsimple_strisutf8("\xFD\x8F", i) == 0);
-		assert(libsimple_strisutf8("\xFD\x8F\x8F", i) == 0);
-		assert(libsimple_strisutf8("\xFD\x8F\x8F\x8F", i) == 0);
-		assert(libsimple_strisutf8("\xFD\x8F\x8F\x8F\x8F", i) == 0);
-		assert(libsimple_strisutf8("\xFE", i) == 0);
-		assert(libsimple_strisutf8("\xFE\x8F", i) == 0);
-		assert(libsimple_strisutf8("\xFE\x8F\x8F", i) == 0);
-		assert(libsimple_strisutf8("\xFE\x8F\x8F\x8F", i) == 0);
-		assert(libsimple_strisutf8("\xFE\x8F\x8F\x8F\x8F", i) == 0);
-		assert(libsimple_strisutf8("\xFE\x8F\x8F\x8F\x8F\x8F", i) == 0);
-		assert(libsimple_strisutf8("\xFF", i) == 0);
-		assert(libsimple_strisutf8("\xFF\x8F", i) == 0);
-		assert(libsimple_strisutf8("\xFF\x8F\x8F", i) == 0);
-		assert(libsimple_strisutf8("\xFF\x8F\x8F\x8F", i) == 0);
-		assert(libsimple_strisutf8("\xFF\x8F\x8F\x8F\x8F", i) == 0);
-		assert(libsimple_strisutf8("\xFF\x8F\x8F\x8F\x8F\x8F", i) == 0);
-		assert(libsimple_strisutf8("\xFF\x8F\x8F\x8F\x8F\x8F\x8F", i) == 0);
-		assert(libsimple_strisutf8("\xC1\x80", i) == 0);
-		assert(libsimple_strisutf8("\xC2\x80", i) == 1);
-		assert(libsimple_strisutf8("\xE1\x80\x80\x80", i) == 0);
-		assert(libsimple_strisutf8("\xE1\x80\xC0\x80", i) == 0);
-		assert(libsimple_strisutf8("\xE1\x80\x00\x80", i) == 0);
-		assert(libsimple_strisutf8("\xF1\x80\x80\x80", i) == 1);
-		assert(libsimple_strisutf8("\xFF\x80\x80\x80\x80\x80\x80\x80", i) == 0);
+		ASSERT("", 1);
+		ASSERT("a", 1);
+		ASSERT("abc", 1);
+		ASSERT("123", 1);
+		ASSERT("åäö", 1);
+		ASSERT("𝖆𝖇𝖈", 1);
+		ASSERT("\x1b", 1);
+		ASSERT("\n\r\t\f", 1);
+		ASSERT("\xFF", 0);
+		ASSERT("\x01", 1);
+		ASSERT("\x7F", 1);
+		ASSERT("\x80", 0);
+		ASSERT("\xC0", 0);
+		ASSERT("\xC0\x80", i);
+		ASSERT("\xC0\x81", 0);
+		ASSERT("\xCF", 0);
+		ASSERT("\xEF", 0);
+		ASSERT("\xEF\x8F", 0);
+		ASSERT("\xF7", 0);
+		ASSERT("\xF7\x8F", 0);
+		ASSERT("\xF7\x8F\x8F", 0);
+		ASSERT("\xFA", 0);
+		ASSERT("\xFA\x8F", 0);
+		ASSERT("\xFA\x8F\x8F", 0);
+		ASSERT("\xFA\x8F\x8F\x8F", 0);
+		ASSERT("\xFD", 0);
+		ASSERT("\xFD\x8F", 0);
+		ASSERT("\xFD\x8F\x8F", 0);
+		ASSERT("\xFD\x8F\x8F\x8F", 0);
+		ASSERT("\xFD\x8F\x8F\x8F\x8F", 0);
+		ASSERT("\xFE", 0);
+		ASSERT("\xFE\x8F", 0);
+		ASSERT("\xFE\x8F\x8F", 0);
+		ASSERT("\xFE\x8F\x8F\x8F", 0);
+		ASSERT("\xFE\x8F\x8F\x8F\x8F", 0);
+		ASSERT("\xFE\x8F\x8F\x8F\x8F\x8F", 0);
+		ASSERT("\xFF", 0);
+		ASSERT("\xFF\x8F", 0);
+		ASSERT("\xFF\x8F\x8F", 0);
+		ASSERT("\xFF\x8F\x8F\x8F", 0);
+		ASSERT("\xFF\x8F\x8F\x8F\x8F", 0);
+		ASSERT("\xFF\x8F\x8F\x8F\x8F\x8F", 0);
+		ASSERT("\xFF\x8F\x8F\x8F\x8F\x8F\x8F", 0);
+		ASSERT("\xC1\x80", 0);
+		ASSERT("\xC2\x80", 1);
+		ASSERT("\xE1\x80\x80\x80", 0);
+		ASSERT("\xE1\x80\xC0\x80", 0);
+		ASSERT("\xE1\x80\x00\x80", 0);
+		ASSERT("\xF1\x80\x80\x80", 1);
+		ASSERT("\xFF\x80\x80\x80\x80\x80\x80\x80", 0);
+		assert(libsimple_memisutf8("\0abc", sizeof("\0abc") - 1, i) == 1);
+		assert(libsimple_memisutf8("\0abc\x80", sizeof("\0abc\x80") - 1, i) == 0);
 	}
 	return 0;
 }

@@ -493,3 +493,19 @@ size_t libsimple_memrcaseeqlen(const void *, size_t, const void *, size_t);
 #ifndef memrcaseeqlen
 # define memrcaseeqlen libsimple_memrcaseeqlen
 #endif
+
+
+/**
+ * Check whether a string is encoded in UTF-8
+ * 
+ * @param   string              The string
+ * @param   n                   The length of the string
+ * @param   allow_modified_nul  Whether Modified UTF-8 is allowed, which
+ *                              allows a two-byte encoding for NUL
+ * @return                      1 if good, 0 on encoding error
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+int libsimple_memisutf8(const char *, size_t, int);
+#ifndef memisutf8
+# define memisutf8 libsimple_memisutf8
+#endif
