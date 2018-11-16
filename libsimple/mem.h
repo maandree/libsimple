@@ -370,7 +370,6 @@ static inline int libsimple_memcaseeq(const void *__a, const void *__b, size_t _
  * @param   n  The number of bytes to copy
  * @return     `&d[n]`
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
 static inline void *libsimple_mempcpy(void *restrict __d, const void *restrict __s, size_t __n)
 { return &((char *)memcpy(__d, __s, __n))[__n]; }
 #ifndef mempcpy
@@ -386,8 +385,7 @@ static inline void *libsimple_mempcpy(void *restrict __d, const void *restrict _
  * @param   n  The number of bytes to move
  * @return     `&d[n]`
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
-static inline void *libsimple_mempmove(void *__d, const void *__s, size_t __n)
+static inline void *libsimple_mempmove(void *__d, const void *__s, size_t __n) /* TODO test */
 { return &((char *)memmove(__d, __s, __n))[__n]; }
 #ifndef mempmove
 # define mempmove libsimple_mempmove
@@ -402,7 +400,6 @@ static inline void *libsimple_mempmove(void *__d, const void *__s, size_t __n)
  * @param   n  The number of bytes to write to `s`
  * @return     `&s[n]`
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
 static inline void *libsimple_mempset(void *__s, int __c, size_t __n)
 { return &((char *)memset(__s, __c, __n))[__n]; }
 #ifndef mempset

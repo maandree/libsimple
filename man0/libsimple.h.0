@@ -1021,6 +1021,23 @@ Check if a string is valid UTF-8.
 .RE
 
 .TP
+.BR libsimple_strmove (3),
+.RS 0
+.BR libsimple_strnmove (3),
+.br
+.BR libsimple_stpmove (3),
+.br
+.BR libsimple_stpnmove (3)
+.RE
+.RS
+Versions of
+.BR memmove (3)
+and
+.BR libsimple_mempmove (3)
+that moves an entire string.
+.RE
+
+.TP
 .BR libsimple_strnchr (3),
 .RS 0
 .BR libsimple_strncasechr (3)

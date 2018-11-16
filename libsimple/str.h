@@ -375,6 +375,38 @@ static inline int libsimple_inchrcaseset(int __c, const char *__s)
 
 
 /**
+ * Moves a string within a string
+ * 
+ * @param   d  The location in the string's byte array where the
+ *             string should be moved to
+ * @param   s  The string to move
+ * @return     `d`
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
+static inline char *libsimple_strmove(char *__d, const char *__s) /* TODO test */
+{ return memmove(__d, __s, strlen(__s) + 1); }
+#ifndef strmove
+# define strmove libsimple_strmove
+#endif
+
+
+/**
+ * Moves a string within a string
+ * 
+ * @param   d  The location in the string's byte array where the
+ *             string should be moved to
+ * @param   s  The string to move
+ * @return     `&d[strlen(s)]` (this byte will be a NUL byte)
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
+static inline char *libsimple_stpmove(char *__d, const char *__s) /* TODO test */
+{ size_t __n = strlen(__s); memmove(__d, __s, __n + 1); return &__d[__n]; }
+#ifndef stpmove
+# define stpmove libsimple_stpmove
+#endif
+
+
+/**
  * Check whether a NUL-terminated string is encoded in UTF-8
  * 
  * @param   string              The string

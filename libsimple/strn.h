@@ -429,6 +429,45 @@ static inline size_t libsimple_strrncaseeqlen(const char *__a, const char *__b, 
 
 
 /**
+ * Moves a string within a string
+ * 
+ * @param   d  The location in the string's byte array where the
+ *             string should be moved to
+ * @param   s  The string to move
+ * @param   n  The maximum number of bytes to move
+ * @return     `d`
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
+static inline char *libsimple_strnmove(char *__d, const char *__s, size_t __n) /* TODO test */
+{ size_t __len = strnlen(__s, __n); return memmove(__d, __s, __len + (__len < __n)); }
+#ifndef strnmove
+# define strnmove libsimple_strnmove
+#endif
+
+
+/**
+ * Moves a string within a string
+ * 
+ * @param   d  The location in the string's byte array where the
+ *             string should be moved to
+ * @param   s  The string to move
+ * @param   n  The maximum number of bytes to move
+ * @return     `&d[strnlen(s, n)]`
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
+static inline char *
+libsimple_stpnmove(char *__d, const char *__s, size_t __n) /* TODO test */
+{
+	size_t __len = strnlen(__s, __n);
+	memmove(__d, __s, __len + (__len < __n));
+	return &__d[__len];
+}
+#ifndef stpnmove
+# define stpnmove libsimple_stpnmove
+#endif
+
+
+/**
  * Check whether a string, that may be or may not be NUL-terminated,
  * is encoded in UTF-8
  * 

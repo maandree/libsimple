@@ -1,14 +1,14 @@
-.TH LIBSIMPLE_MEMPMOVE 3 2018-11-16 libsimple
+.TH LIBSIMPLE_STPMOVE 3 2018-11-16 libsimple
 .SH NAME
-libsimple_mempmove \- move bytes within an array of bytes
+libsimple_stpmove \- move a string within an array of bytes
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_mempmove(void *\fIdest\fP, const void *\fIsrc\fP, size_t \fIn\fP);
+static inline void *libsimple_stpmove(void *\fIdest\fP, const void *\fIsrc\fP);
 
-#ifndef mempmove
-# define mempmove libsimple_mempmove
+#ifndef stpmove
+# define stpmove libsimple_stpmove
 #endif
 .fi
 .PP
@@ -16,25 +16,25 @@ Link with
 .IR \-lsimple .
 .SH DESCRIPTION
 The
-.BR libsimple_mempmove ()
-function copies the first
-.I n
-bytes of
+.BR libsimple_stpmove ()
+function copies the string, including the
+NUL byte that terminates it,
 .I src
 into
 .IR dest .
 The arrays may overlap.
 .SH RETURN VALUE
 The
-.BR libsimple_mempmove ()
+.BR libsimple_stpmove ()
 function returns the pointer
 .I dest
-with the offset
-.I n
-(the byte where the copy stopped).
+with the offset of the length of string
+.I str
+(the address of the copied NUL byte in
+.IR dest ).
 .SH ERRORS
 The
-.BR libsimple_mempmove ()
+.BR libsimple_stpmove ()
 function cannot fail.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
@@ -45,13 +45,13 @@ lb lb lb
 l l l.
 Interface	Attribute	Value
 T{
-.BR libsimple_mempmove ()
+.BR libsimple_stpmove ()
 T}	Thread safety	MT-Safe
 T{
-.BR libsimple_mempmove ()
+.BR libsimple_stpmove ()
 T}	Async-signal safety	AS-Safe
 T{
-.BR libsimple_mempmove ()
+.BR libsimple_stpmove ()
 T}	Async-cancel safety	AC-Safe
 .TE
 .SH EXAMPLES
@@ -67,10 +67,8 @@ None.
 .SH BUGS
 None.
 .SH SEE ALSO
-.BR libsimple_mempcpy (3),
-.BR libsimple_mempset (3),
 .BR libsimple_strmove (3),
-.BR libsimple_stpmove (3),
-.BR libsimple_strnmove (3),
 .BR libsimple_stpnmove (3),
+.BR libsimple_mempmove (3),
+.BR stpcpy (3),
 .BR memmove (3)
