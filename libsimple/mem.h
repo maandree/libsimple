@@ -269,6 +269,26 @@ void *libsimple_memelem(const void *, size_t, const void *, size_t);
 
 
 /**
+ * Finds the first element in an array, the comparison is case-sensitive
+ * 
+ * @param   haystack   The array of bytes to search
+ * @param   nhaystack  The length of `haystack`, divided by `needle`
+ * @param   needle     The substring to search for
+ * @param   nneedle    The length of `needle`
+ * @return             `haystack` with a minimal offset such that,
+ *                     `!memcmp(r, needle, nneedle)` where `r` is the
+ *                     returned pointer and such that `(r - haystack) % nneedle == 0`,
+ *                     `(void *)&((char *)haystack)[nhaystack * nneedle]`
+ *                     if no such offset exists
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+void *libsimple_memelemscan(const void *, size_t, const void *, size_t);
+#ifndef memelemscan
+# define memelemscan libsimple_memelemscan
+#endif
+
+
+/**
  * Finds the last element in an array, the comparison is case-sensitive
  * 
  * @param   haystack   The array of bytes to search

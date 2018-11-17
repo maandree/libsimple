@@ -67,6 +67,7 @@ OBJ =\
 	memcasestarts.o\
 	memdup.o\
 	memelem.o\
+	memelemscan.o\
 	memends.o\
 	memeqlen.o\
 	memisutf8.o\

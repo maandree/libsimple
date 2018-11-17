@@ -52,7 +52,6 @@ libsimple_memelem(const void *hay_, size_t hayn, const void *sub_, size_t subn)
 			next:;
 			}
 			break;
-
 		}
 	}
 
@@ -70,7 +69,7 @@ main(void)
 	assert(!strcmpnul(libsimple_memelem("12345634", 0, "", 0), "12345634"));
 
 	assert(!strcmpnul(libsimple_memelem("12345634", 8, "3", 1), "345634"));
-	assert(!libsimple_memelem("12345634", 8, "x", 1));;
+	assert(!libsimple_memelem("12345634", 8, "x", 1));
 	assert(!strcmpnul(libsimple_memelem("13456342", 8, "3", 1), "3456342"));
 	assert(!libsimple_memelem("12345634", 0, "3", 1));
 

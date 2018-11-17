@@ -542,6 +542,13 @@ that operate on multibyte units
 rather than simple bytes.
 
 .TP
+.BR libsimple_memelemscan (3)
+Version of
+.BR memscan (3)
+that operate on multibyte units
+rather than simple bytes.
+
+.TP
 .BR libsimple_memends (3),
 .RS 0
 .BR libsimple_memcaseends (3)
