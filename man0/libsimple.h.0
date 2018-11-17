@@ -638,6 +638,20 @@ in an array of bytes.
 .RE
 
 .TP
+.BR libsimple_memscan (3),
+.RS 0
+.BR libsimple_memcasescan (3)
+.RE
+.RS
+Versions of
+.BR memchr (3)
+and
+.BR libsimple_memcasechr (3)
+that return the end of the array
+if the byte is not found.
+.RE
+
+.TP
 .BR libsimple_memsetelem (3)
 Fill en array.
 

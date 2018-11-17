@@ -3,19 +3,55 @@
 
 /**
  * Finds the first occurence of a byte value in an array of bytes,
+ * the comparison is case-sensitive
+ * 
+ * @param   s  The array of bytes to search
+ * @param   c  The byte value to search for
+ * @param   n  The number of bytes in the byte array
+ * @return     `s` with a minimal offset such that `*r == c`,
+ *             where `r` is the returned pointer, `&s[n]` if
+ *             no such offset exists within [s, &s[n])
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __returns_nonnull__, __warn_unused_result__)))
+void *libsimple_memscan(const void *, int, size_t);
+#ifndef memscan
+# define memscan libsimple_memscan
+#endif
+
+
+/**
+ * Finds the first occurence of a byte value in an array of bytes,
  * the comparison is case-insensitive
  * 
  * @param   s  The array of bytes to search
  * @param   c  The byte value to search for
  * @param   n  The number of bytes in the byte array
  * @return     `s` with a minimal offset such that `tolower(*r) == tolower(c)`,
- *             where `r` is the returned pointer `NULL` if no
- *             such offset exists within [s, &s[n])
+ *             where `r` is the returned pointer, `NULL` if
+ *             no such offset exists within [s, &s[n])
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
 void *libsimple_memcasechr(const void *, int, size_t);
 #ifndef memcasechr
 # define memcasechr libsimple_memcasechr
+#endif
+
+
+/**
+ * Finds the first occurence of a byte value in an array of bytes,
+ * the comparison is case-insensitive
+ * 
+ * @param   s  The array of bytes to search
+ * @param   c  The byte value to search for
+ * @param   n  The number of bytes in the byte array
+ * @return     `s` with a minimal offset such that `tolower(*r) == tolower(c)`,
+ *             where `r` is the returned pointer, `&s[n]` if
+ *             no such offset exists within [s, &s[n])
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
+void *libsimple_memcasescan(const void *, int, size_t);
+#ifndef memcasescan
+# define memcasescan libsimple_memcasescan
 #endif
 
 
@@ -72,7 +108,7 @@ void *libsimple_rawmemcasechr(const void *, int);
  *             where `r` is the returned pointer `NULL` if no
  *             such offset exists within [s, &s[n])
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
 void *libsimple_memrchr(const void *, int, size_t);
 #ifndef memrchr
 # define memrchr libsimple_memrchr
@@ -90,7 +126,7 @@ void *libsimple_memrchr(const void *, int, size_t);
  *             where `r` is the returned pointer `NULL` if no
  *             such offset exists within [s, &s[n])
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
 void *libsimple_memrcasechr(const void *, int, size_t);
 #ifndef memrcasechr
 # define memrcasechr libsimple_memrcasechr

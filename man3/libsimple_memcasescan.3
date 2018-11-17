@@ -1,14 +1,14 @@
-.TH LIBSIMPLE_RAWMEMCASECHR 3 2018-10-21 libsimple
+.TH LIBSIMPLE_MEMCASESCAN 3 2018-11-17 libsimple
 .SH NAME
-libsimple_rawmemcasechr \- find byte in memory
+libsimple_memcasescan \- find byte in memory
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-void *libsimple_rawmemcasechr(const void *\fIs\fP, int \fIc\fP);
+void *libsimple_memcasescan(const void *\fIs\fP, int \fIc\fP, size_t \fIn\fP);
 
-#ifndef rawmemcasechr
-# define rawmemcasechr libsimple_rawmemcasechr
+#ifndef memcasescan
+# define memcasescan libsimple_memcasescan
 #endif
 .fi
 .PP
@@ -16,24 +16,22 @@ Link with
 .IR \-lsimple .
 .SH DESCRIPTION
 The
-.BR libsimple_rawmemcasechr ()
+.BR libsimple_memcasescan ()
 function scans the memory segment
-.I s
+.IR s ,
+with the size
+.IR n ,
 for the first occurence of the byte
 .I c
 (it is converted to a
 .BR char ).
-.PP
-The
-.BR libsimple_rawmemcasechr ()
-function assumes there is at least one
-occurence, its behaviour is undefined
-if this is not the case.
+If no such character exist in the memory
+segment, the memory segment's end is returned.
 .PP
 The comparison is case-insensitive.
 .SH RETURN VALUE
 The
-.BR libsimple_rawmemcasechr ()
+.BR libsimple_memcasescan ()
 function returns the pointer
 .I s
 with a minimal offset such that
@@ -41,9 +39,12 @@ with a minimal offset such that
 where
 .I r
 is the returned pointer.
+If no such offset exists,
+.I &s[n]
+is returned.
 .SH ERRORS
 The
-.BR libsimple_rawmemcasechr ()
+.BR libsimple_memcasescan ()
 function cannot fail.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
@@ -54,13 +55,13 @@ lb lb lb
 l l l.
 Interface	Attribute	Value
 T{
-.BR libsimple_rawmemcasechr ()
+.BR libsimple_memcasescan ()
 T}	Thread safety	MT-Safe
 T{
-.BR libsimple_rawmemcasechr ()
+.BR libsimple_memcasescan ()
 T}	Async-signal safety	AS-Safe
 T{
-.BR libsimple_rawmemcasechr ()
+.BR libsimple_memcasescan ()
 T}	Async-cancel safety	AC-Safe
 .TE
 .SH EXAMPLES
@@ -76,8 +77,10 @@ None.
 .SH BUGS
 None.
 .SH SEE ALSO
+.BR libsimple_memscan (3),
 .BR libsimple_memcasechr (3),
-.BR libsimple_rawmemchr (3),
-.BR libsimple_rawmemrcasechr (3),
-.BR libsimple_memcasescan (3),
-.BR libsimple_memcasechr (3)
+.BR libsimple_memrcasechr (3),
+.BR libsimple_rawmemcasechr (3),
+.BR libsimple_memcasemem (3),
+.BR libsimple_strncasechrnul (3),
+.BR libsimple_strcasechrnul (3)

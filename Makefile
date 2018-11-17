@@ -63,6 +63,7 @@ OBJ =\
 	memcaseends.o\
 	memcaseeqlen.o\
 	memcasemem.o\
+	memcasescan.o\
 	memcasestarts.o\
 	memdup.o\
 	memelem.o\
@@ -78,6 +79,7 @@ OBJ =\
 	memrelem.o\
 	memreqlen.o\
 	memrmem.o\
+	memscan.o\
 	memstarts.o\
 	minimise_number_string.o\
 	multimespec.o\
