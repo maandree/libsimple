@@ -6,48 +6,36 @@
 int
 libsimple_difftimespec(struct timespec *diff, const struct timespec *minuend, const struct timespec *subtrahend)
 {
-	long int ns = minuend->tv_nsec - subtrahend->tv_nsec;
 	time_t s;
-	int ret = 0;
 
-	s = minuend->tv_sec - subtrahend->tv_sec;
-	if ((minuend->tv_sec <= 0) != (subtrahend->tv_sec <= 0)) {
-		if (minuend->tv_sec < 0 && minuend->tv_sec < TIME_MIN + subtrahend->tv_sec) {
-			s = TIME_MIN;
-			ns = 0;
-			errno = ERANGE;
-			ret = -1;
-		} else if (minuend->tv_sec >= 0 && minuend->tv_sec > TIME_MAX + subtrahend->tv_sec) {
-			s = TIME_MAX;
-			ns = 999999999L;
-			errno = ERANGE;
-			ret = -1;
-		}
+	if (LIBSIMPLE_SSUB_OVERFLOW(minuend->tv_sec, subtrahend->tv_sec, &s, TIME_MIN, TIME_MAX)) {
+		if (subtrahend->tv_sec < 0)
+			goto too_large;
+		else
+			goto too_small;
 	}
 
-	if (ns < 0) {
-		if (s == TIME_MIN) {
-			ns = 0L;
-			errno = ERANGE;
-			ret = -1;
-		} else {
-			s -= 1;
-			ns += 1000000000L;
-		}
-	} else if (ns >= 1000000000L) {
-		if (s == TIME_MAX) {
-			ns = 999999999L;
-			errno = ERANGE;
-			ret = -1;
-		} else {
-			s += 1;
-			ns -= 1000000000L;
-		}
+	diff->tv_nsec = minuend->tv_nsec - subtrahend->tv_nsec;
+	if (diff->tv_nsec < 0) {
+		if (LIBSIMPLE_SDECR_OVERFLOW(&s, TIME_MIN))
+			goto too_small;
+		diff->tv_nsec += 1000000000L;
 	}
 
 	diff->tv_sec = s;
-	diff->tv_nsec = ns;
-	return ret;
+	return 0;
+
+too_large:
+	diff->tv_sec = TIME_MAX;
+	diff->tv_nsec = 999999999L;
+	errno = ERANGE;
+	return -1;
+
+too_small:
+	diff->tv_sec = TIME_MIN;
+	diff->tv_nsec = 0;
+	errno = ERANGE;
+	return -1;
 }
 
 

@@ -5,7 +5,7 @@
  * Scans for a character in a string, the scan is case-insensitive
  * 
  * @param   s  The string to scan
- * @param   c  The character for scan for
+ * @param   c  The character to scan for
  * @param   n  Truncate `s` to this length if it is longer
  * @return     `s` with a minimal offset such that `*r == c`,
  *             where `r` is the returned pointer, `NULL` if no such offset exists
@@ -22,7 +22,7 @@ char *libsimple_strnchr(const char *, int, size_t);
  * Scans for a character in a string, the scan is case-insensitive
  * 
  * @param   s  The string to scan
- * @param   c  The character for scan for
+ * @param   c  The character to scan for
  * @param   n  Truncate `s` to this length if it is longer
  * @return     `s` with a minimal offset such that `tolower(*r) == tolower(c)`,
  *             where `r` is the returned pointer, `NULL` if no such offset exists
@@ -39,7 +39,7 @@ char *libsimple_strncasechr(const char *, int, size_t);
  * Scans for a character in a string, the scan is case-sensitive
  * 
  * @param   s  The string to scan
- * @param   c  The character for scan for
+ * @param   c  The character to scan for
  * @param   n  Truncate `s` to this length if it is longer
  * @return     `s` with a minimal offset such that `*r == c || !*r`,
  *             where `r` is the returned pointer, however if no such
@@ -56,7 +56,7 @@ char *libsimple_strnchrnul(const char *, int, size_t);
  * Scans for a character in a string, the scan is case-insensitive
  * 
  * @param   s  The string to scan
- * @param   c  The character for scan for
+ * @param   c  The character to scan for
  * @param   n  Truncate `s` to this length if it is longer
  * @return     `s` with a minimal offset such that `tolower(*r) == tolower(c) || !*r`,
  *             where `r` is the returned pointer, however if no such offset
@@ -73,7 +73,7 @@ char *libsimple_strncasechrnul(const char *, int, size_t);
  * Scans for a character in a string, the scan is case-sensitive
  * 
  * @param   s  The string to scan
- * @param   c  The character for scan for
+ * @param   c  The character to scan for
  * @param   n  Truncate `s` to this length if it is longer
  * @return     `s` with a maximal offset such that `*r == c`,
  *             where `r` is the returned pointer, `NULL` if no such offset exists
@@ -86,10 +86,11 @@ char *libsimple_strrnchr(const char *, int, size_t);
 
 
 /**
- * Scans for a character in a string, the scan is case-insensitive
+ * Scans for a character in a string with any other value that the
+ * specified value, the scan is case-insensitive
  * 
  * @param   s  The string to scan
- * @param   c  The character for scan for
+ * @param   c  The character to scan for
  * @param   n  Truncate `s` to this length if it is longer
  * @return     `s` with a maximal offset such that `tolower(*r) == tolower(c)`,
  *             where `r` is the returned pointer, `NULL` if no such offset exists
@@ -98,6 +99,112 @@ _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__
 char *libsimple_strrncasechr(const char *, int, size_t);
 #ifndef strrncasechr
 # define strrncasechr libsimple_strrncasechr
+#endif
+
+
+/**
+ * Scans for a character in a string with any other value that the
+ * specified value, the scan is case-insensitive
+ * 
+ * @param   s  The string to scan
+ * @param   c  The character to skip over
+ * @param   n  Truncate `s` to this length if it is longer
+ * @return     `s` with a minimal offset such that `*r != c`,
+ *             where `r` is the returned pointer, `NULL` if no such offset exists
+ *             within the first `n` bytes
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+char *libsimple_strnchr_inv(const char *, int, size_t);
+#ifndef strnchr_inv
+# define strnchr_inv libsimple_strnchr_inv
+#endif
+
+
+/**
+ * Scans for a character in a string with any other value that the
+ * specified value, the scan is case-insensitive
+ * 
+ * @param   s  The string to scan
+ * @param   c  The character to skip over
+ * @param   n  Truncate `s` to this length if it is longer
+ * @return     `s` with a minimal offset such that `tolower(*r) != tolower(c)`,
+ *             where `r` is the returned pointer, `NULL` if no such offset exists
+ *             within the first `n` bytes
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+char *libsimple_strncasechr_inv(const char *, int, size_t);
+#ifndef strncasechr_inv
+# define strncasechr_inv libsimple_strncasechr_inv
+#endif
+
+
+/**
+ * Scans for a character in a string with any other value that the
+ * specified value, the scan is case-sensitive
+ * 
+ * @param   s  The string to scan
+ * @param   c  The character to skip over
+ * @param   n  Truncate `s` to this length if it is longer
+ * @return     `s` with a minimal offset such that `*r != c || !*r`,
+ *             where `r` is the returned pointer, however if no such
+ *             offset exists within the first `n` bytes, `&s[n]` is returned
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
+char *libsimple_strnchrnul_inv(const char *, int, size_t);
+#ifndef strnchrnul_inv
+# define strnchrnul_inv libsimple_strnchrnul_inv
+#endif
+
+
+/**
+ * Scans for a character in a string with any other value that the
+ * specified value, the scan is case-insensitive
+ * 
+ * @param   s  The string to scan
+ * @param   c  The character to skip over
+ * @param   n  Truncate `s` to this length if it is longer
+ * @return     `s` with a minimal offset such that `tolower(*r) != tolower(c) || !*r`,
+ *             where `r` is the returned pointer, however if no such offset
+ *             exists within the first `n` bytes, `&s[n]` is returned
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
+char *libsimple_strncasechrnul_inv(const char *, int, size_t);
+#ifndef strncasechrnul_inv
+# define strncasechrnul_inv libsimple_strncasechrnul_inv
+#endif
+
+
+/**
+ * Scans for a character in a string with any other value that the
+ * specified value, the scan is case-sensitive
+ * 
+ * @param   s  The string to scan
+ * @param   c  The character to skip over
+ * @param   n  Truncate `s` to this length if it is longer
+ * @return     `s` with a maximal offset such that `*r != c`,
+ *             where `r` is the returned pointer, `NULL` if no such offset exists
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+char *libsimple_strrnchr_inv(const char *, int, size_t);
+#ifndef strrnchr_inv
+# define strrnchr_inv libsimple_strrnchr_inv
+#endif
+
+
+/**
+ * Scans for a character in a string with any other value that the
+ * specified value, the scan is case-insensitive
+ * 
+ * @param   s  The string to scan
+ * @param   c  The character to skip over
+ * @param   n  Truncate `s` to this length if it is longer
+ * @return     `s` with a maximal offset such that `tolower(*r) != tolower(c)`,
+ *             where `r` is the returned pointer, `NULL` if no such offset exists
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+char *libsimple_strrncasechr_inv(const char *, int, size_t);
+#ifndef strrncasechr_inv
+# define strrncasechr_inv libsimple_strrncasechr_inv
 #endif
 
 
@@ -464,6 +571,199 @@ libsimple_stpnmove(char *__d, const char *__s, size_t __n) /* TODO test */
 }
 #ifndef stpnmove
 # define stpnmove libsimple_stpnmove
+#endif
+
+
+/**
+ * Fill a string with a character
+ * 
+ * @param   s  The string to fill
+ * @param   c  The byte to replace all bytes in `s` with
+ * @param   n  The maximum number of bytes to write
+ * @return     `s`
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
+static inline char *
+libsimple_strnset(char *__s, int __c_, size_t __n) /* TODO test, man */
+{
+	char __c = (char)__c_, *__r = __s;
+	while (__n-- && *__s) *__s++ = __c;
+	return __r;
+}
+#ifndef strnset
+# define strnset libsimple_strnset
+#endif
+
+
+/**
+ * Fill a string with a character
+ * 
+ * @param   s  The string to fill
+ * @param   c  The byte to replace all bytes in `s` with
+ * @param   n  The maximum number of bytes to write
+ * @return     `&s[strnlen(s, n)]`
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
+static inline char *
+libsimple_stpnset(char *__s, int __c_, size_t __n) /* TODO test, man */
+{
+	char __c = (char)__c_;
+	while (__n-- && *__s) *__s++ = __c;
+	return __s;
+}
+#ifndef stpnset
+# define stpnset libsimple_stpnset
+#endif
+
+
+/**
+ * Copy a string, but stop after a specific character
+ * 
+ * @param  d  The location the string shall be copied to
+ * @param  s  The string to copy
+ * @param  c  The character that stops the copying
+ * @param  n  The maximum number of bytes to copy
+ * @param     `&strchr(d, c)[1]` (after copying) if `c` can be
+ *            found in `s`, `NULL` otherwise
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
+static inline char *
+libsimple_strnccpy(char *restrict __d, const char *restrict __s, int __c_, size_t __n) /* TODO test, man */
+{
+	char __c = (char)__c_;
+	do {
+		if ((*__d++ = *__s) == __c)
+			return __d;
+	} while (*__s++ && __n--);
+	return NULL;
+}
+#ifndef strnccpy
+# define strnccpy libsimple_strnccpy
+#endif
+
+
+/**
+ * Move a string, but stop after a specific character
+ * 
+ * @param  d  The location the string shall be moved to
+ * @param  s  The string to copy
+ * @param  c  The character that stops the copying
+ * @param  n  The maximum number of bytes to move
+ * @param     `&strchr(d, c)[1]` (after copying) if `c` can be
+ *            found within the first `n` bytes of `s` (before
+ *            copying), `NULL` otherwise
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
+char *libsimple_strncmove(char *, const char *, int, size_t);
+#ifndef strncmove
+# define strncmove libsimple_strncmove
+#endif
+
+
+/**
+ * Replace all instances of a character in an string with
+ * another character
+ * 
+ * @param   s    The string
+ * @param   old  The value of the characters to replace
+ * @param   new  The value to replace the characters with
+ * @param   n    The maximum length of `s`
+ * @return       `strnchr(s, '\0', n)`
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __returns_nonnull__)))
+static inline char *
+libsimple_strnreplace(char *__s, int __old_, int __new_, size_t __n) /* TODO test, man */
+{
+	char __old = (char)__old_, __new = (char)__new_;
+	for (; __n && *__s; __s++, __n--)
+		if (*__s == __old)
+			*__s = __new;
+	return __s;
+}
+#ifndef strnreplace
+# define strnreplace libsimple_strnreplace
+#endif
+
+
+/**
+ * Copy a string but convert to lower case
+ * 
+ * `d` and `s` may overlap; the function has
+ * an optimisation for when `d == s`
+ * 
+ * `d` will be `s` but in lower case
+ * 
+ * @param   d  The location the string shall be copied to
+ * @param   s  The string to copy
+ * @param   n  The maximum number of bytes to copy or convert
+ * @return     `strnchrnul(d, '\0', n)` (after copying)
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __returns_nonnull__)))
+char *libsimple_stpntolower(char *__d, const char *__s, size_t __n);
+#ifndef stpntolower
+# define stpntolower libsimple_stpntolower
+#endif
+
+
+/**
+ * Copy a string but convert to upper case
+ * 
+ * `d` and `s` may overlap; the function has
+ * an optimisation for when `d == s`
+ * 
+ * `d` will be `s` but in upper case
+ * 
+ * @param   d  The location the string shall be copied to
+ * @param   s  The string to copy
+ * @param   n  The maximum number of bytes to copy or convert
+ * @return     `strnchrnul(d, '\0', n)` (after copying)
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __returns_nonnull__)))
+char *libsimple_stpntoupper(char *__d, const char *__s, size_t __n);
+#ifndef stpntoupper
+# define stpntoupper libsimple_stpntoupper
+#endif
+
+
+/**
+ * Copy a string but convert to lower case
+ * 
+ * `d` and `s` may overlap; the function has
+ * an optimisation for when `d == s`
+ * 
+ * `d` will be `s` but in lower case
+ * 
+ * @param   d  The location the string shall be copied to
+ * @param   s  The string to copy
+ * @param   n  The maximum number of bytes to copy or convert
+ * @return     `d`
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __returns_nonnull__)))
+static inline char *libsimple_strntolower(char *__d, const char *__s, size_t __n) /* TODO man */
+{ libsimple_stpntolower(__d, __s, __n); return __d; }
+#ifndef strntolower
+# define strntolower libsimple_strntolower
+#endif
+
+
+/**
+ * Copy a string but convert to upper case
+ * 
+ * `d` and `s` may overlap; the function has
+ * an optimisation for when `d == s`
+ * 
+ * `d` will be `s` but in upper case
+ * 
+ * @param   d  The location the string shall be copied to
+ * @param   s  The string to copy
+ * @param   n  The maximum number of bytes to copy or convert
+ * @return     `d`
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __returns_nonnull__)))
+static inline char *libsimple_strntoupper(char *__d, const char *__s, size_t __n) /* TODO man */
+{ libsimple_stpntoupper(__d, __s, __n); return __d; }
+#ifndef strntoupper
+# define strntoupper libsimple_strntoupper
 #endif
 
 

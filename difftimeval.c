@@ -6,16 +6,36 @@
 int
 libsimple_difftimeval(struct timeval *diff, const struct timeval *minuend, const struct timeval *subtrahend)
 {
-	struct timespec a, b, d;
-	int r;
-	libsimple_timeval2timespec(&a, minuend);
-	libsimple_timeval2timespec(&b, subtrahend);
-	r = libsimple_difftimespec(&d, &a, &b);
-	if (r && errno != ERANGE)
-		return r;
-	if (libsimple_timespec2timeval(diff, &d) && r)
-		errno = ERANGE;
-	return r;
+	time_t s;
+
+	if (LIBSIMPLE_SSUB_OVERFLOW(minuend->tv_sec, subtrahend->tv_sec, &s, TIME_MIN, TIME_MAX)) {
+		if (subtrahend->tv_sec < 0)
+			goto too_large;
+		else
+			goto too_small;
+	}
+
+	diff->tv_usec = minuend->tv_usec - subtrahend->tv_usec;
+	if (diff->tv_usec < 0) {
+		if (LIBSIMPLE_SDECR_OVERFLOW(&s, TIME_MIN))
+			goto too_small;
+		diff->tv_usec += 1000000L;
+	}
+
+	diff->tv_sec = s;
+	return 0;
+
+too_large:
+	diff->tv_sec = TIME_MAX;
+	diff->tv_usec = 999999L;
+	errno = ERANGE;
+	return -1;
+
+too_small:
+	diff->tv_sec = TIME_MIN;
+	diff->tv_usec = 0;
+	errno = ERANGE;
+	return -1;
 }
 
 

@@ -4,32 +4,33 @@ CONFIGFILE = config.mk
 include $(CONFIGFILE)
 
 SUBHDR =\
-	libsimple/definitions.h\
-	libsimple/memalloc.h\
-	libsimple/strdup.h\
-	libsimple/strndup.h\
-	libsimple/memdup.h\
-	libsimple/aligned_memdup.h\
-	libsimple/mallocz.h\
-	libsimple/malloc.h\
-	libsimple/calloc.h\
-	libsimple/realloc.h\
-	libsimple/memalignz.h\
-	libsimple/memalign.h\
-	libsimple/vallocz.h\
-	libsimple/valloc.h\
-	libsimple/pvallocz.h\
-	libsimple/pvalloc.h\
-	libsimple/aligned_allocz.h\
 	libsimple/aligned_alloc.h\
-	libsimple/posix_memalignz.h\
-	libsimple/posix_memalign.h\
+	libsimple/aligned_allocz.h\
+	libsimple/aligned_memdup.h\
+	libsimple/calloc.h\
+	libsimple/definitions.h\
 	libsimple/env.h\
-	libsimple/time.h\
+	libsimple/malloc.h\
+	libsimple/mallocz.h\
+	libsimple/mem.h\
+	libsimple/memalign.h\
+	libsimple/memalignz.h\
+	libsimple/memalloc.h\
+	libsimple/memdup.h\
+	libsimple/overflow.h\
+	libsimple/posix_memalign.h\
+	libsimple/posix_memalignz.h\
 	libsimple/printf.h\
+	libsimple/pvalloc.h\
+	libsimple/pvallocz.h\
+	libsimple/realloc.h\
 	libsimple/str.h\
+	libsimple/strdup.h\
 	libsimple/strn.h\
-	libsimple/mem.h
+	libsimple/strndup.h\
+	libsimple/time.h\
+	libsimple/valloc.h\
+	libsimple/vallocz.h
 
 HDR =\
 	$(SUBHDR)\
@@ -59,62 +60,101 @@ OBJ =\
 	envputenvf.o\
 	envreallocn.o\
 	memcasechr.o\
+	memcasechr_inv.o\
 	memcasecmp.o\
 	memcaseends.o\
 	memcaseeqlen.o\
 	memcasemem.o\
 	memcasescan.o\
+	memcasescan_inv.o\
 	memcasestarts.o\
+	memchr_inv.o\
+	memcmove.o\
 	memdup.o\
 	memelem.o\
+	memelem_inv.o\
 	memelemscan.o\
+	memelemscan_inv.o\
 	memends.o\
 	memeqlen.o\
 	memisutf8.o\
 	memmem.o\
 	mempsetelem.o\
+	memptolower.o\
+	memptoupper.o\
 	memrcasechr.o\
+	memrcasechr_inv.o\
 	memrcaseeqlen.o\
 	memrcasemem.o\
 	memrchr.o\
+	memrchr_inv.o\
 	memrelem.o\
+	memrelem_inv.o\
+	memreplaceelem.o\
 	memreqlen.o\
 	memrmem.o\
 	memscan.o\
+	memscan_inv.o\
 	memstarts.o\
 	minimise_number_string.o\
 	multimespec.o\
 	multimeval.o\
 	rawmemcasechr.o\
+	rawmemcasechr_inv.o\
 	rawmemchr.o\
+	rawmemchr_inv.o\
+	rawmemelem.o\
+	rawmemelem_inv.o\
 	rawmemrcasechr.o\
+	rawmemrcasechr_inv.o\
 	rawmemrchr.o\
+	rawmemrchr_inv.o\
+	rawmemrelem.o\
+	rawmemrelem_inv.o\
+	stpntolower.o\
+	stpntoupper.o\
+	stptolower.o\
+	stptoupper.o\
 	strcasechr.o\
+	strcasechr_inv.o\
 	strcasechrnul.o\
+	strcasechrnul_inv.o\
 	strcaseends.o\
 	strcaseeqlen.o\
 	strcasestr.o\
+	strchr_inv.o\
 	strchrnul.o\
+	strchrnul_inv.o\
+	strcmove.o\
 	strends.o\
 	streqlen.o\
 	strncasechr.o\
+	strncasechr_inv.o\
 	strncasechrnul.o\
+	strncasechrnul_inv.o\
 	strncaseends.o\
 	strncaseeqlen.o\
 	strncasestarts.o\
 	strncasestr.o\
 	strnchr.o\
+	strnchr_inv.o\
 	strnchrnul.o\
+	strnchrnul_inv.o\
+	strncmove.o\
 	strnend.o\
 	strnends.o\
 	strneqlen.o\
 	strnstarts.o\
 	strnstr.o\
 	strrcasechr.o\
+	strrcasechr_inv.o\
 	strrcasestr.o\
+	strrchr_inv.o\
 	strrncasechr.o\
+	strrncasechr_inv.o\
 	strrncasestr.o\
 	strrnchr.o\
+	strrnchr_inv.o\
 	strrnstr.o\
 	strrstr.o\
 	strstarts.o\

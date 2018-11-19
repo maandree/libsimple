@@ -6,6 +6,7 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <netinet/tcp.h>
+#include <sys/ioctl.h>
 #include <sys/mman.h>
 #include <sys/select.h>
 #include <sys/socket.h>
@@ -73,6 +74,7 @@
 #include "libsimple/mem.h"
 #include "libsimple/str.h"
 #include "libsimple/strn.h"
+#include "libsimple/overflow.h"
 
 
 /**

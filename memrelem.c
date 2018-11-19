@@ -6,10 +6,9 @@
 void *
 libsimple_memrelem(const void *hay_, size_t hayn, const void *sub_, size_t subn)
 {
-	if (!subn)
-		return (void *)hay_;
-
 	switch (subn) {
+	case 0:
+		return (void *)hay_;
 	case 1:
 		{
 			uint8_t *hay = (void *)hay_;

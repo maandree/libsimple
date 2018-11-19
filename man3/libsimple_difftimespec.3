@@ -32,6 +32,15 @@ is subtracted by
 .IR subtrahend )
 and stores the result in
 .IR diff .
+.PP
+These functions assume that
+.I minuend->tv_nsec
+and
+.I subtrahend->tv_nsec
+are in thier valid range ([0, 1000000000) for
+.BR libsimple_sumtimespec ()
+and [0, 1000000) for
+.BR libsimple_sumtimeval ())
 .SH RETURN VALUE
 The
 .BR libsimple_difftimespec ()

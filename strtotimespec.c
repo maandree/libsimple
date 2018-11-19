@@ -43,12 +43,10 @@ libsimple_strtotimespec(struct timespec *restrict ts, const char *restrict s, ch
 	}
 
 	for (; isdigit(*s); s++) {
-		if (sec < TIME_MIN / 10)
+		if (LIBSIMPLE_SMUL_OVERFLOW_AN_BP(sec, 10, &sec, TIME_MIN, TIME_MAX))
 			goto overflow_integer;
-		sec *= 10;
-		if (sec < TIME_MIN + (*s & 15))
+		if (LIBSIMPLE_SSUB_OVERFLOW_B_POS(sec, (time_t)(*s & 15), &sec, TIME_MIN, TIME_MAX))
 			goto overflow_integer;
-		sec -= *s & 15;
 	}
 
 	if (!neg) {

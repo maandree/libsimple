@@ -38,6 +38,15 @@ functions return 0 on successful completion;
 otherwise, \-1 is returned and
 .I errno
 is set to indicate the error.
+.PP
+These functions assume that
+.I augend->tv_nsec
+and
+.I addend->tv_nsec
+are in thier valid range ([0, 1000000000) for
+.BR libsimple_sumtimespec ()
+and [0, 1000000) for
+.BR libsimple_sumtimeval ()).
 .SH ERRORS
 The
 .BR libsimple_sumtimespec ()

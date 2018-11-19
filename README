@@ -10,3 +10,69 @@ have unnamespaced.
 
 Programs using this library should define `char *argv0` and set it to
 the 0:th command line argument.
+
+libsimple include a number of functions complementing those in <string.h>
+and <strings.h>, the naming scheme of these functions is:
+
+	<base> = str		for NUL-terminated byte strings
+	       = strn		for byte strings that may not be NUL-terminated
+	       = mem		for byte arrays
+	       = wcs		for NUL-terminated wide-character strings
+	       = wcsn		for wide-character strings that may not be NUL-terminated
+	       = wmem		for wide-character arrays
+
+	<str>  = str		if <base> is str, wsc, strn, or wscn
+	       = mem		if <base> is mem or wmem
+
+	<scan> = chrnul		if <base> is str, wsc, strn, or wscn
+	       = scan		if <base> is mem or wmem
+
+	[case] = 		if case-sensitive
+	       = case		if case-insensitive, the name may also end with
+					_l if there is a locale parameter
+
+	[_inv] = 		for normal search
+	       = _inv		for search of anything else (skipping)
+
+	[r]    =                for left-to-right search/comparison
+	       = r              for right-to-left search/comparison
+
+	[p]    = 		return beginning of destination
+	       = p		return end of destination
+
+	[raw]  = 		sought data may not exist
+	       = raw		sought data does exist (only <base> = mem, wmem)
+
+	<base>[r] = strrn	if <base> is strn
+	          = wcsrn	if <base> is wcsn
+		  = <base>r	otherwise
+
+	<base>[p] = stp		if <base> is str
+	          = stpn	if <base> is strn
+	          = wcp		if <base> is wcs
+	          = wcpn	if <base> is wcsn
+		  = <base>p	otherwise
+
+	[raw]<base>[r][case]chr[_inv]	find character
+	<base>[case]<scan>[_inv]	find character or end
+	<base>[r][case]<str>		find substring
+	<base>[case]cmp			alphabetically compare, without NULL support
+	<base>[case]cmpnul		alphabetically compare, with NULL support
+	<base>[case]ends		verify end
+	<base>[case]starts		verify beginning
+	<base>[case]eq			!<base>[case]cmp
+	<base>[case]eqnul		!<base>[case]cmpnul
+	<base>[r][case]eqlen		check length of commonality
+	<base>end			find end of string (not <base> = mem, wmem)
+	<base>[p]cpy			copy data (to external array)
+	<base>[p]move			move data (within array or to external array)
+	<base>[p]set			fill data
+	<base>[p]toupper		like <base>[p]move but convert text to upper case
+	<base>[p]tolower		like <base>[p]move but convert text to lower case
+	[raw]<base>ccpy			like <base>pcpy, but stop after a character is found
+	[raw]<base>cmove		like <base>pmove, but stop after a character is found
+	<base>replace			replace all instance of a character, end is returned
+	mem[p]setelem			fill data with elements of custom length
+	[raw]mem[r]elem[_inv]		find element with custom length
+	memelemscan[_inv]		find element with custom length or end
+	memreplaceelem			replace all instance of an element of custom length, end is returned

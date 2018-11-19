@@ -31,13 +31,11 @@ libsimple_multimespec(struct timespec *prod, const struct timespec *multiplicand
 	xs = ns / 1000000000L;
 	ns %= 1000000000L;
 
-	if (s > TIME_MAX / multiplier)
+	if (LIBSIMPLE_SMUL_OVERFLOW_AP_BP(s, multiplier, &s, TIME_MIN, TIME_MAX))
 		goto overflow;
-	s *= multiplier;
 
-	if (s > TIME_MAX - (time_t)xs)
+	if (LIBSIMPLE_SADD_OVERFLOW_NONNEG(s, (time_t)xs, &s, TIME_MIN, TIME_MAX))
 		goto overflow;
-	s += (time_t)xs;
 
 	if (neg) {
 		s = -s;

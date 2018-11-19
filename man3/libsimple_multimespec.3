@@ -29,6 +29,13 @@ and
 .I multiplier
 and stores the result in
 .IR prod .
+.PP
+These functions assume that
+.I multiplicand->tv_nsec
+is in its valid range ([0, 1000000000) for
+.BR libsimple_multimespec ()
+and [0, 1000000) for
+.BR libsimple_multimeval ()).
 .SH RETURN VALUE
 The
 .BR libsimple_multimespec ()

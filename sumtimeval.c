@@ -6,16 +6,36 @@
 int
 libsimple_sumtimeval(struct timeval *sum, const struct timeval *augend, const struct timeval *addend)
 {
-	struct timespec a, b, s;
-	int r;
-	libsimple_timeval2timespec(&a, augend);
-	libsimple_timeval2timespec(&b, addend);
-	r = libsimple_sumtimespec(&s, &a, &b);
-	if (r && errno != ERANGE)
-		return r;
-	if (libsimple_timespec2timeval(sum, &s) && r)
-		errno = ERANGE;
-	return r;
+	time_t s;
+
+	if (LIBSIMPLE_SADD_OVERFLOW(augend->tv_sec, addend->tv_sec, &s, TIME_MIN, TIME_MAX)) {
+		if (addend->tv_sec > 0)
+			goto too_large;
+		else
+			goto too_small;
+	}
+
+	sum->tv_usec = augend->tv_usec + addend->tv_usec;
+	if (sum->tv_usec >= 1000000L) {
+		if (LIBSIMPLE_SINCR_OVERFLOW(&s, TIME_MAX))
+			goto too_large;
+		sum->tv_usec -= 1000000L;
+	}
+
+	sum->tv_sec = s;
+	return 0;
+
+too_large:
+	sum->tv_sec = TIME_MAX;
+	sum->tv_usec = 999999L;
+	errno = ERANGE;
+	return -1;
+
+too_small:
+	sum->tv_sec = TIME_MIN;
+	sum->tv_usec = 0;
+	errno = ERANGE;
+	return -1;
 }
 
 

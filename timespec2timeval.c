@@ -10,14 +10,13 @@ libsimple_timespec2timeval(struct timeval *restrict tv, const struct timespec *r
 	tv->tv_usec = ts->tv_nsec / 1000L;
 	if ((ts->tv_nsec % 1000L) >= 500L) {
 		if (++(tv->tv_usec) == 1000000L) {
-			tv->tv_usec = 0;
-			if (tv->tv_sec == TIME_MAX) {
+			if (LIBSIMPLE_SINCR_OVERFLOW(&tv->tv_sec, TIME_MAX)) {
+				tv->tv_sec = TIME_MAX;
 				tv->tv_usec = 999999L;
 				errno = EOVERFLOW;
 				return -1;
-			} else {
-				tv->tv_sec += 1;
 			}
+			tv->tv_usec = 0;
 		}
 	}
 	return 0;

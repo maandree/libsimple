@@ -24,15 +24,14 @@ vmemalloc_parse_size_prod(struct memalloc_state *state, size_t n, size_t arg, va
 		goto inval;
 	state->elem_size = arg;
 	if (n) {
-		for (n--; n--;) {
+		while (--n) {
 			arg = va_arg(ap, size_t);
 			if (!state->elem_size)
 				continue;
-			if (arg > SIZE_MAX / state->elem_size) {
+			if (LIBSIMPLE_UMUL_OVERFLOW_NONZERO(arg, state->elem_size, &state->elem_size, SIZE_MAX)) {
 				errno = ENOMEM;
 				return -1;
 			}
-			state->elem_size *= arg;
 		}
 	} else {
 		if (!arg)
@@ -41,11 +40,10 @@ vmemalloc_parse_size_prod(struct memalloc_state *state, size_t n, size_t arg, va
 			arg = va_arg(ap, size_t);
 			if (!arg)
 				break;
-			if (arg > SIZE_MAX / state->elem_size) {
+			if (LIBSIMPLE_UMUL_OVERFLOW_NONZERO(arg, state->elem_size, &state->elem_size, SIZE_MAX)) {
 				errno = ENOMEM;
 				return -1;
 			}
-			state->elem_size *= arg;
 		}
 	}
 
@@ -207,11 +205,10 @@ libsimple_vmemalloc(size_t n, va_list ap) /* TODO test ([v]{mem,array}alloc) */
 	state.zero_init = state.zero_init >= 0 ? state.zero_init : 0;
 	n = state.have_size ? state.size_prod : n;
 	if (state.elem_size > 1) {
-		if (n > SIZE_MAX / state.elem_size) {
+		if (LIBSIMPLE_UMUL_OVERFLOW_NONZERO(n, state.elem_size, &n, SIZE_MAX)) {
 			errno = ENOMEM;
 			return NULL;
 		}
-		n *= state.elem_size;
 	}
 	if (state.round_up_size) {
 		if (!state.alignment) {
@@ -240,11 +237,10 @@ libsimple_vmemalloc(size_t n, va_list ap) /* TODO test ([v]{mem,array}alloc) */
 			min = MIN(state.alignment, cacheline);
 			max = MAX(state.alignment, cacheline);
 			size = max / gcd(state.alignment, cacheline);
-			if (size > SIZE_MAX / min) {
+			if (LIBSIMPLE_UMUL_OVERFLOW_NONZERO(size, min, &state.alignment, SIZE_MAX)) {
 				errno = ENOMEM;
 				return NULL;
 			}
-			state.alignment = size = min;
 		}
 	} else if (!state.cache_split) {
 		if (!state.alignment)

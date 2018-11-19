@@ -6,10 +6,9 @@
 void *
 libsimple_memelemscan(const void *hay_, size_t hayn, const void *sub_, size_t subn)
 {
-	if (!subn)
-		return (void *)hay_;
-
 	switch (subn) {
+	case 0:
+		return (void *)hay_;
 	case 1:
 		return libsimple_memscan(hay_, *(char *)sub_, hayn);
 	case 2:
@@ -48,8 +47,6 @@ libsimple_memelemscan(const void *hay_, size_t hayn, const void *sub_, size_t su
 			return hay;
 		}
 	}
-
-	return NULL;
 }
 
 

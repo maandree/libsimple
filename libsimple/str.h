@@ -5,7 +5,7 @@
  * Scans for a character in a string, the scan is case-sensitive
  * 
  * @param   s  The string to scan
- * @param   c  The character for scan for
+ * @param   c  The character to scan for
  * @return     `s` with a minimal offset such that `*r == c || !*r`,
  *             where `r` is the returned pointer
  */
@@ -20,7 +20,7 @@ char *libsimple_strchrnul(const char *, int);
  * Scans for a character in a string, the scan is case-insensitive
  * 
  * @param   s  The string to scan
- * @param   c  The character for scan for
+ * @param   c  The character to scan for
  * @return     `s` with a minimal offset such that `tolower(*r) == tolower(c)`,
  *             where `r` is the returned pointer, `NULL` if no such offset exists
  */
@@ -35,7 +35,7 @@ char *libsimple_strcasechr(const char *, int);
  * Scans for a character in a string, the scan is case-insensitive
  * 
  * @param   s  The string to scan
- * @param   c  The character for scan for
+ * @param   c  The character to scan for
  * @return     `s` with a minimal offset such that `tolower(*r) == tolower(c) || !*r`,
  *             where `r` is the returned pointer
  */
@@ -50,7 +50,7 @@ char *libsimple_strcasechrnul(const char *, int);
  * Scans for a character in a string, the scan is case-insensitive
  * 
  * @param   s  The string to scan
- * @param   c  The character for scan for
+ * @param   c  The character to scan for
  * @return     `s` with a maximal offset such that `tolower(*r) == tolower(c)`,
  *             where `r` is the returned pointer, `NULL` if no such offset exists
  */
@@ -58,6 +58,102 @@ _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__
 char *libsimple_strrcasechr(const char *, int);
 #ifndef strrcasechr
 # define strrcasechr libsimple_strrcasechr
+#endif
+
+
+/**
+ * Scans for a character in a string with any other value that the
+ * specified value, the scan is case-sensitive
+ * 
+ * @param   s  The string to scan
+ * @param   c  The character to skip over
+ * @return     `s` with a minimal offset such that `*r != c`, where `r`
+ *             is the returned pointer, `NULL` if no such offset exists
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+char *libsimple_strchr_inv(const char *, int);
+#ifndef strchr_inv
+# define strchr_inv libsimple_strchr_inv
+#endif
+
+
+/**
+ * Scans for a character in a string with any other value that the
+ * specified value, the scan is case-sensitive
+ * 
+ * @param   s  The string to scan
+ * @param   c  The character to skip over
+ * @return     `s` with a minimal offset such that `*r != c || !*r`,
+ *             where `r` is the returned pointer
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
+char *libsimple_strchrnul_inv(const char *, int);
+#ifndef strchrnul_inv
+# define strchrnul_inv libsimple_strchrnul_inv
+#endif
+
+
+/**
+ * Scans for a character in a string with any other value that the
+ * specified value, the scan is case-insensitive
+ * 
+ * @param   s  The string to scan
+ * @param   c  The character to skip over
+ * @return     `s` with a minimal offset such that `tolower(*r) != tolower(c)`,
+ *             where `r` is the returned pointer, `NULL` if no such offset exists
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+char *libsimple_strcasechr_inv(const char *, int);
+#ifndef strcasechr_inv
+# define strcasechr_inv libsimple_strcasechr_inv
+#endif
+
+
+/**
+ * Scans for a character in a string with any other value that the
+ * specified value, the scan is case-insensitive
+ * 
+ * @param   s  The string to scan
+ * @param   c  The character to skip over
+ * @return     `s` with a minimal offset such that `tolower(*r) != tolower(c) || !*r`,
+ *             where `r` is the returned pointer
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
+char *libsimple_strcasechrnul_inv(const char *, int);
+#ifndef strcasechrnul_inv
+# define strcasechrnul_inv libsimple_strcasechrnul_inv
+#endif
+
+
+/**
+ * Scans for a character in a string with any other value that the
+ * specified value, the scan is case-sensitive
+ * 
+ * @param   s  The string to scan
+ * @param   c  The character to skip over
+ * @return     `s` with a maximal offset such that `*r != c`, where `r`
+ *             is the returned pointer, `NULL` if no such offset exists
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+char *libsimple_strrchr_inv(const char *, int);
+#ifndef strrchr_inv
+# define strrchr_inv libsimple_strrchr_inv
+#endif
+
+
+/**
+ * Scans for a character in a string with any other value that the
+ * specified value, the scan is case-insensitive
+ * 
+ * @param   s  The string to scan
+ * @param   c  The character to skip over
+ * @return     `s` with a maximal offset such that `tolower(*r) != tolower(c)`,
+ *             where `r` is the returned pointer, `NULL` if no such offset exists
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
+char *libsimple_strrcasechr_inv(const char *, int);
+#ifndef strrcasechr_inv
+# define strrcasechr_inv libsimple_strrcasechr_inv
 #endif
 
 
@@ -403,6 +499,189 @@ static inline char *libsimple_stpmove(char *__d, const char *__s) /* TODO test *
 { size_t __n = strlen(__s); memmove(__d, __s, __n + 1); return &__d[__n]; }
 #ifndef stpmove
 # define stpmove libsimple_stpmove
+#endif
+
+
+/**
+ * Fill a string with a character
+ * 
+ * @param   s  The string to fill
+ * @param   c  The byte to replace all bytes in `s` with
+ * @return     `s`
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
+static inline char *
+libsimple_strset(char *__s, int __c_) /* TODO test, man */
+{
+	char __c = (char)__c_, *__r = __s;
+	while (*__s) *__s++ = __c;
+	return __r;
+}
+#ifndef strset
+# define strset libsimple_strset
+#endif
+
+
+/**
+ * Fill a string with a character
+ * 
+ * @param   s  The string to fill
+ * @param   c  The byte to replace all bytes in `s` with
+ * @return     `&s[strlen(s)]`
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
+static inline char *
+libsimple_stpset(char *__s, int __c_) /* TODO test, man */
+{
+	char __c = (char)__c_;
+	while (*__s) *__s++ = __c;
+	return __s;
+}
+#ifndef stpset
+# define stpset libsimple_stpset
+#endif
+
+
+/**
+ * Copy a string, but stop after a specific character
+ * 
+ * @param  d  The location the string shall be copied to
+ * @param  s  The string to copy
+ * @param  c  The character that stops the copying
+ * @param     `&strchr(d, c)[1]` (after copying) if `c` can be
+ *            found in `s`, `NULL` otherwise
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
+static inline char *
+libsimple_strccpy(char *restrict __d, const char *restrict __s, int __c_) /* TODO test, man */
+{
+	char __c = (char)__c_;
+	do {
+		if ((*__d++ = *__s) == __c)
+			return __d;
+	} while (*__s++);
+	return NULL;
+}
+#ifndef strccpy
+# define strccpy libsimple_strccpy
+#endif
+
+
+/**
+ * Move a string, but stop after a specific character
+ * 
+ * @param  d  The location the string shall be moved to
+ * @param  s  The string to copy
+ * @param  c  The character that stops the copying
+ * @param     `&strchr(d, c)[1]` (after copying) if `c` can be
+ *            found in `s` (before copying), `NULL` otherwise
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
+char *libsimple_strcmove(char *, const char *, int);
+#ifndef strcmove
+# define strcmove libsimple_strcmove
+#endif
+
+
+/**
+ * Replace all instances of a character in an string with
+ * another character
+ * 
+ * @param   s    The string
+ * @param   old  The value of the characters to replace
+ * @param   new  The value to replace the characters with
+ * @return       `strchr(s, '\0')`
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __returns_nonnull__)))
+static inline char *
+libsimple_strreplace(char *__s, int __old_, int __new_) /* TODO test, man */
+{
+	char __old = (char)__old_, __new = (char)__new_;
+	for (; *__s; __s++)
+		if (*__s == __old)
+			*__s = __new;
+	return __s;
+}
+#ifndef strreplace
+# define strreplace libsimple_strreplace
+#endif
+
+
+/**
+ * Copy a string but convert to lower case
+ * 
+ * `d` and `s` may overlap; the function has
+ * an optimisation for when `d == s`
+ * 
+ * `d` will be `s` but in lower case
+ * 
+ * @param   d  The location the string shall be copied to
+ * @param   s  The string to copy
+ * @return     `strchr(d, '\0')` (after copying)
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __returns_nonnull__)))
+char *libsimple_stptolower(char *__d, const char *__s);
+#ifndef stptolower
+# define stptolower libsimple_stptolower
+#endif
+
+
+/**
+ * Copy a string but convert to upper case
+ * 
+ * `d` and `s` may overlap; the function has
+ * an optimisation for when `d == s`
+ * 
+ * `d` will be `s` but in upper case
+ * 
+ * @param   d  The location the string shall be copied to
+ * @param   s  The string to copy
+ * @return     `strchr(d, '\0')` (after copying)
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __returns_nonnull__)))
+char *libsimple_stptoupper(char *__d, const char *__s);
+#ifndef stptoupper
+# define stptoupper libsimple_stptoupper
+#endif
+
+
+/**
+ * Copy a string but convert to lower case
+ * 
+ * `d` and `s` may overlap; the function has
+ * an optimisation for when `d == s`
+ * 
+ * `d` will be `s` but in lower case
+ * 
+ * @param   d  The location the string shall be copied to
+ * @param   s  The string to copy
+ * @return     `d`
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __returns_nonnull__)))
+static inline char *libsimple_strtolower(char *__d, const char *__s) /* TODO man */
+{ libsimple_stptolower(__d, __s); return __d; }
+#ifndef strtolower
+# define strtolower libsimple_strtolower
+#endif
+
+
+/**
+ * Copy a string but convert to upper case
+ * 
+ * `d` and `s` may overlap; the function has
+ * an optimisation for when `d == s`
+ * 
+ * `d` will be `s` but in upper case
+ * 
+ * @param   d  The location the string shall be copied to
+ * @param   s  The string to copy
+ * @return     `d`
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __returns_nonnull__)))
+static inline char *libsimple_strtoupper(char *__d, const char *__s) /* TODO man */
+{ libsimple_stptoupper(__d, __s); return __d; }
+#ifndef strtoupper
+# define strtoupper libsimple_strtoupper
 #endif
 
 
