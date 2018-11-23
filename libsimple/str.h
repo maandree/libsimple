@@ -479,7 +479,7 @@ static inline int libsimple_inchrcaseset(int __c, const char *__s)
  * @return     `d`
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
-static inline char *libsimple_strmove(char *__d, const char *__s) /* TODO test */
+static inline char *libsimple_strmove(char *__d, const char *__s)
 { return memmove(__d, __s, strlen(__s) + 1); }
 #ifndef strmove
 # define strmove libsimple_strmove
@@ -495,7 +495,7 @@ static inline char *libsimple_strmove(char *__d, const char *__s) /* TODO test *
  * @return     `&d[strlen(s)]` (this byte will be a NUL byte)
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
-static inline char *libsimple_stpmove(char *__d, const char *__s) /* TODO test */
+static inline char *libsimple_stpmove(char *__d, const char *__s)
 { size_t __n = strlen(__s); memmove(__d, __s, __n + 1); return &__d[__n]; }
 #ifndef stpmove
 # define stpmove libsimple_stpmove
@@ -511,7 +511,7 @@ static inline char *libsimple_stpmove(char *__d, const char *__s) /* TODO test *
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline char *
-libsimple_strset(char *__s, int __c_) /* TODO test, man */
+libsimple_strset(char *__s, int __c_) /* TODO man */
 {
 	char __c = (char)__c_, *__r = __s;
 	while (*__s) *__s++ = __c;
@@ -531,7 +531,7 @@ libsimple_strset(char *__s, int __c_) /* TODO test, man */
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline char *
-libsimple_stpset(char *__s, int __c_) /* TODO test, man */
+libsimple_stpset(char *__s, int __c_) /* TODO man */
 {
 	char __c = (char)__c_;
 	while (*__s) *__s++ = __c;
@@ -543,7 +543,8 @@ libsimple_stpset(char *__s, int __c_) /* TODO test, man */
 
 
 /**
- * Copy a string, but stop after a specific character
+ * Copy a string, but stop after a specific character,
+ * the new string will be NUL-terminated
  * 
  * @param  d  The location the string shall be copied to
  * @param  s  The string to copy
@@ -553,12 +554,12 @@ libsimple_stpset(char *__s, int __c_) /* TODO test, man */
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline char *
-libsimple_strccpy(char *restrict __d, const char *restrict __s, int __c_) /* TODO test, man */
+libsimple_strccpy(char *restrict __d, const char *restrict __s, int __c_) /* TODO man */
 {
 	char __c = (char)__c_;
 	do {
 		if ((*__d++ = *__s) == __c)
-			return __d;
+			return *__d = '\0', __d;
 	} while (*__s++);
 	return NULL;
 }
@@ -594,7 +595,7 @@ char *libsimple_strcmove(char *, const char *, int);
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __returns_nonnull__)))
 static inline char *
-libsimple_strreplace(char *__s, int __old_, int __new_) /* TODO test, man */
+libsimple_strreplace(char *__s, int __old_, int __new_) /* TODO man */
 {
 	char __old = (char)__old_, __new = (char)__new_;
 	for (; *__s; __s++)

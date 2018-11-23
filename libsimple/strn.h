@@ -545,7 +545,7 @@ static inline size_t libsimple_strrncaseeqlen(const char *__a, const char *__b, 
  * @return     `d`
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
-static inline char *libsimple_strnmove(char *__d, const char *__s, size_t __n) /* TODO test */
+static inline char *libsimple_strnmove(char *__d, const char *__s, size_t __n)
 { size_t __len = strnlen(__s, __n); return memmove(__d, __s, __len + (__len < __n)); }
 #ifndef strnmove
 # define strnmove libsimple_strnmove
@@ -563,7 +563,7 @@ static inline char *libsimple_strnmove(char *__d, const char *__s, size_t __n) /
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline char *
-libsimple_stpnmove(char *__d, const char *__s, size_t __n) /* TODO test */
+libsimple_stpnmove(char *__d, const char *__s, size_t __n)
 {
 	size_t __len = strnlen(__s, __n);
 	memmove(__d, __s, __len + (__len < __n));
@@ -584,10 +584,10 @@ libsimple_stpnmove(char *__d, const char *__s, size_t __n) /* TODO test */
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline char *
-libsimple_strnset(char *__s, int __c_, size_t __n) /* TODO test, man */
+libsimple_strnset(char *__s, int __c_, size_t __n) /* TODO man */
 {
 	char __c = (char)__c_, *__r = __s;
-	while (__n-- && *__s) *__s++ = __c;
+	for (; __n && *__s; __n--) *__s++ = __c;
 	return __r;
 }
 #ifndef strnset
@@ -605,10 +605,10 @@ libsimple_strnset(char *__s, int __c_, size_t __n) /* TODO test, man */
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline char *
-libsimple_stpnset(char *__s, int __c_, size_t __n) /* TODO test, man */
+libsimple_stpnset(char *__s, int __c_, size_t __n) /* TODO man */
 {
 	char __c = (char)__c_;
-	while (__n-- && *__s) *__s++ = __c;
+	for (; __n && *__s; __n--) *__s++ = __c;
 	return __s;
 }
 #ifndef stpnset
@@ -618,6 +618,8 @@ libsimple_stpnset(char *__s, int __c_, size_t __n) /* TODO test, man */
 
 /**
  * Copy a string, but stop after a specific character
+ * the new string will be NUL-terminated if it is
+ * shorter than `n` bytes
  * 
  * @param  d  The location the string shall be copied to
  * @param  s  The string to copy
@@ -628,13 +630,19 @@ libsimple_stpnset(char *__s, int __c_, size_t __n) /* TODO test, man */
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline char *
-libsimple_strnccpy(char *restrict __d, const char *restrict __s, int __c_, size_t __n) /* TODO test, man */
+libsimple_strnccpy(char *restrict __d, const char *restrict __s, int __c_, size_t __n) /* TODO man */
 {
-	char __c = (char)__c_;
+	char __c = (char)__c_, *__end = &__d[__n];
 	do {
-		if ((*__d++ = *__s) == __c)
+		if (!__n)
+			break;
+		if ((*__d++ = *__s) == __c) {
+			if (__d != __end)
+				*__d = '\0';
 			return __d;
-	} while (*__s++ && __n--);
+		}
+		__n--;
+	} while (*__s++);
 	return NULL;
 }
 #ifndef strnccpy
@@ -672,7 +680,7 @@ char *libsimple_strncmove(char *, const char *, int, size_t);
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __returns_nonnull__)))
 static inline char *
-libsimple_strnreplace(char *__s, int __old_, int __new_, size_t __n) /* TODO test, man */
+libsimple_strnreplace(char *__s, int __old_, int __new_, size_t __n) /* TODO man */
 {
 	char __old = (char)__old_, __new = (char)__new_;
 	for (; __n && *__s; __s++, __n--)

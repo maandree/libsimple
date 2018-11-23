@@ -119,7 +119,12 @@ main(void)
 	size_t pagesize, cacheline;
 
 	pagesize = (size_t)sysconf(_SC_PAGESIZE);
+
+#ifdef _SC_LEVEL1_DCACHE_LINESIZE
 	cacheline = (size_t)sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
+#else
+	cacheline = 64;
+#endif
 
 	assert(libsimple_default_failure_exit == 1);
 
@@ -2191,6 +2196,391 @@ main(void)
 		for (; i < sizeof(p_); i++)
 			assert(p[i] == 0);
 	}
+
+
+	stpcpy(mempcpy(buf, "hello world", 12), "goodbye world");
+	assert(libsimple_strset(buf, 'x') == buf);
+	assert(!strcmp(buf, "xxxxxxxxxxx"));
+	assert(!strcmp(&buf[12], "goodbye world"));
+
+	stpcpy(mempcpy(buf, "hello world", 12), "goodbye world");
+	assert(libsimple_strset(buf, '\0') == buf);
+	assert(!memcmp(buf, "\0\0\0\0\0\0\0\0\0\0\0\0goodbye world", 26));
+
+
+	stpcpy(mempcpy(buf, "hello world", 12), "goodbye world");
+	assert(libsimple_stpset(buf, 'x') == &buf[11]);
+	assert(!strcmp(buf, "xxxxxxxxxxx"));
+	assert(!strcmp(&buf[12], "goodbye world"));
+
+	stpcpy(mempcpy(buf, "hello world", 12), "goodbye world");
+	assert(libsimple_stpset(buf, '\0') == &buf[11]);
+	assert(!memcmp(buf, "\0\0\0\0\0\0\0\0\0\0\0\0goodbye world", 26));
+
+
+	stpcpy(mempcpy(buf, "hello world", 12), "goodbye world");
+	assert(libsimple_strnset(buf, 'x', SIZE_MAX) == buf);
+	assert(!strcmp(buf, "xxxxxxxxxxx"));
+	assert(!strcmp(&buf[12], "goodbye world"));
+
+	stpcpy(mempcpy(buf, "hello world", 12), "goodbye world");
+	assert(libsimple_strnset(buf, '\0', SIZE_MAX) == buf);
+	assert(!memcmp(buf, "\0\0\0\0\0\0\0\0\0\0\0\0goodbye world", 26));
+
+
+	stpcpy(mempcpy(buf, "hello world", 12), "goodbye world");
+	assert(libsimple_stpnset(buf, 'x', SIZE_MAX) == &buf[11]);
+	assert(!strcmp(buf, "xxxxxxxxxxx"));
+	assert(!strcmp(&buf[12], "goodbye world"));
+
+	stpcpy(mempcpy(buf, "hello world", 12), "goodbye world");
+	assert(libsimple_stpnset(buf, '\0', SIZE_MAX) == &buf[11]);
+	assert(!memcmp(buf, "\0\0\0\0\0\0\0\0\0\0\0\0goodbye world", 26));
+
+
+	stpcpy(mempcpy(buf, "hello world", 12), "goodbye world");
+	assert(libsimple_strnset(buf, 'x', 5) == buf);
+	assert(!strcmp(buf, "xxxxx world"));
+	assert(!strcmp(&buf[12], "goodbye world"));
+
+	stpcpy(mempcpy(buf, "hello world", 12), "goodbye world");
+	assert(libsimple_strnset(buf, '\0', 5) == buf);
+	assert(!memcmp(buf, "\0\0\0\0\0 world\0goodbye world", 26));
+
+
+	stpcpy(mempcpy(buf, "hello world", 12), "goodbye world");
+	assert(libsimple_stpnset(buf, 'x', 5) == &buf[5]);
+	assert(!strcmp(buf, "xxxxx world"));
+	assert(!strcmp(&buf[12], "goodbye world"));
+
+	stpcpy(mempcpy(buf, "hello world", 12), "goodbye world");
+	assert(libsimple_stpnset(buf, '\0', 5) == &buf[5]);
+	assert(!memcmp(buf, "\0\0\0\0\0 world\0goodbye world", 26));
+
+
+	stpcpy(mempcpy(buf, "hello world", 12), "goodbye world");
+	assert(libsimple_memreplace(buf, 'o', 'x', 46) == &buf[46]);
+	assert(!memcmp(buf, "hellx wxrld\0gxxdbye wxrld", 26));
+
+	stpcpy(mempcpy(buf, "hello world", 12), "goodbye world");
+	assert(libsimple_memreplace(buf, 'o', 'x', 12) == &buf[12]);
+	assert(!memcmp(buf, "hellx wxrld\0goodbye world", 26));
+
+
+	stpcpy(mempcpy(buf, "hello world", 12), "goodbye world");
+	assert(libsimple_strreplace(buf, 'o', 'x') == &buf[11]);
+	assert(!memcmp(buf, "hellx wxrld\0goodbye world", 26));
+
+
+	stpcpy(mempcpy(buf, "hello world", 12), "goodbye world");
+	assert(libsimple_strnreplace(buf, 'o', 'x', SIZE_MAX) == &buf[11]);
+	assert(!memcmp(buf, "hellx wxrld\0goodbye world", 26));
+
+	stpcpy(mempcpy(buf, "hello world", 12), "goodbye world");
+	assert(libsimple_strnreplace(buf, 'o', 'x', 12) == &buf[11]);
+	assert(!memcmp(buf, "hellx wxrld\0goodbye world", 26));
+
+	stpcpy(mempcpy(buf, "hello world", 12), "goodbye world");
+	assert(libsimple_strnreplace(buf, 'o', 'x', 11) == &buf[11]);
+	assert(!memcmp(buf, "hellx wxrld\0goodbye world", 26));
+
+	stpcpy(mempcpy(buf, "hello world", 12), "goodbye world");
+	assert(libsimple_strnreplace(buf, 'o', 'x', 6) == &buf[6]);
+	assert(!memcmp(buf, "hellx world\0goodbye world", 26));
+
+	stpcpy(mempcpy(buf, "hello world", 12), "goodbye world");
+	assert(libsimple_strnreplace(buf, 'o', 'x', 5) == &buf[5]);
+	assert(!memcmp(buf, "hellx world\0goodbye world", 26));
+
+	stpcpy(mempcpy(buf, "hello world", 12), "goodbye world");
+	assert(libsimple_strnreplace(buf, 'o', 'x', 4) == &buf[4]);
+	assert(!memcmp(buf, "hello world\0goodbye world", 26));
+
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_strmove(&buf[3], buf) == &buf[3]);
+	assert(!strcmp(buf, "helhello world"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_strmove(buf, &buf[3]) == buf);
+	assert(!strcmp(buf, "lo world"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_strmove(buf, buf) == buf);
+	assert(!strcmp(buf, "hello world"));
+
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_strnmove(&buf[3], buf, SIZE_MAX) == &buf[3]);
+	assert(!strcmp(buf, "helhello world"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_strnmove(buf, &buf[3], SIZE_MAX) == buf);
+	assert(!strcmp(buf, "lo world"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_strnmove(buf, buf, SIZE_MAX) == buf);
+	assert(!strcmp(buf, "hello world"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_strnmove(&buf[3], buf, 12) == &buf[3]);
+	assert(!strcmp(buf, "helhello world"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_strnmove(buf, &buf[3], 9) == buf);
+	assert(!strcmp(buf, "lo world"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_strnmove(buf, buf, 12) == buf);
+	assert(!strcmp(buf, "hello world"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_strnmove(&buf[3], buf, 11) == &buf[3]);
+	assert(!strncmp(buf, "helhello worldx", 15));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_strnmove(buf, &buf[3], 8) == buf);
+	assert(!strcmp(buf, "lo worldrld"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_strnmove(buf, buf, 11) == buf);
+	assert(!strcmp(buf, "hello world"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_strnmove(&buf[3], buf, 2) == &buf[3]);
+	assert(!strcmp(buf, "helhe world"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_strnmove(buf, &buf[3], 2) == buf);
+	assert(!strcmp(buf, "lollo world"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_strnmove(buf, buf, 2) == buf);
+	assert(!strcmp(buf, "hello world"));
+
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_stpmove(&buf[3], buf) == &buf[11 + 3]);
+	assert(!strcmp(buf, "helhello world"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_stpmove(buf, &buf[3]) == &buf[11 - 3]);
+	assert(!strcmp(buf, "lo world"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_stpmove(buf, buf) == &buf[11]);
+	assert(!strcmp(buf, "hello world"));
+
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_stpnmove(&buf[3], buf, SIZE_MAX) == &buf[11 + 3]);
+	assert(!strcmp(buf, "helhello world"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_stpnmove(buf, &buf[3], SIZE_MAX) == &buf[11 - 3]);
+	assert(!strcmp(buf, "lo world"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_stpnmove(buf, buf, SIZE_MAX) == &buf[11]);
+	assert(!strcmp(buf, "hello world"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_stpnmove(&buf[3], buf, 12) == &buf[11 + 3]);
+	assert(!strcmp(buf, "helhello world"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_stpnmove(buf, &buf[3], 9) == &buf[11 - 3]);
+	assert(!strcmp(buf, "lo world"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_stpnmove(buf, buf, 12) == &buf[11]);
+	assert(!strcmp(buf, "hello world"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_stpnmove(&buf[3], buf, 11) == &buf[11 + 3]);
+	assert(!strncmp(buf, "helhello worldx", 15));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_stpnmove(buf, &buf[3], 8) == &buf[8]);
+	assert(!strcmp(buf, "lo worldrld"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_stpnmove(buf, buf, 11) == &buf[11]);
+	assert(!strcmp(buf, "hello world"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_stpnmove(&buf[3], buf, 2) == &buf[3 + 2]);
+	assert(!strcmp(buf, "helhe world"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_stpnmove(buf, &buf[3], 2) == &buf[2]);
+	assert(!strcmp(buf, "lollo world"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	strcpy(buf, "hello world");
+	assert(libsimple_stpnmove(buf, buf, 2) == &buf[2]);
+	assert(!strcmp(buf, "hello world"));
+
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	assert(libsimple_strccpy(buf, "hello", '\0') == &buf[6]);
+	assert(!strcmp(buf, "hello"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	assert(libsimple_strccpy(buf, "hello", 'o') == &buf[5]);
+	assert(!strcmp(buf, "hello"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	assert(libsimple_strccpy(buf, "hello", 'l') == &buf[3]);
+	assert(!strcmp(buf, "hel"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	assert(libsimple_strccpy(buf, "hello", 'x') == NULL);
+	assert(!strcmp(buf, "hello"));
+
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	assert(libsimple_strnccpy(buf, "hello", '\0', 1024) == &buf[6]);
+	assert(!strcmp(buf, "hello"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	assert(libsimple_strnccpy(buf, "hello", 'o', 1024) == &buf[5]);
+	assert(!strcmp(buf, "hello"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	assert(libsimple_strnccpy(buf, "hello", 'l', 1024) == &buf[3]);
+	assert(!strcmp(buf, "hel"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	assert(libsimple_strnccpy(buf, "hello", 'x', 1024) == NULL);
+	assert(!strcmp(buf, "hello"));
+
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	assert(libsimple_strnccpy(buf, "hello", '\0', 6) == &buf[6]);
+	assert(!strcmp(buf, "hello"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	assert(libsimple_strnccpy(buf, "hello", 'o', 6) == &buf[5]);
+	assert(!strcmp(buf, "hello"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	assert(libsimple_strnccpy(buf, "hello", 'l', 6) == &buf[3]);
+	assert(!strcmp(buf, "hel"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	assert(libsimple_strnccpy(buf, "hello", 'x', 6) == NULL);
+	assert(!strcmp(buf, "hello"));
+
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	assert(libsimple_strnccpy(buf, "hello", '\0', 5) == NULL);
+	assert(!strncmp(buf, "hellox", 6));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	assert(libsimple_strnccpy(buf, "hello", 'o', 5) == &buf[5]);
+	assert(!strncmp(buf, "hellox", 6));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	assert(libsimple_strnccpy(buf, "hello", 'l', 5) == &buf[3]);
+	assert(!strcmp(buf, "hel"));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	assert(libsimple_strnccpy(buf, "hello", 'x', 5) == NULL);
+	assert(!strncmp(buf, "hellox", 6));
+
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	assert(libsimple_strnccpy(buf, "hello", 'o', 3) == NULL);
+	assert(!strncmp(buf, "helx", 4));
+
+
+	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	stpcpy(&buf[5], "hello")[0] = '-';
+	assert(libsimple_rawmemcmove(&buf[5], &buf[5], 'o') == &buf[5 + 5]);
+	assert(!strncmp(buf, "-----hello-", 11));
+
+	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	stpcpy(&buf[5], "hello")[0] = '-';;
+	assert(libsimple_rawmemcmove(&buf[5], &buf[5], 'l') == &buf[5 + 3]);
+	assert(!strncmp(buf, "-----hello-", 11));
+
+
+	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	stpcpy(&buf[5], "hello")[0] = '-';
+	assert(libsimple_rawmemcmove(&buf[3], &buf[5], 'o') == &buf[3 + 5]);
+	assert(!strncmp(buf, "---hellolo-", 11));
+
+	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	stpcpy(&buf[5], "hello")[0] = '-';
+	assert(libsimple_rawmemcmove(&buf[3], &buf[5], 'l') == &buf[3 + 3]);
+	assert(!strncmp(buf, "---helello-", 11));
+
+
+	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	stpcpy(&buf[5], "hello")[0] = '-';
+	assert(libsimple_rawmemcmove(&buf[8], &buf[5], 'o') == &buf[8 + 5]);
+	assert(!strncmp(buf, "-----helhello-", 14));
+
+	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	stpcpy(&buf[5], "hello")[0] = '-';
+	assert(libsimple_rawmemcmove(&buf[8], &buf[5], 'l') == &buf[8 + 3]);
+	assert(!strncmp(buf, "-----helhel-", 12));
+
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	assert(libsimple_rawmemccpy(buf, "hello", 'o') == &buf[5]);
+	assert(!strncmp(buf, "hellox", 6));
+
+	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	assert(libsimple_rawmemccpy(buf, "hello", 'l') == &buf[3]);
+	assert(!strncmp(buf, "helx", 4));
+
+
+	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	stpcpy(&buf[5], "hello")[0] = '-';
+	assert(libsimple_mempmove(&buf[5], &buf[5], 5) == &buf[5 + 5]);
+	assert(!strncmp(buf, "-----hello-", 11));
+
+	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	stpcpy(&buf[5], "hello")[0] = '-';
+	assert(libsimple_mempmove(&buf[3], &buf[5], 5) == &buf[3 + 5]);
+	assert(!strncmp(buf, "---hellolo-", 11));
+
+	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	stpcpy(&buf[5], "hello")[0] = '-';
+	assert(libsimple_mempmove(&buf[8], &buf[5], 5) == &buf[8 + 5]);
+	assert(!strncmp(buf, "-----helhello-", 14));
+
 
 	if (!have_custom_malloc()) {
 		stderr_real = 1;

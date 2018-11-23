@@ -4,11 +4,11 @@
 
 
 void *
-libsimple_memcmove(void *d_, const void *s_, int c_, size_t n) /* TODO test, man */
+libsimple_memcmove(void *d_, const void *s_, int c_, size_t n) /* TODO man */
 {
 	char *d = d_, c = (char)c_, *p;
 	const char *s = s_;
-	if (d < s) {
+	if (d <= s) {
 		for (; n; n--, s++)
 			if ((*d++ = *s) == c)
 				return d;
@@ -36,6 +36,55 @@ libsimple_memcmove(void *d_, const void *s_, int c_, size_t n) /* TODO test, man
 int
 main(void)
 {
+	char buf[1024];
+
+	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	stpcpy(&buf[5], "hello")[0] = '-';
+	assert(libsimple_memcmove(&buf[5], &buf[5], 'o', 5) == &buf[5 + 5]);
+	assert(!strncmp(buf, "-----hello-", 11));
+
+	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	stpcpy(&buf[5], "hello")[0] = '-';;
+	assert(libsimple_memcmove(&buf[5], &buf[5], 'l', 5) == &buf[5 + 3]);
+	assert(!strncmp(buf, "-----hello-", 11));
+
+	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	stpcpy(&buf[5], "hello")[0] = '-';
+	assert(libsimple_memcmove(&buf[5], &buf[5], 'x', 5) == NULL);
+	assert(!strncmp(buf, "-----hello-", 11));
+
+
+	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	stpcpy(&buf[5], "hello")[0] = '-';
+	assert(libsimple_memcmove(&buf[3], &buf[5], 'o', 5) == &buf[3 + 5]);
+	assert(!strncmp(buf, "---hellolo-", 11));
+
+	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	stpcpy(&buf[5], "hello")[0] = '-';
+	assert(libsimple_memcmove(&buf[3], &buf[5], 'l', 5) == &buf[3 + 3]);
+	assert(!strncmp(buf, "---helello-", 11));
+
+	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	stpcpy(&buf[5], "hello")[0] = '-';
+	assert(libsimple_memcmove(&buf[3], &buf[5], 'x', 5) == NULL);
+	assert(!strncmp(buf, "---hellolo-", 11));
+
+
+	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	stpcpy(&buf[5], "hello")[0] = '-';
+	assert(libsimple_memcmove(&buf[8], &buf[5], 'o', 5) == &buf[8 + 5]);
+	assert(!strncmp(buf, "-----helhello-", 14));
+
+	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	stpcpy(&buf[5], "hello")[0] = '-';
+	assert(libsimple_memcmove(&buf[8], &buf[5], 'l', 5) == &buf[8 + 3]);
+	assert(!strncmp(buf, "-----helhel-", 12));
+
+	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	stpcpy(&buf[5], "hello")[0] = '-';
+	assert(libsimple_memcmove(&buf[8], &buf[5], 'x', 5) == NULL);
+	assert(!strncmp(buf, "-----helhello-", 14));
+
 	return 0;
 }
 

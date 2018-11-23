@@ -788,7 +788,7 @@ static inline void *libsimple_mempcpy(void *restrict __d, const void *restrict _
  * @param   n  The number of bytes to move
  * @return     `&d[n]`
  */
-static inline void *libsimple_mempmove(void *__d, const void *__s, size_t __n) /* TODO test */
+static inline void *libsimple_mempmove(void *__d, const void *__s, size_t __n)
 { return &((char *)memmove(__d, __s, __n))[__n]; }
 #ifndef mempmove
 # define mempmove libsimple_mempmove
@@ -857,7 +857,7 @@ static inline void *libsimple_memsetelem(void *__buf, const void *__item, size_t
  * @param     `&rawmemchr(d, c)[1]` (after copying)
  */
 static inline void *
-libsimple_rawmemccpy(void *restrict __d_, const void *restrict __s_, int __c_) /* TODO test, man */
+libsimple_rawmemccpy(void *restrict __d_, const void *restrict __s_, int __c_) /* TODO man */
 {
 	char __c = (char)__c_, *restrict __d = __d_;
 	const char *restrict __s = __s_;
@@ -900,12 +900,12 @@ void *libsimple_memcmove(void *__d_, const void *__s_, int __c_, size_t __n);
  * @param     `&rawmemchr(d, c)[1]` (after copying)
  */
 static inline void *
-libsimple_rawmemcmove(void *__d_, const void *__s_, int __c_) /* TODO test, man */
+libsimple_rawmemcmove(void *__d_, const void *__s_, int __c_) /* TODO man */
 {
 	char *__d = __d_, *__p, __c = (char)__c_;
 	const char *__s = __s_;
 	size_t __n;
-	if (__d < __s) {
+	if (__d <= __s) {
 		for (; (*__d++ = *__s) != __c; __s++);
 		return __d;
 	} else {
@@ -934,7 +934,7 @@ libsimple_rawmemcmove(void *__d_, const void *__s_, int __c_) /* TODO test, man 
  * @return       `(void *)&((char *)s)[n]`
  */
 static inline void *
-libsimple_memreplace(void *__s_, int __old_, int __new_, size_t __n) /* TODO test, man */
+libsimple_memreplace(void *__s_, int __old_, int __new_, size_t __n) /* TODO man */
 {
 	char __old = (char)__old_, __new = (char)__new_, *__s = __s_;
 	char *__ret = &__s[__n];

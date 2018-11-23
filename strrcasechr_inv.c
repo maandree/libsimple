@@ -4,7 +4,7 @@
 
 
 char *
-libsimple_strrcasechr_inv(const char *s_, int c) /* TODO test, man */
+libsimple_strrcasechr_inv(const char *s_, int c) /* TODO man */
 {
 	char *s = *(char **)(void *)&s_, lc = (char)tolower(c), uc = (char)toupper(c), *r = NULL;
 	if (lc != uc) {
@@ -26,6 +26,13 @@ libsimple_strrcasechr_inv(const char *s_, int c) /* TODO test, man */
 int
 main(void)
 {
+	assert(!strcmpnul(libsimple_strrcasechr_inv("aabbaabb", 'b'), "abb"));
+	assert(!strcmpnul(libsimple_strrcasechr_inv("aabbaabb", 'B'), "abb"));
+	assert(!strcmpnul(libsimple_strrcasechr_inv("AABBAABB", 'b'), "ABB"));
+	assert(!strcmpnul(libsimple_strrcasechr_inv("AABBAABB", 'B'), "ABB"));
+	assert(!strcmpnul(libsimple_strrcasechr_inv("aabbaabb", 'a'), "b"));
+	assert(!strcmpnul(libsimple_strrcasechr_inv("aabbaabb", '\0'), "b"));
+	assert(!strcmpnul(libsimple_strrcasechr_inv("--------", '-'), NULL));
 	return 0;
 }
 

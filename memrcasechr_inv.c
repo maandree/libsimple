@@ -4,7 +4,7 @@
 
 
 void *
-libsimple_memrcasechr_inv(const void *s_, int c, size_t n_) /* TODO test, man */
+libsimple_memrcasechr_inv(const void *s_, int c, size_t n_) /* TODO man */
 {
 	char *s = *(char **)(void *)&s_;
 	ssize_t n = n_;
@@ -20,6 +20,13 @@ libsimple_memrcasechr_inv(const void *s_, int c, size_t n_) /* TODO test, man */
 int
 main(void)
 {
+	assert(!strcmpnul(libsimple_memrcasechr_inv("aabbaabb", 'b', 8), "abb"));
+	assert(!strcmpnul(libsimple_memrcasechr_inv("aabbaabb", 'B', 8), "abb"));
+	assert(!strcmpnul(libsimple_memrcasechr_inv("AABBAABB", 'b', 8), "ABB"));
+	assert(!strcmpnul(libsimple_memrcasechr_inv("AABBAABB", 'B', 8), "ABB"));
+	assert(!strcmpnul(libsimple_memrcasechr_inv("aabbaabb", 'a', 8), "b"));
+	assert(!strcmpnul(libsimple_memrcasechr_inv("aabbbb\0", '\0', 8), "b"));
+	assert(!strcmpnul(libsimple_memrcasechr_inv("--------", '-', 8), NULL));
 	return 0;
 }
 

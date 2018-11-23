@@ -223,8 +223,13 @@ libsimple_vmemalloc(size_t n, va_list ap) /* TODO test ([v]{mem,array}alloc) */
 	n = n ? n : (state.if_zero > 0);
 
 	if (state.cache_align || !state.cache_split) {
+#ifdef _SC_LEVEL1_DCACHE_LINESIZE
 		tmp = sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
 		cacheline = (size_t)(tmp < 1 ? 64L : tmp);
+#else
+		(void) tmp;
+		cacheline = 64;
+#endif
 	}
 
 	if (state.cache_align) {
