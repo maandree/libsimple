@@ -17,6 +17,7 @@ SUBHDR =\
 	libsimple/memalignz.h\
 	libsimple/memalloc.h\
 	libsimple/memdup.h\
+	libsimple/memelem.h\
 	libsimple/overflow.h\
 	libsimple/posix_memalign.h\
 	libsimple/posix_memalignz.h\
