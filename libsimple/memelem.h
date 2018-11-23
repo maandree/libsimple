@@ -98,7 +98,7 @@ void *libsimple_memrelem(const void *, size_t, const void *, size_t);
  *                     returned pointer and such that `(r - haystack) % nneedle == 0`
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __returns_nonnull__, __warn_unused_result__)))
-void *libsimple_rawmemrelem(const void *, size_t, const void *, size_t); /* TODO man */
+void *libsimple_rawmemrelem(const void *, size_t, const void *, size_t);
 #ifndef rawmemrelem
 # define rawmemrelem libsimple_rawmemrelem
 #endif

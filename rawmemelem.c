@@ -62,6 +62,11 @@ main(void)
 	assert(!strcmpnul(libsimple_rawmemelem("abcd1234abcd1234", "1234", 4), "1234abcd1234"));
 	assert(!strcmpnul(libsimple_rawmemelem("abcdefgh12345678abcdefgh12345678", "12345678", 8), "12345678abcdefgh12345678"));
 	assert(!strcmpnul(libsimple_rawmemelem("abc123abc123", "123", 3), "123abc123"));
+
+	assert(!strcmpnul(libsimple_rawmemelem("-a-aa--a", "a-", 2), "a--a"));
+	assert(!strcmpnul(libsimple_rawmemelem("--a--aa----a", "a--", 3), "a----a"));
+	assert(!strcmpnul(libsimple_rawmemelem("---a---aa------a", "a---", 4), "a------a"));
+	assert(!strcmpnul(libsimple_rawmemelem("-------a-------aa--------------a", "a-------", 8), "a--------------a"));
 	return 0;
 }
 

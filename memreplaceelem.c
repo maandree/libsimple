@@ -4,7 +4,7 @@
 
 
 void *
-libsimple_memreplaceelem(void *restrict s_, const void *old_, const void *new_, size_t n, size_t width) /* TODO test, man */
+libsimple_memreplaceelem(void *restrict s_, const void *old_, const void *new_, size_t n, size_t width) /* TODO man */
 {
 	switch (width) {
 	case 0:
@@ -77,6 +77,95 @@ libsimple_memreplaceelem(void *restrict s_, const void *old_, const void *new_, 
 int
 main(void)
 {
+	char buf[1024];
+
+	stpcpy(mempcpy(buf, "hello world", 12), "goodbye world");
+	assert(libsimple_memreplaceelem(buf, "o", "x", 46, 0) == &buf[0]);
+	assert(!memcmp(buf, "hello world\0goodbye world", 26));
+
+	stpcpy(mempcpy(buf, "hello world", 12), "goodbye world");
+	assert(libsimple_memreplaceelem(buf, "o", "x", 12, 0) == &buf[0]);
+	assert(!memcmp(buf, "hello world\0goodbye world", 26));
+
+
+	stpcpy(mempcpy(buf, "hello world", 12), "goodbye world");
+	assert(libsimple_memreplaceelem(buf, "o", "x", 46, 1) == &buf[46]);
+	assert(!memcmp(buf, "hellx wxrld\0gxxdbye wxrld", 26));
+
+	stpcpy(mempcpy(buf, "hello world", 12), "goodbye world");
+	assert(libsimple_memreplaceelem(buf, "o", "x", 12, 1) == &buf[12]);
+	assert(!memcmp(buf, "hellx wxrld\0goodbye world", 26));
+
+
+	stpcpy(mempcpy(buf, "-h-e-l-l-o- -w-o-r-l-d\0", 12 * 2), "-g-o-o-d-b-y-e- -w-o-r-l-d");
+	assert(libsimple_memreplaceelem(buf, "-o", "=x", 46, 2) == &buf[46 * 2]);
+	assert(!memcmp(buf, "-h-e-l-l=x- -w=x-r-l-d\0\0-g=x=x-d-b-y-e- -w=x-r-l-d", 25 * 2 + 1));
+
+	stpcpy(mempcpy(buf, "-h-e-l-l-o- -w-o-r-l-d\0", 12 * 2), "-g-o-o-d-b-y-e- -w-o-r-l-d");
+	assert(libsimple_memreplaceelem(buf, "-o", "=x", 12, 2) == &buf[12 * 2]);
+	assert(!memcmp(buf, "-h-e-l-l=x- -w=x-r-l-d\0\0-g-o-o-d-b-y-e- -w-o-r-l-d", 25 * 2 + 1));
+
+	stpcpy(mempcpy(buf, "-h-e-l-l-o- -w-o-r-l-d\0", 12 * 2), "-g-o-o-d-b-y-e- -w-o-r-l-d");
+	assert(libsimple_memreplaceelem(buf, "o-", "x=", 12, 2) == &buf[12 * 2]);
+	assert(!memcmp(buf, "-h-e-l-l-o- -w-o-r-l-d\0\0-g-o-o-d-b-y-e- -w-o-r-l-d", 25 * 2 + 1));
+
+
+	stpcpy(mempcpy(buf, "--h--e--l--l--o-- --w--o--r--l--d\0\0", 12 * 3), "--g--o--o--d--b--y--e-- --w--o--r--l--d");
+	assert(libsimple_memreplaceelem(buf, "--o", "==x", 46, 3) == &buf[46 * 3]);
+	assert(!memcmp(buf, "--h--e--l--l==x-- --w==x--r--l--d\0\0\0--g==x==x--d--b--y--e-- --w==x--r--l--d", 25 * 3 + 1));
+
+	stpcpy(mempcpy(buf, "--h--e--l--l--o-- --w--o--r--l--d\0\0", 12 * 3), "--g--o--o--d--b--y--e-- --w--o--r--l--d");
+	assert(libsimple_memreplaceelem(buf, "--o", "==x", 12, 3) == &buf[12 * 3]);
+	assert(!memcmp(buf, "--h--e--l--l==x-- --w==x--r--l--d\0\0\0--g--o--o--d--b--y--e-- --w--o--r--l--d", 25 * 3 + 1));
+
+	stpcpy(mempcpy(buf, "--h--e--l--l--o-- --w--o--r--l--d\0\0", 12 * 3), "--g--o--o--d--b--y--e-- --w--o--r--l--d");
+	assert(libsimple_memreplaceelem(buf, "o--", "x==", 12, 3) == &buf[12 * 3]);
+	assert(!memcmp(buf, "--h--e--l--l--o-- --w--o--r--l--d\0\0\0--g--o--o--d--b--y--e-- --w--o--r--l--d", 25 * 3 + 1));
+
+
+	stpcpy(mempcpy(buf, "---h---e---l---l---o--- ---w---o---r---l---d\0\0\0", 12 * 4),
+	       "---g---o---o---d---b---y---e--- ---w---o---r---l---d");
+	assert(libsimple_memreplaceelem(buf, "---o", "===x", 46, 4) == &buf[46 * 4]);
+	assert(!memcmp(buf, "---h---e---l---l===x--- ---w===x---r---l---d\0\0\0\0"
+	                    "---g===x===x---d---b---y---e--- ---w===x---r---l---d", 25 * 4 + 1));
+
+	stpcpy(mempcpy(buf, "---h---e---l---l---o--- ---w---o---r---l---d\0\0\0", 12 * 4),
+	       "---g---o---o---d---b---y---e--- ---w---o---r---l---d");
+	assert(libsimple_memreplaceelem(buf, "---o", "===x", 12, 4) == &buf[12 * 4]);
+	assert(!memcmp(buf, "---h---e---l---l===x--- ---w===x---r---l---d\0\0\0\0"
+	                    "---g---o---o---d---b---y---e--- ---w---o---r---l---d", 25 * 4 + 1));
+
+	stpcpy(mempcpy(buf, "---h---e---l---l---o--- ---w---o---r---l---d\0\0\0", 12 * 4),
+	       "---g---o---o---d---b---y---e--- ---w---o---r---l---d");
+	assert(libsimple_memreplaceelem(buf, "o---", "x===", 12, 4) == &buf[12 * 4]);
+	assert(!memcmp(buf, "---h---e---l---l---o--- ---w---o---r---l---d\0\0\0\0"
+	                    "---g---o---o---d---b---y---e--- ---w---o---r---l---d", 25 * 4 + 1));
+
+
+	stpcpy(mempcpy(buf, "-------h-------e-------l-------l-------o------- -------w-------o-------r-------l-------d\0\0\0\0\0\0\0",
+	               12 * 8),
+	       "-------g-------o-------o-------d-------b-------y-------e------- -------w-------o-------r-------l-------d");
+	assert(libsimple_memreplaceelem(buf, "-------o", "=======x", 46, 8) == &buf[46 * 8]);
+	assert(!memcmp(buf, "-------h-------e-------l-------l=======x------- -------w=======x-------r-------l-------d\0\0\0\0\0\0\0\0"
+	                    "-------g=======x=======x-------d-------b-------y-------e------- "
+	                    "-------w=======x-------r-------l-------d", 25 * 8 + 1));
+
+	stpcpy(mempcpy(buf, "-------h-------e-------l-------l-------o------- -------w-------o-------r-------l-------d\0\0\0\0\0\0\0",
+	               12 * 8),
+	       "-------g-------o-------o-------d-------b-------y-------e------- -------w-------o-------r-------l-------d");
+	assert(libsimple_memreplaceelem(buf, "-------o", "=======x", 12, 8) == &buf[12 * 8]);
+	assert(!memcmp(buf, "-------h-------e-------l-------l=======x------- -------w=======x-------r-------l-------d\0\0\0\0\0\0\0\0"
+	                    "-------g-------o-------o-------d-------b-------y-------e------- "
+	                    "-------w-------o-------r-------l-------d", 25 * 8 + 1));
+
+	stpcpy(mempcpy(buf, "-------h-------e-------l-------l-------o------- -------w-------o-------r-------l-------d\0\0\0\0\0\0\0",
+	               12 * 8),
+	       "-------g-------o-------o-------d-------b-------y-------e------- -------w-------o-------r-------l-------d");
+	assert(libsimple_memreplaceelem(buf, "o-------", "x=======", 12, 8) == &buf[12 * 8]);
+	assert(!memcmp(buf, "-------h-------e-------l-------l-------o------- -------w-------o-------r-------l-------d\0\0\0\0\0\0\0\0"
+	                    "-------g-------o-------o-------d-------b-------y-------e------- "
+	                    "-------w-------o-------r-------l-------d", 25 * 8 + 1));
+
 	return 0;
 }
 

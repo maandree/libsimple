@@ -4,7 +4,7 @@
 
 
 void *
-libsimple_memelem_inv(const void *hay_, size_t hayn, const void *sub_, size_t subn) /* TODO test, man */
+libsimple_memelem_inv(const void *hay_, size_t hayn, const void *sub_, size_t subn) /* TODO man */
 {
 	switch (subn) {
 	case 0:
@@ -62,6 +62,50 @@ libsimple_memelem_inv(const void *hay_, size_t hayn, const void *sub_, size_t su
 int
 main(void)
 {
+	assert(!strcmpnul(libsimple_memelem_inv("xxoxx", 5, "x", 0), NULL));
+	assert(!strcmpnul(libsimple_memelem_inv("xxXxx", 5, "x", 0), NULL));
+	assert(!strcmpnul(libsimple_memelem_inv("XXoxx", 5, "x", 0), NULL));
+	assert(!strcmpnul(libsimple_memelem_inv("zzzzz", 5, "z", 0), NULL));
+	assert(!strcmpnul(libsimple_memelem_inv("zzzzx", 4, "z", 0), NULL));
+
+	assert(!strcmpnul(libsimple_memelem_inv("xxoxx", 5, "x", 1), "oxx"));
+	assert(!strcmpnul(libsimple_memelem_inv("xxXxx", 5, "x", 1), "Xxx"));
+	assert(!strcmpnul(libsimple_memelem_inv("XXoxx", 5, "x", 1), "XXoxx"));
+	assert(!strcmpnul(libsimple_memelem_inv("zzzzz", 5, "z", 1), NULL));
+	assert(!strcmpnul(libsimple_memelem_inv("zzzzx", 4, "z", 1), NULL));
+
+	assert(!strcmpnul(libsimple_memelem_inv("-x-x-o-x-x", 5, "-x", 2), "-o-x-x"));
+	assert(!strcmpnul(libsimple_memelem_inv("-x-x-X-x-x", 5, "-x", 2), "-X-x-x"));
+	assert(!strcmpnul(libsimple_memelem_inv("-X-X-o-x-x", 5, "-x", 2), "-X-X-o-x-x"));
+	assert(!strcmpnul(libsimple_memelem_inv("-z-z-z-z-z", 5, "-z", 2), NULL));
+	assert(!strcmpnul(libsimple_memelem_inv("-z-z-z-z-x", 4, "-z", 2), NULL));
+	assert(!strcmpnul(libsimple_memelem_inv("---z-z-z-x", 5, "--", 2), "-z-z-z-x"));
+
+	assert(!strcmpnul(libsimple_memelem_inv("--x--x--o--x--x", 5, "--x", 3), "--o--x--x"));
+	assert(!strcmpnul(libsimple_memelem_inv("--x--x--X--x--x", 5, "--x", 3), "--X--x--x"));
+	assert(!strcmpnul(libsimple_memelem_inv("--X--X--o--x--x", 5, "--x", 3), "--X--X--o--x--x"));
+	assert(!strcmpnul(libsimple_memelem_inv("--z--z--z--z--z", 5, "--z", 3), NULL));
+	assert(!strcmpnul(libsimple_memelem_inv("--z--z--z--z--x", 4, "--z", 3), NULL));
+	assert(!strcmpnul(libsimple_memelem_inv("-----z--z--z--x", 5, "---", 3), "--z--z--z--x"));
+
+	assert(!strcmpnul(libsimple_memelem_inv("---x---x---o---x---x", 5, "---x", 4), "---o---x---x"));
+	assert(!strcmpnul(libsimple_memelem_inv("---x---x---X---x---x", 5, "---x", 4), "---X---x---x"));
+	assert(!strcmpnul(libsimple_memelem_inv("---X---X---o---x---x", 5, "---x", 4), "---X---X---o---x---x"));
+	assert(!strcmpnul(libsimple_memelem_inv("---z---z---z---z---z", 5, "---z", 4), NULL));
+	assert(!strcmpnul(libsimple_memelem_inv("---z---z---z---z---x", 4, "---z", 4), NULL));
+	assert(!strcmpnul(libsimple_memelem_inv("-------z---z---z---x", 5, "----", 4), "---z---z---z---x"));
+
+	assert(!strcmpnul(libsimple_memelem_inv("-------x-------x-------o-------x-------x", 5, "-------x", 8),
+	                  "-------o-------x-------x"));
+	assert(!strcmpnul(libsimple_memelem_inv("-------x-------x-------X-------x-------x", 5, "-------x", 8),
+	                  "-------X-------x-------x"));
+	assert(!strcmpnul(libsimple_memelem_inv("-------X-------X-------o-------x-------x", 5, "-------x", 8),
+	                  "-------X-------X-------o-------x-------x"));
+	assert(!strcmpnul(libsimple_memelem_inv("-------z-------z-------z-------z-------z", 5, "-------z", 8), NULL));
+	assert(!strcmpnul(libsimple_memelem_inv("-------z-------z-------z-------z-------x", 4, "-------z", 8), NULL));
+	assert(!strcmpnul(libsimple_memelem_inv("---------------z-------z-------z-------x", 5, "--------", 8),
+	                  "-------z-------z-------z-------x"));
+
 	return 0;
 }
 

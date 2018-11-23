@@ -85,6 +85,11 @@ main(void)
 	assert(!strcmpnul(libsimple_memelemscan("bc123abc123az", 4, "123", 3), "z"));
 	assert(!strcmpnul(libsimple_memelemscan("abc123abc123z", 0, "123", 3), "abc123abc123z"));
 
+	assert(!strcmpnul(libsimple_memelemscan("-a-aa--a", 4, "a-", 2), "a--a"));
+	assert(!strcmpnul(libsimple_memelemscan("--a--aa----a", 4, "a--", 3), "a----a"));
+	assert(!strcmpnul(libsimple_memelemscan("---a---aa------a", 4, "a---", 4), "a------a"));
+	assert(!strcmpnul(libsimple_memelemscan("-------a-------aa--------------a", 4, "a-------", 8), "a--------------a"));
+
 	return 0;
 }
 

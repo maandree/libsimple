@@ -4,7 +4,7 @@
 
 
 void *
-libsimple_rawmemrelem(const void *hay_, size_t hayn, const void *sub_, size_t subn)
+libsimple_rawmemrelem(const void *hay_, size_t hayn, const void *sub_, size_t subn) /* TODO man */
 {
 	switch (subn) {
 	case 0:
@@ -68,6 +68,11 @@ main(void)
 	assert(!strcmpnul(libsimple_rawmemrelem("abcd1234abcd1234", 4, "1234", 4), "1234"));
 	assert(!strcmpnul(libsimple_rawmemrelem("abcdefgh12345678abcdefgh12345678", 4, "12345678", 8), "12345678"));
 	assert(!strcmpnul(libsimple_rawmemrelem("abc123abc123", 4, "123", 3), "123"));
+
+	assert(!strcmpnul(libsimple_rawmemrelem("-aa--a-a", 4, "a-", 2), "a--a-a"));
+	assert(!strcmpnul(libsimple_rawmemrelem("--aa----a--a", 4, "a--", 3), "a----a--a"));
+	assert(!strcmpnul(libsimple_rawmemrelem("---aa------a---a", 4, "a---", 4), "a------a---a"));
+	assert(!strcmpnul(libsimple_rawmemrelem("-------aa--------------a-------a", 4, "a-------", 8), "a--------------a-------a"));
 	return 0;
 }
 

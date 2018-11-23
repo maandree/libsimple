@@ -4,7 +4,7 @@
 
 
 void *
-libsimple_rawmemelem_inv(const void *hay_, const void *sub_, size_t subn) /* TODO test, man */
+libsimple_rawmemelem_inv(const void *hay_, const void *sub_, size_t subn) /* TODO man */
 {
 	switch (subn) {
 	case 0:
@@ -52,6 +52,34 @@ libsimple_rawmemelem_inv(const void *hay_, const void *sub_, size_t subn) /* TOD
 int
 main(void)
 {
+	assert(!strcmpnul(libsimple_rawmemelem_inv("xxoxx", "x", 1), "oxx"));
+	assert(!strcmpnul(libsimple_rawmemelem_inv("xxXxx", "x", 1), "Xxx"));
+	assert(!strcmpnul(libsimple_rawmemelem_inv("XXoxx", "x", 1), "XXoxx"));
+
+	assert(!strcmpnul(libsimple_rawmemelem_inv("-x-x-o-x-x", "-x", 2), "-o-x-x"));
+	assert(!strcmpnul(libsimple_rawmemelem_inv("-x-x-X-x-x", "-x", 2), "-X-x-x"));
+	assert(!strcmpnul(libsimple_rawmemelem_inv("-X-X-o-x-x", "-x", 2), "-X-X-o-x-x"));
+	assert(!strcmpnul(libsimple_rawmemelem_inv("---X-o-x-x", "--", 2), "-X-o-x-x"));
+
+	assert(!strcmpnul(libsimple_rawmemelem_inv("--x--x--o--x--x", "--x", 3), "--o--x--x"));
+	assert(!strcmpnul(libsimple_rawmemelem_inv("--x--x--X--x--x", "--x", 3), "--X--x--x"));
+	assert(!strcmpnul(libsimple_rawmemelem_inv("--X--X--o--x--x", "--x", 3), "--X--X--o--x--x"));
+	assert(!strcmpnul(libsimple_rawmemelem_inv("-----X--o--x--x", "---", 3), "--X--o--x--x"));
+
+	assert(!strcmpnul(libsimple_rawmemelem_inv("---x---x---o---x---x", "---x", 4), "---o---x---x"));
+	assert(!strcmpnul(libsimple_rawmemelem_inv("---x---x---X---x---x", "---x", 4), "---X---x---x"));
+	assert(!strcmpnul(libsimple_rawmemelem_inv("---X---X---o---x---x", "---x", 4), "---X---X---o---x---x"));
+	assert(!strcmpnul(libsimple_rawmemelem_inv("-------X---o---x---x", "----", 4), "---X---o---x---x"));
+
+	assert(!strcmpnul(libsimple_rawmemelem_inv("-------x-------x-------o-------x-------x", "-------x", 8),
+	                  "-------o-------x-------x"));
+	assert(!strcmpnul(libsimple_rawmemelem_inv("-------x-------x-------X-------x-------x", "-------x", 8),
+	                  "-------X-------x-------x"));
+	assert(!strcmpnul(libsimple_rawmemelem_inv("-------X-------X-------o-------x-------x", "-------x", 8),
+	                  "-------X-------X-------o-------x-------x"));
+	assert(!strcmpnul(libsimple_rawmemelem_inv("---------------X-------o-------x-------x", "--------", 8),
+	                  "-------X-------o-------x-------x"));
+
 	return 0;
 }
 
