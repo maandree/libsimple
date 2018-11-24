@@ -607,10 +607,10 @@ static inline void *libsimple_mempset(void *__s, int __c, size_t __n)
  * occurence of the specified byte value in the specified byte
  * array, its behaviour is undefined
  * 
- * @param  d  The location the byt array shall be copied to
- * @param  s  The byte array to copy
- * @param  c  The byte that stops the copying
- * @param     `&rawmemchr(d, c)[1]` (after copying)
+ * @param   d  The location the byte array shall be copied to
+ * @param   s  The byte array to copy
+ * @param   c  The byte that stops the copying
+ * @return     `&rawmemchr(d, c)[1]` (after copying)
  */
 static inline void *
 libsimple_rawmemccpy(void *restrict __d_, const void *restrict __s_, int __c_) /* TODO man */
@@ -628,13 +628,13 @@ libsimple_rawmemccpy(void *restrict __d_, const void *restrict __s_, int __c_) /
 /**
  * Move a string, but stop after a specific character
  * 
- * @param  d  The location the byt array shall be copied to
- * @param  s  The byte array to copy
- * @param  c  The byte that stops the copying
- * @param  n  The length of `s`
- * @param     `&rawmemchr(d, c)[1]` (after copying) if `c` can
- *            be found within the first `n` bytes of `s` (before
- *            copying), `NULL` otherwise
+ * @param   d  The location the byte array shall be copied to
+ * @param   s  The byte array to copy
+ * @param   c  The byte that stops the copying
+ * @param   n  The length of `s`
+ * @return     `&rawmemchr(d, c)[1]` (after copying) if `c` can
+ *             be found within the first `n` bytes of `s` (before
+ *             copying), `NULL` otherwise
  */
 void *libsimple_memcmove(void *__d_, const void *__s_, int __c_, size_t __n);
 #ifndef memcmove
@@ -650,10 +650,10 @@ void *libsimple_memcmove(void *__d_, const void *__s_, int __c_, size_t __n);
  * occurence of the specified byte value in the specified byte
  * array, its behaviour is undefined
  * 
- * @param  d  The location the byt array shall be copied to
- * @param  s  The byte array to copy
- * @param  c  The byte that stops the copying
- * @param     `&rawmemchr(d, c)[1]` (after copying)
+ * @param   d  The location the byte array shall be copied to
+ * @param   s  The byte array to copy
+ * @param   c  The byte that stops the copying
+ * @return     `&rawmemchr(d, c)[1]` (after copying)
  */
 static inline void *
 libsimple_rawmemcmove(void *__d_, const void *__s_, int __c_) /* TODO man */

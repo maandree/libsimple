@@ -546,11 +546,11 @@ libsimple_stpset(char *__s, int __c_) /* TODO man */
  * Copy a string, but stop after a specific character,
  * the new string will be NUL-terminated
  * 
- * @param  d  The location the string shall be copied to
- * @param  s  The string to copy
- * @param  c  The character that stops the copying
- * @param     `&strchr(d, c)[1]` (after copying) if `c` can be
- *            found in `s`, `NULL` otherwise
+ * @param   d  The location the string shall be copied to
+ * @param   s  The string to copy
+ * @param   c  The character that stops the copying
+ * @return     `&strchr(d, c)[1]` (after copying) if `c` can be
+ *             found in `s`, `NULL` otherwise
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline char *
@@ -571,11 +571,11 @@ libsimple_strccpy(char *restrict __d, const char *restrict __s, int __c_) /* TOD
 /**
  * Move a string, but stop after a specific character
  * 
- * @param  d  The location the string shall be moved to
- * @param  s  The string to copy
- * @param  c  The character that stops the copying
- * @param     `&strchr(d, c)[1]` (after copying) if `c` can be
- *            found in `s` (before copying), `NULL` otherwise
+ * @param   d  The location the string shall be moved to
+ * @param   s  The string to copy
+ * @param   c  The character that stops the copying
+ * @return     `&strchr(d, c)[1]` (after copying) if `c` can be
+ *             found in `s` (before copying), `NULL` otherwise
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 char *libsimple_strcmove(char *, const char *, int);

@@ -36,7 +36,7 @@ void *libsimple_memelem(const void *, size_t, const void *, size_t);
  *                     returned pointer and such that `(r - haystack) % nneedle == 0`
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __returns_nonnull__, __warn_unused_result__)))
-void *libsimple_rawmemelem(const void *, const void *, size_t); /* TODO man */
+void *libsimple_rawmemelem(const void *, const void *, size_t);
 #ifndef rawmemelem
 # define rawmemelem libsimple_rawmemelem
 #endif
@@ -242,6 +242,82 @@ static inline void *libsimple_memsetelem(void *__buf, const void *__item, size_t
 { return __item = libsimple_mempsetelem(__buf, __item, __size, __nitems), __buf; }
 #ifndef memsetelem
 # define memsetelem libsimple_memsetelem
+#endif
+
+
+/**
+ * Copy elements in an array to another array, but stop after a specific element
+ * 
+ * @param   d     The location the array shall be copied to
+ * @param   s     The array to copy
+ * @param   elem  The element that stops the copying
+ * @param   size  The size of each element
+ * @param   n     The maximum number of elements to copy
+ * @return        `&rawmemelem(d, c, size)[size]` (after copying) if `elem`
+ *                can be found within the first `n` elements of `s` (before
+ *                copying), `NULL` otherwise
+ */
+void *libsimple_memelemcpy(void *restrict __d, const void *restrict __s, const void *restrict __elem, size_t __size, size_t __n);
+#ifndef memelemcpy
+# define memelemcpy libsimple_memelemcpy
+#endif
+
+
+/**
+ * Move elements in an array, but stop after a specific element
+ * 
+ * @param   d     The location the array shall be copied to
+ * @param   s     The array to copy
+ * @param   elem  The element that stops the copying
+ * @param   size  The size of each element
+ * @param   n     The maximum number of elements to copy
+ * @return        `&rawmemelem(d, c, size)[size]` (after copying) if `elem`
+ *                can be found within the first `n` elements of `s` (before
+ *                copying), `NULL` otherwise
+ */
+void *libsimple_memelemmove(void *__d, const void *__s, const void *restrict __elem, size_t __size, size_t __n);
+#ifndef memelemmove
+# define memelemmove libsimple_memelemmove
+#endif
+
+
+/**
+ * Copy elements in an array to another array, but stop after a specific element
+ * 
+ * This function is optimised for instances where it is already
+ * known that there is at least one occurence; if there is no
+ * occurence of the specified value in the specified array, its
+ * behaviour is undefined
+ * 
+ * @param   d     The location the array shall be copied to
+ * @param   s     The array to copy
+ * @param   elem  The element that stops the copying
+ * @param   size  The size of each element
+ * @return        `&rawmemelem(d, c, size)[size]` (after copying)
+ */
+void *libsimple_rawmemelemcpy(void *restrict __d, const void *restrict __s, const void *restrict __elem, size_t __size);
+#ifndef rawmemelemcpy
+# define rawmemelemcpy libsimple_rawmemelemcpy
+#endif
+
+
+/**
+ * Move elements in an array, but stop after a specific element
+ * 
+ * This function is optimised for instances where it is already
+ * known that there is at least one occurence; if there is no
+ * occurence of the specified value in the specified array, its
+ * behaviour is undefined
+ * 
+ * @param   d     The location the array shall be copied to
+ * @param   s     The array to copy
+ * @param   elem  The element that stops the copying
+ * @param   size  The size of each element
+ * @return        `&rawmemelem(d, c, size)[size]` (after copying)
+ */
+void *libsimple_rawmemelemmove(void *__d, const void *__s, const void *restrict __elem, size_t __size);
+#ifndef rawmemelemmove
+# define rawmemelemmove libsimple_rawmemelemmove
 #endif
 
 

@@ -4,7 +4,7 @@
 
 
 void *
-libsimple_rawmemelem(const void *hay_, const void *sub_, size_t subn)
+libsimple_rawmemelem(const void *hay_, const void *sub_, size_t subn) /* TODO man */
 {
 	switch (subn) {
 	case 0:

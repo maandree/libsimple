@@ -183,7 +183,7 @@ void *
 libsimple_vmemalloc(size_t n, va_list ap) /* TODO test ([v]{mem,array}alloc) */
 {
 	struct memalloc_state state;
-	size_t misalignment, size, cacheline, min, max;
+	size_t misalignment, size, cacheline = 64, min, max;
 	void *ptr = NULL;
 	int saved_errno;
 	long int tmp;
@@ -225,10 +225,10 @@ libsimple_vmemalloc(size_t n, va_list ap) /* TODO test ([v]{mem,array}alloc) */
 	if (state.cache_align || !state.cache_split) {
 #ifdef _SC_LEVEL1_DCACHE_LINESIZE
 		tmp = sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
-		cacheline = (size_t)(tmp < 1 ? 64L : tmp);
+		if (tmp >= 1)
+			cacheline = (size_t)tmp;
 #else
 		(void) tmp;
-		cacheline = 64;
 #endif
 	}
 

@@ -74,6 +74,8 @@ OBJ =\
 	memdup.o\
 	memelem.o\
 	memelem_inv.o\
+	memelemcpy.o\
+	memelemmove.o\
 	memelemscan.o\
 	memelemscan_inv.o\
 	memends.o\
@@ -106,6 +108,8 @@ OBJ =\
 	rawmemchr_inv.o\
 	rawmemelem.o\
 	rawmemelem_inv.o\
+	rawmemelemcpy.o\
+	rawmemelemmove.o\
 	rawmemrcasechr.o\
 	rawmemrcasechr_inv.o\
 	rawmemrchr.o\

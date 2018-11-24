@@ -621,12 +621,12 @@ libsimple_stpnset(char *__s, int __c_, size_t __n) /* TODO man */
  * the new string will be NUL-terminated if it is
  * shorter than `n` bytes
  * 
- * @param  d  The location the string shall be copied to
- * @param  s  The string to copy
- * @param  c  The character that stops the copying
- * @param  n  The maximum number of bytes to copy
- * @param     `&strchr(d, c)[1]` (after copying) if `c` can be
- *            found in `s`, `NULL` otherwise
+ * @param   d  The location the string shall be copied to
+ * @param   s  The string to copy
+ * @param   c  The character that stops the copying
+ * @param   n  The maximum number of bytes to copy
+ * @return     `&strchr(d, c)[1]` (after copying) if `c` can be
+ *             found in `s`, `NULL` otherwise
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline char *
@@ -653,13 +653,13 @@ libsimple_strnccpy(char *restrict __d, const char *restrict __s, int __c_, size_
 /**
  * Move a string, but stop after a specific character
  * 
- * @param  d  The location the string shall be moved to
- * @param  s  The string to copy
- * @param  c  The character that stops the copying
- * @param  n  The maximum number of bytes to move
- * @param     `&strchr(d, c)[1]` (after copying) if `c` can be
- *            found within the first `n` bytes of `s` (before
- *            copying), `NULL` otherwise
+ * @param   d  The location the string shall be moved to
+ * @param   s  The string to copy
+ * @param   c  The character that stops the copying
+ * @param   n  The maximum number of bytes to move
+ * @return     `&strchr(d, c)[1]` (after copying) if `c` can be
+ *             found within the first `n` bytes of `s` (before
+ *             copying), `NULL` otherwise
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 char *libsimple_strncmove(char *, const char *, int, size_t);
