@@ -4,7 +4,7 @@
 
 
 void *
-libsimple_rawmemcasechr_inv(const void *s_, int c) /* TODO man */
+libsimple_rawmemcasechr_inv(const void *s_, int c)
 {
 	char *s = *(char **)(void *)&s_;
 	c = tolower(c);

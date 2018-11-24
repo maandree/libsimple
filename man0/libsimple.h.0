@@ -1,4 +1,4 @@
-.TH LIBSIMPLE.H 0 2018-11-16 libsimple
+.TH LIBSIMPLE.H 0 2018-11-24 libsimple
 .SH NAME
 libsimple.h \- main header for libsimple
 .SH SYNOPSIS
@@ -520,6 +520,28 @@ Case-insensitive version of
 .BR memcmp (3).
 
 .TP
+.BR libsimple_memchr_inv (3),
+.RS 0
+.BR libsimple_memcasechr_inv (3)
+.RE
+.RS
+Find first byte that is different from a specified byte.
+.RE
+
+.TP
+.BR libsimple_memcmove (3),
+.RS 0
+.BR libsimple_rawmemcmove (3)
+.RE
+.RS
+Versions of
+.BR memccpy (3)
+and
+.BR libsimple_rawmemccpy (3)
+that allow overlap of the arrays.
+.RE
+
+.TP
 .BR libsimple_memdup (3),
 .RS 0
 .BR libsimple_ememdup (3),
@@ -542,9 +564,43 @@ that operate on multibyte units
 rather than simple bytes.
 
 .TP
+.BR libsimple_memelem_inv (3)
+Version of
+.BR libsimple_memchr_inv (3)
+that operate on multibyte units
+rather than simple bytes.
+
+.TP
+.BR libsimple_memelemcpy (3),
+.RS 0
+.BR libsimple_rawmemelemcpy (3),
+.br
+.BR libsimple_memelemmove (3),
+.br
+.BR libsimple_rawmemelemmove (3)
+.RE
+.RS
+Versions of
+.BR memccpy (3),
+.BR libsimple_rawmemccpy (3),
+.BR libsimple_memcmove (3),
+and
+.BR libsimple_rawmemcmove (3)
+that that operate on multibyte units
+rather than simple bytes.
+.RE
+
+.TP
 .BR libsimple_memelemscan (3)
 Version of
 .BR memscan (3)
+that operate on multibyte units
+rather than simple bytes.
+
+.TP
+.BR libsimple_memelemscan_inv (3)
+Version of
+.BR libsimple_memscan_inv (3)
 that operate on multibyte units
 rather than simple bytes.
 
@@ -620,9 +676,36 @@ in an array of bytes.
 .RE
 
 .TP
+.BR libsimple_memrchr_inv (3),
+.RS 0
+.BR libsimple_memrcasechr_inv (3)
+.RE
+.RS
+Find the last byte that is different from a
+specified byte.
+.RE
+
+.TP
+.BR libsimple_memrelem_inv (3)
+Version of
+.BR libsimple_memrchr_inv (3)
+that operate on multibyte units
+rather than simple bytes.
+
+.TP
 .BR libsimple_memrelem (3)
 Find the last occurrence of a specific element
 in an array.
+
+.TP
+.BR libsimple_memreplace (3)
+Replace all occurrences of a byte with
+another byte.
+
+.TP
+.BR libsimple_memreplaceelem (3)
+Replace all occurrences of an element with
+another element.
 
 .TP
 .BR libsimple_memreqlen (3),
@@ -656,6 +739,15 @@ and
 .BR libsimple_memcasechr (3)
 that return the end of the array
 if the byte is not found.
+.RE
+
+.TP
+.BR libsimple_memscan_inv (3),
+.RS 0
+.BR libsimple_memcasescan_inv (3)
+.RE
+.RS
+Skip leading bytes.
 .RE
 
 .TP
@@ -831,15 +923,47 @@ allocation size and conditionally initialises the memory.
 .RE
 
 .TP
-.BR libsimple_rawmemchr (3)
+.BR libsimple_rawmemccpy (3)
+Version of
+.BR memccpy (3)
+with the optimising assumption that the
+byte actually exists in the array.
+
+.TP
+.BR libsimple_rawmemchr (3),
 .RS 0
 .BR libsimple_rawmemcasechr (3)
 .RE
 .RS
 Find the first occurrence of a specific byte
 in an array of bytes, with the optimising
-assumption that is actually exists in the array.
+assumption that it actually exists in the array.
 .RE
+
+.TP
+.BR libsimple_rawmemchr_inv (3),
+.RS 0
+.BR libsimple_rawmemcasechr_inv (3)
+.RE
+.RS
+Find first byte that is different from a specified
+byte, with the optimising assumption that such a
+byte actually exists in the array.
+.RE
+
+.TP
+.BR libsimple_rawmemelem (3)
+Version of
+.BR libsimple_memelem (3),
+with the optimising assumption that the
+element actually exists in the array.
+
+.TP
+.BR libsimple_rawmemelem_inv (3)
+Version of
+.BR libsimple_memelem_inv (3)
+with the optimising assumption that such a
+element actually exists in the array.
 
 .TP
 .BR libsimple_rawmemrchr (3)
@@ -849,7 +973,32 @@ assumption that is actually exists in the array.
 .RS
 Find the last occurrence of a specific byte
 in an array of bytes, with the optimising
-assumption that is actually exists in the array.
+assumption that it actually exists in the array.
+.RE
+
+.TP
+.BR libsimple_rawmemrchr_inv (3),
+.RS 0
+.BR libsimple_rawmemrcasechr_inv (3)
+.RE
+.RS
+Find last byte that is different from a specified
+byte, with the optimising assumption that such a
+byte actually exists in the array.
+
+.TP
+.BR libsimple_rawmemrelem (3)
+Version of
+.BR libsimple_memrelem (3),
+with the optimising assumption that the
+element actually exists in the array.
+
+.TP
+.BR libsimple_rawmemrelem_inv (3)
+Version of
+.BR libsimple_memrelem_inv (3),
+with the optimising assumption that such a
+element actually exists in the array.
 .RE
 
 .TP
@@ -894,6 +1043,30 @@ Case-insensitive version of
 .BR strstr (3).
 
 .TP
+.BR libsimple_strccpy (3),
+.RS 0
+.BR libsimple_strnccpy (3)
+.RE
+.RS
+Copy a string but stop after the first
+occurrence of a specified character.
+.RE
+
+.TP
+.BR libsimple_strchr_inv (3),
+.RS 0
+.BR libsimple_strcasechr_inv (3),
+.br
+.BR libsimple_strnchr_inv (3),
+.br
+.BR libsimple_strncasechr_inv (3)
+.RE
+.RS
+Find the first character that is different
+from a specified character.
+.RE
+
+.TP
 .BR libsimple_strchrnul (3),
 .RS 0
 .BR libsimple_strcasechrnul (3),
@@ -911,6 +1084,29 @@ and
 .BR libsimple_strncasechr (3)
 that return the end of the
 string if the byte is not found.
+.RE
+
+.TP
+.BR libsimple_strchrnul_inv (3),
+.RS 0
+.BR libsimple_strcasechrnul_inv (3),
+.br
+.BR libsimple_strnchrnul_inv (3),
+.br
+.BR libsimple_strncasechrnul_inv (3)
+.RE
+.RS
+Skip leading characters.
+.RE
+
+.TP
+.BR libsimple_strcmove (3),
+.RS 0
+.BR libsimple_strncmove (3)
+.RE
+.RS
+Move a string but stop after the first
+occurrence of a specified character.
 .RE
 
 .TP
@@ -1090,6 +1286,29 @@ Case-insensitive version of the
 .BR strrchr (3).
 
 .TP
+.BR libsimple_strrchrnul_inv (3),
+.RS 0
+.BR libsimple_strrcasechrnul_inv (3),
+.br
+.BR libsimple_strrnchrnul_inv (3),
+.br
+.BR libsimple_strrncasechrnul_inv (3)
+.RE
+.RS
+Skip trailing characters.
+.RE
+
+.TP
+.BR libsimple_strreplace (3),
+.RS 0
+.BR libsimple_strnreplace (3)
+.RE
+.RS
+Replace all occurrences of a character with
+another character.
+.RE
+
+.TP
 .BR libsimple_strreqlen (3),
 .RS 0
 .BR libsimple_strrcaseeqlen (3),
@@ -1130,6 +1349,19 @@ Find the last occurrence of a substring.
 .RE
 
 .TP
+.BR libsimple_stpnset (3),
+.RS 0
+.BR libsimple_stpset (3),
+.br
+.BR libsimple_strnset (3),
+.br
+.BR libsimple_strset (3)
+.RE
+.RS
+Fill a string a with character.
+.RE
+
+.TP
 .BR libsimple_strstarts (3),
 .RS 0
 .BR libsimple_strcasestarts (3),
@@ -1143,6 +1375,23 @@ Check the beginning if a string.
 .RE
 
 .TP
+.BR libsimple_strtolower (3),
+.RS 0
+.BR libsimple_strntolower (3),
+.br
+.BR libsimple_memtolower (3),
+.br
+.BR libsimple_stptolower (3),
+.br
+.BR libsimple_stpntolower (3),
+.br
+.BR libsimple_memptolower (3)
+.RE
+.RS
+Convert a string to lower case.
+.RE
+
+.TP
 .BR libsimple_strtotimespec (3),
 .RS 0
 .BR libsimple_strtotimeval (3)
@@ -1151,6 +1400,23 @@ Check the beginning if a string.
 Convert a string, with a real value
 representing a number of seconds, to
 a duration.
+.RE
+
+.TP
+.BR libsimple_strtoupper (3),
+.RS 0
+.BR libsimple_strntoupper (3),
+.br
+.BR libsimple_memtoupper (3),
+.br
+.BR libsimple_stptoupper (3),
+.br
+.BR libsimple_stpntoupper (3),
+.br
+.BR libsimple_memptoupper (3)
+.RE
+.RS
+Convert a string to upper case.
 .RE
 
 .TP

@@ -1,0 +1,88 @@
+.TH LIBSIMPLE_STRNCASECHRNUL_INV 3 2018-11-24 libsimple
+.SH NAME
+libsimple_strncasechrnul_inv \- skip a character in a string
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+char *libsimple_strncasechrnul_inv(const char *\fIs\fP, int \fIc\fP, size_t \fIn\fP);
+
+#ifndef strncasechrnul_inv
+# define strncasechrnul_inv libsimple_strncasechrnul_inv
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_strncasechrnul_inv ()
+function scans the string
+.IR s ,
+truncated to
+.I n
+bytes unless it is shorter,
+for the first occurence of any character
+other than
+.I c
+(it is converted to a
+.BR char ).
+If no such character exist in the string,
+the string's end is returned.
+.PP
+The comparison is case-insensitive.
+.SH RETURN VALUE
+The
+.BR libsimple_strncasechrnul_inv ()
+function returns the pointer
+.I s
+with a minimal offset such that
+.IR tolower(*r)!=tolower(c)||!*r ,
+where
+.I r
+is the returned pointer. However if no such
+offset less than
+.I n
+exists,
+.B NULL
+is returned.
+.SH ERRORS
+The
+.BR libsimple_strncasechrnul_inv ()
+function cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_strncasechrnul_inv ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_strncasechrnul_inv ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_strncasechrnul_inv ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_strncasechrnul (3),
+.BR libsimple_strncasechr_inv (3),
+.BR libsimple_strnchrnul_inv (3),
+.BR libsimple_strcasechrnul_inv (3),
+.BR libsimple_memcasescan_inv (3)

@@ -4,7 +4,7 @@
 
 
 void *
-libsimple_memrchr_inv(const void *s_, int c_, size_t n_) /* TODO man */
+libsimple_memrchr_inv(const void *s_, int c_, size_t n_)
 {
 	char *s = *(char **)(void *)&s_, c = (char)c_;
 	ssize_t n = n_;

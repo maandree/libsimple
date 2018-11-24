@@ -1,0 +1,87 @@
+.TH LIBSIMPLE_MEMCASESCAN_INV 3 2018-11-24 libsimple
+.SH NAME
+libsimple_memcasescan_inv \- skip byte in memory
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+void *libsimple_memcasescan_inv(const void *\fIs\fP, int \fIc\fP, size_t \fIn\fP);
+
+#ifndef memcasescan_inv
+# define memcasescan_inv libsimple_memcasescan_inv
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_memcasescan_inv ()
+function scans the memory segment
+.IR s ,
+with the size
+.IR n ,
+for the first occurence of any byte
+other than
+.I c
+(it is converted to a
+.BR char ).
+If no such character exist in the memory
+segment, the memory segment's end is returned.
+.PP
+The comparison is case-insensitive.
+.SH RETURN VALUE
+The
+.BR libsimple_memcasescan_inv ()
+function returns the pointer
+.I s
+with a minimal offset such that
+.IR tolower(*r)!=tolower(c) ,
+where
+.I r
+is the returned pointer.
+If no such offset exists,
+.I &s[n]
+is returned.
+.SH ERRORS
+The
+.BR libsimple_memcasescan_inv ()
+function cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_memcasescan_inv ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_memcasescan_inv ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_memcasescan_inv ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_memcasescan (3),
+.BR libsimple_memscan_inv (3),
+.BR libsimple_memcasechr_inv (3),
+.BR libsimple_memrcasechr_inv (3),
+.BR libsimple_rawmemcasechr_inv (3),
+.BR libsimple_strncasechrnul_inv (3),
+.BR libsimple_strcasechrnul_inv (3)

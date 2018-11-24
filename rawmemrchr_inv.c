@@ -4,7 +4,7 @@
 
 
 void *
-libsimple_rawmemrchr_inv(const void *s_, int c_, size_t n) /* TODO man */
+libsimple_rawmemrchr_inv(const void *s_, int c_, size_t n)
 {
 	char *s = *(char **)(void *)&s_, c = (char)c_;
 	while (s[--n] == c);

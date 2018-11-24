@@ -4,7 +4,7 @@
 
 
 void *
-libsimple_memscan_inv(const void *s_, int c_, size_t n) /* TODO man */
+libsimple_memscan_inv(const void *s_, int c_, size_t n)
 {
 	char *s = *(char **)(void *)&s_, c = (char)c_;
 	size_t i = 0;

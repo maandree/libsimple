@@ -4,7 +4,7 @@
 
 
 char *
-libsimple_strnchrnul_inv(const char *s_, int c_, size_t n) /* TODO man */
+libsimple_strnchrnul_inv(const char *s_, int c_, size_t n)
 {
 	char *s = *(char **)(void *)&s_, c = (char)c_;
 	char *end = &s[n];

@@ -1,0 +1,85 @@
+.TH LIBSIMPLE_RAWMEMRCHR_INV 3 2018-11-24 libsimple
+.SH NAME
+libsimple_rawmemrchr_inv \- find different byte in memory
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+void *libsimple_rawmemrchr_inv(const void *s, int c, size_t n);
+
+#ifndef rawmemrchr_inv
+# define rawmemrchr_inv libsimple_rawmemrchr_inv
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_rawmemrchr_inv ()
+function scans the memory segment
+.IR s ,
+with the size
+.IR n ,
+for the last occurence of any byte
+other than
+.I c
+(it is converted to a
+.BR char ).
+.PP
+The
+.BR libsimple_rawmemrchr_inv ()
+function assumes there is at least one
+occurence, its behaviour is undefined
+if this is not the case.
+.PP
+The comparison is case-sensitive.
+.SH RETURN VALUE
+The
+.BR libsimple_rawmemrchr_inv ()
+function returns the pointer
+.I s
+with a maximal offset such that
+.IR *r!=c ,
+where
+.I r
+is the returned pointer.
+.SH ERRORS
+The
+.BR libsimple_rawmemrchr_inv ()
+function cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_rawmemrchr_inv ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_rawmemrchr_inv ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_rawmemrchr_inv ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_rawmemrchr (3),
+.BR libsimple_rawmemrcasechr_inv (3),
+.BR libsimple_memrchr_inv (3),
+.BR libsimple_rawmemchr_inv (3)

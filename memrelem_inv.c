@@ -4,7 +4,7 @@
 
 
 void *
-libsimple_memrelem_inv(const void *hay_, size_t hayn, const void *sub_, size_t subn) /* TODO man */
+libsimple_memrelem_inv(const void *hay_, size_t hayn, const void *sub_, size_t subn)
 {
 	switch (subn) {
 	case 0:

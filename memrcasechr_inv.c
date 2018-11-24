@@ -4,7 +4,7 @@
 
 
 void *
-libsimple_memrcasechr_inv(const void *s_, int c, size_t n_) /* TODO man */
+libsimple_memrcasechr_inv(const void *s_, int c, size_t n_)
 {
 	char *s = *(char **)(void *)&s_;
 	ssize_t n = n_;
