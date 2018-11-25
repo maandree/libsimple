@@ -3,6 +3,54 @@
 /* TODO test, doc, man */
 
 
+#define libsimple_arraydupa(array, alignment, n) libsimple_aligned_memdupa(array, _Alignof(*(array)), n)
+#ifndef aligned_arraydupa
+# define aligned_arraydupa(...) libsimple_aligned_arraydupa(__VA_ARGS__)
+#endif
+
+
+#define libsimple_arraydup(array, n) libsimple_aligned_memdup(array, _Alignof(*(array)), n)
+#ifndef arraydup
+# define arraydup(...) libsimple_arraydup(__VA_ARGS__)
+#endif
+
+
+#define libsimple_earraydup(array, n) libsimple_ealigned_memdup(array, _Alignof(*(array)), n)
+#ifndef earraydup
+# define earraydup(...) libsimple_earraydup(__VA_ARGS__)
+#endif
+
+
+#define libsimple_enarraydup(status, array, n) libsimple_enaligned_memdup(status, array, _Alignof(*(array)), n)
+#ifndef enarraydup
+# define enarraydup(...) libsimple_enarraydup(__VA_ARGS__)
+#endif
+
+
+#define libsimple_aligned_arraydupa(array, alignment, n) libsimple_aligned_memdupa(array, alignment, n)
+#ifndef aligned_arraydupa
+# define aligned_arraydupa(...) libsimple_aligned_arraydupa(__VA_ARGS__)
+#endif
+
+
+#define libsimple_aligned_arraydup(array, alignment, n) libsimple_aligned_memdup(array, alignment, n)
+#ifndef aligned_arraydup
+# define aligned_arraydup(...) libsimple_aligned_arraydup(__VA_ARGS__)
+#endif
+
+
+#define libsimple_ealigned_arraydup(array, alignment, n) libsimple_ealigned_memdup(array, alignment, n)
+#ifndef ealigned_arraydup
+# define ealigned_arraydup(...) libsimple_ealigned_arraydup(__VA_ARGS__)
+#endif
+
+
+#define libsimple_enaligned_arraydup(status, array, alignment, n) libsimple_enaligned_memdup(status, array, alignment, n)
+#ifndef enaligned_arraydup
+# define enaligned_arraydup(...) libsimple_enaligned_arraydup(__VA_ARGS__)
+#endif
+
+
 #define libsimple_arrayelem(haystack, needle, n) libsimple_memelem(haystack, needle, sizeof *(haystack), n)
 #ifndef arrayelem
 # define arrayelem(...) libsimple_arrayelem(__VA_ARGS__)
