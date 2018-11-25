@@ -1,11 +1,11 @@
-.TH LIBSIMPLE_MEMELEM_INV 3 2018-11-24 libsimple
+.TH LIBSIMPLE_MEMELEM_INV 3 2018-11-25 libsimple
 .SH NAME
 libsimple_memelem_inv \- find different aligned byte string in memory
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-void *libsimple_memelem_inv(const void *\fIhaystack\fP, size_t \fInhaystack\fP, const void *\fIneedle\fP, size_t \fInneedle\fP);
+void *libsimple_memelem_inv(const void *\fIhaystack\fP, const void *\fIneedle\fP, size_t \fIwidth\fP, size_t \fIn\fP);
 
 #ifndef memelem_inv
 # define memelem_inv libsimple_memelem_inv
@@ -20,14 +20,14 @@ The
 function scans the memory segment
 .IR haystack ,
 with the size
-.IR nhaystack*nneedle ,
+.IR n*width ,
 for the first occurence of a byte string
 different from
 .I needle
 with the size
-.IR nneedle ,
+.IR width ,
 and with an offset equivalent to zero modulo
-.IR nneedle .
+.IR width .
 .PP
 The comparison is case-sensitive.
 .SH RETURN VALUE
@@ -36,12 +36,12 @@ The
 function returns the pointer
 .I s
 with a minimal offset such that
-.IR memcmp(r,needle,nneedle) ,
+.IR memcmp(r,needle,width) ,
 where
 .I r
 is the returned pointer, and such that
 the offset is equivalent to zero modulo
-.IR nneedle .
+.IR width .
 If no such offset exists,
 .B NULL
 is returned.

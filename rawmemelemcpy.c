@@ -36,27 +36,27 @@ rawmemelemcpy64(uint64_t *restrict d, const uint64_t *restrict s, uint64_t elem)
 
 
 static inline char *
-rawmemelemcpyx(char *restrict d, const char *restrict s, const char *restrict elem, size_t size)
+rawmemelemcpyx(char *restrict d, const char *restrict s, const char *restrict elem, size_t width)
 {
 	size_t i;
-	for (;; s += size) {
-		for (i = 0; i < size; i++)
+	for (;; s += width) {
+		for (i = 0; i < width; i++)
 			d[i] = s[i];
-		for (i = 0; i < size; i++)
+		for (i = 0; i < width; i++)
 			if (d[i] != elem[i])
 				goto next;
-		d += size;
+		d += width;
 		return d;
 	next:
-		d += size;
+		d += width;
 	}
 }
 
 
 void *
-libsimple_rawmemelemcpy(void *restrict d, const void *restrict s, const void *restrict elem, size_t size) /* TODO man */
+libsimple_rawmemelemcpy(void *restrict d, const void *restrict s, const void *restrict elem, size_t width) /* TODO man */
 {
-	switch (size) {
+	switch (width) {
 	case 0:
 		return d;
 	case 1:
@@ -68,7 +68,7 @@ libsimple_rawmemelemcpy(void *restrict d, const void *restrict s, const void *re
 	case 8:
 		return rawmemelemcpy64(d, s, *(const uint64_t *)elem);
 	default:
-		return rawmemelemcpyx(d, s, elem, size);
+		return rawmemelemcpyx(d, s, elem, width);
 	}
 }
 

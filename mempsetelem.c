@@ -4,17 +4,17 @@
 
 
 void *
-libsimple_mempsetelem(void *buf_, const void *item, size_t size, size_t nitems)
+libsimple_mempsetelem(void *buf_, const void *item, size_t width, size_t n)
 {
-	switch (size) {
+	switch (width) {
 	case 0:
 		return buf_;
 	case 1:
-		return &((char *)memset(buf_, *(char *)item, nitems))[nitems];
+		return &((char *)memset(buf_, *(char *)item, n))[n];
 	case 2:
 		{
 			uint16_t *buf = buf_, e = *(uint16_t *)item;
-			uint16_t *end = &buf[nitems];
+			uint16_t *end = &buf[n];
 			for (; buf != end; buf++)
 				*buf = e;
 			return buf;
@@ -22,7 +22,7 @@ libsimple_mempsetelem(void *buf_, const void *item, size_t size, size_t nitems)
 	case 4:
 		{
 			uint32_t *buf = buf_, e = *(uint32_t *)item;
-			uint32_t *end = &buf[nitems];
+			uint32_t *end = &buf[n];
 			for (; buf != end; buf++)
 				*buf = e;
 			return buf;
@@ -30,7 +30,7 @@ libsimple_mempsetelem(void *buf_, const void *item, size_t size, size_t nitems)
 	case 8:
 		{
 			uint64_t *buf = buf_, e = *(uint64_t *)item;
-			uint64_t *end = &buf[nitems];
+			uint64_t *end = &buf[n];
 			for (; buf != end; buf++)
 				*buf = e;
 			return buf;
@@ -39,8 +39,8 @@ libsimple_mempsetelem(void *buf_, const void *item, size_t size, size_t nitems)
 		{
 			char *buf = buf_;
 			size_t i;
-			for (; nitems--; buf += size)
-				for (i = 0; i < size; i++)
+			for (; n--; buf += width)
+				for (i = 0; i < width; i++)
 					buf[i] = ((const char *)item)[i];
 			return buf;
 		}

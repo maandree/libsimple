@@ -4,9 +4,9 @@
 
 
 void *
-libsimple_rawmemelem_inv(const void *hay_, const void *sub_, size_t subn)
+libsimple_rawmemelem_inv(const void *hay_, const void *sub_, size_t width)
 {
-	switch (subn) {
+	switch (width) {
 	case 0:
 		abort();
 	case 1:
@@ -37,8 +37,8 @@ libsimple_rawmemelem_inv(const void *hay_, const void *sub_, size_t subn)
 			char *hay = (void *)hay_;
 			const char *sub = sub_;
 			size_t i;
-			for (;; hay += subn)
-				for (i = 0; i < subn; i++)
+			for (;; hay += width)
+				for (i = 0; i < width; i++)
 					if (hay[i] != sub[i])
 						return hay;
 		}

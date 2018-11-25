@@ -1,11 +1,11 @@
-.TH LIBSIMPLE_RAWMEMELEM 3 2018-11-24 libsimple
+.TH LIBSIMPLE_RAWMEMELEM 3 2018-11-25 libsimple
 .SH NAME
 libsimple_rawmemelem \- find aligned byte string in memory
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-void *libsimple_rawmemelem(const void *\fIhaystack\fP, const void *\fIneedle\fP, size_t \fInneedle\fP);
+void *libsimple_rawmemelem(const void *\fIhaystack\fP, const void *\fIneedle\fP, size_t \fIwidth\fP);
 
 #ifndef rawmemelem
 # define rawmemelem libsimple_rawmemelem
@@ -22,9 +22,9 @@ function scans the memory segment
 for the first occurence of the byte string
 .I needle
 with the size
-.IR nneedle ,
+.IR width ,
 and with an offset equivalent to zero modulo
-.IR nneedle .
+.IR width .
 .PP
 The
 .BR libsimple_rawmemelem ()
@@ -39,12 +39,12 @@ The
 function returns the pointer
 .I s
 with a minimal offset such that
-.IR !memcmp(r,needle,nneedle) ,
+.IR !memcmp(r,needle,width) ,
 where
 .I r
 is the returned pointer, and such that
 the offset is equivalent to zero modulo
-.IR nneedle .
+.IR width .
 If no such offset exists, the behaviour is undefined.
 .SH ERRORS
 The

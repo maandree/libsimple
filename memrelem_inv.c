@@ -4,16 +4,16 @@
 
 
 void *
-libsimple_memrelem_inv(const void *hay_, size_t hayn, const void *sub_, size_t subn)
+libsimple_memrelem_inv(const void *hay_, const void *sub_, size_t width, size_t n)
 {
-	switch (subn) {
+	switch (width) {
 	case 0:
 		return NULL;
 	case 1:
 		{
 			uint8_t *hay = (void *)hay_;
 			uint8_t sub = *(uint8_t *)sub_;
-			for (hay += hayn; hayn--;)
+			for (hay += n; n--;)
 				if (*--hay != sub)
 					return hay;
 			break;
@@ -22,7 +22,7 @@ libsimple_memrelem_inv(const void *hay_, size_t hayn, const void *sub_, size_t s
 		{
 			uint16_t *hay = (void *)hay_;
 			uint16_t sub = *(uint16_t *)sub_;
-			for (hay += hayn; hayn--;)
+			for (hay += n; n--;)
 				if (*--hay != sub)
 					return hay;
 			break;
@@ -31,7 +31,7 @@ libsimple_memrelem_inv(const void *hay_, size_t hayn, const void *sub_, size_t s
 		{
 			uint32_t *hay = (void *)hay_;
 			uint32_t sub = *(uint32_t *)sub_;
-			for (hay += hayn; hayn--;)
+			for (hay += n; n--;)
 				if (*--hay != sub)
 					return hay;
 			break;
@@ -40,7 +40,7 @@ libsimple_memrelem_inv(const void *hay_, size_t hayn, const void *sub_, size_t s
 		{
 			uint64_t *hay = (void *)hay_;
 			uint64_t sub = *(uint64_t *)sub_;
-			for (hay += hayn; hayn--;)
+			for (hay += n; n--;)
 				if (*--hay != sub)
 					return hay;
 			break;
@@ -50,9 +50,9 @@ libsimple_memrelem_inv(const void *hay_, size_t hayn, const void *sub_, size_t s
 			char *hay = (void *)hay_;
 			const char *sub = sub_;
 			size_t i;
-			for (hay += hayn * subn; hayn--;) {
-				hay -= subn;
-				for (i = 0; i < subn; i++)
+			for (hay += n * width; n--;) {
+				hay -= width;
+				for (i = 0; i < width; i++)
 					if (hay[i] != sub[i])
 						return hay;
 			}
@@ -70,65 +70,65 @@ libsimple_memrelem_inv(const void *hay_, size_t hayn, const void *sub_, size_t s
 int
 main(void)
 {
-	assert(!strcmpnul(libsimple_memrelem_inv("aabbaabb", 8, "b", 0), NULL));
-	assert(!strcmpnul(libsimple_memrelem_inv("aabbaabb", 8, "B", 0), NULL));
-	assert(!strcmpnul(libsimple_memrelem_inv("AABBAABB", 8, "b", 0), NULL));
-	assert(!strcmpnul(libsimple_memrelem_inv("AABBAABB", 8, "B", 0), NULL));
-	assert(!strcmpnul(libsimple_memrelem_inv("aabbaabb", 8, "a", 0), NULL));
-	assert(!strcmpnul(libsimple_memrelem_inv("aabbbb\0\0", 8, "\0", 0), NULL));
-	assert(!strcmpnul(libsimple_memrelem_inv("--------", 8, "-", 0), NULL));
+	assert(!strcmpnul(libsimple_memrelem_inv("aabbaabb", "b", 0, 8), NULL));
+	assert(!strcmpnul(libsimple_memrelem_inv("aabbaabb", "B", 0, 8), NULL));
+	assert(!strcmpnul(libsimple_memrelem_inv("AABBAABB", "b", 0, 8), NULL));
+	assert(!strcmpnul(libsimple_memrelem_inv("AABBAABB", "B", 0, 8), NULL));
+	assert(!strcmpnul(libsimple_memrelem_inv("aabbaabb", "a", 0, 8), NULL));
+	assert(!strcmpnul(libsimple_memrelem_inv("aabbbb\0\0", "\0", 0, 8), NULL));
+	assert(!strcmpnul(libsimple_memrelem_inv("--------", "-", 0, 8), NULL));
 
-	assert(!strcmpnul(libsimple_memrelem_inv("aabbaabb", 8, "b", 1), "abb"));
-	assert(!strcmpnul(libsimple_memrelem_inv("aabbaabb", 8, "B", 1), "b"));
-	assert(!strcmpnul(libsimple_memrelem_inv("AABBAABB", 8, "b", 1), "B"));
-	assert(!strcmpnul(libsimple_memrelem_inv("AABBAABB", 8, "B", 1), "ABB"));
-	assert(!strcmpnul(libsimple_memrelem_inv("aabbaabb", 8, "a", 1), "b"));
-	assert(!strcmpnul(libsimple_memrelem_inv("aabbbb\0\0", 8, "\0", 1), "b"));
-	assert(!strcmpnul(libsimple_memrelem_inv("--------", 8, "-", 1), NULL));
+	assert(!strcmpnul(libsimple_memrelem_inv("aabbaabb", "b", 1, 8), "abb"));
+	assert(!strcmpnul(libsimple_memrelem_inv("aabbaabb", "B", 1, 8), "b"));
+	assert(!strcmpnul(libsimple_memrelem_inv("AABBAABB", "b", 1, 8), "B"));
+	assert(!strcmpnul(libsimple_memrelem_inv("AABBAABB", "B", 1, 8), "ABB"));
+	assert(!strcmpnul(libsimple_memrelem_inv("aabbaabb", "a", 1, 8), "b"));
+	assert(!strcmpnul(libsimple_memrelem_inv("aabbbb\0\0", "\0", 1, 8), "b"));
+	assert(!strcmpnul(libsimple_memrelem_inv("--------", "-", 1, 8), NULL));
 
-	assert(!strcmpnul(libsimple_memrelem_inv("-a-a-b-b-a-a-b-b", 8, "-b", 2), "-a-b-b"));
-	assert(!strcmpnul(libsimple_memrelem_inv("-a-a-b-b-a-a-b-b", 8, "-B", 2), "-b"));
-	assert(!strcmpnul(libsimple_memrelem_inv("-A-A-B-B-A-A-B-B", 8, "-b", 2), "-B"));
-	assert(!strcmpnul(libsimple_memrelem_inv("-A-A-B-B-A-A-B-B", 8, "-B", 2), "-A-B-B"));
-	assert(!strcmpnul(libsimple_memrelem_inv("-a-a-b-b-a-a-b-b", 8, "-a", 2), "-b"));
-	assert(!strcmpnul(libsimple_memrelem_inv("-a-a-b-b-b-b\0\0\0\0", 8, "\0\0", 2), "-b"));
-	assert(!strcmpnul(libsimple_memrelem_inv("-x-x-x-x-x-x-x-x", 8, "-x", 2), NULL));
+	assert(!strcmpnul(libsimple_memrelem_inv("-a-a-b-b-a-a-b-b", "-b", 2, 8), "-a-b-b"));
+	assert(!strcmpnul(libsimple_memrelem_inv("-a-a-b-b-a-a-b-b", "-B", 2, 8), "-b"));
+	assert(!strcmpnul(libsimple_memrelem_inv("-A-A-B-B-A-A-B-B", "-b", 2, 8), "-B"));
+	assert(!strcmpnul(libsimple_memrelem_inv("-A-A-B-B-A-A-B-B", "-B", 2, 8), "-A-B-B"));
+	assert(!strcmpnul(libsimple_memrelem_inv("-a-a-b-b-a-a-b-b", "-a", 2, 8), "-b"));
+	assert(!strcmpnul(libsimple_memrelem_inv("-a-a-b-b-b-b\0\0\0\0", "\0\0", 2, 8), "-b"));
+	assert(!strcmpnul(libsimple_memrelem_inv("-x-x-x-x-x-x-x-x", "-x", 2, 8), NULL));
 
-	assert(!strcmpnul(libsimple_memrelem_inv("--a--a--b--b--a--a--b--b", 8, "--b", 3), "--a--b--b"));
-	assert(!strcmpnul(libsimple_memrelem_inv("--a--a--b--b--a--a--b--b", 8, "--B", 3), "--b"));
-	assert(!strcmpnul(libsimple_memrelem_inv("--A--A--B--B--A--A--B--B", 8, "--b", 3), "--B"));
-	assert(!strcmpnul(libsimple_memrelem_inv("--A--A--B--B--A--A--B--B", 8, "--B", 3), "--A--B--B"));
-	assert(!strcmpnul(libsimple_memrelem_inv("--a--a--b--b--a--a--b--b", 8, "--a", 3), "--b"));
-	assert(!strcmpnul(libsimple_memrelem_inv("--a--a--b--b--b--b\0\0\0\0\0\0", 8, "\0\0\0", 3), "--b"));
-	assert(!strcmpnul(libsimple_memrelem_inv("--x--x--x--x--x--x--x--x", 8, "--x", 3), NULL));
+	assert(!strcmpnul(libsimple_memrelem_inv("--a--a--b--b--a--a--b--b", "--b", 3, 8), "--a--b--b"));
+	assert(!strcmpnul(libsimple_memrelem_inv("--a--a--b--b--a--a--b--b", "--B", 3, 8), "--b"));
+	assert(!strcmpnul(libsimple_memrelem_inv("--A--A--B--B--A--A--B--B", "--b", 3, 8), "--B"));
+	assert(!strcmpnul(libsimple_memrelem_inv("--A--A--B--B--A--A--B--B", "--B", 3, 8), "--A--B--B"));
+	assert(!strcmpnul(libsimple_memrelem_inv("--a--a--b--b--a--a--b--b", "--a", 3, 8), "--b"));
+	assert(!strcmpnul(libsimple_memrelem_inv("--a--a--b--b--b--b\0\0\0\0\0\0", "\0\0\0", 3, 8), "--b"));
+	assert(!strcmpnul(libsimple_memrelem_inv("--x--x--x--x--x--x--x--x", "--x", 3, 8), NULL));
 
-	assert(!strcmpnul(libsimple_memrelem_inv("---a---a---b---b---a---a---b---b", 8, "---b", 4), "---a---b---b"));
-	assert(!strcmpnul(libsimple_memrelem_inv("---a---a---b---b---a---a---b---b", 8, "---B", 4), "---b"));
-	assert(!strcmpnul(libsimple_memrelem_inv("---A---A---B---B---A---A---B---B", 8, "---b", 4), "---B"));
-	assert(!strcmpnul(libsimple_memrelem_inv("---A---A---B---B---A---A---B---B", 8, "---B", 4), "---A---B---B"));
-	assert(!strcmpnul(libsimple_memrelem_inv("---a---a---b---b---a---a---b---b", 8, "---a", 4), "---b"));
-	assert(!strcmpnul(libsimple_memrelem_inv("---a---a---b---b---b---b\0\0\0\0\0\0\0\0", 8, "\0\0\0\0", 4), "---b"));
-	assert(!strcmpnul(libsimple_memrelem_inv("---x---x---x---x---x---x---x---x", 8, "---x", 4), NULL));
+	assert(!strcmpnul(libsimple_memrelem_inv("---a---a---b---b---a---a---b---b", "---b", 4, 8), "---a---b---b"));
+	assert(!strcmpnul(libsimple_memrelem_inv("---a---a---b---b---a---a---b---b", "---B", 4, 8), "---b"));
+	assert(!strcmpnul(libsimple_memrelem_inv("---A---A---B---B---A---A---B---B", "---b", 4, 8), "---B"));
+	assert(!strcmpnul(libsimple_memrelem_inv("---A---A---B---B---A---A---B---B", "---B", 4, 8), "---A---B---B"));
+	assert(!strcmpnul(libsimple_memrelem_inv("---a---a---b---b---a---a---b---b", "---a", 4, 8), "---b"));
+	assert(!strcmpnul(libsimple_memrelem_inv("---a---a---b---b---b---b\0\0\0\0\0\0\0\0", "\0\0\0\0", 4, 8), "---b"));
+	assert(!strcmpnul(libsimple_memrelem_inv("---x---x---x---x---x---x---x---x", "---x", 4, 8), NULL));
 
-	assert(!strcmpnul(libsimple_memrelem_inv("-------a-------a-------b-------b-------a-------a-------b-------b", 8, "-------b", 8),
+	assert(!strcmpnul(libsimple_memrelem_inv("-------a-------a-------b-------b-------a-------a-------b-------b", "-------b", 8, 8),
 	                  "-------a-------b-------b"));
-	assert(!strcmpnul(libsimple_memrelem_inv("-------a-------a-------b-------b-------a-------a-------b-------b", 8, "-------B", 8),
+	assert(!strcmpnul(libsimple_memrelem_inv("-------a-------a-------b-------b-------a-------a-------b-------b", "-------B", 8, 8),
 	                  "-------b"));
-	assert(!strcmpnul(libsimple_memrelem_inv("-------A-------A-------B-------B-------A-------A-------B-------B", 8, "-------b", 8),
+	assert(!strcmpnul(libsimple_memrelem_inv("-------A-------A-------B-------B-------A-------A-------B-------B", "-------b", 8, 8),
 	                  "-------B"));
-	assert(!strcmpnul(libsimple_memrelem_inv("-------A-------A-------B-------B-------A-------A-------B-------B", 8, "-------B", 8),
+	assert(!strcmpnul(libsimple_memrelem_inv("-------A-------A-------B-------B-------A-------A-------B-------B", "-------B", 8, 8),
 	                  "-------A-------B-------B"));
-	assert(!strcmpnul(libsimple_memrelem_inv("-------a-------a-------b-------b-------a-------a-------b-------b", 8, "-------a", 8),
+	assert(!strcmpnul(libsimple_memrelem_inv("-------a-------a-------b-------b-------a-------a-------b-------b", "-------a", 8, 8),
 	                  "-------b"));
-	assert(!strcmpnul(libsimple_memrelem_inv("-------a-------a-------b-------b-------b-------b\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", 8,
-	                  "\0\0\0\0\0\0\0\0", 8), "-------b"));
-	assert(!strcmpnul(libsimple_memrelem_inv("-------x-------x-------x-------x-------x-------x-------x-------x", 8, "-------x", 8),
+	assert(!strcmpnul(libsimple_memrelem_inv("-------a-------a-------b-------b-------b-------b\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
+	                  "\0\0\0\0\0\0\0\0", 8, 8), "-------b"));
+	assert(!strcmpnul(libsimple_memrelem_inv("-------x-------x-------x-------x-------x-------x-------x-------x", "-------x", 8, 8),
 	                  NULL));
 
-	assert(!strcmpnul(libsimple_memrelem_inv("aaaa-aaa", 4, "aa", 2), "-aaa"));
-	assert(!strcmpnul(libsimple_memrelem_inv("aaaaaa-aaaaa", 4, "aaa", 3), "-aaaaa"));
-	assert(!strcmpnul(libsimple_memrelem_inv("aaaaaaaa-aaaaaaa", 4, "aaaa", 4), "-aaaaaaa"));
-	assert(!strcmpnul(libsimple_memrelem_inv("aaaaaaaaaaaaaaaa-aaaaaaaaaaaaaaa", 4, "aaaaaaaa", 8), "-aaaaaaaaaaaaaaa"));
+	assert(!strcmpnul(libsimple_memrelem_inv("aaaa-aaa", "aa", 2, 4), "-aaa"));
+	assert(!strcmpnul(libsimple_memrelem_inv("aaaaaa-aaaaa", "aaa", 3, 4), "-aaaaa"));
+	assert(!strcmpnul(libsimple_memrelem_inv("aaaaaaaa-aaaaaaa", "aaaa", 4, 4), "-aaaaaaa"));
+	assert(!strcmpnul(libsimple_memrelem_inv("aaaaaaaaaaaaaaaa-aaaaaaaaaaaaaaa", "aaaaaaaa", 8, 4), "-aaaaaaaaaaaaaaa"));
 
 	return 0;
 }

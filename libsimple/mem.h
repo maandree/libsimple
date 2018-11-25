@@ -516,7 +516,7 @@ int libsimple_memcaseends(const void *, size_t, const void *, size_t);
  * @return     1 if the arrays are equal, 0 otherwise
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
-int libsimple_memcasecmp(const void *__a, const void *__b, size_t __n);
+int libsimple_memcasecmp(const void *, const void *, size_t);
 #ifndef memcasecmp
 # define memcasecmp libsimple_memcasecmp
 #endif
@@ -636,7 +636,7 @@ libsimple_rawmemccpy(void *restrict __d_, const void *restrict __s_, int __c_) /
  *             be found within the first `n` bytes of `s` (before
  *             copying), `NULL` otherwise
  */
-void *libsimple_memcmove(void *__d_, const void *__s_, int __c_, size_t __n);
+void *libsimple_memcmove(void *, const void *, int, size_t);
 #ifndef memcmove
 # define memcmove libsimple_memcmove
 #endif
@@ -717,7 +717,7 @@ libsimple_memreplace(void *__s_, int __old_, int __new_, size_t __n)
  * @param   n  The number of bytes to copy or covert
  * @return     `&d[n]`
  */
-void *libsimple_memptolower(void *__d, const void *__s, size_t __n);
+void *libsimple_memptolower(void *, const void *, size_t);
 #ifndef memptolower
 # define memptolower libsimple_memptolower
 #endif
@@ -736,7 +736,7 @@ void *libsimple_memptolower(void *__d, const void *__s, size_t __n);
  * @param   n  The number of bytes to copy or covert
  * @return     `&d[n]`
  */
-void *libsimple_memptoupper(void *__d, const void *__s, size_t __n);
+void *libsimple_memptoupper(void *, const void *, size_t);
 #ifndef memptoupper
 # define memptoupper libsimple_memptoupper
 #endif

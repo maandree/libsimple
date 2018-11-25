@@ -45,31 +45,31 @@ rawmemelemmove64(uint64_t *restrict d, const uint64_t *restrict s, uint64_t elem
 
 
 static char *
-rawmemelemmovex(char *restrict d, const char *restrict s, const char *restrict elem, size_t size)
+rawmemelemmovex(char *restrict d, const char *restrict s, const char *restrict elem, size_t width)
 {
 	char *p;
 	size_t i, n;
 	if (d <= s) {
-		for (;; s += size) {
-			for (i = 0; i < size; i++)
+		for (;; s += width) {
+			for (i = 0; i < width; i++)
 				d[i] = s[i];
-			for (i = 0; i < size; i++)
+			for (i = 0; i < width; i++)
 				if (d[i] != elem[i])
 					goto next_forwards;
-			d += size;
+			d += width;
 			return d;
 		next_forwards:
-			d += size;
+			d += width;
 		}
 	} else {
 		for (p = *(char **)(void *)&s;;) {
-			for (i = 0; i < size; i++)
+			for (i = 0; i < width; i++)
 				if (p[i] != elem[i])
 					goto next_backwards;
-			p += size;
+			p += width;
 			break;
 		next_backwards:
-			p += size;
+			p += width;
 		}
 		n = (size_t)(p - s);
 		p = &d[n];
@@ -83,9 +83,9 @@ rawmemelemmovex(char *restrict d, const char *restrict s, const char *restrict e
 
 
 void *
-libsimple_rawmemelemmove(void *d, const void *s, const void *restrict elem, size_t size) /* TODO man */
+libsimple_rawmemelemmove(void *d, const void *s, const void *restrict elem, size_t width) /* TODO man */
 {
-	switch (size) {
+	switch (width) {
 	case 0:
 		return d;
 	case 1:
@@ -97,7 +97,7 @@ libsimple_rawmemelemmove(void *d, const void *s, const void *restrict elem, size
 	case 8:
 		return rawmemelemmove64(d, s, *(const uint64_t *)elem);
 	default:
-		return rawmemelemmovex(d, s, elem, size);
+		return rawmemelemmovex(d, s, elem, width);
 	}
 }
 

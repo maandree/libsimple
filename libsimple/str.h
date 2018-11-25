@@ -621,7 +621,7 @@ libsimple_strreplace(char *__s, int __old_, int __new_)
  * @return     `strchr(d, '\0')` (after copying)
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __returns_nonnull__)))
-char *libsimple_stptolower(char *__d, const char *__s);
+char *libsimple_stptolower(char *, const char *);
 #ifndef stptolower
 # define stptolower libsimple_stptolower
 #endif
@@ -640,7 +640,7 @@ char *libsimple_stptolower(char *__d, const char *__s);
  * @return     `strchr(d, '\0')` (after copying)
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __returns_nonnull__)))
-char *libsimple_stptoupper(char *__d, const char *__s);
+char *libsimple_stptoupper(char *, const char *);
 #ifndef stptoupper
 # define stptoupper libsimple_stptoupper
 #endif

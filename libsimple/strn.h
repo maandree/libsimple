@@ -707,7 +707,7 @@ libsimple_strnreplace(char *__s, int __old_, int __new_, size_t __n)
  * @return     `strnchrnul(d, '\0', n)` (after copying)
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __returns_nonnull__)))
-char *libsimple_stpntolower(char *__d, const char *__s, size_t __n);
+char *libsimple_stpntolower(char *, const char *, size_t);
 #ifndef stpntolower
 # define stpntolower libsimple_stpntolower
 #endif
@@ -727,7 +727,7 @@ char *libsimple_stpntolower(char *__d, const char *__s, size_t __n);
  * @return     `strnchrnul(d, '\0', n)` (after copying)
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __returns_nonnull__)))
-char *libsimple_stpntoupper(char *__d, const char *__s, size_t __n);
+char *libsimple_stpntoupper(char *, const char *, size_t);
 #ifndef stpntoupper
 # define stpntoupper libsimple_stpntoupper
 #endif
