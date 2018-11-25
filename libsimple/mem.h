@@ -690,7 +690,7 @@ libsimple_rawmemcmove(void *__d_, const void *__s_, int __c_) /* TODO man */
  * @return       `(void *)&((char *)s)[n]`
  */
 static inline void *
-libsimple_memreplace(void *__s_, int __old_, int __new_, size_t __n) /* TODO man */
+libsimple_memreplace(void *__s_, int __old_, int __new_, size_t __n)
 {
 	char __old = (char)__old_, __new = (char)__new_, *__s = __s_;
 	char *__ret = &__s[__n];
@@ -755,7 +755,7 @@ void *libsimple_memptoupper(void *__d, const void *__s, size_t __n);
  * @param   n  The number of bytes to copy or covert
  * @return     `d`
  */
-static inline void *libsimple_memtolower(void *__d, const void *__s, size_t __n) /* TODO man */
+static inline void *libsimple_memtolower(void *__d, const void *__s, size_t __n)
 { libsimple_memptolower(__d, __s, __n); return __d; }
 #ifndef memtolower
 # define memtolower libsimple_memtolower
@@ -775,7 +775,7 @@ static inline void *libsimple_memtolower(void *__d, const void *__s, size_t __n)
  * @param   n  The number of bytes to copy or covert
  * @return     `d`
  */
-static inline void *libsimple_memtoupper(void *__d, const void *__s, size_t __n) /* TODO man */
+static inline void *libsimple_memtoupper(void *__d, const void *__s, size_t __n)
 { libsimple_memptoupper(__d, __s, __n); return __d; }
 #ifndef memtoupper
 # define memtoupper libsimple_memtoupper

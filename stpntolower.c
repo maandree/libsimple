@@ -4,7 +4,7 @@
 
 
 char *
-libsimple_stpntolower(char *d, const char *s, size_t n) /* TODO man */
+libsimple_stpntolower(char *d, const char *s, size_t n)
 {
 	size_t i;
 	char *ret;

@@ -1,0 +1,95 @@
+.TH LIBSIMPLE_STRTOLOWER 3 2018-11-25 libsimple
+.SH NAME
+libsimple_strtolower, libsimple_stptolower \- convert a string to lower case
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+static inline char *libsimple_strtolower(char *\fIdest\fP, const char *\fIsrc\fP);
+char *libsimple_stptolower(char *\fIdest\fP, const char *\fIsrc\fP);
+
+#ifndef strtolower
+# define strtolower libsimple_strtolower
+#endif
+#ifndef stptolower
+# define stptolower libsimple_stptolower
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_strtolower ()
+and
+.BR libsimple_stptolower ()
+functions copies and covert a string, including the
+NUL byte that terminates it, to lower case.
+The string
+.I src
+is copied into
+.IR dest ,
+with all upper case ASCII characters converted to
+lower case. The arrays may overlap, and there is
+an optimisation for the case where
+.IR dest==src .
+.SH RETURN VALUE
+The
+.BR libsimple_strtolower ()
+function returns the pointer
+.IR dest .
+.PP
+The
+.BR libsimple_stptolower ()
+function returns the pointer
+end of the string copied into
+.IR dest ,
+that is
+.IR &dest[strlen(src)] .
+.SH ERRORS
+The
+.BR libsimple_strtolower ()
+and
+.BR libsimple_stptolower ()
+functions cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_strtolower (),
+.br
+.BR libsimple_stptolower ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_strtolower (),
+.br
+.BR libsimple_stptolower ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_strtolower (),
+.br
+.BR libsimple_stptolower ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_strtoupper (3),
+.BR libsimple_strreplace (3),
+.BR libsimple_strntolower (3),
+.BR libsimple_memtolower (3)

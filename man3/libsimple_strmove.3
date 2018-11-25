@@ -5,7 +5,7 @@ libsimple_strmove \- move a string within an array of bytes
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_strmove(void *\fIdest\fP, const void *\fIsrc\fP);
+static inline char *libsimple_strmove(char *\fIdest\fP, const char *\fIsrc\fP);
 
 #ifndef strmove
 # define strmove libsimple_strmove

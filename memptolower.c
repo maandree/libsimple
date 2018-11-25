@@ -4,7 +4,7 @@
 
 
 void *
-libsimple_memptolower(void *d_, const void *s_, size_t n) /* TODO man */
+libsimple_memptolower(void *d_, const void *s_, size_t n)
 {
 	char *ret, *d = d_;
 	const char *s = s_;

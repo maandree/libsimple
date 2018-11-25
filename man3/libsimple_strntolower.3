@@ -1,0 +1,97 @@
+.TH LIBSIMPLE_STRNTOLOWER 3 2018-11-25 libsimple
+.SH NAME
+libsimple_strntolower, libsimple_stpntolower \- convert a string to lower case
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+static inline char *libsimple_strntolower(char *\fIdest\fP, const char *\fIsrc\fP, size_t \fIn\fP);
+char *libsimple_stpntolower(char *\fIdest\fP, const char *\fIsrc\fP, size_t \fIn\fP);
+
+#ifndef strntolower
+# define strntolower libsimple_strntolower
+#endif
+#ifndef stpntolower
+# define stpntolower libsimple_stpntolower
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_strntolower ()
+and
+.BR libsimple_stpntolower ()
+functions copies and covert a string, including the
+NUL byte that terminates it, to lower case.
+The string
+.I src
+is copied into
+.IR dest ,
+with all upper case ASCII characters converted to
+lower case; however no more than
+.I n
+bytes will be copied or coverted. The arrays may overlap,
+and there is an optimisation for the case where
+.IR dest==src .
+.SH RETURN VALUE
+The
+.BR libsimple_strntolower ()
+function returns the pointer
+.IR dest .
+.PP
+The
+.BR libsimple_stpntolower ()
+function returns the pointer
+end of the string copied into
+.IR dest ,
+that is
+.IR &dest[strnlen(src,n)] .
+.SH ERRORS
+The
+.BR libsimple_strntolower ()
+and
+.BR libsimple_stpntolower ()
+functions cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_strntolower (),
+.br
+.BR libsimple_stpntolower ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_strntolower (),
+.br
+.BR libsimple_stpntolower ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_strntolower (),
+.br
+.BR libsimple_stpntolower ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_strntoupper (3),
+.BR libsimple_strnreplace (3),
+.BR libsimple_strnntolower (3),
+.BR libsimple_memntolower (3)

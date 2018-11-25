@@ -1,0 +1,81 @@
+.TH LIBSIMPLE_STRNREPLACE 3 2018-11-25 libsimple
+.SH NAME
+libsimple_strnreplace \- replace characters in a string
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+static inline char *libsimple_strnreplace(char *\fIs\fP, int \fIold\fP, int \fInew\fP, size_t \fIn\fP);
+
+#ifndef strnreplace
+# define strnreplace libsimple_strnreplace
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_strnreplace ()
+function replaces all instances of the character
+.I old
+(it is converted to a
+.BR char )
+in the string
+.I s
+with the character
+.IR new ,
+up to the
+.I n th
+character (up the last character
+.I s
+is shorter).
+.PP
+The comparison is case-sensitive.
+.SH RETURN VALUE
+The
+.BR libsimple_strnreplace ()
+function returns the end of
+.IR s ,
+that is
+.I &s[strnlen(s,n)]
+(as evaluated before the function call).
+.SH ERRORS
+The
+.BR libsimple_strnreplace ()
+function cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_strnreplace ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_strnreplace ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_strnreplace ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_strntolower (3),
+.BR libsimple_strntoupper (3),
+.BR libsimple_strreplace (3),
+.BR libsimple_memreplace (3)

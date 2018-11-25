@@ -1,0 +1,92 @@
+.TH LIBSIMPLE_MEMTOLOWER 3 2018-11-25 libsimple
+.SH NAME
+libsimple_memtolower, libsimple_memptolower \- convert a character array to lower case
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+static inline void *libsimple_memtolower(void *\fIdest\fP, const void *\fIsrc\fP, size_t \fIn\fP);
+void *libsimple_memptolower(void *\fIdest\fP, const void *\fIsrc\fP, size_t \fIn\fP);
+
+#ifndef memtolower
+# define memtolower libsimple_memtolower
+#endif
+#ifndef memptolower
+# define memptolower libsimple_memptolower
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_memtolower ()
+and
+.BR libsimple_memptolower ()
+functions copies the first
+.I n
+characters from the array
+.I src
+into the
+.I array.
+All upper case ASCII characters will be converted
+to lower case. The arrays may overlap, and there
+is an optimisation for the case where
+.IR dest==src .
+.SH RETURN VALUE
+The
+.BR libsimple_memtolower ()
+function returns the pointer
+.IR dest .
+.PP
+The
+.BR libsimple_memptolower ()
+function returns
+.IR &dest[n] .
+.SH ERRORS
+The
+.BR libsimple_memtolower ()
+and
+.BR libsimple_memptolower ()
+functions cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_memtolower (),
+.br
+.BR libsimple_memptolower ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_memtolower (),
+.br
+.BR libsimple_memptolower ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_memtolower (),
+.br
+.BR libsimple_memptolower ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_memtoupper (3),
+.BR libsimple_memreplace (3),
+.BR libsimple_strtolower (3),
+.BR libsimple_strntolower (3)

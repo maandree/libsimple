@@ -1,0 +1,95 @@
+.TH LIBSIMPLE_STRTOUPPER 3 2018-11-25 libsimple
+.SH NAME
+libsimple_strtoupper, libsimple_stptoupper \- convert a string to upper case
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+static inline char *libsimple_strtoupper(char *\fIdest\fP, const char *\fIsrc\fP);
+char *libsimple_stptoupper(char *\fIdest\fP, const char *\fIsrc\fP);
+
+#ifndef strtoupper
+# define strtoupper libsimple_strtoupper
+#endif
+#ifndef stptoupper
+# define stptoupper libsimple_stptoupper
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_strtoupper ()
+and
+.BR libsimple_stptoupper ()
+functions copies and covert a string, including the
+NUL byte that terminates it, to upper case.
+The string
+.I src
+is copied into
+.IR dest ,
+with all lower case ASCII characters converted to
+upper case. The arrays may overlap, and there is
+an optimisation for the case where
+.IR dest==src .
+.SH RETURN VALUE
+The
+.BR libsimple_strtoupper ()
+function returns the pointer
+.IR dest .
+.PP
+The
+.BR libsimple_stptoupper ()
+function returns the pointer
+end of the string copied into
+.IR dest ,
+that is
+.IR &dest[strlen(src)] .
+.SH ERRORS
+The
+.BR libsimple_strtoupper ()
+and
+.BR libsimple_stptoupper ()
+functions cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_strtoupper (),
+.br
+.BR libsimple_stptoupper ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_strtoupper (),
+.br
+.BR libsimple_stptoupper ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_strtoupper (),
+.br
+.BR libsimple_stptoupper ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_strtolower (3),
+.BR libsimple_strreplace (3),
+.BR libsimple_strntoupper (3),
+.BR libsimple_memtoupper (3)

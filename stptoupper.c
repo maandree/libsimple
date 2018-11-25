@@ -4,7 +4,7 @@
 
 
 char *
-libsimple_stptoupper(char *d, const char *s) /* TODO man */
+libsimple_stptoupper(char *d, const char *s)
 {
 	size_t n;
 	char *ret;

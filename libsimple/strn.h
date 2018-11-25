@@ -680,7 +680,7 @@ char *libsimple_strncmove(char *, const char *, int, size_t);
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __returns_nonnull__)))
 static inline char *
-libsimple_strnreplace(char *__s, int __old_, int __new_, size_t __n) /* TODO man */
+libsimple_strnreplace(char *__s, int __old_, int __new_, size_t __n)
 {
 	char __old = (char)__old_, __new = (char)__new_;
 	for (; __n && *__s; __s++, __n--)
@@ -747,7 +747,7 @@ char *libsimple_stpntoupper(char *__d, const char *__s, size_t __n);
  * @return     `d`
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __returns_nonnull__)))
-static inline char *libsimple_strntolower(char *__d, const char *__s, size_t __n) /* TODO man */
+static inline char *libsimple_strntolower(char *__d, const char *__s, size_t __n)
 { libsimple_stpntolower(__d, __s, __n); return __d; }
 #ifndef strntolower
 # define strntolower libsimple_strntolower
@@ -768,7 +768,7 @@ static inline char *libsimple_strntolower(char *__d, const char *__s, size_t __n
  * @return     `d`
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __returns_nonnull__)))
-static inline char *libsimple_strntoupper(char *__d, const char *__s, size_t __n) /* TODO man */
+static inline char *libsimple_strntoupper(char *__d, const char *__s, size_t __n)
 { libsimple_stpntoupper(__d, __s, __n); return __d; }
 #ifndef strntoupper
 # define strntoupper libsimple_strntoupper

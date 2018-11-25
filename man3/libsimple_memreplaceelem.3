@@ -1,0 +1,82 @@
+.TH LIBSIMPLE_MEMREPLACEELEM 3 2018-11-25 libsimple
+.SH NAME
+libsimple_memreplaceelem \- replace elements in an array
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+void *libsimple_memreplaceelem(void *\fIs\fP, int \fIold\fP, int \fInew\fP, size_t \fIn\fP, size_t \fIwidth\fP);
+
+#ifndef memreplaceelem
+# define memreplaceelem libsimple_memreplaceelem
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_memreplaceelem ()
+function replaces all instances of the element
+.IR old ,
+with size
+.IR width ,
+in the array
+.IR s ,
+with the size of
+.I n
+elements of size
+.IR width ,
+with the element
+.IR new ,
+also with the size
+.IR width .
+The replace elements in
+.I s
+are aligned by
+.I width
+bytes in
+.IR s .
+.SH RETURN VALUE
+The
+.BR libsimple_memreplaceelem ()
+function returns
+.IR &s[n*width] .
+.SH ERRORS
+The
+.BR libsimple_memreplaceelem ()
+function cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_memreplaceelem ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_memreplaceelem ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_memreplaceelem ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_memreplace (3),
+.BR libsimple_strreplace (3),
+.BR libsimple_strnreplace (3)

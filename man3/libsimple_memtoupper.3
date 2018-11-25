@@ -1,0 +1,92 @@
+.TH LIBSIMPLE_MEMTOUPPER 3 2018-11-25 libsimple
+.SH NAME
+libsimple_memtoupper, libsimple_memptoupper \- convert a character array to upper case
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+static inline void *libsimple_memtoupper(void *\fIdest\fP, const void *\fIsrc\fP, size_t \fIn\fP);
+void *libsimple_memptoupper(void *\fIdest\fP, const void *\fIsrc\fP, size_t \fIn\fP);
+
+#ifndef memtoupper
+# define memtoupper libsimple_memtoupper
+#endif
+#ifndef memptoupper
+# define memptoupper libsimple_memptoupper
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_memtoupper ()
+and
+.BR libsimple_memptoupper ()
+functions copies the first
+.I n
+characters from the array
+.I src
+into the
+.I array.
+All lower case ASCII characters will be converted
+to upper case. The arrays may overlap, and there
+is an optimisation for the case where
+.IR dest==src .
+.SH RETURN VALUE
+The
+.BR libsimple_memtoupper ()
+function returns the pointer
+.IR dest .
+.PP
+The
+.BR libsimple_memptoupper ()
+function returns
+.IR &dest[n] .
+.SH ERRORS
+The
+.BR libsimple_memtoupper ()
+and
+.BR libsimple_memptoupper ()
+functions cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_memtoupper (),
+.br
+.BR libsimple_memptoupper ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_memtoupper (),
+.br
+.BR libsimple_memptoupper ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_memtoupper (),
+.br
+.BR libsimple_memptoupper ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_memtolower (3),
+.BR libsimple_memreplace (3),
+.BR libsimple_strtoupper (3),
+.BR libsimple_strntoupper (3)

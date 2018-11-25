@@ -1,0 +1,76 @@
+.TH LIBSIMPLE_MEMREPLACE 3 2018-11-25 libsimple
+.SH NAME
+libsimple_memreplace \- replace bytes in an array of bytes
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+static inline void *libsimple_memreplace(void *\fIs\fP, int \fIold\fP, int \fInew\fP, size_t \fIn\fP);
+
+#ifndef memreplace
+# define memreplace libsimple_memreplace
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_memreplace ()
+function replaces all instances of the byte
+.I old
+(it is converted to a
+.BR char )
+in the byte array
+.IR s ,
+with the size
+.IR n ,
+with the byte
+.IR new .
+.PP
+The comparison is case-sensitive.
+.SH RETURN VALUE
+The
+.BR libsimple_memreplace ()
+function returns
+.IR &s[n] .
+.SH ERRORS
+The
+.BR libsimple_memreplace ()
+function cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_memreplace ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_memreplace ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_memreplace ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_memtolower (3),
+.BR libsimple_memtoupper (3),
+.BR libsimple_strreplace (3),
+.BR libsimple_strnreplace (3),
+.BR libsimple_memreplaceelem (3)

@@ -4,7 +4,7 @@
 
 
 void *
-libsimple_memreplaceelem(void *restrict s_, const void *old_, const void *new_, size_t n, size_t width) /* TODO man */
+libsimple_memreplaceelem(void *restrict s_, const void *old_, const void *new_, size_t n, size_t width)
 {
 	switch (width) {
 	case 0:
