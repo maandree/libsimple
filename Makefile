@@ -7,6 +7,7 @@ SUBHDR =\
 	libsimple/aligned_alloc.h\
 	libsimple/aligned_allocz.h\
 	libsimple/aligned_memdup.h\
+	libsimple/array.h\
 	libsimple/calloc.h\
 	libsimple/definitions.h\
 	libsimple/env.h\

@@ -73,6 +73,7 @@
 #include "libsimple/time.h"
 #include "libsimple/mem.h"
 #include "libsimple/memelem.h"
+#include "libsimple/array.h"
 #include "libsimple/str.h"
 #include "libsimple/strn.h"
 #include "libsimple/overflow.h"
