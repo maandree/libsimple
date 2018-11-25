@@ -236,6 +236,34 @@ memdup(const void *s, size_t size)
 }
 
 
+wchar_t *
+wcsdup(const wchar_t *s)
+{
+	wchar_t *r;
+	size_t n = wcslen(s) + 1;
+	if (n > SIZE_MAX / sizeof(wchar_t)) {
+		errno = ENOMEM;
+		return NULL;
+	}
+	r = malloc(n * sizeof(wchar_t));
+	return r ? wcscpy(r, s) : r;
+}
+
+
+wchar_t *
+wcsndup(const wchar_t *s, size_t n)
+{
+	return libsimple_wcsndup(s, n);
+}
+
+
+wchar_t *
+wmemdup(const wchar_t *s, size_t n)
+{
+	return libsimple_wmemdup(s, n);
+}
+
+
 void
 free(void *ptr)
 {

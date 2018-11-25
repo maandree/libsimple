@@ -15,10 +15,12 @@
 		const char *__s = (s);\
 		size_t __n = (n);\
 		size_t __a = (alignment);\
+		size_t __size;\
 		uintptr_t __misalignment;\
 		char *__r;\
 		__a += !__a;\
-		__r = alloca(__n + (__a - 1));\
+		__size = __n + (__a - 1);\
+		__r = alloca(__size + !__size);\
 		__misalignment = (uintptr_t)__r % (uintptr_t)__a;\
 		if (__misalignment)\
 			__r += (uintptr_t)__a - __misalignment;\
@@ -71,7 +73,7 @@ void *libsimple_enaligned_memdup(int, const void *, size_t, size_t);
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_align__(2), __alloc_size__(3), __warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_ealigned_memdup(const void *__s, size_t __alignment, size_t __n)
-{ return enaligned_memdup(libsimple_default_failure_exit, __s, __alignment, __n); }
+{ return libsimple_enaligned_memdup(libsimple_default_failure_exit, __s, __alignment, __n); }
 #ifndef ealigned_memdup
 # define ealigned_memdup libsimple_ealigned_memdup
 #endif

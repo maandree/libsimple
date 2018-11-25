@@ -2,7 +2,7 @@
 
 
 /**
- * Stack allocation version of `aligned_strdup`
+ * Stack allocation version of `libsimple_aligned_strdup`
  * 
  * @param   s:const char *    The string to copy
  * @param   alignment:size_t  The alignment of the returned pointer
@@ -68,7 +68,7 @@ char *libsimple_enaligned_strdup(int, const char *, size_t); /* TODO man */
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
 static inline char *libsimple_ealigned_strdup(const char *__s, size_t __alignment) /* TODO man */
-{ return enaligned_strdup(libsimple_default_failure_exit, __s, __alignment); }
+{ return libsimple_enaligned_strdup(libsimple_default_failure_exit, __s, __alignment); }
 #ifndef ealigned_strdup
 # define ealigned_strdup libsimple_ealigned_strdup
 #endif

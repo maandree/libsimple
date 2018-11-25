@@ -43,7 +43,7 @@ char *libsimple_enstrdup(int, const char *);
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __assume_aligned__(1), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
 static inline char *libsimple_estrdup(const char *__s)
-{ return enstrdup(libsimple_default_failure_exit, __s); }
+{ return libsimple_enstrdup(libsimple_default_failure_exit, __s); }
 #ifndef estrdup
 # define estrdup libsimple_estrdup
 #endif

@@ -17,7 +17,8 @@
 		size_t __a = (alignment);\
 		uintptr_t __misalignment;\
 		char *__r;\
-		__r = alloca(__n + (__a - 1));\
+		__a += !__a;\
+		__r = alloca(__n + 1 + (__a - 1));\
 		__misalignment = (uintptr_t)__r % (uintptr_t)__a;\
 		if (__misalignment)\
 			__r += (uintptr_t)__a - __misalignment;\
@@ -72,7 +73,7 @@ char *libsimple_enaligned_strndup(int, const char *, size_t, size_t); /* TODO ma
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
 static inline char *libsimple_ealigned_strndup(const char *__s, size_t __alignment, size_t __n) /* TODO man */
-{ return enaligned_strndup(libsimple_default_failure_exit, __s, __alignment, __n); }
+{ return libsimple_enaligned_strndup(libsimple_default_failure_exit, __s, __alignment, __n); }
 #ifndef ealigned_strndup
 # define ealigned_strndup libsimple_ealigned_strndup
 #endif

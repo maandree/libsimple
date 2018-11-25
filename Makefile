@@ -9,6 +9,9 @@ SUBHDR =\
 	libsimple/aligned_memdup.h\
 	libsimple/aligned_strdup.h\
 	libsimple/aligned_strndup.h\
+	libsimple/aligned_wcsdup.h\
+	libsimple/aligned_wcsndup.h\
+	libsimple/aligned_wmemdup.h\
 	libsimple/array.h\
 	libsimple/calloc.h\
 	libsimple/definitions.h\
@@ -34,7 +37,10 @@ SUBHDR =\
 	libsimple/strndup.h\
 	libsimple/time.h\
 	libsimple/valloc.h\
-	libsimple/vallocz.h
+	libsimple/vallocz.h\
+	libsimple/wcsdup.h\
+	libsimple/wcsndup.h\
+	libsimple/wmemdup.h
 
 HDR =\
 	$(SUBHDR)\
