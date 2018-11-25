@@ -1,4 +1,4 @@
-.TH LIBSIMPLE.H 0 2018-11-24 libsimple
+.TH LIBSIMPLE.H 0 2018-11-25 libsimple
 .SH NAME
 libsimple.h \- main header for libsimple
 .SH SYNOPSIS
@@ -43,8 +43,10 @@ includes the following header files:
 .IR <string.h> ,
 .IR <strings.h> ,
 .IR <time.h> ,
+.IR <unistd.h> ,
+.IR <wchar.h> ,
 and
-.IR <unistd.h> .
+.IR <wctype.h> .
 .PP
 The header
 .I <libsimple.h>

@@ -39,6 +39,8 @@
 #include <strings.h>
 #include <time.h>
 #include <unistd.h>
+#include <wchar.h>
+#include <wctype.h>
 
 
 #if defined(__GNUC__) && !defined(__clang__)
