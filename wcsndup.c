@@ -16,7 +16,7 @@ libsimple_wcsndup(const wchar_t *s, size_t n) /* TODO test */
 	if (!ret)
 		enprintf(status, "wcsdup:");
 	wmemcpy(ret, s, n);
-	ret[n] = '\0';
+	ret[n] = 0;
 	return ret;
 }
 

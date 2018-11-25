@@ -23,7 +23,7 @@
 		if (__misalignment)\
 			__r += (uintptr_t)__a - __misalignment;\
 		wmemcpy(__r, __s, __n);\
-		__r[__n] = '\0';\
+		__r[__n] = 0;\
 		__r;\
 	})
 # ifndef aligned_wcsndupa

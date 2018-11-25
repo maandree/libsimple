@@ -16,7 +16,7 @@
 		wchar_t *__r;\
 		__r = alloca((__n + 1) * sizeof(wchar_t));\
 		wmemcpy(__r, __s, __n);\
-		__r[__n] = '\0';\
+		__r[__n] = 0;\
 		__r;\
 	})
 # ifndef wcsndupa
