@@ -7,6 +7,8 @@ SUBHDR =\
 	libsimple/aligned_alloc.h\
 	libsimple/aligned_allocz.h\
 	libsimple/aligned_memdup.h\
+	libsimple/aligned_strdup.h\
+	libsimple/aligned_strndup.h\
 	libsimple/array.h\
 	libsimple/calloc.h\
 	libsimple/definitions.h\
@@ -40,6 +42,7 @@ HDR =\
 
 OBJ =\
 	aligned_memdup.o\
+	aligned_strndup.o\
 	allocn.o\
 	asprintf.o\
 	difftimespec.o\
@@ -48,6 +51,8 @@ OBJ =\
 	doubletotimeval.o\
 	enaligned_allocz.o\
 	enaligned_memdup.o\
+	enaligned_strdup.o\
+	enaligned_strndup.o\
 	encalloc.o\
 	enmalloc.o\
 	enmemdup.o\
