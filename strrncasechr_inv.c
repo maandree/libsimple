@@ -4,7 +4,7 @@
 
 
 char *
-libsimple_strrncasechr_inv(const char *s_, int c, size_t n) /* TODO man */
+libsimple_strrncasechr_inv(const char *s_, int c, size_t n)
 {
 	char *s = *(char **)(void *)&s_;
 	char *end = &s[n], *r = NULL;

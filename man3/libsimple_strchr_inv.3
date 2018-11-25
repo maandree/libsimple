@@ -1,14 +1,14 @@
-.TH LIBSIMPLE_STRCASECHR 3 2018-10-23 libsimple
+.TH LIBSIMPLE_STRCHR_INV 3 2018-11-25 libsimple
 .SH NAME
-libsimple_strcasechr \- find a character in a string
+libsimple_strchr_inv \- find a different character in a string
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-char *libsimple_strcasechr(const char *\fIs\fP, int \fIc\fP);
+char *libsimple_strchr_inv(const char *\fIs\fP, int \fIc\fP);
 
-#ifndef strcasechr
-# define strcasechr libsimple_strcasechr
+#ifndef strchr_inv
+# define strchr_inv libsimple_strchr_inv
 #endif
 .fi
 .PP
@@ -16,24 +16,25 @@ Link with
 .IR \-lsimple .
 .SH DESCRIPTION
 The
-.BR libsimple_strcasechr ()
+.BR libsimple_strchr_inv ()
 function scans the string
 .I s
-for the first occurence of the character
+for the first occurence of any character
+other than
 .I c
 (it is converted to a
 .BR char ).
 If no such character exist in the string,
 the string's end is returned.
 .PP
-The comparison is case-insensitive.
+The comparison is case-sensitive.
 .SH RETURN VALUE
 The
-.BR libsimple_strcasechr ()
+.BR libsimple_strchr_inv ()
 function returns the pointer
 .I s
 with a minimal offset such that
-.IR tolower(*r)==tolower(c) ,
+.IR *r!=c ,
 where
 .I r
 is the returned pointer, if no such
@@ -41,7 +42,7 @@ offset exists, it returns
 .BR NULL .
 .SH ERRORS
 The
-.BR libsimple_strcasechr ()
+.BR libsimple_strchr_inv ()
 function cannot fail.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
@@ -52,13 +53,13 @@ lb lb lb
 l l l.
 Interface	Attribute	Value
 T{
-.BR libsimple_strcasechr ()
+.BR libsimple_strchr_inv ()
 T}	Thread safety	MT-Safe
 T{
-.BR libsimple_strcasechr ()
+.BR libsimple_strchr_inv ()
 T}	Async-signal safety	AS-Safe
 T{
-.BR libsimple_strcasechr ()
+.BR libsimple_strchr_inv ()
 T}	Async-cancel safety	AC-Safe
 .TE
 .SH EXAMPLES
@@ -75,9 +76,8 @@ None.
 None.
 .SH SEE ALSO
 .BR libsimple_strcasechr_inv (3),
-.BR libsimple_strcasechrnul (3),
-.BR libsimple_strrcasechr (3),
-.BR libsimple_strncasechr (3),
-.BR libsimple_memcasechr (3),
-.BR libsimple_inchrcaseset (3),
+.BR libsimple_strchrnul_inv (3),
+.BR libsimple_strrchr_inv (3),
+.BR libsimple_strnchr_inv (3),
+.BR libsimple_memchr_inv (3),
 .BR strchr (3)

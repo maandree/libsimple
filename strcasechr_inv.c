@@ -4,7 +4,7 @@
 
 
 char *
-libsimple_strcasechr_inv(const char *s_, int c) /* TODO man */
+libsimple_strcasechr_inv(const char *s_, int c)
 {
 	char *s = *(char **)(void *)&s_, lc = (char)tolower(c), uc = (char)toupper(c);
 	if (lc != uc)

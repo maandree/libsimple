@@ -1,14 +1,14 @@
-.TH LIBSIMPLE_MEMRELEM_INV 3 2018-11-24 libsimple
+.TH LIBSIMPLE_RAWMEMELEM_INV 3 2018-11-24 libsimple
 .SH NAME
-libsimple_memrelem_inv \- find different aligned byte string in memory
+libsimple_rawmemelem_inv \- find different aligned byte string in memory
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 
-void *libsimple_memrelem_inv(const void *\fIhaystack\fP, size_t \fInhaystack\fP, const void *\fIneedle\fP, size_t \fInneedle\fP);
+void *libsimple_rawmemelem_inv(const void *\fIhaystack\fP, const void *\fIneedle\fP, size_t \fInneedle\fP);
 
-#ifndef memrelem_inv
-# define memrelem_inv libsimple_memrelem_inv
+#ifndef rawmemelem_inv
+# define rawmemelem_inv libsimple_rawmemelem_inv
 #endif
 .fi
 .PP
@@ -16,12 +16,10 @@ Link with
 .IR \-lsimple .
 .SH DESCRIPTION
 The
-.BR libsimple_memrelem_inv ()
+.BR libsimple_rawmemelem_inv ()
 function scans the memory segment
 .IR haystack ,
-with the size
-.IR nhaystack*nneedle ,
-for the last occurence of a byte string
+for the first occurence of a byte string
 different from
 .I needle
 with the size
@@ -29,25 +27,29 @@ with the size
 and with an offset equivalent to zero modulo
 .IR nneedle .
 .PP
+The
+.BR libsimple_rawmemchr ()
+function assumes there is at least one
+occurence, its behaviour is undefined
+if this is not the case.
+.PP
 The comparison is case-sensitive.
 .SH RETURN VALUE
 The
-.BR libsimple_memrelem_inv ()
+.BR libsimple_rawmemelem_inv ()
 function returns the pointer
 .I s
-with a maximal offset such that
+with a minimal offset such that
 .IR memcmp(r,needle,nneedle) ,
 where
 .I r
 is the returned pointer, and such that
 the offset is equivalent to zero modulo
 .IR nneedle .
-If no such offset exists,
-.B NULL
-is returned.
+If no such offset exists, the behaviour is undefined.
 .SH ERRORS
 The
-.BR libsimple_memrelem_inv ()
+.BR libsimple_rawmemelem_inv ()
 function cannot fail.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
@@ -58,13 +60,13 @@ lb lb lb
 l l l.
 Interface	Attribute	Value
 T{
-.BR libsimple_memrelem_inv ()
+.BR libsimple_rawmemelem_inv ()
 T}	Thread safety	MT-Safe
 T{
-.BR libsimple_memrelem_inv ()
+.BR libsimple_rawmemelem_inv ()
 T}	Async-signal safety	AS-Safe
 T{
-.BR libsimple_memrelem_inv ()
+.BR libsimple_rawmemelem_inv ()
 T}	Async-cancel safety	AC-Safe
 .TE
 .SH EXAMPLES
@@ -80,8 +82,7 @@ None.
 .SH BUGS
 None.
 .SH SEE ALSO
-.BR libsimple_memrelem (3),
+.BR libsimple_rawmemelem (3),
 .BR libsimple_rawmemrelem_inv (3),
 .BR libsimple_memelem_inv (3),
-.BR libsimple_memrmem_inv (3),
-.BR libsimple_memrchr_inv (3)
+.BR libsimple_rawmemchr_inv (3)
