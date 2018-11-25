@@ -83,7 +83,7 @@ rawmemelemmovex(char *restrict d, const char *restrict s, const char *restrict e
 
 
 void *
-libsimple_rawmemelemmove(void *d, const void *s, const void *restrict elem, size_t width) /* TODO man */
+libsimple_rawmemelemmove(void *d, const void *s, const void *restrict elem, size_t width)
 {
 	switch (width) {
 	case 0:

@@ -1,0 +1,107 @@
+.TH LIBSIMPLE_RAWMEMELEMMOVE 3 2018-11-25 libsimple
+.SH NAME
+libsimple_rawmemelemmove, libsimple_rawmemelemcpy \- copy or move elements within an array
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+static inline void *libsimple_rawmemelemmove(void *\fIdest\fP, const void *\fIsrc\fP, int \fIelem\fP, size_t \fIwidth\fP);
+static inline void *libsimple_rawmemelemcpy(void *\fIdest\fP, const void *\fIsrc\fP, int \fIelem\fP, size_t \fIwidth\fP);
+
+#ifndef rawmemelemmove
+# define rawmemelemmove libsimple_rawmemelemmove
+#endif
+#ifndef rawmemelemcpy
+# define rawmemelemcpy libsimple_rawmemelemcpy
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_rawmemelemmove ()
+and
+.BR libsimple_rawmemelemcpy ()
+functions copy all elements,
+each with the width
+.IR width ,
+in
+.I src
+to
+.I dest
+until the element
+.I elem
+(with size
+.IR width )
+has been copied.
+.PP
+The arrays may overlap in the
+.BR libsimple_rawmemelemmove ()
+function but not in the
+.BR libsimple_rawmemelemcpy ()
+function.
+.SH RETURN VALUE
+The
+.BR libsimple_rawmemelemmove ()
+and
+.BR libsimple_rawmemelemcpy ()
+functions return a pointer directly behind
+the position of the element
+.I elem
+in
+.I dest
+after it was copied. If the element
+.I elem
+does not exist in
+.IR src ,
+the behaviour is undefined.
+.SH ERRORS
+The
+.BR libsimple_rawmemelemmove ()
+and
+.BR libsimple_rawmemelemcpy ()
+functions cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_rawmemelemmove (),
+and
+.BR libsimple_rawmemelemcpy ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_rawmemelemmove (),
+and
+.BR libsimple_rawmemelemcpy ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_rawmemelemmove (),
+and
+.BR libsimple_rawmemelemcpy ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_memelemmove (3),
+.BR libsimple_mempmove (3),
+.BR libsimple_mempcpy (3),
+.BR libsimple_rawmemcmove (3),
+.BR memmove (3),
+.BR memcpy (3)

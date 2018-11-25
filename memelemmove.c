@@ -93,7 +93,7 @@ memelemmovex(char *restrict d, const char *restrict s, const char *restrict elem
 
 
 void *
-libsimple_memelemmove(void *d, const void *s, const void *restrict elem, size_t width, size_t n) /* TODO man */
+libsimple_memelemmove(void *d, const void *s, const void *restrict elem, size_t width, size_t n)
 {
 	switch (width) {
 	case 0:

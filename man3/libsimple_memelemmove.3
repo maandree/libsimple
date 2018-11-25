@@ -1,0 +1,111 @@
+.TH LIBSIMPLE_MEMELEMMOVE 3 2018-11-25 libsimple
+.SH NAME
+libsimple_memelemmove, libsimple_memelemcpy \- copy or move elements within an array
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+static inline void *libsimple_memelemmove(void *\fIdest\fP, const void *\fIsrc\fP, int \fIelem\fP, size_t \fIwidth\fP, size_t \fIn\fP);
+static inline void *libsimple_memelemcpy(void *\fIdest\fP, const void *\fIsrc\fP, int \fIelem\fP, size_t \fIwidth\fP, size_t \fIn\fP);
+
+#ifndef memelemmove
+# define memelemmove libsimple_memelemmove
+#endif
+#ifndef memelemcpy
+# define memelemcpy libsimple_memelemcpy
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_memelemmove ()
+and
+.BR libsimple_memelemcpy ()
+functions copy
+.I n
+elements,
+each with the width
+.IR width ,
+in
+.I src
+to
+.IR dest .
+However the copy stopes after the element
+.I elem
+(with size
+.IR width )
+has been copied.
+.PP
+The arrays may overlap in the
+.BR libsimple_memelemmove ()
+function but not in the
+.BR libsimple_memelemcpy ()
+function.
+.SH RETURN VALUE
+The
+.BR libsimple_memelemmove ()
+and
+.BR libsimple_memelemcpy ()
+functions return a pointer directly behind
+the position of the element
+.I elem
+in
+.I dest
+after it was copied. If the element
+.I elem
+was not copied
+.I NULL
+is returned.
+.SH ERRORS
+The
+.BR libsimple_memelemmove ()
+and
+.BR libsimple_memelemcpy ()
+functions cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_memelemmove (),
+and
+.BR libsimple_memelemcpy ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_memelemmove (),
+and
+.BR libsimple_memelemcpy ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_memelemmove (),
+and
+.BR libsimple_memelemcpy ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_rawmemelemmove (3),
+.BR libsimple_mempmove (3),
+.BR libsimple_mempcpy (3),
+.BR libsimple_strcmove (3),
+.BR libsimple_strncmove (3),
+.BR libsimple_memcmove (3),
+.BR memmove (3),
+.BR memcpy (3)

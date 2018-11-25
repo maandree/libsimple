@@ -54,7 +54,7 @@ rawmemelemcpyx(char *restrict d, const char *restrict s, const char *restrict el
 
 
 void *
-libsimple_rawmemelemcpy(void *restrict d, const void *restrict s, const void *restrict elem, size_t width) /* TODO man */
+libsimple_rawmemelemcpy(void *restrict d, const void *restrict s, const void *restrict elem, size_t width)
 {
 	switch (width) {
 	case 0:

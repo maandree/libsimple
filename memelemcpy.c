@@ -63,7 +63,7 @@ memelemcpyx(char *restrict d, const char *restrict s, const char *restrict elem,
 
 
 void *
-libsimple_memelemcpy(void *restrict d, const void *restrict s, const void *restrict elem, size_t size, size_t n) /* TODO man */
+libsimple_memelemcpy(void *restrict d, const void *restrict s, const void *restrict elem, size_t size, size_t n)
 {
 	switch (size) {
 	case 0:
