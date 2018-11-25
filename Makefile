@@ -176,6 +176,15 @@ OBJ =\
 	vweprintf.o\
 	libsimple.o
 
+MAN0 =\
+	man0/libsimple-arg.h.0\
+	man0/libsimple.h.0
+
+MAN3 =\
+	man3/libsimple_*.3\
+	man3/LIBSIMPLE_*.3\
+	man3/*.3libsimple
+
 TESTS = $(OBJ:.o=.test) libsimple-arg.test
 
 all: libsimple.a $(TESTS)
@@ -200,16 +209,21 @@ check: $(TESTS)
 install: libsimple.a
 	mkdir -p -- "$(DESTDIR)$(PREFIX)/lib"
 	mkdir -p -- "$(DESTDIR)$(PREFIX)/include/libsimple"
+	mkdir -p -- "$(DESTDIR)$(PREFIX)/share/man/man0"
+	mkdir -p -- "$(DESTDIR)$(PREFIX)/share/man/man3"
 	cp -- libsimple.a "$(DESTDIR)$(PREFIX)/lib"
 	cp -- libsimple.h "$(DESTDIR)$(PREFIX)/include"
 	cp -- libsimple-arg.h "$(DESTDIR)$(PREFIX)/include"
 	cp -- $(SUBHDR) "$(DESTDIR)$(PREFIX)/include/libsimple"
+	cp -- $(MAN0) "$(DESTDIR)$(PREFIX)/share/man/man0"
+	cp -P -- $(MAN3) "$(DESTDIR)$(PREFIX)/share/man/man3"
 
 uninstall:
 	-rm -f -- "$(DESTDIR)$(PREFIX)/lib/libsimple.a"
 	-rm -f -- "$(DESTDIR)$(PREFIX)/include/libsimple.h"
 	-rm -f -- "$(DESTDIR)$(PREFIX)/include/libsimple-arg.h"
 	-rm -rf -- "$(DESTDIR)$(PREFIX)/include/libsimple"
+	-cd -- "$(DESTDIR)$(PREFIX)/share/man" && rm -f -- $(MAN0) $(MAN3)
 
 clean:
 	-rm -rf -- *.o *.su *.a *.so *.so.* *.gch *.gcda *.gcno *.gcov *.lo *.test
