@@ -511,7 +511,7 @@ static inline char *libsimple_stpmove(char *__d, const char *__s)
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline char *
-libsimple_strset(char *__s, int __c_) /* TODO man */
+libsimple_strset(char *__s, int __c_)
 {
 	char __c = (char)__c_, *__r = __s;
 	while (*__s) *__s++ = __c;
@@ -531,7 +531,7 @@ libsimple_strset(char *__s, int __c_) /* TODO man */
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline char *
-libsimple_stpset(char *__s, int __c_) /* TODO man */
+libsimple_stpset(char *__s, int __c_)
 {
 	char __c = (char)__c_;
 	while (*__s) *__s++ = __c;

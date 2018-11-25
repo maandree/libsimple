@@ -584,7 +584,7 @@ libsimple_stpnmove(char *__d, const char *__s, size_t __n)
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline char *
-libsimple_strnset(char *__s, int __c_, size_t __n) /* TODO man */
+libsimple_strnset(char *__s, int __c_, size_t __n)
 {
 	char __c = (char)__c_, *__r = __s;
 	for (; __n && *__s; __n--) *__s++ = __c;
@@ -605,7 +605,7 @@ libsimple_strnset(char *__s, int __c_, size_t __n) /* TODO man */
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline char *
-libsimple_stpnset(char *__s, int __c_, size_t __n) /* TODO man */
+libsimple_stpnset(char *__s, int __c_, size_t __n)
 {
 	char __c = (char)__c_;
 	for (; __n && *__s; __n--) *__s++ = __c;

@@ -1,0 +1,89 @@
+.TH LIBSIMPLE_STRSET 3 2018-11-25 libsimple
+.SH NAME
+libsimple_strset, libsimple_stpset \- fill a string with a character
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+static inline char *libsimple_strset(char *\fIs\fP, int \fIc\fP);
+static inline char *libsimple_stpset(char *\fIs\fP, int \fIc\fP);
+
+#ifndef strset
+# define strset libsimple_strset
+#endif
+#ifndef stpset
+# define stpset libsimple_stpset
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_strset ()
+and
+.BR libsimple_stpset ()
+functions replace all characters in the string
+.I s
+with the character
+.IR c .
+.SH RETURN VALUE
+The
+.BR libsimple_strset ()
+function returns the pointer
+.IR s .
+The
+.BR libsimple_strset ()
+function returns the end of
+.I s
+(that is
+.IR &s[strlen(s)] ,
+as evaluated before the function call.
+.SH ERRORS
+The
+.BR libsimple_strset ()
+and
+.BR libsimple_stpset ()
+functions cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_strset (),
+.br
+.BR libsimple_stpset ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_strset (),
+.br
+.BR libsimple_stpset ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_strset (),
+.br
+.BR libsimple_stpset ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_strnset (3),
+.BR libsimple_mempset (3),
+.BR strcpy (3),
+.BR stpcpy (3),
+.BR memset (3)
