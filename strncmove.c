@@ -4,7 +4,7 @@
 
 
 char *
-libsimple_strncmove(char *d, const char *s, int c_, size_t n) /* TODO man */
+libsimple_strncmove(char *d, const char *s, int c_, size_t n)
 {
 	char c = (char)c_, *p, *end = &d[n];
 	if (d <= s) {

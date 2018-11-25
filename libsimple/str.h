@@ -554,7 +554,7 @@ libsimple_stpset(char *__s, int __c_)
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline char *
-libsimple_strccpy(char *restrict __d, const char *restrict __s, int __c_) /* TODO man */
+libsimple_strccpy(char *restrict __d, const char *restrict __s, int __c_)
 {
 	char __c = (char)__c_;
 	do {

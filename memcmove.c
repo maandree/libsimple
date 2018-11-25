@@ -4,7 +4,7 @@
 
 
 void *
-libsimple_memcmove(void *d_, const void *s_, int c_, size_t n) /* TODO man */
+libsimple_memcmove(void *d_, const void *s_, int c_, size_t n)
 {
 	char *d = d_, c = (char)c_, *p;
 	const char *s = s_;

@@ -613,7 +613,7 @@ static inline void *libsimple_mempset(void *__s, int __c, size_t __n)
  * @return     `&rawmemchr(d, c)[1]` (after copying)
  */
 static inline void *
-libsimple_rawmemccpy(void *restrict __d_, const void *restrict __s_, int __c_) /* TODO man */
+libsimple_rawmemccpy(void *restrict __d_, const void *restrict __s_, int __c_)
 {
 	char __c = (char)__c_, *restrict __d = __d_;
 	const char *restrict __s = __s_;
@@ -656,7 +656,7 @@ void *libsimple_memcmove(void *, const void *, int, size_t);
  * @return     `&rawmemchr(d, c)[1]` (after copying)
  */
 static inline void *
-libsimple_rawmemcmove(void *__d_, const void *__s_, int __c_) /* TODO man */
+libsimple_rawmemcmove(void *__d_, const void *__s_, int __c_)
 {
 	char *__d = __d_, *__p, __c = (char)__c_;
 	const char *__s = __s_;

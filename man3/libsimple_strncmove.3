@@ -1,0 +1,114 @@
+.TH LIBSIMPLE_STRNCMOVE 3 2018-11-25 libsimple
+.SH NAME
+libsimple_strncmove, libsimple_strnccpy \- copy or move a string within an array of bytes
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+char *libsimple_strncmove(char *\fIdest\fP, const char *\fIsrc\fP, int \fIc\fP, size_t \fIn\fP);
+static inline char *libsimple_strnccpy(char *restrict \fIdest\fP, const char *restrict \fIsrc\fP, int \fIc\fP, size_t \fIn\fP);
+
+#ifndef strncmove
+# define strncmove libsimple_strncmove
+#endif
+#ifndef strnccpy
+# define strnccpy libsimple_strnccpy
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_strncmove ()
+and
+.BR libsimple_strnccpy ()
+functions copy the string, including the
+NUL byte that terminates it,
+.I src
+into
+.IR dest .
+However the copying stops directly after that character
+.I c
+(it is converted to a
+.BR char )
+is copied or after
+.I n
+characters have been copied. A NUL byte is written after
+the last copied character unless
+.I n
+chracters have been copied.
+.PP
+The arrays may overlap in the
+.BR libsimple_strncmove ()
+function but not in the
+.BR libsimple_strnccpy ()
+function.
+.PP
+The comparison is case-sensitive.
+.SH RETURN VALUE
+The
+.BR libsimple_strncmove ()
+and
+.BR libsimple_strnccpy ()
+functions return a pointer directly behind
+the position of the character
+.I c
+in the string
+.I dest
+after it was copied, if the character
+.I c
+was not copied
+.I NULL
+is returned.
+.SH ERRORS
+The
+.BR libsimple_strncmove ()
+and
+.BR libsimple_strnccpy ()
+functions cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_strncmove (),
+.br
+.BR libsimple_strnccpy ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_strncmove (),
+.br
+.BR libsimple_strnccpy ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_strncmove (),
+.br
+.BR libsimple_strnccpy ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_strnmove (3),
+.BR libsimple_stpnmove (3),
+.BR libsimple_strcmove (3),
+.BR libsimple_memcmove (3),
+.BR libsimple_memelemmove (3),
+.BR strncpy (3),
+.BR stpncpy (3),
+.BR memccpy (3),

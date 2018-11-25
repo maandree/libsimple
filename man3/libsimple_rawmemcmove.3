@@ -1,0 +1,108 @@
+.TH LIBSIMPLE_RAWMEMCMOVE 3 2018-11-25 libsimple
+.SH NAME
+libsimple_rawmemcmove, libsimple_rawmemccpy \- copy or move bytes within an array of bytes
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+static inline void *libsimple_rawmemcmove(void *\fIdest\fP, const void *\fIsrc\fP, int \fIc\fP);
+static inline void *libsimple_rawmemccpy(void *\fIdest\fP, const void *\fIsrc\fP, int \fIc\fP);
+
+#ifndef rawmemcmove
+# define rawmemcmove libsimple_rawmemcmove
+#endif
+#ifndef rawmemccpy
+# define rawmemccpy libsimple_rawmemccpy
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_rawmemcmove ()
+and
+.BR libsimple_rawmemccpy ()
+functions all bytes in
+.I src
+to
+.IR dest
+until the character
+.I c
+(it is converted to a
+.BR char )
+has been copied.
+.PP
+The arrays may overlap in the
+.BR libsimple_rawmemcmove ()
+function but not in the
+.BR libsimple_rawmemccpy ()
+function.
+.PP
+The comparison is case-sensitive.
+.SH RETURN VALUE
+The
+.BR libsimple_rawmemcmove ()
+and
+.BR libsimple_rawmemccpy ()
+functions return a pointer directly behind
+the position of the character
+.I c
+in
+.I dest
+after it was copied. If the character
+.I c
+does not exist in
+.IR src ,
+the behaviour is undefined.
+.SH ERRORS
+The
+.BR libsimple_rawmemcmove ()
+and
+.BR libsimple_rawmemccpy ()
+functions cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_rawmemcmove (),
+and
+.BR libsimple_rawmemccpy ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_rawmemcmove (),
+and
+.BR libsimple_rawmemccpy ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_rawmemcmove (),
+and
+.BR libsimple_rawmemccpy ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_memcmove (3),
+.BR libsimple_mempmove (3),
+.BR libsimple_mempcpy (3),
+.BR libsimple_strcmove (3),
+.BR libsimple_strncmove (3),
+.BR libsimple_rawmemelemmove (3),
+.BR memmove (3),
+.BR memcpy (3)

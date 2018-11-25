@@ -1,0 +1,109 @@
+.TH LIBSIMPLE_STRCMOVE 3 2018-11-25 libsimple
+.SH NAME
+libsimple_strcmove, libsimple_strccpy \- copy or move a string within an array of bytes
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+char *libsimple_strcmove(char *\fIdest\fP, const char *\fIsrc\fP, int \fIc\fP);
+static inline char *libsimple_strccpy(char *restrict \fIdest\fP, const char *restrict \fIsrc\fP, int \fIc\fP);
+
+#ifndef strcmove
+# define strcmove libsimple_strcmove
+#endif
+#ifndef strccpy
+# define strccpy libsimple_strccpy
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_strcmove ()
+and
+.BR libsimple_strccpy ()
+functions copy the string, including the
+NUL byte that terminates it,
+.I src
+into
+.IR dest .
+However the copying stops directly after that character
+.I c
+(it is converted to a
+.BR char )
+is copied, and a NUL byte is written behind it.
+.PP
+The arrays may overlap in the
+.BR libsimple_strcmove ()
+function but not in the
+.BR libsimple_strccpy ()
+function.
+.PP
+The comparison is case-sensitive.
+.SH RETURN VALUE
+The
+.BR libsimple_strcmove ()
+and
+.BR libsimple_strccpy ()
+functions return a pointer directly behind
+the position of the character
+.I c
+in the string
+.I dest
+after it was copied, if the character
+.I c
+was not copied
+.I NULL
+is returned.
+.SH ERRORS
+The
+.BR libsimple_strcmove ()
+and
+.BR libsimple_strccpy ()
+functions cannot fail.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_strcmove (),
+.br
+.BR libsimple_strccpy ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_strcmove (),
+.br
+.BR libsimple_strccpy ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_strcmove (),
+.br
+.BR libsimple_strccpy ()
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_strmove (3),
+.BR libsimple_stpmove (3),
+.BR libsimple_strncmove (3),
+.BR libsimple_memcmove (3),
+.BR libsimple_memelemmove (3),
+.BR strcpy (3),
+.BR stpcpy (3),
+.BR memccpy (3),

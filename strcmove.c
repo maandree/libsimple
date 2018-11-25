@@ -4,7 +4,7 @@
 
 
 char *
-libsimple_strcmove(char *d, const char *s, int c_) /* TODO man */
+libsimple_strcmove(char *d, const char *s, int c_)
 {
 	char c = (char)c_, *p;
 	size_t n;

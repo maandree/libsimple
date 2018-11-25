@@ -630,7 +630,7 @@ libsimple_stpnset(char *__s, int __c_, size_t __n)
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline char *
-libsimple_strnccpy(char *restrict __d, const char *restrict __s, int __c_, size_t __n) /* TODO man */
+libsimple_strnccpy(char *restrict __d, const char *restrict __s, int __c_, size_t __n)
 {
 	char __c = (char)__c_, *__end = &__d[__n];
 	do {
