@@ -9,7 +9,7 @@
  * @return  :wchar_t *         Duplicate of `s` with automatic storage
  */
 #if defined(__GNUC__) || defined(__clang__)
-# define libsimple_aligned_wcsdupa(s, alignment) /* TODO test, man */\
+# define libsimple_aligned_wcsdupa(s, alignment) /* TODO test */\
 	({\
 		const wchar_t *__s = (s);\
 		size_t __n = wcslen(__s) + 1;\
@@ -37,7 +37,7 @@
  * @return             Duplicate of `s`, `NULL` on failure
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __nonnull__, __warn_unused_result__)))
-static inline wchar_t *libsimple_aligned_wcsdup(const wchar_t * __s, size_t __alignment) /* TODO test, man */
+static inline wchar_t *libsimple_aligned_wcsdup(const wchar_t * __s, size_t __alignment) /* TODO test */
 { return libsimple_aligned_wmemdup(__s, __alignment, wcslen(__s) + 1); }
 #ifndef aligned_wcsdup
 # define aligned_wcsdup libsimple_aligned_wcsdup
@@ -53,7 +53,7 @@ static inline wchar_t *libsimple_aligned_wcsdup(const wchar_t * __s, size_t __al
  * @return             Duplicate of `s`
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(3), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
-wchar_t *libsimple_enaligned_wcsdup(int, const wchar_t *, size_t); /* TODO man */
+wchar_t *libsimple_enaligned_wcsdup(int, const wchar_t *, size_t);
 #ifndef enaligned_wcsdup
 # define enaligned_wcsdup libsimple_enaligned_wcsdup
 #endif
@@ -67,7 +67,7 @@ wchar_t *libsimple_enaligned_wcsdup(int, const wchar_t *, size_t); /* TODO man *
  * @return             Duplicate of `s`
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
-static inline wchar_t *libsimple_ealigned_wcsdup(const wchar_t *__s, size_t __alignment) /* TODO test, man */
+static inline wchar_t *libsimple_ealigned_wcsdup(const wchar_t *__s, size_t __alignment) /* TODO test */
 { return libsimple_enaligned_wcsdup(libsimple_default_failure_exit, __s, __alignment); }
 #ifndef ealigned_wcsdup
 # define ealigned_wcsdup libsimple_ealigned_wcsdup

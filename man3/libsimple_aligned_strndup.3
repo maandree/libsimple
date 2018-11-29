@@ -1,0 +1,154 @@
+.TH LIBSIMPLE_ALIGNED_STRNDUP 3 2018-11-27 libsimple
+.SH NAME
+libsimple_aligned_strndup, libsimple_aligned_strndupa \- duplicate a string
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+char *libsimple_aligned_strndupa(const char *\fIs\fP, size_t \fIalignment\fP, size_t \fIn\fP);
+char *libsimple_aligned_strndup(const char *\fIs\fP, size_t \fIalignment\fP, size_t \fIn\fP);
+char *libsimple_enaligned_strndup(int \fIstatus\fP, const char *\fIs\fP, size_t \fIalignment\fP, size_t \fIn\fP);
+static inline char *libsimple_ealigned_strndup(const char *\fIs\fP, size_t \fIalignment\fP, size_t \fIn\fP);
+
+#ifndef aligned_strndupa
+# define aligned_strndupa libsimple_aligned_strndupa
+#endif
+#ifndef aligned_strndup
+# define aligned_strndup libsimple_aligned_strndup
+#endif
+#ifndef enaligned_strndup
+# define enaligned_strndup libsimple_enaligned_strndup
+#endif
+#ifndef ealigned_strndup
+# define ealigned_strndup libsimple_ealigned_strndup
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_aligned_strndup ()
+function allocates memory with the alignment
+specified in the
+.I alignment
+parameter and copies the string
+.I s
+into the new allocation, up to the
+.IR n th
+byte. A NUL byte will always be written
+to the end of the new string.
+.PP
+The
+.BR libsimple_enaligned_strndup ()
+and
+.BR libsimple_ealigned_strndup ()
+functions are versions of the
+.BR libsimple_aligned_strndup ()
+function that call the
+.BR libsimple_enprintf (3)
+function on failure, causing the process to print
+an error message and exit. See
+.BR libsimple_enprintf (3)
+for more information.
+.PP
+The
+.BR libsimple_strndupa ()
+function is implemented as a macro and is a version
+of the
+.BR libsimple_strndup ()
+function that uses allocates the memory on the stack
+rather than on the heap, causing the return pointer
+to become invalid when the calling function returns.
+It is only available when compling with GCC or Clang.
+.SH RETURN VALUE
+Upon successful completion, the
+.BR libsimple_aligned_strndupa (),
+.BR libsimple_aligned_strndup (),
+.BR libsimple_enaligned_strndup (),
+and
+.BR libsimple_ealigned_strndup ()
+functions return a non-null pointer, on failure the
+.BR libsimple_aligned_strndup ()
+function returns
+.B NULL
+and set
+.I errno
+to indicate the error, and the
+.BR libsimple_enaligned_strndup (),
+and
+.BR libsimple_ealigned_strndup ()
+functions exit the process. The
+.BR libsimple_aligned_strndupa ()
+function cannot fail, however the kernel
+can kill the thread, and possibly the process, with a
+.B SIGSEGV
+signal if the memory cannot be allocated.
+.PP
+The returned pointer should be deallocated when it
+is no longer needed, except for the pointer returned
+by the
+.BR libsimple_aligned_strndupa ()
+function, it is automatically deallocated when the
+calling function returns.
+.SH ERRORS
+The
+.BR libsimple_aligned_strndup ()
+function may fail for any reason specified for the
+.BR aligned_alloc (3)
+function.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_aligned_strndupa (),
+.br
+.BR libsimple_aligned_strndup (),
+.br
+.BR libsimple_enaligned_strndup (),
+.br
+.BR libsimple_ealigned_strndup (),
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_aligned_strndupa (),
+.br
+.BR libsimple_aligned_strndup (),
+.br
+.BR libsimple_enaligned_strndup (),
+.br
+.BR libsimple_ealigned_strndup (),
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_aligned_strndupa (),
+.br
+.BR libsimple_aligned_strndup (),
+.br
+.BR libsimple_enaligned_strndup (),
+.br
+.BR libsimple_ealigned_strndup (),
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_aligned_strdup (3),
+.BR libsimple_aligned_memdup (3),
+.BR libsimple_aligned_wcsdup (3),
+.BR libsimple_aligned_wcsndup (3),
+.BR libsimple_aligned_wmemdup (3),
+.BR strndup (3)

@@ -21,10 +21,10 @@ and <strings.h>, the naming scheme of these functions is:
 	       = wcsn		for wide-character strings that may not be NUL-terminated
 	       = wmem		for wide-character arrays
 
-	<str>  = str		if <base> is str, wsc, strn, or wscn
+	<str>  = str		if <base> is str, wcs, strn, or wcsn
 	       = mem		if <base> is mem or wmem
 
-	<scan> = chrnul		if <base> is str, wsc, strn, or wscn
+	<scan> = chrnul		if <base> is str, wcs, strn, or wcsn
 	       = scan		if <base> is mem or wmem
 
 	[case] = 		if case-sensitive

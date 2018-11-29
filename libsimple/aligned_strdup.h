@@ -9,7 +9,7 @@
  * @return  :char *           Duplicate of `s` with automatic storage
  */
 #if defined(__GNUC__) || defined(__clang__)
-# define libsimple_aligned_strdupa(s, alignment) /* TODO test, man */\
+# define libsimple_aligned_strdupa(s, alignment) /* TODO test */\
 	({\
 		const char *__s = (s);\
 		size_t __n = strlen(__s) + 1;\
@@ -37,7 +37,7 @@
  * @return             Duplicate of `s`, `NULL` on failure
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __nonnull__, __warn_unused_result__)))
-static inline char *libsimple_aligned_strdup(const char * __s, size_t __alignment) /* TODO test, man */
+static inline char *libsimple_aligned_strdup(const char * __s, size_t __alignment) /* TODO test */
 { return libsimple_aligned_memdup(__s, __alignment, strlen(__s) + 1); }
 #ifndef aligned_strdup
 # define aligned_strdup libsimple_aligned_strdup
@@ -53,7 +53,7 @@ static inline char *libsimple_aligned_strdup(const char * __s, size_t __alignmen
  * @return             Duplicate of `s`
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(3), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
-char *libsimple_enaligned_strdup(int, const char *, size_t); /* TODO man */
+char *libsimple_enaligned_strdup(int, const char *, size_t);
 #ifndef enaligned_strdup
 # define enaligned_strdup libsimple_enaligned_strdup
 #endif
@@ -67,7 +67,7 @@ char *libsimple_enaligned_strdup(int, const char *, size_t); /* TODO man */
  * @return             Duplicate of `s`
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
-static inline char *libsimple_ealigned_strdup(const char *__s, size_t __alignment) /* TODO man */
+static inline char *libsimple_ealigned_strdup(const char *__s, size_t __alignment)
 { return libsimple_enaligned_strdup(libsimple_default_failure_exit, __s, __alignment); }
 #ifndef ealigned_strdup
 # define ealigned_strdup libsimple_ealigned_strdup

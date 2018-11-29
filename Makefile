@@ -7,6 +7,7 @@ SUBHDR =\
 	libsimple/aligned_alloc.h\
 	libsimple/aligned_allocz.h\
 	libsimple/aligned_memdup.h\
+	libsimple/aligned_realloc.h\
 	libsimple/aligned_strdup.h\
 	libsimple/aligned_strndup.h\
 	libsimple/aligned_wcsdup.h\
@@ -49,6 +50,8 @@ HDR =\
 OBJ =\
 	aligned_memdup.o\
 	aligned_strndup.o\
+	aligned_wcsndup.o\
+	aligned_wmemdup.o\
 	allocn.o\
 	asprintf.o\
 	difftimespec.o\
@@ -57,6 +60,8 @@ OBJ =\
 	doubletotimeval.o\
 	enaligned_allocz.o\
 	enaligned_memdup.o\
+	enaligned_realloc.o\
+	enaligned_reallocarray.o\
 	enaligned_strdup.o\
 	enaligned_strndup.o\
 	encalloc.o\
@@ -64,9 +69,11 @@ OBJ =\
 	enmemdup.o\
 	enposix_memalignz.o\
 	enrealloc.o\
+	enreallocarray.o\
 	enstrdup.o\
 	enstrndup.o\
 	envaligned_alloczn.o\
+	envaligned_reallocn.o\
 	envmalloczn.o\
 	envmemalloc.o\
 	envposix_memalignzn.o\
@@ -186,6 +193,8 @@ OBJ =\
 	vmemalloc.o\
 	vputenvf.o\
 	vweprintf.o\
+	wcsndup.o\
+	wmemdup.o\
 	libsimple.o
 
 MAN0 =\

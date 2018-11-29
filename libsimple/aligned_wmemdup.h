@@ -10,7 +10,7 @@
  * @return  :wchar_t *         Duplicate of `s` with automatic storage
  */
 #if defined(__GNUC__) || defined(__clang__)
-# define libsimple_aligned_wmemdupa(s, alignment, n) /* TODO test, man */\
+# define libsimple_aligned_wmemdupa(s, alignment, n) /* TODO test */\
 	({\
 		const wchar_t *__s = (s);\
 		size_t __n = (n);\
@@ -40,8 +40,8 @@
  * @param   n          The number of wide characters to copy
  * @return             Duplicate of `s`, `NULL` on failure
  */	
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_size__(3), __nonnull__, __warn_unused_result__)))
-wchar_t *libsimple_aligned_wmemdup(const wchar_t *, size_t, size_t); /* TODO man */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __alloc_size__(3), __nonnull__, __warn_unused_result__)))
+wchar_t *libsimple_aligned_wmemdup(const wchar_t *, size_t, size_t);
 #ifndef aligned_wmemdup
 # define aligned_wmemdup libsimple_aligned_wmemdup
 #endif
@@ -56,8 +56,8 @@ wchar_t *libsimple_aligned_wmemdup(const wchar_t *, size_t, size_t); /* TODO man
  * @param   n          The number of wide characters to copy
  * @return             Duplicate of `s`
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_size__(4), __warn_unused_result__, __returns_nonnull__)))
-wchar_t *libsimple_enaligned_wmemdup(int, const wchar_t *, size_t, size_t); /* TODO man */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(3), __alloc_size__(4), __warn_unused_result__, __returns_nonnull__)))
+wchar_t *libsimple_enaligned_wmemdup(int, const wchar_t *, size_t, size_t);
 #ifndef enaligned_wmemdup
 # define enaligned_wmemdup libsimple_enaligned_wmemdup
 #endif
@@ -71,8 +71,8 @@ wchar_t *libsimple_enaligned_wmemdup(int, const wchar_t *, size_t, size_t); /* T
  * @param   n          The number of wide characters to copy
  * @return             Duplicate of `s`
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_size__(3), __warn_unused_result__, __returns_nonnull__)))
-static inline wchar_t *libsimple_ealigned_wmemdup(const wchar_t *__s, size_t __alignment, size_t __n) /* TODO test, man */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __alloc_size__(3), __warn_unused_result__, __returns_nonnull__)))
+static inline wchar_t *libsimple_ealigned_wmemdup(const wchar_t *__s, size_t __alignment, size_t __n) /* TODO test */
 { return libsimple_enaligned_wmemdup(libsimple_default_failure_exit, __s, __alignment, __n); }
 #ifndef ealigned_wmemdup
 # define ealigned_wmemdup libsimple_ealigned_wmemdup

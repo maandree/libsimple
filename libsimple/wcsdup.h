@@ -8,7 +8,7 @@
  * @return  :wchar_t *         Duplicate of `s` with automatic storage
  */
 #if defined(__GNUC__) || defined(__clang__)
-# define libsimple_wcsdupa(s) /* TODO test, man */\
+# define libsimple_wcsdupa(s)\
 	({\
 		const wchar_t *__s = (s);\
 		size_t __n = wcslen(__s) + 1;\
@@ -28,8 +28,9 @@
  * @param   s       The string to copy
  * @return          Duplicate of `s`
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __nonnull__, __warn_unused_result__, __returns_nonnull__)))
-wchar_t *libsimple_enwcsdup(int, const wchar_t *); /* TODO man */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, _libsimple_assume_aligned_as(wchar_t), __nonnull__,
+                                   __warn_unused_result__, __returns_nonnull__)))
+wchar_t *libsimple_enwcsdup(int, const wchar_t *);
 #ifndef enwcsdup
 # define enwcsdup libsimple_enwcsdup
 #endif
@@ -41,8 +42,9 @@ wchar_t *libsimple_enwcsdup(int, const wchar_t *); /* TODO man */
  * @param   s  The string to copy
  * @return     Duplicate of `s`
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __nonnull__, __warn_unused_result__, __returns_nonnull__)))
-static inline wchar_t *libsimple_ewcsdup(const wchar_t *__s) /* TODO man */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, _libsimple_assume_aligned_as(wchar_t),
+                                   __nonnull__, __warn_unused_result__, __returns_nonnull__)))
+static inline wchar_t *libsimple_ewcsdup(const wchar_t *__s)
 { return enwcsdup(libsimple_default_failure_exit, __s); }
 #ifndef ewcsdup
 # define ewcsdup libsimple_ewcsdup

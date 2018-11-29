@@ -9,7 +9,7 @@
  * @return  :wchar_t *         Duplicate of `s` with automatic storage
  */
 #if defined(__GNUC__) || defined(__clang__)
-# define libsimple_wcsndupa(s, n) /* TODO test, man */\
+# define libsimple_wcsndupa(s, n) /* TODO test */\
 	({\
 		const wchar_t *__s = (s);\
 		size_t __n = wcsnlen(__s, n);\
@@ -32,8 +32,9 @@
  * @param   n  The maximum number of wide characters to copy
  * @return     Duplicate of `s`
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __nonnull__, __warn_unused_result__, __returns_nonnull__)))
-wchar_t *libsimple_wcsndup(const wchar_t *, size_t); /* TODO man */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, _libsimple_assume_aligned_as(wchar_t), __nonnull__,
+                                   __warn_unused_result__, __returns_nonnull__)))
+wchar_t *libsimple_wcsndup(const wchar_t *, size_t);
 #ifndef wcsndup
 # define wcsndup libsimple_wcsndup
 #endif
@@ -47,8 +48,9 @@ wchar_t *libsimple_wcsndup(const wchar_t *, size_t); /* TODO man */
  * @param   n       The maximum number of wide characters to copy
  * @return          Duplicate of `s`
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __nonnull__, __warn_unused_result__, __returns_nonnull__)))
-wchar_t *libsimple_enwcsndup(int, const wchar_t *, size_t); /* TODO man */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, _libsimple_assume_aligned_as(wchar_t), __nonnull__,
+                                   __warn_unused_result__, __returns_nonnull__)))
+wchar_t *libsimple_enwcsndup(int, const wchar_t *, size_t);
 #ifndef enwcsndup
 # define enwcsndup libsimple_enwcsndup
 #endif
@@ -61,8 +63,9 @@ wchar_t *libsimple_enwcsndup(int, const wchar_t *, size_t); /* TODO man */
  * @param   n  The maximum number of wide characters to copy
  * @return     Duplicate of `s`
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __nonnull__, __warn_unused_result__, __returns_nonnull__)))
-static inline wchar_t *libsimple_ewcsndup(const wchar_t *__s, size_t __n) /* TODO test, man */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, _libsimple_assume_aligned_as(wchar_t),
+                                   __nonnull__, __warn_unused_result__, __returns_nonnull__)))
+static inline wchar_t *libsimple_ewcsndup(const wchar_t *__s, size_t __n) /* TODO test */
 { return libsimple_enwcsndup(libsimple_default_failure_exit, __s, __n); }
 #ifndef ewcsndup
 # define ewcsndup libsimple_ewcsndup

@@ -10,7 +10,7 @@ libsimple_aligned_wmemdup(const wchar_t *s, size_t alignment, size_t n)
 	void *ret;
 	if (LIBSIMPLE_UMUL_OVERFLOW_NONZERO(n, sizeof(wchar_t), &size, SIZE_MAX)) {
 		errno = ENOMEM;
-		enprintf(status, "wcsdup:");
+		return NULL;
 	}
 	size = size + (alignment - size % alignment) % alignment;
 	ret = aligned_alloc(alignment, size ? size : alignment);

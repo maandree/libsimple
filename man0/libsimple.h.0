@@ -268,7 +268,201 @@ new pointer with a custom alignment.
 
 .TP
 .BR libsimple_aligned_memdupa (3)
-Duplicate an array of bytes onto the stack.
+Duplicate an array of bytes onto the stack,
+with custom alignment.
+
+.TP
+.BR libsimple_aligned_realloc (3),
+.RS 0
+.BR libsimple_ealigned_realloc (3),
+.br
+.BR libsimple_enaligned_realloc (3)
+.RE
+.RS
+Version of
+.BR realloc (3)
+with custom alignment.
+.RE
+
+.TP
+.BR libsimple_aligned_reallocf (3)
+Version of
+.BR realloc (3)
+with custom alignment that deallocates
+the pointer on failure.
+
+.TP
+.BR libsimple_aligned_reallocarray (3),
+.RS 0
+.BR libsimple_ealigned_reallocarray (3),
+.br
+.BR libsimple_enaligned_reallocarray (3)
+.RE
+.RS
+Version of
+.BR realloc (3)
+with custom alignment that, like
+.BR calloc (3),
+takes two size arguments.
+.RE
+
+.TP
+.BR libsimple_aligned_reallocarrayf (3)
+Version of
+.BR realloc (3)
+with custom alignment that, like
+.BR calloc (3),
+takes two size arguments, and that
+deallocates the pointer on failure.
+
+.TP
+.BR libsimple_aligned_reallocfn (3),
+.RS 0
+.BR libsimple_valigned_reallocfn (3)
+.RE
+.RS
+Version of
+.BR realloc (3)
+that take the product of multiple arguments
+as the allocation size, and that
+deallocates the pointer on failure.
+.RE
+
+.TP
+.BR libsimple_aligned_reallocn (3),
+.RS 0
+.BR libsimple_ealigned_reallocn (3),
+.br
+.BR libsimple_enaligned_reallocn (3),
+.br
+.BR libsimple_valigned_reallocn (3),
+.br
+.BR libsimple_evaligned_reallocn (3),
+.br
+.BR libsimple_envaligned_reallocn (3)
+.RE
+.RS
+Version of
+.BR realloc (3)
+that take the product of multiple arguments
+as the allocation size.
+.RE
+
+.TP
+.BR libsimple_reallocarray (3),
+.RS 0
+.BR libsimple_ereallocarray (3),
+.br
+.BR libsimple_enreallocarray (3)
+.RE
+.RS
+Version of
+.BR realloc (3)
+that, like
+.BR calloc (3),
+takes to size arguments.
+.RE
+
+.TP
+.BR libsimple_reallocarrayf (3)
+Version of
+.BR realloc (3)
+that, like
+.BR calloc (3),
+takes to size arguments, and that
+deallocates the pointer on failure.
+
+.TP
+.BR libsimple_reallocf (3)
+Version of
+.BR realloc (3)
+that deallocates the pointer on failure.
+
+.TP
+.BR libsimple_reallocfn (3),
+.RS 0
+.BR libsimple_vreallocfn (3)
+.RE
+.RS
+Version of
+.BR realloc (3)
+that take the product of multiple arguments
+as the allocation size, and that
+deallocates the pointer on failure.
+.RE
+
+.TP
+.BR libsimple_aligned_strdup (3),
+.RS 0
+.BR libsimple_ealigned_strdup (3),
+.br
+.BR libsimple_enaligned_strdup (3),
+.br
+.BR libsimple_aligned_strndup (3),
+.br
+.BR libsimple_ealigned_strndup (3),
+.br
+.BR libsimple_enaligned_strndup (3)
+.RE
+.RS
+Duplicate a string into a new pointer
+with a custom alignment.
+.RE
+
+.TP
+.BR libsimple_aligned_strdupa (3),
+.RS 0
+.BR libsimple_aligned_strndupa (3)
+.RE
+.RS
+Duplicate a string onto the stack,
+with custom alignment.
+.RE
+
+.TP
+.BR libsimple_aligned_wcsdup (3),
+.RS 0
+.BR libsimple_ealigned_wcsdup (3),
+.br
+.BR libsimple_enaligned_wcsdup (3),
+.br
+.BR libsimple_aligned_wcsndup (3),
+.br
+.BR libsimple_ealigned_wcsndup (3),
+.br
+.BR libsimple_enaligned_wcsndup (3)
+.RE
+.RS
+Duplicate a wide-character string into a
+new pointer with a custom alignment.
+.RE
+
+.TP
+.BR libsimple_aligned_wcsdupa (3),
+.RS 0
+.BR libsimple_aligned_wcsndupa (3)
+.RE
+.RS
+Duplicate a wide-character string onto
+the stack, with custom alignment.
+.RE
+
+.TP
+.BR libsimple_aligned_wmemdup (3),
+.RS 0
+.BR libsimple_ealigned_wmemdup (3),
+.br
+.BR libsimple_enaligned_wmemdup (3)
+.RE
+.RS
+Duplicate an array of wide characters into
+a new pointer with a custom alignment.
+.RE
+
+.TP
+.BR libsimple_aligned_wmemdupa (3)
+Duplicate an array of wide characters onto
+the stack, with custom alignment.
 
 .TP
 .BR libsimple_asprintf (3),
@@ -285,7 +479,8 @@ Format a string and allocate a sufficient large string.
 .BR libsimple_vasprintfa (3)
 .RE
 .RS
-Format a string and allocate a sufficient large string onto the stack.
+Format a string and allocate a sufficient large
+string onto the stack.
 .RE
 
 .TP
@@ -1534,6 +1729,52 @@ Versions of
 .BR libsimple_valloc (3)
 that take the product of multiple arguments as the
 allocation size and conditionally initialises the memory.
+.RE
+
+.TP
+.BR libsimple_ewcsdup (3),
+.RS 0
+.BR libsimple_enwcsdup (3),
+.br
+.BR libsimple_wcsndup (3),
+.br
+.BR libsimple_ewcsndup (3),
+.br
+.BR libsimple_enwcsndup (3)
+.RE
+.RS
+Duplicate a wide-character string.
+.RE
+
+.TP
+.BR libsimple_wcsdupa (3),
+.RS 0
+.BR libsimple_wcsndupa (3)
+.RE
+.RS
+Versions of
+.BR wcsdup (3),
+and
+.BR libsimple_wcsndup (3)
+that allocate the string on the stack.
+.RE
+
+.TP
+.BR libsimple_wmemdup (3),
+.RS 0
+.BR libsimple_ewmemdup (3),
+.br
+.BR libsimple_enwmemdup (3)
+.RE
+.RS
+Duplicate an array of wide character.
+.RE
+
+.TP
+.BR libsimple_wmemdupa (3)
+Version of
+.BR libsimple_wmemdup (3)
+that allocate the string on the stack.
 .RE
 
 .SH APPLICATION USAGE

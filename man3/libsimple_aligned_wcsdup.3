@@ -1,0 +1,151 @@
+.TH LIBSIMPLE_ALIGNED_WCSDUP 3 2018-11-27 libsimple
+.SH NAME
+libsimple_aligned_wcsdup, libsimple_aligned_wcsdupa \- duplicate a wide-character string
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+wchar_t *libsimple_aligned_wcsdupa(const wchar_t *\fIs\fP, size_t \fIalignment\fP);
+wchar_t *libsimple_aligned_wcsdup(const wchar_t *\fIs\fP, size_t \fIalignment\fP);
+wchar_t *libsimple_enaligned_wcsdup(int \fIstatus\fP, const wchar_t *\fIs\fP, size_t \fIalignment\fP);
+static inline wchar_t *libsimple_ealigned_wcsdup(const wchar_t *\fIs\fP, size_t \fIalignment\fP);
+
+#ifndef aligned_wcsdupa
+# define aligned_wcsdupa libsimple_aligned_wcsdupa
+#endif
+#ifndef aligned_wcsdup
+# define aligned_wcsdup libsimple_aligned_wcsdup
+#endif
+#ifndef enaligned_wcsdup
+# define enaligned_wcsdup libsimple_enaligned_wcsdup
+#endif
+#ifndef ealigned_wcsdup
+# define ealigned_wcsdup libsimple_ealigned_wcsdup
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_aligned_wcsdup ()
+function allocates memory with the alignment
+specified in the
+.I alignment
+parameter and copies the wide-character string
+.I s
+into the new allocation.
+.PP
+The
+.BR libsimple_enaligned_wcsdup ()
+and
+.BR libsimple_ealigned_wcsdup ()
+functions are versions of the
+.BR libsimple_aligned_wcsdup ()
+function that call the
+.BR libsimple_enprintf (3)
+function on failure, causing the process to print
+an error message and exit. See
+.BR libsimple_enprintf (3)
+for more information.
+.PP
+The
+.BR libsimple_wcsdupa ()
+function is implemented as a macro and is a version
+of the
+.BR libsimple_wcsdup ()
+function that uses allocates the memory on the stack
+rather than on the heap, causing the return pointer
+to become invalid when the calling function returns.
+It is only available when compling with GCC or Clang.
+.SH RETURN VALUE
+Upon successful completion, the
+.BR libsimple_aligned_wcsdupa (),
+.BR libsimple_aligned_wcsdup (),
+.BR libsimple_enaligned_wcsdup (),
+and
+.BR libsimple_ealigned_wcsdup ()
+functions return a non-null pointer, on failure the
+.BR libsimple_aligned_wcsdup ()
+function returns
+.B NULL
+and set
+.I errno
+to indicate the error, and the
+.BR libsimple_enaligned_wcsdup (),
+and
+.BR libsimple_ealigned_wcsdup ()
+functions exit the process. The
+.BR libsimple_aligned_wcsdupa ()
+function cannot fail, however the kernel
+can kill the thread, and possibly the process, with a
+.B SIGSEGV
+signal if the memory cannot be allocated.
+.PP
+The returned pointer should be deallocated when it
+is no longer needed, except for the pointer returned
+by the
+.BR libsimple_aligned_wcsdupa ()
+function, it is automatically deallocated when the
+calling function returns.
+.SH ERRORS
+The
+.BR libsimple_aligned_wcsdup ()
+function may fail for any reason specified for the
+.BR aligned_alloc (3)
+function.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_aligned_wcsdupa (),
+.br
+.BR libsimple_aligned_wcsdup (),
+.br
+.BR libsimple_enaligned_wcsdup (),
+.br
+.BR libsimple_ealigned_wcsdup (),
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_aligned_wcsdupa (),
+.br
+.BR libsimple_aligned_wcsdup (),
+.br
+.BR libsimple_enaligned_wcsdup (),
+.br
+.BR libsimple_ealigned_wcsdup (),
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_aligned_wcsdupa (),
+.br
+.BR libsimple_aligned_wcsdup (),
+.br
+.BR libsimple_enaligned_wcsdup (),
+.br
+.BR libsimple_ealigned_wcsdup (),
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_aligned_strndup (3),
+.BR libsimple_aligned_strdup (3),
+.BR libsimple_aligned_memdup (3),
+.BR libsimple_aligned_wcsndup (3),
+.BR libsimple_aligned_wmemdup (3),
+.BR wcsdup (3)

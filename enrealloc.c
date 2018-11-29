@@ -6,7 +6,7 @@
 void *
 libsimple_enrealloc(int status, void *ptr, size_t n)
 {
-	char *ret = realloc(ptr, n);
+	void *ret = realloc(ptr, n);
 	if (!ret)
 		enprintf(status, "realloc:");
 	return ret;

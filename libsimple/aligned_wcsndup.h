@@ -10,7 +10,7 @@
  * @return  :wchar_t *         Duplicate of `s` with automatic storage
  */
 #if defined(__GNUC__) || defined(__clang__)
-# define libsimple_aligned_wcsndupa(s, alignment, n) /* TODO test, man */\
+# define libsimple_aligned_wcsndupa(s, alignment, n) /* TODO test */\
 	({\
 		const wchar_t *__s = (s);\
 		size_t __n = wcsnlen(__s, n);\
@@ -41,7 +41,7 @@
  * @return             Duplicate of `s`, `NULL` on failure
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __nonnull__, __warn_unused_result__)))
-wchar_t *libsimple_aligned_wcsndup(const wchar_t * __s, size_t __alignment, size_t __n); /* TODO man */
+wchar_t *libsimple_aligned_wcsndup(const wchar_t * __s, size_t __alignment, size_t __n);
 #ifndef aligned_wcsndup
 # define aligned_wcsndup libsimple_aligned_wcsndup
 #endif
@@ -57,7 +57,7 @@ wchar_t *libsimple_aligned_wcsndup(const wchar_t * __s, size_t __alignment, size
  * @return             Duplicate of `s`
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(3), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
-wchar_t *libsimple_enaligned_wcsndup(int, const wchar_t *, size_t, size_t); /* TODO man */
+wchar_t *libsimple_enaligned_wcsndup(int, const wchar_t *, size_t, size_t);
 #ifndef enaligned_wcsndup
 # define enaligned_wcsndup libsimple_enaligned_wcsndup
 #endif
@@ -72,7 +72,7 @@ wchar_t *libsimple_enaligned_wcsndup(int, const wchar_t *, size_t, size_t); /* T
  * @return             Duplicate of `s`
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
-static inline wchar_t *libsimple_ealigned_wcsndup(const wchar_t *__s, size_t __alignment, size_t __n) /* TODO test, man */
+static inline wchar_t *libsimple_ealigned_wcsndup(const wchar_t *__s, size_t __alignment, size_t __n) /* TODO test */
 { return libsimple_enaligned_wcsndup(libsimple_default_failure_exit, __s, __alignment, __n); }
 #ifndef ealigned_wcsndup
 # define ealigned_wcsndup libsimple_ealigned_wcsndup

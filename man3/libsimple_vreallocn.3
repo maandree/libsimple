@@ -43,7 +43,7 @@ and
 functions are wrappers for the
 .BR realloc (3)
 function, they reallocate memory allocated on
-the heap and return the older pointer ot a new
+the heap and return the older pointer or a new
 pointer with the alignment of
 .I alignof(max_align_t)
 to the allocated memory of 
@@ -133,9 +133,10 @@ and
 functions terminated the process.
 .SH ERRORS
 The
-.BR libsimple_vreallocn (),
+.BR libsimple_vreallocn ()
+and
 .BR libsimple_reallocn ()
-function will fail for the reasons specified for the
+functions will fail for the reasons specified for the
 .BR realloc (3)
 function, and if:
 .TP
@@ -218,6 +219,16 @@ None.
 .BR libsimple_encalloc (3),
 .BR libsimple_vcallocn (3),
 .BR libsimple_enrealloc (3),
+.BR libsimple_reallocarray (3),
+.BR libsimple_reallocf (3),
+.BR libsimple_reallocarrayf (3),
+.BR libsimple_vreallocfn (3),
+.BR libsimple_aligned_realloc (3),
+.BR libsimple_aligned_reallocarray (3),
+.BR libsimple_aligned_vreallocn (3),
+.BR libsimple_aligned_reallocf (3),
+.BR libsimple_aligned_reallocarrayf (3),
+.BR libsimple_aligned_vreallocfn (3),
 .BR libsimple_memalign (3),
 .BR libsimple_memalignz (3),
 .BR libsimple_vmemalignn (3),

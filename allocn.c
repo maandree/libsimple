@@ -15,11 +15,10 @@ alloc_size_product(int *errp, size_t n, va_list ap)
 		n = va_arg(ap, size_t);
 		if (!n)
 			break;
-		if (n >= SIZE_MAX / prod) {
+		if (LIBSIMPLE_UMUL_OVERFLOW_NONZERO(n, prod, &prod, SIZE_MAX)) {
 			*errp = ENOMEM;
 			return 0;
 		}
-		prod *= n;
 	}
 	return prod;
 }
@@ -61,6 +60,15 @@ libsimple_vposix_memalignzn(void **memptr, int clear, size_t alignment, size_t n
 		memset(*memptr, 0, n);
 	return ret;
 }
+
+#ifdef LIBSIMPLE_HAVE_ALIGNED_REALLOC
+void *
+libsimple_valigned_reallocn(void *ptr, size_t alignment, size_t n, va_list ap) /* TODO test (aligned_reallocn) */
+{
+	n = alloc_size_product(&errno, n, ap);
+	return !n ? NULL : aligned_realloc(ptr, alignment, n);
+}
+#endif
 
 
 #else

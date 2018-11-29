@@ -43,13 +43,54 @@
 #include <wctype.h>
 
 
+
 #if defined(__GNUC__) && !defined(__clang__)
 # define _LIBSIMPLE_GCC_ONLY(x) x
+# define _LIBSIMPLE_NON_GCC_ONLY(x)
 #else
 # define _LIBSIMPLE_GCC_ONLY(x)
+# define _LIBSIMPLE_NON_GCC_ONLY(x) x
+#endif
+
+#if __STDC_VERSION__ >= 199409L
+# define _LIBSIMPLE_C95_ONLY(x) x
+# define _LIBSIMPLE_PRE_C95_ONLY(x)
+#else
+# define _LIBSIMPLE_C95_ONLY(x)
+# define _LIBSIMPLE_PRE_C95_ONLY(x) x
+#endif
+
+#if __STDC_VERSION__ >= 199901L
+# define _LIBSIMPLE_C99_ONLY(x) x
+# define _LIBSIMPLE_PRE_C99_ONLY(x)
+#else
+# define _LIBSIMPLE_C99_ONLY(x)
+# define _LIBSIMPLE_PRE_C99_ONLY(x) x
+#endif
+
+#if __STDC_VERSION__ >= 201112L
+# define _LIBSIMPLE_C11_ONLY(x) x
+# define _LIBSIMPLE_PRE_C11_ONLY(x)
+#else
+# define _LIBSIMPLE_C11_ONLY(x)
+# define _LIBSIMPLE_PRE_C11_ONLY(x) x
+#endif
+
+#if __STDC_VERSION__ >= 201710L
+# define _LIBSIMPLE_C17_ONLY(x) x
+# define _LIBSIMPLE_PRE_C17_ONLY(x)
+#else
+# define _LIBSIMPLE_C17_ONLY(x)
+# define _LIBSIMPLE_PRE_C17_ONLY(x) x
 #endif
 
 
+#define _libsimple_assume_aligned_as(TYPE)\
+	_LIBSIMPLE_C11_ONLY(__assume_aligned__(_Alignof(TYPE)))\
+	_LIBSIMPLE_PRE_C11_ONLY(_LIBSIMPLE_GCC_ONLY__assume_aligned__(__alignof(TYPE)))
+
+
+#include "libsimple/overflow.h"
 #include "libsimple/printf.h"
 #include "libsimple/definitions.h"
 #include "libsimple/memalloc.h"
@@ -69,6 +110,7 @@
 #include "libsimple/malloc.h"
 #include "libsimple/calloc.h"
 #include "libsimple/realloc.h"
+#include "libsimple/aligned_realloc.h"
 #include "libsimple/memalignz.h"
 #include "libsimple/memalign.h"
 #include "libsimple/vallocz.h"
@@ -86,7 +128,6 @@
 #include "libsimple/array.h"
 #include "libsimple/str.h"
 #include "libsimple/strn.h"
-#include "libsimple/overflow.h"
 
 
 /**
@@ -147,6 +188,60 @@ libsimple_unlist(void *__list, size_t __i, size_t *__np, size_t __width)
 #ifndef unlist
 # define unlist libsimple_unlist
 #endif
+
+
+#define _LIBSIMPLE_REMOVE_CONST(X, TYPE, ...) (*(TYPE *)(void *)&(X))
+#define LIBSIMPLE_REMOVE_CONST(...) _LIBSIMPLE_REMOVE_CONST(__VA_ARGS__, void *) /* TODO test, doc, man */
+#ifndef REMOVE_CONST
+# define REMOVE_CONST(...) LIBSIMPLE_REMOVE_CONST(__VA_ARGS__)
+#endif
+
+
+#define LIBSIMPLE_PREFETCH_RDONLY(ADDRESS, LOCALITY) /* void */ /* TODO test, doc, man */\
+	_LIBSIMPLE_GCC_ONLY(__builtin_prefetch(ADDRESS, 0, LOCALITY))
+#ifndef PREFETCH_RDONLY
+# define PREFETCH_RDONLY(...) LIBSIMPLE_PREFETCH_RDONLY(__VA_ARGS__)
+#endif
+
+
+#define LIBSIMPLE_PREFETCH_RDWR(ADDRESS, LOCALITY) /* void */ /* TODO test, doc, man */\
+	_LIBSIMPLE_GCC_ONLY(__builtin_prefetch(ADDRESS, 1, LOCALITY))
+#ifndef PREFETCH_RDWR
+# define PREFETCH_RDWR(...) LIBSIMPLE_PREFETCH_RDWR(__VA_ARGS__)
+#endif
+
+
+#define _LIBSIMPLE_ASSUME_ALIGNED(PTR, ALIGNMENT, ...)\
+	_LIBSIMPLE_GCC_ONLY(__builtin_assume_aligned(PTR, ALIGNMENT))
+#if defined(__GNUC__) && !defined(__clang__)
+# define LIBSIMPLE_ASSUME_ALIGNED(PTR, ...) /* returns PTR */ /* TODO test, doc, man */\
+	_LIBSIMPLE_GCC_ONLY(__builtin_assume_aligned(PTR, ##__VA_ARGS__,\
+	                                             _LIBSIMPLE_C11_ONLY(_Alignof(PTR))\
+	                                             _LIBSIMPLE_PREC11_ONLY(__alignof(PTR))))
+#endif
+#ifndef ASSUME_ALIGNED
+# define ASSUME_ALIGNED(...) LIBSIMPLE_ASSUME_ALIGNED(__VA_ARGS__)
+#endif
+
+
+#define LIBSIMPLE_ASSUME_MISALIGNED(PTR, ALIGNMENT, OFFSET) /* returns PTR */ /* TODO test, doc, man */\
+	__builtin_assume_aligned(PTR, ALIGNMENT, OFFSET)
+#ifndef ASSUME_MISALIGNED
+# define ASSUME_MISALIGNED(...) LIBSIMPLE_ASSUME_MISALIGNED(__VA_ARGS__)
+#endif
+
+
+#define LIBSIMPLE_UNROLLED(N) _LIBSIMPLE_GCC_ONLY(_LIBSIMPLE_C11_ONLY(_Pragma("GCC unroll "#N))) /* TODO test, doc, man */
+#ifndef UNROLLED
+# define UNROLLED(N) LIBSIMPLE_UNROLLED(N)
+#endif
+
+
+#define LIBSIMPLE_SIMDLOOP _LIBSIMPLE_GCC_ONLY(_LIBSIMPLE_C11_ONLY(_Pragma("GCC ivdep"))) /* TODO test, doc, man */
+#ifndef SIMDLOOP
+# define SIMDLOOP LIBSIMPLE_SIMDLOOP
+#endif
+
 
 
 #endif

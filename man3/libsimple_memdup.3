@@ -29,7 +29,7 @@ Link with
 .SH DESCRIPTION
 The
 .BR libsimple_memdup ()
-function constructs allocates memory and copies
+function allocates memory and copies
 .I n
 first bytes from
 .I s
@@ -91,7 +91,7 @@ calling function returns.
 The
 .BR libsimple_memdup ()
 function may fail for any reason specified for the
-.BR alloc (3)
+.BR malloc (3)
 function.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
@@ -145,5 +145,9 @@ None.
 .BR libsimple_aligned_memdup (3),
 .BR libsimple_enstrndup (3),
 .BR libsimple_enstrdup (3),
+.BR libsimple_enwcsdup (3),
+.BR libsimple_wcsndup (3),
+.BR libsimple_wmemdup (3),
 .BR strndup (3),
-.BR strdup (3)
+.BR strdup (3),
+.BR wcsdup (3)

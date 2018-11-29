@@ -6,7 +6,7 @@
 wchar_t *
 libsimple_enwcsndup(int status, const wchar_t *s, size_t n) /* TODO test */
 {
-	wchar_t *ret = wcsndup(s, n);
+	wchar_t *ret = libsimple_wcsndup(s, n);
 	if (!ret)
 		enprintf(status, "wcsndup:");
 	return ret;

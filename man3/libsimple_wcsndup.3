@@ -1,0 +1,155 @@
+.TH LIBSIMPLE_WCSNDUP 3 2018-11-27 libsimple
+.SH NAME
+libsimple_wcsndup \- duplicate a wide-character string
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+wchar_t *libsimple_wcsndupa(const wchar_t *\fIs\fP, size_t \fIn\fP);
+wchar_t *libsimple_wcsndup(const wchar_t *\fIs\fP, size_t \fIn\fP);
+wchar_t *libsimple_enwcsndup(int \fIstatus\fP, const wchar_t *\fIs\fP, size_t \fIn\fP);
+static inline wchar_t *libsimple_ewcsndup(const wchar_t *\fIs\fP, size_t \fIn\fP);
+
+#ifndef wcsndupa
+# define wcsndupa libsimple_wcsndupa
+#endif
+#ifndef wcsndup
+# define wcsndup libsimple_wcsndup
+#endif
+#ifndef enwcsndup
+# define enwcsndup libsimple_enwcsndup
+#endif
+#ifndef ewcsndup
+# define ewcsndup libsimple_ewcsndup
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+.SH DESCRIPTION
+The
+.BR libsimple_wcsndup ()
+function allocates memory and copies the string
+.I s
+into the new allocation, however only up to the
+.I n
+first wide-characters; a NUL wide-character will
+always be written to the end of the new
+wide-character string.
+.PP
+The
+.BR libsimple_enwcsndup ()
+and
+.BR libsimple_ewcsndup ()
+functions are versions of the
+.BR libsimple_wcsndup ()
+function that call the
+.BR libsimple_enprintf (3)
+function on failure, causing the process to print
+an error message and exit. See
+.BR libsimple_enprintf (3)
+for more information.
+.PP
+The
+.BR libsimple_wcsndupa ()
+function is implemented as a macro and is a version
+of the
+.BR libsimple_wcsndup ()
+function that uses allocates the memory on the stack
+rather than on the heap, causing the return pointer
+to become invalid when the calling function returns.
+It is only available when compling with GCC or Clang.
+.SH RETURN VALUE
+Upon successful completion, the
+.BR libsimple_wcsndupa (),
+.BR libsimple_wcsndup (),
+.BR libsimple_enwcsndup (),
+and
+.BR libsimple_ewcsndup ()
+functions return a non-null pointer, on failure the
+.BR libsimple_wcsndup ()
+function returns
+.B NULL
+and set
+.I errno
+to indicate the error, and the
+.BR libsimple_enwcsndup (),
+and
+.BR libsimple_ewcsndup ()
+functions exit the process. The
+.BR libsimple_wcsndupa ()
+function cannot fail, however the kernel
+can kill the thread, and possibly the process, with a
+.B SIGSEGV
+signal if the memory cannot be allocated.
+.PP
+The returned pointer should be deallocated when it
+is no longer needed, except for the pointer returned
+by the
+.BR libsimple_wcsndupa ()
+function, it is automatically deallocated when the
+calling function returns.
+.SH ERRORS
+The
+.BR libsimple_wcsndup ()
+function may fail for any reason specified for the
+.BR malloc (3)
+function.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_wcsndupa (),
+.br
+.BR libsimple_wcsndup (),
+.br
+.BR libsimple_enwcsndup (),
+.br
+.BR libsimple_ewcsndup (),
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_wcsndupa (),
+.br
+.BR libsimple_wcsndup (),
+.br
+.BR libsimple_enwcsndup (),
+.br
+.BR libsimple_ewcsndup (),
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_wcsndupa (),
+.br
+.BR libsimple_wcsndup (),
+.br
+.BR libsimple_enwcsndup (),
+.br
+.BR libsimple_ewcsndup (),
+T}	Async-cancel safety	AC-Safe
+.TE
+.SH EXAMPLES
+None.
+.SH APPLICATION USAGE
+None.
+.SH RATIONALE
+None.
+.SH FUTURE DIRECTIONS
+None.
+.SH NOTES
+None.
+.SH BUGS
+None.
+.SH SEE ALSO
+.BR libsimple_aligned_wcsndup (3),
+.BR libsimple_enstrndup (3),
+.BR libsimple_enstrdup (3),
+.BR libsimple_memdup (3),
+.BR libsimple_enwcsdup (3),
+.BR libsimple_wmemdup (3),
+.BR strndup (3),
+.BR strdup (3),
+.BR wcsdup (3)
