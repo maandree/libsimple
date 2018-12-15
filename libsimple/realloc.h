@@ -347,7 +347,7 @@ libsimple_reallocf(void *__ptr, size_t __n) /* TODO test */
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_size__(2, 3), __warn_unused_result__)))
 static inline void *
-libsimple_reallocarray(void *__ptr, size_t __n, size_t __m) /* TODO test */
+libsimple_reallocarray(void *__ptr, size_t __n, size_t __m)
 {
 	if (LIBSIMPLE_UMUL_OVERFLOW(__n, __m, &__n, SIZE_MAX)) {
 		errno = ENOMEM;
@@ -420,7 +420,7 @@ void *libsimple_enreallocarray(int, void *, size_t, size_t);
  *               `alignof(max_align_t)`
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_size__(2, 3), __warn_unused_result__, __returns_nonnull__)))
-static inline void *libsimple_ereallocarray(void *__ptr, size_t __n, size_t __m) /* TODO test */
+static inline void *libsimple_ereallocarray(void *__ptr, size_t __n, size_t __m)
 { return libsimple_enreallocarray(libsimple_default_failure_exit, __ptr, __n, __m); }
 #ifndef ereallocarray
 # define ereallocarray libsimple_ereallocarray

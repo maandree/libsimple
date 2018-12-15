@@ -8,7 +8,7 @@ libsimple_enaligned_strndup(int status, const char *s, size_t alignment, size_t 
 {
 	void *ret = aligned_strndup(s, alignment, n);
 	if (!ret)
-		enprintf(status, "aligned_strdup:");
+		enprintf(status, "aligned_strndup:");
 	return ret;
 }
 
@@ -116,14 +116,14 @@ main(void)
 		alloc_fail_in = 1;
 		assert_exit_ptr(libsimple_enaligned_strndup(44, "hello", 2, 10));
 		assert(exit_status == 44);
-		assert_stderr("%s: aligned_strdup: %s\n", argv0, strerror(ENOMEM));
+		assert_stderr("%s: aligned_strndup: %s\n", argv0, strerror(ENOMEM));
 		assert(!alloc_fail_in);
 
 		libsimple_default_failure_exit = 55;
 		alloc_fail_in = 1;
 		assert_exit_ptr(libsimple_ealigned_strndup("test", 8, 10));
 		assert(exit_status == 55);
-		assert_stderr("%s: aligned_strdup: %s\n", argv0, strerror(ENOMEM));
+		assert_stderr("%s: aligned_strndup: %s\n", argv0, strerror(ENOMEM));
 		assert(!alloc_fail_in);
 		libsimple_default_failure_exit = 1;
 	}

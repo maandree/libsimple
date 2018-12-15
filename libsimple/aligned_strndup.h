@@ -10,7 +10,7 @@
  * @return  :char *           Duplicate of `s` with automatic storage
  */
 #if defined(__GNUC__) || defined(__clang__)
-# define libsimple_aligned_strndupa(s, alignment, n) /* TODO test */\
+# define libsimple_aligned_strndupa(s, alignment, n)\
 	({\
 		const char *__s = (s);\
 		size_t __n = strnlen(__s, n);\

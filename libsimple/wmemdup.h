@@ -9,7 +9,7 @@
  * @return  :wchar_t *         Duplicate of `s` with automatic storage
  */
 #if defined(__GNUC__) || defined(__clang__)
-# define libsimple_wmemdupa(s, n) /* TODO test */\
+# define libsimple_wmemdupa(s, n)\
 	({\
 		const wchar_t *__s = (s);\
 		size_t __n = (n);\
@@ -61,7 +61,7 @@ wchar_t *libsimple_enwmemdup(int, const wchar_t *, size_t);
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, _libsimple_assume_aligned_as(wchar_t), __alloc_size__(2),
                                    __warn_unused_result__, __returns_nonnull__)))
-static inline wchar_t *libsimple_ewmemdup(const wchar_t *__s, size_t __n) /* TODO test */
+static inline wchar_t *libsimple_ewmemdup(const wchar_t *__s, size_t __n)
 { return libsimple_enwmemdup(libsimple_default_failure_exit, __s, __n); }
 #ifndef ewmemdup
 # define ewmemdup libsimple_ewmemdup

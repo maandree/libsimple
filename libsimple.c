@@ -6,27 +6,6 @@
 #else
 #include "test.h"
 
-static size_t
-gcd(size_t u, size_t v)
-{
-	size_t t;
-	int shift = 0;
-	/* Not needed because u>0, v>0: if (!(u | v)) return u + v; */
-	while (!((u | v) & 1)) u >>= 1, v >>= 1, shift++;
-	while (!(u & 1))       u >>= 1;
-	do {
-		while (!(v & 1)) v >>= 1;
-		if (u > v)       t = u, u = v, v = t;
-	} while (v -= u);
-	return u << shift;
-}
-
-static size_t
-lcm(size_t u, size_t v)
-{
-	return u / gcd(u, v) * v;
-}
-
 static int
 test_timespec(double d, time_t sec, long int nsec, double rd, const char *s, const char *ss)
 {
@@ -113,18 +92,13 @@ main(void)
 	struct timespec ts, ts1, ts2;
 	struct timeval tv1, tv2;
 	const char *cs;
+	const wchar_t *cws;
 	char buf[1024], *s;
+	wchar_t *ws;
 	int intarray[10];
 	size_t i, j, n;
-	size_t pagesize, cacheline;
-
-	pagesize = (size_t)sysconf(_SC_PAGESIZE);
-
-#ifdef _SC_LEVEL1_DCACHE_LINESIZE
-	cacheline = (size_t)sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
-#else
-	cacheline = 64;
-#endif
+	DEFINE_PAGESIZE;
+	DEFINE_CACHELINE;
 
 	assert(libsimple_default_failure_exit == 1);
 
@@ -734,6 +708,7 @@ main(void)
 		s = libsimple_memdupa(cs, n);
 		assert(s);
 		assert(s != cs);
+		assert(!((uintptr_t)s % _Alignof(max_align_t)));
 		assert(!memcmp(s, cs, n));
 	}
 #else
@@ -743,14 +718,253 @@ main(void)
 #ifdef libsimple_aligned_memdupa
 	cs = "xyz";
 	for (n = 1; n < 4; n++) {
-		s = libsimple_aligned_memdupa(cs, 4 + i, n);
-		assert(s);
-		assert(s != cs);
-		assert(!((uintptr_t)s % (4 + i)));
-		assert(!memcmp(s, cs, n));
+		for (i = 1; i < 5; i++) {
+			s = libsimple_aligned_memdupa(cs, i, n);
+			assert(s);
+			assert(s != cs);
+			assert(!((uintptr_t)s % i));
+			assert(!memcmp(s, cs, n));
+		}
 	}
 #else
 	fprintf(stderr, "warning: libsimple_aligned_memdupa missing\n");
+#endif
+
+#ifdef libsimple_aligned_strdupa
+	for (i = 1; i < 5; i++) {
+		cs = "";
+		s = libsimple_aligned_strdupa(cs, i);
+		assert(s);
+		assert(s != cs);
+		assert(!((uintptr_t)s % i));
+		assert(!strcmp(s, cs));
+
+		cs = "xyz";
+		s = libsimple_aligned_strdupa(cs, i);
+		assert(s);
+		assert(s != cs);
+		assert(!((uintptr_t)s % i));
+		assert(!strcmp(s, cs));
+	}
+#else
+	fprintf(stderr, "warning: libsimple_aligned_strdupa missing\n");
+#endif
+
+#ifdef libsimple_aligned_strndupa
+	for (i = 1; i < 5; i++) {
+		cs = "";
+		s = libsimple_aligned_strndupa(cs, i, 5);
+		assert(s);
+		assert(s != cs);
+		assert(!((uintptr_t)s % i));
+		assert(!strcmp(s, ""));
+
+		cs = "xyz";
+
+		s = libsimple_aligned_strndupa(cs, i, 5);
+		assert(s);
+		assert(s != cs);
+		assert(!((uintptr_t)s % i));
+		assert(!strcmp(s, "xyz"));
+
+		s = libsimple_aligned_strndupa(cs, i, 4);
+		assert(s);
+		assert(s != cs);
+		assert(!((uintptr_t)s % i));
+		assert(!strcmp(s, "xyz"));
+
+		s = libsimple_aligned_strndupa(cs, i, 3);
+		assert(s);
+		assert(s != cs);
+		assert(!((uintptr_t)s % i));
+		assert(!strcmp(s, "xyz"));
+
+		s = libsimple_aligned_strndupa(cs, i, 2);
+		assert(s);
+		assert(s != cs);
+		assert(!((uintptr_t)s % i));
+		assert(!strcmp(s, "xy"));
+
+		s = libsimple_aligned_strndupa(cs, i, 1);
+		assert(s);
+		assert(s != cs);
+		assert(!((uintptr_t)s % i));
+		assert(!strcmp(s, "x"));
+
+		s = libsimple_aligned_strndupa(cs, i, 0);
+		assert(s);
+		assert(s != cs);
+		assert(!((uintptr_t)s % i));
+		assert(!strcmp(s, ""));
+	}
+#else
+	fprintf(stderr, "warning: libsimple_aligned_strndupa missing\n");
+#endif
+
+#ifdef libsimple_wcsdupa
+	cws = L"";
+	ws = libsimple_wcsdupa(cws);
+	assert(ws);
+	assert(ws != cws);
+	assert(!((uintptr_t)ws % _Alignof(wchar_t)));
+	assert(!wcscmp(ws, cws));
+
+	cws = L"xyz";
+	ws = libsimple_wcsdupa(cws);
+	assert(ws);
+	assert(ws != cws);
+	assert(!((uintptr_t)ws % _Alignof(wchar_t)));
+	assert(!wcscmp(ws, cws));
+#else
+	fprintf(stderr, "warning: libsimple_wcsdupa missing\n");
+#endif
+
+#ifdef libsimple_wcsndupa
+	cws = L"";
+	ws = libsimple_wcsndupa(cws, 5);
+	assert(ws);
+	assert(ws != cws);
+	assert(!((uintptr_t)ws % _Alignof(wchar_t)));
+	assert(!wcscmp(ws, L""));
+
+	cws = L"xyz";
+
+	ws = libsimple_wcsndupa(cws, 5);
+	assert(ws);
+	assert(ws != cws);
+	assert(!((uintptr_t)ws % _Alignof(wchar_t)));
+	assert(!wcscmp(ws, L"xyz"));
+
+	ws = libsimple_wcsndupa(cws, 4);
+	assert(ws);
+	assert(ws != cws);
+	assert(!((uintptr_t)ws % _Alignof(wchar_t)));
+	assert(!wcscmp(ws, L"xyz"));
+
+	ws = libsimple_wcsndupa(cws, 3);
+	assert(ws);
+	assert(ws != cws);
+	assert(!((uintptr_t)ws % _Alignof(wchar_t)));
+	assert(!wcscmp(ws, L"xyz"));
+
+	ws = libsimple_wcsndupa(cws, 2);
+	assert(ws);
+	assert(ws != cws);
+	assert(!((uintptr_t)ws % _Alignof(wchar_t)));
+	assert(!wcscmp(ws, L"xy"));
+
+	ws = libsimple_wcsndupa(cws, 1);
+	assert(ws);
+	assert(ws != cws);
+	assert(!((uintptr_t)ws % _Alignof(wchar_t)));
+	assert(!wcscmp(ws, L"x"));
+
+	ws = libsimple_wcsndupa(cws, 0);
+	assert(ws);
+	assert(ws != cws);
+	assert(!((uintptr_t)ws % _Alignof(wchar_t)));
+	assert(!wcscmp(ws, L""));
+#else
+	fprintf(stderr, "warning: libsimple_wcsndupa missing\n");
+#endif
+
+#ifdef libsimple_wmemdupa
+	cws = L"xyz";
+	for (n = 1; n < 4; n++) {
+		ws = libsimple_wmemdupa(cws, n);
+		assert(ws);
+		assert(ws != cws);
+		assert(!((uintptr_t)ws % _Alignof(wchar_t)));
+		assert(!wmemcmp(ws, cws, n));
+	}
+#else
+	fprintf(stderr, "warning: libsimple_wmemdupa missing\n");
+#endif
+
+#ifdef libsimple_aligned_wmemdupa
+	cws = L"xyz";
+	for (n = 1; n < 4; n++) {
+		for (i = 1; i < 5; i++) {
+			ws = libsimple_aligned_wmemdupa(cws, i, n);
+			assert(ws);
+			assert(ws != cws);
+			assert(!((uintptr_t)ws % i));
+			assert(!wmemcmp(ws, cws, n));
+		}
+	}
+#else
+	fprintf(stderr, "warning: libsimple_aligned_wmemdupa missing\n");
+#endif
+
+#ifdef libsimple_aligned_wcsdupa
+	for (i = 1; i < 5; i++) {
+		cws = L"";
+		ws = libsimple_aligned_wcsdupa(cws, i);
+		assert(ws);
+		assert(ws != cws);
+		assert(!((uintptr_t)ws % i));
+		assert(!wcscmp(ws, cws));
+
+		cws = L"xyz";
+		ws = libsimple_aligned_wcsdupa(cws, i);
+		assert(ws);
+		assert(ws != cws);
+		assert(!((uintptr_t)ws % i));
+		assert(!wcscmp(ws, cws));
+	}
+#else
+	fprintf(stderr, "warning: libsimple_aligned_wcsdupa missing\n");
+#endif
+
+#ifdef libsimple_aligned_wcsndupa
+	for (i = 1; i < 5; i++) {
+		cws = L"";
+		ws = libsimple_aligned_wcsndupa(cws, i, 5);
+		assert(ws);
+		assert(ws != cws);
+		assert(!((uintptr_t)ws % i));
+		assert(!wcscmp(ws, L""));
+
+		cws = L"xyz";
+
+		ws = libsimple_aligned_wcsndupa(cws, i, 5);
+		assert(ws);
+		assert(ws != cws);
+		assert(!((uintptr_t)ws % i));
+		assert(!wcscmp(ws, L"xyz"));
+
+		ws = libsimple_aligned_wcsndupa(cws, i, 4);
+		assert(ws);
+		assert(ws != cws);
+		assert(!((uintptr_t)ws % i));
+		assert(!wcscmp(ws, L"xyz"));
+
+		ws = libsimple_aligned_wcsndupa(cws, i, 3);
+		assert(ws);
+		assert(ws != cws);
+		assert(!((uintptr_t)ws % i));
+		assert(!wcscmp(ws, L"xyz"));
+
+		ws = libsimple_aligned_wcsndupa(cws, i, 2);
+		assert(ws);
+		assert(ws != cws);
+		assert(!((uintptr_t)ws % i));
+		assert(!wcscmp(ws, L"xy"));
+
+		ws = libsimple_aligned_wcsndupa(cws, i, 1);
+		assert(ws);
+		assert(ws != cws);
+		assert(!((uintptr_t)ws % i));
+		assert(!wcscmp(ws, L"x"));
+
+		ws = libsimple_aligned_wcsndupa(cws, i, 0);
+		assert(ws);
+		assert(ws != cws);
+		assert(!((uintptr_t)ws % i));
+		assert(!wcscmp(ws, L""));
+	}
+#else
+	fprintf(stderr, "warning: libsimple_aligned_wcsndupa missing\n");
 #endif
 
 	unsetenv("X");
@@ -1048,14 +1262,6 @@ main(void)
 	tv1.tv_sec = -1, tv1.tv_usec = 0L;
 	tv2.tv_sec =  1, tv2.tv_usec = 0L;
 	assert(libsimple_cmptimeval(&tv1, &tv2) == -1);
-
-#define ASSERT_ALIGNMENT(INFO, ALIGN)\
-	do {\
-		assert((INFO)->alignment <= lcm(cacheline, ALIGN));\
-		assert(!((INFO)->alignment % (ALIGN)));\
-		if ((cacheline - (ALIGN) % cacheline) % cacheline + (INFO)->size % (ALIGN) > cacheline)\
-			assert(!((INFO)->alignment % cacheline));\
-	} while (0)
 
 	assert((ptr = libsimple_mallocz(0, 11)));
 	if (have_custom_malloc()) {

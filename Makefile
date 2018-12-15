@@ -64,6 +64,9 @@ OBJ =\
 	enaligned_reallocarray.o\
 	enaligned_strdup.o\
 	enaligned_strndup.o\
+	enaligned_wcsdup.o\
+	enaligned_wcsndup.o\
+	enaligned_wmemdup.o\
 	encalloc.o\
 	enmalloc.o\
 	enmemdup.o\
@@ -79,6 +82,9 @@ OBJ =\
 	envposix_memalignzn.o\
 	envputenvf.o\
 	envreallocn.o\
+	enwcsdup.o\
+	enwcsndup.o\
+	enwmemdup.o\
 	memcasechr.o\
 	memcasechr_inv.o\
 	memcasecmp.o\

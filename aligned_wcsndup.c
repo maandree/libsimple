@@ -8,10 +8,8 @@ libsimple_aligned_wcsndup(const wchar_t *s, size_t alignment, size_t n)
 {
 	size_t size;
 	wchar_t *ret;
-	if (LIBSIMPLE_UMUL_OVERFLOW_NONZERO(n + 1, sizeof(wchar_t), &size, SIZE_MAX)) {
-		errno = ENOMEM;
-		return NULL;
-	}
+	n = wcsnlen(s, n);
+	size = (n + 1) * sizeof(wchar_t);
 	size = size + (alignment - size % alignment) % alignment;
 	ret = aligned_alloc(alignment, size);
 	if (!ret)

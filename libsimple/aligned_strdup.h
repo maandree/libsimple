@@ -9,7 +9,7 @@
  * @return  :char *           Duplicate of `s` with automatic storage
  */
 #if defined(__GNUC__) || defined(__clang__)
-# define libsimple_aligned_strdupa(s, alignment) /* TODO test */\
+# define libsimple_aligned_strdupa(s, alignment)\
 	({\
 		const char *__s = (s);\
 		size_t __n = strlen(__s) + 1;\
@@ -37,7 +37,7 @@
  * @return             Duplicate of `s`, `NULL` on failure
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __nonnull__, __warn_unused_result__)))
-static inline char *libsimple_aligned_strdup(const char * __s, size_t __alignment) /* TODO test */
+static inline char *libsimple_aligned_strdup(const char * __s, size_t __alignment)
 { return libsimple_aligned_memdup(__s, __alignment, strlen(__s) + 1); }
 #ifndef aligned_strdup
 # define aligned_strdup libsimple_aligned_strdup

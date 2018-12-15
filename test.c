@@ -229,11 +229,13 @@ strndup(const char *s, size_t n)
 }
 
 
+#if 0
 void *
 memdup(const void *s, size_t size)
 {
 	return libsimple_memdup(s, size);
 }
+#endif
 
 
 wchar_t *
@@ -250,6 +252,7 @@ wcsdup(const wchar_t *s)
 }
 
 
+#if 0
 wchar_t *
 wcsndup(const wchar_t *s, size_t n)
 {
@@ -262,6 +265,7 @@ wmemdup(const wchar_t *s, size_t n)
 {
 	return libsimple_wmemdup(s, n);
 }
+#endif
 
 
 void

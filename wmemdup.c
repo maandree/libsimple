@@ -4,7 +4,7 @@
 
 
 wchar_t *
-libsimple_wmemdup(const wchar_t *s, size_t n) /* TODO test */
+libsimple_wmemdup(const wchar_t *s, size_t n)
 {
 	wchar_t *ret;
 	size_t size;
@@ -25,6 +25,27 @@ libsimple_wmemdup(const wchar_t *s, size_t n) /* TODO test */
 int
 main(void)
 {
+	struct allocinfo *info;
+	const wchar_t *s = L"test";
+	wchar_t *p;
+
+	p = libsimple_wmemdup(s, 5);
+	assert(p);
+	assert(p != s);
+	assert(!((uintptr_t)s % _Alignof(wchar_t)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(p)));
+		assert(info->size == 5 * sizeof(wchar_t));
+		assert(info->alignment == _Alignof(wchar_t));
+	}
+	assert(!wmemcmp(p, s, 5));
+	wmemset(p, 0, 5);
+	assert(!wmemcmp(s, L"test", 5));
+	free(p);
+
+	errno = 0;
+	assert(!libsimple_wmemdup(NULL, SSIZE_MAX) && errno == ENOMEM);
+
 	return 0;
 }
 

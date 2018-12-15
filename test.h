@@ -95,3 +95,42 @@ test_fprintf(FILE *restrict stream, const char *restrict format, ...)
 	return test_vfprintf(stream, format, ap);
 	va_end(ap);
 }
+
+
+
+static size_t
+gcd(size_t u, size_t v)
+{
+	size_t t;
+	int shift = 0;
+	/* Not needed because u>0, v>0: if (!(u | v)) return u + v; */
+	while (!((u | v) & 1)) u >>= 1, v >>= 1, shift++;
+	while (!(u & 1))       u >>= 1;
+	do {
+		while (!(v & 1)) v >>= 1;
+		if (u > v)       t = u, u = v, v = t;
+	} while (v -= u);
+	return u << shift;
+}
+
+static inline size_t
+lcm(size_t u, size_t v)
+{
+	return u / gcd(u, v) * v;
+}
+
+#define ASSERT_ALIGNMENT(INFO, ALIGN)\
+	do {\
+		assert((INFO)->alignment <= lcm(cacheline, ALIGN));\
+		assert(!((INFO)->alignment % (ALIGN)));\
+		if ((cacheline - (ALIGN) % cacheline) % cacheline + (INFO)->size % (ALIGN) > cacheline)\
+			assert(!((INFO)->alignment % cacheline));\
+	} while (0)
+
+#define DEFINE_PAGESIZE size_t pagesize = (size_t)sysconf(_SC_PAGESIZE)
+
+#ifdef _SC_LEVEL1_DCACHE_LINESIZ
+#define DEFINE_CACHELINE size_t cacheline = (size_t)sysconf(_SC_LEVEL1_DCACHE_LINESIZE)
+#else
+#define DEFINE_CACHELINE size_t cacheline = 64
+#endif

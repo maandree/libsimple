@@ -4,7 +4,7 @@
 
 
 wchar_t *
-libsimple_enwcsdup(int status, const wchar_t *s) /* TODO test */
+libsimple_enwcsdup(int status, const wchar_t *s)
 {
 	size_t n = wcslen(s) + 1, size;
 	wchar_t *ret;
@@ -26,6 +26,45 @@ libsimple_enwcsdup(int status, const wchar_t *s) /* TODO test */
 int
 main(void)
 {
+	struct allocinfo *info;
+	wchar_t *s;
+
+	assert((s = libsimple_enwcsdup(1, L"hello")));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(s)));
+		assert(info->size == 6 * sizeof(wchar_t));
+		assert(info->alignment == _Alignof(wchar_t));
+		assert(!info->zeroed);
+	}
+	assert(!wcscmp(s, L"hello"));
+	free(s);
+
+	assert((s = libsimple_ewcsdup(L"test")));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(s)));
+		assert(info->size == 5 * sizeof(wchar_t));
+		assert(info->alignment == _Alignof(wchar_t));
+		assert(!info->zeroed);
+	}
+	assert(!wcscmp(s, L"test"));
+	free(s);
+
+	if (have_custom_malloc()) {
+		alloc_fail_in = 1;
+		assert_exit_ptr(libsimple_enwcsdup(18, L"hello"));
+		assert(exit_status == 18);
+		assert_stderr("%s: wcsdup: %s\n", argv0, strerror(ENOMEM));
+		assert(!alloc_fail_in);
+
+		libsimple_default_failure_exit = 5;
+		alloc_fail_in = 1;
+		assert_exit_ptr(libsimple_ewcsdup(L"test"));
+		assert(exit_status == 5);
+		assert_stderr("%s: wcsdup: %s\n", argv0, strerror(ENOMEM));
+		assert(!alloc_fail_in);
+		libsimple_default_failure_exit = 1;
+	}
+
 	return 0;
 }
 

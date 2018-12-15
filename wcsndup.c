@@ -4,15 +4,12 @@
 
 
 wchar_t *
-libsimple_wcsndup(const wchar_t *s, size_t n) /* TODO test */
+libsimple_wcsndup(const wchar_t *s, size_t n)
 {
 	size_t size;
 	wchar_t *ret;
 	n = wcsnlen(s, n);
-	if (LIBSIMPLE_UMUL_OVERFLOW_NONZERO(n + 1, sizeof(wchar_t), &size, SIZE_MAX)) {
-		errno = ENOMEM;
-		return NULL;
-	}
+	size = (n + 1) * sizeof(wchar_t);
 	ret = aligned_alloc(_Alignof(wchar_t), size);
 	if (!ret)
 		return NULL;
@@ -28,6 +25,81 @@ libsimple_wcsndup(const wchar_t *s, size_t n) /* TODO test */
 int
 main(void)
 {
+	struct allocinfo *info;
+	const wchar_t *s = L"test";
+	wchar_t *p;
+
+	p = libsimple_wcsndup(s, SIZE_MAX);
+	assert(p);
+	assert(p != s);
+	assert(!((uintptr_t)s % _Alignof(wchar_t)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(p)));
+		assert(info->size == 5 * sizeof(wchar_t));
+		assert(info->alignment == _Alignof(wchar_t));
+	}
+	assert(!wmemcmp(p, s, 5));
+	wmemset(p, 0, 5);
+	assert(!wmemcmp(s, L"test", 5));
+	free(p);
+
+	p = libsimple_wcsndup(s, 10);
+	assert(p);
+	assert(p != s);
+	assert(!((uintptr_t)s % _Alignof(wchar_t)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(p)));
+		assert(info->size == 5 * sizeof(wchar_t));
+		assert(info->alignment == _Alignof(wchar_t));
+	}
+	assert(!wmemcmp(p, s, 5));
+	wmemset(p, 0, 5);
+	assert(!wmemcmp(s, L"test", 5));
+	free(p);
+
+	p = libsimple_wcsndup(s, 5);
+	assert(p);
+	assert(p != s);
+	assert(!((uintptr_t)s % _Alignof(wchar_t)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(p)));
+		assert(info->size == 5 * sizeof(wchar_t));
+		assert(info->alignment == _Alignof(wchar_t));
+	}
+	assert(!wmemcmp(p, s, 5));
+	wmemset(p, 0, 5);
+	assert(!wmemcmp(s, L"test", 5));
+	free(p);
+
+	p = libsimple_wcsndup(s, 4);
+	assert(p);
+	assert(p != s);
+	assert(!((uintptr_t)s % _Alignof(wchar_t)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(p)));
+		assert(info->size == 5 * sizeof(wchar_t));
+		assert(info->alignment == _Alignof(wchar_t));
+	}
+	assert(!wmemcmp(p, s, 5));
+	wmemset(p, 0, 5);
+	assert(!wmemcmp(s, L"test", 5));
+	free(p);
+
+	p = libsimple_wcsndup(s, 2);
+	assert(p);
+	assert(p != s);
+	assert(!((uintptr_t)s % _Alignof(wchar_t)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(p)));
+		assert(info->size == 3 * sizeof(wchar_t));
+		assert(info->alignment == _Alignof(wchar_t));
+	}
+	assert(!wmemcmp(p, s, 2));
+	assert(!p[2]);
+	wmemset(p, 0, 3);
+	assert(!wmemcmp(s, L"test", 5));
+	free(p);
+
 	return 0;
 }
 
