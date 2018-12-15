@@ -88,7 +88,7 @@ int
 main(void)
 {
 	struct allocinfo *volatile info;
-	void *ptr;
+	void *ptr, *old;
 	struct timespec ts, ts1, ts2;
 	struct timeval tv1, tv2;
 	const char *cs;
@@ -2247,6 +2247,66 @@ main(void)
 	assert(exit_status == 104);
 	assert_stderr("%s: libsimple_vmemalignz: %s\n", argv0, strerror(EINVAL));
 	libsimple_default_failure_exit = 1;
+
+#ifdef LIBSIMPLE_HAVE_ALIGNED_REALLOC
+	assert((ptr = libsimple_aligned_realloc(NULL, 16, 5)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 5 || info->size == info->alignment);
+		assert(!info->zeroed);
+		ASSERT_ALIGNMENT(info, 16);
+		info->refcount += 1;
+	}
+	stpcpy(ptr, "test");
+	assert((ptr = libsimple_aligned_realloc(old = ptr, 32, 10)));
+	assert(!strcmp(ptr, "test"));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 10 || info->size == info->alignment);
+		assert(!info->zeroed);
+		ASSERT_ALIGNMENT(info, 32);
+		assert(ptr != old);
+		free(old);
+	}
+	free(ptr);
+	if (have_custom_malloc()) {
+		alloc_fail_in = 1;
+		assert(!libsimple_aligned_realloc(NULL, 8, 1) && errno == ENOMEM);
+		assert(!alloc_fail_in);
+	}
+#else
+	assert(libsimple_aligned_realloc(NULL, 8, 1) && errno == ENOSYS);
+#endif
+
+#ifdef LIBSIMPLE_HAVE_ALIGNED_REALLOC
+	assert((ptr = libsimple_aligned_reallocarray(NULL, 16, 5, 3)));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 15 || info->size == info->alignment);
+		assert(!info->zeroed);
+		ASSERT_ALIGNMENT(info, 16);
+		info->refcount += 1;
+	}
+	stpcpy(ptr, "test");
+	assert((ptr = libsimple_aligned_reallocarray(old = ptr, 32, 10, 2)));
+	assert(!strcmp(ptr, "test"));
+	if (have_custom_malloc()) {
+		assert((info = get_allocinfo(ptr)));
+		assert(info->size == 20 || info->size == info->alignment);
+		assert(!info->zeroed);
+		ASSERT_ALIGNMENT(info, 32);
+		assert(ptr != old);
+		free(old);
+	}
+	free(ptr);
+	if (have_custom_malloc()) {
+		alloc_fail_in = 1;
+		assert(!libsimple_aligned_reallocarray(NULL, 8, 1, 1) && errno == ENOMEM);
+		assert(!alloc_fail_in);
+	}
+#else
+	assert(libsimple_aligned_reallocarray(NULL, 8, 1, 1) && errno == ENOSYS);
+#endif
 
 	assert(libsimple_memeq("abcxyz", "abc123", 3));
 	assert(!libsimple_memeq("abcxyz", "abc123", 4));

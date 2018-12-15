@@ -32,7 +32,7 @@ _LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_align__(2), __alloc_size__(3), __warn
 # define LIBSIMPLE_HAVE_ALIGNED_REALLOC
 # include <malloc.h>
 static inline void *
-libsimple_aligned_realloc(void *__ptr, size_t __alignment, size_t __n) /* TODO test, musl */
+libsimple_aligned_realloc(void *__ptr, size_t __alignment, size_t __n) /* TODO musl */
 {
 	size_t __old = malloc_usable_size(__ptr);
 #if __STDC_VERSION__ >= 201112L || defined(_ISOC11_SOURCE)
@@ -200,7 +200,7 @@ libsimple_aligned_reallocf(void *__ptr, size_t __alignment, size_t __n) /* TODO 
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_align__(2), __alloc_size__(3, 4), __warn_unused_result__)))
 static inline void *
-libsimple_aligned_reallocarray(void *__ptr, size_t __alignment, size_t __n, size_t __m) /* TODO test */
+libsimple_aligned_reallocarray(void *__ptr, size_t __alignment, size_t __n, size_t __m)
 {
 	if (LIBSIMPLE_UMUL_OVERFLOW(__n, __m, &__n, SIZE_MAX)) {
 		errno = ENOMEM;
