@@ -287,7 +287,7 @@ memset(void *s, int c, size_t n)
 {
 	char *str = s;
 	struct allocinfo *info;
-	if (just_alloced && s == just_alloced) {
+	if (s == just_alloced && just_alloced && !c) {
 		info = get_allocinfo(s);
 		info->zeroed = MAX(info->zeroed, n);
 	}

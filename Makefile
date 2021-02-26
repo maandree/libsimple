@@ -222,7 +222,9 @@ all: libsimple.a $(TESTS)
 $(OBJ): $(@:.o=.c) $(HDR)
 $(TESTS): $(@:=.o) test.o libsimple.a
 $(TESTS:=.o): $(@:.test.o=.c) $(HDR) test.h
+
 test.o: test.c $(HDR) test.h
+	$(CC) -c -o $@ test.c $(CFLAGS) -DTEST -O0 -ffreestanding
 
 libsimple.a: $(OBJ)
 	$(AR) rc $@ $?
