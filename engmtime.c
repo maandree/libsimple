@@ -18,6 +18,7 @@ int
 main(void)
 {
 	/* TODO test */
+	return 0;
 }
 
 #endif
