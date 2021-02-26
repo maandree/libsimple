@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_ENCALLOC 3 2018-11-03 libsimple
+.TH LIBSIMPLE_ENCALLOC 3 libsimple
 .SH NAME
 libsimple_encalloc \- allocate initialised memory or die
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -18,6 +19,7 @@ static inline void *libsimple_ecalloc(size_t \fIn\fP, size_t \fIm\fP);
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_encalloc ()
@@ -72,6 +74,7 @@ functions behaviour is unspecified if
 or
 .I m
 is 0.
+
 .SH RETURN VALUE
 The
 .BR libsimple_encalloc ()
@@ -79,12 +82,14 @@ and
 .BR libsimple_ecalloc ()
 functions return a pointer to the allocated memory
 upon success completion; otherwise the process is terminated.
+
 .SH ERRORS
 The
 .BR libsimple_encalloc ()
 and
 .BR libsimple_ecalloc ()
 functions will terminate the process on failure.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -109,18 +114,25 @@ T{
 .BR libsimple_ecalloc ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_enmalloc (3),
 .BR libsimple_mallocz (3),

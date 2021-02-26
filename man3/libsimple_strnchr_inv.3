@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_STRNCHR_INV 3 2018-11-25 libsimple
+.TH LIBSIMPLE_STRNCHR_INV 3 libsimple
 .SH NAME
 libsimple_strnchr_inv \- find a different character in a string
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -14,6 +15,7 @@ char *libsimple_strnchr_inv(const char *\fIs\fP, int \fIc\fP, size_t \fIn\fP);
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_strnchr_inv ()
@@ -31,6 +33,7 @@ If no such character exist in the string,
 the string's end is returned.
 .PP
 The comparison is case-sensitive.
+
 .SH RETURN VALUE
 The
 .BR libsimple_strnchr_inv ()
@@ -45,10 +48,12 @@ offset less than
 .I n
 exists, it returns
 .BR NULL .
+
 .SH ERRORS
 The
 .BR libsimple_strnchr_inv ()
 function cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -67,18 +72,25 @@ T{
 .BR libsimple_strnchr_inv ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_strnchr (3),
 .BR libsimple_strnchrnul_inv (3),

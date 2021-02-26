@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_STRRCASECHR 3 2018-10-23 libsimple
+.TH LIBSIMPLE_STRRCASECHR 3 libsimple
 .SH NAME
 libsimple_strrcasechr \- find a character in a string
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -14,6 +15,7 @@ char *libsimple_strrcasechr(const char *\fIs\fP, int \fIc\fP);
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_strrcasechr ()
@@ -27,6 +29,7 @@ If no such character exist in the string,
 the string's end is returned.
 .PP
 The comparison is case-insensitive.
+
 .SH RETURN VALUE
 The
 .BR libsimple_strrcasechr ()
@@ -39,10 +42,12 @@ where
 is the returned pointer, if no such
 offset exists, it returns
 .BR NULL .
+
 .SH ERRORS
 The
 .BR libsimple_strrcasechr ()
 function cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -61,18 +66,25 @@ T{
 .BR libsimple_strrcasechr ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_strrcasechr_inv (3),
 .BR libsimple_strcasechr (3),

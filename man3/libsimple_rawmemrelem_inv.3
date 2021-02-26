@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_RAWMEMRELEM_INV 3 2018-11-25 libsimple
+.TH LIBSIMPLE_RAWMEMRELEM_INV 3 libsimple
 .SH NAME
 libsimple_rawmemrelem_inv \- find different aligned byte string in memory
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -14,6 +15,7 @@ void *libsimple_rawmemrelem_inv(const void *\fIhaystack\fP, const void *\fIneedl
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_rawmemrelem_inv ()
@@ -35,6 +37,7 @@ occurence, its behaviour is undefined
 if this is not the case.
 .PP
 The comparison is case-sensitive.
+
 .SH RETURN VALUE
 The
 .BR libsimple_rawmemrelem_inv ()
@@ -48,10 +51,12 @@ is the returned pointer, and such that
 the offset is equivalent to zero modulo
 .IR width .
 If no such offset exists, the behaviour is undefined.
+
 .SH ERRORS
 The
 .BR libsimple_rawmemrelem_inv ()
 function cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -70,18 +75,25 @@ T{
 .BR libsimple_rawmemrelem_inv ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_rawmemrelem (3),
 .BR libsimple_memrelem_inv (3),

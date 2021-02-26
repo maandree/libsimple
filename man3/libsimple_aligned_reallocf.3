@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_ALIGNED_REALLOCF 3 2018-11-29 libsimple
+.TH LIBSIMPLE_ALIGNED_REALLOCF 3 libsimple
 .SH NAME
 libsimple_aligned_reallocf \- reallocate memory and customise alignment
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -14,6 +15,7 @@ static inline void *libsimple_aligned_reallocf(void *\fIptr\fP, size_t \fIalignm
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_aligned_reallocf ()
@@ -49,6 +51,7 @@ is deallocaed and
 is returned, however portable applications should,
 unless the namespaced alias is used, assume the
 behaviour is unspecifed in this case.
+
 .SH RETURN VALUE
 The
 .BR libsimple_aligned_reallocf (),
@@ -60,6 +63,7 @@ function returns
 and set
 .I errno
 it indicate the error.
+
 .SH ERRORS
 The
 .BR libsimple_aligned_reallocf ()
@@ -79,6 +83,7 @@ for all libc implementations.
 The function is implemented if and only if the macro
 .B LIBSIMPLE_HAVE_ALIGNED_REALLOC
 is defined by the library.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -97,18 +102,25 @@ T{
 .BR libsimple_aligned_reallocf ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_enmalloc (3),
 .BR libsimple_mallocz (3),

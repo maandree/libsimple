@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_SUMTIMESPEC 3 2018-10-29 libsimple
+.TH LIBSIMPLE_SUMTIMESPEC 3 libsimple
 .SH NAME
 libsimple_sumtimespec, libsimple_sumtimeval \- calculate the sum of two durations
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -18,6 +19,7 @@ int libsimple_sumtimeval(struct timeval *\fIsum\fP, const struct timeval *\fIaug
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_sumtimespec ()
@@ -29,6 +31,7 @@ and
 .I addend
 and stores the result in
 .IR sum .
+
 .SH RETURN VALUE
 The
 .BR libsimple_sumtimespec ()
@@ -47,6 +50,7 @@ are in thier valid range ([0, 1000000000) for
 .BR libsimple_sumtimespec ()
 and [0, 1000000) for
 .BR libsimple_sumtimeval ()).
+
 .SH ERRORS
 The
 .BR libsimple_sumtimespec ()
@@ -77,6 +81,7 @@ function and to
 for the
 .BR libsimple_sumtimeval ()
 function.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -101,18 +106,25 @@ T{
 .BR libsimple_sumtimeval ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_difftimespec (3),
 .BR libsimple_multimespec (3),

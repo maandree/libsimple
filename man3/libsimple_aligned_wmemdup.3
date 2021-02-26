@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_ALIGNED_WMEMDUP 3 2018-11-27 libsimple
+.TH LIBSIMPLE_ALIGNED_WMEMDUP 3 libsimple
 .SH NAME
 libsimple_aligned_wmemdup, libsimple_aligned_wmemdupa \- duplicate a wide-character array
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -26,6 +27,7 @@ static inline wchar_t *libsimple_ealigned_wmemdup(const wchar_t *\fIs\fP, size_t
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_aligned_wmemdup ()
@@ -62,6 +64,7 @@ function that uses allocates the memory on the stack
 rather than on the heap, causing the return pointer
 to become invalid when the calling function returns.
 It is only available when compling with GCC or Clang.
+
 .SH RETURN VALUE
 Upon successful completion, the
 .BR libsimple_aligned_wmemdupa (),
@@ -92,12 +95,14 @@ by the
 .BR libsimple_aligned_wmemdupa ()
 function, it is automatically deallocated when the
 calling function returns.
+
 .SH ERRORS
 The
 .BR libsimple_aligned_wmemdup ()
 function may fail for any reason specified for the
 .BR aligned_alloc (3)
 function.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -134,18 +139,25 @@ T{
 .BR libsimple_ealigned_wmemdup (),
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_wmemdup (3),
 .BR libsimple_aligned_strndup (3),

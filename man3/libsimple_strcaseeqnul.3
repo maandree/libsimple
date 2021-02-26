@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_STRCASEEQNUL 3 2018-10-23 libsimple
+.TH LIBSIMPLE_STRCASEEQNUL 3 libsimple
 .SH NAME
 libsimple_strcaseeqnul \- compare two strings
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -14,6 +15,7 @@ static inline int libsimple_strcaseeqnul(const char *\fIa\fP, const char *\fIb\f
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_strcaseeqnul ()
@@ -25,16 +27,19 @@ both of which may be
 .BR NULL .
 .PP
 The comparison is case-insensitive.
+
 .SH RETURN VALUE
 The
 .BR libsimple_strcaseeqnul ()
 function returns 1 if the strings are equals,
 with the possible exception of the case,
 otherwise it returns 0.
+
 .SH ERRORS
 The
 .BR libsimple_strcaseeqnul ()
 function cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -53,18 +58,25 @@ T{
 .BR libsimple_strcaseeqnul ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_strcaseeq (3),
 .BR libsimple_streqnul (3),

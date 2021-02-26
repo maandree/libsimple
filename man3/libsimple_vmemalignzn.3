@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_VMEMALIGNZN 3 2018-11-03 libsimple
+.TH LIBSIMPLE_VMEMALIGNZN 3 libsimple
 .SH NAME
 libsimple_vmemalignzn \- allocate optionally initialised memory with custom alignment
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -34,6 +35,7 @@ static inline void *libsimple_ememalignzn(int \fIclear\fP, size_t \fIalignment\f
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_memalignzn (),
@@ -94,6 +96,7 @@ and
 respectively, that use
 .B va_list
 instead of variadic arguments.
+
 .SH RETURN VALUE
 The
 .BR libsimple_vmemalignzn (),
@@ -119,6 +122,7 @@ it indicate the error, and the
 and
 .BR libsimple_ememalignzn ()
 functions terminated the process.
+
 .SH ERRORS
 The
 .BR libsimple_vmemalignzn (),
@@ -143,6 +147,7 @@ The
 and
 .BR libsimple_ememalignzn ()
 functions will terminate the process on failure.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -191,18 +196,25 @@ T{
 .BR libsimple_ememalignzn ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_enmalloc (3),
 .BR libsimple_mallocz (3),

@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_VPUTENVF 3 2018-10-20 libsimple
+.TH LIBSIMPLE_VPUTENVF 3 libsimple
 .SH NAME
 libsimple_vputenvf \- change or add a string formatted value to the environment
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -34,6 +35,7 @@ static inline void libsimple_eputenvf(const char *\fIfmt\fP, ...);
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_vputenvf ()
@@ -88,6 +90,7 @@ for more information.
 Modifications made to the environment do not become
 visible to other process until the process image is
 changed.
+
 .SH RETURN VALUE
 Upon successful completion, the
 .BR libsimple_vputenvf ()
@@ -96,6 +99,7 @@ and
 functions return 0; otherwise, they return \-1 and set
 .I errno
 to indicate the error.
+
 .SH ERRORS
 The
 .BR libsimple_vputenvf ()
@@ -114,6 +118,7 @@ Insufficient memory was available.
 They may also fail for any reason specified for the
 .BR vsnprintf (3)
 function.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -162,14 +167,19 @@ T{
 .BR libsimple_eputenvf ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 If the construct does not contain the
 .B '='
@@ -182,12 +192,14 @@ the behaviour is unspecified when countered by the
 and
 .BR unsetenv (3)
 functions.
+
 .SH BUGS
 There is no mechanism for detecting which entries in the
 environment are statically allocated and which are
 dynamically allocated, this can lead to memory leaks
 with are detected by
 .BR valgrind (1).
+
 .SH SEE ALSO
 .BR putenv (3),
 .BR setenv (3),

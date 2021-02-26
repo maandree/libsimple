@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_STRNCMOVE 3 2018-11-25 libsimple
+.TH LIBSIMPLE_STRNCMOVE 3 libsimple
 .SH NAME
 libsimple_strncmove, libsimple_strnccpy \- copy or move a string within an array of bytes
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -18,6 +19,7 @@ static inline char *libsimple_strnccpy(char *restrict \fIdest\fP, const char *re
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_strncmove ()
@@ -46,6 +48,7 @@ function but not in the
 function.
 .PP
 The comparison is case-sensitive.
+
 .SH RETURN VALUE
 The
 .BR libsimple_strncmove ()
@@ -61,12 +64,14 @@ after it was copied, if the character
 was not copied
 .I NULL
 is returned.
+
 .SH ERRORS
 The
 .BR libsimple_strncmove ()
 and
 .BR libsimple_strnccpy ()
 functions cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -91,18 +96,25 @@ T{
 .BR libsimple_strnccpy ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_strnmove (3),
 .BR libsimple_stpnmove (3),

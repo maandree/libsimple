@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_MEMDUP 3 2018-10-27 libsimple
+.TH LIBSIMPLE_MEMDUP 3 libsimple
 .SH NAME
 libsimple_memdup \- duplicate bytes in memory
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -26,6 +27,7 @@ static inline void *libsimple_ememdup(const void *\fIs\fP, size_t \fIn\fP);
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_memdup ()
@@ -57,6 +59,7 @@ function that uses allocates the memory on the stack
 rather than on the heap, causing the return pointer
 to become invalid when the calling function returns.
 It is only available when compling with GCC or Clang.
+
 .SH RETURN VALUE
 Upon successful completion, the
 .BR libsimple_memdupa (),
@@ -87,12 +90,14 @@ by the
 .BR libsimple_memdupa ()
 function, it is automatically deallocated when the
 calling function returns.
+
 .SH ERRORS
 The
 .BR libsimple_memdup ()
 function may fail for any reason specified for the
 .BR malloc (3)
 function.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -129,18 +134,25 @@ T{
 .BR libsimple_ememdup (),
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_aligned_memdup (3),
 .BR libsimple_enstrndup (3),

@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_ALIGNED_STRNDUP 3 2018-11-27 libsimple
+.TH LIBSIMPLE_ALIGNED_STRNDUP 3 libsimple
 .SH NAME
 libsimple_aligned_strndup, libsimple_aligned_strndupa \- duplicate a string
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -26,6 +27,7 @@ static inline char *libsimple_ealigned_strndup(const char *\fIs\fP, size_t \fIal
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_aligned_strndup ()
@@ -61,6 +63,7 @@ function that uses allocates the memory on the stack
 rather than on the heap, causing the return pointer
 to become invalid when the calling function returns.
 It is only available when compling with GCC or Clang.
+
 .SH RETURN VALUE
 Upon successful completion, the
 .BR libsimple_aligned_strndupa (),
@@ -91,12 +94,14 @@ by the
 .BR libsimple_aligned_strndupa ()
 function, it is automatically deallocated when the
 calling function returns.
+
 .SH ERRORS
 The
 .BR libsimple_aligned_strndup ()
 function may fail for any reason specified for the
 .BR aligned_alloc (3)
 function.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -133,18 +138,25 @@ T{
 .BR libsimple_ealigned_strndup (),
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_aligned_strdup (3),
 .BR libsimple_aligned_memdup (3),

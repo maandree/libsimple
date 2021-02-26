@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_MEMCASEEQLEN 3 2018-10-23 libsimple
+.TH LIBSIMPLE_MEMCASEEQLEN 3 libsimple
 .SH NAME
 libsimple_memcaseeqlen \- check initial commonality
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -14,6 +15,7 @@ size_t libsimple_memcaseeqlen(const void *\fIa\fP, size_t \fIn\fP, const void *\
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_memcaseeqlen ()
@@ -28,6 +30,7 @@ with size
 at their beginnings.
 .PP
 The comparison is case-insensitive.
+
 .SH RETURN VALUE
 The
 .BR libsimple_memcaseeqlen ()
@@ -36,10 +39,12 @@ function returns the number of bytes
 and
 .I b
 have in common at their beginnings.
+
 .SH ERRORS
 The
 .BR libsimple_memcaseeqlen ()
 function cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -58,18 +63,25 @@ T{
 .BR libsimple_memcaseeqlen ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_memcaseeq (3),
 .BR libsimple_memeqlen (3),

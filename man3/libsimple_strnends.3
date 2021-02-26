@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_STRNENDS 3 2018-10-23 libsimple
+.TH LIBSIMPLE_STRNENDS 3 libsimple
 .SH NAME
 libsimple_strnends \- check the beginning of a string
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -14,6 +15,7 @@ int libsimple_strnends(const char *\fIs\fP, const char *\fIt\fP, size_t \fIn\fP)
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_strnends ()
@@ -26,6 +28,7 @@ ends with the string
 .IR t .
 .PP
 The comparison is case-sensitive.
+
 .SH RETURN VALUE
 The
 .BR libsimple_strnends ()
@@ -34,10 +37,12 @@ function returns 1 if the string
 ends with the string
 .IR t ,
 otherwise it returns 0.
+
 .SH ERRORS
 The
 .BR libsimple_strnends ()
 function cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -56,18 +61,25 @@ T{
 .BR libsimple_strnends ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_strncaseends (3),
 .BR libsimple_strnstarts (3),

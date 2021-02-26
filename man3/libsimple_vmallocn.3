@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_VMALLOCN 3 2018-11-03 libsimple
+.TH LIBSIMPLE_VMALLOCN 3 libsimple
 .SH NAME
 libsimple_vmallocn \- allocate memory
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -34,6 +35,7 @@ static inline void *libsimple_emallocn(size_t \fIn\fP, ..., /* (size_t)0 */);
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_mallocn (),
@@ -93,6 +95,7 @@ and
 respectively, that use
 .B va_list
 instead of variadic arguments.
+
 .SH RETURN VALUE
 The
 .BR libsimple_vmallocn (),
@@ -118,6 +121,7 @@ it indicate the error, and the
 and
 .BR libsimple_emallocn ()
 functions terminated the process.
+
 .SH ERRORS
 The
 .BR libsimple_vmallocn (),
@@ -137,6 +141,7 @@ The
 and
 .BR libsimple_emallocn ()
 functions will terminate the process on failure.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -185,18 +190,25 @@ T{
 .BR libsimple_emallocn ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_enmalloc (3),
 .BR libsimple_mallocz (3),

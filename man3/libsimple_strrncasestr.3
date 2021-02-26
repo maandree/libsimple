@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_STRRNCASESTR 3 2018-10-23 libsimple
+.TH LIBSIMPLE_STRRNCASESTR 3 libsimple
 .SH NAME
 libsimple_strrncasestr \- find a substring in a string
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -14,6 +15,7 @@ char *libsimple_strrncasestr(const char *\fIhaystack\fP, const char *\fIneedle\f
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_strrncasestr ()
@@ -26,6 +28,7 @@ the last occurrence of the substring
 .IR needle .
 .PP
 The comparison is case-insensitive.
+
 .SH RETURN VALUE
 The
 .BR libsimple_strrncasestr ()
@@ -41,10 +44,12 @@ is the returned pointer.
 If no such offset exists,
 .B NULL
 is returned.
+
 .SH ERRORS
 The
 .BR libsimple_strrncasestr ()
 function cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -63,18 +68,25 @@ T{
 .BR libsimple_strrncasestr ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_strrnstr (3),
 .BR libsimple_strncasestr (3),

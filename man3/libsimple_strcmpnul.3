@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_STRCMPNUL 3 2018-10-23 libsimple
+.TH LIBSIMPLE_STRCMPNUL 3 libsimple
 .SH NAME
 libsimple_strcmpnul \- compare two strings
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -14,6 +15,7 @@ static inline int libsimple_strcmpnul(const char *\fIa\fP, const char *\fIb\fP);
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_strcmpnul ()
@@ -32,6 +34,7 @@ greater than the shorter string.
 The comparison is case-sensitive and made as if
 the strings were
 .IR "unsigned char *" s.
+
 .SH RETURN VALUE
 The
 .BR libsimple_strcmpnul ()
@@ -44,10 +47,12 @@ a positive value if
 is greater than
 .IR b ,
 and 0 otherwise.
+
 .SH ERRORS
 The
 .BR libsimple_strcmpnul ()
 function cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -66,18 +71,25 @@ T{
 .BR libsimple_strcmpnul ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_strcasecmpnul (3),
 .BR libsimple_streqnul (3),

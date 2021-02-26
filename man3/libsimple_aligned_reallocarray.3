@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_ALIGNED_REALLOCARRAY 3 2018-11-29 libsimple
+.TH LIBSIMPLE_ALIGNED_REALLOCARRAY 3 libsimple
 .SH NAME
 libsimple_aligned_reallocarray \- reallocate memory and customise alignment
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -22,6 +23,7 @@ static inline void *libsimple_ealigned_reallocarray(void *\fIptr\fP, size_t \fIa
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_aligned_reallocarray (),
@@ -74,6 +76,7 @@ function is used or
 if the
 .BR libsimple_ealigned_reallocarray ()
 function is used.
+
 .SH RETURN VALUE
 The
 .BR libsimple_aligned_reallocarray (),
@@ -92,6 +95,7 @@ it indicate the error, and the
 and
 .BR libsimple_ealigned_reallocarray ()
 functions terminated the process.
+
 .SH ERRORS
 The
 .BR libsimple_aligned_reallocarray ()
@@ -117,6 +121,7 @@ The
 and
 .BR libsimple_ealigned_reallocarray ()
 functions will terminate the process on failure.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -147,18 +152,25 @@ T{
 .BR libsimple_ealigned_reallocarray ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_enmalloc (3),
 .BR libsimple_mallocz (3),

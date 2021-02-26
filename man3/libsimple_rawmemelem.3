@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_RAWMEMELEM 3 2018-11-25 libsimple
+.TH LIBSIMPLE_RAWMEMELEM 3 libsimple
 .SH NAME
 libsimple_rawmemelem \- find aligned byte string in memory
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -14,6 +15,7 @@ void *libsimple_rawmemelem(const void *\fIhaystack\fP, const void *\fIneedle\fP,
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_rawmemelem ()
@@ -33,6 +35,7 @@ occurence, its behaviour is undefined
 if this is not the case.
 .PP
 The comparison is case-sensitive.
+
 .SH RETURN VALUE
 The
 .BR libsimple_rawmemelem ()
@@ -46,10 +49,12 @@ is the returned pointer, and such that
 the offset is equivalent to zero modulo
 .IR width .
 If no such offset exists, the behaviour is undefined.
+
 .SH ERRORS
 The
 .BR libsimple_rawmemelem ()
 function cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -68,18 +73,25 @@ T{
 .BR libsimple_rawmemelem ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_rawmemelem_inv (3),
 .BR libsimple_rawmemrelem (3),

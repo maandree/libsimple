@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_POSIX_MEMALIGNZ 3 2018-11-03 libsimple
+.TH LIBSIMPLE_POSIX_MEMALIGNZ 3 libsimple
 .SH NAME
 libsimple_posix_memalignz \- allocate optionally initialised memory with custom alignment
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -22,6 +23,7 @@ static inline void libsimple_eposix_memalignz(void **\fImemptr\fP, int \fIclear\
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_posix_memalignz (),
@@ -73,6 +75,7 @@ and
 functions behaviour is unspecified if
 .I n
 is 0.
+
 .SH RETURN VALUE
 The
 .BR libsimple_posix_memalignz ()
@@ -86,6 +89,7 @@ and
 .BR libsimple_eposix_memalignz ()
 functions do not return a value, but
 terminated the process on failure.
+
 .SH ERRORS
 The
 .BR libsimple_posix_memalignz ()
@@ -112,6 +116,7 @@ The
 and
 .BR libsimple_eposix_memalignz ()
 functions will terminate the process on failure.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -142,18 +147,25 @@ T{
 .BR libsimple_eposix_memalignz ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_enmalloc (3),
 .BR libsimple_mallocz (3),

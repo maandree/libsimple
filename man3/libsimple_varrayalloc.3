@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_VARRAYALLOC 3 2018-11-03 libsimple
+.TH LIBSIMPLE_VARRAYALLOC 3 libsimple
 .SH NAME
 libsimple_varrayalloc \- allocate memory in a flexible manner
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -19,6 +20,7 @@ void *libsimple_earrayalloc(\fItype\fP, size_t \fIn\fP, ..., /* LIBSIMPLE_ARRAYA
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_varrayalloc (),
@@ -74,6 +76,7 @@ will be used as the alignment for the returned pointer.
 *
 The specified allocatio size will be multiplied by
 .IR sizeof(type) .
+
 .SH RETURN VALUE
 The
 .BR libsimple_varrayalloc (),
@@ -99,6 +102,7 @@ to indicate the error, whereas the
 and
 .BR libsimple_earrayalloc ()
 functions terminate the process.
+
 .SH ERRORS
 The
 .BR libsimple_varrayalloc ()
@@ -123,6 +127,7 @@ The
 and
 .BR libsimple_earrayalloc ()
 functions terminate the process on failure.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -171,18 +176,25 @@ T{
 .BR libsimple_earrayalloc ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_vmemalloc (3),
 .BR libsimple_enmalloc (3),

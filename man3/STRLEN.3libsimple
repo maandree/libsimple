@@ -1,6 +1,7 @@
-.TH STRLEN 3 2018-11-05 libsimple
+.TH STRLEN 3 libsimple
 .SH NAME
 STRLEN \- get the length of a string literal
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -9,6 +10,7 @@ STRLEN \- get the length of a string literal
 # define STRLEN(str) /* implementation omitted */
 #endif
 .fi
+
 .SH DESCRIPTION
 The
 .BR STRLEN ()
@@ -25,17 +27,24 @@ however it is not suitable for
 .BR #if .
 The type of the expression the macro expands to is
 .BR size_t .
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR ELEMSOF (3libsimple)

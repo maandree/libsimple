@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_VWEPRINTF 3 2018-11-06 libsimple
+.TH LIBSIMPLE_VWEPRINTF 3 libsimple
 .SH NAME
 libsimple_vweprintf \- print an error message
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -38,6 +39,7 @@ static inline void libsimple_eprintf(const char *\fIfmt\fP, ...);
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_vweprintf ()
@@ -151,10 +153,13 @@ function called when
 or
 .I libsimple_eprint_postprint
 is called.
+
 .SH RETURN VALUE
 None.
+
 .SH ERRORS
 None.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -203,18 +208,25 @@ T{
 .BR libsimple_eprintf ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR perror (3),
 .BR fprintf (3),

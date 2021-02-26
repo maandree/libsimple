@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_DOUBLETOTIMESPEC 3 2018-10-30 libsimple
+.TH LIBSIMPLE_DOUBLETOTIMESPEC 3 libsimple
 .SH NAME
 libsimple_doubletotimespec, libsimple_doubletotimeval \- convert a double to a duration data structure
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -18,6 +19,7 @@ void libsimple_doubletotimeval(struct timeval *\fItv\fP, double \fId\fP);
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_doubletotimespec ()
@@ -37,10 +39,13 @@ and stores the result in
 .IR tv .
 .PP
 Neither of these functions perform an overflow check.
+
 .SH RETURN VALUE
 None.
+
 .SH ERRORS
 No error checks are made.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -65,18 +70,25 @@ T{
 .BR libsimple_doubletotimeval ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_sumtimespec (3),
 .BR libsimple_difftimespec (3),

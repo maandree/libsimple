@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_STRNTOLOWER 3 2018-11-25 libsimple
+.TH LIBSIMPLE_STRNTOLOWER 3 libsimple
 .SH NAME
 libsimple_strntolower, libsimple_stpntolower \- convert a string to lower case
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -18,6 +19,7 @@ char *libsimple_stpntolower(char *\fIdest\fP, const char *\fIsrc\fP, size_t \fIn
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_strntolower ()
@@ -35,6 +37,7 @@ lower case; however no more than
 bytes will be copied or coverted. The arrays may overlap,
 and there is an optimisation for the case where
 .IR dest==src .
+
 .SH RETURN VALUE
 The
 .BR libsimple_strntolower ()
@@ -48,12 +51,14 @@ end of the string copied into
 .IR dest ,
 that is
 .IR &dest[strnlen(src,n)] .
+
 .SH ERRORS
 The
 .BR libsimple_strntolower ()
 and
 .BR libsimple_stpntolower ()
 functions cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -78,18 +83,25 @@ T{
 .BR libsimple_stpntolower ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_strntoupper (3),
 .BR libsimple_strnreplace (3),

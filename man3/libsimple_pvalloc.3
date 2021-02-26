@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_PVALLOC 3 2018-11-03 libsimple
+.TH LIBSIMPLE_PVALLOC 3 libsimple
 .SH NAME
 libsimple_pvalloc \- allocate memory with page size alignment
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -22,6 +23,7 @@ static inline void *libsimple_epvalloc(size_t \fIn\fP);
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_pvalloc (),
@@ -60,6 +62,7 @@ function is used or
 if the
 .BR libsimple_epvalloc ()
 function is used.
+
 .SH RETURN VALUE
 The
 .BR libsimple_pvalloc (),
@@ -78,6 +81,7 @@ it indicate the error, and the
 and
 .BR libsimple_epvalloc ()
 functions terminated the process.
+
 .SH ERRORS
 The
 .BR libsimple_pvalloc ()
@@ -95,6 +99,7 @@ The
 and
 .BR libsimple_epvalloc ()
 functions will terminate the process on failure.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -125,14 +130,19 @@ T{
 .BR libsimple_epvalloc ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 Portable applications shall assume that pointer
 returned by the
@@ -146,8 +156,10 @@ is used explicitly.
 The GNU implementation of
 .BR pvalloc (3)
 is \(dqMT-Unsafe init\(dq.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_enmalloc (3),
 .BR libsimple_mallocz (3),

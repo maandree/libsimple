@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_MULTIMESPEC 3 2018-10-29 libsimple
+.TH LIBSIMPLE_MULTIMESPEC 3 libsimple
 .SH NAME
 libsimple_multimespec, libsimple_multimeval \- multiply a duration with an integer
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -18,6 +19,7 @@ int libsimple_multimeval(struct timeval *\fIprod\fP, const struct timeval *\fImu
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_multimespec ()
@@ -36,6 +38,7 @@ is in its valid range ([0, 1000000000) for
 .BR libsimple_multimespec ()
 and [0, 1000000) for
 .BR libsimple_multimeval ()).
+
 .SH RETURN VALUE
 The
 .BR libsimple_multimespec ()
@@ -45,6 +48,7 @@ functions return 0 on successful completion;
 otherwise, \-1 is returned and
 .I errno
 is set to indicate the error.
+
 .SH ERRORS
 The
 .BR libsimple_multimespec ()
@@ -75,6 +79,7 @@ function and to
 for the
 .BR libsimple_multimeval ()
 function.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -99,18 +104,25 @@ T{
 .BR libsimple_multimeval ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_sumtimespec (3),
 .BR libsimple_difftimespec (3),

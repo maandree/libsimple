@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_CLOSE 3 2018-11-05 libsimple
+.TH LIBSIMPLE_CLOSE 3 libsimple
 .SH NAME
 libsimple_close \- close file descriptor and mark it as closed
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -10,6 +11,7 @@ static inline int libsimple_close(int *\fIfdp\fP);
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_close ()
@@ -22,28 +24,37 @@ to
 However if
 .IR *fdp<0 ,
 does not except return 0.
+
 .SH RETURN VALUE
 The
 .BR libsimple_close ()
 function returns 0 upon successful completion;
 otherwise \-1 is returned.
+
 .SH ERRORS
 The
 .BR libsimple_close ()
 function fail for the reasons specified for the
 .BR close (3)
 function.
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR close (3)

@@ -68,6 +68,8 @@ OBJ =\
 	enaligned_wcsndup.o\
 	enaligned_wmemdup.o\
 	encalloc.o\
+	engmtime.o\
+	enlocaltime.o\
 	enmalloc.o\
 	enmemdup.o\
 	enposix_memalignz.o\
@@ -85,6 +87,8 @@ OBJ =\
 	enwcsdup.o\
 	enwcsndup.o\
 	enwmemdup.o\
+	gmtime.o\
+	localtime.o\
 	memcasechr.o\
 	memcasechr_inv.o\
 	memcasecmp.o\

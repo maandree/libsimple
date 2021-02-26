@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_VALIGNED_ALLOCZN 3 2018-11-03 libsimple
+.TH LIBSIMPLE_VALIGNED_ALLOCZN 3 libsimple
 .SH NAME
 libsimple_valigned_alloczn \- allocate optionally initialised memory with custom alignment
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -34,6 +35,7 @@ static inline void *libsimple_ealigned_alloczn(int \fIclear\fP, size_t \fIalignm
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_aligned_alloczn (),
@@ -94,6 +96,7 @@ and
 respectively, that use
 .B va_list
 instead of variadic arguments.
+
 .SH RETURN VALUE
 The
 .BR libsimple_valigned_alloczn (),
@@ -119,6 +122,7 @@ it indicate the error, and the
 and
 .BR libsimple_ealigned_alloczn ()
 functions terminated the process.
+
 .SH ERRORS
 The
 .BR libsimple_valigned_alloczn (),
@@ -148,6 +152,7 @@ The
 and
 .BR libsimple_ealigned_alloczn ()
 functions will terminate the process on failure.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -196,18 +201,25 @@ T{
 .BR libsimple_ealigned_alloczn ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_enmalloc (3),
 .BR libsimple_mallocz (3),

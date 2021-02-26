@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_REALLOCARRAY 3 2018-11-29 libsimple
+.TH LIBSIMPLE_REALLOCARRAY 3 libsimple
 .SH NAME
 libsimple_reallocarray \- reallocate memory
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -22,6 +23,7 @@ static inline void *libsimple_ereallocarray(void *\fIptr\fP, size_t \fIn\fP, siz
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_reallocarray (),
@@ -76,6 +78,7 @@ function is used or
 if the
 .BR libsimple_ereallocarray ()
 function is used.
+
 .SH RETURN VALUE
 The
 .BR libsimple_reallocarray (),
@@ -94,6 +97,7 @@ it indicate the error, and the
 and
 .BR libsimple_ereallocarray ()
 functions terminated the process.
+
 .SH ERRORS
 The
 .BR libsimple_reallocarray ()
@@ -106,6 +110,7 @@ The
 and
 .BR libsimple_ereallocarray ()
 functions will terminate the process on failure.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -136,18 +141,25 @@ T{
 .BR libsimple_ereallocarray ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_enmalloc (3),
 .BR libsimple_mallocz (3),

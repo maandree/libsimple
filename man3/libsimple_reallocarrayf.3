@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_REALLOCARRAYF 3 2018-11-29 libsimple
+.TH LIBSIMPLE_REALLOCARRAYF 3 libsimple
 .SH NAME
 libsimple_reallocarrayf \- reallocate memory
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -14,6 +15,7 @@ static inline void *libsimple_reallocarrayf(void *\fIptr\fP, size_t \fIn\fP, siz
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_reallocarrayf ()
@@ -53,6 +55,7 @@ is deallocaed and
 is returned, however portable applications should,
 unless the namespaced alias is used, assume the
 behaviour is unspecifed in this case.
+
 .SH RETURN VALUE
 The
 .BR libsimple_reallocarrayf (),
@@ -64,12 +67,14 @@ function returns
 and set
 .I errno
 it indicate the error.
+
 .SH ERRORS
 The
 .BR libsimple_reallocarrayf ()
 function will fail for the reasons specified for the
 .BR realloc (3)
 function.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -88,18 +93,25 @@ T{
 .BR libsimple_reallocarrayf ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_enmalloc (3),
 .BR libsimple_mallocz (3),

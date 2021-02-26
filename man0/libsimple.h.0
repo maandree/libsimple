@@ -1,10 +1,12 @@
-.TH LIBSIMPLE.H 0 2018-11-25 libsimple
+.TH LIBSIMPLE.H 0 libsimple
 .SH NAME
 libsimple.h \- main header for libsimple
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
 .fi
+
 .SH DESCRIPTION
 The header
 .I <libsimple.h>
@@ -141,20 +143,17 @@ are defined only with namespacing:
 
 .TP
 .BR libsimple_arrayalloc (3),
-.RS 0
+.TQ
 .BR libsimple_earrayalloc (3),
-.br
+.TQ
 .BR libsimple_enarrayalloc (3),
-.br
+.TQ
 .BR libsimple_varrayalloc (3),
-.br
+.TQ
 .BR libsimple_evarrayalloc (3),
-.br
+.TQ
 .BR libsimple_envarrayalloc (3)
-.RE
-.RS
 Flexible allocation of memory suitable for allocating arrays.
-.RE
 
 .TP
 .BR libsimple_close (3)
@@ -170,20 +169,17 @@ Function called after printing error messages.
 Function called before printing error messages.
 .TP
 .BR libsimple_memalloc (3),
-.RS 0
+.TQ
 .BR libsimple_ememalloc (3),
-.br
+.TQ
 .BR libsimple_enmemalloc (3),
-.br
+.TQ
 .BR libsimple_vmemalloc (3),
-.br
+.TQ
 .BR libsimple_evmemalloc (3),
-.br
+.TQ
 .BR libsimple_envmemalloc (3)
-.RE
-.RS
 Flexible allocation of memory.
-.RE
 
 .PP
 The following functions and macros are
@@ -191,80 +187,65 @@ defined both with and without namespacing:
 
 .TP
 .BR libsimple_ealigned_alloc (3),
-.RS 0
+.TQ
 .BR libsimple_enaligned_alloc (3)
-.RE
-.RS
 Wrappers for
 .BR aligned_alloc (3)
 that terminate the process on failure.
-.RE
 
 .TP
 .BR libsimple_aligned_allocn (3),
-.RS 0
+.TQ
 .BR libsimple_ealigned_allocn (3),
-.br
+.TQ
 .BR libsimple_enaligned_allocn (3),
-.br
+.TQ
 .BR libsimple_valigned_allocn (3),
-.br
+.TQ
 .BR libsimple_evaligned_allocn (3),
-.br
+.TQ
 .BR libsimple_envaligned_allocn (3)
-.RE
-.RS
 Wrappers for
 .BR aligned_alloc (3)
 that take the product of multiple
 arguments as the allocation size.
-.RE
 
 .TP
 .BR libsimple_aligned_allocz (3),
-.RS 0
+.TQ
 .BR libsimple_ealigned_allocz (3),
-.br
+.TQ
 .BR libsimple_enaligned_allocz (3)
-.RE
-.RS
 Wrappers for
 .BR aligned_alloc (3)
 that conditionally initialises the memory.
-.RE
 
 .TP
 .BR libsimple_aligned_alloczn (3),
-.RS 0
+.TQ
 .BR libsimple_ealigned_alloczn (3),
-.br
+.TQ
 .BR libsimple_enaligned_alloczn (3),
-.br
+.TQ
 .BR libsimple_valigned_alloczn (3),
-.br
+.TQ
 .BR libsimple_evaligned_alloczn (3),
-.br
+.TQ
 .BR libsimple_envaligned_alloczn (3)
-.RE
-.RS
 Wrappers for
 .BR aligned_alloc (3)
 that take the product of multiple
 arguments as the allocation size
 and conditionally initialises the memory.
-.RE
 
 .TP
 .BR libsimple_aligned_memdup (3),
-.RS 0
+.TQ
 .BR libsimple_ealigned_memdup (3),
-.br
+.TQ
 .BR libsimple_enaligned_memdup (3)
-.RE
-.RS
 Duplicate an array of bytes into a
 new pointer with a custom alignment.
-.RE
 
 .TP
 .BR libsimple_aligned_memdupa (3)
@@ -273,16 +254,13 @@ with custom alignment.
 
 .TP
 .BR libsimple_aligned_realloc (3),
-.RS 0
+.TQ
 .BR libsimple_ealigned_realloc (3),
-.br
+.TQ
 .BR libsimple_enaligned_realloc (3)
-.RE
-.RS
 Version of
 .BR realloc (3)
 with custom alignment.
-.RE
 
 .TP
 .BR libsimple_aligned_reallocf (3)
@@ -293,18 +271,15 @@ the pointer on failure.
 
 .TP
 .BR libsimple_aligned_reallocarray (3),
-.RS 0
+.TQ
 .BR libsimple_ealigned_reallocarray (3),
-.br
+.TQ
 .BR libsimple_enaligned_reallocarray (3)
-.RE
-.RS
 Version of
 .BR realloc (3)
 with custom alignment that, like
 .BR calloc (3),
 takes two size arguments.
-.RE
 
 .TP
 .BR libsimple_aligned_reallocarrayf (3)
@@ -317,51 +292,42 @@ deallocates the pointer on failure.
 
 .TP
 .BR libsimple_aligned_reallocfn (3),
-.RS 0
+.TQ
 .BR libsimple_valigned_reallocfn (3)
-.RE
-.RS
 Version of
 .BR realloc (3)
 that take the product of multiple arguments
 as the allocation size, and that
 deallocates the pointer on failure.
-.RE
 
 .TP
 .BR libsimple_aligned_reallocn (3),
-.RS 0
+.TQ
 .BR libsimple_ealigned_reallocn (3),
-.br
+.TQ
 .BR libsimple_enaligned_reallocn (3),
-.br
+.TQ
 .BR libsimple_valigned_reallocn (3),
-.br
+.TQ
 .BR libsimple_evaligned_reallocn (3),
-.br
+.TQ
 .BR libsimple_envaligned_reallocn (3)
-.RE
-.RS
 Version of
 .BR realloc (3)
 that take the product of multiple arguments
 as the allocation size.
-.RE
 
 .TP
 .BR libsimple_reallocarray (3),
-.RS 0
+.TQ
 .BR libsimple_ereallocarray (3),
-.br
+.TQ
 .BR libsimple_enreallocarray (3)
-.RE
-.RS
 Version of
 .BR realloc (3)
 that, like
 .BR calloc (3),
 takes to size arguments.
-.RE
 
 .TP
 .BR libsimple_reallocarrayf (3)
@@ -380,84 +346,66 @@ that deallocates the pointer on failure.
 
 .TP
 .BR libsimple_reallocfn (3),
-.RS 0
+.TQ
 .BR libsimple_vreallocfn (3)
-.RE
-.RS
 Version of
 .BR realloc (3)
 that take the product of multiple arguments
 as the allocation size, and that
 deallocates the pointer on failure.
-.RE
 
 .TP
 .BR libsimple_aligned_strdup (3),
-.RS 0
+.TQ
 .BR libsimple_ealigned_strdup (3),
-.br
+.TQ
 .BR libsimple_enaligned_strdup (3),
-.br
+.TQ
 .BR libsimple_aligned_strndup (3),
-.br
+.TQ
 .BR libsimple_ealigned_strndup (3),
-.br
+.TQ
 .BR libsimple_enaligned_strndup (3)
-.RE
-.RS
 Duplicate a string into a new pointer
 with a custom alignment.
-.RE
 
 .TP
 .BR libsimple_aligned_strdupa (3),
-.RS 0
+.TQ
 .BR libsimple_aligned_strndupa (3)
-.RE
-.RS
 Duplicate a string onto the stack,
 with custom alignment.
-.RE
 
 .TP
 .BR libsimple_aligned_wcsdup (3),
-.RS 0
+.TQ
 .BR libsimple_ealigned_wcsdup (3),
-.br
+.TQ
 .BR libsimple_enaligned_wcsdup (3),
-.br
+.TQ
 .BR libsimple_aligned_wcsndup (3),
-.br
+.TQ
 .BR libsimple_ealigned_wcsndup (3),
-.br
+.TQ
 .BR libsimple_enaligned_wcsndup (3)
-.RE
-.RS
 Duplicate a wide-character string into a
 new pointer with a custom alignment.
-.RE
 
 .TP
 .BR libsimple_aligned_wcsdupa (3),
-.RS 0
+.TQ
 .BR libsimple_aligned_wcsndupa (3)
-.RE
-.RS
 Duplicate a wide-character string onto
 the stack, with custom alignment.
-.RE
 
 .TP
 .BR libsimple_aligned_wmemdup (3),
-.RS 0
+.TQ
 .BR libsimple_ealigned_wmemdup (3),
-.br
+.TQ
 .BR libsimple_enaligned_wmemdup (3)
-.RE
-.RS
 Duplicate an array of wide characters into
 a new pointer with a custom alignment.
-.RE
 
 .TP
 .BR libsimple_aligned_wmemdupa (3)
@@ -466,97 +414,82 @@ the stack, with custom alignment.
 
 .TP
 .BR libsimple_asprintf (3),
-.RS 0
+.TQ
 .BR libsimple_vasprintf (3)
-.RE
-.RS
 Format a string and allocate a sufficient large string.
-.RE
 
 .TP
 .BR libsimple_asprintfa (3),
-.RS 0
+.TQ
 .BR libsimple_vasprintfa (3)
-.RE
-.RS
 Format a string and allocate a sufficient large
 string onto the stack.
-.RE
 
 .TP
 .BR libsimple_ecalloc (3),
-.RS 0
+.TQ
 .BR libsimple_encalloc (3)
-.RE
-.RS
 Wrappers for
 .BR calloc (3)
 that terminate the process on failure.
-.RE
 
 .TP
 .BR libsimple_callocn (3),
-.RS 0
+.TQ
 .BR libsimple_ecallocn (3),
-.br
+.TQ
 .BR libsimple_encallocn (3),
-.br
+.TQ
 .BR libsimple_vcallocn (3),
-.br
+.TQ
 .BR libsimple_evcallocn (3),
-.br
+.TQ
 .BR libsimple_envcallocn (3)
-.RE
-.RS
 Wrappers for
 .BR calloc (3)
 that take the product of multiple arguments as the allocation size.
-.RE
 
 .TP
 .BR libsimple_cmptimespec (3),
-.RS 0
+.TQ
 .BR libsimple_cmptimeval (3)
-.RE
-.RS
 Compare two durations.
-.RE
 
 .TP
 .BR libsimple_difftimespec (3),
-.RS 0
+.TQ
 .BR libsimple_difftimeval (3)
-.RE
-.RS
 Calculate the difference of two durations.
-.RE
 
 .TP
 .BR libsimple_doubletotimespec (3),
-.RS 0
+.TQ
 .BR libsimple_doubletotimeval (3)
-.RE
-.RS
 Convert a real value to a duration data structure.
-.RE
 
 .TP
 .BR libsimple_eprintf (3),
-.RS 0
+.TQ
 .BR libsimple_enprintf (3),
-.br
+.TQ
 .BR libsimple_veprintf (3),
-.br
+.TQ
 .BR libsimple_venprintf (3),
-.br
+.TQ
 .BR libsimple_weprintf (3),
-.br
+.TQ
 .BR libsimple_vweprintf (3)
-.RE
-.RS
 Print an error message and (except for the two last functions)
 terminate the process.
-.RE
+
+.TP
+.BR libsimple_gmtime (3),
+.TQ
+.BR libsimple_egmtime (3),
+.TQ
+.BR libsimple_engmtime (3)
+Get the current time in the UTC timezone, and adjust
+for leapsecond insertions and delections.
 
 .TP
 .BR libsimple_getenv_e (3)
@@ -569,142 +502,124 @@ Get the value of a non-empty environment value or
 
 .TP
 .BR libsimple_inchrset (3)
-.RS 0
+.TQ
 .BR libsimple_inchrcaseset (3)
-.RE
-.RS
 Test if a byte belongs to set of byte.
-.RE
+
+.TP
+.BR libsimple_localtime (3),
+.TQ
+.BR libsimple_elocaltime (3),
+.TQ
+.BR libsimple_enlocaltime (3)
+Get the current time in the UTC timezone, and adjust
+for leapsecond insertions and delections.
 
 .TP
 .BR libsimple_emalloc (3),
-.RS 0
+.TQ
 .BR libsimple_enmalloc (3)
-.RE
-.RS
 Wrappers for
 .BR malloc (3)
 that terminate the process on failure.
-.RE
 
 .TP
 .BR libsimple_mallocn (3),
-.RS 0
+.TQ
 .BR libsimple_emallocn (3),
-.br
+.TQ
 .BR libsimple_enmallocn (3),
-.br
+.TQ
 .BR libsimple_vmallocn (3),
-.br
+.TQ
 .BR libsimple_evmallocn (3),
-.br
+.TQ
 .BR libsimple_envmallocn (3)
-.RE
-.RS
 Wrappers for
 .BR malloc (3)
 that take the product of multiple arguments
 as the allocation size.
-.RE
 
 .TP
 .BR libsimple_mallocz (3),
-.RS 0
+.TQ
 .BR libsimple_emallocz (3),
-.br
+.TQ
 .BR libsimple_enmallocz (3)
-.RE
-.RS
 Wrappers for
 .BR aligned_alloc (3)
 that conditionally initialises the memory.
-.RE
 
 .TP
 .BR libsimple_malloczn (3),
-.RS 0
+.TQ
 .BR libsimple_emalloczn (3),
-.br
+.TQ
 .BR libsimple_enmalloczn (3),
-.br
+.TQ
 .BR libsimple_vmalloczn (3),
-.br
+.TQ
 .BR libsimple_evmalloczn (3),
-.br
+.TQ
 .BR libsimple_envmalloczn (3)
-.RE
-.RS
 Wrappers for
 .BR malloc (3)
 that take the product of multiple arguments as the
 allocation size and conditionally initialises the memory.
-.RE
 
 .TP
 .BR libsimple_memalign (3),
-.RS 0
+.TQ
 .BR libsimple_ememalign (3),
-.br
+.TQ
 .BR libsimple_enmemalign (3)
-.RE
-.RS
 Implementation of the nonstandard
 .BR memalign (3)
 function.
-.RE
 
 .TP
 .BR libsimple_memalignn (3),
-.RS 0
+.TQ
 .BR libsimple_ememalignn (3),
-.br
+.TQ
 .BR libsimple_enmemalignn (3),
-.br
+.TQ
 .BR libsimple_vmemalignn (3),
-.br
+.TQ
 .BR libsimple_evmemalignn (3),
-.br
+.TQ
 .BR libsimple_envmemalignn (3)
-.RE
-.RS
 Versions of
 .BR libsimple_memalign (3)
 that take the product of multiple arguments as the
 allocation size.
-.RE
 
 .TP
 .BR libsimple_memalignz (3),
-.RS 0
+.TQ
 .BR libsimple_ememalignz (3),
-.br
+.TQ
 .BR libsimple_enmemalignz (3)
-.RE
-.RS
 Versions of
 .BR libsimple_memalign (3)
 that conditionally initialises the memory.
-.RE
 
 .TP
 .BR libsimple_memalignzn (3),
-.RS 0
+.TQ
 .BR libsimple_ememalignzn (3),
-.br
+.TQ
 .BR libsimple_enmemalignzn (3),
-.br
+.TQ
 .BR libsimple_vmemalignzn (3),
-.br
+.TQ
 .BR libsimple_evmemalignzn (3),
-.br
+.TQ
 .BR libsimple_envmemalignzn (3)
-.RE
-.RS
 Versions of
 .BR libsimple_memalign (3)
 that take the product of multiple arguments as the
 allocation size and conditionally initialises the memory.
-.RE
 
 .TP
 .BR libsimple_memcasechr (3)
@@ -718,36 +633,27 @@ Case-insensitive version of
 
 .TP
 .BR libsimple_memchr_inv (3),
-.RS 0
+.TQ
 .BR libsimple_memcasechr_inv (3)
-.RE
-.RS
 Find first byte that is different from a specified byte.
-.RE
 
 .TP
 .BR libsimple_memcmove (3),
-.RS 0
+.TQ
 .BR libsimple_rawmemcmove (3)
-.RE
-.RS
 Versions of
 .BR memccpy (3)
 and
 .BR libsimple_rawmemccpy (3)
 that allow overlap of the arrays.
-.RE
 
 .TP
 .BR libsimple_memdup (3),
-.RS 0
+.TQ
 .BR libsimple_ememdup (3),
-.br
+.TQ
 .BR libsimple_enmemdup (3)
-.RE
-.RS
 Duplicate an array of bytes into a new pointer.
-.RE
 
 .TP
 .BR libsimple_memdupa (3)
@@ -769,14 +675,12 @@ rather than simple bytes.
 
 .TP
 .BR libsimple_memelemcpy (3),
-.RS 0
+.TQ
 .BR libsimple_rawmemelemcpy (3),
-.br
+.TQ
 .BR libsimple_memelemmove (3),
-.br
+.TQ
 .BR libsimple_rawmemelemmove (3)
-.RE
-.RS
 Versions of
 .BR memccpy (3),
 .BR libsimple_rawmemccpy (3),
@@ -785,7 +689,6 @@ and
 .BR libsimple_rawmemcmove (3)
 that that operate on multibyte units
 rather than simple bytes.
-.RE
 
 .TP
 .BR libsimple_memelemscan (3)
@@ -803,40 +706,28 @@ rather than simple bytes.
 
 .TP
 .BR libsimple_memends (3),
-.RS 0
+.TQ
 .BR libsimple_memcaseends (3)
-.RE
-.RS
 Check the end if an array of bytes.
-.RE
 
 .TP
 .BR libsimple_memeq (3),
-.RS 0
+.TQ
 .BR libsimple_memcaseeq (3)
-.RE
-.RS
 Compare two arrays of bytes for equality.
-.RE
 
 .TP
 .BR libsimple_memeqlen (3),
-.RS 0
+.TQ
 .BR libsimple_memcaseeqlen (3)
-.RE
-.RS
 Get the number if bytes two arrays of bytes
 have in common at their beginning.
-.RE
 
 .TP
 .BR libsimple_memmem (3),
-.RS 0
+.TQ
 .BR libsimple_memcasemem (3)
-.RE
-.RS
 Find a substring of bytes in an array of bytes.
-.RE
 
 .TP
 .BR libsimple_mempcpy (3)
@@ -864,23 +755,17 @@ that returns the end of the written array.
 
 .TP
 .BR libsimple_memrchr (3),
-.RS 0
+.TQ
 .BR libsimple_memrcasechr (3)
-.RE
-.RS
 Find the last occurrence of a specific byte
 in an array of bytes.
-.RE
 
 .TP
 .BR libsimple_memrchr_inv (3),
-.RS 0
+.TQ
 .BR libsimple_memrcasechr_inv (3)
-.RE
-.RS
 Find the last byte that is different from a
 specified byte.
-.RE
 
 .TP
 .BR libsimple_memrelem_inv (3)
@@ -906,46 +791,34 @@ another element.
 
 .TP
 .BR libsimple_memreqlen (3),
-.RS 0
+.TQ
 .BR libsimple_memrcaseeqlen (3)
-.RE
-.RS
 Get the number if bytes two arrays of bytes
 have in common at their end.
-.RE
 
 .TP
 .BR libsimple_memrmem (3),
-.RS 0
+.TQ
 .BR libsimple_memrcasemem (3)
-.RE
-.RS
 Find the last occurrence of string of byte
 in an array of bytes.
-.RE
 
 .TP
 .BR libsimple_memscan (3),
-.RS 0
+.TQ
 .BR libsimple_memcasescan (3)
-.RE
-.RS
 Versions of
 .BR memchr (3)
 and
 .BR libsimple_memcasechr (3)
 that return the end of the array
 if the byte is not found.
-.RE
 
 .TP
 .BR libsimple_memscan_inv (3),
-.RS 0
+.TQ
 .BR libsimple_memcasescan_inv (3)
-.RE
-.RS
 Skip leading bytes.
-.RE
 
 .TP
 .BR libsimple_memsetelem (3)
@@ -953,171 +826,138 @@ Fill en array.
 
 .TP
 .BR libsimple_memstarts (3),
-.RS 0
+.TQ
 .BR libsimple_memcasestarts (3)
-.RE
-.RS
 Check the beginning if an array of bytes.
-.RE
 
 .TP
 .BR libsimple_multimespec (3),
-.RS 0
+.TQ
 .BR libsimple_multimeval (3)
-.RE
-.RS
 Multiple a duration with an integer.
-.RE
 
 .TP
 .BR libsimple_eposix_memalign (3),
-.RS 0
+.TQ
 .BR libsimple_enposix_memalign (3)
-.RE
-.RS
 Wrappers for
 .BR posix_memalign (3)
 that terminate the process on failure.
-.RE
 
 .TP
 .BR libsimple_posix_memalignn (3),
-.RS 0
+.TQ
 .BR libsimple_eposix_memalignn (3),
-.br
+.TQ
 .BR libsimple_enposix_memalignn (3),
-.br
+.TQ
 .BR libsimple_vposix_memalignn (3),
-.br
+.TQ
 .BR libsimple_evposix_memalignn (3),
-.br
+.TQ
 .BR libsimple_envposix_memalignn (3)
-.RE
-.RS
 Wrappers for
 .BR posix_memalign (3)
 that take the product of multiple
 arguments as the allocation size.
-.RE
 
 .TP
 .BR libsimple_posix_memalignz (3),
-.RS 0
+.TQ
 .BR libsimple_eposix_memalignz (3),
-.br
+.TQ
 .BR libsimple_enposix_memalignz (3)
-.RE
-.RS
 Wrappers for
 .BR posix_memalign (3)
 that conditionally initialises the memory.
-.RE
 
 .TP
 .BR libsimple_posix_memalignzn (3),
-.RS 0
+.TQ
 .BR libsimple_eposix_memalignzn (3),
-.br
+.TQ
 .BR libsimple_enposix_memalignzn (3),
-.br
+.TQ
 .BR libsimple_vposix_memalignzn (3),
-.br
+.TQ
 .BR libsimple_evposix_memalignzn (3),
-.br
+.TQ
 .BR libsimple_envposix_memalignzn (3)
-.RE
-.RS
 Wrappers for
 .BR posix_memalign (3)
 that take the product of multiple
 arguments as the allocation size
 and conditionally initialises the memory.
-.RE
 
 .TP
 .BR libsimple_putenvf (3),
-.RS 0
+.TQ
 .BR libsimple_eputenvf (3),
-.br
+.TQ
 .BR libsimple_enputenvf (3),
-.br
+.TQ
 .BR libsimple_vputenvf (3),
-.br
+.TQ
 .BR libsimple_evputenvf (3),
-.br
+.TQ
 .BR libsimple_envputenvf (3)
-.RE
-.RS
 Verion of
 .BR putenv (3)
 that formats the string.
-.RE
 
 .TP
 .BR libsimple_pvalloc (3),
-.RS 0
+.TQ
 .BR libsimple_epvalloc (3),
-.br
+.TQ
 .BR libsimple_enpvalloc (3)
-.RE
-.RS
 Implementation of the nonstandard
 .BR pvalloc (3)
 function.
-.RE
 
 .TP
 .BR libsimple_pvallocn (3),
-.RS 0
+.TQ
 .BR libsimple_epvallocn (3),
-.br
+.TQ
 .BR libsimple_enpvallocn (3),
-.br
+.TQ
 .BR libsimple_vpvallocn (3),
-.br
+.TQ
 .BR libsimple_evpvallocn (3),
-.br
+.TQ
 .BR libsimple_envpvallocn (3)
-.RE
-.RS
 Versions of
 .BR libsimple_pvalloc (3)
 that take the product of multiple arguments as the
 allocation size.
-.RE
 
 .TP
 .BR libsimple_pvallocz (3),
-.RS 0
+.TQ
 .BR libsimple_epvallocz (3),
-.br
+.TQ
 .BR libsimple_enpvallocz (3)
-.RE
-.RS
 Versions of
 .BR libsimple_pvalloc (3)
 that conditionally initialises the memory.
-.RE
 
 .TP
 .BR libsimple_pvalloczn (3),
-.RS 0
+.TQ
 .BR libsimple_epvalloczn (3),
-.br
+.TQ
 .BR libsimple_enpvalloczn (3),
-.br
+.TQ
 .BR libsimple_vpvalloczn (3),
-.br
+.TQ
 .BR libsimple_evpvalloczn (3),
-.br
+.TQ
 .BR libsimple_envpvalloczn (3)
-.RE
-.RS
 Versions of
 .BR libsimple_pvalloc (3)
 that take the product of multiple arguments as the
 allocation size and conditionally initialises the memory.
-.RE
 
 .TP
 .BR libsimple_rawmemccpy (3)
@@ -1128,25 +968,19 @@ byte actually exists in the array.
 
 .TP
 .BR libsimple_rawmemchr (3),
-.RS 0
+.TQ
 .BR libsimple_rawmemcasechr (3)
-.RE
-.RS
 Find the first occurrence of a specific byte
 in an array of bytes, with the optimising
 assumption that it actually exists in the array.
-.RE
 
 .TP
 .BR libsimple_rawmemchr_inv (3),
-.RS 0
+.TQ
 .BR libsimple_rawmemcasechr_inv (3)
-.RE
-.RS
 Find first byte that is different from a specified
 byte, with the optimising assumption that such a
 byte actually exists in the array.
-.RE
 
 .TP
 .BR libsimple_rawmemelem (3)
@@ -1164,21 +998,16 @@ element actually exists in the array.
 
 .TP
 .BR libsimple_rawmemrchr (3)
-.RS 0
+.TQ
 .BR libsimple_rawmemrcasechr (3)
-.RE
-.RS
 Find the last occurrence of a specific byte
 in an array of bytes, with the optimising
 assumption that it actually exists in the array.
-.RE
 
 .TP
 .BR libsimple_rawmemrchr_inv (3),
-.RS 0
+.TQ
 .BR libsimple_rawmemrcasechr_inv (3)
-.RE
-.RS
 Find last byte that is different from a specified
 byte, with the optimising assumption that such a
 byte actually exists in the array.
@@ -1196,38 +1025,31 @@ Version of
 .BR libsimple_memrelem_inv (3),
 with the optimising assumption that such a
 element actually exists in the array.
-.RE
 
 .TP
 .BR libsimple_erealloc (3),
-.RS 0
+.TQ
 .BR libsimple_enrealloc (3)
-.RE
-.RS
 Wrappers for
 .BR realloc (3)
 that terminate the process on failure.
-.RE
 
 .TP
 .BR libsimple_reallocn (3),
-.RS 0
+.TQ
 .BR libsimple_ereallocn (3),
-.br
+.TQ
 .BR libsimple_enreallocn (3),
-.br
+.TQ
 .BR libsimple_vreallocn (3),
-.br
+.TQ
 .BR libsimple_evreallocn (3),
-.br
+.TQ
 .BR libsimple_envreallocn (3)
-.RE
-.RS
 Wrappers for
 .BR realloc (3)
 that take the product of multiple arguments
 as the allocation size.
-.RE
 
 .TP
 .BR libsimple_strcasechr (3)
@@ -1241,38 +1063,30 @@ Case-insensitive version of
 
 .TP
 .BR libsimple_strccpy (3),
-.RS 0
+.TQ
 .BR libsimple_strnccpy (3)
-.RE
-.RS
 Copy a string but stop after the first
 occurrence of a specified character.
-.RE
 
 .TP
 .BR libsimple_strchr_inv (3),
-.RS 0
+.TQ
 .BR libsimple_strcasechr_inv (3),
-.br
+.TQ
 .BR libsimple_strnchr_inv (3),
-.br
+.TQ
 .BR libsimple_strncasechr_inv (3)
-.RE
-.RS
 Find the first character that is different
 from a specified character.
-.RE
 
 .TP
 .BR libsimple_strchrnul (3),
-.RS 0
+.TQ
 .BR libsimple_strcasechrnul (3),
-.br
+.TQ
 .BR libsimple_strnchrnul (3),
-.br
+.TQ
 .BR libsimple_strncasechrnul (3)
-.RE
-.RS
 Versions of
 .BR strchr (3),
 .BR libsimple_strcasechr (3),
@@ -1281,41 +1095,32 @@ and
 .BR libsimple_strncasechr (3)
 that return the end of the
 string if the byte is not found.
-.RE
 
 .TP
 .BR libsimple_strchrnul_inv (3),
-.RS 0
+.TQ
 .BR libsimple_strcasechrnul_inv (3),
-.br
+.TQ
 .BR libsimple_strnchrnul_inv (3),
-.br
+.TQ
 .BR libsimple_strncasechrnul_inv (3)
-.RE
-.RS
 Skip leading characters.
-.RE
 
 .TP
 .BR libsimple_strcmove (3),
-.RS 0
+.TQ
 .BR libsimple_strncmove (3)
-.RE
-.RS
 Move a string but stop after the first
 occurrence of a specified character.
-.RE
 
 .TP
 .BR libsimple_strcmpnul (3),
-.RS 0
+.TQ
 .BR libsimple_strcasecmpnul (3),
-.br
+.TQ
 .BR libsimple_strncmpnul (3),
-.br
+.TQ
 .BR libsimple_strncasecmpnul (3)
-.RE
-.RS
 Versions of
 .BR strcmp (3),
 .BR strcasecmp (3),
@@ -1324,158 +1129,124 @@ and
 .BR strncasecmp (3)
 that support
 .BR NULL .
-.RE
 
 .TP
 .BR libsimple_estrdup (3),
-.RS 0
+.TQ
 .BR libsimple_enstrdup (3),
-.br
+.TQ
 .BR libsimple_estrndup (3),
-.br
+.TQ
 .BR libsimple_enstrndup (3)
-.RE
-.RS
 Wrappers of
 .BR strdup (3)
 and
 .BR strndup (3)
 that terminate the process on failure.
-.RE
 
 .TP
 .BR libsimple_strdupa (3),
-.RS 0
+.TQ
 .BR libsimple_strndupa (3)
-.RE
-.RS
 Versions of
 .BR strdup (3),
 and
 .BR strndup (3)
 that allocate the string on the stack.
-.RE
 
 .TP
 .BR libsimple_strend (3),
-.RS 0
+.TQ
 .BR libsimple_strnend (3)
-.RE
-.RS
 Locate end of string.
-.RE
 
 .TP
 .BR libsimple_strends (3),
-.RS 0
+.TQ
 .BR libsimple_strcaseends (3),
-.br
+.TQ
 .BR libsimple_strnends (3),
-.br
+.TQ
 .BR libsimple_strncaseends (3)
-.RE
-.RS
 Check the end if a string.
-.RE
 
 .TP
 .BR libsimple_streq (3),
-.RS 0
+.TQ
 .BR libsimple_strcaseeq (3),
-.br
+.TQ
 .BR libsimple_strneq (3),
-.br
+.TQ
 .BR libsimple_strncaseeq (3)
-.RE
-.RS
 Compare two strings for equality.
-.RE
 
 .TP
 .BR libsimple_streqlen (3),
-.RS 0
+.TQ
 .BR libsimple_strcaseeqlen (3),
-.br
+.TQ
 .BR libsimple_strneqlen (3),
-.br
+.TQ
 .BR libsimple_strncaseeqlen (3)
-.RE
-.RS
 Get the number if bytes two strings
 have in common at their beginning.
-.RE
 
 .TP
 .BR libsimple_streqnul (3),
-.RS 0
+.TQ
 .BR libsimple_strcaseeqnul (3),
-.br
+.TQ
 .BR libsimple_strneqnul (3),
-.br
+.TQ
 .BR libsimple_strncaseeqnul (3)
-.RE
-.RS
 Verions of
 .BR libsimple_streq (3)
 and
 .BR libsimple_strcaseeq (3)
 that support
 .BR NULL .
-.RE
 
 .TP
 .BR libsimple_strisutf8 (3),
-.RS 0
+.TQ
 .BR libsimple_strnisutf8 (3),
-.br
+.TQ
 .BR libsimple_memisutf8 (3)
-.RE
-.RS
 Check if a string is valid UTF-8.
-.RE
 
 .TP
 .BR libsimple_strmove (3),
-.RS 0
+.TQ
 .BR libsimple_strnmove (3),
-.br
+.TQ
 .BR libsimple_stpmove (3),
-.br
+.TQ
 .BR libsimple_stpnmove (3)
-.RE
-.RS
 Versions of
 .BR memmove (3)
 and
 .BR libsimple_mempmove (3)
 that moves an entire string.
-.RE
 
 .TP
 .BR libsimple_strnchr (3),
-.RS 0
+.TQ
 .BR libsimple_strncasechr (3)
-.RE
-.RS
 Versions of
 .BR strchr (3)
 and
 .BR libsimple_strcasechr (3)
 that support strings without NUL-termination.
-.RE
 
 .TP
 .BR libsimple_strnstr (3),
-.RS 0
+.TQ
 .BR libsimple_strncasestr (3)
-.RE
-.RS
 Versions of
 .BR strstr (3)
 and
 .BR libsimple_strcasestr (3)
 that support strings without NUL-termination.
-.RE
 
 .TP
 .BR libsimple_strrcasechr (3)
@@ -1484,306 +1255,243 @@ Case-insensitive version of the
 
 .TP
 .BR libsimple_strrchrnul_inv (3),
-.RS 0
+.TQ
 .BR libsimple_strrcasechrnul_inv (3),
-.br
+.TQ
 .BR libsimple_strrnchrnul_inv (3),
-.br
+.TQ
 .BR libsimple_strrncasechrnul_inv (3)
-.RE
-.RS
 Skip trailing characters.
-.RE
 
 .TP
 .BR libsimple_strreplace (3),
-.RS 0
+.TQ
 .BR libsimple_strnreplace (3)
-.RE
-.RS
 Replace all occurrences of a character with
 another character.
-.RE
 
 .TP
 .BR libsimple_strreqlen (3),
-.RS 0
+.TQ
 .BR libsimple_strrcaseeqlen (3),
-.br
+.TQ
 .BR libsimple_strrneqlen (3),
-.br
+.TQ
 .BR libsimple_strrncaseeqlen (3)
-.RE
-.RS
 Get the number if bytes two strings
 have in common at their end.
-.RE
 
 .TP
 .BR libsimple_strrnchr (3),
-.RS 0
+.TQ
 .BR libsimple_strrncasechr (3)
-.RE
-.RS
 Versions of
 .BR strrchr (3)
 and
 .BR libsimple_strrcasechr (3)
 that support strings without NUL-termination.
-.RE
 
 .TP
 .BR libsimple_strrstr (3),
-.RS 0
+.TQ
 .BR libsimple_strrcasestr (3),
-.br
+.TQ
 .BR libsimple_strrnstr (3),
-.br
+.TQ
 .BR libsimple_strrncasestr (3)
-.RE
-.RS
 Find the last occurrence of a substring.
-.RE
 
 .TP
 .BR libsimple_stpnset (3),
-.RS 0
+.TQ
 .BR libsimple_stpset (3),
-.br
+.TQ
 .BR libsimple_strnset (3),
-.br
+.TQ
 .BR libsimple_strset (3)
-.RE
-.RS
 Fill a string a with character.
-.RE
 
 .TP
 .BR libsimple_strstarts (3),
-.RS 0
+.TQ
 .BR libsimple_strcasestarts (3),
-.br
+.TQ
 .BR libsimple_strnstarts (3),
-.br
+.TQ
 .BR libsimple_strncasestarts (3)
-.RE
-.RS
 Check the beginning if a string.
-.RE
 
 .TP
 .BR libsimple_strtolower (3),
-.RS 0
+.TQ
 .BR libsimple_strntolower (3),
-.br
+.TQ
 .BR libsimple_memtolower (3),
-.br
+.TQ
 .BR libsimple_stptolower (3),
-.br
+.TQ
 .BR libsimple_stpntolower (3),
-.br
+.TQ
 .BR libsimple_memptolower (3)
-.RE
-.RS
 Convert a string to lower case.
-.RE
 
 .TP
 .BR libsimple_strtotimespec (3),
-.RS 0
+.TQ
 .BR libsimple_strtotimeval (3)
-.RE
-.RS
 Convert a string, with a real value
 representing a number of seconds, to
 a duration.
-.RE
 
 .TP
 .BR libsimple_strtoupper (3),
-.RS 0
+.TQ
 .BR libsimple_strntoupper (3),
-.br
+.TQ
 .BR libsimple_memtoupper (3),
-.br
+.TQ
 .BR libsimple_stptoupper (3),
-.br
+.TQ
 .BR libsimple_stpntoupper (3),
-.br
+.TQ
 .BR libsimple_memptoupper (3)
-.RE
-.RS
 Convert a string to upper case.
-.RE
 
 .TP
 .BR libsimple_sumtimespec (3),
-.RS 0
+.TQ
 .BR libsimple_sumtimeval (3)
-.RE
-.RS
 Calculate the sum of two durations.
-.RE
 
 .TP
 .BR libsimple_timespec2timeval (3),
-.RS 0
+.TQ
 .BR libsimple_timeval2timespec (3)
-.RE
-.RS
 Convert a duration between to storage formats.
-.RE
 
 .TP
 .BR libsimple_timespectodouble (3),
-.RS 0
+.TQ
 .BR libsimple_timevaltodouble (3)
-.RE
-.RS
 Convert a duration stored in a duration
 specific format to a double.
-.RE
 
 .TP
 .BR libsimple_timespectostr (3),
-.RS 0
+.TQ
 .BR libsimple_timevaltostr (3),
-.br
+.TQ
 .BR libsimple_minimise_number_string (3)
-.RE
-.RS
 Convert a duration stored in a duration
 specific format to a string.
-.RE
 
 .TP
 .BR libsimple_unlist (3),
-.RS 0
+.TQ
 .BR LIBSIMPLE_UNLIST (3)
-.RE
-.RS
 Remove an item from an array without changing the order of the items in the array.
-.RE
 
 .TP
 .BR libsimple_valloc (3),
-.RS 0
+.TQ
 .BR libsimple_evalloc (3),
-.br
+.TQ
 .BR libsimple_envalloc (3)
-.RE
-.RS
 Implementation of the nonstandard
 .BR valloc (3)
 function.
-.RE
 
 .TP
 .BR libsimple_vallocn (3),
-.RS 0
+.TQ
 .BR libsimple_evallocn (3),
-.br
+.TQ
 .BR libsimple_envallocn (3),
-.br
+.TQ
 .BR libsimple_vvallocn (3),
-.br
+.TQ
 .BR libsimple_evvallocn (3),
-.br
+.TQ
 .BR libsimple_envvallocn (3)
-.RE
-.RS
 Versions of
 .BR libsimple_valloc (3)
 that take the product of multiple arguments as the
 allocation size.
-.RE
 
 .TP
 .BR libsimple_vallocz (3),
-.RS 0
+.TQ
 .BR libsimple_evallocz (3),
-.br
+.TQ
 .BR libsimple_envallocz (3)
-.RE
-.RS
 Versions of
 .BR libsimple_valloc (3)
 that conditionally initialises the memory.
-.RE
 
 .TP
 .BR libsimple_valloczn (3),
-.RS 0
+.TQ
 .BR libsimple_evalloczn (3),
-.br
+.TQ
 .BR libsimple_envalloczn (3),
-.br
+.TQ
 .BR libsimple_vvalloczn (3),
-.br
+.TQ
 .BR libsimple_evvalloczn (3),
-.br
+.TQ
 .BR libsimple_envvalloczn (3)
-.RE
-.RS
 Versions of
 .BR libsimple_valloc (3)
 that take the product of multiple arguments as the
 allocation size and conditionally initialises the memory.
-.RE
 
 .TP
 .BR libsimple_ewcsdup (3),
-.RS 0
+.TQ
 .BR libsimple_enwcsdup (3),
-.br
+.TQ
 .BR libsimple_wcsndup (3),
-.br
+.TQ
 .BR libsimple_ewcsndup (3),
-.br
+.TQ
 .BR libsimple_enwcsndup (3)
-.RE
-.RS
 Duplicate a wide-character string.
-.RE
 
 .TP
 .BR libsimple_wcsdupa (3),
-.RS 0
+.TQ
 .BR libsimple_wcsndupa (3)
-.RE
-.RS
 Versions of
 .BR wcsdup (3),
 and
 .BR libsimple_wcsndup (3)
 that allocate the string on the stack.
-.RE
 
 .TP
 .BR libsimple_wmemdup (3),
-.RS 0
+.TQ
 .BR libsimple_ewmemdup (3),
-.br
+.TQ
 .BR libsimple_enwmemdup (3)
-.RE
-.RS
 Duplicate an array of wide character.
-.RE
 
 .TP
 .BR libsimple_wmemdupa (3)
 Version of
 .BR libsimple_wmemdup (3)
 that allocate the string on the stack.
-.RE
 
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH SEE ALSO
 .BR libsimple-arg.h (0)

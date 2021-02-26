@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_CMPTIMESPEC 3 2018-10-29 libsimple
+.TH LIBSIMPLE_CMPTIMESPEC 3 libsimple
 .SH NAME
 libsimple_cmptimespec, libsimple_cmptimeval \- calculate the sum of two durations
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -18,6 +19,7 @@ static inline int libsimple_cmptimeval(const struct timeval *\fIa\fP, const stru
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_cmptimespec ()
@@ -28,6 +30,7 @@ functions compares the values of
 and
 .IR b ,
 returning a value indicating which is larger, if any.
+
 .SH RETURN VALUE
 The
 .BR libsimple_cmptimespec ()
@@ -42,12 +45,14 @@ is less than
 is greater than
 .IR b ,
 and 0 otherwise.
+
 .SH ERRORS
 The
 .BR libsimple_cmptimespec ()
 and
 .BR libsimple_cmptimeval ()
 functions cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -72,18 +77,25 @@ T{
 .BR libsimple_cmptimeval ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_sumtimespec (3),
 .BR libsimple_difftimespec (3),

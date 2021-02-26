@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_MEMPMOVE 3 2018-11-16 libsimple
+.TH LIBSIMPLE_MEMPMOVE 3 libsimple
 .SH NAME
 libsimple_mempmove \- move bytes within an array of bytes
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -14,6 +15,7 @@ static inline void *libsimple_mempmove(void *\fIdest\fP, const void *\fIsrc\fP, 
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_mempmove ()
@@ -24,6 +26,7 @@ bytes of
 into
 .IR dest .
 The arrays may overlap.
+
 .SH RETURN VALUE
 The
 .BR libsimple_mempmove ()
@@ -32,10 +35,12 @@ function returns the pointer
 with the offset
 .I n
 (the byte where the copy stopped).
+
 .SH ERRORS
 The
 .BR libsimple_mempmove ()
 function cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -54,18 +59,25 @@ T{
 .BR libsimple_mempmove ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_mempcpy (3),
 .BR libsimple_mempset (3),

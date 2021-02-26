@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_STPNMOVE 3 2018-11-16 libsimple
+.TH LIBSIMPLE_STPNMOVE 3 libsimple
 .SH NAME
 libsimple_stpnmove \- move a string within an array of bytes
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -14,6 +15,7 @@ static inline void *libsimple_stpnmove(void *\fIdest\fP, const void *\fIsrc\fP, 
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_stpnmove ()
@@ -25,6 +27,7 @@ NUL byte that terminates it (if any),
 into
 .IR dest .
 The arrays may overlap.
+
 .SH RETURN VALUE
 The
 .BR libsimple_stpnmove ()
@@ -37,10 +40,12 @@ with the offset of the length of string
 or
 .I &dest[n]
 if no NUL byte was copied).
+
 .SH ERRORS
 The
 .BR libsimple_stpnmove ()
 function cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -59,18 +64,25 @@ T{
 .BR libsimple_stpnmove ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_strnmove (3),
 .BR libsimple_stpmove (3),

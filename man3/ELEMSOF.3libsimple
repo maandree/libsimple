@@ -1,6 +1,7 @@
-.TH ELEMSOF 3 2018-11-05 libsimple
+.TH ELEMSOF 3 libsimple
 .SH NAME
 ELEMSOF \- get the size of an array
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -9,6 +10,7 @@ ELEMSOF \- get the size of an array
 # define ELEMSOF(arr) /* implementation omitted */
 #endif
 .fi
+
 .SH DESCRIPTION
 The
 .BR ELEMSOF ()
@@ -18,17 +20,24 @@ is an array (not a pointer) and expands, as
 a constant expression. The type of the expression
 the macro expands to is
 .BR size_t .
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR STRLEN (3libsimple)

@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_ALIGNED_ALLOCZ 3 2018-11-03 libsimple
+.TH LIBSIMPLE_ALIGNED_ALLOCZ 3 libsimple
 .SH NAME
 libsimple_aligned_allocz \- allocate optionally initialised memory with custom alignment
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -22,6 +23,7 @@ static inline void *libsimple_ealigned_allocz(int \fIclear\fP, size_t \fIalignme
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_aligned_allocz (),
@@ -69,6 +71,7 @@ and
 functions behaviour is unspecified if
 .I n
 is 0.
+
 .SH RETURN VALUE
 The
 .BR libsimple_aligned_allocz (),
@@ -87,6 +90,7 @@ it indicate the error, and the
 and
 .BR libsimple_ealigned_allocz ()
 functions terminated the process.
+
 .SH ERRORS
 The
 .BR libsimple_aligned_allocz ()
@@ -113,6 +117,7 @@ The
 and
 .BR libsimple_ealigned_allocz ()
 functions will terminate the process on failure.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -143,18 +148,25 @@ T{
 .BR libsimple_ealigned_allocz ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_enmalloc (3),
 .BR libsimple_mallocz (3),

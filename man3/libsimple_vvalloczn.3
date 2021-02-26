@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_VVALLOCZN 3 2018-11-03 libsimple
+.TH LIBSIMPLE_VVALLOCZN 3 libsimple
 .SH NAME
 libsimple_vvalloczn \- allocate optionally initialised memory with page size alignment
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -34,6 +35,7 @@ static inline void *libsimple_evalloczn(int \fIclear\fP, size_t \fIn\fP, ..., /*
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_valloczn (),
@@ -93,6 +95,7 @@ and
 respectively, that use
 .B va_list
 instead of variadic arguments.
+
 .SH RETURN VALUE
 The
 .BR libsimple_vvalloczn (),
@@ -118,6 +121,7 @@ it indicate the error, and the
 and
 .BR libsimple_evalloczn ()
 functions terminated the process.
+
 .SH ERRORS
 The
 .BR libsimple_vvalloczn (),
@@ -138,6 +142,7 @@ The
 and
 .BR libsimple_evalloczn ()
 functions will terminate the process on failure.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -186,20 +191,27 @@ T{
 .BR libsimple_evalloczn ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 The GNU implementation of
 .BR valloc (3)
 is \(dqMT-Unsafe init\(dq.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_enmalloc (3),
 .BR libsimple_mallocz (3),

@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_VALIGNED_REALLOCN 3 2018-11-28 libsimple
+.TH LIBSIMPLE_VALIGNED_REALLOCN 3 libsimple
 .SH NAME
 libsimple_valigned_reallocn \- reallocate memory and customise alignment
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -34,6 +35,7 @@ static inline void *libsimple_ealigned_reallocn(void *\fIptr\fP, size_t \fIalign
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_aligned_reallocn (),
@@ -106,6 +108,7 @@ and
 respectively, that use
 .B va_list
 instead of variadic arguments.
+
 .SH RETURN VALUE
 The
 .BR libsimple_valigned_reallocn (),
@@ -131,6 +134,7 @@ it indicate the error, and the
 and
 .BR libsimple_ealigned_reallocn ()
 functions terminated the process.
+
 .SH ERRORS
 The
 .BR libsimple_valigned_reallocn ()
@@ -164,6 +168,7 @@ The
 and
 .BR libsimple_ealigned_reallocn ()
 functions will terminate the process on failure.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -212,18 +217,25 @@ T{
 .BR libsimple_ealigned_reallocn ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_enmalloc (3),
 .BR libsimple_mallocz (3),
