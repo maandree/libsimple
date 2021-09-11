@@ -7,8 +7,8 @@ libsimple_vweprintf \- print an error message
 #include <libsimple.h>
 
 extern int libsimple_default_failure_exit;
-extern void (*libsimple_eprint_preprint)(void);
-extern void (*libsimple_eprint_postprint)(void);
+extern void (*libsimple_eprintf_preprint)(void);
+extern void (*libsimple_eprintf_postprint)(void);
 
 void libsimple_vweprintf(const char *\fIfmt\fP, va_list \fIap\fP);
 static inline void libsimple_weprintf(const char *\fIfmt\fP, ...);
@@ -124,18 +124,18 @@ The
 and
 .BR libsimple_eprintf ()
 functions call
-.I libsimple_eprint_preprint
+.I libsimple_eprintf_preprint
 unless it is
 .B NULL
 before they print the message, after printing
 the message they call
-.I libsimple_eprint_postprint
+.I libsimple_eprintf_postprint
 unless it is
 .BR NULL .
 The
-.I libsimple_eprint_preprint
+.I libsimple_eprintf_preprint
 and
-.I libsimple_eprint_postprint
+.I libsimple_eprintf_postprint
 variables are
 .B NULL
 byte default.
@@ -149,9 +149,9 @@ may have a different value from when the
 or
 .BR libsimple_eprintf ()
 function called when
-.I libsimple_eprint_preprint
+.I libsimple_eprintf_preprint
 or
-.I libsimple_eprint_postprint
+.I libsimple_eprintf_postprint
 is called.
 
 .SH RETURN VALUE
