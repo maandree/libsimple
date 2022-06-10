@@ -95,7 +95,6 @@ main(void)
 	const wchar_t *cws;
 	char buf[1024], *s;
 	wchar_t *ws;
-	int intarray[10];
 	size_t i, j, n;
 	DEFINE_PAGESIZE;
 	DEFINE_CACHELINE;
@@ -497,34 +496,6 @@ main(void)
 	assert(libsimple_strncaseeqnul(NULL, "", 0) == 0);
 	assert(libsimple_strncaseeqnul(NULL, "1", 0) == 0);
 	assert(libsimple_strncaseeqnul(NULL, NULL, 0) == 1);
-
-	for (i = 0, n = 10; i < n; i++)
-		buf[i] = i;
-	LIBSIMPLE_UNLIST(buf, 4, &n);
-	LIBSIMPLE_UNLIST(buf, 9 - 1, &n);
-	LIBSIMPLE_UNLIST(buf, 6 - 1, &n);
-	assert(n == 7);
-	assert(buf[0] == 0);
-	assert(buf[1] == 1);
-	assert(buf[2] == 2);
-	assert(buf[3] == 3);
-	assert(buf[4] == 5);
-	assert(buf[5] == 7);
-	assert(buf[6] == 8);
-
-	for (i = 0, n = 10; i < n; i++)
-		intarray[i] = i;
-	LIBSIMPLE_UNLIST(intarray, 4, &n);
-	LIBSIMPLE_UNLIST(intarray, 9 - 1, &n);
-	LIBSIMPLE_UNLIST(intarray, 6 - 1, &n);
-	assert(n == 7);
-	assert(intarray[0] == 0);
-	assert(intarray[1] == 1);
-	assert(intarray[2] == 2);
-	assert(intarray[3] == 3);
-	assert(intarray[4] == 5);
-	assert(intarray[5] == 7);
-	assert(intarray[6] == 8);
 
 	assert(libsimple_strcmpnul(NULL, NULL) == 0);
 	assert(libsimple_strcmpnul(NULL, "") < 0);
@@ -966,26 +937,6 @@ main(void)
 #else
 	fprintf(stderr, "warning: libsimple_aligned_wcsndupa missing\n");
 #endif
-
-	unsetenv("X");
-	assert(!getenv("X"));
-	assert(!libsimple_getenv_ne("X"));
-	putenv("X=xyz");
-	assert(!strcmpnul(getenv("X"), "xyz"));
-	assert(!strcmpnul(libsimple_getenv_ne("X"), "xyz"));
-	putenv("X=");
-	assert(!strcmpnul(getenv("X"), ""));
-	assert(!libsimple_getenv_ne("X"));
-
-	unsetenv("X");
-	assert(!getenv("X"));
-	assert(!strcmpnul(libsimple_getenv_e("X"), ""));
-	putenv("X=xyz");
-	assert(!strcmpnul(getenv("X"), "xyz"));
-	assert(!strcmpnul(libsimple_getenv_e("X"), "xyz"));
-	putenv("X=");
-	assert(!strcmpnul(getenv("X"), ""));
-	assert(!strcmpnul(libsimple_getenv_e("X"), ""));
 
 	assert(test_timespec(10.3000200010, 10, 300020001L, 10.300020001, "+10.300020001", "10.300020001"));
 	assert(test_timespec(10.3000200014, 10, 300020001L, 10.300020001, "+10.300020001", "10.300020001"));
@@ -2428,39 +2379,6 @@ main(void)
 		}
 		assert(libsimple_strrncaseeqlen("abc", "abc", n) == MIN(3, n));
 		assert(libsimple_strrncaseeqlen("123", "123", n) == MIN(3, n));
-	}
-
-	{
-		char p_[4096];
-		char *p = p_;
-
-		memset(p, 0, sizeof(p_));
-		assert(libsimple_memsetelem(p, &(uint64_t){~0}, 0, 0) == p);
-		assert(libsimple_memsetelem(p, &(uint64_t){~0}, 0, 10) == p);
-		assert(libsimple_memsetelem(p, &(uint64_t){~0}, 1, 0) == p);
-		assert(libsimple_memsetelem(p, &(uint64_t){~0}, 2, 0) == p);
-		assert(libsimple_memsetelem(p, &(uint64_t){~0}, 4, 0) == p);
-		assert(libsimple_memsetelem(p, &(uint64_t){~0}, 8, 0) == p);
-		assert(libsimple_memsetelem(p, &(uint64_t){~0}, 16, 0) == p);
-		assert(libsimple_memsetelem(p, &(uint64_t){~0}, 3, 0) == p);
-		assert(libsimple_memsetelem(p, &(uint8_t){0x09}, 1, 3000) == p);
-		assert(libsimple_memsetelem(p, &(uint16_t){0x0807}, 2, 1000) == p);
-		assert(libsimple_memsetelem(p, &(uint32_t){0x10203040UL}, 4, 300) == p);
-		assert(libsimple_memsetelem(p, &(uint64_t){0x0102030450607080ULL}, 8, 100) == p);
-		assert(libsimple_memsetelem(p, (char []){0xA0, 0xB0, 0xC0}, 3, 16) == p);
-
-		for (i = 0; i < 48; i++)
-			assert(p[i] == ((char []){0xA0, 0xB0, 0xC0})[i % 3]);
-		for (; i < 800; i += 8)
-			assert(*(uint64_t *)&p[i] == 0x0102030450607080ULL);
-		for (; i < 1200; i += 4)
-			assert(*(uint32_t *)&p[i] == 0x10203040UL);
-		for (; i < 2000; i += 2)
-			assert(*(uint16_t *)&p[i] == 0x0807);
-		for (; i < 3000; i++)
-			assert(p[i] == 0x09);
-		for (; i < sizeof(p_); i++)
-			assert(p[i] == 0);
 	}
 
 

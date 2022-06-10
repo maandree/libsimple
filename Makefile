@@ -55,10 +55,15 @@ OBJ =\
 	aligned_wmemdup.o\
 	allocn.o\
 	asprintf.o\
+	close.o\
 	difftimespec.o\
 	difftimeval.o\
 	doubletotimespec.o\
 	doubletotimeval.o\
+	ealigned_memdup.o\
+	ealigned_strndup.o\
+	ealigned_wcsndup.o\
+	ealigned_wmemdup.o\
 	enaligned_allocz.o\
 	enaligned_memdup.o\
 	enaligned_realloc.o\
@@ -74,6 +79,7 @@ OBJ =\
 	enmalloc.o\
 	enmemdup.o\
 	enposix_memalignz.o\
+	enputenvf.o\
 	enrealloc.o\
 	enreallocarray.o\
 	enstrdup.o\
@@ -88,6 +94,16 @@ OBJ =\
 	enwcsdup.o\
 	enwcsndup.o\
 	enwmemdup.o\
+	ememdup.o\
+	eputenvf.o\
+	estrdup.o\
+	estrndup.o\
+	evputenvf.o\
+	ewcsdup.o\
+	ewcsndup.o\
+	ewmemdup.o\
+	getenv_e.o\
+	getenv_ne.o\
 	gmtime.o\
 	localtime.o\
 	memcasechr.o\
@@ -126,12 +142,14 @@ OBJ =\
 	memreplaceelem.o\
 	memreqlen.o\
 	memrmem.o\
+	memsetelem.o\
 	memscan.o\
 	memscan_inv.o\
 	memstarts.o\
 	minimise_number_string.o\
 	multimespec.o\
 	multimeval.o\
+	putenvf.o\
 	rawmemcasechr.o\
 	rawmemcasechr_inv.o\
 	rawmemchr.o\
@@ -216,6 +234,7 @@ OBJ =\
 	timespec2timeval.o\
 	timespectostr.o\
 	timevaltostr.o\
+	unlist.o\
 	vasprintf.o\
 	vmemalloc.o\
 	vputenvf.o\

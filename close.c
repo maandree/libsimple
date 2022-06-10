@@ -3,7 +3,7 @@
 #ifndef TEST
 
 
-extern inline size_t libsimple_strtouz(const char *restrict, char **restrict, int); /* TODO test, man */
+extern inline int libsimple_close(int *); /* TODO test */
 
 
 #else

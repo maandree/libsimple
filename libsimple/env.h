@@ -8,7 +8,7 @@
  * @return       The environment variable's value, `NULL` if empty or not defined
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __warn_unused_result__)))
-static inline char *
+inline char *
 libsimple_getenv_ne(const char *__name)
 {
 	char *__env = getenv(__name);
@@ -26,7 +26,7 @@ libsimple_getenv_ne(const char *__name)
  * @return       The environment variable's value, "" if empty or not defined
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __warn_unused_result__, __returns_nonnull__)))
-static inline const char *
+inline const char *
 libsimple_getenv_e(const char *__name)
 {
 	const char *__env = getenv(__name);
@@ -71,7 +71,7 @@ int libsimple_vputenvf(const char *, va_list);
  * @return       0 on success, -1 on failure
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __format__(__printf__, 1, 2))))
-static inline int
+inline int
 libsimple_putenvf(const char *__fmt, ...)
 {
 	va_list __ap;
@@ -126,7 +126,7 @@ void libsimple_envputenvf(int, const char *, va_list);
  * @param  ap      Format arguments, see vsprintf(3)
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __format__(__printf__, 2, 3))))
-static inline void
+inline void
 libsimple_enputenvf(int __status, const char *__fmt, ...)
 {
 	va_list __ap;
@@ -156,8 +156,11 @@ libsimple_enputenvf(int __status, const char *__fmt, ...)
  * @param  ap   Format arguments, see vsprintf(3)
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
-static inline void libsimple_evputenvf(const char *__fmt, va_list __ap)
-{ libsimple_envputenvf(libsimple_default_failure_exit, __fmt, __ap); }
+inline void
+libsimple_evputenvf(const char *__fmt, va_list __ap)
+{
+	libsimple_envputenvf(libsimple_default_failure_exit, __fmt, __ap);
+}
 #ifndef evputenvf
 # define evputenvf libsimple_evputenvf
 #endif
@@ -180,7 +183,7 @@ static inline void libsimple_evputenvf(const char *__fmt, va_list __ap)
  * @param  ap   Format arguments, see vsprintf(3)
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __format__(__printf__, 1, 2))))
-static inline void
+inline void
 libsimple_eputenvf(const char *__fmt, ...)
 {
 	va_list __ap;

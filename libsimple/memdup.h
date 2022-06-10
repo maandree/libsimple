@@ -59,8 +59,11 @@ void *libsimple_enmemdup(int, const void *, size_t);
  * @return     Duplicate of `s`
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_size__(2), __warn_unused_result__, __returns_nonnull__)))
-static inline void *libsimple_ememdup(const void *__s, size_t __n)
-{ return libsimple_enmemdup(libsimple_default_failure_exit, __s, __n); }
+inline void *
+libsimple_ememdup(const void *__s, size_t __n)
+{
+	return libsimple_enmemdup(libsimple_default_failure_exit, __s, __n);
+}
 #ifndef ememdup
 # define ememdup libsimple_ememdup
 #endif

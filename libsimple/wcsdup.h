@@ -44,8 +44,11 @@ wchar_t *libsimple_enwcsdup(int, const wchar_t *);
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, _libsimple_assume_aligned_as(wchar_t),
                                    __nonnull__, __warn_unused_result__, __returns_nonnull__)))
-static inline wchar_t *libsimple_ewcsdup(const wchar_t *__s)
-{ return enwcsdup(libsimple_default_failure_exit, __s); }
+inline wchar_t *
+libsimple_ewcsdup(const wchar_t *__s)
+{
+	return enwcsdup(libsimple_default_failure_exit, __s);
+}
 #ifndef ewcsdup
 # define ewcsdup libsimple_ewcsdup
 #endif

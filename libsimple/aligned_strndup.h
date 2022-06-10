@@ -72,8 +72,11 @@ char *libsimple_enaligned_strndup(int, const char *, size_t, size_t);
  * @return             Duplicate of `s`
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
-static inline char *libsimple_ealigned_strndup(const char *__s, size_t __alignment, size_t __n)
-{ return libsimple_enaligned_strndup(libsimple_default_failure_exit, __s, __alignment, __n); }
+inline char *
+libsimple_ealigned_strndup(const char *__s, size_t __alignment, size_t __n)
+{
+	return libsimple_enaligned_strndup(libsimple_default_failure_exit, __s, __alignment, __n);
+}
 #ifndef ealigned_strndup
 # define ealigned_strndup libsimple_ealigned_strndup
 #endif

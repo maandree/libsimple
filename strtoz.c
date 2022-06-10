@@ -3,7 +3,7 @@
 #ifndef TEST
 
 
-extern inline ssize_t libsimple_strtoz(const char *restrict nptr, char **restrict end, int base); /* TODO test, man */
+extern inline ssize_t libsimple_strtoz(const char *restrict, char **restrict, int); /* TODO test, man */
 
 
 #else

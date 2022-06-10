@@ -72,8 +72,11 @@ wchar_t *libsimple_enaligned_wmemdup(int, const wchar_t *, size_t, size_t);
  * @return             Duplicate of `s`
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __alloc_size__(3), __warn_unused_result__, __returns_nonnull__)))
-static inline wchar_t *libsimple_ealigned_wmemdup(const wchar_t *__s, size_t __alignment, size_t __n)
-{ return libsimple_enaligned_wmemdup(libsimple_default_failure_exit, __s, __alignment, __n); }
+inline wchar_t *
+libsimple_ealigned_wmemdup(const wchar_t *__s, size_t __alignment, size_t __n)
+{
+	return libsimple_enaligned_wmemdup(libsimple_default_failure_exit, __s, __alignment, __n);
+}
 #ifndef ealigned_wmemdup
 # define ealigned_wmemdup libsimple_ealigned_wmemdup
 #endif

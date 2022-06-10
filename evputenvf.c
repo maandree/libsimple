@@ -3,7 +3,7 @@
 #ifndef TEST
 
 
-extern inline size_t libsimple_strtouz(const char *restrict, char **restrict, int); /* TODO test, man */
+extern inline void libsimple_evputenvf(const char *, va_list);
 
 
 #else
@@ -12,7 +12,7 @@ extern inline size_t libsimple_strtouz(const char *restrict, char **restrict, in
 int
 main(void)
 {
-	return 0;
+	return 0; /* Tested via libsimple_eputenvf */
 }
 
 #endif

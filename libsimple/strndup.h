@@ -48,8 +48,11 @@ char *libsimple_enstrndup(int, const char *, size_t);
  * @return     Duplicate of `s`
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __assume_aligned__(1), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
-static inline char *libsimple_estrndup(const char *__s, size_t __n)
-{ return libsimple_enstrndup(libsimple_default_failure_exit, __s, __n); }
+inline char *
+libsimple_estrndup(const char *__s, size_t __n)
+{
+	return libsimple_enstrndup(libsimple_default_failure_exit, __s, __n);
+}
 #ifndef estrndup
 # define estrndup libsimple_estrndup
 #endif

@@ -72,8 +72,11 @@ wchar_t *libsimple_enaligned_wcsndup(int, const wchar_t *, size_t, size_t);
  * @return             Duplicate of `s`
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
-static inline wchar_t *libsimple_ealigned_wcsndup(const wchar_t *__s, size_t __alignment, size_t __n)
-{ return libsimple_enaligned_wcsndup(libsimple_default_failure_exit, __s, __alignment, __n); }
+inline wchar_t *
+libsimple_ealigned_wcsndup(const wchar_t *__s, size_t __alignment, size_t __n)
+{
+	return libsimple_enaligned_wcsndup(libsimple_default_failure_exit, __s, __alignment, __n);
+}
 #ifndef ealigned_wcsndup
 # define ealigned_wcsndup libsimple_ealigned_wcsndup
 #endif

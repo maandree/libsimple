@@ -72,8 +72,11 @@ void *libsimple_enaligned_memdup(int, const void *, size_t, size_t);
  * @return             Duplicate of `s`
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_align__(2), __alloc_size__(3), __warn_unused_result__, __returns_nonnull__)))
-static inline void *libsimple_ealigned_memdup(const void *__s, size_t __alignment, size_t __n)
-{ return libsimple_enaligned_memdup(libsimple_default_failure_exit, __s, __alignment, __n); }
+inline void *
+libsimple_ealigned_memdup(const void *__s, size_t __alignment, size_t __n)
+{
+	return libsimple_enaligned_memdup(libsimple_default_failure_exit, __s, __alignment, __n);
+}
 #ifndef ealigned_memdup
 # define ealigned_memdup libsimple_ealigned_memdup
 #endif

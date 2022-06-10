@@ -65,8 +65,11 @@ wchar_t *libsimple_enwcsndup(int, const wchar_t *, size_t);
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, _libsimple_assume_aligned_as(wchar_t),
                                    __nonnull__, __warn_unused_result__, __returns_nonnull__)))
-static inline wchar_t *libsimple_ewcsndup(const wchar_t *__s, size_t __n)
-{ return libsimple_enwcsndup(libsimple_default_failure_exit, __s, __n); }
+inline wchar_t *
+libsimple_ewcsndup(const wchar_t *__s, size_t __n)
+{
+	return libsimple_enwcsndup(libsimple_default_failure_exit, __s, __n);
+}
 #ifndef ewcsndup
 # define ewcsndup libsimple_ewcsndup
 #endif

@@ -142,7 +142,7 @@
  *               -1 on error), 0 if `*fdp < 0`
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
-static inline int
+inline int
 libsimple_close(int *__fdp)
 {
 	int __ret;
@@ -180,7 +180,7 @@ libsimple_close(int *__fdp)
  * @param  width  The width, in bytes, of each item in the list
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
-static inline void
+inline void
 libsimple_unlist(void *__list, size_t __i, size_t *__np, size_t __width)
 {
         char *__lst = __list;
