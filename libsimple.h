@@ -128,6 +128,7 @@
 #include "libsimple/array.h"
 #include "libsimple/str.h"
 #include "libsimple/strn.h"
+#include "libsimple/strtoint.h"
 
 
 /**

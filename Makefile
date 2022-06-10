@@ -36,6 +36,7 @@ SUBHDR =\
 	libsimple/strdup.h\
 	libsimple/strn.h\
 	libsimple/strndup.h\
+	libsimple/strtoint.h\
 	libsimple/time.h\
 	libsimple/valloc.h\
 	libsimple/vallocz.h\
@@ -192,8 +193,24 @@ OBJ =\
 	strrnstr.o\
 	strrstr.o\
 	strstarts.o\
+	strtoh.o\
+	strtohh.o\
+	strtoi.o\
+	strtoi16.o\
+	strtoi32.o\
+	strtoi64.o\
+	strtoi8.o\
 	strtotimespec.o\
 	strtotimeval.o\
+	strtou.o\
+	strtou16.o\
+	strtou32.o\
+	strtou64.o\
+	strtou8.o\
+	strtouh.o\
+	strtouhh.o\
+	strtouz.o\
+	strtoz.o\
 	sumtimespec.o\
 	sumtimeval.o\
 	timespec2timeval.o\
