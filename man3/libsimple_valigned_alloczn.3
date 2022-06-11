@@ -8,10 +8,10 @@ libsimple_valigned_alloczn \- allocate optionally initialised memory with custom
 
 void *libsimple_valigned_alloczn(int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
 void *libsimple_envaligned_alloczn(int \fIstatus\fP, int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
-static inline void *libsimple_evaligned_alloczn(int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
-static inline void *libsimple_aligned_alloczn(int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
-static inline void *libsimple_enaligned_alloczn(int \fIstatus\fP, int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
-static inline void *libsimple_ealigned_alloczn(int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_evaligned_alloczn(int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
+inline void *libsimple_aligned_alloczn(int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_enaligned_alloczn(int \fIstatus\fP, int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_ealigned_alloczn(int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
 
 #ifndef valigned_alloczn
 # define valigned_alloczn libsimple_valigned_alloczn

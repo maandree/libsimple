@@ -9,7 +9,7 @@ libsimple_aligned_strdup, libsimple_aligned_strdupa \- duplicate a string
 char *libsimple_aligned_strdupa(const char *\fIs\fP, size_t \fIn\fP);
 char *libsimple_aligned_strdup(const char *\fIs\fP, size_t \fIn\fP);
 char *libsimple_enaligned_strdup(int \fIstatus\fP, const char *\fIs\fP, size_t \fIn\fP);
-static inline char *libsimple_ealigned_strdup(const char *\fIs\fP, size_t \fIn\fP);
+inline char *libsimple_ealigned_strdup(const char *\fIs\fP, size_t \fIn\fP);
 
 #ifndef aligned_strdupa
 # define aligned_strdupa libsimple_aligned_strdupa

@@ -6,9 +6,9 @@ libsimple_memalignz \- allocate optionally initialised memory with custom alignm
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_memalignz(int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP);
-static inline void *libsimple_enmemalignz(int \fIstatus\fP, int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP);
-static inline void *libsimple_ememalignz(int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP);
+inline void *libsimple_memalignz(int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP);
+inline void *libsimple_enmemalignz(int \fIstatus\fP, int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP);
+inline void *libsimple_ememalignz(int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP);
 
 #ifndef memalignz
 # define memalignz libsimple_memalignz

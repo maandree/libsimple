@@ -6,8 +6,8 @@ libsimple_vreallocfn \- reallocate memory
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_vreallocfn(void *\fIptr\fP, size_t \fIn\fP, va_list \fIap\fP);
-static inline void *libsimple_reallocfn(void *\fIptr\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_vreallocfn(void *\fIptr\fP, size_t \fIn\fP, va_list \fIap\fP);
+inline void *libsimple_reallocfn(void *\fIptr\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
 
 #ifndef vreallocfn
 # define vreallocfn libsimple_vreallocfn

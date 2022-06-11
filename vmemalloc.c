@@ -76,7 +76,7 @@ vmemalloc_parse_args(struct memalloc_state *state, size_t n, va_list ap)
 		case LIBSIMPLE_MEMALLOC_CONDITIONAL_ZERO_INIT:
 			if (state->zero_init >= 0)
 				goto inval;
-			state->zero_init = va_arg(ap, int);
+			state->zero_init = (char)va_arg(ap, int);
 			state->zero_init = !!state->zero_init;
 			break;
 
@@ -158,7 +158,6 @@ vmemalloc_parse_args(struct memalloc_state *state, size_t n, va_list ap)
 		}
 	}
 
-	return 0;
 inval:
 	errno = EINVAL;
 	return -1;
@@ -170,11 +169,23 @@ gcd(size_t u, size_t v)
 	size_t t;
 	int shift = 0;
 	/* Not needed because u>0, v>0: if (!(u | v)) return u + v; */
-	while (!((u | v) & 1)) u >>= 1, v >>= 1, shift++;
-	while (!(u & 1))       u >>= 1;
+	while (!((u | v) & 1)) {
+		u >>= 1;
+		v >>= 1;
+		shift++;
+	}
+	while (!(u & 1)) {
+		u >>= 1;
+	}
 	do {
-		while (!(v & 1)) v >>= 1;
-		if (u > v)       t = u, u = v, v = t;
+		while (!(v & 1)) {
+			v >>= 1;
+		}
+		if (u > v) {
+			t = u;
+			u = v;
+			v = t;
+		}
 	} while (v -= u);
 	return u << shift;
 }

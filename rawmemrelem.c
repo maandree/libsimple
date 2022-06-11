@@ -8,38 +8,38 @@ libsimple_rawmemrelem(const void *hay_, const void *sub_, size_t width, size_t n
 {
 	switch (width) {
 	case 0:
-		return (void *)hay_;
+		return REMOVE_CONST(hay_, void *);
 	case 1:
 		{
-			uint8_t *hay = (void *)hay_;
-			uint8_t sub = *(uint8_t *)sub_;
+			const uint8_t *hay = hay_;
+			uint8_t sub = *(const uint8_t *)sub_;
 			for (hay += n; *--hay != sub;);
-			return hay;
+			return REMOVE_CONST(hay, uint8_t *);
 		}
 	case 2:
 		{
-			uint16_t *hay = (void *)hay_;
-			uint16_t sub = *(uint16_t *)sub_;
+			const uint16_t *hay = hay_;
+			uint16_t sub = *(const uint16_t *)sub_;
 			for (hay += n; *--hay != sub;);
-			return hay;
+			return REMOVE_CONST(hay, uint16_t *);
 		}
 	case 4:
 		{
-			uint32_t *hay = (void *)hay_;
-			uint32_t sub = *(uint32_t *)sub_;
+			const uint32_t *hay = hay_;
+			uint32_t sub = *(const uint32_t *)sub_;
 			for (hay += n; *--hay != sub;);
-			return hay;
+			return REMOVE_CONST(hay, uint32_t *);
 		}
 	case 8:
 		{
-			uint64_t *hay = (void *)hay_;
-			uint64_t sub = *(uint64_t *)sub_;
+			const uint64_t *hay = hay_;
+			uint64_t sub = *(const uint64_t *)sub_;
 			for (hay += n; *--hay != sub;);
-			return hay;
+			return REMOVE_CONST(hay, uint64_t *);
 		}
 	default:
 		{
-			char *hay = (void *)hay_;
+			const char *hay = hay_;
 			const char *sub = sub_;
 			size_t i;
 			for (hay += n * width;;) {
@@ -47,7 +47,7 @@ libsimple_rawmemrelem(const void *hay_, const void *sub_, size_t width, size_t n
 				for (i = 0; i < width; i++)
 					if (hay[i] != sub[i])
 						goto next;
-				return hay;
+				return REMOVE_CONST(hay, char *);
 			next:;
 			}
 		}

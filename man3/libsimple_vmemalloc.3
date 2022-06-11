@@ -12,10 +12,10 @@ enum libsimple_memalloc_option {
 
 void *libsimple_vmemalloc(size_t \fIn\fP, va_list \fIap\fP);
 void *libsimple_envmemalloc(int \fIstatus\fP, size_t \fIn\fP, va_list \fIap\fP);
-static inline void *libsimple_evmemalloc(size_t \fIn\fP, va_list \fIap\fP);
-static inline void *libsimple_memalloc(size_t \fIn\fP, ..., /* LIBSIMPLE_MEMALLOC_END */);
-static inline void *libsimple_enmemalloc(int \fIstatus\fP, size_t \fIn\fP, ..., /* LIBSIMPLE_MEMALLOC_END */);
-static inline void *libsimple_ememalloc(size_t \fIn\fP, ..., /* LIBSIMPLE_MEMALLOC_END */);
+inline void *libsimple_evmemalloc(size_t \fIn\fP, va_list \fIap\fP);
+inline void *libsimple_memalloc(size_t \fIn\fP, ..., /* LIBSIMPLE_MEMALLOC_END */);
+inline void *libsimple_enmemalloc(int \fIstatus\fP, size_t \fIn\fP, ..., /* LIBSIMPLE_MEMALLOC_END */);
+inline void *libsimple_ememalloc(size_t \fIn\fP, ..., /* LIBSIMPLE_MEMALLOC_END */);
 .fi
 .PP
 Link with

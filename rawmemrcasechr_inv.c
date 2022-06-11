@@ -8,7 +8,9 @@ libsimple_rawmemrcasechr_inv(const void *s_, int c, size_t n)
 {
 	char *s = *(char **)(void *)&s_;
 	c = tolower(c);
-	while (--n, tolower(s[n]) == c);
+	do {
+		n--;
+	} while (tolower(s[n]) == c);
 	return &s[n];
 }
 

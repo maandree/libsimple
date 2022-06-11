@@ -6,8 +6,8 @@ libsimple_valigned_reallocfn \- reallocate memory and customise alignment
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_valigned_reallocfn(void *\fIptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
-static inline void *libsimple_aligned_reallocfn(void *\fIptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_valigned_reallocfn(void *\fIptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
+inline void *libsimple_aligned_reallocfn(void *\fIptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
 
 #ifndef valigned_reallocfn
 # define valigned_reallocfn libsimple_valigned_reallocfn

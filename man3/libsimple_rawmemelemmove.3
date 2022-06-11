@@ -6,8 +6,8 @@ libsimple_rawmemelemmove, libsimple_rawmemelemcpy \- copy or move elements withi
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_rawmemelemmove(void *\fIdest\fP, const void *\fIsrc\fP, int \fIelem\fP, size_t \fIwidth\fP);
-static inline void *libsimple_rawmemelemcpy(void *\fIdest\fP, const void *\fIsrc\fP, int \fIelem\fP, size_t \fIwidth\fP);
+inline void *libsimple_rawmemelemmove(void *\fIdest\fP, const void *\fIsrc\fP, int \fIelem\fP, size_t \fIwidth\fP);
+inline void *libsimple_rawmemelemcpy(void *\fIdest\fP, const void *\fIsrc\fP, int \fIelem\fP, size_t \fIwidth\fP);
 
 #ifndef rawmemelemmove
 # define rawmemelemmove libsimple_rawmemelemmove

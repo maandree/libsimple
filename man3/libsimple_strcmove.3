@@ -7,7 +7,7 @@ libsimple_strcmove, libsimple_strccpy \- copy or move a string within an array o
 #include <libsimple.h>
 
 char *libsimple_strcmove(char *\fIdest\fP, const char *\fIsrc\fP, int \fIc\fP);
-static inline char *libsimple_strccpy(char *restrict \fIdest\fP, const char *restrict \fIsrc\fP, int \fIc\fP);
+inline char *libsimple_strccpy(char *restrict \fIdest\fP, const char *restrict \fIsrc\fP, int \fIc\fP);
 
 #ifndef strcmove
 # define strcmove libsimple_strcmove

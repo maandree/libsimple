@@ -11,11 +11,11 @@ extern void (*libsimple_eprintf_preprint)(void);
 extern void (*libsimple_eprintf_postprint)(void);
 
 void libsimple_vweprintf(const char *\fIfmt\fP, va_list \fIap\fP);
-static inline void libsimple_weprintf(const char *\fIfmt\fP, ...);
-static inline void libsimple_venprintf(int \fIstatus\fP, const char *\fIfmt\fP, va_list \fIap\fP);
-static inline void libsimple_enprintf(int \fIstatus\fP, const char *\fIfmt\fP, ...);
-static inline void libsimple_veprintf(const char *\fIfmt\fP, va_list \fIap\fP);
-static inline void libsimple_eprintf(const char *\fIfmt\fP, ...);
+inline void libsimple_weprintf(const char *\fIfmt\fP, ...);
+inline void libsimple_venprintf(int \fIstatus\fP, const char *\fIfmt\fP, va_list \fIap\fP);
+inline void libsimple_enprintf(int \fIstatus\fP, const char *\fIfmt\fP, ...);
+inline void libsimple_veprintf(const char *\fIfmt\fP, va_list \fIap\fP);
+inline void libsimple_eprintf(const char *\fIfmt\fP, ...);
 
 #ifndef vweprintf
 # define vweprintf libsimple_vweprintf

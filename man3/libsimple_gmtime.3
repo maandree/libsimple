@@ -7,8 +7,8 @@ libsimple_gmtime \- get the current UTC time with leap second adjustment
 #include <libsimple.h>
 
 int libsimple_gmtime(struct tm *\fItm\fP, struct timespec *\fIts\fP);
-static inline void libsimple_engmtime(int \fIstatus\fPstruct tm *\fItm\fP, struct timespec *\fIts\fP);
-static inline void libsimple_egmtime(struct tm *\fItm\fP, struct timespec *\fIts\fP);
+inline void libsimple_engmtime(int \fIstatus\fPstruct tm *\fItm\fP, struct timespec *\fIts\fP);
+inline void libsimple_egmtime(struct tm *\fItm\fP, struct timespec *\fIts\fP);
 .fi
 .PP
 Link with

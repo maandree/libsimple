@@ -6,7 +6,7 @@ libsimple_timeval2timespec, libsimple_timespec2timeval \- convert between timesp
 .nf
 #include <libsimple.h>
 
-static inline void libsimple_timeval2timespec(struct timespec *restrict \fIts\fP, const struct timeval *restrict \fItv\fP);
+inline void libsimple_timeval2timespec(struct timespec *restrict \fIts\fP, const struct timeval *restrict \fItv\fP);
 int libsimple_timespec2timeval(struct timeval *restrict \fItv\fP, const struct timespec *restrict \fIts\fP);
 
 #ifndef timeval2timespec

@@ -6,9 +6,9 @@ libsimple_vallocz \- allocate optionally initialised memory with page size align
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_vallocz(int \fIclear\fP, size_t \fIn\fP);
-static inline void *libsimple_envallocz(int \fIstatus\fP, int \fIclear\fP, size_t \fIn\fP);
-static inline void *libsimple_evallocz(int \fIclear\fP, size_t \fIn\fP);
+inline void *libsimple_vallocz(int \fIclear\fP, size_t \fIn\fP);
+inline void *libsimple_envallocz(int \fIstatus\fP, int \fIclear\fP, size_t \fIn\fP);
+inline void *libsimple_evallocz(int \fIclear\fP, size_t \fIn\fP);
 
 #ifndef vallocz
 # define vallocz libsimple_vallocz

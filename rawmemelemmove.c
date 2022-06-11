@@ -5,20 +5,21 @@
 
 #define RAWMEMELEMMOVE(TYPE)\
 	do {\
-		TYPE *p;\
+		const TYPE *p;\
+		TYPE *ret;\
 		size_t n;\
 		if (d <= s) {\
 			for (; (*d++ = *s) != elem; s++);\
 			return d;\
 		} else {\
-			for (p = *(TYPE **)(void *)&s; *p++ != elem;);\
+			for (p = s; *p++ != elem;);\
 			n = (size_t)(p - s);\
-			p = &d[n];\
+			ret = &d[n];\
 			while (n) {\
 				n--;\
 				d[n] = s[n];\
 			}\
-			return p;\
+			return ret;\
 		}\
 	} while (0)
 
@@ -47,7 +48,8 @@ rawmemelemmove64(uint64_t *restrict d, const uint64_t *restrict s, uint64_t elem
 static char *
 rawmemelemmovex(char *restrict d, const char *restrict s, const char *restrict elem, size_t width)
 {
-	char *p;
+	const char *p;
+	char *ret;
 	size_t i, n;
 	if (d <= s) {
 		for (;; s += width) {
@@ -62,7 +64,7 @@ rawmemelemmovex(char *restrict d, const char *restrict s, const char *restrict e
 			d += width;
 		}
 	} else {
-		for (p = *(char **)(void *)&s;;) {
+		for (p = s;;) {
 			for (i = 0; i < width; i++)
 				if (p[i] != elem[i])
 					goto next_backwards;
@@ -72,12 +74,12 @@ rawmemelemmovex(char *restrict d, const char *restrict s, const char *restrict e
 			p += width;
 		}
 		n = (size_t)(p - s);
-		p = &d[n];
+		ret = &d[n];
 		while (n) {
 			n--;
 			d[n] = s[n];
 		}
-		return p;
+		return ret;
 	}
 }
 
@@ -133,7 +135,7 @@ main(void)
 	assert(!strncmp(buf, "-----hello-", 11));
 
 	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
-	stpcpy(&buf[5], "hello")[0] = '-';;
+	stpcpy(&buf[5], "hello")[0] = '-';
 	assert(libsimple_rawmemelemmove(&buf[5], &buf[5], "l", 1) == &buf[5 + 3]);
 	assert(!strncmp(buf, "-----hello-", 11));
 
@@ -164,7 +166,7 @@ main(void)
 	assert(!strncmp(buf, "-----.h.e.l.l.o-", 16));
 
 	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
-	stpcpy(&buf[5], ".h.e.l.l.o")[0] = '-';;
+	stpcpy(&buf[5], ".h.e.l.l.o")[0] = '-';
 	assert(libsimple_rawmemelemmove(&buf[5], &buf[5], ".l", 2) == &buf[5 + 3 * 2]);
 	assert(!strncmp(buf, "-----.h.e.l.l.o-", 16));
 
@@ -195,7 +197,7 @@ main(void)
 	assert(!strncmp(buf, "-----..h..e..l..l..o-", 21));
 
 	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
-	stpcpy(&buf[5], "..h..e..l..l..o")[0] = '-';;
+	stpcpy(&buf[5], "..h..e..l..l..o")[0] = '-';
 	assert(libsimple_rawmemelemmove(&buf[5], &buf[5], "..l", 3) == &buf[5 + 3 * 3]);
 	assert(!strncmp(buf, "-----..h..e..l..l..o-", 21));
 
@@ -226,7 +228,7 @@ main(void)
 	assert(!strncmp(buf, "-----...h...e...l...l...o-", 26));
 
 	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
-	stpcpy(&buf[5], "...h...e...l...l...o")[0] = '-';;
+	stpcpy(&buf[5], "...h...e...l...l...o")[0] = '-';
 	assert(libsimple_rawmemelemmove(&buf[5], &buf[5], "...l", 4) == &buf[5 + 3 * 4]);
 	assert(!strncmp(buf, "-----...h...e...l...l...o-", 26));
 
@@ -257,7 +259,7 @@ main(void)
 	assert(!strncmp(buf, "-----.......h.......e.......l.......l.......o-", 46));
 
 	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
-	stpcpy(&buf[5], ".......h.......e.......l.......l.......o")[0] = '-';;
+	stpcpy(&buf[5], ".......h.......e.......l.......l.......o")[0] = '-';
 	assert(libsimple_rawmemelemmove(&buf[5], &buf[5], ".......l", 8) == &buf[5 + 3 * 8]);
 	assert(!strncmp(buf, "-----.......h.......e.......l.......l.......o-", 46));
 

@@ -6,12 +6,12 @@ libsimple_vvalloczn \- allocate optionally initialised memory with page size ali
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_vvalloczn(int \fIclear\fP, size_t \fIn\fP, va_list \fIap\fP);
-static inline void *libsimple_envvalloczn(int \fIstatus\fP, int \fIclear\fP, size_t \fIn\fP, va_list \fIap\fP);
-static inline void *libsimple_evvalloczn(int \fIclear\fP, size_t \fIn\fP, va_list \fIap\fP);
-static inline void *libsimple_valloczn(int \fIclear\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
-static inline void *libsimple_envalloczn(int \fIstatus\fP, int \fIclear\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
-static inline void *libsimple_evalloczn(int \fIclear\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_vvalloczn(int \fIclear\fP, size_t \fIn\fP, va_list \fIap\fP);
+inline void *libsimple_envvalloczn(int \fIstatus\fP, int \fIclear\fP, size_t \fIn\fP, va_list \fIap\fP);
+inline void *libsimple_evvalloczn(int \fIclear\fP, size_t \fIn\fP, va_list \fIap\fP);
+inline void *libsimple_valloczn(int \fIclear\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_envalloczn(int \fIstatus\fP, int \fIclear\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_evalloczn(int \fIclear\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
 
 #ifndef vvalloczn
 # define vvalloczn libsimple_vvalloczn

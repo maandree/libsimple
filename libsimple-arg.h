@@ -436,7 +436,7 @@ struct longopt {
 	static _LIBSIMPLE_NORETURN void\
 	usage(void)\
 	{\
-		const char *syn = SYNOPSIS ? SYNOPSIS : "";\
+		const char *syn = (const char *)SYNOPSIS ? SYNOPSIS : "";\
 		fprintf(stderr, "usage: %s%s%s\n", argv0, *syn ? " " : "", syn);\
 		exit(STATUS);\
 	}\

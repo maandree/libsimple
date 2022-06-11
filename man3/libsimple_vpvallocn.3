@@ -6,12 +6,12 @@ libsimple_vpvallocn \- allocate memory with page size alignment
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_vpvallocn(size_t \fIn\fP, va_list \fIap\fP);
-static inline void *libsimple_envpvallocn(int \fIstatus\fP, size_t \fIn\fP, va_list \fIap\fP);
-static inline void *libsimple_evpvallocn(size_t \fIn\fP, va_list \fIap\fP);
-static inline void *libsimple_pvallocn(size_t \fIn\fP, ..., /* (size_t)0 */);
-static inline void *libsimple_enpvallocn(int \fIstatus\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
-static inline void *libsimple_epvallocn(size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_vpvallocn(size_t \fIn\fP, va_list \fIap\fP);
+inline void *libsimple_envpvallocn(int \fIstatus\fP, size_t \fIn\fP, va_list \fIap\fP);
+inline void *libsimple_evpvallocn(size_t \fIn\fP, va_list \fIap\fP);
+inline void *libsimple_pvallocn(size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_enpvallocn(int \fIstatus\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_epvallocn(size_t \fIn\fP, ..., /* (size_t)0 */);
 
 #ifndef vpvallocn
 # define vpvallocn libsimple_vpvallocn

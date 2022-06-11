@@ -10,11 +10,12 @@
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define libsimple_memdupa(s, n)\
+	LIBSIMPLE_GCC_ONLY__(__extension__)\
 	({\
-		const char *__s = (s);\
-		size_t __n = (n);\
-		char *__r = alloca(__n + !__n);\
-		memcpy(__r, __s, __n);\
+		const char *s__ = (s);\
+		size_t n__ = (n);\
+		char *r__ = alloca(n__ + !n__);\
+		memcpy(r__, s__, n__);\
 	})
 # ifndef memdupa
 #  define memdupa(s, n) libsimple_memdupa(s, n)
@@ -29,7 +30,7 @@
  * @param   n  The number of bytes to copy
  * @return     Duplicate of `s`, `NULL` on failure
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_size__(2), __nonnull__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_size__(2), __nonnull__, __warn_unused_result__)))
 void *libsimple_memdup(const void *, size_t);
 #ifndef memdup
 # define memdup libsimple_memdup
@@ -44,7 +45,7 @@ void *libsimple_memdup(const void *, size_t);
  * @param   n       The number of bytes to copy
  * @return          Duplicate of `s`
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_size__(3), __warn_unused_result__, __returns_nonnull__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_size__(3), __warn_unused_result__, __returns_nonnull__)))
 void *libsimple_enmemdup(int, const void *, size_t);
 #ifndef enmemdup
 # define enmemdup libsimple_enmemdup
@@ -58,11 +59,11 @@ void *libsimple_enmemdup(int, const void *, size_t);
  * @param   n  The number of bytes to copy
  * @return     Duplicate of `s`
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_size__(2), __warn_unused_result__, __returns_nonnull__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_size__(2), __warn_unused_result__, __returns_nonnull__)))
 inline void *
-libsimple_ememdup(const void *__s, size_t __n)
+libsimple_ememdup(const void *s__, size_t n__)
 {
-	return libsimple_enmemdup(libsimple_default_failure_exit, __s, __n);
+	return libsimple_enmemdup(libsimple_default_failure_exit, s__, n__);
 }
 #ifndef ememdup
 # define ememdup libsimple_ememdup

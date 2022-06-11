@@ -6,7 +6,7 @@
 unsigned int
 libsimple_strtou(const char *restrict nptr, char **restrict end, int base) /* TODO test, man */
 {
-	signed long int r = strtoul(nptr, end, base);
+	unsigned long int r = strtoul(nptr, end, base);
 	if(r > UINT_MAX) {
 		r = UINT_MAX;
 		errno = ERANGE;

@@ -9,7 +9,7 @@ libsimple_aligned_wcsndup, libsimple_aligned_wcsndupa \- duplicate a wide-charac
 wchar_t *libsimple_aligned_wcsndupa(const wchar_t *\fIs\fP, size_t \fIalignment\fP, size_t \fIn\fP);
 wchar_t *libsimple_aligned_wcsndup(const wchar_t *\fIs\fP, size_t \fIalignment\fP, size_t \fIn\fP);
 wchar_t *libsimple_enaligned_wcsndup(int \fIstatus\fP, const wchar_t *\fIs\fP, size_t \fIalignment\fP, size_t \fIn\fP);
-static inline wchar_t *libsimple_ealigned_wcsndup(const wchar_t *\fIs\fP, size_t \fIalignment\fP, size_t \fIn\fP);
+inline wchar_t *libsimple_ealigned_wcsndup(const wchar_t *\fIs\fP, size_t \fIalignment\fP, size_t \fIn\fP);
 
 #ifndef aligned_wcsndupa
 # define aligned_wcsndupa libsimple_aligned_wcsndupa

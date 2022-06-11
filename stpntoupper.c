@@ -10,11 +10,11 @@ libsimple_stpntoupper(char *d, const char *s, size_t n)
 	char *ret;
 	if (d == s) {
 		for (; n && *d; d++, n--)
-			*d = toupper(*d);
+			*d = (char)toupper(*d);
 		return d;
 	} else if (d < s) {
 		for (; n && *s; d++, s++, n--)
-			*d = toupper(*s);
+			*d = (char)toupper(*s);
 		if (n)
 			*d = '\0';
 		return d;
@@ -22,9 +22,9 @@ libsimple_stpntoupper(char *d, const char *s, size_t n)
 		for (i = 0; i < n && s[i]; i++);
 		ret = &d[i];
 		if (i != n)
-			d[i] = toupper(s[i]);
+			d[i] = (char)toupper(s[i]);
 		while (i--)
-			d[i] = toupper(s[i]);
+			d[i] = (char)toupper(s[i]);
 		return ret;
 	}
 }

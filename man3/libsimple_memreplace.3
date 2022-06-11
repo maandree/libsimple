@@ -6,7 +6,7 @@ libsimple_memreplace \- replace bytes in an array of bytes
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_memreplace(void *\fIs\fP, int \fIold\fP, int \fInew\fP, size_t \fIn\fP);
+inline void *libsimple_memreplace(void *\fIs\fP, int \fIold\fP, int \fInew\fP, size_t \fIn\fP);
 
 #ifndef memreplace
 # define memreplace libsimple_memreplace

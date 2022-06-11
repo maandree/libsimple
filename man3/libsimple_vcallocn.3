@@ -6,12 +6,12 @@ libsimple_vcallocn \- allocate memory
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_vcallocn(size_t \fIn\fP, va_list \fIap\fP);
-static inline void *libsimple_envcallocn(int \fIstatus\fP, size_t \fIn\fP, va_list \fIap\fP);
-static inline void *libsimple_evcallocn(size_t \fIn\fP, va_list \fIap\fP);
-static inline void *libsimple_callocn(size_t \fIn\fP, ..., /* (size_t)0 */);
-static inline void *libsimple_encallocn(int \fIstatus\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
-static inline void *libsimple_ecallocn(size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_vcallocn(size_t \fIn\fP, va_list \fIap\fP);
+inline void *libsimple_envcallocn(int \fIstatus\fP, size_t \fIn\fP, va_list \fIap\fP);
+inline void *libsimple_evcallocn(size_t \fIn\fP, va_list \fIap\fP);
+inline void *libsimple_callocn(size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_encallocn(int \fIstatus\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_ecallocn(size_t \fIn\fP, ..., /* (size_t)0 */);
 
 #ifndef vcallocn
 # define vcallocn libsimple_vcallocn

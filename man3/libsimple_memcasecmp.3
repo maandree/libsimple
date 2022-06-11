@@ -6,7 +6,7 @@ libsimple_memcasecmp \- compare two memory segments
 .nf
 #include <libsimple.h>
 
-static inline int libsimple_memcasecmp(const void *\fIa\fP, const void *\fIb\fP, size_t \fIn\fP);
+inline int libsimple_memcasecmp(const void *\fIa\fP, const void *\fIb\fP, size_t \fIn\fP);
 
 #ifndef memcasecmp
 # define memcasecmp libsimple_memcasecmp

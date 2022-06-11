@@ -7,7 +7,7 @@ libsimple_enmalloc \- allocate memory or die
 #include <libsimple.h>
 
 void *libsimple_enmalloc(int \fIstatus\fP, size_t \fIn\fP);
-static inline void *libsimple_emalloc(size_t \fIn\fP);
+inline void *libsimple_emalloc(size_t \fIn\fP);
 
 #ifndef enmalloc
 # define enmalloc libsimple_enmalloc

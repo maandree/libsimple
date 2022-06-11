@@ -159,7 +159,7 @@ realloc(void *ptr, size_t size)
 		return malloc(size);
 	ret = malloc(size);
 	if (!ret)
-		return malloc;
+		return NULL;
 	info = get_allocinfo(ret);
 	n = MIN(size, info->size);
 	info->zeroed = MIN(n, info->zeroed);
@@ -347,7 +347,7 @@ test_vfprintf(FILE *restrict stream, const char *restrict format, va_list ap)
 		n = (size_t)r;
 		alloc_fail_in = 0;
 		assert((buf = malloc(n + 1)));
-		n = vsnprintf(buf, n + 1, format, ap);
+		n = (size_t)vsnprintf(buf, n + 1, format, ap);
 		if (fileno(stream) != STDERR_FILENO || stderr_real) {
 			fwrite(buf, 1, n, stream);
 		} else {

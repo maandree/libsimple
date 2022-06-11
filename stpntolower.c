@@ -10,11 +10,11 @@ libsimple_stpntolower(char *d, const char *s, size_t n)
 	char *ret;
 	if (d == s) {
 		for (; n && *d; d++, n--)
-			*d = tolower(*d);
+			*d = (char)tolower(*d);
 		return d;
 	} else if (d < s) {
 		for (; n && *s; d++, s++, n--)
-			*d = tolower(*s);
+			*d = (char)tolower(*s);
 		if (n)
 			*d = '\0';
 		return d;
@@ -22,9 +22,9 @@ libsimple_stpntolower(char *d, const char *s, size_t n)
 		for (i = 0; i < n && s[i]; i++);
 		ret = &d[i];
 		if (i != n)
-			d[i] = tolower(s[i]);
+			d[i] = (char)tolower(s[i]);
 		while (i--)
-			d[i] = tolower(s[i]);
+			d[i] = (char)tolower(s[i]);
 		return ret;
 	}
 }

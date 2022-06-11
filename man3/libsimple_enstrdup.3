@@ -8,7 +8,7 @@ libsimple_enstrdup, libsimple_strdupa \- duplicate a string
 
 char *libsimple_strdupa(const char *\fIs\fP);
 char *libsimple_enstrdup(int \fIstatus\fP, const char *\fIs\fP);
-static inline char *libsimple_estrdup(const char *\fIs\fP);
+inline char *libsimple_estrdup(const char *\fIs\fP);
 
 #ifndef strdupa
 # define strdupa libsimple_strdupa

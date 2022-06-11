@@ -21,10 +21,11 @@ libsimple_asprintf(char **strp, const char *fmt, ...)
 int
 main(void)
 {
-	char *s = "";
+	char empty[1] = "";
+	char *s = empty;
 	char *old = s;
 
-	assert(libsimple_asprintf(&s, "%i %X", 99999, 255) == sizeof("99999 FF") - 1);
+	assert(libsimple_asprintf(&s, "%i %X", 99999, 255U) == sizeof("99999 FF") - 1);
 	assert(s && s != old);
 	assert(!strcmpnul(s, "99999 FF"));
 	free(s);

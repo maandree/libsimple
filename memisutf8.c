@@ -11,6 +11,8 @@ libsimple_memisutf8(const char *string, size_t n, int allow_modified_nul)
         long int bytes = 0, read_bytes = 0, bits = 0, c, character;
 	size_t i;
 
+	character = 0; /* silence false warning from compiler; `character` is set in `if (!read_bytes)` before `else` */
+
         /*                                                      min bits  max bits
           0.......                                                 0         7
           110..... 10......                                        8        11
@@ -36,8 +38,10 @@ libsimple_memisutf8(const char *string, size_t n, int allow_modified_nul)
                                 return 0;
 
                         /* Multibyte character. */
-                        while ((c & 0x80))
-                                bytes++, c <<= 1;
+                        while ((c & 0x80)) {
+                                bytes++;
+				c <<= 1;
+			}
                         read_bytes = 1;
 			character = (c & 0xFF) >> bytes;
                         if (bytes > 6)
@@ -59,8 +63,10 @@ libsimple_memisutf8(const char *string, size_t n, int allow_modified_nul)
                                 continue;
 
                         /* Check that the character is not unnecessarily long. */
-                        while (character)
-                                character >>= 1, bits++;
+                        while (character) {
+                                character >>= 1;
+				bits++;
+			}
                         bits = (!bits && bytes == 2 && allow_modified_nul) ? 8 : bits;
                         if (bits < BYTES_TO_MIN_BITS[bytes] || BYTES_TO_MAX_BITS[bytes] < bits)
                                 return 0;

@@ -6,8 +6,8 @@ libsimple_enposix_memalign \- allocate memory with custom alignment or die
 .nf
 #include <libsimple.h>
 
-static inline void libsimple_enposix_memalign(int \fIstatus\fP, void **\fImemptr\fP, size_t \fIalignment\fP, size_t \fIn\fP);
-static inline void libsimple_eposix_memalign(void **\fImemptr\fP, size_t \fIalignment\fP, size_t \fIn\fP);
+inline void libsimple_enposix_memalign(int \fIstatus\fP, void **\fImemptr\fP, size_t \fIalignment\fP, size_t \fIn\fP);
+inline void libsimple_eposix_memalign(void **\fImemptr\fP, size_t \fIalignment\fP, size_t \fIn\fP);
 
 #ifndef enposix_memalign
 # define enposix_memalign libsimple_enposix_memalign

@@ -6,9 +6,9 @@ libsimple_aligned_realloc \- reallocate memory and customise alignment
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_aligned_realloc(void *\fIptr\fP, size_t \fIalignment\fP, size_t \fIn\fP);
+inline void *libsimple_aligned_realloc(void *\fIptr\fP, size_t \fIalignment\fP, size_t \fIn\fP);
 void *libsimple_enaligned_realloc(int \fIstatus\fP, void *\fIptr\fP, size_t \fIalignment\fP, size_t \fIn\fP);
-static inline void *libsimple_ealigned_realloc(void *\fIptr\fP, size_t \fIalignment\fP, size_t \fIn\fP);
+inline void *libsimple_ealigned_realloc(void *\fIptr\fP, size_t \fIalignment\fP, size_t \fIn\fP);
 
 #ifndef aligned_realloc
 # define aligned_realloc libsimple_aligned_realloc

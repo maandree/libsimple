@@ -7,8 +7,8 @@ libsimple_localtime \- get the current local time with leap second adjustment
 #include <libsimple.h>
 
 int libsimple_localtime(struct tm *\fItm\fP, struct timespec *\fIts\fP);
-static inline void libsimple_enlocaltime(int \fIstatus\fPstruct tm *\fItm\fP, struct timespec *\fIts\fP);
-static inline void libsimple_elocaltime(struct tm *\fItm\fP, struct timespec *\fIts\fP);
+inline void libsimple_enlocaltime(int \fIstatus\fPstruct tm *\fItm\fP, struct timespec *\fIts\fP);
+inline void libsimple_elocaltime(struct tm *\fItm\fP, struct timespec *\fIts\fP);
 .fi
 .PP
 Link with

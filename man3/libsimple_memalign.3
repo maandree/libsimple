@@ -6,9 +6,9 @@ libsimple_memalign \- allocate memory with custom alignment
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_memalign(size_t \fIalignment\fP, size_t \fIn\fP);
-static inline void *libsimple_enmemalign(int \fIstatus\fP, size_t \fIalignment\fP, size_t \fIn\fP);
-static inline void *libsimple_ememalign(size_t \fIalignment\fP, size_t \fIn\fP);
+inline void *libsimple_memalign(size_t \fIalignment\fP, size_t \fIn\fP);
+inline void *libsimple_enmemalign(int \fIstatus\fP, size_t \fIalignment\fP, size_t \fIn\fP);
+inline void *libsimple_ememalign(size_t \fIalignment\fP, size_t \fIn\fP);
 
 #ifndef memalign
 # define memalign libsimple_memalign

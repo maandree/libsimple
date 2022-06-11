@@ -6,9 +6,9 @@ libsimple_mallocz \- allocate optionally initialised memory
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_mallocz(int \fIclear\fP, size_t \fIn\fP);
-static inline void *libsimple_enmallocz(int \fIstatus\fP, int \fIclear\fP, size_t \fIn\fP);
-static inline void *libsimple_emallocz(int \fIclear\fP, size_t \fIn\fP);
+inline void *libsimple_mallocz(int \fIclear\fP, size_t \fIn\fP);
+inline void *libsimple_enmallocz(int \fIstatus\fP, int \fIclear\fP, size_t \fIn\fP);
+inline void *libsimple_emallocz(int \fIclear\fP, size_t \fIn\fP);
 
 #ifndef mallocz
 # define mallocz libsimple_mallocz

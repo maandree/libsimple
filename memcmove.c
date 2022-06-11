@@ -44,7 +44,7 @@ main(void)
 	assert(!strncmp(buf, "-----hello-", 11));
 
 	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
-	stpcpy(&buf[5], "hello")[0] = '-';;
+	stpcpy(&buf[5], "hello")[0] = '-';
 	assert(libsimple_memcmove(&buf[5], &buf[5], 'l', 5) == &buf[5 + 3]);
 	assert(!strncmp(buf, "-----hello-", 11));
 

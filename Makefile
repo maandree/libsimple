@@ -50,20 +50,30 @@ HDR =\
 
 OBJ =\
 	aligned_memdup.o\
+	aligned_strdup.o\
 	aligned_strndup.o\
+	aligned_wcsdup.o\
 	aligned_wcsndup.o\
 	aligned_wmemdup.o\
 	allocn.o\
 	asprintf.o\
 	close.o\
+	cmptimespec.o\
+	cmptimeval.o\
 	difftimespec.o\
 	difftimeval.o\
 	doubletotimespec.o\
 	doubletotimeval.o\
 	ealigned_memdup.o\
+	ealigned_strdup.o\
 	ealigned_strndup.o\
+	ealigned_wcsdup.o\
 	ealigned_wcsndup.o\
 	ealigned_wmemdup.o\
+	egmtime.o\
+	elocaltime.o\
+	ememalloc.o\
+	ememdup.o\
 	enaligned_allocz.o\
 	enaligned_memdup.o\
 	enaligned_realloc.o\
@@ -77,28 +87,64 @@ OBJ =\
 	engmtime.o\
 	enlocaltime.o\
 	enmalloc.o\
+	enmemalloc.o\
 	enmemdup.o\
+	enposix_memalign.o\
+	enposix_memalignn.o\
 	enposix_memalignz.o\
+	enposix_memalignzn.o\
+	enprintf.o\
 	enputenvf.o\
+	enpvalloc.o\
+	enpvallocn.o\
+	enpvallocz.o\
+	enpvalloczn.o\
 	enrealloc.o\
 	enreallocarray.o\
+	enreallocn.o\
 	enstrdup.o\
 	enstrndup.o\
 	envaligned_alloczn.o\
 	envaligned_reallocn.o\
+	envallocz.o\
+	envalloczn.o\
 	envmalloczn.o\
 	envmemalloc.o\
+	envposix_memalignn.o\
 	envposix_memalignzn.o\
 	envputenvf.o\
+	envpvallocn.o\
+	envpvalloczn.o\
 	envreallocn.o\
+	envvalloczn.o\
 	enwcsdup.o\
 	enwcsndup.o\
 	enwmemdup.o\
-	ememdup.o\
+	eposix_memalign.o\
+	eposix_memalignn.o\
+	eposix_memalignz.o\
+	eposix_memalignzn.o\
+	eprintf.o\
 	eputenvf.o\
+	epvalloc.o\
+	epvallocn.o\
+	epvallocz.o\
+	epvalloczn.o\
+	erealloc.o\
+	ereallocarray.o\
+	ereallocn.o\
 	estrdup.o\
 	estrndup.o\
+	evallocz.o\
+	evalloczn.o\
+	evmemalloc.o\
+	evposix_memalignn.o\
+	evposix_memalignzn.o\
 	evputenvf.o\
+	evpvallocn.o\
+	evpvalloczn.o\
+	evreallocn.o\
+	evvalloczn.o\
 	ewcsdup.o\
 	ewcsndup.o\
 	ewmemdup.o\
@@ -106,10 +152,12 @@ OBJ =\
 	getenv_ne.o\
 	gmtime.o\
 	localtime.o\
+	memalloc.o\
 	memcasechr.o\
 	memcasechr_inv.o\
 	memcasecmp.o\
 	memcaseends.o\
+	memcaseeq.o\
 	memcaseeqlen.o\
 	memcasemem.o\
 	memcasescan.o\
@@ -125,9 +173,13 @@ OBJ =\
 	memelemscan.o\
 	memelemscan_inv.o\
 	memends.o\
+	memeq.o\
 	memeqlen.o\
 	memisutf8.o\
 	memmem.o\
+	mempcpy.o\
+	mempmove.o\
+	mempset.o\
 	mempsetelem.o\
 	memptolower.o\
 	memptoupper.o\
@@ -139,21 +191,33 @@ OBJ =\
 	memrchr_inv.o\
 	memrelem.o\
 	memrelem_inv.o\
+	memreplace.o\
 	memreplaceelem.o\
 	memreqlen.o\
 	memrmem.o\
-	memsetelem.o\
 	memscan.o\
 	memscan_inv.o\
+	memsetelem.o\
 	memstarts.o\
+	memtolower.o\
+	memtoupper.o\
 	minimise_number_string.o\
 	multimespec.o\
 	multimeval.o\
+	posix_memalignn.o\
+	posix_memalignz.o\
+	posix_memalignzn.o\
 	putenvf.o\
+	pvalloc.o\
+	pvallocn.o\
+	pvallocz.o\
+	pvalloczn.o\
 	rawmemcasechr.o\
 	rawmemcasechr_inv.o\
+	rawmemccpy.o\
 	rawmemchr.o\
 	rawmemchr_inv.o\
+	rawmemcmove.o\
 	rawmemelem.o\
 	rawmemelem_inv.o\
 	rawmemelemcpy.o\
@@ -164,6 +228,11 @@ OBJ =\
 	rawmemrchr_inv.o\
 	rawmemrelem.o\
 	rawmemrelem_inv.o\
+	reallocarray.o\
+	reallocarrayf.o\
+	reallocf.o\
+	reallocfn.o\
+	reallocn.o\
 	stpntolower.o\
 	stpntoupper.o\
 	stptolower.o\
@@ -232,14 +301,27 @@ OBJ =\
 	sumtimespec.o\
 	sumtimeval.o\
 	timespec2timeval.o\
+	timespectodouble.o\
 	timespectostr.o\
+	timeval2timespec.o\
+	timevaltodouble.o\
 	timevaltostr.o\
 	unlist.o\
+	vallocz.o\
+	valloczn.o\
 	vasprintf.o\
+	venprintf.o\
+	veprintf.o\
 	vmemalloc.o\
+	vposix_memalignn.o\
 	vputenvf.o\
+	vpvallocn.o\
+	vpvalloczn.o\
+	vreallocfn.o\
+	vvalloczn.o\
 	vweprintf.o\
 	wcsndup.o\
+	weprintf.o\
 	wmemdup.o\
 	libsimple.o
 
@@ -255,21 +337,23 @@ MAN3 =\
 TESTS = $(OBJ:.o=.test) libsimple-arg.test
 
 all: libsimple.a $(TESTS)
-$(OBJ): $(@:.o=.c) $(HDR)
-$(TESTS): $(@:=.o) test.o libsimple.a
-$(TESTS:=.o): $(@:.test.o=.c) $(HDR) test.h
+tests: $(TESTS)
+$(OBJ): $(HDR)
+$(TESTS): test.o libsimple.a
+$(TESTS:.test=.to): $(HDR) test.h
 
 test.o: test.c $(HDR) test.h
 	$(CC) -c -o $@ test.c $(CFLAGS) -DTEST -O0 -ffreestanding
 
 libsimple.a: $(OBJ)
-	$(AR) rc $@ $?
+	@rm -f -- $@
+	$(AR) rc $@ $(OBJ)
 	$(AR) -s $@
 
-.test.o.test:
+.to.test:
 	$(CC) -o $@ $< test.o libsimple.a $(LDFLAGS)
 
-.c.test.o:
+.c.to:
 	$(CC) -c -o $@ $< $(CFLAGS) -DTEST -O0
 
 check: $(TESTS)
@@ -295,9 +379,9 @@ uninstall:
 	-cd -- "$(DESTDIR)$(PREFIX)/share/man" && rm -f -- $(MAN0) $(MAN3)
 
 clean:
-	-rm -rf -- *.o *.su *.a *.so *.so.* *.gch *.gcda *.gcno *.gcov *.lo *.test
+	-rm -rf -- *.o *.su *.a *.so *.so.* *.gch *.gcda *.gcno *.gcov *.lo *.test *.to
 
 .SUFFIXES:
-.SUFFIXES: .test .test.o .o .c
+.SUFFIXES: .test .to .o .c
 
 .PHONY: all check install uninstall clean

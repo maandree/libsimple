@@ -10,18 +10,19 @@
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define libsimple_aligned_wcsdupa(s, alignment)\
+	LIBSIMPLE_GCC_ONLY__(__extension__)\
 	({\
-		const wchar_t *__s = (s);\
-		size_t __n = wcslen(__s) + 1;\
-		size_t __a = (alignment);\
-		uintptr_t __misalignment;\
-		wchar_t *__r;\
-		__a += !__a;\
-		__r = alloca(__n * sizeof(wchar_t) + (__a - 1));\
-		__misalignment = (uintptr_t)__r % (uintptr_t)__a;\
-		if (__misalignment)\
-			__r += (uintptr_t)__a - __misalignment;\
-		wmemcpy(__r, __s, __n);\
+		const wchar_t *s__ = (s);\
+		size_t n__ = wcslen(s__) + 1;\
+		size_t a__ = (alignment);\
+		uintptr_t misalignment__;\
+		wchar_t *r__;\
+		a__ += !a__;\
+		r__ = alloca(n__ * sizeof(wchar_t) + (a__ - 1));\
+		misalignment__ = (uintptr_t)r__ % (uintptr_t)a__;\
+		if (misalignment__)\
+			r__ += (uintptr_t)a__ - misalignment__;\
+		wmemcpy(r__, s__, n__);\
 	})
 # ifndef aligned_wcsdupa
 #  define aligned_wcsdupa(s, alignment) libsimple_aligned_wcsdupa(s, alignment)
@@ -36,9 +37,12 @@
  * @param   alignment  The alignment of the returned pointer
  * @return             Duplicate of `s`, `NULL` on failure
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __nonnull__, __warn_unused_result__)))
-static inline wchar_t *libsimple_aligned_wcsdup(const wchar_t * __s, size_t __alignment)
-{ return libsimple_aligned_wmemdup(__s, __alignment, wcslen(__s) + 1); }
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(2), __nonnull__, __warn_unused_result__)))
+inline wchar_t *
+libsimple_aligned_wcsdup(const wchar_t *s__, size_t alignment__)
+{
+	return libsimple_aligned_wmemdup(s__, alignment__, wcslen(s__) + 1);
+}
 #ifndef aligned_wcsdup
 # define aligned_wcsdup libsimple_aligned_wcsdup
 #endif
@@ -52,7 +56,7 @@ static inline wchar_t *libsimple_aligned_wcsdup(const wchar_t * __s, size_t __al
  * @param   alignment  The alignment of the returned pointer
  * @return             Duplicate of `s`
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(3), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(3), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
 wchar_t *libsimple_enaligned_wcsdup(int, const wchar_t *, size_t);
 #ifndef enaligned_wcsdup
 # define enaligned_wcsdup libsimple_enaligned_wcsdup
@@ -66,9 +70,12 @@ wchar_t *libsimple_enaligned_wcsdup(int, const wchar_t *, size_t);
  * @param   alignment  The alignment of the returned pointer
  * @return             Duplicate of `s`
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
-static inline wchar_t *libsimple_ealigned_wcsdup(const wchar_t *__s, size_t __alignment)
-{ return libsimple_enaligned_wcsdup(libsimple_default_failure_exit, __s, __alignment); }
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(2), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
+inline wchar_t *
+libsimple_ealigned_wcsdup(const wchar_t *s__, size_t alignment__)
+{
+	return libsimple_enaligned_wcsdup(libsimple_default_failure_exit, s__, alignment__);
+}
 #ifndef ealigned_wcsdup
 # define ealigned_wcsdup libsimple_ealigned_wcsdup
 #endif

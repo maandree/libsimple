@@ -52,7 +52,7 @@
 		assert(len__ >= 0);\
 		assert((size_t)len__ == stderr_n);\
 		assert(!memcmp(buf__, (char **)(void *)(&stderr_buf), stderr_n)); \
-	} while (0);
+	} while (0)
 
 
 struct allocinfo {
@@ -66,7 +66,9 @@ struct allocinfo {
 };
 
 
+#ifndef LIBSIMPLE_ARG_H
 extern char *argv0;
+#endif
 
 extern volatile size_t alloc_fail_in;
 extern volatile int exit_real;
@@ -98,17 +100,32 @@ test_fprintf(FILE *restrict stream, const char *restrict format, ...)
 
 
 
+#if defined(__GNUC__)
+__attribute__((__const__))
+#endif
 static size_t
 gcd(size_t u, size_t v)
 {
 	size_t t;
 	int shift = 0;
 	/* Not needed because u>0, v>0: if (!(u | v)) return u + v; */
-	while (!((u | v) & 1)) u >>= 1, v >>= 1, shift++;
-	while (!(u & 1))       u >>= 1;
+	while (!((u | v) & 1)) {
+		u >>= 1;
+		v >>= 1;
+		shift++;
+	}
+	while (!(u & 1)) {
+		u >>= 1;
+	}
 	do {
-		while (!(v & 1)) v >>= 1;
-		if (u > v)       t = u, u = v, v = t;
+		while (!(v & 1)) {
+			v >>= 1;
+		}
+		if (u > v) {
+			t = u;
+			u = v;
+			v = t;
+		}
 	} while (v -= u);
 	return u << shift;
 }

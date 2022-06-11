@@ -12,13 +12,16 @@ extern inline const char *libsimple_getenv_e(const char *);
 int
 main(void)
 {
+	char env1[] = "X=xyz";
+	char env2[] = "X=";
+
 	unsetenv("X");
 	assert(!getenv("X"));
 	assert(!strcmpnul(libsimple_getenv_e("X"), ""));
-	putenv("X=xyz");
+	putenv(env1);
 	assert(!strcmpnul(getenv("X"), "xyz"));
 	assert(!strcmpnul(libsimple_getenv_e("X"), "xyz"));
-	putenv("X=");
+	putenv(env2);
 	assert(!strcmpnul(getenv("X"), ""));
 	assert(!strcmpnul(libsimple_getenv_e("X"), ""));
 

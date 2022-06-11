@@ -6,8 +6,8 @@ libsimple_rawmemcmove, libsimple_rawmemccpy \- copy or move bytes within an arra
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_rawmemcmove(void *\fIdest\fP, const void *\fIsrc\fP, int \fIc\fP);
-static inline void *libsimple_rawmemccpy(void *\fIdest\fP, const void *\fIsrc\fP, int \fIc\fP);
+inline void *libsimple_rawmemcmove(void *\fIdest\fP, const void *\fIsrc\fP, int \fIc\fP);
+inline void *libsimple_rawmemccpy(void *\fIdest\fP, const void *\fIsrc\fP, int \fIc\fP);
 
 #ifndef rawmemcmove
 # define rawmemcmove libsimple_rawmemcmove

@@ -6,9 +6,9 @@ libsimple_aligned_reallocarray \- reallocate memory and customise alignment
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_aligned_reallocarray(void *\fIptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, size_t \fIm\fP);
+inline void *libsimple_aligned_reallocarray(void *\fIptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, size_t \fIm\fP);
 void *libsimple_enaligned_reallocarray(int \fIstatus\fP, void *\fIptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, size_t \fIm\fP);
-static inline void *libsimple_ealigned_reallocarray(void *\fIptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, size_t \fIm\fP);
+inline void *libsimple_ealigned_reallocarray(void *\fIptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, size_t \fIm\fP);
 
 #ifndef aligned_reallocarray
 # define aligned_reallocarray libsimple_aligned_reallocarray

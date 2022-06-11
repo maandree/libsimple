@@ -9,11 +9,12 @@
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define libsimple_strdupa(s)\
+	LIBSIMPLE_GCC_ONLY__(__extension__)\
 	({\
-		const char *__s = (s);\
-		size_t __n = strlen(__s) + 1;\
-		char *__r = alloca(__n);\
-		memcpy(__r, __s, __n);\
+		const char *s__ = (s);\
+		size_t n__ = strlen(s__) + 1;\
+		char *r__ = alloca(n__);\
+		memcpy(r__, s__, n__);\
 	})
 # ifndef strdupa
 #  define strdupa(s) libsimple_strdupa(s)
@@ -28,7 +29,7 @@
  * @param   s       The string to copy
  * @return          Duplicate of `s`
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __assume_aligned__(1), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __assume_aligned__(1), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
 char *libsimple_enstrdup(int, const char *);
 #ifndef enstrdup
 # define enstrdup libsimple_enstrdup
@@ -41,11 +42,11 @@ char *libsimple_enstrdup(int, const char *);
  * @param   s  The string to copy
  * @return     Duplicate of `s`
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __assume_aligned__(1), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __assume_aligned__(1), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
 inline char *
-libsimple_estrdup(const char *__s)
+libsimple_estrdup(const char *s__)
 {
-	return libsimple_enstrdup(libsimple_default_failure_exit, __s);
+	return libsimple_enstrdup(libsimple_default_failure_exit, s__);
 }
 #ifndef estrdup
 # define estrdup libsimple_estrdup

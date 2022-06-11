@@ -6,8 +6,8 @@ libsimple_memelemmove, libsimple_memelemcpy \- copy or move elements within an a
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_memelemmove(void *\fIdest\fP, const void *\fIsrc\fP, int \fIelem\fP, size_t \fIwidth\fP, size_t \fIn\fP);
-static inline void *libsimple_memelemcpy(void *\fIdest\fP, const void *\fIsrc\fP, int \fIelem\fP, size_t \fIwidth\fP, size_t \fIn\fP);
+inline void *libsimple_memelemmove(void *\fIdest\fP, const void *\fIsrc\fP, int \fIelem\fP, size_t \fIwidth\fP, size_t \fIn\fP);
+inline void *libsimple_memelemcpy(void *\fIdest\fP, const void *\fIsrc\fP, int \fIelem\fP, size_t \fIwidth\fP, size_t \fIn\fP);
 
 #ifndef memelemmove
 # define memelemmove libsimple_memelemmove

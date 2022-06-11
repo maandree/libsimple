@@ -6,7 +6,7 @@
 signed int
 libsimple_strtoi(const char *restrict nptr, char **restrict end, int base) /* TODO test, man */
 {
-	signed int r = strtol(nptr, end, base);
+	signed long int r = strtol(nptr, end, base);
 	if(r < INT_MIN) {
 		r = INT_MIN;
 		errno = ERANGE;

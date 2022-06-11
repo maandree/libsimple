@@ -10,18 +10,18 @@ libsimple_stptolower(char *d, const char *s)
 	char *ret;
 	if (d == s) {
 		for (; *d; d++)
-			*d = tolower(*d);
+			*d = (char)tolower(*d);
 		return d;
 	} else if (d < s) {
 		for (; *s; d++, s++)
-			*d = tolower(*s);
+			*d = (char)tolower(*s);
 		*d = '\0';
 		return d;
 	} else {
 		for (n = 0; s[n]; n++);
 		ret = &d[n];
 		do {
-			d[n] = tolower(s[n]);
+			d[n] = (char)tolower(s[n]);
 		} while (n--);
 		return ret;
 	}

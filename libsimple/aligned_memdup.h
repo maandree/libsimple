@@ -11,6 +11,7 @@
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define libsimple_aligned_memdupa(s, alignment, n)\
+	LIBSIMPLE_GCC_ONLY__(__extension__)\
 	({\
 		const char *__s = (s);\
 		size_t __n = (n);\
@@ -40,7 +41,7 @@
  * @param   n          The number of bytes to copy
  * @return             Duplicate of `s`, `NULL` on failure
  */	
-_LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_align__(2), __alloc_size__(3), __nonnull__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_align__(2), __alloc_size__(3), __nonnull__, __warn_unused_result__)))
 void *libsimple_aligned_memdup(const void *, size_t, size_t);
 #ifndef aligned_memdup
 # define aligned_memdup libsimple_aligned_memdup
@@ -56,7 +57,7 @@ void *libsimple_aligned_memdup(const void *, size_t, size_t);
  * @param   n          The number of bytes to copy
  * @return             Duplicate of `s`
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_align__(3), __alloc_size__(4), __warn_unused_result__, __returns_nonnull__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_align__(3), __alloc_size__(4), __warn_unused_result__, __returns_nonnull__)))
 void *libsimple_enaligned_memdup(int, const void *, size_t, size_t);
 #ifndef enaligned_memdup
 # define enaligned_memdup libsimple_enaligned_memdup
@@ -71,11 +72,11 @@ void *libsimple_enaligned_memdup(int, const void *, size_t, size_t);
  * @param   n          The number of bytes to copy
  * @return             Duplicate of `s`
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_align__(2), __alloc_size__(3), __warn_unused_result__, __returns_nonnull__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_align__(2), __alloc_size__(3), __warn_unused_result__, __returns_nonnull__)))
 inline void *
-libsimple_ealigned_memdup(const void *__s, size_t __alignment, size_t __n)
+libsimple_ealigned_memdup(const void *s__, size_t alignment__, size_t n__)
 {
-	return libsimple_enaligned_memdup(libsimple_default_failure_exit, __s, __alignment, __n);
+	return libsimple_enaligned_memdup(libsimple_default_failure_exit, s__, alignment__, n__);
 }
 #ifndef ealigned_memdup
 # define ealigned_memdup libsimple_ealigned_memdup

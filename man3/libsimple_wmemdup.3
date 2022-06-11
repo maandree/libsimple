@@ -9,7 +9,7 @@ libsimple_wmemdup \- duplicate a wide-character array
 wchar_t *libsimple_wmemdupa(const wchar_t *\fIs\fP, size_t \fIn\fP);
 wchar_t *libsimple_wmemdup(const wchar_t *\fIs\fP, size_t \fIn\fP);
 wchar_t *libsimple_enwmemdup(int \fIstatus\fP, const wchar_t *\fIs\fP, size_t \fIn\fP);
-static inline wchar_t *libsimple_ewmemdup(const wchar_t *\fIs\fP, size_t \fIn\fP);
+inline wchar_t *libsimple_ewmemdup(const wchar_t *\fIs\fP, size_t \fIn\fP);
 
 #ifndef wmemdupa
 # define wmemdupa libsimple_wmemdupa

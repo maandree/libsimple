@@ -10,14 +10,15 @@
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define libsimple_wcsndupa(s, n)\
+	LIBSIMPLE_GCC_ONLY__(__extension__)\
 	({\
-		const wchar_t *__s = (s);\
-		size_t __n = wcsnlen(__s, n);\
-		wchar_t *__r;\
-		__r = alloca((__n + 1) * sizeof(wchar_t));\
-		wmemcpy(__r, __s, __n);\
-		__r[__n] = 0;\
-		__r;\
+		const wchar_t *s__ = (s);\
+		size_t n__ = wcsnlen(s__, n);\
+		wchar_t *r__;\
+		r__ = alloca((n__ + 1) * sizeof(wchar_t));\
+		wmemcpy(r__, s__, n__);\
+		r__[n__] = 0;\
+		r__;\
 	})
 # ifndef wcsndupa
 #  define wcsndupa(s, n) libsimple_wcsndupa(s, n)
@@ -32,7 +33,7 @@
  * @param   n  The maximum number of wide characters to copy
  * @return     Duplicate of `s`
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, _libsimple_assume_aligned_as(wchar_t), __nonnull__,
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, libsimple_assume_aligned_as__(wchar_t), __nonnull__,
                                    __warn_unused_result__)))
 wchar_t *libsimple_wcsndup(const wchar_t *, size_t);
 #ifndef wcsndup
@@ -48,7 +49,7 @@ wchar_t *libsimple_wcsndup(const wchar_t *, size_t);
  * @param   n       The maximum number of wide characters to copy
  * @return          Duplicate of `s`
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, _libsimple_assume_aligned_as(wchar_t), __nonnull__,
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, libsimple_assume_aligned_as__(wchar_t), __nonnull__,
                                    __warn_unused_result__, __returns_nonnull__)))
 wchar_t *libsimple_enwcsndup(int, const wchar_t *, size_t);
 #ifndef enwcsndup
@@ -63,12 +64,12 @@ wchar_t *libsimple_enwcsndup(int, const wchar_t *, size_t);
  * @param   n  The maximum number of wide characters to copy
  * @return     Duplicate of `s`
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, _libsimple_assume_aligned_as(wchar_t),
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, libsimple_assume_aligned_as__(wchar_t),
                                    __nonnull__, __warn_unused_result__, __returns_nonnull__)))
 inline wchar_t *
-libsimple_ewcsndup(const wchar_t *__s, size_t __n)
+libsimple_ewcsndup(const wchar_t *s__, size_t n__)
 {
-	return libsimple_enwcsndup(libsimple_default_failure_exit, __s, __n);
+	return libsimple_enwcsndup(libsimple_default_failure_exit, s__, n__);
 }
 #ifndef ewcsndup
 # define ewcsndup libsimple_ewcsndup

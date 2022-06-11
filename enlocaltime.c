@@ -4,7 +4,7 @@
 
 
 void
-libsimple_enlocaltime(int status, struct tm *tm, struct timespec *ts)
+libsimple_enlocaltime(int status, struct tm *tm, struct timespec *ts) /* TODO test (also libsimple_elocaltime) */
 {
 	if (libsimple_localtime(tm, ts))
 		enprintf(status, "libsimple_localtime:");
@@ -17,7 +17,6 @@ libsimple_enlocaltime(int status, struct tm *tm, struct timespec *ts)
 int
 main(void)
 {
-	/* TODO test */
 	return 0;
 }
 

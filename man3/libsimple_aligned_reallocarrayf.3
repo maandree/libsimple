@@ -6,7 +6,7 @@ libsimple_aligned_reallocarrayf \- reallocate memory and customise alignment
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_aligned_reallocarrayf(void *\fIptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, size_t \fIm\fP);
+inline void *libsimple_aligned_reallocarrayf(void *\fIptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, size_t \fIm\fP);
 
 #ifndef aligned_reallocarrayf
 # define aligned_reallocarrayf libsimple_aligned_reallocarrayf

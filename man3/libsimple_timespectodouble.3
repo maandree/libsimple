@@ -6,8 +6,8 @@ libsimple_timespectodouble, libsimple_timevaltodouble \- convert a duration data
 .nf
 #include <libsimple.h>
 
-static inline double libsimple_timespectodouble(const struct timespec *\fIts\fP);
-static inline double libsimple_timevaltodouble(const struct timeval *\fItv\fP);
+inline double libsimple_timespectodouble(const struct timespec *\fIts\fP);
+inline double libsimple_timevaltodouble(const struct timeval *\fItv\fP);
 
 #ifndef timespectodouble
 # define timespectodouble libsimple_timespectodouble

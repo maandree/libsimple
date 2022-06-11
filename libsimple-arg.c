@@ -4,25 +4,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "test.h"
 #include "libsimple-arg.h"
+#include "test.h"
 
 
 #define PARSER_BEGIN\
 	int old_argc = argc;\
 	char **old_argv = argv;\
-	{
+	/* { */
 
 
 #define PARSER_END\
-	;}\
+	/* } */\
 	assert(argv0 == old_argv[0]);\
 	assert(argv == &old_argv[old_argc - argc]);\
 	return argc
 
 
 #define PARSER_END_NO_ARGV0\
-	}\
+	/* } */\
 	assert(argv0 == NULL);\
 	assert(argv == &old_argv[old_argc - argc]);\
 	return argc
@@ -260,252 +260,253 @@ usage(void)
 static int
 parser1(int argc, char *argv[])
 {
-	PARSER_BEGIN;
-	ARGBEGIN {
-	case 'a': SHORT_WITHOUT_ARG("-a"); break;
-	case 'b': SHORT_WITHOUT_ARG("-b"); break;
-	case 'c': SHORT_WITHOUT_ARG("-c"); break;
-	case 'd': SHORT_WITHOUT_ARG("-d"); break;
-	case 'e': SHORT_WITHOUT_ARG("-e"); break;
-	case 'A': SHORT_WITHOUT_ARG("-A"); break;
-	case 'B': SHORT_WITHOUT_ARG("-B"); break;
-	case 'C': SHORT_WITHOUT_ARG("-C"); break;
-	case 'D': SHORT_WITHOUT_ARG("-D"); break;
-	case 'E': SHORT_WITHOUT_ARG("-E"); break;
-	case 'x': SHORT_WITH_ARG("-x"); break;
-	case 'y': SHORT_WITH_ARG("-y"); break;
-	case 'z': SHORT_WITH_ARG("-z"); break;
-	case 'X': SHORT_WITH_ARG("-X"); break;
-	case 'Y': SHORT_WITH_ARG("-Y"); break;
-	case 'Z': SHORT_WITH_ARG("-Z"); break;
-	case '-': SHORT_WITHOUT_ARG("--"); break;
-	case ARGNUM: SHORT_WITH_ARGHERE("-#"); break;
-	case '@': SHORT_WITH_MISSING_ARG("-@"); break;
-	default:
+	PARSER_BEGIN {
+		ARGBEGIN {
+		case 'a': SHORT_WITHOUT_ARG("-a"); break;
+		case 'b': SHORT_WITHOUT_ARG("-b"); break;
+		case 'c': SHORT_WITHOUT_ARG("-c"); break;
+		case 'd': SHORT_WITHOUT_ARG("-d"); break;
+		case 'e': SHORT_WITHOUT_ARG("-e"); break;
+		case 'A': SHORT_WITHOUT_ARG("-A"); break;
+		case 'B': SHORT_WITHOUT_ARG("-B"); break;
+		case 'C': SHORT_WITHOUT_ARG("-C"); break;
+		case 'D': SHORT_WITHOUT_ARG("-D"); break;
+		case 'E': SHORT_WITHOUT_ARG("-E"); break;
+		case 'x': SHORT_WITH_ARG("-x"); break;
+		case 'y': SHORT_WITH_ARG("-y"); break;
+		case 'z': SHORT_WITH_ARG("-z"); break;
+		case 'X': SHORT_WITH_ARG("-X"); break;
+		case 'Y': SHORT_WITH_ARG("-Y"); break;
+		case 'Z': SHORT_WITH_ARG("-Z"); break;
+		case '-': SHORT_WITHOUT_ARG("--"); break;
+		case ARGNUM: SHORT_WITH_ARGHERE("-#"); break;
+		case '@': SHORT_WITH_MISSING_ARG("-@"); break;
+		default:
 		usage();
-	} ARGEND;
-	PARSER_END;
+		} ARGEND;
+	} PARSER_END;
 }
 
 
 static int
 parser2(int argc, char *argv[])
 {
-	PARSER_BEGIN;
-	SUBARGBEGIN {
-	case 'a': SHORT_WITHOUT_ARG("-a"); break;
-	case 'b': SHORT_WITHOUT_ARG("-b"); break;
-	case 'c': SHORT_WITHOUT_ARG("-c"); break;
-	case 'd': SHORT_WITHOUT_ARG("-d"); break;
-	case 'e': SHORT_WITHOUT_ARG("-e"); break;
-	case 'A': SHORT_WITHOUT_ARG("-A"); break;
-	case 'B': SHORT_WITHOUT_ARG("-B"); break;
-	case 'C': SHORT_WITHOUT_ARG("-C"); break;
-	case 'D': SHORT_WITHOUT_ARG("-D"); break;
-	case 'E': SHORT_WITHOUT_ARG("-E"); break;
-	case 'x': SHORT_WITH_ARG("-x"); break;
-	case 'y': SHORT_WITH_ARG("-y"); break;
-	case 'z': SHORT_WITH_ARG("-z"); break;
-	case 'X': SHORT_WITH_ARG("-X"); break;
-	case 'Y': SHORT_WITH_ARG("-Y"); break;
-	case 'Z': SHORT_WITH_ARG("-Z"); break;
-	case '-': SHORT_WITHOUT_ARG("--"); break;
-	case ARGNUM: SHORT_WITH_ARGHERE("-#"); break;
-	case '@': SHORT_WITH_MISSING_ARG("-@"); break;
-	default:
-		usage();
-	} ARGEND;
-	PARSER_END_NO_ARGV0;
+	PARSER_BEGIN {
+		SUBARGBEGIN {
+		case 'a': SHORT_WITHOUT_ARG("-a"); break;
+		case 'b': SHORT_WITHOUT_ARG("-b"); break;
+		case 'c': SHORT_WITHOUT_ARG("-c"); break;
+		case 'd': SHORT_WITHOUT_ARG("-d"); break;
+		case 'e': SHORT_WITHOUT_ARG("-e"); break;
+		case 'A': SHORT_WITHOUT_ARG("-A"); break;
+		case 'B': SHORT_WITHOUT_ARG("-B"); break;
+		case 'C': SHORT_WITHOUT_ARG("-C"); break;
+		case 'D': SHORT_WITHOUT_ARG("-D"); break;
+		case 'E': SHORT_WITHOUT_ARG("-E"); break;
+		case 'x': SHORT_WITH_ARG("-x"); break;
+		case 'y': SHORT_WITH_ARG("-y"); break;
+		case 'z': SHORT_WITH_ARG("-z"); break;
+		case 'X': SHORT_WITH_ARG("-X"); break;
+		case 'Y': SHORT_WITH_ARG("-Y"); break;
+		case 'Z': SHORT_WITH_ARG("-Z"); break;
+		case '-': SHORT_WITHOUT_ARG("--"); break;
+		case ARGNUM: SHORT_WITH_ARGHERE("-#"); break;
+		case '@': SHORT_WITH_MISSING_ARG("-@"); break;
+		default:
+			usage();
+		} ARGEND;
+	} PARSER_END_NO_ARGV0;
 }
 
 
 static int
 parser3(int argc, char *argv[])
 {
-	PARSER_BEGIN;
-	NOFLAGS(0);
-	PARSER_END;
+	PARSER_BEGIN {
+		NOFLAGS(0);
+	} PARSER_END;
 }
 
 
 static int
 parser4(int argc, char *argv[])
 {
-	PARSER_BEGIN;
-	NOFLAGS(argc);
-	PARSER_END;
+	PARSER_BEGIN {
+		NOFLAGS(argc);
+	} PARSER_END;
 }
 
 
 static int
 parser5(int argc, char *argv[])
 {
-	PARSER_BEGIN;
-	ARGBEGIN {
-	case 'a': SHORT_WITHOUT_ARG("-a"); break;
-	case 'x': SHORT_WITHOUT_ARG("-x"); break;
-	case '-': SHORT_WITHOUT_ARG("--"); break;
-	default:
-		usage();
-	} ARGALT('+') {
-	case 'a': SHORT_WITHOUT_ARG("+a"); break;
-	case 'y': SHORT_WITHOUT_ARG("+y"); break;
-	case '+': SHORT_WITHOUT_ARG("++"); break;
-	default:
-		usage();
-	} ARGALT('/') {
-	case 'a': SHORT_WITHOUT_ARG("/a"); break;
-	case 'z': SHORT_WITHOUT_ARG("/z"); break;
-	case '/': SHORT_WITHOUT_ARG("//"); break;
-	default:
-		usage();
-	} ARGALT('x') {
-	case 'a': SHORT_WITHOUT_ARG("xa"); break;
-	case 'b': SHORT_WITHOUT_ARG("xb"); break;
-	case 'x': SHORT_WITHOUT_ARG("xx"); break;
-	default:
-		usage();
-	} ARGEND;
-	PARSER_END;
+	PARSER_BEGIN {
+		ARGBEGIN {
+		case 'a': SHORT_WITHOUT_ARG("-a"); break;
+		case 'x': SHORT_WITHOUT_ARG("-x"); break;
+		case '-': SHORT_WITHOUT_ARG("--"); break;
+		default:
+			usage();
+		} ARGALT('+') {
+		case 'a': SHORT_WITHOUT_ARG("+a"); break;
+		case 'y': SHORT_WITHOUT_ARG("+y"); break;
+		case '+': SHORT_WITHOUT_ARG("++"); break;
+		default:
+			usage();
+		} ARGALT('/') {
+		case 'a': SHORT_WITHOUT_ARG("/a"); break;
+		case 'z': SHORT_WITHOUT_ARG("/z"); break;
+		case '/': SHORT_WITHOUT_ARG("//"); break;
+		default:
+			usage();
+		} ARGALT('x') {
+		case 'a': SHORT_WITHOUT_ARG("xa"); break;
+		case 'b': SHORT_WITHOUT_ARG("xb"); break;
+		case 'x': SHORT_WITHOUT_ARG("xx"); break;
+		default:
+			usage();
+		} ARGEND;
+	} PARSER_END;
 }
 
 
 static int
 parser6(int argc, char *argv[])
 {
-	PARSER_BEGIN;
-	ARGBEGIN2(1, 1) {
-	default:
-		assert(ARGHERE() == &LFLAG()[1]);
-		argv[0] = LFLAG();
-		goto stop;
-	} ARGALT('+') {
-	case 'a': SHORT_WITHOUT_ARG("+a"); break;
-	case 'b': SHORT_WITHOUT_ARG("+b"); break;
-	case 'c': SHORT_WITHOUT_ARG("+c"); break;
-	case 'd': SHORT_WITHOUT_ARG("+d"); break;
-	case 'e': SHORT_WITHOUT_ARG("+e"); break;
-	case 'A': SHORT_WITHOUT_ARG("+A"); break;
-	case 'B': SHORT_WITHOUT_ARG("+B"); break;
-	case 'C': SHORT_WITHOUT_ARG("+C"); break;
-	case 'D': SHORT_WITHOUT_ARG("+D"); break;
-	case 'E': SHORT_WITHOUT_ARG("+E"); break;
-	case 'x': SHORT_WITH_ARG("+x"); break;
-	case 'y': SHORT_WITH_ARG("+y"); break;
-	case 'z': SHORT_WITH_ARG("+z"); break;
-	case 'X': SHORT_WITH_ARG("+X"); break;
-	case 'Y': SHORT_WITH_ARG("+Y"); break;
-	case 'Z': SHORT_WITH_ARG("+Z"); break;
-	case '+': SHORT_WITHOUT_ARG("++"); break;
-	case ARGNUM: SHORT_WITH_ARGHERE("+#"); break;
-	case '@': SHORT_WITH_MISSING_ARG("+@"); break;
-	default:
-		usage();
-	} ARGEND;
-stop:
-	PARSER_END;
+	PARSER_BEGIN {
+		ARGBEGIN2(1, 1) {
+		default:
+			assert(ARGHERE() == &LFLAG()[1]);
+			argv[0] = LFLAG();
+			goto stop;
+		} ARGALT('+') {
+		case 'a': SHORT_WITHOUT_ARG("+a"); break;
+		case 'b': SHORT_WITHOUT_ARG("+b"); break;
+		case 'c': SHORT_WITHOUT_ARG("+c"); break;
+		case 'd': SHORT_WITHOUT_ARG("+d"); break;
+		case 'e': SHORT_WITHOUT_ARG("+e"); break;
+		case 'A': SHORT_WITHOUT_ARG("+A"); break;
+		case 'B': SHORT_WITHOUT_ARG("+B"); break;
+		case 'C': SHORT_WITHOUT_ARG("+C"); break;
+		case 'D': SHORT_WITHOUT_ARG("+D"); break;
+		case 'E': SHORT_WITHOUT_ARG("+E"); break;
+		case 'x': SHORT_WITH_ARG("+x"); break;
+		case 'y': SHORT_WITH_ARG("+y"); break;
+		case 'z': SHORT_WITH_ARG("+z"); break;
+		case 'X': SHORT_WITH_ARG("+X"); break;
+		case 'Y': SHORT_WITH_ARG("+Y"); break;
+		case 'Z': SHORT_WITH_ARG("+Z"); break;
+		case '+': SHORT_WITHOUT_ARG("++"); break;
+		case ARGNUM: SHORT_WITH_ARGHERE("+#"); break;
+		case '@': SHORT_WITH_MISSING_ARG("+@"); break;
+		default:
+			usage();
+		} ARGEND;
+	stop:;
+	} PARSER_END;
 }
 
 
 static int
 parser7(int argc, char *argv[])
 {
-	PARSER_BEGIN;
-	ARGBEGIN {
-	case '-':
-		if (TESTLONG("--alpha", 0))
-			LONG_WITHOUT_ARG("--alpha");
-		else if (TESTLONG("--alpha=", 0))
-			LONG_WITHOUT_ARG("--alpha=");
-		else if (TESTLONG("--beta", 1))
-			LONG_WITH_ARG("--beta");
-		else if (TESTLONG("--gamma=", 1))
-			LONG_WITH_ARG("--gamma");
-		else if (TESTLONG("--gamma", 0))
-			LONG_WITHOUT_ARG("--gamma");
-		else if (TESTLONG("--missing", 1))
-			LONG_WITH_MISSING_ARG("--missing");
-		else
+	PARSER_BEGIN {
+		ARGBEGIN {
+		case '-':
+			if (TESTLONG("--alpha", 0))
+				LONG_WITHOUT_ARG("--alpha");
+			else if (TESTLONG("--alpha=", 0))
+				LONG_WITHOUT_ARG("--alpha=");
+			else if (TESTLONG("--beta", 1))
+				LONG_WITH_ARG("--beta");
+			else if (TESTLONG("--gamma=", 1))
+				LONG_WITH_ARG("--gamma");
+			else if (TESTLONG("--gamma", 0))
+				LONG_WITHOUT_ARG("--gamma");
+			else if (TESTLONG("--missing", 1))
+				LONG_WITH_MISSING_ARG("--missing");
+			else
+				usage();
+			break;
+		default:
 			usage();
-		break;
-	default:
-		usage();
-	} ARGALT('+') {
-	case '+':
-		if (TESTLONG("++alpha", 0))
-			LONG_WITHOUT_ARG("++alpha");
-		else if (TESTLONG("++alpha=", 0))
-			LONG_WITHOUT_ARG("++alpha=");
-		else if (TESTLONG("++beta", 1))
-			LONG_WITH_ARG("++beta");
-		else if (TESTLONG("++gamma=", 1))
-			LONG_WITH_ARG("++gamma");
-		else if (TESTLONG("++gamma", 0))
-			LONG_WITHOUT_ARG("++gamma");
-		else if (TESTLONG("++missing", 1))
-			LONG_WITH_MISSING_ARG("++missing");
-		else
+		} ARGALT('+') {
+		case '+':
+			if (TESTLONG("++alpha", 0))
+				LONG_WITHOUT_ARG("++alpha");
+			else if (TESTLONG("++alpha=", 0))
+				LONG_WITHOUT_ARG("++alpha=");
+			else if (TESTLONG("++beta", 1))
+				LONG_WITH_ARG("++beta");
+			else if (TESTLONG("++gamma=", 1))
+				LONG_WITH_ARG("++gamma");
+			else if (TESTLONG("++gamma", 0))
+				LONG_WITHOUT_ARG("++gamma");
+			else if (TESTLONG("++missing", 1))
+				LONG_WITH_MISSING_ARG("++missing");
+			else
+				usage();
+			break;
+		default:
 			usage();
-		break;
-	default:
-		usage();
-	} ARGEND;
-	PARSER_END;
+		} ARGEND;
+	} PARSER_END;
 }
 
 
 static int
 parser8(int argc, char *argv[])
 {
-	PARSER_BEGIN;
-	ARGBEGIN {
-	case 'a': SHORT_WITHOUT_ARG("-a"); break;
-	case 'A': SHORT_WITHOUT_ARG("-A"); break;
-	case 'b': SHORT_WITH_ARG("-b"); break;
-	case 'g': SHORT_WITH_ARG("-g"); break;
-	case 'G': SHORT_WITHOUT_ARG("-G"); break;
-	case 'm': SHORT_WITH_MISSING_ARG("-m"); break;
-	case '-':
-		ARGMAPLONG(((struct longopt []){
-			{"--alpha", 'a', 0},
-			{"--alpha=", 'A', 0},
-			{"--beta", 'b', 1},
-			{"--gamma=", 'g', 1},
-			{"--gamma", 'G', 0},
-			{"--missing", 'm', 1},
-			{NULL, '\0', 0},
-		}));
-		/* fall through */
-	default:
-		usage();
-	} ARGALT('+') {
-	case 'a': SHORT_WITHOUT_ARG("+a"); break;
-	case 'A': SHORT_WITHOUT_ARG("+A"); break;
-	case 'b': SHORT_WITH_ARG("+b"); break;
-	case 'g': SHORT_WITH_ARG("+g"); break;
-	case 'G': SHORT_WITHOUT_ARG("+G"); break;
-	case 'm': SHORT_WITH_MISSING_ARG("+m"); break;
-	case '+':
-		ARGMAPLONG(((struct longopt []){
-			{"++alpha", 'a', 0},
-			{"++alpha=", 'A', 0},
-			{"++beta", 'b', 1},
-			{"++gamma=", 'g', 1},
-			{"++gamma", 'G', 0},
-			{"++missing", 'm', 1},
-			{NULL, '\0', 0},
-		}));
-		/* fall through */
-	default:
-		usage();
-	} ARGEND;
-	PARSER_END;
+	PARSER_BEGIN {
+		ARGBEGIN {
+		case 'a': SHORT_WITHOUT_ARG("-a"); break;
+		case 'A': SHORT_WITHOUT_ARG("-A"); break;
+		case 'b': SHORT_WITH_ARG("-b"); break;
+		case 'g': SHORT_WITH_ARG("-g"); break;
+		case 'G': SHORT_WITHOUT_ARG("-G"); break;
+		case 'm': SHORT_WITH_MISSING_ARG("-m"); break;
+		case '-':
+			ARGMAPLONG(((struct longopt []){
+				{"--alpha", 'a', 0},
+				{"--alpha=", 'A', 0},
+				{"--beta", 'b', 1},
+				{"--gamma=", 'g', 1},
+				{"--gamma", 'G', 0},
+				{"--missing", 'm', 1},
+				{NULL, '\0', 0},
+			}));
+			/* fall through */
+		default:
+			usage();
+		} ARGALT('+') {
+		case 'a': SHORT_WITHOUT_ARG("+a"); break;
+		case 'A': SHORT_WITHOUT_ARG("+A"); break;
+		case 'b': SHORT_WITH_ARG("+b"); break;
+		case 'g': SHORT_WITH_ARG("+g"); break;
+		case 'G': SHORT_WITHOUT_ARG("+G"); break;
+		case 'm': SHORT_WITH_MISSING_ARG("+m"); break;
+		case '+':
+			ARGMAPLONG(((struct longopt []){
+				{"++alpha", 'a', 0},
+				{"++alpha=", 'A', 0},
+				{"++beta", 'b', 1},
+				{"++gamma=", 'g', 1},
+				{"++gamma", 'G', 0},
+				{"++missing", 'm', 1},
+				{NULL, '\0', 0},
+			}));
+			/* fall through */
+		default:
+			usage();
+		} ARGEND;
+	} PARSER_END;
 }
 
 
 int
 main(void)
 {
+	char buf[10];
 	const char *a1;
 	size_t i;
 
@@ -696,22 +697,22 @@ main(void)
 	ASSERT_ENTRY("+G", NULL, NULL);
 	ASSERT_END();
 
-	argv0_1 = "[1]";
+	argv0_1 = strcpy(buf, "[1]");
 	assert_exit(usage1());
 	assert(exit_status == 1);
 	assert_stderr("usage: [1] -1\n");
 
-	argv0_2 = "[2]";
+	argv0_2 = strcpy(buf, "[2]");
 	assert_exit(usage2());
 	assert_stderr("usage: [2] -2\n");
 	assert(exit_status == 2);
 
-	argv0_3 = "[3]";
+	argv0_3 = strcpy(buf, "[3]");
 	assert_exit(usage3());
 	assert_stderr("usage: [3]\n");
 	assert(exit_status == 3);
 
-	argv0_0 = "[0]";
+	argv0_0 = strcpy(buf, "[0]");
 	assert_exit(usage0());
 	assert_stderr("usage: [0]\n");
 	assert(exit_status == 0);

@@ -8,10 +8,10 @@ libsimple_vmalloczn \- allocate optionally initialised memory
 
 void *libsimple_vmalloczn(int \fIclear\fP, size_t \fIn\fP, va_list \fIap\fP);
 void *libsimple_envmalloczn(int \fIstatus\fP, int \fIclear\fP, size_t \fIn\fP, va_list \fIap\fP);
-static inline void *libsimple_evmalloczn(int \fIclear\fP, size_t \fIn\fP, va_list \fIap\fP);
-static inline void *libsimple_malloczn(int \fIclear\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
-static inline void *libsimple_enmalloczn(int \fIstatus\fP, int \fIclear\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
-static inline void *libsimple_emalloczn(int \fIclear\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_evmalloczn(int \fIclear\fP, size_t \fIn\fP, va_list \fIap\fP);
+inline void *libsimple_malloczn(int \fIclear\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_enmalloczn(int \fIstatus\fP, int \fIclear\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_emalloczn(int \fIclear\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
 
 #ifndef vmalloczn
 # define vmalloczn libsimple_vmalloczn

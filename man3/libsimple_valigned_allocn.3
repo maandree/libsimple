@@ -6,12 +6,12 @@ libsimple_valigned_allocn \- allocate memory with custom alignment
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_valigned_allocn(size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
-static inline void *libsimple_envaligned_allocn(int \fIstatus\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
-static inline void *libsimple_evaligned_allocn(size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
-static inline void *libsimple_aligned_allocn(size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
-static inline void *libsimple_enaligned_allocn(int \fIstatus\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
-static inline void *libsimple_ealigned_allocn(size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_valigned_allocn(size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
+inline void *libsimple_envaligned_allocn(int \fIstatus\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
+inline void *libsimple_evaligned_allocn(size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
+inline void *libsimple_aligned_allocn(size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_enaligned_allocn(int \fIstatus\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_ealigned_allocn(size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
 
 #ifndef valigned_allocn
 # define valigned_allocn libsimple_valigned_allocn

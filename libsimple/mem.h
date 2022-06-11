@@ -12,7 +12,7 @@
  *             where `r` is the returned pointer, `&s[n]` if
  *             no such offset exists within [s, &s[n])
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __returns_nonnull__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __returns_nonnull__, __warn_unused_result__)))
 void *libsimple_memscan(const void *, int, size_t);
 #ifndef memscan
 # define memscan libsimple_memscan
@@ -30,7 +30,7 @@ void *libsimple_memscan(const void *, int, size_t);
  *             where `r` is the returned pointer, `NULL` if
  *             no such offset exists within [s, &s[n])
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
 void *libsimple_memcasechr(const void *, int, size_t);
 #ifndef memcasechr
 # define memcasechr libsimple_memcasechr
@@ -48,7 +48,7 @@ void *libsimple_memcasechr(const void *, int, size_t);
  *             where `r` is the returned pointer, `&s[n]` if
  *             no such offset exists within [s, &s[n])
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
 void *libsimple_memcasescan(const void *, int, size_t);
 #ifndef memcasescan
 # define memcasescan libsimple_memcasescan
@@ -69,7 +69,7 @@ void *libsimple_memcasescan(const void *, int, size_t);
  * @return     `s` with a miminal offset such that `*r == c`,
  *             where `r` is the returned pointer
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
 void *libsimple_rawmemchr(const void *, int);
 #ifndef rawmemchr
 # define rawmemchr libsimple_rawmemchr
@@ -90,7 +90,7 @@ void *libsimple_rawmemchr(const void *, int);
  * @return     `s` with a miminal offset such that `tolower(*r) == tolower(c)`,
  *             where `r` is the returned pointer
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
 void *libsimple_rawmemcasechr(const void *, int);
 #ifndef rawmemcasechr
 # define rawmemcasechr libsimple_rawmemcasechr
@@ -108,7 +108,7 @@ void *libsimple_rawmemcasechr(const void *, int);
  *             where `r` is the returned pointer `NULL` if no
  *             such offset exists within [s, &s[n])
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
 void *libsimple_memrchr(const void *, int, size_t);
 #ifndef memrchr
 # define memrchr libsimple_memrchr
@@ -126,7 +126,7 @@ void *libsimple_memrchr(const void *, int, size_t);
  *             where `r` is the returned pointer `NULL` if no
  *             such offset exists within [s, &s[n])
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
 void *libsimple_memrcasechr(const void *, int, size_t);
 #ifndef memrcasechr
 # define memrcasechr libsimple_memrcasechr
@@ -148,7 +148,7 @@ void *libsimple_memrcasechr(const void *, int, size_t);
  * @return     `s` with a maximal offset such that `*r == c`,
  *             where `r` is the returned pointer
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
 void *libsimple_rawmemrchr(const void *, int, size_t);
 #ifndef rawmemrchr
 # define rawmemrchr libsimple_rawmemrchr
@@ -170,7 +170,7 @@ void *libsimple_rawmemrchr(const void *, int, size_t);
  * @return     `s` with a maximal offset such that `tolower(*r) == tolower(c)`,
  *             where `r` is the returned pointer
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
 void *libsimple_rawmemrcasechr(const void *, int, size_t);
 #ifndef rawmemrcasechr
 # define rawmemrcasechr libsimple_rawmemrcasechr
@@ -188,7 +188,7 @@ void *libsimple_rawmemrcasechr(const void *, int, size_t);
  *             where `r` is the returned pointer, `NULL` if
  *             no such offset exists within [s, &s[n])
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
 void *libsimple_memchr_inv(const void *, int, size_t);
 #ifndef memchr_inv
 # define memchr_inv libsimple_memchr_inv
@@ -206,7 +206,7 @@ void *libsimple_memchr_inv(const void *, int, size_t);
  *             where `r` is the returned pointer, `&s[n]` if
  *             no such offset exists within [s, &s[n])
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __returns_nonnull__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __returns_nonnull__, __warn_unused_result__)))
 void *libsimple_memscan_inv(const void *, int, size_t);
 #ifndef memscan_inv
 # define memscan_inv libsimple_memscan_inv
@@ -224,7 +224,7 @@ void *libsimple_memscan_inv(const void *, int, size_t);
  *             where `r` is the returned pointer, `NULL` if
  *             no such offset exists within [s, &s[n])
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
 void *libsimple_memcasechr_inv(const void *, int, size_t);
 #ifndef memcasechr_inv
 # define memcasechr_inv libsimple_memcasechr_inv
@@ -242,7 +242,7 @@ void *libsimple_memcasechr_inv(const void *, int, size_t);
  *             where `r` is the returned pointer, `&s[n]` if
  *             no such offset exists within [s, &s[n])
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
 void *libsimple_memcasescan_inv(const void *, int, size_t);
 #ifndef memcasescan_inv
 # define memcasescan_inv libsimple_memcasescan_inv
@@ -263,7 +263,7 @@ void *libsimple_memcasescan_inv(const void *, int, size_t);
  * @return     `s` with a miminal offset such that `*r != c`,
  *             where `r` is the returned pointer
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
 void *libsimple_rawmemchr_inv(const void *, int);
 #ifndef rawmemchr_inv
 # define rawmemchr_inv libsimple_rawmemchr_inv
@@ -284,7 +284,7 @@ void *libsimple_rawmemchr_inv(const void *, int);
  * @return     `s` with a miminal offset such that `tolower(*r) != tolower(c)`,
  *             where `r` is the returned pointer
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
 void *libsimple_rawmemcasechr_inv(const void *, int);
 #ifndef rawmemcasechr_inv
 # define rawmemcasechr_inv libsimple_rawmemcasechr_inv
@@ -302,7 +302,7 @@ void *libsimple_rawmemcasechr_inv(const void *, int);
  *             where `r` is the returned pointer `NULL` if no
  *             such offset exists within [s, &s[n])
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
 void *libsimple_memrchr_inv(const void *, int, size_t);
 #ifndef memrchr_inv
 # define memrchr_inv libsimple_memrchr_inv
@@ -320,7 +320,7 @@ void *libsimple_memrchr_inv(const void *, int, size_t);
  *             where `r` is the returned pointer `NULL` if no
  *             such offset exists within [s, &s[n])
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
 void *libsimple_memrcasechr_inv(const void *, int, size_t);
 #ifndef memrcasechr_inv
 # define memrcasechr_inv libsimple_memrcasechr_inv
@@ -342,7 +342,7 @@ void *libsimple_memrcasechr_inv(const void *, int, size_t);
  * @return     `s` with a maximal offset such that `*r != c`,
  *             where `r` is the returned pointer
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
 void *libsimple_rawmemrchr_inv(const void *, int, size_t);
 #ifndef rawmemrchr_inv
 # define rawmemrchr_inv libsimple_rawmemrchr_inv
@@ -364,7 +364,7 @@ void *libsimple_rawmemrchr_inv(const void *, int, size_t);
  * @return     `s` with a maximal offset such that `tolower(*r) != tolower(c)`,
  *             where `r` is the returned pointer
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
 void *libsimple_rawmemrcasechr_inv(const void *, int, size_t);
 #ifndef rawmemrcasechr_inv
 # define rawmemrcasechr_inv libsimple_rawmemrcasechr_inv
@@ -382,7 +382,7 @@ void *libsimple_rawmemrcasechr_inv(const void *, int, size_t);
  *                     `!memcmp(r, needle, nneedle)` where `r` is the
  *                     returned pointer, `NULL` if no such offset exists
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
 void *libsimple_memmem(const void *, size_t, const void *, size_t);
 #ifndef memmem
 # define memmem libsimple_memmem
@@ -400,7 +400,7 @@ void *libsimple_memmem(const void *, size_t, const void *, size_t);
  *                     `!memcasecmp(r, needle, nneedle)` where `r` is the
  *                     returned pointer, `NULL` if no such offset exists
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
 void *libsimple_memcasemem(const void *, size_t, const void *, size_t);
 #ifndef memcasemem
 # define memcasemem libsimple_memcasemem
@@ -418,7 +418,7 @@ void *libsimple_memcasemem(const void *, size_t, const void *, size_t);
  *                     `!memcmp(r, needle, nneedle)` where `r` is the
  *                     returned pointer, `NULL` if no such offset exists
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
 void *libsimple_memrmem(const void *, size_t, const void *, size_t);
 #ifndef memrmem
 # define memrmem libsimple_memrmem
@@ -436,7 +436,7 @@ void *libsimple_memrmem(const void *, size_t, const void *, size_t);
  *                     `!memcasecmp(r, needle, nneedle)` where `r` is the
  *                     returned pointer, `NULL` if no such offset exists
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
 void *libsimple_memrcasemem(const void *, size_t, const void *, size_t);
 #ifndef memrcasemem
 # define memrcasemem libsimple_memrcasemem
@@ -452,7 +452,7 @@ void *libsimple_memrcasemem(const void *, size_t, const void *, size_t);
  * @param   m  The length of `t`
  * @return     1 if `s` begins with `t`, 0 otherwise
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
 int libsimple_memstarts(const void *, size_t, const void *, size_t);
 #ifndef memstarts
 # define memstarts libsimple_memstarts
@@ -468,7 +468,7 @@ int libsimple_memstarts(const void *, size_t, const void *, size_t);
  * @param   m  The length of `t`
  * @return     1 if `s` begins with `t`, 0 otherwise
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
 int libsimple_memcasestarts(const void *, size_t, const void *, size_t);
 #ifndef memcasestarts
 # define memcasestarts libsimple_memcasestarts
@@ -484,7 +484,7 @@ int libsimple_memcasestarts(const void *, size_t, const void *, size_t);
  * @param   m  The length of `t`
  * @return     1 if `s` ends with `t`, 0 otherwise
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
 int libsimple_memends(const void *, size_t, const void *, size_t);
 #ifndef memends
 # define memends libsimple_memends
@@ -500,7 +500,7 @@ int libsimple_memends(const void *, size_t, const void *, size_t);
  * @param   m  The length of `t`
  * @return     1 if `s` ends with `t`, 0 otherwise
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
 int libsimple_memcaseends(const void *, size_t, const void *, size_t);
 #ifndef memcaseends
 # define memcaseends libsimple_memcaseends
@@ -515,7 +515,7 @@ int libsimple_memcaseends(const void *, size_t, const void *, size_t);
  * @param   n  The lengths of the arrays
  * @return     1 if the arrays are equal, 0 otherwise
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
 int libsimple_memcasecmp(const void *, const void *, size_t);
 #ifndef memcasecmp
 # define memcasecmp libsimple_memcasecmp
@@ -530,9 +530,12 @@ int libsimple_memcasecmp(const void *, const void *, size_t);
  * @param   n  The lengths of the arrays
  * @return     1 if the arrays are equal, 0 otherwise
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
-static inline int libsimple_memeq(const void *__a, const void *__b, size_t __n)
-{ return !memcmp(__a, __b, __n); }
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
+inline int
+libsimple_memeq(const void *a__, const void *b__, size_t n__)
+{
+	return !memcmp(a__, b__, n__);
+}
 #ifndef memeq
 # define memeq libsimple_memeq
 #endif
@@ -546,9 +549,12 @@ static inline int libsimple_memeq(const void *__a, const void *__b, size_t __n)
  * @param   n  The lengths of the arrays
  * @return     1 if the arrays are equal, 0 otherwise
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
-static inline int libsimple_memcaseeq(const void *__a, const void *__b, size_t __n)
-{ return !memcasecmp(__a, __b, __n); }
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
+inline int
+libsimple_memcaseeq(const void *a__, const void *b__, size_t n__)
+{
+	return !memcasecmp(a__, b__, n__);
+}
 #ifndef memcaseeq
 # define memcaseeq libsimple_memcaseeq
 #endif
@@ -562,8 +568,11 @@ static inline int libsimple_memcaseeq(const void *__a, const void *__b, size_t _
  * @param   n  The number of bytes to copy
  * @return     `&d[n]`
  */
-static inline void *libsimple_mempcpy(void *restrict __d, const void *restrict __s, size_t __n)
-{ return &((char *)memcpy(__d, __s, __n))[__n]; }
+inline void *
+libsimple_mempcpy(void *restrict d__, const void *restrict s__, size_t n__)
+{
+	return &((char *)memcpy(d__, s__, n__))[n__];
+}
 #ifndef mempcpy
 # define mempcpy libsimple_mempcpy
 #endif
@@ -577,8 +586,11 @@ static inline void *libsimple_mempcpy(void *restrict __d, const void *restrict _
  * @param   n  The number of bytes to move
  * @return     `&d[n]`
  */
-static inline void *libsimple_mempmove(void *__d, const void *__s, size_t __n)
-{ return &((char *)memmove(__d, __s, __n))[__n]; }
+inline void *
+libsimple_mempmove(void *d__, const void *s__, size_t n__)
+{
+	return &((char *)memmove(d__, s__, n__))[n__];
+}
 #ifndef mempmove
 # define mempmove libsimple_mempmove
 #endif
@@ -592,8 +604,11 @@ static inline void *libsimple_mempmove(void *__d, const void *__s, size_t __n)
  * @param   n  The number of bytes to write to `s`
  * @return     `&s[n]`
  */
-static inline void *libsimple_mempset(void *__s, int __c, size_t __n)
-{ return &((char *)memset(__s, __c, __n))[__n]; }
+inline void *
+libsimple_mempset(void *s__, int c__, size_t n__)
+{
+	return &((char *)memset(s__, c__, n__))[n__];
+}
 #ifndef mempset
 # define mempset libsimple_mempset
 #endif
@@ -612,13 +627,13 @@ static inline void *libsimple_mempset(void *__s, int __c, size_t __n)
  * @param   c  The byte that stops the copying
  * @return     `&rawmemchr(d, c)[1]` (after copying)
  */
-static inline void *
-libsimple_rawmemccpy(void *restrict __d_, const void *restrict __s_, int __c_)
+inline void *
+libsimple_rawmemccpy(void *restrict d___, const void *restrict s___, int c___)
 {
-	char __c = (char)__c_, *restrict __d = __d_;
-	const char *restrict __s = __s_;
-	for (; (*__d++ = *__s) != __c; __s++);
-	return __d;
+	char c__ = (char)c___, *restrict d__ = d___;
+	const char *restrict s__ = s___;
+	for (; (*d__++ = *s__) != c__; s__++);
+	return d__;
 }
 #ifndef rawmemccpy
 # define rawmemccpy libsimple_rawmemccpy
@@ -655,24 +670,24 @@ void *libsimple_memcmove(void *, const void *, int, size_t);
  * @param   c  The byte that stops the copying
  * @return     `&rawmemchr(d, c)[1]` (after copying)
  */
-static inline void *
-libsimple_rawmemcmove(void *__d_, const void *__s_, int __c_)
+inline void *
+libsimple_rawmemcmove(void *d___, const void *s___, int c___)
 {
-	char *__d = __d_, *__p, __c = (char)__c_;
-	const char *__s = __s_;
-	size_t __n;
-	if (__d <= __s) {
-		for (; (*__d++ = *__s) != __c; __s++);
-		return __d;
+	char *d__ = d___, *p__, c__ = (char)c___;
+	const char *s__ = s___;
+	size_t n__;
+	if (d__ <= s__) {
+		for (; (*d__++ = *s__) != c__; s__++);
+		return d__;
 	} else {
-		for (__p = *(char **)(void *)&__s; *__p++ != __c;);
-		__n = (size_t)(__p - __s);
-		__p = &__d[__n];
-		while (__n) {
-			__n--;
-			__d[__n] = __s[__n];
+		for (p__ = *(char **)(void *)&s__; *p__++ != c__;);
+		n__ = (size_t)(p__ - s__);
+		p__ = &d__[n__];
+		while (n__) {
+			n__--;
+			d__[n__] = s__[n__];
 		}
-		return __p;
+		return p__;
 	}
 }
 #ifndef rawmemcmove
@@ -689,15 +704,15 @@ libsimple_rawmemcmove(void *__d_, const void *__s_, int __c_)
  * @param   n    The length of `s`
  * @return       `(void *)&((char *)s)[n]`
  */
-static inline void *
-libsimple_memreplace(void *__s_, int __old_, int __new_, size_t __n)
+inline void *
+libsimple_memreplace(void *s___, int old___, int new___, size_t n__)
 {
-	char __old = (char)__old_, __new = (char)__new_, *__s = __s_;
-	char *__ret = &__s[__n];
-	while (__n)
-		if (__s[--__n] == __old)
-			__s[__n] = __new;
-	return __ret;
+	char old__ = (char)old___, new__ = (char)new___, *s__ = s___;
+	char *ret__ = &s__[n__];
+	while (n__)
+		if (s__[--n__] == old__)
+			s__[n__] = new__;
+	return ret__;
 }
 #ifndef memreplace
 # define memreplace libsimple_memreplace
@@ -755,8 +770,12 @@ void *libsimple_memptoupper(void *, const void *, size_t);
  * @param   n  The number of bytes to copy or covert
  * @return     `d`
  */
-static inline void *libsimple_memtolower(void *__d, const void *__s, size_t __n)
-{ libsimple_memptolower(__d, __s, __n); return __d; }
+inline void *
+libsimple_memtolower(void *d__, const void *s__, size_t n__)
+{
+	libsimple_memptolower(d__, s__, n__);
+	return d__;
+}
 #ifndef memtolower
 # define memtolower libsimple_memtolower
 #endif
@@ -775,8 +794,12 @@ static inline void *libsimple_memtolower(void *__d, const void *__s, size_t __n)
  * @param   n  The number of bytes to copy or covert
  * @return     `d`
  */
-static inline void *libsimple_memtoupper(void *__d, const void *__s, size_t __n)
-{ libsimple_memptoupper(__d, __s, __n); return __d; }
+inline void *
+libsimple_memtoupper(void *d__, const void *s__, size_t n__)
+{
+	libsimple_memptoupper(d__, s__, n__);
+	return d__;
+}
 #ifndef memtoupper
 # define memtoupper libsimple_memtoupper
 #endif
@@ -792,7 +815,7 @@ static inline void *libsimple_memtoupper(void *__d, const void *__s, size_t __n)
  * @return     The number of bytes `a` and `b` have
  *             in common in their beginnings
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
 size_t libsimple_memeqlen(const void *, size_t, const void *, size_t);
 #ifndef memeqlen
 # define memeqlen libsimple_memeqlen
@@ -809,7 +832,7 @@ size_t libsimple_memeqlen(const void *, size_t, const void *, size_t);
  * @return     The number of bytes `a` and `b` have
  *             in common in their beginnings
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
 size_t libsimple_memcaseeqlen(const void *, size_t, const void *, size_t);
 #ifndef memcaseeqlen
 # define memcaseeqlen libsimple_memcaseeqlen
@@ -826,7 +849,7 @@ size_t libsimple_memcaseeqlen(const void *, size_t, const void *, size_t);
  * @return     The number of bytes `a` and `b` have
  *             in common in their ends
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
 size_t libsimple_memreqlen(const void *, size_t, const void *, size_t);
 #ifndef memreqlen
 # define memreqlen libsimple_memreqlen
@@ -843,7 +866,7 @@ size_t libsimple_memreqlen(const void *, size_t, const void *, size_t);
  * @return     The number of bytes `a` and `b` have
  *             in common in their ends
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
 size_t libsimple_memrcaseeqlen(const void *, size_t, const void *, size_t);
 #ifndef memrcaseeqlen
 # define memrcaseeqlen libsimple_memrcaseeqlen
@@ -859,7 +882,7 @@ size_t libsimple_memrcaseeqlen(const void *, size_t, const void *, size_t);
  *                              allows a two-byte encoding for NUL
  * @return                      1 if good, 0 on encoding error
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
 int libsimple_memisutf8(const char *, size_t, int);
 #ifndef memisutf8
 # define memisutf8 libsimple_memisutf8

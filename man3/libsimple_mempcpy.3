@@ -6,7 +6,7 @@ libsimple_mempcpy \- copy an array of bytes into another
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_mempcpy(void *restrict \fIdest\fP, const void *restrict \fIsrc\fP, size_t \fIn\fP);
+inline void *libsimple_mempcpy(void *restrict \fIdest\fP, const void *restrict \fIsrc\fP, size_t \fIn\fP);
 
 #ifndef mempcpy
 # define mempcpy libsimple_mempcpy

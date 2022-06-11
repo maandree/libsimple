@@ -9,7 +9,7 @@ libsimple_wcsndup \- duplicate a wide-character string
 wchar_t *libsimple_wcsndupa(const wchar_t *\fIs\fP, size_t \fIn\fP);
 wchar_t *libsimple_wcsndup(const wchar_t *\fIs\fP, size_t \fIn\fP);
 wchar_t *libsimple_enwcsndup(int \fIstatus\fP, const wchar_t *\fIs\fP, size_t \fIn\fP);
-static inline wchar_t *libsimple_ewcsndup(const wchar_t *\fIs\fP, size_t \fIn\fP);
+inline wchar_t *libsimple_ewcsndup(const wchar_t *\fIs\fP, size_t \fIn\fP);
 
 #ifndef wcsndupa
 # define wcsndupa libsimple_wcsndupa

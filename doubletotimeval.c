@@ -6,7 +6,8 @@
 void
 libsimple_doubletotimeval(struct timeval *tv, double d)
 {
-	double ns = (long long int)d;
+	long long int d_integer = (long long int)d;
+	double ns = (double)d_integer;
 	long int nsi;
 	ns = d - ns;
 	ns *= (double)1000000L;

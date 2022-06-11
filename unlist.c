@@ -17,7 +17,7 @@ main(void)
 	size_t i, n;
 
 	for (i = 0, n = 10; i < n; i++)
-		buf[i] = i;
+		buf[i] = (char)i;
 	LIBSIMPLE_UNLIST(buf, 4, &n);
 	LIBSIMPLE_UNLIST(buf, 9 - 1, &n);
 	LIBSIMPLE_UNLIST(buf, 6 - 1, &n);
@@ -31,7 +31,7 @@ main(void)
 	assert(buf[6] == 8);
 
 	for (i = 0, n = 10; i < n; i++)
-		intarray[i] = i;
+		intarray[i] = (int)i;
 	LIBSIMPLE_UNLIST(intarray, 4, &n);
 	LIBSIMPLE_UNLIST(intarray, 9 - 1, &n);
 	LIBSIMPLE_UNLIST(intarray, 6 - 1, &n);
