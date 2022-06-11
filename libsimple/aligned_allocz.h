@@ -41,7 +41,7 @@ void *libsimple_valigned_alloczn(int, size_t, size_t, va_list);
  * @throws  ENOMEM     Could not allocated enough memory
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(2), __alloc_size__(3), __warn_unused_result__)))
-static inline void *
+inline void *
 libsimple_aligned_allocz(int clear__, size_t alignment__, size_t n__)
 {
 	void *ret__ = aligned_alloc(alignment__, n__);
@@ -74,7 +74,7 @@ libsimple_aligned_allocz(int clear__, size_t alignment__, size_t n__)
  * @throws  ENOMEM     Could not allocated enough memory
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(2), __warn_unused_result__)))
-static inline void *
+inline void *
 libsimple_aligned_alloczn(int clear__, size_t alignment__, size_t n__, ... /*, (size_t)0 */)
 {
 	va_list ap__;
@@ -162,7 +162,7 @@ void *libsimple_envaligned_alloczn(int, int, size_t, size_t, va_list);
  *                     and alignment
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(3), __warn_unused_result__, __returns_nonnull__)))
-static inline void *
+inline void *
 libsimple_enaligned_alloczn(int status__, int clear__, size_t alignment__, size_t n__, ... /*, (size_t)0 */)
 {
 	va_list ap__;
@@ -190,7 +190,7 @@ libsimple_enaligned_alloczn(int status__, int clear__, size_t alignment__, size_
  *                     and alignment
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(2), __alloc_size__(3), __warn_unused_result__, __returns_nonnull__)))
-static inline void *
+inline void *
 libsimple_ealigned_allocz(int clear__, size_t alignment__, size_t n__)
 {
 	return libsimple_enaligned_allocz(libsimple_default_failure_exit, clear__, alignment__, n__);
@@ -222,7 +222,7 @@ libsimple_ealigned_allocz(int clear__, size_t alignment__, size_t n__)
  *                     and alignment
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(2), __warn_unused_result__, __returns_nonnull__)))
-static inline void *
+inline void *
 libsimple_evaligned_alloczn(int clear__, size_t alignment__, size_t n__, va_list ap__)
 {
 	return libsimple_envaligned_alloczn(libsimple_default_failure_exit, clear__, alignment__, n__, ap__);
@@ -254,7 +254,7 @@ libsimple_evaligned_alloczn(int clear__, size_t alignment__, size_t n__, va_list
  *                     and alignment
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(2), __warn_unused_result__, __returns_nonnull__)))
-static inline void *
+inline void *
 libsimple_ealigned_alloczn(int clear__, size_t alignment__, size_t n__, ... /*, (size_t)0 */)
 {
 	va_list ap__;

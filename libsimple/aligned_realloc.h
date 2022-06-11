@@ -31,7 +31,7 @@ LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_align__(2), __alloc_size__(3), __war
 #if defined(__GLIBC__)
 # define LIBSIMPLE_HAVE_ALIGNED_REALLOC
 # include <malloc.h>
-static inline void *
+inline void *
 libsimple_aligned_realloc(void *ptr__, size_t alignment__, size_t n__) /* TODO musl */
 {
 	size_t old__ = malloc_usable_size(ptr__);
@@ -48,7 +48,7 @@ libsimple_aligned_realloc(void *ptr__, size_t alignment__, size_t n__) /* TODO m
 	return new__;
 }
 #else
-static inline void *
+inline void *
 libsimple_aligned_realloc(void *ptr__, size_t alignment__, size_t n__)
 {
 	(void) ptr__;
@@ -122,7 +122,7 @@ void *libsimple_enaligned_realloc(int, void *, size_t, size_t);
  *                     the specified size
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_align__(2), __alloc_size__(3), __warn_unused_result__, __returns_nonnull__)))
-static inline void *
+inline void *
 libsimple_ealigned_realloc(void *ptr__, size_t alignment__, size_t n__)
 {
 	return libsimple_enaligned_realloc(libsimple_default_failure_exit, ptr__, alignment__, n__);
@@ -159,8 +159,8 @@ libsimple_ealigned_realloc(void *ptr__, size_t alignment__, size_t n__)
  * @throws  ENOMEM     Could not allocated enough memory
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_align__(2), __alloc_size__(3), __warn_unused_result__)))
-static inline void *
-libsimple_aligned_reallocf(void *ptr__, size_t alignment__, size_t n__) /* TODO test */
+inline void *
+libsimple_aligned_reallocf(void *ptr__, size_t alignment__, size_t n__)
 {
 	void *new__ = n__ ? libsimple_aligned_realloc(ptr__, alignment__, n__) : NULL;
 	if (!new__)
@@ -202,7 +202,7 @@ libsimple_aligned_reallocf(void *ptr__, size_t alignment__, size_t n__) /* TODO 
  * @throws  ENOSYS     Not implemented (requires non-standard libc functions)
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_align__(2), __alloc_size__(3, 4), __warn_unused_result__)))
-static inline void *
+inline void *
 libsimple_aligned_reallocarray(void *ptr__, size_t alignment__, size_t n__, size_t m__)
 {
 	if (LIBSIMPLE_UMUL_OVERFLOW(n__, m__, &n__, SIZE_MAX)) {
@@ -282,7 +282,7 @@ void *libsimple_enaligned_reallocarray(int, void *, size_t, size_t, size_t);
  *                     the specified size
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_align__(2), __alloc_size__(3, 4), __warn_unused_result__, __returns_nonnull__)))
-static inline void *
+inline void *
 libsimple_ealigned_reallocarray(void *ptr__, size_t alignment__, size_t n__, size_t m__)
 {
 	return libsimple_enaligned_reallocarray(libsimple_default_failure_exit, ptr__, alignment__, n__, m__);
@@ -318,8 +318,8 @@ libsimple_ealigned_reallocarray(void *ptr__, size_t alignment__, size_t n__, siz
  * @throws  ENOSYS     Not implemented (requires non-standard libc functions)
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_align__(2), __alloc_size__(3, 4), __warn_unused_result__)))
-static inline void *
-libsimple_aligned_reallocarrayf(void *ptr__, size_t alignment__, size_t n__, size_t m__) /* TODO test */
+inline void *
+libsimple_aligned_reallocarrayf(void *ptr__, size_t alignment__, size_t n__, size_t m__)
 {
 	void *new__ = (n__ && m__) ? libsimple_aligned_reallocarray(ptr__, alignment__, n__, m__) : NULL;
 	if (!new__)
@@ -437,7 +437,7 @@ void *libsimple_envaligned_reallocn(int, void *, size_t, size_t, va_list);
  *                     the specified size
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_align__(2), __warn_unused_result__, __returns_nonnull__)))
-static inline void *
+inline void *
 libsimple_evaligned_reallocn(void *ptr__, size_t alignment__, size_t n__, va_list ap__)
 {
 	return libsimple_envaligned_reallocn(libsimple_default_failure_exit, ptr__, alignment__, n__, ap__);
@@ -474,8 +474,8 @@ libsimple_evaligned_reallocn(void *ptr__, size_t alignment__, size_t n__, va_lis
  * @throws  ENOSYS     Not implemented (requires non-standard libc functions)
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_align__(2), __warn_unused_result__)))
-static inline void *
-libsimple_valigned_reallocfn(void *ptr__, size_t alignment__, size_t n__, va_list ap__) /* TODO test (aligned_reallocfn) */
+inline void *
+libsimple_valigned_reallocfn(void *ptr__, size_t alignment__, size_t n__, va_list ap__)
 {
 	void *new__ = libsimple_valigned_reallocn(ptr__, alignment__, n__, ap__);
 	if (!new__)
@@ -518,7 +518,7 @@ libsimple_valigned_reallocfn(void *ptr__, size_t alignment__, size_t n__, va_lis
  * @throws  ENOSYS     Not implemented (requires non-standard libc functions)
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_align__(2), __warn_unused_result__)))
-static inline void *
+inline void *
 libsimple_aligned_reallocn(void *ptr__, size_t alignment__, size_t n__, ... /*, (size_t)0 */)
 {
 	va_list ap__;
@@ -563,7 +563,7 @@ libsimple_aligned_reallocn(void *ptr__, size_t alignment__, size_t n__, ... /*, 
  *                     the specified size
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_align__(3), __warn_unused_result__, __returns_nonnull__)))
-static inline void *
+inline void *
 libsimple_enaligned_reallocn(int status__, void *ptr__, size_t alignment__, size_t n__, ... /*, (size_t)0 */)
 {
 	va_list ap__;
@@ -607,7 +607,7 @@ libsimple_enaligned_reallocn(int status__, void *ptr__, size_t alignment__, size
  *                     the specified size
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_align__(2), __warn_unused_result__, __returns_nonnull__)))
-static inline void *
+inline void *
 libsimple_ealigned_reallocn(void *ptr__, size_t alignment__, size_t n__, ... /*, (size_t)0 */)
 {
 	va_list ap__;
@@ -651,7 +651,7 @@ libsimple_ealigned_reallocn(void *ptr__, size_t alignment__, size_t n__, ... /*,
  * @throws  ENOSYS     Not implemented (requires non-standard libc functions)
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_align__(2), __warn_unused_result__)))
-static inline void *
+inline void *
 libsimple_aligned_reallocfn(void *ptr__, size_t alignment__, size_t n__, ... /*, (size_t)0 */)
 {
 	va_list ap__;

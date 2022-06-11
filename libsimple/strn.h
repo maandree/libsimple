@@ -366,7 +366,7 @@ char *libsimple_strrncasestr(const char *, const char *, size_t);
  *             0 otherwise
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
-static inline int
+inline int
 libsimple_strncmpnul(const char *a__, const char *b__, size_t n__)
 {
 	return (!a__ || !b__) ? !b__ - !a__ : strncmp(a__, b__, n__);
@@ -389,7 +389,7 @@ libsimple_strncmpnul(const char *a__, const char *b__, size_t n__)
  *             0 otherwise
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
-static inline int
+inline int
 libsimple_strncasecmpnul(const char *a__, const char *b__, size_t n__)
 {
 	return (!a__ || !b__) ? !b__ - !a__ : strncasecmp(a__, b__, n__);
@@ -410,7 +410,7 @@ libsimple_strncasecmpnul(const char *a__, const char *b__, size_t n__)
  * @return     1 if the strings are equal, 0 otherwise
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-static inline int
+inline int
 libsimple_strneq(const char *a__, const char *b__, size_t n__)
 {
 	return !strncmp(a__, b__, n__);
@@ -431,7 +431,7 @@ libsimple_strneq(const char *a__, const char *b__, size_t n__)
  * @return     1 if the strings are equal, 0 otherwise
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
-static inline int
+inline int
 libsimple_strneqnul(const char *a__, const char *b__, size_t n__)
 {
 	return !strncmpnul(a__, b__, n__);
@@ -452,7 +452,7 @@ libsimple_strneqnul(const char *a__, const char *b__, size_t n__)
  * @return     1 if the strings are equal, 0 otherwise
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-static inline int
+inline int
 libsimple_strncaseeq(const char *a__, const char *b__, size_t n__)
 {
 	return !strncasecmp(a__, b__, n__);
@@ -473,7 +473,7 @@ libsimple_strncaseeq(const char *a__, const char *b__, size_t n__)
  * @return     1 if the strings are equal, 0 otherwise
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
-static inline int
+inline int
 libsimple_strncaseeqnul(const char *a__, const char *b__, size_t n__)
 {
 	return !libsimple_strncasecmpnul(a__, b__, n__);
@@ -528,7 +528,7 @@ size_t libsimple_strncaseeqlen(const char *, const char *, size_t);
  *             in common in their ends
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-static inline size_t
+inline size_t
 libsimple_strrneqlen(const char *a__, const char *b__, size_t n__)
 {
 	return libsimple_memreqlen(a__, strnlen(a__, n__), b__, strnlen(b__, n__));
@@ -549,7 +549,7 @@ libsimple_strrneqlen(const char *a__, const char *b__, size_t n__)
  *             in common in their ends
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-static inline size_t
+inline size_t
 libsimple_strrncaseeqlen(const char *a__, const char *b__, size_t n__)
 {
 	return libsimple_memrcaseeqlen(a__, strnlen(a__, n__), b__, strnlen(b__, n__));
@@ -569,7 +569,7 @@ libsimple_strrncaseeqlen(const char *a__, const char *b__, size_t n__)
  * @return     `d`
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__)))
-static inline char *
+inline char *
 libsimple_strnmove(char *d__, const char *s__, size_t n__)
 {
 	size_t len__ = strnlen(s__, n__);
@@ -590,7 +590,7 @@ libsimple_strnmove(char *d__, const char *s__, size_t n__)
  * @return     `&d[strnlen(s, n)]`
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__)))
-static inline char *
+inline char *
 libsimple_stpnmove(char *d__, const char *s__, size_t n__)
 {
 	size_t len__ = strnlen(s__, n__);
@@ -611,7 +611,7 @@ libsimple_stpnmove(char *d__, const char *s__, size_t n__)
  * @return     `s`
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__)))
-static inline char *
+inline char *
 libsimple_strnset(char *s__, int c___, size_t n__)
 {
 	char c__ = (char)c___, *r__ = s__;
@@ -632,7 +632,7 @@ libsimple_strnset(char *s__, int c___, size_t n__)
  * @return     `&s[strnlen(s, n)]`
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__)))
-static inline char *
+inline char *
 libsimple_stpnset(char *s__, int c___, size_t n__)
 {
 	char c__ = (char)c___;
@@ -657,7 +657,7 @@ libsimple_stpnset(char *s__, int c___, size_t n__)
  *             found in `s`, `NULL` otherwise
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__)))
-static inline char *
+inline char *
 libsimple_strnccpy(char *restrict d__, const char *restrict s__, int c___, size_t n__)
 {
 	char c__ = (char)c___, *end__ = &d__[n__];
@@ -707,7 +707,7 @@ char *libsimple_strncmove(char *, const char *, int, size_t);
  * @return       `strnchr(s, '\0', n)`
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__, __returns_nonnull__)))
-static inline char *
+inline char *
 libsimple_strnreplace(char *s__, int old___, int new___, size_t n__)
 {
 	char old__ = (char)old___, new__ = (char)new___;
@@ -775,7 +775,7 @@ char *libsimple_stpntoupper(char *, const char *, size_t);
  * @return     `d`
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__, __returns_nonnull__)))
-static inline char *
+inline char *
 libsimple_strntolower(char *d__, const char *s__, size_t n__)
 {
 	libsimple_stpntolower(d__, s__, n__);
@@ -800,7 +800,7 @@ libsimple_strntolower(char *d__, const char *s__, size_t n__)
  * @return     `d`
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__, __returns_nonnull__)))
-static inline char *
+inline char *
 libsimple_strntoupper(char *d__, const char *s__, size_t n__)
 {
 	libsimple_stpntoupper(d__, s__, n__);
@@ -824,7 +824,7 @@ libsimple_strntoupper(char *d__, const char *s__, size_t n__)
  * @return                      1 if good, 0 on encoding error
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-static inline int
+inline int
 libsimple_strnisutf8(const char *string__, size_t n__, int allow_modified_nul__)
 {
 	return libsimple_memisutf8(string__, strnlen(string__, n__), allow_modified_nul__);

@@ -19,7 +19,7 @@
  * @throws  ENOMEM  Could not allocated enough memory
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__)))
-static inline void *
+inline void *
 libsimple_vmallocn(size_t n__, va_list ap__)
 {
 	return libsimple_vmalloczn(0, n__, ap__);
@@ -47,7 +47,7 @@ libsimple_vmallocn(size_t n__, va_list ap__)
  * @throws  ENOMEM  Could not allocated enough memory
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__)))
-static inline void *
+inline void *
 libsimple_mallocn(size_t n__, ... /*, (size_t)0 */)
 {
 	va_list ap__;
@@ -104,7 +104,7 @@ void *libsimple_enmalloc(int, size_t);
  *                  and with the alignment `alignof(max_align_t)`
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
-static inline void *
+inline void *
 libsimple_envmallocn(int status__, size_t n__, va_list ap__)
 {
 	return libsimple_envmalloczn(status__, 0, n__, ap__);
@@ -134,7 +134,7 @@ libsimple_envmallocn(int status__, size_t n__, va_list ap__)
  *                  and with the alignment `alignof(max_align_t)`
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
-static inline void *
+inline void *
 libsimple_enmallocn(int status__, size_t n__, ... /*, (size_t)0 */)
 {
 	va_list ap__;
@@ -161,7 +161,7 @@ libsimple_enmallocn(int status__, size_t n__, ... /*, (size_t)0 */)
  *             and with the alignment `alignof(max_align_t)`
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_size__(1), __warn_unused_result__, __returns_nonnull__)))
-static inline void *
+inline void *
 libsimple_emalloc(size_t n__)
 {
 	return libsimple_enmalloc(libsimple_default_failure_exit, n__);
@@ -190,7 +190,7 @@ libsimple_emalloc(size_t n__)
  *              and with the alignment `alignof(max_align_t)`
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
-static inline void *
+inline void *
 libsimple_evmallocn(size_t n__, va_list ap__)
 {
 	return libsimple_envmallocn(libsimple_default_failure_exit, n__, ap__);
@@ -219,7 +219,7 @@ libsimple_evmallocn(size_t n__, va_list ap__)
  *               and with the alignment `alignof(max_align_t)`
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
-static inline void *
+inline void *
 libsimple_emallocn(size_t n__, ... /*, (size_t)0 */)
 {
 	va_list ap__;

@@ -18,7 +18,7 @@
  * @throws  ENOMEM  Could not allocated enough memory
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__)))
-static inline void *
+inline void *
 libsimple_vvallocn(size_t n__, va_list ap__)
 {
 	return libsimple_vvalloczn(0, n__, ap__);
@@ -39,7 +39,7 @@ libsimple_vvallocn(size_t n__, va_list ap__)
  * @throws  ENOMEM  Could not allocated enough memory
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_size__(1), __warn_unused_result__)))
-static inline void *
+inline void *
 libsimple_valloc(size_t n__)
 {
 	return libsimple_vallocz(0, n__);
@@ -66,7 +66,7 @@ libsimple_valloc(size_t n__)
  * @throws  ENOMEM  Could not allocated enough memory
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__)))
-static inline void *
+inline void *
 libsimple_vallocn(size_t n__, ... /*, (size_t)0 */)
 {
 	va_list ap__;
@@ -94,7 +94,7 @@ libsimple_vallocn(size_t n__, ... /*, (size_t)0 */)
  *                  and with page size alignment
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_size__(2), __warn_unused_result__, __returns_nonnull__)))
-static inline void *
+inline void *
 libsimple_envalloc(int status__, size_t n__)
 {
 	return libsimple_envallocz(status__, 0, n__);
@@ -124,7 +124,7 @@ libsimple_envalloc(int status__, size_t n__)
  *                  and with page size alignment
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
-static inline void *
+inline void *
 libsimple_envvallocn(int status__, size_t n__, va_list ap__)
 {
 	return libsimple_envvalloczn(status__, 0, n__, ap__);
@@ -154,7 +154,7 @@ libsimple_envvallocn(int status__, size_t n__, va_list ap__)
  *                  and with page size alignment
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
-static inline void *
+inline void *
 libsimple_envallocn(int status__, size_t n__, ... /*, (size_t)0 */)
 {
 	va_list ap__;
@@ -181,7 +181,7 @@ libsimple_envallocn(int status__, size_t n__, ... /*, (size_t)0 */)
  *             and with page size alignment
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_size__(1), __warn_unused_result__, __returns_nonnull__)))
-static inline void *
+inline void *
 libsimple_evalloc(size_t n__)
 {
 	return libsimple_envalloc(libsimple_default_failure_exit, n__);
@@ -210,7 +210,7 @@ libsimple_evalloc(size_t n__)
  *              and with page size alignment
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
-static inline void *
+inline void *
 libsimple_evvallocn(size_t n__, va_list ap__)
 {
 	return libsimple_envvallocn(libsimple_default_failure_exit, n__, ap__);
@@ -239,7 +239,7 @@ libsimple_evvallocn(size_t n__, va_list ap__)
  *               and with page size alignment
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
-static inline void *
+inline void *
 libsimple_evallocn(size_t n__, ... /*, (size_t)0 */)
 {
 	va_list ap__;

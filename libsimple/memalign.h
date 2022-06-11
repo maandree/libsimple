@@ -20,7 +20,7 @@
  * @throws  ENOMEM     Could not allocated enough memory
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(1), __warn_unused_result__)))
-static inline void *
+inline void *
 libsimple_vmemalignn(size_t alignment__, size_t n__, va_list ap__)
 {
 	return libsimple_vmemalignzn(0, alignment__, n__, ap__);
@@ -42,7 +42,7 @@ libsimple_vmemalignn(size_t alignment__, size_t n__, va_list ap__)
  * @throws  ENOMEM     Could not allocated enough memory
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(1), __alloc_size__(2), __warn_unused_result__)))
-static inline void *
+inline void *
 libsimple_memalign(size_t alignment__, size_t n__)
 {
 	return libsimple_memalignz(0, alignment__, n__);
@@ -71,7 +71,7 @@ libsimple_memalign(size_t alignment__, size_t n__)
  * @throws  ENOMEM     Could not allocated enough memory
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(1), __warn_unused_result__)))
-static inline void *
+inline void *
 libsimple_memalignn(size_t alignment__, size_t n__, ... /*, (size_t)0 */)
 {
 	va_list ap__;
@@ -100,7 +100,7 @@ libsimple_memalignn(size_t alignment__, size_t n__, ... /*, (size_t)0 */)
  *                     and alignment
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(2), __alloc_size__(3), __warn_unused_result__, __returns_nonnull__)))
-static inline void *
+inline void *
 libsimple_enmemalign(int status__, size_t alignment__, size_t n__)
 {
 	return libsimple_enmemalignz(status__, 0, alignment__, n__);
@@ -132,7 +132,7 @@ libsimple_enmemalign(int status__, size_t alignment__, size_t n__)
  *                     and alignment
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(2), __warn_unused_result__, __returns_nonnull__)))
-static inline void *
+inline void *
 libsimple_envmemalignn(int status__, size_t alignment__, size_t n__, va_list ap__)
 {
 	return libsimple_envmemalignzn(status__, 0, alignment__, n__, ap__);
@@ -164,7 +164,7 @@ libsimple_envmemalignn(int status__, size_t alignment__, size_t n__, va_list ap_
  *                     and alignment
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(2), __warn_unused_result__, __returns_nonnull__)))
-static inline void *
+inline void *
 libsimple_enmemalignn(int status__, size_t alignment__, size_t n__, ... /*, (size_t)0 */)
 {
 	va_list ap__;
@@ -192,7 +192,7 @@ libsimple_enmemalignn(int status__, size_t alignment__, size_t n__, ... /*, (siz
  *                     and alignment
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(1), __alloc_size__(2), __warn_unused_result__, __returns_nonnull__)))
-static inline void *
+inline void *
 libsimple_ememalign(size_t alignment__, size_t n__)
 {
 	return libsimple_enmemalign(libsimple_default_failure_exit, alignment__, n__);
@@ -224,7 +224,7 @@ libsimple_ememalign(size_t alignment__, size_t n__)
  *                     and alignment
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(1), __warn_unused_result__, __returns_nonnull__)))
-static inline void *
+inline void *
 libsimple_evmemalignn(size_t alignment__, size_t n__, va_list ap__)
 {
 	return libsimple_envmemalignn(libsimple_default_failure_exit, alignment__, n__, ap__);
@@ -255,7 +255,7 @@ libsimple_evmemalignn(size_t alignment__, size_t n__, va_list ap__)
  *                     and alignment
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(1), __warn_unused_result__, __returns_nonnull__)))
-static inline void *
+inline void *
 libsimple_ememalignn(size_t alignment__, size_t n__, ... /*, (size_t)0 */)
 {
 	va_list ap__;

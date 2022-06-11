@@ -49,7 +49,16 @@ HDR =\
 	libsimple.h
 
 OBJ =\
+	aligned_allocn.o\
+	aligned_allocz.o\
+	aligned_alloczn.o\
 	aligned_memdup.o\
+	aligned_realloc.o\
+	aligned_reallocarray.o\
+	aligned_reallocarrayf.o\
+	aligned_reallocf.o\
+	aligned_reallocfn.o\
+	aligned_reallocn.o\
 	aligned_strdup.o\
 	aligned_strndup.o\
 	aligned_wcsdup.o\
@@ -57,6 +66,7 @@ OBJ =\
 	aligned_wmemdup.o\
 	allocn.o\
 	asprintf.o\
+	callocn.o\
 	close.o\
 	cmptimespec.o\
 	cmptimeval.o\
@@ -64,29 +74,58 @@ OBJ =\
 	difftimeval.o\
 	doubletotimespec.o\
 	doubletotimeval.o\
+	ealigned_alloc.o\
+	ealigned_allocn.o\
+	ealigned_allocz.o\
+	ealigned_alloczn.o\
 	ealigned_memdup.o\
+	ealigned_realloc.o\
+	ealigned_reallocarray.o\
+	ealigned_reallocn.o\
 	ealigned_strdup.o\
 	ealigned_strndup.o\
 	ealigned_wcsdup.o\
 	ealigned_wcsndup.o\
 	ealigned_wmemdup.o\
+	ecalloc.o\
+	ecallocn.o\
 	egmtime.o\
 	elocaltime.o\
+	emalloc.o\
+	emallocn.o\
+	emallocz.o\
+	emalloczn.o\
+	ememalign.o\
+	ememalignn.o\
+	ememalignz.o\
+	ememalignzn.o\
 	ememalloc.o\
 	ememdup.o\
+	enaligned_alloc.o\
+	enaligned_allocn.o\
 	enaligned_allocz.o\
+	enaligned_alloczn.o\
 	enaligned_memdup.o\
 	enaligned_realloc.o\
 	enaligned_reallocarray.o\
+	enaligned_reallocn.o\
 	enaligned_strdup.o\
 	enaligned_strndup.o\
 	enaligned_wcsdup.o\
 	enaligned_wcsndup.o\
 	enaligned_wmemdup.o\
 	encalloc.o\
+	encallocn.o\
 	engmtime.o\
 	enlocaltime.o\
 	enmalloc.o\
+	enmallocn.o\
+	enmallocz.o\
+	enmalloczn.o\
+	enmemalign.o\
+	enmemalignn.o\
+	enmemalignz.o\
+	enmemalignzn.o\
 	enmemalloc.o\
 	enmemdup.o\
 	enposix_memalign.o\
@@ -104,11 +143,18 @@ OBJ =\
 	enreallocn.o\
 	enstrdup.o\
 	enstrndup.o\
+	envaligned_allocn.o\
 	envaligned_alloczn.o\
 	envaligned_reallocn.o\
+	envalloc.o\
+	envallocn.o\
 	envallocz.o\
 	envalloczn.o\
+	envcallocn.o\
+	envmallocn.o\
 	envmalloczn.o\
+	envmemalignn.o\
+	envmemalignzn.o\
 	envmemalloc.o\
 	envposix_memalignn.o\
 	envposix_memalignzn.o\
@@ -116,6 +162,7 @@ OBJ =\
 	envpvallocn.o\
 	envpvalloczn.o\
 	envreallocn.o\
+	envvallocn.o\
 	envvalloczn.o\
 	enwcsdup.o\
 	enwcsndup.o\
@@ -135,8 +182,18 @@ OBJ =\
 	ereallocn.o\
 	estrdup.o\
 	estrndup.o\
+	evaligned_allocn.o\
+	evaligned_alloczn.o\
+	evaligned_reallocn.o\
+	evalloc.o\
+	evallocn.o\
 	evallocz.o\
 	evalloczn.o\
+	evcallocn.o\
+	evmallocn.o\
+	evmalloczn.o\
+	evmemalignn.o\
+	evmemalignzn.o\
 	evmemalloc.o\
 	evposix_memalignn.o\
 	evposix_memalignzn.o\
@@ -144,6 +201,7 @@ OBJ =\
 	evpvallocn.o\
 	evpvalloczn.o\
 	evreallocn.o\
+	evvallocn.o\
 	evvalloczn.o\
 	ewcsdup.o\
 	ewcsndup.o\
@@ -152,6 +210,13 @@ OBJ =\
 	getenv_ne.o\
 	gmtime.o\
 	localtime.o\
+	mallocn.o\
+	mallocz.o\
+	malloczn.o\
+	memalign.o\
+	memalignn.o\
+	memalignz.o\
+	memalignzn.o\
 	memalloc.o\
 	memcasechr.o\
 	memcasechr_inv.o\
@@ -233,6 +298,8 @@ OBJ =\
 	reallocf.o\
 	reallocfn.o\
 	reallocn.o\
+	stpnmove.o\
+	stpnset.o\
 	stpntolower.o\
 	stpntoupper.o\
 	stptolower.o\
@@ -254,29 +321,44 @@ OBJ =\
 	strncasechr_inv.o\
 	strncasechrnul.o\
 	strncasechrnul_inv.o\
+	strncasecmpnul.o\
 	strncaseends.o\
+	strncaseeq.o\
 	strncaseeqlen.o\
+	strncaseeqnul.o\
 	strncasestarts.o\
 	strncasestr.o\
+	strnccpy.o\
 	strnchr.o\
 	strnchr_inv.o\
 	strnchrnul.o\
 	strnchrnul_inv.o\
 	strncmove.o\
+	strncmpnul.o\
 	strnend.o\
 	strnends.o\
+	strneq.o\
 	strneqlen.o\
+	strneqnul.o\
+	strnisutf8.o\
+	strnmove.o\
+	strnreplace.o\
+	strnset.o\
 	strnstarts.o\
 	strnstr.o\
+	strntolower.o\
+	strntoupper.o\
 	strrcasechr.o\
 	strrcasechr_inv.o\
 	strrcasestr.o\
 	strrchr_inv.o\
 	strrncasechr.o\
 	strrncasechr_inv.o\
+	strrncaseeqlen.o\
 	strrncasestr.o\
 	strrnchr.o\
 	strrnchr_inv.o\
+	strrneqlen.o\
 	strrnstr.o\
 	strrstr.o\
 	strstarts.o\
@@ -307,17 +389,26 @@ OBJ =\
 	timevaltodouble.o\
 	timevaltostr.o\
 	unlist.o\
+	valigned_allocn.o\
+	valigned_reallocfn.o\
+	valloc.o\
+	vallocn.o\
 	vallocz.o\
 	valloczn.o\
 	vasprintf.o\
+	vcallocn.o\
 	venprintf.o\
 	veprintf.o\
+	vmallocn.o\
+	vmemalignn.o\
+	vmemalignzn.o\
 	vmemalloc.o\
 	vposix_memalignn.o\
 	vputenvf.o\
 	vpvallocn.o\
 	vpvalloczn.o\
 	vreallocfn.o\
+	vvallocn.o\
 	vvalloczn.o\
 	vweprintf.o\
 	wcsndup.o\
