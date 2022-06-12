@@ -12,7 +12,7 @@ extern inline void *libsimple_vcallocn(size_t, va_list);
 int
 main(void)
 {
-	return 0;
+	return 0; /* Tested via libsimple_callocn */
 }
 
 #endif

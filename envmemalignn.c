@@ -12,7 +12,7 @@ extern inline void *libsimple_envmemalignn(int, size_t, size_t, va_list);
 int
 main(void)
 {
-	return 0;
+	return 0; /* Tested via libsimple_enmemalignn */
 }
 
 #endif

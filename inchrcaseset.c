@@ -3,7 +3,7 @@
 #ifndef TEST
 
 
-extern inline int libsimple_inchrcaseset(int, const char *);
+extern inline int libsimple_inchrcaseset(int, const char *); /* TODO test */
 
 
 #else

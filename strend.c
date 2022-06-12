@@ -12,6 +12,7 @@ extern inline char *libsimple_strend(const char *);
 int
 main(void)
 {
+	assert(strcmpnul(libsimple_strend("abc\0xyz"), "xyz"));
 	return 0;
 }
 

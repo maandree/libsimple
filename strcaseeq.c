@@ -12,6 +12,16 @@ extern inline int libsimple_strcaseeq(const char *, const char *);
 int
 main(void)
 {
+	assert(libsimple_strcaseeq("abc", "abc") == 1);
+	assert(libsimple_strcaseeq("abc", "ab") == 0);
+	assert(libsimple_strcaseeq("ab", "abc") == 0);
+	assert(libsimple_strcaseeq("ab", "xy") == 0);
+	assert(libsimple_strcaseeq("xy", "ab") == 0);
+	assert(libsimple_strcaseeq("", "1") == 0);
+	assert(libsimple_strcaseeq("1", "") == 0);
+	assert(libsimple_strcaseeq("", "") == 1);
+	assert(libsimple_strcaseeq("abc", "ABC") == 1);
+	assert(libsimple_strcaseeq("ABC", "abc") == 1);
 	return 0;
 }
 

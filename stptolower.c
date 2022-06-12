@@ -45,15 +45,6 @@ main(void)
 	stpcpy(buf, "ABCDEabcde12345");
 	assert(!strcmpnul(libsimple_stptolower(&buf[0], &buf[0]), ""));
 	assert(!strcmp(buf, "abcdeabcde12345"));
-	stpcpy(buf, "ABCDEabcde12345");
-	assert(!strcmpnul(libsimple_strtolower(&buf[3], &buf[0]), "abcdeabcde12345"));
-	assert(!strcmp(buf, "ABCabcdeabcde12345"));
-	stpcpy(buf, "ABCDEabcde12345");
-	assert(!strcmpnul(libsimple_strtolower(&buf[0], &buf[3]), "deabcde12345"));
-	assert(!strcmp(buf, "deabcde12345"));
-	stpcpy(buf, "ABCDEabcde12345");
-	assert(!strcmpnul(libsimple_strtolower(&buf[0], &buf[0]), "abcdeabcde12345"));
-	assert(!strcmp(buf, "abcdeabcde12345"));
 
 	return 0;
 }

@@ -3,7 +3,7 @@
 #ifndef TEST
 
 
-extern inline void *libsimple_valigned_reallocfn(void *, size_t, size_t, va_list); /* TODO test (aligned_reallocfn) */
+extern inline void *libsimple_valigned_reallocfn(void *, size_t, size_t, va_list);
 
 
 #else
@@ -12,7 +12,7 @@ extern inline void *libsimple_valigned_reallocfn(void *, size_t, size_t, va_list
 int
 main(void)
 {
-	return 0;
+	return 0; /* Tested via libsimple_aligned_reallocfn */
 }
 
 #endif

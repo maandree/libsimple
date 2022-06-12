@@ -91,10 +91,6 @@ main(void)
 		assert(libsimple_memisutf8(STRING, sizeof(STRING) - 1, i) == (GOOD));\
 		assert(libsimple_memisutf8(STRING "\xFF", sizeof(STRING) - 1, i) == (GOOD));\
 		assert(libsimple_memisutf8(STRING "\x00", sizeof(STRING) - 1, i) == (GOOD));\
-		assert(libsimple_strisutf8(STRING, i) == (GOOD));\
-		assert(libsimple_strnisutf8(STRING, sizeof(STRING) - 1, i) == (GOOD));\
-		assert(libsimple_strnisutf8(STRING "\xFF", sizeof(STRING) - 1, i) == (GOOD));\
-		assert(libsimple_strnisutf8(STRING "\x00", sizeof(STRING) - 1, i) == (GOOD));\
 	} while (0)
 
 	int i;

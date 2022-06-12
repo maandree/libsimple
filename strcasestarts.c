@@ -3,7 +3,7 @@
 #ifndef TEST
 
 
-extern inline int libsimple_strcasestarts(const char *, const char *);
+extern inline int libsimple_strcasestarts(const char *, const char *); /* TODO test */
 
 
 #else
