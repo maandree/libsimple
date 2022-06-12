@@ -330,6 +330,9 @@ vfprintf(FILE *restrict stream, const char *restrict format, va_list ap)
 }
 
 
+#if defined(__GNUC__)
+__attribute__((__format__(__printf__, 2, 0)))
+#endif
 int
 test_vfprintf(FILE *restrict stream, const char *restrict format, va_list ap)
 {

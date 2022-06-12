@@ -116,6 +116,15 @@
 	LIBSIMPLE_PRE_C11_ONLY__(LIBSIMPLE_GCC_ONLY__(__assume_aligned__(__alignof(TYPE))))
 
 
+#if __STDC_VERSION__ >= 201112L
+# define LIBSIMPLE_NORETURN _Noreturn /* TODO doc, man */
+#elif defined(__GNUC__) || defined(__clang__)
+# define LIBSIMPLE_NORETURN __attribute__((noreturn))
+#else
+# define LIBSIMPLE_NORETURN
+#endif
+
+
 #include "libsimple/overflow.h"
 #include "libsimple/printf.h"
 #include "libsimple/definitions.h"
@@ -266,6 +275,7 @@ libsimple_unlist(void *list__, size_t i__, size_t *np__, size_t width__)
 #ifndef SIMDLOOP
 # define SIMDLOOP LIBSIMPLE_SIMDLOOP
 #endif
+
 
 
 

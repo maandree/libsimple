@@ -74,7 +74,7 @@ int libsimple_asprintf(char **, const char *, ...);
  * @throws  ENOMEM  Could not allocate enough memory
  * @throws          Any error specified for `fprintf`
  */
-LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1, 2))))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1, 2), __format__(__printf__, 2, 0))))
 int libsimple_vasprintf(char **, const char *, va_list);
 #ifndef vasprintf
 # define vasprintf libsimple_vasprintf
@@ -169,7 +169,7 @@ int libsimple_vasprintf(char **, const char *, va_list);
  * @param  fmt  The format string
  * @param  ap   The format argument
  */
-LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1))))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __format__(__printf__, 1, 0))))
 void libsimple_vweprintf(const char *, va_list);
 #ifndef vweprintf
 # define vweprintf libsimple_vweprintf
@@ -227,8 +227,8 @@ libsimple_weprintf(const char *fmt__, ...)
  * @param  fmt     The format string
  * @param  ap      The format argument
  */
-LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __noreturn__)))
-inline void
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __format__(__printf__, 2, 0))))
+inline LIBSIMPLE_NORETURN void
 libsimple_venprintf(int status__, const char *fmt__, va_list ap__)
 {
 	libsimple_vweprintf(fmt__, ap__);
@@ -259,8 +259,8 @@ libsimple_venprintf(int status__, const char *fmt__, va_list ap__)
  * @param  fmt     The format string
  * @param  ...     The format argument
  */
-LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __format__(__printf__, 2, 3), __noreturn__)))
-inline void
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __format__(__printf__, 2, 3))))
+inline LIBSIMPLE_NORETURN void
 libsimple_enprintf(int status__, const char *fmt__, ...)
 {
 	va_list ap__;
@@ -293,8 +293,8 @@ libsimple_enprintf(int status__, const char *fmt__, ...)
  * @param  fmt  The format string
  * @param  ap   The format argument
  */
-LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __noreturn__)))
-inline void
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __format__(__printf__, 1, 0))))
+inline LIBSIMPLE_NORETURN void
 libsimple_veprintf(const char *fmt__, va_list ap__)
 {
 	libsimple_vweprintf(fmt__, ap__);
@@ -325,8 +325,8 @@ libsimple_veprintf(const char *fmt__, va_list ap__)
  * @param  fmt  The format string
  * @param  ...  The format argument
  */
-LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __format__(__printf__, 1, 2), __noreturn__)))
-inline void
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __format__(__printf__, 1, 2))))
+inline LIBSIMPLE_NORETURN void
 libsimple_eprintf(const char *fmt__, ...)
 {
 	va_list ap__;

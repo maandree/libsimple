@@ -50,7 +50,7 @@ libsimple_getenv_e(const char *name__)
  * @param   ap   Format arguments, see vsprintf(3)
  * @return       0 on success, -1 on failure
  */
-LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__, __format__(__printf__, 1, 0))))
 int libsimple_vputenvf(const char *, va_list);
 #ifndef vputenvf
 # define vputenvf libsimple_vputenvf
@@ -101,7 +101,7 @@ libsimple_putenvf(const char *fmt__, ...)
  * @param  fmt     Format string, see vsprintf(3)
  * @param  ap      Format arguments, see vsprintf(3)
  */
-LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__, __format__(__printf__, 2, 0))))
 void libsimple_envputenvf(int, const char *, va_list);
 #ifndef envputenvf
 # define envputenvf libsimple_envputenvf
@@ -155,7 +155,7 @@ libsimple_enputenvf(int status__, const char *fmt__, ...)
  * @param  fmt  Format string, see vsprintf(3)
  * @param  ap   Format arguments, see vsprintf(3)
  */
-LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__, __format__(__printf__, 1, 0))))
 inline void
 libsimple_evputenvf(const char *fmt__, va_list ap__)
 {

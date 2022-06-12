@@ -163,6 +163,7 @@ inval:
 	return -1;
 }
 
+LIBSIMPLE_GCC_ONLY__(__attribute__((__const__)))
 static size_t
 gcd(size_t u, size_t v)
 {
