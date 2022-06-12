@@ -164,7 +164,7 @@ char *libsimple_strrcasechr_inv(const char *, int);
  * @return     `s` with an offset such `!*r`, where `r` is the returned pointer
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-static inline char *
+inline char *
 libsimple_strend(const char *s__)
 {
 	return strchr(s__, '\0');
@@ -196,7 +196,7 @@ int libsimple_strstarts(const char *, const char *);
  * @return     1 if `s` starts with `t`, 0 otherwise
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-static inline int
+inline int
 libsimple_strcasestarts(const char *s__, const char *t__)
 {
 	return !strncasecmp(s__, t__, strlen(t__));
@@ -293,7 +293,7 @@ char *libsimple_strrcasestr(const char *, const char *);
  *             0 otherwise
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
-static inline int
+inline int
 libsimple_strcmpnul(const char *a__, const char *b__)
 {
 	return (!a__ || !b__) ? !b__ - !a__ : strcmp(a__, b__);
@@ -314,7 +314,7 @@ libsimple_strcmpnul(const char *a__, const char *b__)
  *             0 otherwise
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
-static inline int
+inline int
 libsimple_strcasecmpnul(const char *a__, const char *b__)
 {
 	return (!a__ || !b__) ? !b__ - !a__ : strcasecmp(a__, b__);
@@ -333,7 +333,7 @@ libsimple_strcasecmpnul(const char *a__, const char *b__)
  * @return     1 if the strings are equal, 0 otherwise
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-static inline int
+inline int
 libsimple_streq(const char *a__, const char *b__)
 {
 	return !strcmp(a__, b__);
@@ -352,7 +352,7 @@ libsimple_streq(const char *a__, const char *b__)
  * @return     1 if the strings are equal, 0 otherwise
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
-static inline int
+inline int
 libsimple_streqnul(const char *a__, const char *b__)
 {
 	return !libsimple_strcmpnul(a__, b__);
@@ -371,7 +371,7 @@ libsimple_streqnul(const char *a__, const char *b__)
  * @return     1 if the strings are equal, 0 otherwise
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-static inline int
+inline int
 libsimple_strcaseeq(const char *a__, const char *b__)
 {
 	return !strcasecmp(a__, b__);
@@ -390,7 +390,7 @@ libsimple_strcaseeq(const char *a__, const char *b__)
  * @return     1 if the strings are equal, 0 otherwise
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __warn_unused_result__)))
-static inline int
+inline int
 libsimple_strcaseeqnul(const char *a__, const char *b__)
 {
 	return !libsimple_strcasecmpnul(a__, b__);
@@ -439,7 +439,7 @@ size_t libsimple_strcaseeqlen(const char *, const char *);
  *             in common in their ends
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-static inline size_t
+inline size_t
 libsimple_strreqlen(const char *a__, const char *b__)
 {
 	return libsimple_memreqlen(a__, strlen(a__), b__, strlen(b__));
@@ -458,7 +458,7 @@ libsimple_strreqlen(const char *a__, const char *b__)
  *             in common in their ends
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-static inline size_t
+inline size_t
 libsimple_strrcaseeqlen(const char *a__, const char *b__)
 {
 	return libsimple_memrcaseeqlen(a__, strlen(a__), b__, strlen(b__));
@@ -477,7 +477,7 @@ libsimple_strrcaseeqlen(const char *a__, const char *b__)
  *             0 otherwise
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-static inline int
+inline int
 libsimple_inchrset(int c__, const char *s__)
 {
 	return c__ && strchr(s__, c__);
@@ -496,7 +496,7 @@ libsimple_inchrset(int c__, const char *s__)
  *             0 otherwise
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-static inline int
+inline int
 libsimple_inchrcaseset(int c__, const char *s__)
 {
 	return c__ && strcasechr(s__, c__);
@@ -515,7 +515,7 @@ libsimple_inchrcaseset(int c__, const char *s__)
  * @return     `d`
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__)))
-static inline char *
+inline char *
 libsimple_strmove(char *d__, const char *s__)
 {
 	return memmove(d__, s__, strlen(s__) + 1);
@@ -534,7 +534,7 @@ libsimple_strmove(char *d__, const char *s__)
  * @return     `&d[strlen(s)]` (this byte will be a NUL byte)
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__)))
-static inline char *
+inline char *
 libsimple_stpmove(char *d__, const char *s__)
 {
 	size_t n__ = strlen(s__);
@@ -554,7 +554,7 @@ libsimple_stpmove(char *d__, const char *s__)
  * @return     `s`
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__)))
-static inline char *
+inline char *
 libsimple_strset(char *s__, int c___)
 {
 	char c__ = (char)c___, *r__ = s__;
@@ -574,7 +574,7 @@ libsimple_strset(char *s__, int c___)
  * @return     `&s[strlen(s)]`
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__)))
-static inline char *
+inline char *
 libsimple_stpset(char *s__, int c___)
 {
 	char c__ = (char)c___;
@@ -597,7 +597,7 @@ libsimple_stpset(char *s__, int c___)
  *             found in `s`, `NULL` otherwise
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__)))
-static inline char *
+inline char *
 libsimple_strccpy(char *restrict d__, const char *restrict s__, int c___)
 {
 	char c__ = (char)c___;
@@ -640,7 +640,7 @@ char *libsimple_strcmove(char *, const char *, int);
  * @return       `strchr(s, '\0')`
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__, __returns_nonnull__)))
-static inline char *
+inline char *
 libsimple_strreplace(char *s__, int old___, int new___)
 {
 	char old__ = (char)old___, new__ = (char)new___;
@@ -705,7 +705,7 @@ char *libsimple_stptoupper(char *, const char *);
  * @return     `d`
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__, __returns_nonnull__)))
-static inline char *
+inline char *
 libsimple_strtolower(char *d__, const char *s__)
 {
 	libsimple_stptolower(d__, s__);
@@ -729,7 +729,7 @@ libsimple_strtolower(char *d__, const char *s__)
  * @return     `d`
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__, __returns_nonnull__)))
-static inline char *
+inline char *
 libsimple_strtoupper(char *d__, const char *s__)
 {
 	libsimple_stptoupper(d__, s__);
@@ -749,7 +749,7 @@ libsimple_strtoupper(char *d__, const char *s__)
  * @return                      1 if good, 0 on encoding error
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
-static inline int
+inline int
 libsimple_strisutf8(const char *string__, int allow_modified_nul__)
 {
 	return libsimple_memisutf8(string__, strlen(string__), allow_modified_nul__);

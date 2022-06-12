@@ -3,6 +3,14 @@
 #define LIBSIMPLE_H
 
 
+#if defined(__clang__)
+# pragma clang diagnostic push
+# pragma clang diagnostic ignored "-Wdocumentation"
+# pragma clang diagnostic ignored "-Wdocumentation-unknown-command"
+# pragma clang diagnostic ignored "-Wreserved-identifier"
+# pragma clang diagnostic ignored "-Wdisabled-macro-expansion"
+#endif
+
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <netinet/tcp.h>
@@ -50,11 +58,24 @@
 
 
 #if defined(__GNUC__) && !defined(__clang__)
+# pragma GCC diagnostic push
+# pragma GCC diagnostic ignored "-Winline"
+#endif
+
+
+
+#if defined(__GNUC__) && !defined(__clang__)
 # define LIBSIMPLE_GCC_ONLY__(x) x
 # define LIBSIMPLE_NON_GCC_ONLY__(x)
 #else
 # define LIBSIMPLE_GCC_ONLY__(x)
 # define LIBSIMPLE_NON_GCC_ONLY__(x) x
+#endif
+
+#if defined(__GNUC__)
+# define LIBSIMPLE_EXTENSION__ __extension__
+#else
+# define LIBSIMPLE_EXTENSION__
 #endif
 
 #if __STDC_VERSION__ >= 199409L
@@ -218,13 +239,11 @@ libsimple_unlist(void *list__, size_t i__, size_t *np__, size_t width__)
 
 
 #define LIBSIMPLE_ASSUME_ALIGNED__(PTR, ALIGNMENT, ...)\
-	LIBSIMPLE_GCC_ONLY__(__builtin_assume_aligned(PTR, ALIGNMENT))
-#if defined(__GNUC__) && !defined(__clang__)
-# define LIBSIMPLE_ASSUME_ALIGNED(PTR, ...) /* returns PTR */ /* TODO test, doc, man */\
-	LIBSIMPLE_GCC_ONLY__(__builtin_assume_aligned(PTR, ##__VA_ARGS__,\
-	                                             LIBSIMPLE_C11_ONLY__(_Alignof(PTR))\
-	                                             _LIBSIMPLE_PREC11_ONLY(__alignof(PTR))))
-#endif
+	LIBSIMPLE_GCC_ONLY__(__builtin_assume_aligned(PTR, ALIGNMENT))\
+	LIBSIMPLE_NON_GCC_ONLY__(PTR)
+#define LIBSIMPLE_ASSUME_ALIGNED(PTR, ...) /* returns PTR */ /* TODO test, doc, man */\
+	LIBSIMPLE_ASSUME_ALIGNED__(PTR, ##__VA_ARGS__, LIBSIMPLE_C11_ONLY__(_Alignof(*PTR)) /* no , */\
+	                           LIBSIMPLE_PRE_C11_ONLY__(__alignof(*PTR)))
 #ifndef ASSUME_ALIGNED
 # define ASSUME_ALIGNED(...) LIBSIMPLE_ASSUME_ALIGNED(__VA_ARGS__)
 #endif
@@ -248,6 +267,15 @@ libsimple_unlist(void *list__, size_t i__, size_t *np__, size_t width__)
 # define SIMDLOOP LIBSIMPLE_SIMDLOOP
 #endif
 
+
+
+#if defined(__GNUC__) && !defined(__clang__)
+# pragma GCC diagnostic pop
+#endif
+
+#if defined(__clang__)
+# pragma clang diagnostic pop
+#endif
 
 
 #endif

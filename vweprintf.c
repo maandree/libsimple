@@ -1,6 +1,10 @@
 /* See LICENSE file for copyright and license details. */
-#include "libsimple.h"
+#include "common.h"
 #ifndef TEST
+
+#if defined(__clang__)
+# pragma clang diagnostic ignored "-Wformat-nonliteral"
+#endif
 
 
 extern char *argv0;
@@ -32,8 +36,15 @@ libsimple_vweprintf(const char *fmt, va_list ap)
 	va_copy(ap2, ap);
 	r = vsnprintf(NULL, 0, fmt, ap1);
 	if (0 <= r && r < 8096) {
+#if defined(__clang__)
+# pragma clang diagnostic push
+# pragma clang diagnostic ignored "-Walloca"
+#endif
 		message = alloca((size_t)r + 1);
 		vsprintf(message, fmt, ap2);
+#if defined(__clang__)
+# pragma clang diagnostic pop
+#endif
 	}
 	va_end(ap2);
 	va_end(ap1);

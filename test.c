@@ -1,5 +1,5 @@
 /* See LICENSE file for copyright and license details. */
-#include "libsimple.h"
+#include "common.h"
 #include "test.h"
 #include <sys/syscall.h>
 
@@ -337,7 +337,7 @@ test_vfprintf(FILE *restrict stream, const char *restrict format, va_list ap)
 	va_list ap2;
 	int r;
 	char *buf;
-	size_t n;
+	size_t i, n;
 
 	va_copy(ap2, ap);
 	r = vsnprintf(NULL, 0, format, ap2);
@@ -353,7 +353,8 @@ test_vfprintf(FILE *restrict stream, const char *restrict format, va_list ap)
 		} else {
 			assert(stderr_ok);
 			assert(stderr_n + n <= sizeof(stderr_buf));
-			memcpy((char *)(void *)(&stderr_buf[stderr_n]), buf, n);
+			for (i = 0; i < n; i++)
+				stderr_buf[stderr_n + i] = buf[i];
 			stderr_n += n;
 		}
 		free(buf);

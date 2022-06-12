@@ -10,7 +10,7 @@
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define libsimple_strndupa(s, n)\
-	LIBSIMPLE_GCC_ONLY__(__extension__)\
+	LIBSIMPLE_EXTENSION__\
 	({\
 		const char *s__ = (s);\
 		size_t n__ = strnlen(s__, n);\

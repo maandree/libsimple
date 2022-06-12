@@ -46,7 +46,8 @@ SUBHDR =\
 
 HDR =\
 	$(SUBHDR)\
-	libsimple.h
+	libsimple.h\
+	common.h
 
 OBJ =\
 	aligned_allocn.o\
@@ -209,6 +210,8 @@ OBJ =\
 	getenv_e.o\
 	getenv_ne.o\
 	gmtime.o\
+	inchrcaseset.o\
+	inchrset.o\
 	localtime.o\
 	mallocn.o\
 	mallocz.o\
@@ -298,25 +301,38 @@ OBJ =\
 	reallocf.o\
 	reallocfn.o\
 	reallocn.o\
+	stpmove.o\
 	stpnmove.o\
 	stpnset.o\
 	stpntolower.o\
 	stpntoupper.o\
+	stpset.o\
 	stptolower.o\
 	stptoupper.o\
 	strcasechr.o\
 	strcasechr_inv.o\
 	strcasechrnul.o\
 	strcasechrnul_inv.o\
+	strcasecmpnul.o\
 	strcaseends.o\
+	strcaseeq.o\
 	strcaseeqlen.o\
+	strcaseeqnul.o\
+	strcasestarts.o\
 	strcasestr.o\
+	strccpy.o\
 	strchr_inv.o\
 	strchrnul.o\
 	strchrnul_inv.o\
 	strcmove.o\
+	strcmpnul.o\
+	strend.o\
 	strends.o\
+	streq.o\
 	streqlen.o\
+	streqnul.o\
+	strisutf8.o\
+	strmove.o\
 	strncasechr.o\
 	strncasechr_inv.o\
 	strncasechrnul.o\
@@ -350,8 +366,11 @@ OBJ =\
 	strntoupper.o\
 	strrcasechr.o\
 	strrcasechr_inv.o\
+	strrcaseeqlen.o\
 	strrcasestr.o\
 	strrchr_inv.o\
+	strreplace.o\
+	strreqlen.o\
 	strrncasechr.o\
 	strrncasechr_inv.o\
 	strrncaseeqlen.o\
@@ -361,6 +380,7 @@ OBJ =\
 	strrneqlen.o\
 	strrnstr.o\
 	strrstr.o\
+	strset.o\
 	strstarts.o\
 	strtoh.o\
 	strtohh.o\
@@ -369,6 +389,7 @@ OBJ =\
 	strtoi32.o\
 	strtoi64.o\
 	strtoi8.o\
+	strtolower.o\
 	strtotimespec.o\
 	strtotimeval.o\
 	strtou.o\
@@ -378,6 +399,7 @@ OBJ =\
 	strtou8.o\
 	strtouh.o\
 	strtouhh.o\
+	strtoupper.o\
 	strtouz.o\
 	strtoz.o\
 	sumtimespec.o\

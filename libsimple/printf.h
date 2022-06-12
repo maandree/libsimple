@@ -96,7 +96,7 @@ int libsimple_vasprintf(char **, const char *, va_list);
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define libsimple_asprintfa(fmt__, ...)\
-	LIBSIMPLE_GCC_ONLY__(__extension__)\
+	LIBSIMPLE_EXTENSION__\
 	({\
 		const char *f__ = (fmt__);\
 		char *ret__ = NULL;\
@@ -128,7 +128,7 @@ int libsimple_vasprintf(char **, const char *, va_list);
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define libsimple_vasprintfa(fmt__, ap__)\
-	LIBSIMPLE_GCC_ONLY__(__extension__)\
+	LIBSIMPLE_EXTENSION__\
 	({\
 		const char *f__ = (fmt__);\
 		va_list a1__;\

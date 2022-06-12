@@ -1,5 +1,5 @@
 /* See LICENSE file for copyright and license details. */
-#include "libsimple.h"
+#include "common.h"
 #ifndef TEST
 
 
@@ -12,6 +12,8 @@ libsimple_mempsetelem(void *buf_, const void *item, size_t width, size_t n)
 	case 1:
 		return &((char *)memset(buf_, *(const char *)item, n))[n];
 	case 2:
+		if ((uintptr_t)buf_ % _Alignof(uint16_t) || (uintptr_t)item % _Alignof(uint16_t))
+			goto misaligned;
 		{
 			uint16_t *buf = buf_;
 			uint16_t *end = &buf[n];
@@ -21,6 +23,8 @@ libsimple_mempsetelem(void *buf_, const void *item, size_t width, size_t n)
 			return buf;
 		}
 	case 4:
+		if ((uintptr_t)buf_ % _Alignof(uint32_t) || (uintptr_t)item % _Alignof(uint32_t))
+			goto misaligned;
 		{
 			uint32_t *buf = buf_;
 			uint32_t *end = &buf[n];
@@ -30,6 +34,8 @@ libsimple_mempsetelem(void *buf_, const void *item, size_t width, size_t n)
 			return buf;
 		}
 	case 8:
+		if ((uintptr_t)buf_ % _Alignof(uint64_t) || (uintptr_t)item % _Alignof(uint64_t))
+			goto misaligned;
 		{
 			uint64_t *buf = buf_;
 			uint64_t *end = &buf[n];
@@ -39,6 +45,7 @@ libsimple_mempsetelem(void *buf_, const void *item, size_t width, size_t n)
 			return buf;
 		}
 	default:
+	misaligned:
 		{
 			char *buf = buf_;
 			size_t i;
@@ -57,8 +64,8 @@ libsimple_mempsetelem(void *buf_, const void *item, size_t width, size_t n)
 int
 main(void)
 {
-	char buf_[4096];
-	char *buf = buf_;
+	_Alignas(8) char buf_[4096];
+	_Alignas(8) char *buf = buf_;
 	size_t i;
 
 	memset(buf, 0, sizeof(buf_));
@@ -75,6 +82,10 @@ main(void)
 	assert(libsimple_mempsetelem(buf, &(uint32_t){0x10203040UL}, 4, 300) == &buf[1200]);
 	assert(libsimple_mempsetelem(buf, &(uint64_t){0x0102030450607080ULL}, 8, 100) == &buf[800]);
 	assert(libsimple_mempsetelem(buf, (char []){(char)0xA0, (char)0xB0, (char)0xC0}, 3, 16) == &buf[48]);
+
+#if defined(__clang__)
+# pragma clang diagnostic ignored "-Wcast-align"
+#endif
 
 	for (i = 0; i < 48; i++)
 		assert(buf[i] == ((char []){(char)0xA0, (char)0xB0, (char)0xC0})[i % 3]);

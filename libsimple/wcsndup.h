@@ -10,7 +10,7 @@
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define libsimple_wcsndupa(s, n)\
-	LIBSIMPLE_GCC_ONLY__(__extension__)\
+	LIBSIMPLE_EXTENSION__\
 	({\
 		const wchar_t *s__ = (s);\
 		size_t n__ = wcsnlen(s__, n);\

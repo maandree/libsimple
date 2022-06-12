@@ -1,5 +1,5 @@
 /* See LICENSE file for copyright and license details. */
-#include "libsimple.h"
+#include "common.h"
 #ifndef TEST
 
 
@@ -51,7 +51,7 @@ main(void)
 		assert(!alloc_fail_in);
 	}
 
-#if defined(__GNUC__) && !defined(__clang)
+#if defined(__GNUC__) && !defined(__clang__)
 # pragma GCC diagnostic push
 # pragma GCC diagnostic ignored "-Walloc-size-larger-than="
 #endif
@@ -60,7 +60,7 @@ main(void)
 	assert(exit_status == 3);
 	assert_stderr("%s: reallocarray: %s\n", argv0, strerror(ENOMEM));
 
-#if defined(__GNUC__) && !defined(__clang)
+#if defined(__GNUC__) && !defined(__clang__)
 # pragma GCC diagnostic pop
 #endif
 

@@ -10,7 +10,7 @@
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define libsimple_aligned_wcsdupa(s, alignment)\
-	LIBSIMPLE_GCC_ONLY__(__extension__)\
+	LIBSIMPLE_EXTENSION__\
 	({\
 		const wchar_t *s__ = (s);\
 		size_t n__ = wcslen(s__) + 1;\

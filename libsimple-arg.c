@@ -475,7 +475,8 @@ parser8(int argc, char *argv[])
 				{"--missing", 'm', 1},
 				{NULL, '\0', 0},
 			}));
-			/* fall through */
+			usage();
+			break;
 		default:
 			usage();
 		} ARGALT('+') {
@@ -495,7 +496,8 @@ parser8(int argc, char *argv[])
 				{"++missing", 'm', 1},
 				{NULL, '\0', 0},
 			}));
-			/* fall through */
+			usage();
+			break;
 		default:
 			usage();
 		} ARGEND;

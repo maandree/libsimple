@@ -9,7 +9,7 @@
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define libsimple_strdupa(s)\
-	LIBSIMPLE_GCC_ONLY__(__extension__)\
+	LIBSIMPLE_EXTENSION__\
 	({\
 		const char *s__ = (s);\
 		size_t n__ = strlen(s__) + 1;\

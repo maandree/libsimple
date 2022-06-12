@@ -1,5 +1,5 @@
 /* See LICENSE file for copyright and license details. */
-#include "libsimple.h"
+#include "common.h"
 #ifndef TEST
 
 
@@ -47,62 +47,82 @@ main(void)
 {
 	struct timespec r, a, b;
 
-	a.tv_sec = 0, a.tv_nsec = 0;
-	b.tv_sec = 0, b.tv_nsec = 0;
+	a.tv_sec  = 0;
+	a.tv_nsec = 0;
+	b.tv_sec  = 0;
+	b.tv_nsec = 0;
 	assert(!libsimple_sumtimespec(&r, &a, &b));
 	assert(r.tv_sec  == 0);
 	assert(r.tv_nsec == 0);
 
-	a.tv_sec = 10, a.tv_nsec = 10000L;
-	b.tv_sec =  0, b.tv_nsec =     0L;
+	a.tv_sec  = 10;
+	a.tv_nsec = 10000L;
+	b.tv_sec  = 0;
+	b.tv_nsec = 0L;
 	assert(!libsimple_sumtimespec(&r, &a, &b));
 	assert(r.tv_sec  == 10);
 	assert(r.tv_nsec == 10000L);
 
-	a.tv_sec =  10, a.tv_nsec = 10000L;
-	b.tv_sec = -10, b.tv_nsec =     0L;
+	a.tv_sec  = 10;
+	a.tv_nsec = 10000L;
+	b.tv_sec  = -10;
+	b.tv_nsec = 0L;
 	assert(!libsimple_sumtimespec(&r, &a, &b));
 	assert(r.tv_sec  == 0);
 	assert(r.tv_nsec == 10000L);
 
-	a.tv_sec =  10, a.tv_nsec = 10000L;
-	b.tv_sec = -20, b.tv_nsec = 20000L;
+	a.tv_sec  = 10;
+	a.tv_nsec = 10000L;
+	b.tv_sec  = -20;
+	b.tv_nsec = 20000L;
 	assert(!libsimple_sumtimespec(&r, &a, &b));
 	assert(r.tv_sec  == -10);
 	assert(r.tv_nsec == 30000L);
 
-	a.tv_sec = 1, a.tv_nsec = 999999999L;
-	b.tv_sec = 1, b.tv_nsec =         1L;
+	a.tv_sec  = 1;
+	a.tv_nsec = 999999999L;
+	b.tv_sec  = 1;
+	b.tv_nsec = 1L;
 	assert(!libsimple_sumtimespec(&r, &a, &b));
 	assert(r.tv_sec  == 3);
 	assert(r.tv_nsec == 0L);
 
-	a.tv_sec = TIME_MAX, a.tv_nsec = 0L;
-	b.tv_sec = TIME_MAX, b.tv_nsec = 0L;
+	a.tv_sec  = TIME_MAX;
+	a.tv_nsec = 0L;
+	b.tv_sec  = TIME_MAX;
+	b.tv_nsec = 0L;
 	assert(libsimple_sumtimespec(&r, &a, &b) == -1);
 	assert(r.tv_sec  == TIME_MAX);
 	assert(r.tv_nsec == 999999999L);
 
-	a.tv_sec = TIME_MAX, a.tv_nsec = 999999999L;
-	b.tv_sec =        0, b.tv_nsec =         1L;
+	a.tv_sec  = TIME_MAX;
+	a.tv_nsec = 999999999L;
+	b.tv_sec  = 0;
+	b.tv_nsec = 1L;
 	assert(libsimple_sumtimespec(&r, &a, &b) == -1);
 	assert(r.tv_sec  == TIME_MAX);
 	assert(r.tv_nsec == 999999999L);
 
-	a.tv_sec = TIME_MAX, a.tv_nsec =         1L;
-	b.tv_sec =        0, b.tv_nsec = 999999999L;
+	a.tv_sec  = TIME_MAX;
+	a.tv_nsec = 1L;
+	b.tv_sec  = 0;
+	b.tv_nsec = 999999999L;
 	assert(libsimple_sumtimespec(&r, &a, &b) == -1);
 	assert(r.tv_sec  == TIME_MAX);
 	assert(r.tv_nsec == 999999999L);
 
-	a.tv_sec = TIME_MIN, a.tv_nsec = 0L;
-	b.tv_sec = TIME_MIN, b.tv_nsec = 0L;
+	a.tv_sec  = TIME_MIN;
+	a.tv_nsec = 0L;
+	b.tv_sec  = TIME_MIN;
+	b.tv_nsec = 0L;
 	assert(libsimple_sumtimespec(&r, &a, &b) == -1);
 	assert(r.tv_sec  == TIME_MIN);
 	assert(r.tv_nsec == 0L);
 
-	a.tv_sec = TIME_MIN, a.tv_nsec = 100L;
-	b.tv_sec = TIME_MIN, b.tv_nsec = 100L;
+	a.tv_sec  = TIME_MIN;
+	a.tv_nsec = 100L;
+	b.tv_sec  = TIME_MIN;
+	b.tv_nsec = 100L;
 	assert(libsimple_sumtimespec(&r, &a, &b) == -1);
 	assert(r.tv_sec  == TIME_MIN);
 	assert(r.tv_nsec == 0L);

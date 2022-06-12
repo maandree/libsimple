@@ -1,6 +1,18 @@
 /* See LICENSE file for copyright and license details. */
 
 
+#if defined(__GNUC__) && !defined(__clang__)
+# pragma GCC diagnostic ignored "-Wunsuffixed-float-constants"
+# pragma GCC diagnostic ignored "-Wformat-nonliteral"
+#endif
+
+#if defined(__clang__)
+# pragma clang diagnostic ignored "-Wformat-nonliteral"
+# pragma clang diagnostic ignored "-Wdisabled-macro-expansion"
+# pragma clang diagnostic ignored "-Walloca"
+#endif
+
+
 #define assert(EXPR)\
 	do {\
 		if (EXPR)\
@@ -48,10 +60,14 @@
 	do {\
 		char buf__[1024];\
 		int len__;\
+		size_t i__;\
+		int not_same__ = 0;\
 		len__ = sprintf(buf__, __VA_ARGS__);\
 		assert(len__ >= 0);\
 		assert((size_t)len__ == stderr_n);\
-		assert(!memcmp(buf__, (char **)(void *)(&stderr_buf), stderr_n)); \
+		for (i__ = 0; i__ < stderr_n; i__++)\
+			not_same__ |= buf__[i__] ^ stderr_buf[i__];\
+		assert(!not_same__);\
 	} while (0)
 
 

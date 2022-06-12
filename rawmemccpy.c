@@ -1,5 +1,5 @@
 /* See LICENSE file for copyright and license details. */
-#include "libsimple.h"
+#include "common.h"
 #ifndef TEST
 
 
@@ -14,11 +14,13 @@ main(void)
 {
 	char buf[100];
 
-	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	memset(buf, 'x', sizeof(buf));
+	buf[sizeof(buf) - 1] = '\0';
 	assert(libsimple_rawmemccpy(buf, "hello", 'o') == &buf[5]);
 	assert(!strncmp(buf, "hellox", 6));
 
-	memset(buf, 'x', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	memset(buf, 'x', sizeof(buf));
+	buf[sizeof(buf) - 1] = '\0';
 	assert(libsimple_rawmemccpy(buf, "hello", 'l') == &buf[3]);
 	assert(!strncmp(buf, "helx", 4));
 

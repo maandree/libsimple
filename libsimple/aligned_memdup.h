@@ -11,21 +11,21 @@
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define libsimple_aligned_memdupa(s, alignment, n)\
-	LIBSIMPLE_GCC_ONLY__(__extension__)\
+	LIBSIMPLE_EXTENSION__\
 	({\
-		const char *__s = (s);\
-		size_t __n = (n);\
-		size_t __a = (alignment);\
-		size_t __size;\
-		uintptr_t __misalignment;\
-		char *__r;\
-		__a += !__a;\
-		__size = __n + (__a - 1);\
-		__r = alloca(__size + !__size);\
-		__misalignment = (uintptr_t)__r % (uintptr_t)__a;\
-		if (__misalignment)\
-			__r += (uintptr_t)__a - __misalignment;\
-		memcpy(__r, __s, __n);\
+		const char *s__ = (s);\
+		size_t n__ = (n);\
+		size_t a__ = (alignment);\
+		size_t size__;\
+		uintptr_t misalignment__;\
+		char *r__;\
+		a__ += !a__;\
+		size__ = n__ + (a__ - 1);\
+		r__ = alloca(size__ + !size__);\
+		misalignment__ = (uintptr_t)r__ % (uintptr_t)a__;\
+		if (misalignment__)\
+			r__ += (uintptr_t)a__ - misalignment__;\
+		memcpy(r__, s__, n__);\
 	})
 # ifndef aligned_memdupa
 #  define aligned_memdupa(s, alignment, n) libsimple_aligned_memdupa(s, alignment, n)
