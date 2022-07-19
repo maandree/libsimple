@@ -6,8 +6,8 @@
 #define RET_MIN (-RET_MAX - 1LL)
 
 
-int_least32_t
-libsimple_strtoi32(const char *restrict nptr, char **restrict end, int base) /* TODO test, man */
+int_least64_t
+libsimple_strtoi64(const char *restrict nptr, char **restrict end, int base) /* TODO test, man */
 {
 	intmax_t r = strtoimax(nptr, end, base);
 	if(r < RET_MIN) {
@@ -17,7 +17,7 @@ libsimple_strtoi32(const char *restrict nptr, char **restrict end, int base) /* 
 		r = RET_MAX;
 		errno = ERANGE;
 	}
-	return (int_least32_t)r;
+	return (int_least64_t)r;
 }
 
 

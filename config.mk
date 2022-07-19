@@ -4,5 +4,5 @@ MANPREFIX = $(PREFIX)/share/man
 CC = cc
 
 CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700
-CFLAGS   = -std=c11 -Wall -Wextra -O2 $(CPPFLAGS)
+CFLAGS   = -std=c11 -Wall -Wextra -O2
 LDFLAGS  = -s

@@ -3,6 +3,19 @@
 CONFIGFILE = config.mk
 include $(CONFIGFILE)
 
+OS = linux
+# Linux:   linux
+# Mac OS:  macos
+# Windows: windows
+include mk/$(OS).mk
+
+
+LIB_MAJOR = 1
+LIB_MINOR = 0
+LIB_VERSION = $(LIB_MAJOR).$(LIB_MINOR)
+LIB_NAME = simple
+
+
 SUBHDR =\
 	libsimple/aligned_alloc.h\
 	libsimple/aligned_allocz.h\
@@ -449,52 +462,68 @@ MAN3 =\
 
 TESTS = $(OBJ:.o=.test) libsimple-arg.test
 
-all: libsimple.a $(TESTS)
+LOBJ = $(OBJ:.o=.lo)
+
+all: libsimple.a libsimple.$(LIBEXT) $(TESTS)
 tests: $(TESTS)
 $(OBJ): $(HDR)
 $(TESTS): test.o libsimple.a
 $(TESTS:.test=.to): $(HDR) test.h
 
 test.o: test.c $(HDR) test.h
-	$(CC) -c -o $@ test.c $(CFLAGS) -DTEST -O0 -ffreestanding
+	$(CC) -c -o $@ test.c $(CFLAGS) $(CPPFLAGS) -DTEST -O0 -ffreestanding
 
 libsimple.a: $(OBJ)
 	@rm -f -- $@
 	$(AR) rc $@ $(OBJ)
 	$(AR) -s $@
 
+libsimple.$(LIBEXT): $(LOBJ)
+	$(CC) $(LIBFLAGS) -o $@ $(LOBJ) $(LDFLAGS)
+
 .to.test:
 	$(CC) -o $@ $< test.o libsimple.a $(LDFLAGS)
 
 .c.to:
-	$(CC) -c -o $@ $< $(CFLAGS) -DTEST -O0
+	$(CC) -c -o $@ $< $(CFLAGS) $(CPPFLAGS) -DTEST -O0
+
+.c.o:
+	$(CC) -c -o $@ $< $(CFLAGS) $(CPPFLAGS)
+
+.c.lo:
+	$(CC) -fPIC -c -o $@ $< $(CFLAGS) $(CPPFLAGS)
 
 check: $(TESTS)
 	@set -e; for t in $(TESTS); do printf '%s\n' "./$$t"; $(CHECK_PREFIX) "./$$t"; done
 
-install: libsimple.a
+install: libsimple.a libsimple.$(LIBEXT)
 	mkdir -p -- "$(DESTDIR)$(PREFIX)/lib"
 	mkdir -p -- "$(DESTDIR)$(PREFIX)/include/libsimple"
-	mkdir -p -- "$(DESTDIR)$(PREFIX)/share/man/man0"
-	mkdir -p -- "$(DESTDIR)$(PREFIX)/share/man/man3"
+	mkdir -p -- "$(DESTDIR)$(MANPREFIX)/man0"
+	mkdir -p -- "$(DESTDIR)$(MANPREFIX)/man3"
 	cp -- libsimple.a "$(DESTDIR)$(PREFIX)/lib"
+	cp -- libsimple.$(LIBEXT) "$(DESTDIR)$(PREFIX)/lib/libsimple.$(LIBMINOREXT)"
+	$(FIX_INSTALL_NAME) "$(DESTDIR)$(PREFIX)/lib/libsimple.$(LIBMINOREXT)"
+	ln -sf -- libsimple.$(LIBMINOREXT) "$(DESTDIR)$(PREFIX)/lib/libsimple.$(LIBMAJOREXT)"
+	ln -sf -- libsimple.$(LIBMAJOREXT) "$(DESTDIR)$(PREFIX)/lib/libsimple.$(LIBEXT)"
 	cp -- libsimple.h "$(DESTDIR)$(PREFIX)/include"
 	cp -- libsimple-arg.h "$(DESTDIR)$(PREFIX)/include"
 	cp -- $(SUBHDR) "$(DESTDIR)$(PREFIX)/include/libsimple"
-	cp -- $(MAN0) "$(DESTDIR)$(PREFIX)/share/man/man0"
-	cp -P -- $(MAN3) "$(DESTDIR)$(PREFIX)/share/man/man3"
+	cp -P -- $(MAN0) "$(DESTDIR)$(MANPREFIX)/man0"
+	cp -P -- $(MAN3) "$(DESTDIR)$(MANPREFIX)/man3"
 
 uninstall:
 	-rm -f -- "$(DESTDIR)$(PREFIX)/lib/libsimple.a"
 	-rm -f -- "$(DESTDIR)$(PREFIX)/include/libsimple.h"
 	-rm -f -- "$(DESTDIR)$(PREFIX)/include/libsimple-arg.h"
 	-rm -rf -- "$(DESTDIR)$(PREFIX)/include/libsimple"
-	-cd -- "$(DESTDIR)$(PREFIX)/share/man" && rm -f -- $(MAN0) $(MAN3)
+	-cd -- "$(DESTDIR)$(MANPREFIX)/man0" && rm -f -- $(MAN0)
+	-cd -- "$(DESTDIR)$(MANPREFIX)/man3" && rm -f -- $(MAN3)
 
 clean:
 	-rm -rf -- *.o *.su *.a *.so *.so.* *.gch *.gcda *.gcno *.gcov *.lo *.test *.to
 
 .SUFFIXES:
-.SUFFIXES: .test .to .o .c
+.SUFFIXES: .test .to .lo .o .c
 
 .PHONY: all check install uninstall clean
