@@ -17,7 +17,7 @@
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
  */
-LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 signed char libsimple_strtohh(const char *restrict, char **restrict, int);
 #ifndef strtohh
 # define strtohh libsimple_strtohh
@@ -40,7 +40,7 @@ signed char libsimple_strtohh(const char *restrict, char **restrict, int);
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
  */
-LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 unsigned char libsimple_strtouhh(const char *restrict, char **restrict, int);
 #ifndef strtouhh
 # define strtouhh libsimple_strtouhh
@@ -63,7 +63,7 @@ unsigned char libsimple_strtouhh(const char *restrict, char **restrict, int);
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
  */
-LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 signed short int libsimple_strtoh(const char *restrict, char **restrict, int);
 #ifndef strtoh
 # define strtoh libsimple_strtoh
@@ -86,7 +86,7 @@ signed short int libsimple_strtoh(const char *restrict, char **restrict, int);
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
  */
-LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 unsigned short int libsimple_strtouh(const char *restrict, char **restrict, int);
 #ifndef strtouh
 # define strtouh libsimple_strtouh
@@ -109,7 +109,7 @@ unsigned short int libsimple_strtouh(const char *restrict, char **restrict, int)
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
  */
-LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 signed int libsimple_strtoi(const char *restrict, char **restrict, int);
 #ifndef strtoi
 # define strtoi libsimple_strtoi
@@ -132,7 +132,7 @@ signed int libsimple_strtoi(const char *restrict, char **restrict, int);
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
  */
-LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 unsigned int libsimple_strtou(const char *restrict, char **restrict, int);
 #ifndef strtou
 # define strtou libsimple_strtou
@@ -155,7 +155,7 @@ unsigned int libsimple_strtou(const char *restrict, char **restrict, int);
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
  */
-LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 inline ssize_t
 libsimple_strtoz(const char *restrict nptr__, char **restrict endptr__, int base__)
 {
@@ -182,7 +182,7 @@ libsimple_strtoz(const char *restrict nptr__, char **restrict endptr__, int base
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
  */
-LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 inline size_t
 libsimple_strtouz(const char *restrict nptr__, char **restrict endptr__, int base__)
 {
@@ -209,7 +209,7 @@ libsimple_strtouz(const char *restrict nptr__, char **restrict endptr__, int bas
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
  */
-LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 int_least8_t libsimple_strtoi8(const char *restrict, char **restrict, int);
 #ifndef strtoi8
 # define strtoi8 libsimple_strtoi8
@@ -232,7 +232,7 @@ int_least8_t libsimple_strtoi8(const char *restrict, char **restrict, int);
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
  */
-LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 uint_least8_t libsimple_strtou8(const char *restrict, char **restrict, int);
 #ifndef strtou8
 # define strtou8 libsimple_strtou8
@@ -255,7 +255,7 @@ uint_least8_t libsimple_strtou8(const char *restrict, char **restrict, int);
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
  */
-LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 int_least16_t libsimple_strtoi16(const char *restrict, char **restrict, int);
 #ifndef strtoi16
 # define strtoi16 libsimple_strtoi16
@@ -278,7 +278,7 @@ int_least16_t libsimple_strtoi16(const char *restrict, char **restrict, int);
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
  */
-LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 uint_least16_t libsimple_strtou16(const char *restrict, char **restrict, int);
 #ifndef strtou16
 # define strtou16 libsimple_strtou16
@@ -301,7 +301,7 @@ uint_least16_t libsimple_strtou16(const char *restrict, char **restrict, int);
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
  */
-LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 int_least32_t libsimple_strtoi32(const char *restrict, char **restrict, int);
 #ifndef strtoi32
 # define strtoi32 libsimple_strtoi32
@@ -324,7 +324,7 @@ int_least32_t libsimple_strtoi32(const char *restrict, char **restrict, int);
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
  */
-LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 uint_least32_t libsimple_strtou32(const char *restrict, char **restrict, int);
 #ifndef strtou32
 # define strtou32 libsimple_strtou32
@@ -347,7 +347,7 @@ uint_least32_t libsimple_strtou32(const char *restrict, char **restrict, int);
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
  */
-LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 int_least64_t libsimple_strtoi64(const char *restrict, char **restrict, int);
 #ifndef strtoi64
 # define strtoi64 libsimple_strtoi64
@@ -370,7 +370,7 @@ int_least64_t libsimple_strtoi64(const char *restrict, char **restrict, int);
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
  */
-LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 uint_least64_t libsimple_strtou64(const char *restrict, char **restrict, int);
 #ifndef strtou64
 # define strtou64 libsimple_strtou64

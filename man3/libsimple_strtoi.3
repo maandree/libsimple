@@ -1,0 +1,202 @@
+.TH LIBSIMPLE_STRTOI 3 libsimple
+.SH NAME
+libsimple_strto{i,h,hh,z,i8,i16,i32,i64} \- parse a string as a signed integer
+
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+signed int libsimple_strtoi(const char *\fInptr\fP, char **\fIend\fP, int \fIbase\fP);
+signed short int libsimple_strtoh(const char *\fInptr\fP, char **\fIend\fP, int \fIbase\fP);
+signed char libsimple_strtohh(const char *\fInptr\fP, char **\fIend\fP, int \fIbase\fP);
+inline ssize_t libsimple_strtoz(const char *\fInptr\fP, char **\fIend\fP, int \fIbase\fP);
+int_least8_t libsimple_strtoi8(const char *\fInptr\fP, char **\fIend\fP, int \fIbase\fP);
+int_least16_t libsimple_strtoi16(const char *\fInptr\fP, char **\fIend\fP, int \fIbase\fP);
+int_least32_t libsimple_strtoi32(const char *\fInptr\fP, char **\fIend\fP, int \fIbase\fP);
+int_least64_t libsimple_strtoi64(const char *\fInptr\fP, char **\fIend\fP, int \fIbase\fP);
+
+#ifndef strtoi
+# define strtoi libsimple_strtoi
+#endif
+#ifndef strtoh
+# define strtoh libsimple_strtoh
+#endif
+#ifndef strtohh
+# define strtohh libsimple_strtohh
+#endif
+#ifndef strtoz
+# define strtoz libsimple_strtoz
+#endif
+#ifndef strtoi8
+# define strtoi8 libsimple_strtoi8
+#endif
+#ifndef strtoi16
+# define strtoi16 libsimple_strtoi16
+#endif
+#ifndef strtoi32
+# define strtoi32 libsimple_strtoi32
+#endif
+#ifndef strtoi64
+# define strtoi64 libsimple_strtoi64
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+
+.SH DESCRIPTION
+The
+.BR libsimple_strtoi ()
+function is a version of the
+.BR strtol (3)
+function, that returns a
+.BR "signed int" .
+.PP
+The
+.BR libsimple_strtoh ()
+function is a version of the
+.BR strtol (3)
+function, that returns a
+.BR "signed short int" .
+.PP
+The
+.BR libsimple_strtohh ()
+function is a version of the
+.BR strtol (3)
+function, that returns a
+.BR "signed char" .
+.PP
+The
+.BR libsimple_strtoz ()
+function is a version of the
+.BR strtol (3)
+function, that returns a
+.BR ssize_t .
+.PP
+The
+.BR libsimple_strtoi8 ()
+function is a version of the
+.BR strtol (3)
+function, that returns an
+.B int_least8_t
+restricted to the range of
+.BR int8_t .
+.PP
+The
+.BR libsimple_strtoi16 ()
+function is a version of the
+.BR strtol (3)
+function, that returns an
+.B int_least16_t
+restricted to the range of
+.BR int16_t .
+.PP
+The
+.BR libsimple_strtoi32 ()
+function is a version of the
+.BR strtol (3)
+function, that returns an
+.B int_least32_t
+restricted to the range of
+.BR int32_t .
+.PP
+The
+.BR libsimple_strtoi64 ()
+function is a version of the
+.BR strtol (3)
+function, that returns an
+.B int_least64_t
+restricted to the range of
+.BR int64_t .
+
+.SH RETURN VALUE
+See
+.BR strtol (3).
+
+.SH ERRORS
+See
+.BR strtol (3).
+
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_strtoi (),
+.br
+.BR libsimple_strtoh (),
+.br
+.BR libsimple_strtohh (),
+.br
+.BR libsimple_strtoz (),
+.br
+.BR libsimple_strtoi8 (),
+.br
+.BR libsimple_strtoi16 (),
+.br
+.BR libsimple_strtoi32 (),
+.br
+.BR libsimple_strtoi64 ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_strtoi (),
+.br
+.BR libsimple_strtoh (),
+.br
+.BR libsimple_strtohh (),
+.br
+.BR libsimple_strtoz (),
+.br
+.BR libsimple_strtoi8 (),
+.br
+.BR libsimple_strtoi16 (),
+.br
+.BR libsimple_strtoi32 (),
+.br
+.BR libsimple_strtoi64 ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_strtoi (),
+.br
+.BR libsimple_strtoh (),
+.br
+.BR libsimple_strtohh (),
+.br
+.BR libsimple_strtoz (),
+.br
+.BR libsimple_strtoi8 (),
+.br
+.BR libsimple_strtoi16 (),
+.br
+.BR libsimple_strtoi32 (),
+.br
+.BR libsimple_strtoi64 ()
+T}	Async-cancel safety	AC-Safe
+.TE
+
+.SH EXAMPLES
+None.
+
+.SH APPLICATION USAGE
+None.
+
+.SH RATIONALE
+None.
+
+.SH FUTURE DIRECTIONS
+None.
+
+.SH NOTES
+None.
+
+.SH BUGS
+None.
+
+.SH SEE ALSO
+.BR libsimple_strtou (3),
+.BR strtol (3),
+.BR strtoll (3)
