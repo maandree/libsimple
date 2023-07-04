@@ -45,6 +45,7 @@ SUBHDR =\
 	libsimple/pvalloc.h\
 	libsimple/pvallocz.h\
 	libsimple/realloc.h\
+	libsimple/search.h\
 	libsimple/str.h\
 	libsimple/strdup.h\
 	libsimple/strn.h\
@@ -80,6 +81,8 @@ OBJ =\
 	aligned_wmemdup.o\
 	allocn.o\
 	asprintf.o\
+	bindex.o\
+	bindex_r.o\
 	callocn.o\
 	close.o\
 	cmptimespec.o\

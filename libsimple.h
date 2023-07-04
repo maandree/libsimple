@@ -164,6 +164,7 @@
 #include "libsimple/str.h"
 #include "libsimple/strn.h"
 #include "libsimple/strtoint.h"
+#include "libsimple/search.h"
 
 
 /**
