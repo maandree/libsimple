@@ -111,13 +111,13 @@
 #endif
 
 
-#define libsimple_arrayset(buf, item, n) libsimple_memsetelem(buf, item, (n) * sizeof *(buf))
+#define libsimple_arrayset(buf, item, n) libsimple_memsetelem(buf, item, sizeof *(buf), n)
 #ifndef arrayset
 # define arrayset(...) libsimple_arrayset(__VA_ARGS__)
 #endif
 
 
-#define libsimple_arraypset(buf, item, n) libsimple_mempsetelem(buf, item, (n) * sizeof *(buf))
+#define libsimple_arraypset(buf, item, n) libsimple_mempsetelem(buf, item, sizeof *(buf), n)
 #ifndef arraypset
 # define arraypset(...) libsimple_arraypset(__VA_ARGS__)
 #endif
@@ -162,4 +162,16 @@
 #define libsimple_arrayreplace(s, old, new, n) libsimple_memreplaceelem(s, old, new, sizeof *(s), n)
 #ifndef arrayreplace
 # define arrayreplace(...) libsimple_arrayreplace(__VA_ARGS__)
+#endif
+
+
+#define libsimple_arrayfill(buf, item) libsimple_memsetelem(buf, item, sizeof *(buf), sizeof (buf) / sizeof *(buf))
+#ifndef arrayfill
+# define arrayfill(...) libsimple_arrayfill(__VA_ARGS__)
+#endif
+
+
+#define libsimple_arraynull(buf) libsimple_memsetelem(buf, (void *)0, sizeof *(buf), sizeof (buf) / sizeof *(buf))
+#ifndef arraynull
+# define arraynull(...) libsimple_arraynull(__VA_ARGS__)
 #endif
