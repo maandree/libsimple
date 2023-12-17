@@ -11,7 +11,7 @@ include mk/$(OS).mk
 
 
 LIB_MAJOR = 1
-LIB_MINOR = 4
+LIB_MINOR = 5
 LIB_VERSION = $(LIB_MAJOR).$(LIB_MINOR)
 LIB_NAME = simple
 
