@@ -191,6 +191,20 @@ libsimple_close(int *fdp__)
 
 
 /**
+ * Close a range of file descriptors
+ *
+ * @param   first   The lowest file descriptor to close
+ * @param   last    The highest file descriptor to close
+ * @param   next    Output parameter for the potentially first unclosed file descriptor; may be `NULL`
+ * @return          0 on successful completion, -1 on failure
+ * @throws  EINVAL  If `first > last`
+ * @throws          Any error for close(3) except EBADF
+ */
+int libsimple_close_range(unsigned int first, unsigned int last, unsigned int *next);
+#define LIBSIMPLE_CLOSE_RANGE_MAX (~0U)
+
+
+/**
  * Remove an item from a list, keeping the list ordered
  * 
  * `list` must be non-void pointer to a complete type,

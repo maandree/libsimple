@@ -85,6 +85,7 @@ OBJ =\
 	bindex_r.o\
 	callocn.o\
 	close.o\
+	close_range.o\
 	cmptimespec.o\
 	cmptimeval.o\
 	difftimespec.o\
