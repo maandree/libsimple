@@ -39,11 +39,7 @@ The
 macro returns to the greater value.
 
 .SH ERRORS
-The
-.BR libsimple_close ()
-function fail for the reasons specified for the
-.BR close (3)
-function.
+None.
 
 .SH EXAMPLES
 None.
