@@ -44,6 +44,7 @@ SUBHDR =\
 	libsimple/printf.h\
 	libsimple/pvalloc.h\
 	libsimple/pvallocz.h\
+	libsimple/random.h\
 	libsimple/realloc.h\
 	libsimple/search.h\
 	libsimple/str.h\
@@ -224,6 +225,7 @@ OBJ =\
 	ewcsdup.o\
 	ewcsndup.o\
 	ewmemdup.o\
+	generate_seed.o\
 	getenv_e.o\
 	getenv_ne.o\
 	gmtime.o\
@@ -318,6 +320,7 @@ OBJ =\
 	reallocf.o\
 	reallocfn.o\
 	reallocn.o\
+	srand.o\
 	stpmove.o\
 	stpnmove.o\
 	stpnset.o\

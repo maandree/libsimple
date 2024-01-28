@@ -165,6 +165,7 @@
 #include "libsimple/strn.h"
 #include "libsimple/strtoint.h"
 #include "libsimple/search.h"
+#include "libsimple/random.h"
 
 
 /**
