@@ -167,6 +167,7 @@
 #include "libsimple/search.h"
 #include "libsimple/random.h"
 #include "libsimple/abs.h"
+#include "libsimple/net.h"
 
 
 /**

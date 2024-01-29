@@ -39,6 +39,7 @@ SUBHDR =\
 	libsimple/memalloc.h\
 	libsimple/memdup.h\
 	libsimple/memelem.h\
+	libsimple/net.h\
 	libsimple/overflow.h\
 	libsimple/posix_memalign.h\
 	libsimple/posix_memalignz.h\
@@ -86,6 +87,7 @@ OBJ =\
 	asprintf.o\
 	bindex.o\
 	bindex_r.o\
+	bindtemp_un.o\
 	callocn.o\
 	close.o\
 	close_range.o\
