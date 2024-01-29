@@ -17,6 +17,7 @@ LIB_NAME = simple
 
 
 SUBHDR =\
+	libsimple/abs.h\
 	libsimple/aligned_alloc.h\
 	libsimple/aligned_allocz.h\
 	libsimple/aligned_memdup.h\
@@ -65,6 +66,7 @@ HDR =\
 	common.h
 
 OBJ =\
+	abs.o\
 	aligned_allocn.o\
 	aligned_allocz.o\
 	aligned_alloczn.o\
@@ -89,6 +91,7 @@ OBJ =\
 	close_range.o\
 	cmptimespec.o\
 	cmptimeval.o\
+	diff.o\
 	difftimespec.o\
 	difftimeval.o\
 	doubletotimespec.o\
@@ -229,8 +232,28 @@ OBJ =\
 	getenv_e.o\
 	getenv_ne.o\
 	gmtime.o\
+	habs.o\
+	hdiff.o\
+	hhabs.o\
+	hhdiff.o\
+	i16abs.o\
+	i16diff.o\
+	i32abs.o\
+	i32diff.o\
+	i64abs.o\
+	i64diff.o\
+	i8abs.o\
+	i8diff.o\
+	imaxabs.o\
+	imaxdiff.o\
 	inchrcaseset.o\
 	inchrset.o\
+	iptrabs.o\
+	iptrdiff.o\
+	labs.o\
+	ldiff.o\
+	llabs.o\
+	lldiff.o\
 	localtime.o\
 	mallocn.o\
 	mallocz.o\
@@ -299,6 +322,10 @@ OBJ =\
 	pvallocn.o\
 	pvallocz.o\
 	pvalloczn.o\
+	random_bits.o\
+	random_float.o\
+	random_signed.o\
+	random_unsigned.o\
 	rawmemcasechr.o\
 	rawmemcasechr_inv.o\
 	rawmemccpy.o\
@@ -430,7 +457,31 @@ OBJ =\
 	timeval2timespec.o\
 	timevaltodouble.o\
 	timevaltostr.o\
+	toi.o\
+	toi16.o\
+	toi32.o\
+	toi64.o\
+	toi8.o\
+	toih.o\
+	toihh.o\
+	toil.o\
+	toill.o\
+	toimax.o\
+	toiptr.o\
+	toiz.o\
+	u16abs.o\
+	u32abs.o\
+	u64abs.o\
+	u8abs.o\
+	uabs.o\
+	uhabs.o\
+	uhhabs.o\
+	ulabs.o\
+	ullabs.o\
+	umaxabs.o\
 	unlist.o\
+	uptrabs.o\
+	uzabs.o\
 	valigned_allocn.o\
 	valigned_reallocfn.o\
 	valloc.o\
@@ -456,6 +507,8 @@ OBJ =\
 	wcsndup.o\
 	weprintf.o\
 	wmemdup.o\
+	zabs.o\
+	zdiff.o\
 	libsimple.o
 
 MAN0 =\

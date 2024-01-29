@@ -20,3 +20,10 @@ libsimple_srand(void) /* TODO add man page */
 {
 	srand(libsimple_generate_seed());
 }
+
+
+/* TODO doc, man */
+uintmax_t libsimple_random_bits(size_t bits, void *unused);
+uintmax_t libsimple_random_unsigned(uintmax_t (*rng)(size_t bits, void *user), void *user, uintmax_t min, uintmax_t max);
+intmax_t libsimple_random_signed(uintmax_t (*rng)(size_t bits, void *user), void *user, intmax_t min, intmax_t max);
+long double libsimple_random_float(uintmax_t (*rng)(size_t bits, void *user), void *user, long double min, long double postmax);
