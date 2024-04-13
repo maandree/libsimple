@@ -41,6 +41,7 @@ SUBHDR =\
 	libsimple/memelem.h\
 	libsimple/net.h\
 	libsimple/overflow.h\
+	libsimple/path.h\
 	libsimple/posix_memalign.h\
 	libsimple/posix_memalignz.h\
 	libsimple/printf.h\
@@ -113,6 +114,7 @@ OBJ =\
 	ealigned_wmemdup.o\
 	ecalloc.o\
 	ecallocn.o\
+	egetcwd.o\
 	egmtime.o\
 	elocaltime.o\
 	emalloc.o\
@@ -140,6 +142,7 @@ OBJ =\
 	enaligned_wmemdup.o\
 	encalloc.o\
 	encallocn.o\
+	engetcwd.o\
 	engmtime.o\
 	enlocaltime.o\
 	enmalloc.o\
@@ -231,6 +234,7 @@ OBJ =\
 	ewcsndup.o\
 	ewmemdup.o\
 	generate_seed.o\
+	getcwd.o\
 	getenv_e.o\
 	getenv_ne.o\
 	gmtime.o\

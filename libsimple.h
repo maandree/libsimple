@@ -168,6 +168,7 @@
 #include "libsimple/random.h"
 #include "libsimple/abs.h"
 #include "libsimple/net.h"
+#include "libsimple/path.h"
 
 
 /**
