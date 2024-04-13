@@ -6,7 +6,7 @@
  * 
  * @return  The current working directory, or `NULL` on failure
  */
-LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __assume_aligned__(1), __warn_unused_result__)))
 char *libsimple_getcwd(void); /* TODO man */
 
 /**
@@ -15,7 +15,7 @@ char *libsimple_getcwd(void); /* TODO man */
  * @param   status  Exit value in case of failure
  * @return          The current working directory
  */
-LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __assume_aligned__(1), __warn_unused_result__, __returns_nonnull__)))
 char *libsimple_engetcwd(int status); /* TODO man */
 
 /**
@@ -23,7 +23,7 @@ char *libsimple_engetcwd(int status); /* TODO man */
  * 
  * @return  The current working directory
  */
-LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __assume_aligned__(1), __warn_unused_result__, __returns_nonnull__)))
 inline char *
 libsimple_egetcwd(void) /* TODO man */
 {
