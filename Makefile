@@ -69,6 +69,7 @@ HDR =\
 
 OBJ =\
 	abs.o\
+	abspath.o\
 	aligned_allocn.o\
 	aligned_allocz.o\
 	aligned_alloczn.o\
@@ -99,6 +100,7 @@ OBJ =\
 	difftimeval.o\
 	doubletotimespec.o\
 	doubletotimeval.o\
+	eabspath.o\
 	ealigned_alloc.o\
 	ealigned_allocn.o\
 	ealigned_allocz.o\
@@ -127,6 +129,7 @@ OBJ =\
 	ememalignzn.o\
 	ememalloc.o\
 	ememdup.o\
+	enabspath.o\
 	enaligned_alloc.o\
 	enaligned_allocn.o\
 	enaligned_allocz.o\
