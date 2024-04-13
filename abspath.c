@@ -8,7 +8,7 @@ libsimple_abspath(const char *path, const char *relto)
 {
 	size_t size;
 	int add_slash;
-	char *p, *ret;
+	char *p, *ret, *relto_free = NULL;
 
 	if (*path == '/') {
 		ret = strdup(path);
@@ -17,6 +17,13 @@ libsimple_abspath(const char *path, const char *relto)
 
 	while (path[0] == '.' && path[1] == '/')
 		path = &path[2];
+
+	if (relto) {
+		relto_free = libsimple_getcwd();
+		if (!relto_free)
+			return NULL;
+		relto = relto_free;
+	}
 
 	add_slash = (strchr(relto, '\0')[-1] != '/');
 	size = strlen(relto) + strlen(path) + (size_t)(1 + add_slash);
@@ -28,6 +35,7 @@ libsimple_abspath(const char *path, const char *relto)
 			*p++ = '/';
 		stpcpy(p, path);
 	}
+	free(relto_free);
 	return ret;
 }
 

@@ -35,7 +35,8 @@ libsimple_egetcwd(void) /* TODO man */
  * Turn a path into an absolute path if it is a relative path
  * 
  * @param   path    The path to transform
- * @param   relto   The directory `path` is relative to if it is a relative path
+ * @param   relto   The directory `path` is relative to if it is a relative path,
+ *                  `NULL` for the current working directory
  * @return          `path` as an absolute path, or `NULL` on failure
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __assume_aligned__(1), __warn_unused_result__, __nonnull__(1))))
@@ -46,7 +47,8 @@ char *libsimple_abspath(const char *, const char *); /* TODO man */
  * 
  * @param   status  Exit value in case of failure
  * @param   path    The path to transform
- * @param   relto   The directory `path` is relative to if it is a relative path
+ * @param   relto   The directory `path` is relative to if it is a relative path,
+ *                  `NULL` for the current working directory
  * @return          `path` as an absolute path
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __assume_aligned__(1), __warn_unused_result__, __nonnull__(2), __returns_nonnull__)))
@@ -56,7 +58,8 @@ char *libsimple_enabspath(int, const char *, const char *); /* TODO man */
  * Version of `libsimple_abspath` that calls `libsimple_eprintf` on error
  * 
  * @param   path    The path to transform
- * @param   relto   The directory `path` is relative to if it is a relative path
+ * @param   relto   The directory `path` is relative to if it is a relative path,
+ *                  `NULL` for the current working directory
  * @return          `path` as an absolute path
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __assume_aligned__(1), __warn_unused_result__, __nonnull__(1), __returns_nonnull__)))
