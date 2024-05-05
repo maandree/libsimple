@@ -171,6 +171,7 @@
 #include "libsimple/path.h"
 #include "libsimple/ascii.h"
 #include "libsimple/exec.h"
+#include "libsimple/sort.h"
 
 
 /**
