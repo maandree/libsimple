@@ -57,8 +57,8 @@ libsimple_bindtemp_un(int fd, int dir_fd, struct sockaddr_un *addr, socklen_t *a
 		len = snprintf(addr->sun_path, sizeof(addr->sun_path), "/dev/fd/%i/tmp", dir_fd);
 	if (len < 0 || (size_t)len >= sizeof(addr->sun_path) || sizeof(addr->sun_path) - (size_t)len < 6)
 		abort();
-	rem = sizeof(addr->sun_path) - 1 - len;
-	addr->sun_path[sizeof(addr->sun_path) - 1] = 0;
+	rem = sizeof(addr->sun_path) - 1U - (size_t)len;
+	addr->sun_path[sizeof(addr->sun_path) - 1U] = 0;
 
 	while (try_limit--) {
 	again:
@@ -67,7 +67,7 @@ libsimple_bindtemp_un(int fd, int dir_fd, struct sockaddr_un *addr, socklen_t *a
 			errno = saved_errno;
 			return 0;
 		} else if (errno == ENAMETOOLONG && rem > 5) {
-			addr->sun_path[len + --rem] = 0;
+			addr->sun_path[(size_t)len + --rem] = 0;
 			goto again;
 		} else if (errno != EEXIST && errno != EADDRINUSE) {
 			return -1;

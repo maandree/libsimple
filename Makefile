@@ -28,9 +28,11 @@ SUBHDR =\
 	libsimple/aligned_wcsndup.h\
 	libsimple/aligned_wmemdup.h\
 	libsimple/array.h\
+	libsimple/ascii.h\
 	libsimple/calloc.h\
 	libsimple/definitions.h\
 	libsimple/env.h\
+	libsimple/exec.h\
 	libsimple/malloc.h\
 	libsimple/mallocz.h\
 	libsimple/mem.h\
@@ -236,6 +238,15 @@ OBJ =\
 	ewcsdup.o\
 	ewcsndup.o\
 	ewmemdup.o\
+	execlat.o\
+	execleat.o\
+	execlpe.o\
+	execvat.o\
+	execveat.o\
+	execvpe.o\
+	fexecl.o\
+	fexecle.o\
+	fexecv.o\
 	generate_seed.o\
 	getcwd.o\
 	getenv_e.o\
@@ -501,6 +512,14 @@ OBJ =\
 	vcallocn.o\
 	venprintf.o\
 	veprintf.o\
+	vexecl.o\
+	vexeclat.o\
+	vexecle.o\
+	vexecleat.o\
+	vexeclp.o\
+	vexeclpe.o\
+	vfexecl.o\
+	vfexecle.o\
 	vmallocn.o\
 	vmemalignn.o\
 	vmemalignzn.o\
@@ -513,9 +532,14 @@ OBJ =\
 	vvallocn.o\
 	vvalloczn.o\
 	vweprintf.o\
+	vxexecl.o\
+	vxexecle.o\
 	wcsndup.o\
 	weprintf.o\
+	which.o\
 	wmemdup.o\
+	xexecl.o\
+	xexecv.o\
 	zabs.o\
 	zdiff.o\
 	libsimple.o

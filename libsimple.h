@@ -169,6 +169,8 @@
 #include "libsimple/abs.h"
 #include "libsimple/net.h"
 #include "libsimple/path.h"
+#include "libsimple/ascii.h"
+#include "libsimple/exec.h"
 
 
 /**
