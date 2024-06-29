@@ -71,6 +71,10 @@ HDR =\
 	common.h
 
 OBJ =\
+	_enprintf.o\
+	_eprintf.o\
+	_venprintf.o\
+	_veprintf.o\
 	abs.o\
 	abspath.o\
 	aligned_allocn.o\

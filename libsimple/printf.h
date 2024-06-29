@@ -2,7 +2,8 @@
 
 
 /**
- * Exit value for `libsimple_eprintf`
+ * Exit value for `libsimple_eprintf` and
+ * `libsimple__eprintf`
  * 
  * Default value is 1
  */
@@ -250,6 +251,40 @@ libsimple_venprintf(int status__, const char *fmt__, va_list ap__)
  * neither ':' nor '\n', the outpt is suffixed with
  * `\n`
  * 
+ * This function will exit the process without
+ * calling clean-up functions registered with
+ * atexit(3)
+ * 
+ * NB! This function uses `strerror` which is not
+ * thread-safe
+ * 
+ * @param  status  Exit value for the process
+ * @param  fmt     The format string
+ * @param  ap      The format argument
+ */
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __format__(__printf__, 2, 0))))
+inline LIBSIMPLE_NORETURN void
+libsimple__venprintf(int status__, const char *fmt__, va_list ap__)
+{
+	libsimple_vweprintf(fmt__, ap__);
+	_exit(status__);
+}
+#ifndef _venprintf
+# define _venprintf libsimple__venprintf
+#endif
+
+
+/**
+ * Version of `vprintf` for printing error message;
+ * it prints to standard error (rather than standard
+ * output) and, unless `fmt` starts with "usage: "
+ * and unless `argv0` (global `char *`), prefixes
+ * the output with `"%s: ", argv0`; additionally, if
+ * `fmt` ends with ':', the output is suffixed with
+ * `" %s\n", strerror(errno)`, if `fmt` ends with
+ * neither ':' nor '\n', the outpt is suffixed with
+ * `\n`
+ * 
  * This function will exit the process
  * 
  * NB! This function uses `strerror` which is not
@@ -270,6 +305,42 @@ libsimple_enprintf(int status__, const char *fmt__, ...)
 }
 #ifndef enprintf
 # define enprintf libsimple_enprintf
+#endif
+
+
+/**
+ * Version of `vprintf` for printing error message;
+ * it prints to standard error (rather than standard
+ * output) and, unless `fmt` starts with "usage: "
+ * and unless `argv0` (global `char *`), prefixes
+ * the output with `"%s: ", argv0`; additionally, if
+ * `fmt` ends with ':', the output is suffixed with
+ * `" %s\n", strerror(errno)`, if `fmt` ends with
+ * neither ':' nor '\n', the outpt is suffixed with
+ * `\n`
+ * 
+ * This function will exit the process without
+ * calling clean-up functions registered with
+ * atexit(3)
+ * 
+ * NB! This function uses `strerror` which is not
+ * thread-safe
+ * 
+ * @param  status  Exit value for the process
+ * @param  fmt     The format string
+ * @param  ...     The format argument
+ */
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __format__(__printf__, 2, 3))))
+inline LIBSIMPLE_NORETURN void
+libsimple__enprintf(int status__, const char *fmt__, ...)
+{
+	va_list ap__;
+	va_start(ap__, fmt__);
+	libsimple__venprintf(status__, fmt__, ap__);
+	va_end(ap__);
+}
+#ifndef _enprintf
+# define _enprintf libsimple__enprintf
 #endif
 
 
@@ -317,6 +388,40 @@ libsimple_veprintf(const char *fmt__, va_list ap__)
  * `\n`
  * 
  * This function will exit the process with the
+ * value `libsimple_default_failure_exit` without
+ * calling clean-up functions registered with
+ * atexit(3)
+ * 
+ * NB! This function uses `strerror` which is not
+ * thread-safe
+ * 
+ * @param  fmt  The format string
+ * @param  ap   The format argument
+ */
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __format__(__printf__, 1, 0))))
+inline LIBSIMPLE_NORETURN void
+libsimple__veprintf(const char *fmt__, va_list ap__)
+{
+	libsimple_vweprintf(fmt__, ap__);
+	_exit(libsimple_default_failure_exit);
+}
+#ifndef _veprintf
+# define _veprintf libsimple__veprintf
+#endif
+
+
+/**
+ * Version of `vprintf` for printing error message;
+ * it prints to standard error (rather than standard
+ * output) and, unless `fmt` starts with "usage: "
+ * and unless `argv0` (global `char *`), prefixes
+ * the output with `"%s: ", argv0`; additionally, if
+ * `fmt` ends with ':', the output is suffixed with
+ * `" %s\n", strerror(errno)`, if `fmt` ends with
+ * neither ':' nor '\n', the outpt is suffixed with
+ * `\n`
+ * 
+ * This function will exit the process with the
  * value `libsimple_default_failure_exit`
  * 
  * NB! This function uses `strerror` which is not
@@ -336,4 +441,40 @@ libsimple_eprintf(const char *fmt__, ...)
 }
 #ifndef eprintf
 # define eprintf libsimple_eprintf
+#endif
+
+
+/**
+ * Version of `vprintf` for printing error message;
+ * it prints to standard error (rather than standard
+ * output) and, unless `fmt` starts with "usage: "
+ * and unless `argv0` (global `char *`), prefixes
+ * the output with `"%s: ", argv0`; additionally, if
+ * `fmt` ends with ':', the output is suffixed with
+ * `" %s\n", strerror(errno)`, if `fmt` ends with
+ * neither ':' nor '\n', the outpt is suffixed with
+ * `\n`
+ * 
+ * This function will exit the process with the
+ * value `libsimple_default_failure_exit` without
+ * calling clean-up functions registered with
+ * atexit(3)
+ * 
+ * NB! This function uses `strerror` which is not
+ * thread-safe
+ * 
+ * @param  fmt  The format string
+ * @param  ...  The format argument
+ */
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __format__(__printf__, 1, 2))))
+inline LIBSIMPLE_NORETURN void
+libsimple__eprintf(const char *fmt__, ...)
+{
+	va_list ap__;
+	va_start(ap__, fmt__);
+	libsimple__veprintf(fmt__, ap__);
+	va_end(ap__);
+}
+#ifndef _eprintf
+# define _eprintf libsimple__eprintf
 #endif
