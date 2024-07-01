@@ -18,7 +18,7 @@ libsimple_abspath(const char *path, const char *relto)
 	while (path[0] == '.' && path[1] == '/')
 		path = &path[2];
 
-	if (relto) {
+	if (!relto) {
 		relto_free = libsimple_getcwd();
 		if (!relto_free)
 			return NULL;
