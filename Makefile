@@ -411,6 +411,7 @@ OBJ =\
 	ealigned_wmemdup.o\
 	ecalloc.o\
 	ecallocn.o\
+	efreadlink.o\
 	egetcwd.o\
 	egmtime.o\
 	elocaltime.o\
@@ -440,6 +441,7 @@ OBJ =\
 	enaligned_wmemdup.o\
 	encalloc.o\
 	encallocn.o\
+	enfreadlink.o\
 	engetcwd.o\
 	engmtime.o\
 	enlocaltime.o\
@@ -463,6 +465,9 @@ OBJ =\
 	enpvallocn.o\
 	enpvallocz.o\
 	enpvalloczn.o\
+	enreadlink.o\
+	enreadlinkat.o\
+	enreadmagiclink.o\
 	enrealloc.o\
 	enreallocarray.o\
 	enreallocn.o\
@@ -502,6 +507,9 @@ OBJ =\
 	epvallocn.o\
 	epvallocz.o\
 	epvalloczn.o\
+	ereadlink.o\
+	ereadlinkat.o\
+	ereadmagiclink.o\
 	erealloc.o\
 	ereallocarray.o\
 	ereallocn.o\
@@ -540,6 +548,7 @@ OBJ =\
 	fexecl.o\
 	fexecle.o\
 	fexecv.o\
+	freadlink.o\
 	generate_seed.o\
 	getcwd.o\
 	getenv_e.o\
@@ -943,6 +952,9 @@ OBJ =\
 	rawmemrchr_inv.o\
 	rawmemrelem.o\
 	rawmemrelem_inv.o\
+	readlink.o\
+	readlinkat.o\
+	readmagiclink.o\
 	reallocarray.o\
 	reallocarrayf.o\
 	reallocf.o\

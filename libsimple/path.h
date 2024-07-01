@@ -68,3 +68,74 @@ libsimple_eabspath(const char *p__, const char *r__) /* TODO man */
 {
 	return libsimple_enabspath(libsimple_default_failure_exit, p__, r__);
 }
+
+
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __assume_aligned__(1), __warn_unused_result__, __nonnull__)))
+char *libsimple_readlinkat(int, const char *); /* TODO man, doc */
+
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __assume_aligned__(1), __warn_unused_result__, __nonnull__, __returns_nonnull__)))
+char *libsimple_enreadlinkat(int, int, const char *); /* TODO man, doc */
+
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __assume_aligned__(1), __warn_unused_result__, __nonnull__, __returns_nonnull__)))
+inline char *
+libsimple_ereadlinkat(int dirfd__, const char *path__) /* TODO man, doc */
+{
+	return libsimple_enreadlinkat(libsimple_default_failure_exit, dirfd__, path__);
+}
+
+
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __assume_aligned__(1), __warn_unused_result__, __nonnull__)))
+inline char *
+libsimple_readlink(const char *path__) /* TODO man, doc */
+{
+	return libsimple_readlinkat(AT_FDCWD, path__);
+}
+
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __assume_aligned__(1), __warn_unused_result__, __nonnull__, __returns_nonnull__)))
+inline char *
+libsimple_enreadlink(int status__, const char *path__) /* TODO man, doc */
+{
+	return libsimple_enreadlinkat(status__, AT_FDCWD, path__);
+}
+
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __assume_aligned__(1), __warn_unused_result__, __nonnull__, __returns_nonnull__)))
+inline char *
+libsimple_ereadlink(const char *path__) /* TODO man, doc */
+{
+	return libsimple_enreadlinkat(libsimple_default_failure_exit, AT_FDCWD, path__);
+}
+
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __assume_aligned__(1), __warn_unused_result__, __nonnull__)))
+inline char *
+libsimple_freadlink(int fd__) /* TODO man, doc */
+{
+	return libsimple_readlinkat(fd__, "");
+}
+
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __assume_aligned__(1), __warn_unused_result__, __nonnull__, __returns_nonnull__)))
+inline char *
+libsimple_enfreadlink(int status__, int fd__) /* TODO man, doc */
+{
+	return libsimple_enreadlinkat(status__, fd__, "");
+}
+
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __assume_aligned__(1), __warn_unused_result__, __nonnull__, __returns_nonnull__)))
+inline char *
+libsimple_efreadlink(int fd__) /* TODO man, doc */
+{
+	return libsimple_enreadlinkat(libsimple_default_failure_exit, fd__, "");
+}
+
+
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __assume_aligned__(1), __warn_unused_result__, __nonnull__)))
+char *libsimple_readmagiclink(const char *); /* TODO man, doc */
+
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __assume_aligned__(1), __warn_unused_result__, __nonnull__, __returns_nonnull__)))
+char *libsimple_enreadmagiclink(int, const char *); /* TODO man, doc */
+
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __assume_aligned__(1), __warn_unused_result__, __nonnull__, __returns_nonnull__)))
+inline char *
+libsimple_ereadmagiclink(const char *path__) /* TODO man, doc */
+{
+	return libsimple_enreadmagiclink(libsimple_default_failure_exit, path__);
+}
