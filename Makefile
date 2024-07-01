@@ -413,6 +413,7 @@ OBJ =\
 	ecallocn.o\
 	efreadlink.o\
 	egetcwd.o\
+	egetexecpath.o\
 	egmtime.o\
 	elocaltime.o\
 	emalloc.o\
@@ -443,6 +444,7 @@ OBJ =\
 	encallocn.o\
 	enfreadlink.o\
 	engetcwd.o\
+	engetexecpath.o\
 	engmtime.o\
 	enlocaltime.o\
 	enmalloc.o\
@@ -553,6 +555,7 @@ OBJ =\
 	getcwd.o\
 	getenv_e.o\
 	getenv_ne.o\
+	getexecpath.o\
 	gmtime.o\
 	habs.o\
 	hdiff.o\

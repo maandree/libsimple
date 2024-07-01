@@ -139,3 +139,17 @@ libsimple_ereadmagiclink(const char *path__) /* TODO man, doc */
 {
 	return libsimple_enreadmagiclink(libsimple_default_failure_exit, path__);
 }
+
+
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __assume_aligned__(1), __warn_unused_result__, __nonnull__)))
+char *libsimple_getexecpath(void); /* TODO man, doc */
+
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __assume_aligned__(1), __warn_unused_result__, __nonnull__, __returns_nonnull__)))
+char *libsimple_engetexecpath(int); /* TODO man, doc */
+
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __assume_aligned__(1), __warn_unused_result__, __nonnull__, __returns_nonnull__)))
+inline char *
+libsimple_egetexecpath(void) /* TODO man, doc */
+{
+	return libsimple_engetexecpath(libsimple_default_failure_exit);
+}
