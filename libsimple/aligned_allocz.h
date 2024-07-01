@@ -50,7 +50,7 @@ libsimple_aligned_allocz(int clear__, size_t alignment__, size_t n__)
 		memset(ret__, 0, n__);
 	return ret__;
 #else
-	if (!alignment__ || alignment__ % sizeof(void *))) {
+	if (!alignment__ || alignment__ % sizeof(void *)) {
 		errno = EINVAL;
 		return NULL;
 	}
