@@ -53,6 +53,7 @@ SUBHDR =\
 	libsimple/realloc.h\
 	libsimple/search.h\
 	libsimple/sort.h\
+	libsimple/stack.h\
 	libsimple/str.h\
 	libsimple/strdup.h\
 	libsimple/strn.h\
@@ -552,6 +553,9 @@ OBJ =\
 	fexecv.o\
 	freadlink.o\
 	generate_seed.o\
+	get_stack_direction.o\
+	get_stack_limit.o\
+	get_stack_space.o\
 	getcwd.o\
 	getenv_e.o\
 	getenv_ne.o\
@@ -639,6 +643,7 @@ OBJ =\
 	minimise_number_string.o\
 	multimespec.o\
 	multimeval.o\
+	needstack.o\
 	posix_memalignn.o\
 	posix_memalignz.o\
 	posix_memalignzn.o\
