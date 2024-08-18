@@ -1,0 +1,179 @@
+saturated integer math
+
+versions of memory allocation functions that are given
+two size arguments (n, m) and allocate with size n + m
+
+versions of memory allocation functions that are given
+three size arguments (n, m, p) and allocate with size (n + m) * p
+
+versions of memory allocation functions that are given
+three size arguments (n, m, p) and allocate with size n * m + p
+
+functions for adding and element into a sorted list
+
+functions for merging to sorted lists
+
+non-uniform random number generators (random.h)
+
+wcs.h (based on str.h)
+	wcschrnul
+	wcscasechr
+	wcscasechrnul
+	wcsrcasechr
+	wcschr_inv
+	wcschrnul_inv
+	wcscasechr_inv
+	wcscasechrnul_inv
+	wcsrchr_inv
+	wcsrcasechr_inv
+	wcsend
+	wcsstarts
+	wcscasestarts
+	wcsends
+	wcscaseends
+	wcsrstr
+	wcscasestr
+	wcsrcasestr
+	wcscmpnul
+	wcscasecmpnul
+	wcseq
+	wcseqnul
+	wcscaseeq
+	wcscaseeqnul
+	wcseqlen
+	wcscaseeqlen
+	wcsreqlen
+	wcsrcaseeqlen
+	inwcset
+	inwccaseset
+	wcsmove
+	wcpmove
+	wcsset
+	wcpset
+	wcsccpy
+	wcscmove
+	wcsreplace
+	wcptolower
+	wcptoupper
+	wcstolower
+	wcstoupper
+	wcsisutf8
+
+wcsn.h (based on strn.h)
+	wcsnchr
+	wcsncasechr
+	wcsnchrnul
+	wcsncasechrnul
+	wcsrnchr
+	wcsrncasechr
+	wcsnchr_inv
+	wcsncasechr_inv
+	wcsnchrnul_inv
+	wcsncasechrnul_inv
+	wcsrnchr_inv
+	wcsrncasechr_inv
+	wcsnend
+	wcsnstarts
+	wcsncasestarts
+	wcsnends
+	wcsncaseends
+	wcsnstr
+	wcsncasestr
+	wcsrnstr
+	wcsrncasestr
+	wcsncmpnul
+	wcsncasecmpnul
+	wcsneq
+	wcsneqnul
+	wcsncaseeq
+	wcsncaseeqnul
+	wcsneqlen
+	wcsncaseeqlen
+	wcsrneqlen
+	wcsrncaseeqlen
+	wcsnmove
+	wcpnmove
+	wcsnset
+	wcpnset
+	wcsnccpy
+	wcsncmove
+	wcsnreplace
+	wcpntolower
+	wcpntoupper
+	wcsntolower
+	wcsntoupper
+	wcsnisutf8
+
+wmem.h (based on mem.h)
+	wmemccpy (new: analogue to standard function)
+	wmemscan
+	wmemcasechr
+	wmemcasescan
+	rawwmemchr
+	rawwmemcasechr
+	wmemrchr
+	wmemrcasechr
+	rawwmemrchr
+	rawwmemrcasechr
+	wmemchr_inv
+	wmemscan_inv
+	wmemcasechr_inv
+	wmemcasescan_inv
+	rawwmemchr_inv
+	rawwmemcasechr_inv
+	wmemrchr_inv
+	wmemrcasechr_inv
+	rawwmemrchr_inv
+	rawwmemrcasechr_inv
+	wmemmem
+	wmemcasemem
+	wmemrmem
+	wmemrcasemem
+	wmemstarts
+	wmemcasestarts
+	wmemends
+	wmemcaseends
+	wmemcasecmp
+	wmemeq
+	wmemcaseeq
+	wmempcpy
+	wmempmove
+	wmempset
+	rawwmemccpy
+	wmemcmove
+	rawwmemcmove
+	wmemreplace
+	wmemptolower
+	wmemptoupper
+	wmemtolower
+	wmemtoupper
+	wmemeqlen
+	wmemcaseeqlen
+	wmemreqlen
+	wmemrcaseeqlen
+	wmemisutf8
+
+wcstoint.h (based on strtoint.h)
+	wcstohh
+	wcstouhh
+	wcstoh
+	wcstouh
+	wcstoi
+	wcstou
+	wcstoz
+	wcstouz
+	wcstoi8
+	wcstou8
+	wcstoi16
+	wcstou16
+	wcstoi32
+	wcstou32
+	wcstoi64
+	wcstou64
+
+wcstime.h (based on time.h)
+	wcstotimespec
+	wcstotimeval
+	timespectowcs
+	timevaltowcs
+	libsimple_minimise_number_wcstring
