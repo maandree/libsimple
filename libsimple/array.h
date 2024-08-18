@@ -144,14 +144,14 @@
 
 
 /* @since  1.1 */
-#define libsimple_arraycpy(d, s, n) libsimple_memcpy(d, s, (n) * sizeof *(s))
+#define libsimple_arraycpy(d, s, n) memcpy(d, s, (n) * sizeof *(s))
 #ifndef arraycpy
 # define arraycpy(...) libsimple_arraycpy(__VA_ARGS__)
 #endif
 
 
 /* @since  1.1 */
-#define libsimple_arraymove(d, s, n) libsimple_memmove(d, s, (n) * sizeof *(s))
+#define libsimple_arraymove(d, s, n) memmove(d, s, (n) * sizeof *(s))
 #ifndef arraymove
 # define arraymove(...) libsimple_arraymove(__VA_ARGS__)
 #endif

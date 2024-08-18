@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_STRMOVE 3 2018-11-16 libsimple
+.TH LIBSIMPLE_STRMOVE 3 libsimple
 .SH NAME
 libsimple_strmove \- move a string within an array of bytes
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -14,6 +15,7 @@ static inline char *libsimple_strmove(char *\fIdest\fP, const char *\fIsrc\fP);
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_strmove ()
@@ -23,15 +25,18 @@ NUL byte that terminates it,
 into
 .IR dest .
 The arrays may overlap.
+
 .SH RETURN VALUE
 The
 .BR libsimple_strmove ()
 function returns the pointer
 .IR dest .
+
 .SH ERRORS
 The
 .BR libsimple_strmove ()
 function cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -50,18 +55,25 @@ T{
 .BR libsimple_strmove ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_stpmove (3),
 .BR libsimple_strnmove (3),

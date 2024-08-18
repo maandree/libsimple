@@ -1,0 +1,178 @@
+.TH LIBSIMPLE_VREALLOCFN 3 libsimple
+.SH NAME
+libsimple_vreallocfn \- reallocate memory
+
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+static inline void *libsimple_vreallocfn(void *\fIptr\fP, size_t \fIn\fP, va_list \fIap\fP);
+static inline void *libsimple_reallocfn(void *\fIptr\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+
+#ifndef vreallocfn
+# define vreallocfn libsimple_vreallocfn
+#endif
+#ifndef reallocfn
+# define reallocfn libsimple_reallocfn
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+
+.SH DESCRIPTION
+The
+.BR libsimple_reallocfn ()
+function is a wrapper for the
+.BR realloc (3)
+function, it reallocate memory allocated on
+the heap and return the older pointer or a new
+pointer with the alignment of
+.I alignof(max_align_t)
+to the allocated memory of 
+.I N
+bytes, where
+.I N
+is the product of
+.I n
+and all following arguments (which should have the type
+.BR size_t )
+up to the first 0;
+.I n
+must not be 0. The returned pointer will contain the
+same content as
+.IR ptr ,
+but truncated to
+.I N
+bytes if it is smaller or with the new bytes
+unitialised if it is larger. If a new pointer
+is returned, rather than
+.IR ptr ,
+.I ptr
+is deallocated;
+.I ptr
+is also deallocated on failure. The function
+.BR free (3)
+shall be called with the returned pointer as
+input when the allocated memory is no longer needed.
+.PP
+The
+.BR libsimple_vreallocfn ()
+function is a version of the
+.BR libsimple_reallocfn ()
+function that use
+.B va_list
+instead of variadic arguments.
+
+.SH RETURN VALUE
+The
+.BR libsimple_vreallocfn ()
+and
+.BR libsimple_reallocfn (),
+functions return a pointer to the allocated memory
+upon success completion; otherwise the
+.BR libsimple_vreallocfn ()
+and
+.BR libsimple_reallocfn ()
+functions return
+.B NULL
+and set
+.I errno
+it indicate the error.
+
+.SH ERRORS
+The
+.BR libsimple_vreallocn (),
+.BR libsimple_reallocn ()
+function will fail for the reasons specified for the
+.BR realloc (3)
+function, and if:
+.TP
+.B EINVAL
+.I n
+is 0.
+
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_vreallocfn (),
+.br
+.BR libsimple_reallocfn ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_vreallocfn (),
+.br
+.BR libsimple_reallocfn ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_vreallocfn (),
+.br
+.BR libsimple_reallocfn ()
+T}	Async-cancel safety	AC-Safe
+.TE
+
+.SH EXAMPLES
+None.
+
+.SH APPLICATION USAGE
+None.
+
+.SH RATIONALE
+None.
+
+.SH FUTURE DIRECTIONS
+None.
+
+.SH NOTES
+None.
+
+.SH BUGS
+None.
+
+.SH SEE ALSO
+.BR libsimple_enmalloc (3),
+.BR libsimple_mallocz (3),
+.BR libsimple_vmallocn (3),
+.BR libsimple_vmalloczn (3),
+.BR libsimple_encalloc (3),
+.BR libsimple_vcallocn (3),
+.BR libsimple_enrealloc (3),
+.BR libsimple_reallocarray (3),
+.BR libsimple_vreallocn (3),
+.BR libsimple_reallocf (3),
+.BR libsimple_reallocarrayf (3),
+.BR libsimple_aligned_realloc (3),
+.BR libsimple_aligned_reallocarray (3),
+.BR libsimple_aligned_vreallocn (3),
+.BR libsimple_aligned_reallocf (3),
+.BR libsimple_aligned_reallocarrayf (3),
+.BR libsimple_aligned_vreallocfn (3),
+.BR libsimple_memalign (3),
+.BR libsimple_memalignz (3),
+.BR libsimple_vmemalignn (3),
+.BR libsimple_vmemalignzn (3),
+.BR libsimple_enposix_memalign (3),
+.BR libsimple_posix_memalignz (3),
+.BR libsimple_vposix_memalignn (3),
+.BR libsimple_vposix_memalignzn (3),
+.BR libsimple_enaligned_alloc (3),
+.BR libsimple_aligned_allocz (3),
+.BR libsimple_valigned_allocn (3),
+.BR libsimple_valigned_alloczn (3),
+.BR libsimple_pvalloc (3),
+.BR libsimple_pvallocz (3),
+.BR libsimple_vpvallocn (3),
+.BR libsimple_vpvalloczn (3),
+.BR libsimple_valloc (3),
+.BR libsimple_vallocz (3),
+.BR libsimple_vvallocn (3),
+.BR libsimple_vvalloczn (3),
+.BR libsimple_vmemalloc (3),
+.BR libsimple_varrayalloc (3),
+.BR malloc (3)

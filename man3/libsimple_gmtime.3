@@ -1,0 +1,133 @@
+.TH LIBSIMPLE_GMTIME 3 libsimple
+.SH NAME
+libsimple_gmtime \- get the current UTC time with leap second adjustment
+
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+int libsimple_gmtime(struct tm *\fItm\fP, struct timespec *\fIts\fP);
+static inline void libsimple_engmtime(int \fIstatus\fPstruct tm *\fItm\fP, struct timespec *\fIts\fP);
+static inline void libsimple_egmtime(struct tm *\fItm\fP, struct timespec *\fIts\fP);
+.fi
+.PP
+Link with
+.IR \-lsimple .
+
+.SH DESCRIPTION
+The
+.BR libsimple_gmtime (),
+.BR libsimple_engmtime (),
+and
+.BR libsimple_egmtime ()
+functions get the current UTC time, with adjustments
+for leap seconds insertions and deletions.
+.PP
+The
+.BR libsimple_engmtime ()
+and
+.BR libsimple_egmtime ()
+functions will terminate the process on failure.
+On failure, the process's exit value will be
+.I status
+if the
+.BR libsimple_engmtime ()
+function is used or
+.IR libsimple_default_failure_exit (3)
+if the
+.BR libsimple_egmtime ()
+fucntion is used.
+.PP
+The local time is stored in
+.IR *tm ,
+and the POSIX time (not timezone adjusted),
+with leap second adjustments, is stored in
+.I *ts
+unless
+.I ts
+is
+.IR NULL .
+.I tm
+may
+.I not
+be
+.RI NULL .
+
+.SH RETURN VALUE
+The
+.BR libsimple_gmtime ()
+function return a 0 upon successful completion;
+otherwise the they return -1 and set
+.I errno
+to indicate the error. The
+.BR libsimple_engmtime ()
+and
+.BR libsimple_egmtime ()
+functions terminate the processes on failure.
+
+.SH ERRORS
+The
+.BR libsimple_gmtime ()
+function will fail for the reasons specified for the
+.BR gmtime_r (3)
+function.
+.PP
+The
+.BR libsimple_engmtime ()
+and
+.BR libsimple_egmtime ()
+functions will terminate the process on failure.
+
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_gmtime (),
+.br
+.BR libsimple_engmtime (),
+.br
+.BR libsimple_egmtime ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_gmtime (),
+.br
+.BR libsimple_engmtime (),
+.br
+.BR libsimple_egmtime ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_gmtime (),
+.br
+.BR libsimple_engmtime (),
+.br
+.BR libsimple_egmtime ()
+T}	Async-cancel safety	AC-Safe
+.TE
+
+.SH EXAMPLES
+None.
+
+.SH APPLICATION USAGE
+None.
+
+.SH RATIONALE
+None.
+
+.SH FUTURE DIRECTIONS
+None.
+
+.SH NOTES
+None.
+
+.SH BUGS
+None.
+
+.SH SEE ALSO
+.BR libsimple_gmtime (3),
+.BR ntp_adjtime (2),
+.BR gmtime_r (3)

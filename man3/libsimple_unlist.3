@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_UNLIST 3 2018-11-05 libsimple
+.TH LIBSIMPLE_UNLIST 3 libsimple
 .SH NAME
 libsimple_unlist \- remove item for array and keep order
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -18,6 +19,7 @@ void LIBSIMPLE_UNLIST(\fItype\fP *\fIlist\fP, size_t \fIi\fP, size_t *\fInp\fP);
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_unlist ()
@@ -50,14 +52,17 @@ instead it is inferred from the type of
 as such,
 .I type
 must be a complete, non-void type.
+
 .SH RETURN VALUE
 None.
+
 .SH ERRORS
 The
 .BR libsimple_unlist ()
 and
 .BR LIBSIMPLE_UNLIST ()
 functions cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -82,17 +87,24 @@ T{
 .BR LIBSIMPLE_UNLIST ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR memmove (3)

@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_STREND 3 2018-10-23 libsimple
+.TH LIBSIMPLE_STREND 3 libsimple
 .SH NAME
 libsimple_strend \- find a character in a string
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -14,12 +15,14 @@ static inline char *libsimple_strend(const char *\fIs\fP);
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_strend ()
 function scans the string
 .I s
 for its end.
+
 .SH RETURN VALUE
 The
 .BR libsimple_strend ()
@@ -30,10 +33,12 @@ with an offset such that
 where
 .I r
 is the returned pointer.
+
 .SH ERRORS
 The
 .BR libsimple_strend ()
 function cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -52,18 +57,25 @@ T{
 .BR libsimple_strend ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_strchrnul (3),
 .BR libsimple_strnend (3),

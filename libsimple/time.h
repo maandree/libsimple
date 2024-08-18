@@ -399,3 +399,105 @@ char *libsimple_minimise_number_string(char *);
 #ifndef minimise_number_string
 # define minimise_number_string libsimple_minimise_number_string
 #endif
+
+
+/**
+ * Get the current time in the local timezone
+ * 
+ * This function is leap-second aware
+ * 
+ * @param   tm  Output parameter for the local time
+ * @param   ts  Output parameter for the POSIX time, may be NULL
+ * @return      0 on success, -1 on failure
+ * 
+ * @since  1.2
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(1))))
+int libsimple_localtime(struct tm *, struct timespec *);
+
+/**
+ * Get the current time in the local timezone
+ * 
+ * This function is leap-second aware
+ * 
+ * On failure, the `libsimple_enprintf` function is called,
+ * cause the program to print an error message and exit,
+ * see `libsimple_enprintf` for more information
+ * 
+ * @param  status  The exit value for the process in case of failure
+ * @param  tm      Output parameter for the local time
+ * @param  ts      Output parameter for the POSIX time, may be NULL
+ * 
+ * @since  1.2
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(2))))
+void libsimple_enlocaltime(int, struct tm *, struct timespec *);
+
+/**
+ * Get the current time in the local timezone
+ * 
+ * This function is leap-second aware
+ * 
+ * On failure, the `libsimple_eprintf` function is called,
+ * cause the program to print an error message and exit,
+ * see `libsimple_eprintf` for more information
+ * 
+ * @param  tm  Output parameter for the local time
+ * @param  ts  Output parameter for the POSIX time, may be NULL
+ * 
+ * @since  1.2
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(1))))
+static inline void libsimple_elocaltime(struct tm *__tm, struct timespec *__ts)
+{ libsimple_enlocaltime(libsimple_default_failure_exit, __tm, __ts); }
+
+
+/**
+ * Get the current time in the UTC timezone
+ * 
+ * This function is leap-second aware
+ * 
+ * @param   tm  Output parameter for the UTC time
+ * @param   ts  Output parameter for the POSIX time, may be NULL
+ * @return      0 on success, -1 on failure
+ * 
+ * @since  1.2
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(1))))
+int libsimple_gmtime(struct tm *, struct timespec *);
+
+/**
+ * Get the current time in the UTC timezone
+ * 
+ * This function is leap-second aware
+ * 
+ * On failure, the `libsimple_enprintf` function is called,
+ * cause the program to print an error message and exit,
+ * see `libsimple_enprintf` for more information
+ * 
+ * @param  status  The exit value for the process in case of failure
+ * @param  tm      Output parameter for the UTC time
+ * @param  ts      Output parameter for the POSIX time, may be NULL
+ * 
+ * @since  1.2
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(2))))
+void libsimple_engmtime(int, struct tm *, struct timespec *);
+
+/**
+ * Get the current time in the UTC timezone
+ * 
+ * This function is leap-second aware
+ * 
+ * On failure, the `libsimple_eprintf` function is called,
+ * cause the program to print an error message and exit,
+ * see `libsimple_eprintf` for more information
+ * 
+ * @param  tm  Output parameter for the UTC time
+ * @param  ts  Output parameter for the POSIX time, may be NULL
+ * 
+ * @since  1.2
+ */
+_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(1))))
+static inline void libsimple_egmtime(struct tm *__tm, struct timespec *__ts)
+{ libsimple_engmtime(libsimple_default_failure_exit, __tm, __ts); }

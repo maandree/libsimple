@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_VMEMALIGNN 3 2018-11-03 libsimple
+.TH LIBSIMPLE_VMEMALIGNN 3 libsimple
 .SH NAME
 libsimple_vmemalignn \- allocate memory with custom alignment
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -34,6 +35,7 @@ static inline void *libsimple_ememalignn(size_t \fIalignment\fP, size_t \fIn\fP,
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_memalignn (),
@@ -91,6 +93,7 @@ and
 respectively, that use
 .B va_list
 instead of variadic arguments.
+
 .SH RETURN VALUE
 The
 .BR libsimple_vmemalignn (),
@@ -116,6 +119,7 @@ it indicate the error, and the
 and
 .BR libsimple_ememalignn ()
 functions terminated the process.
+
 .SH ERRORS
 The
 .BR libsimple_vmemalignn (),
@@ -140,6 +144,7 @@ The
 and
 .BR libsimple_ememalignn ()
 functions will terminate the process on failure.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -188,18 +193,25 @@ T{
 .BR libsimple_ememalignn ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_enmalloc (3),
 .BR libsimple_mallocz (3),
@@ -208,7 +220,17 @@ None.
 .BR libsimple_encalloc (3),
 .BR libsimple_vcallocn (3),
 .BR libsimple_enrealloc (3),
+.BR libsimple_reallocarray (3),
 .BR libsimple_vreallocn (3),
+.BR libsimple_reallocf (3),
+.BR libsimple_reallocarrayf (3),
+.BR libsimple_vreallocfn (3),
+.BR libsimple_aligned_realloc (3),
+.BR libsimple_aligned_reallocarray (3),
+.BR libsimple_aligned_vreallocn (3),
+.BR libsimple_aligned_reallocf (3),
+.BR libsimple_aligned_reallocarrayf (3),
+.BR libsimple_aligned_vreallocfn (3),
 .BR libsimple_memalign (3),
 .BR libsimple_memalignz (3),
 .BR libsimple_vmemalignzn (3),

@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_TIMESPECTOSTR 3 2018-10-30 libsimple
+.TH LIBSIMPLE_TIMESPECTOSTR 3 libsimple
 .SH NAME
 libsimple_timespectostr, libsimple_timevaltostr \- convert a duration data structure to a string
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -18,6 +19,7 @@ char *libsimple_timevaltostr(char *restrict \fIbuf\fP, const struct timeval *res
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_timespectostr ()
@@ -59,6 +61,7 @@ and will always contain 9 (for the
 function) or 6 (for the
 .BR libsimple_timevaltostr ()
 function) decimals.
+
 .SH RETURN VALUE
 The
 .BR libsimple_timespectostr ()
@@ -77,6 +80,7 @@ pointer, otherwise the pointer
 is returned. On failure,
 .B NULL
 is returned.
+
 .SH ERRORS
 The
 .BR libsimple_timespectostr ()
@@ -97,6 +101,7 @@ failed because it could not allocate enough memory.
 is negative or greater than 999\ 999\ 999, or
 .I tv->tv_usec
 is negative or greater than 999\ 999.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -121,18 +126,25 @@ T{
 .BR libsimple_timevaltostr ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_minimise_number_string (3),
 .BR libsimple_sumtimespec (3),

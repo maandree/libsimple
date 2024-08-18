@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_GETENV_NE 3 2018-10-20 libsimple
+.TH LIBSIMPLE_GETENV_NE 3 libsimple
 .SH NAME
 libsimple_getenv_ne \- get non-empty value of an environment variable
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -14,6 +15,7 @@ static inline char *libsimple_getenv_ne(const char *\fIname\fP);
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_getenv_ne ()
@@ -29,6 +31,7 @@ that have not be come visible to other process via
 replacement of the process image, are visible to the
 .BR libsimple_getenv_ne ()
 function.
+
 .SH RETURN VALUE
 If the environment variable
 .I name
@@ -42,10 +45,12 @@ its content should not be modified. The returned
 pointer becomes invalid when the environment variable
 .I name
 is unset or modified.
+
 .SH ERRORS
 The
 .BR libsimple_getenv_ne ()
 function cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -64,18 +69,25 @@ T{
 .BR libsimple_getenv_ne ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_getenv_e (3),
 .BR getenv (3)

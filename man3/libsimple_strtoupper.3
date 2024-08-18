@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_STRTOUPPER 3 2018-11-25 libsimple
+.TH LIBSIMPLE_STRTOUPPER 3 libsimple
 .SH NAME
 libsimple_strtoupper, libsimple_stptoupper \- convert a string to upper case
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -18,6 +19,7 @@ char *libsimple_stptoupper(char *\fIdest\fP, const char *\fIsrc\fP);
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_strtoupper ()
@@ -33,6 +35,7 @@ with all lower case ASCII characters converted to
 upper case. The arrays may overlap, and there is
 an optimisation for the case where
 .IR dest==src .
+
 .SH RETURN VALUE
 The
 .BR libsimple_strtoupper ()
@@ -46,12 +49,14 @@ end of the string copied into
 .IR dest ,
 that is
 .IR &dest[strlen(src)] .
+
 .SH ERRORS
 The
 .BR libsimple_strtoupper ()
 and
 .BR libsimple_stptoupper ()
 functions cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -76,18 +81,25 @@ T{
 .BR libsimple_stptoupper ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_strtolower (3),
 .BR libsimple_strreplace (3),

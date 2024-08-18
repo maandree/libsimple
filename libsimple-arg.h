@@ -432,8 +432,19 @@ struct longopt {
 #define USAGE(SYNOPSIS)\
 	NUSAGE(1, SYNOPSIS)
 
+
+/* Intended for internal use only */
+#if __STDC_VERSION__ >= 201112L
+# define _LIBSIMPLE_NORETURN _Noreturn
+#elif defined(__GNUC__) || defined(__clang__)
+# define _LIBSIMPLE_NORETURN __attribute__((noreturn))
+#else
+# define _LIBSIMPLE_NORETURN
+#endif
+
+
 /**
- * Define the function `static void usage(void)`
+ * Define the function `static _Noreturn void usage(void)`
  * that prints the error message
  *         "usage: %s %s\n", argv0, SYNOPSIS
  * or
@@ -448,26 +459,15 @@ struct longopt {
  * 
  * @since  1.0
  */
-#if defined(__GNUC__) || defined(__clang__)
-# define NUSAGE(STATUS, SYNOPSIS)\
-	__attribute__((noreturn))\
-	static void usage(void)\
+#define NUSAGE(STATUS, SYNOPSIS)\
+	static _LIBSIMPLE_NORETURN void\
+	usage(void)\
 	{\
 		const char *syn = SYNOPSIS ? SYNOPSIS : "";\
 		fprintf(stderr, "usage: %s%s%s\n", argv0, *syn ? " " : "", syn);\
 		exit(STATUS);\
 	}\
 	char *argv0 = NULL
-#else
-# define NUSAGE(STATUS, SYNOPSIS)\
-	static void usage(void)\
-	{\
-		const char *syn = SYNOPSIS ? SYNOPSIS : "";\
-		fprintf(stderr, "usage: %s%s%s\n", argv0, *syn ? " " : "", syn);\
-		exit(STATUS);\
-	}\
-	char *argv0 = NULL
-#endif
 
 
 #endif

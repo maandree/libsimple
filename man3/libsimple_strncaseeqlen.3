@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_STRNCASEEQLEN 3 2018-10-23 libsimple
+.TH LIBSIMPLE_STRNCASEEQLEN 3 libsimple
 .SH NAME
 libsimple_strncaseeqlen \- check initial commonality
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -14,6 +15,7 @@ size_t libsimple_strncaseeqlen(const char *\fIa\fP, const char *\fIb\fP, size_t 
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_strncaseeqlen ()
@@ -30,6 +32,7 @@ bytes unless it is shorter,
 at their beginnings.
 .PP
 The comparison is case-insensitive.
+
 .SH RETURN VALUE
 The
 .BR libsimple_strncaseeqlen ()
@@ -40,10 +43,12 @@ and
 (both truncated to
 .I n
 bytes) have in common at their beginnings.
+
 .SH ERRORS
 The
 .BR libsimple_strncaseeqlen ()
 function cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -62,18 +67,25 @@ T{
 .BR libsimple_strncaseeqlen ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_strcaseeq (3),
 .BR libsimple_streqlen (3),

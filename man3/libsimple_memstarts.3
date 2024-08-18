@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_MEMSTARTS 3 2018-10-23 libsimple
+.TH LIBSIMPLE_MEMSTARTS 3 libsimple
 .SH NAME
 libsimple_memstarts \- checks beginning of memory
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -14,6 +15,7 @@ int libsimple_memstarts(const void *\fIs\fP, size_t \fIn\fP, const void *\fIt\fP
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_memstarts ()
@@ -31,6 +33,7 @@ first bytes of
 .IR t .
 .PP
 The comparison is case-sensitive.
+
 .SH RETURN VALUE
 The
 .BR libsimple_memstarts ()
@@ -39,10 +42,12 @@ function returns 1 if
 begins with
 .IR t ,
 otherwise it returns 0.
+
 .SH ERRORS
 The
 .BR libsimple_memstarts ()
 function cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -61,18 +66,25 @@ T{
 .BR libsimple_memstarts ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_memcasestarts (3),
 .BR libsimple_memends (3),

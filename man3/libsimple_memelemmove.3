@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_MEMELEMMOVE 3 2018-11-25 libsimple
+.TH LIBSIMPLE_MEMELEMMOVE 3 libsimple
 .SH NAME
 libsimple_memelemmove, libsimple_memelemcpy \- copy or move elements within an array
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -18,6 +19,7 @@ static inline void *libsimple_memelemcpy(void *\fIdest\fP, const void *\fIsrc\fP
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_memelemmove ()
@@ -43,6 +45,7 @@ The arrays may overlap in the
 function but not in the
 .BR libsimple_memelemcpy ()
 function.
+
 .SH RETURN VALUE
 The
 .BR libsimple_memelemmove ()
@@ -58,12 +61,14 @@ after it was copied. If the element
 was not copied
 .I NULL
 is returned.
+
 .SH ERRORS
 The
 .BR libsimple_memelemmove ()
 and
 .BR libsimple_memelemcpy ()
 functions cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -88,18 +93,25 @@ and
 .BR libsimple_memelemcpy ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_rawmemelemmove (3),
 .BR libsimple_mempmove (3),

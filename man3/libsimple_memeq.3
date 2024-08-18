@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_MEMEQ 3 2018-10-23 libsimple
+.TH LIBSIMPLE_MEMEQ 3 libsimple
 .SH NAME
 libsimple_memeq \- check two memory segments for equality
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -14,6 +15,7 @@ static inline int libsimple_memeq(const void *\fIa\fP, const void *\fIb\fP, size
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_memeq ()
@@ -26,6 +28,7 @@ and
 are equal.
 .PP
 The comparison is case-sensitive.
+
 .SH RETURN VALUE
 The
 .BR libsimple_memeq ()
@@ -34,10 +37,12 @@ function returns 1 one if
 and
 .I b
 are equal, otherwise it returns 0.
+
 .SH ERRORS
 The
 .BR libsimple_memeq ()
 function cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -56,18 +61,25 @@ T{
 .BR libsimple_memeq ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_memcaseeq (3),
 .BR libsimple_memeqlen (3),

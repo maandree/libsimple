@@ -1,0 +1,203 @@
+.TH LIBSIMPLE_REALLOCARRAY 3 libsimple
+.SH NAME
+libsimple_reallocarray \- reallocate memory
+
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+static inline void *libsimple_reallocarray(void *\fIptr\fP, size_t \fIn\fP, size_t \fIm\fP);
+static inline void *libsimple_enreallocarray(int \fIstatus\fP, void *\fIptr\fP, size_t \fIn\fP, size_t \fIm\fP);
+static inline void *libsimple_ereallocarray(void *\fIptr\fP, size_t \fIn\fP, size_t \fIm\fP);
+
+#ifndef reallocarray
+# define reallocarray libsimple_reallocarray
+#endif
+#ifndef enreallocarray
+# define enreallocarray libsimple_enreallocarray
+#endif
+#ifndef ereallocarray
+# define ereallocarray libsimple_ereallocarray
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+
+.SH DESCRIPTION
+The
+.BR libsimple_reallocarray (),
+.BR libsimple_enreallocarray (),
+and
+.BR libsimple_ereallocarray ()
+functions are wrappers for the
+.BR realloc (3)
+function, they reallocate memory allocated on
+the heap and return the older pointer or a new
+pointer with the alignment of
+.I alignof(max_align_t)
+to the allocated memory of 
+.I n*m
+bytes. The behaviour is unspecified if
+.I n
+or
+.I m
+is 0. The returned pointer will contain the
+same content as
+.IR ptr ,
+but truncated to
+.I n*m
+bytes if it is smaller or with the new bytes
+unitialised if it is larger. If a new pointer
+is returned, rather than
+.IR ptr ,
+.I ptr
+is deallocated;
+.I ptr
+is not deallocated on failure. The function
+.BR free (3)
+shall be called with the returned pointer as
+input when the allocated memory is no longer needed.
+.PP
+The
+.BR libsimple_enreallocarray ()
+and
+.BR libsimple_ereallocarray ()
+functions will terminate the process if the memory
+cannot be allocated, by calling the
+.BR libsimple_enprintf ()
+and
+.BR libsimple_eprintf ()
+functions, respectively.
+On failure, the process's exit value will be
+.I status
+if the
+.BR libsimple_enreallocarray ()
+function is used or
+.IR libsimple_default_failure_exit (3)
+if the
+.BR libsimple_ereallocarray ()
+function is used.
+
+.SH RETURN VALUE
+The
+.BR libsimple_reallocarray (),
+.BR libsimple_enreallocarray (),
+and
+.BR libsimple_ereallocarray ()
+functions return a pointer to the allocated memory
+upon success completion; otherwise the
+.BR libsimple_reallocarray ()
+function returns
+.B NULL
+and set
+.I errno
+it indicate the error, and the
+.BR libsimple_enreallocarray ()
+and
+.BR libsimple_ereallocarray ()
+functions terminated the process.
+
+.SH ERRORS
+The
+.BR libsimple_reallocarray ()
+function will fail for the reasons specified for the
+.BR realloc (3)
+function.
+.PP
+The
+.BR libsimple_enreallocarray ()
+and
+.BR libsimple_ereallocarray ()
+functions will terminate the process on failure.
+
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_reallocarray (),
+.br
+.BR libsimple_enreallocarray (),
+.br
+.BR libsimple_ereallocarray ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_reallocarray (),
+.br
+.BR libsimple_enreallocarray (),
+.br
+.BR libsimple_ereallocarray ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_reallocarray (),
+.br
+.BR libsimple_enreallocarray (),
+.br
+.BR libsimple_ereallocarray ()
+T}	Async-cancel safety	AC-Safe
+.TE
+
+.SH EXAMPLES
+None.
+
+.SH APPLICATION USAGE
+None.
+
+.SH RATIONALE
+None.
+
+.SH FUTURE DIRECTIONS
+None.
+
+.SH NOTES
+None.
+
+.SH BUGS
+None.
+
+.SH SEE ALSO
+.BR libsimple_enmalloc (3),
+.BR libsimple_mallocz (3),
+.BR libsimple_vmallocn (3),
+.BR libsimple_vmalloczn (3),
+.BR libsimple_encalloc (3),
+.BR libsimple_vcallocn (3),
+.BR libsimple_enrealloc (3),
+.BR libsimple_vreallocn (3),
+.BR libsimple_reallocf (3),
+.BR libsimple_reallocarrayf (3),
+.BR libsimple_vreallocfn (3),
+.BR libsimple_aligned_realloc (3),
+.BR libsimple_aligned_reallocarray (3),
+.BR libsimple_aligned_vreallocn (3),
+.BR libsimple_aligned_reallocf (3),
+.BR libsimple_aligned_reallocarrayf (3),
+.BR libsimple_aligned_vreallocfn (3),
+.BR libsimple_memalign (3),
+.BR libsimple_memalignz (3),
+.BR libsimple_vmemalignn (3),
+.BR libsimple_vmemalignzn (3),
+.BR libsimple_enposix_memalign (3),
+.BR libsimple_posix_memalignz (3),
+.BR libsimple_vposix_memalignn (3),
+.BR libsimple_vposix_memalignzn (3),
+.BR libsimple_enaligned_alloc (3),
+.BR libsimple_aligned_allocz (3),
+.BR libsimple_valigned_allocn (3),
+.BR libsimple_valigned_alloczn (3),
+.BR libsimple_pvalloc (3),
+.BR libsimple_pvallocz (3),
+.BR libsimple_vpvallocn (3),
+.BR libsimple_vpvalloczn (3),
+.BR libsimple_valloc (3),
+.BR libsimple_vallocz (3),
+.BR libsimple_vvallocn (3),
+.BR libsimple_vvalloczn (3),
+.BR libsimple_vmemalloc (3),
+.BR libsimple_varrayalloc (3),
+.BR malloc (3)

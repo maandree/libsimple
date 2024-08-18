@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_MEMCASEENDS 3 2018-10-23 libsimple
+.TH LIBSIMPLE_MEMCASEENDS 3 libsimple
 .SH NAME
 libsimple_memcaseends \- checks end of memory
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -14,6 +15,7 @@ int libsimple_memcaseends(const void *\fIs\fP, size_t \fIn\fP, const void *\fIt\
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_memcaseends ()
@@ -33,6 +35,7 @@ first bytes of
 .IR t .
 .PP
 The comparison is case-insensitive.
+
 .SH RETURN VALUE
 The
 .BR libsimple_memcaseends ()
@@ -41,10 +44,12 @@ function returns 1 if
 ends with
 .IR t ,
 otherwise it returns 0.
+
 .SH ERRORS
 The
 .BR libsimple_memcaseends ()
 function cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -63,18 +68,25 @@ T{
 .BR libsimple_memcaseends ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_memends (3),
 .BR libsimple_memcasestarts (3),

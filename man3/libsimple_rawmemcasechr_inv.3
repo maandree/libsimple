@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_RAWMEMCASECHR_INV 3 2018-11-24 libsimple
+.TH LIBSIMPLE_RAWMEMCASECHR_INV 3 libsimple
 .SH NAME
 libsimple_rawmemcasechr_inv \- find different byte in memory
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -14,6 +15,7 @@ void *libsimple_rawmemcasechr_inv(const void *\fIs\fP, int \fIc\fP);
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_rawmemcasechr_inv ()
@@ -32,6 +34,7 @@ occurence, its behaviour is undefined
 if this is not the case.
 .PP
 The comparison is case-insensitive.
+
 .SH RETURN VALUE
 The
 .BR libsimple_rawmemcasechr_inv ()
@@ -42,10 +45,12 @@ with a minimal offset such that
 where
 .I r
 is the returned pointer.
+
 .SH ERRORS
 The
 .BR libsimple_rawmemcasechr_inv ()
 function cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -64,18 +69,25 @@ T{
 .BR libsimple_rawmemcasechr_inv ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_rawmemcasechr (3),
 .BR libsimple_memcasechr_inv (3),

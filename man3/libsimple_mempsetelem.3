@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_MEMPSETELEM 3 2018-10-20 libsimple
+.TH LIBSIMPLE_MEMPSETELEM 3 libsimple
 .SH NAME
 libsimple_mempsetelem \- fill an array with a value
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -14,6 +15,7 @@ void *libsimple_mempsetelem(void *\fIbuf\fP, const void *\fIitem\fP, size_t \fIw
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_mempsetelem ()
@@ -25,6 +27,7 @@ copies of the element
 .I item
 with the size
 .IR width .
+
 .SH RETURN VALUE
 The
 .BR libsimple_mempsetelem ()
@@ -33,10 +36,12 @@ function returns the pointer
 with the offset
 .I n*width
 (the byte where the copy stopped).
+
 .SH ERRORS
 The
 .BR libsimple_mempsetelem ()
 function cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -55,18 +60,25 @@ T{
 .BR libsimple_mempsetelem ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_memsetelem (3),
 .BR libsimple_mempset (3)

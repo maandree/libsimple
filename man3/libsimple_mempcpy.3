@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_MEMPCPY 3 2018-11-16 libsimple
+.TH LIBSIMPLE_MEMPCPY 3 libsimple
 .SH NAME
 libsimple_mempcpy \- copy an array of bytes into another
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -14,6 +15,7 @@ static inline void *libsimple_mempcpy(void *restrict \fIdest\fP, const void *res
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_mempcpy ()
@@ -31,6 +33,7 @@ must not overlap with the first
 .I n
 bytes of
 .IR src .
+
 .SH RETURN VALUE
 The
 .BR libsimple_mempcpy ()
@@ -39,10 +42,12 @@ function returns the pointer
 with the offset
 .I n
 (the byte where the copy stopped).
+
 .SH ERRORS
 The
 .BR libsimple_mempcpy ()
 function cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -61,18 +66,25 @@ T{
 .BR libsimple_mempcpy ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_mempmove (3),
 .BR libsimple_mempset (3),

@@ -1,6 +1,7 @@
-.TH LIBSIMPLE\-ARG.H 0 2018-11-15 libsimple
+.TH LIBSIMPLE\-ARG.H 0 libsimple
 .SH NAME
 libsimple\-arg.h \- command line argument parsing header for libsimple
+
 .SH SYNOPSIS
 .nf
 #include <libsimple\-arg.h>
@@ -29,6 +30,7 @@ struct longopt {
 #define USAGE(\fISYNOPSIS\fP)                      /* implementation omitted */
 #define NUSAGE(\fISTATUS\fP, \fISYNOPSIS\fP)             /* implementation omitted */
 .fi
+
 .SH DESCRIPTION
 The
 .I <libsimple\-arg.h>
@@ -467,13 +469,18 @@ once, or if flags are used, never. So if your application
 should not have any options or operands,
 .I NOFLAGS(argc)
 can be used.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH SEE ALSO
 .BR libsimple.h (0)

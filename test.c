@@ -229,11 +229,43 @@ strndup(const char *s, size_t n)
 }
 
 
+#if 0
 void *
 memdup(const void *s, size_t size)
 {
 	return libsimple_memdup(s, size);
 }
+#endif
+
+
+wchar_t *
+wcsdup(const wchar_t *s)
+{
+	wchar_t *r;
+	size_t n = wcslen(s) + 1;
+	if (n > SIZE_MAX / sizeof(wchar_t)) {
+		errno = ENOMEM;
+		return NULL;
+	}
+	r = malloc(n * sizeof(wchar_t));
+	return r ? wcscpy(r, s) : r;
+}
+
+
+#if 0
+wchar_t *
+wcsndup(const wchar_t *s, size_t n)
+{
+	return libsimple_wcsndup(s, n);
+}
+
+
+wchar_t *
+wmemdup(const wchar_t *s, size_t n)
+{
+	return libsimple_wmemdup(s, n);
+}
+#endif
 
 
 void
@@ -255,7 +287,7 @@ memset(void *s, int c, size_t n)
 {
 	char *str = s;
 	struct allocinfo *info;
-	if (just_alloced && s == just_alloced) {
+	if (s == just_alloced && just_alloced && !c) {
 		info = get_allocinfo(s);
 		info->zeroed = MAX(info->zeroed, n);
 	}

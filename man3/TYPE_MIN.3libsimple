@@ -1,6 +1,7 @@
-.TH TYPE_MIN 3 2018-11-05 libsimple
+.TH TYPE_MIN 3 libsimple
 .SH NAME
 TYPE_MIN \- get smallest value for an integer type
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -9,6 +10,7 @@ TYPE_MIN \- get smallest value for an integer type
 # define TYPE_MIN(type) /* implementation omitted */
 #endif
 .fi
+
 .SH DESCRIPTION
 The
 .BR TYPE_MIN ()
@@ -60,18 +62,25 @@ macro, for the minimum value for multiple integer types:
 .BR USECONDS_MIN ,
 and
 .BR U_QUAD_MIN .
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR TYPE_MAX (3libsimple)
 .BR INTSTRLEN (3libsimple)

@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_INCHRSET 3 2018-11-05 libsimple
+.TH LIBSIMPLE_INCHRSET 3 libsimple
 .SH NAME
 libsimple_inchrset, libsimple_inchrcaseset \- the whether a character belongs to a set
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -18,6 +19,7 @@ static inline int libsimple_inchrcaseset(int \fIc\fP, const char *\fIs\fP);
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_inchrset ()
@@ -39,6 +41,7 @@ The comparison is case-sensitive for the
 function, and case-insensitive for the
 .BR libsimple_inchrcaseset ()
 function.
+
 .SH RETURN VALUE
 The
 .BR libsimple_inchrset ()
@@ -49,12 +52,14 @@ functions returns 1 if
 is not the NUL byte but can be found in
 .IR s ;
 otherwise 0 is returned.
+
 .SH ERRORS
 The
 .BR libsimple_inchrset ()
 and
 .BR libsimple_inchrcaseset ()
 functions cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -79,18 +84,25 @@ T{
 .BR libsimple_strchrnul ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_strcasechr (3),
 .BR strchr (3)

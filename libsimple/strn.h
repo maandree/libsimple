@@ -513,7 +513,7 @@ static inline int libsimple_strncaseeq(const char *__a, const char *__b, size_t 
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
 static inline int libsimple_strncaseeqnul(const char *__a, const char *__b, size_t __n)
-{ return !strncasecmpnul(__a, __b, __n); }
+{ return !libsimple_strncasecmpnul(__a, __b, __n); }
 #ifndef strncaseeqnul
 # define strncaseeqnul libsimple_strncaseeqnul
 #endif
@@ -571,7 +571,7 @@ size_t libsimple_strncaseeqlen(const char *, const char *, size_t);
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 static inline size_t libsimple_strrneqlen(const char *__a, const char *__b, size_t __n)
-{ return memreqlen(__a, strnlen(__a, __n), __b, strnlen(__b, __n)); }
+{ return libsimple_memreqlen(__a, strnlen(__a, __n), __b, strnlen(__b, __n)); }
 #ifndef strrneqlen
 # define strrneqlen libsimple_strrneqlen
 #endif
@@ -591,7 +591,7 @@ static inline size_t libsimple_strrneqlen(const char *__a, const char *__b, size
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 static inline size_t libsimple_strrncaseeqlen(const char *__a, const char *__b, size_t __n)
-{ return memrcaseeqlen(__a, strnlen(__a, __n), __b, strnlen(__b, __n)); }
+{ return libsimple_memrcaseeqlen(__a, strnlen(__a, __n), __b, strnlen(__b, __n)); }
 #ifndef strrncaseeqlen
 # define strrncaseeqlen libsimple_strrncaseeqlen
 #endif

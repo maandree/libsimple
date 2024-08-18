@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_STRSET 3 2018-11-25 libsimple
+.TH LIBSIMPLE_STRSET 3 libsimple
 .SH NAME
 libsimple_strset, libsimple_stpset \- fill a string with a character
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -18,6 +19,7 @@ static inline char *libsimple_stpset(char *\fIs\fP, int \fIc\fP);
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_strset ()
@@ -27,6 +29,7 @@ functions replace all characters in the string
 .I s
 with the character
 .IR c .
+
 .SH RETURN VALUE
 The
 .BR libsimple_strset ()
@@ -39,12 +42,14 @@ function returns the end of
 (that is
 .IR &s[strlen(s)] ,
 as evaluated before the function call.
+
 .SH ERRORS
 The
 .BR libsimple_strset ()
 and
 .BR libsimple_stpset ()
 functions cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -69,18 +74,25 @@ T{
 .BR libsimple_stpset ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_strnset (3),
 .BR libsimple_mempset (3),

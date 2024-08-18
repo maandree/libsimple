@@ -7,6 +7,12 @@ SUBHDR =\
 	libsimple/aligned_alloc.h\
 	libsimple/aligned_allocz.h\
 	libsimple/aligned_memdup.h\
+	libsimple/aligned_realloc.h\
+	libsimple/aligned_strdup.h\
+	libsimple/aligned_strndup.h\
+	libsimple/aligned_wcsdup.h\
+	libsimple/aligned_wcsndup.h\
+	libsimple/aligned_wmemdup.h\
 	libsimple/array.h\
 	libsimple/calloc.h\
 	libsimple/definitions.h\
@@ -32,7 +38,10 @@ SUBHDR =\
 	libsimple/strndup.h\
 	libsimple/time.h\
 	libsimple/valloc.h\
-	libsimple/vallocz.h
+	libsimple/vallocz.h\
+	libsimple/wcsdup.h\
+	libsimple/wcsndup.h\
+	libsimple/wmemdup.h
 
 HDR =\
 	$(SUBHDR)\
@@ -40,6 +49,9 @@ HDR =\
 
 OBJ =\
 	aligned_memdup.o\
+	aligned_strndup.o\
+	aligned_wcsndup.o\
+	aligned_wmemdup.o\
 	allocn.o\
 	asprintf.o\
 	difftimespec.o\
@@ -48,19 +60,35 @@ OBJ =\
 	doubletotimeval.o\
 	enaligned_allocz.o\
 	enaligned_memdup.o\
+	enaligned_realloc.o\
+	enaligned_reallocarray.o\
+	enaligned_strdup.o\
+	enaligned_strndup.o\
+	enaligned_wcsdup.o\
+	enaligned_wcsndup.o\
+	enaligned_wmemdup.o\
 	encalloc.o\
+	engmtime.o\
+	enlocaltime.o\
 	enmalloc.o\
 	enmemdup.o\
 	enposix_memalignz.o\
 	enrealloc.o\
+	enreallocarray.o\
 	enstrdup.o\
 	enstrndup.o\
 	envaligned_alloczn.o\
+	envaligned_reallocn.o\
 	envmalloczn.o\
 	envmemalloc.o\
 	envposix_memalignzn.o\
 	envputenvf.o\
 	envreallocn.o\
+	enwcsdup.o\
+	enwcsndup.o\
+	enwmemdup.o\
+	gmtime.o\
+	localtime.o\
 	memcasechr.o\
 	memcasechr_inv.o\
 	memcasecmp.o\
@@ -175,6 +203,8 @@ OBJ =\
 	vmemalloc.o\
 	vputenvf.o\
 	vweprintf.o\
+	wcsndup.o\
+	wmemdup.o\
 	libsimple.o
 
 MAN0 =\
@@ -192,7 +222,9 @@ all: libsimple.a $(TESTS)
 $(OBJ): $(@:.o=.c) $(HDR)
 $(TESTS): $(@:=.o) test.o libsimple.a
 $(TESTS:=.o): $(@:.test.o=.c) $(HDR) test.h
+
 test.o: test.c $(HDR) test.h
+	$(CC) -c -o $@ test.c $(CFLAGS) -DTEST -O0 -ffreestanding
 
 libsimple.a: $(OBJ)
 	$(AR) rc $@ $?

@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_STRNEND 3 2018-10-23 libsimple
+.TH LIBSIMPLE_STRNEND 3 libsimple
 .SH NAME
 libsimple_strnend \- find a character in a string
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -14,6 +15,7 @@ static inline char *libsimple_strnend(const char *\fIs\fP, size_t \fIn\fP);
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_strnend ()
@@ -23,6 +25,7 @@ truncated to
 .I n
 bytes unless it is shorter,
 for its end.
+
 .SH RETURN VALUE
 The
 .BR libsimple_strnend ()
@@ -38,10 +41,12 @@ if no such offset less than
 exists,
 .I &s[n]
 is returned.
+
 .SH ERRORS
 The
 .BR libsimple_strnend ()
 function cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -60,18 +65,25 @@ T{
 .BR libsimple_strnend ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_strnchrnul (3),
 .BR libsimple_strnchr (3),

@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_VASPRINTF 3 2018-11-04 libsimple
+.TH LIBSIMPLE_VASPRINTF 3 libsimple
 .SH NAME
 libsimple_vasprintf \- allocate and format a string
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -26,6 +27,7 @@ char *libsimple_asprintfa(const char *\fIfmt\fP, ...);
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_vasprintf ()
@@ -92,6 +94,7 @@ and
 .BR libsimple_asprintfa ()
 functions are implemented as macros and are only
 available if compiling with GCC or Clang.
+
 .SH RETURN VALUE
 The
 .BR libsimple_vasprintf ()
@@ -113,6 +116,7 @@ completion; otherwise
 is returned and
 .I errno
 set to indicate the error.
+
 .SH ERRORS
 The
 .BR libsimple_vasprintf (),
@@ -141,6 +145,7 @@ and
 functions, the kernel will kill the thread with a
 .B SIGSEGV
 signal.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -177,18 +182,25 @@ T{
 .BR libsimple_asprintfa ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_vweprintf (3),
 .BR sprintf (3),

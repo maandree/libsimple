@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_ALIGNED_MEMDUP 3 2018-10-27 libsimple
+.TH LIBSIMPLE_ALIGNED_MEMDUP 3 libsimple
 .SH NAME
 libsimple_aligned_memdup, libsimple_aligned_memdupa \- duplicate bytes in memory
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -26,10 +27,11 @@ static inline void *libsimple_ealigned_memdup(const void *\fIs\fP, size_t \fIali
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_aligned_memdup ()
-function constructs allocates memory with the alignment
+function allocates memory with the alignment
 specified in the
 .I alignment
 parameter and copies
@@ -60,6 +62,7 @@ function that uses allocates the memory on the stack
 rather than on the heap, causing the return pointer
 to become invalid when the calling function returns.
 It is only available when compling with GCC or Clang.
+
 .SH RETURN VALUE
 Upon successful completion, the
 .BR libsimple_aligned_memdupa (),
@@ -90,12 +93,14 @@ by the
 .BR libsimple_aligned_memdupa ()
 function, it is automatically deallocated when the
 calling function returns.
+
 .SH ERRORS
 The
 .BR libsimple_aligned_memdup ()
 function may fail for any reason specified for the
 .BR aligned_alloc (3)
 function.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -132,21 +137,29 @@ T{
 .BR libsimple_ealigned_memdup (),
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_memdup (3),
-.BR libsimple_enstrndup (3),
-.BR libsimple_enstrdup (3),
-.BR strndup (3),
-.BR strdup (3)
+.BR libsimple_aligned_strndup (3),
+.BR libsimple_aligned_strdup (3),
+.BR libsimple_aligned_wcsdup (3),
+.BR libsimple_aligned_wcsndup (3),
+.BR libsimple_aligned_wmemdup (3)

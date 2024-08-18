@@ -1,6 +1,7 @@
-.TH LIBSIMPLE_MEMCMOVE 3 2018-11-25 libsimple
+.TH LIBSIMPLE_MEMCMOVE 3 libsimple
 .SH NAME
 libsimple_memcmove \- move bytes within an array of bytes
+
 .SH SYNOPSIS
 .nf
 #include <libsimple.h>
@@ -14,6 +15,7 @@ void *libsimple_memcmove(void *\fIdest\fP, const void *\fIsrc\fP, int \fIc\fP, s
 .PP
 Link with
 .IR \-lsimple .
+
 .SH DESCRIPTION
 The
 .BR libsimple_memcmove ()
@@ -30,6 +32,7 @@ However the move stops after the character
 is moved. The arrays may overlap in the.
 .PP
 The comparison is case-sensitive.
+
 .SH RETURN VALUE
 The
 .BR libsimple_memcmove ()
@@ -43,10 +46,12 @@ after it was move, if the character
 was not moved
 .I NULL
 is returned.
+
 .SH ERRORS
 The
 .BR libsimple_memcmove ()
 function cannot fail.
+
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -65,18 +70,25 @@ T{
 .BR libsimple_memcmove ()
 T}	Async-cancel safety	AC-Safe
 .TE
+
 .SH EXAMPLES
 None.
+
 .SH APPLICATION USAGE
 None.
+
 .SH RATIONALE
 None.
+
 .SH FUTURE DIRECTIONS
 None.
+
 .SH NOTES
 None.
+
 .SH BUGS
 None.
+
 .SH SEE ALSO
 .BR libsimple_rawmemcmove (3),
 .BR libsimple_mempmove (3),
