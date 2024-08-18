@@ -12,6 +12,8 @@
  *                     `!memcmp(r, needle, width)` where `r` is the returned
  *                     pointer and such that `(r - haystack) % width == 0`,
  *                     `NULL` if no such offset exists
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
 void *libsimple_memelem(const void *, const void *, size_t, size_t);
@@ -34,6 +36,8 @@ void *libsimple_memelem(const void *, const void *, size_t, size_t);
  * @return             `haystack` with a minimal offset such that,
  *                     `!memcmp(r, needle, width)` where `r` is the returned
  *                     pointer and such that `(r - haystack) % width == 0`
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __returns_nonnull__, __warn_unused_result__)))
 void *libsimple_rawmemelem(const void *, const void *, size_t);
@@ -54,6 +58,8 @@ void *libsimple_rawmemelem(const void *, const void *, size_t);
  *                     pointer and such that `(r - haystack) % width == 0`,
  *                     `(void *)&((char *)haystack)[n * width]` if no such
  *                     offset exists
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
 void *libsimple_memelemscan(const void *, const void *, size_t, size_t);
@@ -73,6 +79,8 @@ void *libsimple_memelemscan(const void *, const void *, size_t, size_t);
  *                     `!memcmp(r, needle, width)` where `r` is the returned
  *                     pointer and such that `(r - haystack) % width == 0`,
  *                     `NULL` if no such offset exists
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
 void *libsimple_memrelem(const void *, const void *, size_t, size_t);
@@ -96,6 +104,8 @@ void *libsimple_memrelem(const void *, const void *, size_t, size_t);
  * @return             `haystack` with a maximal offset such that,
  *                     `!memcmp(r, needle, width)` where `r` is the returned
  *                     pointer and such that `(r - haystack) % width == 0`
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __returns_nonnull__, __warn_unused_result__)))
 void *libsimple_rawmemrelem(const void *, const void *, size_t, size_t);
@@ -116,6 +126,8 @@ void *libsimple_rawmemrelem(const void *, const void *, size_t, size_t);
  *                     `memcmp(r, needle, width)` where `r` is the returned
  *                     pointer and such that `(r - haystack) % width == 0`,
  *                     `NULL` if no such offset exists
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
 void *libsimple_memelem_inv(const void *, const void *, size_t, size_t);
@@ -139,6 +151,8 @@ void *libsimple_memelem_inv(const void *, const void *, size_t, size_t);
  * @return             `haystack` with a minimal offset such that,
  *                     `memcmp(r, needle, width)` where `r` is the returned
  *                     pointer and such that `(r - haystack) % width == 0`
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __returns_nonnull__, __warn_unused_result__)))
 void *libsimple_rawmemelem_inv(const void *, const void *, size_t);
@@ -160,6 +174,8 @@ void *libsimple_rawmemelem_inv(const void *, const void *, size_t);
  *                     pointer and such that `(r - haystack) % width == 0`,
  *                     `(void *)&((char *)haystack)[n * width]` if no such
  *                     offset exists
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
 void *libsimple_memelemscan_inv(const void *, const void *, size_t, size_t);
@@ -180,6 +196,8 @@ void *libsimple_memelemscan_inv(const void *, const void *, size_t, size_t);
  *                     `memcmp(r, needle, width)` where `r` is the returned
  *                     pointer and such that `(r - haystack) % width == 0`,
  *                     `NULL` if no such offset exists
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
 void *libsimple_memrelem_inv(const void *, const void *, size_t, size_t);
@@ -204,6 +222,8 @@ void *libsimple_memrelem_inv(const void *, const void *, size_t, size_t);
  * @return             `haystack` with a maximal offset such that,
  *                     `memcmp(r, needle, width)` where `r` is the returned
  *                     pointer and such that `(r - haystack) % width == 0`
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __returns_nonnull__, __warn_unused_result__)))
 void *libsimple_rawmemrelem_inv(const void *, const void *, size_t, size_t);
@@ -220,6 +240,8 @@ void *libsimple_rawmemrelem_inv(const void *, const void *, size_t, size_t);
  * @param   width  The size of `item`
  * @param   n      The number of copies to fill `buf` with
  * @return         `&buf[n * width]`
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
 void *libsimple_mempsetelem(void *, const void *, size_t, size_t);
@@ -236,6 +258,8 @@ void *libsimple_mempsetelem(void *, const void *, size_t, size_t);
  * @param   width   The size of `item`
  * @param   n       The number of copies to fill `buf` with
  * @return          `buf`
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
 static inline void *libsimple_memsetelem(void *__buf, const void *__item, size_t __width, size_t __n)
@@ -256,6 +280,8 @@ static inline void *libsimple_memsetelem(void *__buf, const void *__item, size_t
  * @return         `&rawmemelem(d, c, width)[width]` (after copying) if `elem`
  *                 can be found within the first `n` elements of `s` (before
  *                 copying), `NULL` otherwise
+ * 
+ * @since  1.1
  */
 void *libsimple_memelemcpy(void *restrict, const void *restrict, const void *restrict, size_t, size_t);
 #ifndef memelemcpy
@@ -274,6 +300,8 @@ void *libsimple_memelemcpy(void *restrict, const void *restrict, const void *res
  * @return         `&rawmemelem(d, c, width)[width]` (after copying) if `elem`
  *                 can be found within the first `n` elements of `s` (before
  *                 copying), `NULL` otherwise
+ * 
+ * @since  1.1
  */
 void *libsimple_memelemmove(void *, const void *, const void *restrict, size_t, size_t);
 #ifndef memelemmove
@@ -294,6 +322,8 @@ void *libsimple_memelemmove(void *, const void *, const void *restrict, size_t, 
  * @param   elem   The element that stops the copying
  * @param   width  The size of each element
  * @return         `&rawmemelem(d, c, width)[width]` (after copying)
+ * 
+ * @since  1.1
  */
 void *libsimple_rawmemelemcpy(void *restrict, const void *restrict, const void *restrict, size_t);
 #ifndef rawmemelemcpy
@@ -314,6 +344,8 @@ void *libsimple_rawmemelemcpy(void *restrict, const void *restrict, const void *
  * @param   elem   The element that stops the copying
  * @param   width  The size of each element
  * @return         `&rawmemelem(d, c, width)[width]` (after copying)
+ * 
+ * @since  1.1
  */
 void *libsimple_rawmemelemmove(void *, const void *, const void *restrict, size_t);
 #ifndef rawmemelemmove
@@ -331,6 +363,8 @@ void *libsimple_rawmemelemmove(void *, const void *, const void *restrict, size_
  * @param   width  The size of each element
  * @param   n      The length of `s`, measured in elements
  * @return         `(void *)&((char *)s)[n * width]`
+ * 
+ * @since  1.1
  */
 void *libsimple_memreplaceelem(void *restrict, const void *, const void *, size_t, size_t);
 #ifndef memreplaceelem

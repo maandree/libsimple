@@ -6,6 +6,8 @@
  * 
  * @param   s:const char *  The string to copy
  * @return  :char *         Duplicate of `s` with automatic storage
+ * 
+ * @since  1.0
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define libsimple_strdupa(s)\
@@ -27,6 +29,8 @@
  * @param   status  Exit value in case of failure
  * @param   s       The string to copy
  * @return          Duplicate of `s`
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __assume_aligned__(1), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
 char *libsimple_enstrdup(int, const char *);
@@ -40,6 +44,8 @@ char *libsimple_enstrdup(int, const char *);
  * 
  * @param   s  The string to copy
  * @return     Duplicate of `s`
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __assume_aligned__(1), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
 static inline char *libsimple_estrdup(const char *__s)

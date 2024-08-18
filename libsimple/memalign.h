@@ -18,6 +18,8 @@
  *                     and alignment; `NULL` on failure
  * @throws  EINVAL     `n` is 0 or `alignment` is not a power of 2
  * @throws  ENOMEM     Could not allocated enough memory
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(1), __warn_unused_result__)))
 static inline void *libsimple_vmemalignn(size_t __alignment, size_t __n, va_list __ap)
@@ -37,6 +39,8 @@ static inline void *libsimple_vmemalignn(size_t __alignment, size_t __n, va_list
  *                     and alignment; `NULL` on failure
  * @throws  EINVAL     `n` is 0 or `alignment` is not a power of 2
  * @throws  ENOMEM     Could not allocated enough memory
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(1), __alloc_size__(2), __warn_unused_result__)))
 static inline void *libsimple_memalign(size_t __alignment, size_t __n)
@@ -63,6 +67,8 @@ static inline void *libsimple_memalign(size_t __alignment, size_t __n)
  *                     and alignment; `NULL` on failure
  * @throws  EINVAL     `n` is 0 or `alignment` is not a power of 2
  * @throws  ENOMEM     Could not allocated enough memory
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(1), __warn_unused_result__)))
 static inline void *
@@ -92,6 +98,8 @@ libsimple_memalignn(size_t __alignment, size_t __n, ... /*, (size_t)0 */)
  *                     this function is unspecified for the value 0
  * @return             A unique pointer with at least the specified size
  *                     and alignment
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __alloc_size__(3), __warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_enmemalign(int __status, size_t __alignment, size_t __n)
@@ -121,6 +129,8 @@ static inline void *libsimple_enmemalign(int __status, size_t __alignment, size_
  *                     list must end with 0 (which is not factor)
  * @return             A unique pointer with at least the specified size
  *                     and alignment
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_envmemalignn(int __status, size_t __alignment, size_t __n, va_list __ap)
@@ -150,6 +160,8 @@ static inline void *libsimple_envmemalignn(int __status, size_t __alignment, siz
  *                     list must end with 0 (which is not factor)
  * @return             A unique pointer with at least the specified size
  *                     and alignment
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __warn_unused_result__, __returns_nonnull__)))
 static inline void *
@@ -178,6 +190,8 @@ libsimple_enmemalignn(int __status, size_t __alignment, size_t __n, ... /*, (siz
  *                     this function is unspecified for the value 0
  * @return             A unique pointer with at least the specified size
  *                     and alignment
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(1), __alloc_size__(2), __warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_ememalign(size_t __alignment, size_t __n)
@@ -207,6 +221,8 @@ static inline void *libsimple_ememalign(size_t __alignment, size_t __n)
  *                     list must end with 0 (which is not factor)
  * @return             A unique pointer with at least the specified size
  *                     and alignment
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(1), __warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_evmemalignn(size_t __alignment, size_t __n, va_list __ap)
@@ -235,6 +251,8 @@ static inline void *libsimple_evmemalignn(size_t __alignment, size_t __n, va_lis
  *                     list must end with 0 (which is not factor)
  * @return             A unique pointer with at least the specified size
  *                     and alignment
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(1), __warn_unused_result__, __returns_nonnull__)))
 static inline void *

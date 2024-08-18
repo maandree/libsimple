@@ -19,6 +19,8 @@
  *                     and alignment; `NULL` on failure
  * @throws  EINVAL     `n` is 0 or `alignment` is not a power of 2
  * @throws  ENOMEM     Could not allocated enough memory
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __warn_unused_result__)))
 void *libsimple_valigned_alloczn(int, size_t, size_t, va_list);
@@ -39,6 +41,8 @@ void *libsimple_valigned_alloczn(int, size_t, size_t, va_list);
  *                     and alignment; `NULL` on failure
  * @throws  EINVAL     `n` is 0 or `alignment` is not a power of 2
  * @throws  ENOMEM     Could not allocated enough memory
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __alloc_size__(3), __warn_unused_result__)))
 static inline void *
@@ -72,6 +76,8 @@ libsimple_aligned_allocz(int __clear, size_t __alignment, size_t __n)
  *                     and alignment; `NULL` on failure
  * @throws  EINVAL     `n` is 0 or `alignment` is not a power of 2
  * @throws  ENOMEM     Could not allocated enough memory
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __warn_unused_result__)))
 static inline void *
@@ -102,6 +108,8 @@ libsimple_aligned_alloczn(int __clear, size_t __alignment, size_t __n, ... /*, (
  *                     this function is unspecified for the value 0
  * @return             A unique pointer with at least the specified size
  *                     and alignment
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(3), __alloc_size__(4), __warn_unused_result__, __returns_nonnull__)))
 void *libsimple_enaligned_allocz(int, int, size_t, size_t);
@@ -131,6 +139,8 @@ void *libsimple_enaligned_allocz(int, int, size_t, size_t);
  *                     list must end with 0 (which is not factor)
  * @return             A unique pointer with at least the specified size
  *                     and alignment
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(3), __warn_unused_result__, __returns_nonnull__)))
 void *libsimple_envaligned_alloczn(int, int, size_t, size_t, va_list);
@@ -160,6 +170,8 @@ void *libsimple_envaligned_alloczn(int, int, size_t, size_t, va_list);
  *                     list must end with 0 (which is not factor)
  * @return             A unique pointer with at least the specified size
  *                     and alignment
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(3), __warn_unused_result__, __returns_nonnull__)))
 static inline void *
@@ -188,6 +200,8 @@ libsimple_enaligned_alloczn(int __status, int __clear, size_t __alignment, size_
  *                     this function is unspecified for the value 0
  * @return             A unique pointer with at least the specified size
  *                     and alignment
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __alloc_size__(3), __warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_ealigned_allocz(int __clear, size_t __alignment, size_t __n)
@@ -217,6 +231,8 @@ static inline void *libsimple_ealigned_allocz(int __clear, size_t __alignment, s
  *                     list must end with 0 (which is not factor)
  * @return             A unique pointer with at least the specified size
  *                     and alignment
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_evaligned_alloczn(int __clear, size_t __alignment, size_t __n, va_list __ap)
@@ -246,6 +262,8 @@ static inline void *libsimple_evaligned_alloczn(int __clear, size_t __alignment,
  *                     list must end with 0 (which is not factor)
  * @return             A unique pointer with at least the specified size
  *                     and alignment
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __warn_unused_result__, __returns_nonnull__)))
 static inline void *

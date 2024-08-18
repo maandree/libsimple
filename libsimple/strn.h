@@ -10,6 +10,8 @@
  * @return     `s` with a minimal offset such that `*r == c`,
  *             where `r` is the returned pointer, `NULL` if no such offset exists
  *             within the first `n` bytes
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 char *libsimple_strnchr(const char *, int, size_t);
@@ -27,6 +29,8 @@ char *libsimple_strnchr(const char *, int, size_t);
  * @return     `s` with a minimal offset such that `tolower(*r) == tolower(c)`,
  *             where `r` is the returned pointer, `NULL` if no such offset exists
  *             within the first `n` bytes
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 char *libsimple_strncasechr(const char *, int, size_t);
@@ -44,6 +48,8 @@ char *libsimple_strncasechr(const char *, int, size_t);
  * @return     `s` with a minimal offset such that `*r == c || !*r`,
  *             where `r` is the returned pointer, however if no such
  *             offset exists within the first `n` bytes, `&s[n]` is returned
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
 char *libsimple_strnchrnul(const char *, int, size_t);
@@ -61,6 +67,8 @@ char *libsimple_strnchrnul(const char *, int, size_t);
  * @return     `s` with a minimal offset such that `tolower(*r) == tolower(c) || !*r`,
  *             where `r` is the returned pointer, however if no such offset
  *             exists within the first `n` bytes, `&s[n]` is returned
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
 char *libsimple_strncasechrnul(const char *, int, size_t);
@@ -77,6 +85,8 @@ char *libsimple_strncasechrnul(const char *, int, size_t);
  * @param   n  Truncate `s` to this length if it is longer
  * @return     `s` with a maximal offset such that `*r == c`,
  *             where `r` is the returned pointer, `NULL` if no such offset exists
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 char *libsimple_strrnchr(const char *, int, size_t);
@@ -94,6 +104,8 @@ char *libsimple_strrnchr(const char *, int, size_t);
  * @param   n  Truncate `s` to this length if it is longer
  * @return     `s` with a maximal offset such that `tolower(*r) == tolower(c)`,
  *             where `r` is the returned pointer, `NULL` if no such offset exists
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 char *libsimple_strrncasechr(const char *, int, size_t);
@@ -112,6 +124,8 @@ char *libsimple_strrncasechr(const char *, int, size_t);
  * @return     `s` with a minimal offset such that `*r != c`,
  *             where `r` is the returned pointer, `NULL` if no such offset exists
  *             within the first `n` bytes
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 char *libsimple_strnchr_inv(const char *, int, size_t);
@@ -130,6 +144,8 @@ char *libsimple_strnchr_inv(const char *, int, size_t);
  * @return     `s` with a minimal offset such that `tolower(*r) != tolower(c)`,
  *             where `r` is the returned pointer, `NULL` if no such offset exists
  *             within the first `n` bytes
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 char *libsimple_strncasechr_inv(const char *, int, size_t);
@@ -148,6 +164,8 @@ char *libsimple_strncasechr_inv(const char *, int, size_t);
  * @return     `s` with a minimal offset such that `*r != c || !*r`,
  *             where `r` is the returned pointer, however if no such
  *             offset exists within the first `n` bytes, `&s[n]` is returned
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
 char *libsimple_strnchrnul_inv(const char *, int, size_t);
@@ -166,6 +184,8 @@ char *libsimple_strnchrnul_inv(const char *, int, size_t);
  * @return     `s` with a minimal offset such that `tolower(*r) != tolower(c) || !*r`,
  *             where `r` is the returned pointer, however if no such offset
  *             exists within the first `n` bytes, `&s[n]` is returned
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
 char *libsimple_strncasechrnul_inv(const char *, int, size_t);
@@ -183,6 +203,8 @@ char *libsimple_strncasechrnul_inv(const char *, int, size_t);
  * @param   n  Truncate `s` to this length if it is longer
  * @return     `s` with a maximal offset such that `*r != c`,
  *             where `r` is the returned pointer, `NULL` if no such offset exists
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 char *libsimple_strrnchr_inv(const char *, int, size_t);
@@ -200,6 +222,8 @@ char *libsimple_strrnchr_inv(const char *, int, size_t);
  * @param   n  Truncate `s` to this length if it is longer
  * @return     `s` with a maximal offset such that `tolower(*r) != tolower(c)`,
  *             where `r` is the returned pointer, `NULL` if no such offset exists
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 char *libsimple_strrncasechr_inv(const char *, int, size_t);
@@ -217,6 +241,8 @@ char *libsimple_strrncasechr_inv(const char *, int, size_t);
  *             is the returned pointer, however if there
  *             is not NUL byte within the first `n` bytes
  *             if `s`, `&s[n]` is returned
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __returns_nonnull__, __warn_unused_result__)))
 char *libsimple_strnend(const char *, size_t);
@@ -232,6 +258,8 @@ char *libsimple_strnend(const char *, size_t);
  * @param   t  The string `s` should begin with
  * @param   n  Truncate `s` to this length if it is longer
  * @return     1 if `s` starts with `t`, 0 otherwise
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 int libsimple_strnstarts(const char *, const char *, size_t);
@@ -247,6 +275,8 @@ int libsimple_strnstarts(const char *, const char *, size_t);
  * @param   t  The string `s` should begin with
  * @param   n  Truncate `s` to this length if it is longer
  * @return     1 if `s` starts with `t`, 0 otherwise
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 int libsimple_strncasestarts(const char *, const char *, size_t);
@@ -262,6 +292,8 @@ int libsimple_strncasestarts(const char *, const char *, size_t);
  * @param   t  The string `s` should begin with
  * @param   n  Truncate `s` to this length if it is longer
  * @return     1 if `s` ends with `t`, 0 otherwise
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 int libsimple_strnends(const char *, const char *, size_t);
@@ -277,6 +309,8 @@ int libsimple_strnends(const char *, const char *, size_t);
  * @param   t  The string `s` should begin with
  * @param   n  Truncate `s` to this length if it is longer
  * @return     1 if `s` end with `t`, 0 otherwise
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 int libsimple_strncaseends(const char *, const char *, size_t);
@@ -294,6 +328,8 @@ int libsimple_strncaseends(const char *, const char *, size_t);
  * @return            `haystack` with a minimal offset such that the returned
  *                    pointer begins with `needle`, `NULL` if no such offset
  *                    exists
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 char *libsimple_strnstr(const char *, const char *, size_t);
@@ -311,6 +347,8 @@ char *libsimple_strnstr(const char *, const char *, size_t);
  * @return            `haystack` with a minimal offset such that the returned
  *                    pointer begins with `needle`, `NULL` if no such offset
  *                    exists
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 char *libsimple_strncasestr(const char *, const char *, size_t);
@@ -328,6 +366,8 @@ char *libsimple_strncasestr(const char *, const char *, size_t);
  * @return            `haystack` with a maximal offset such that the returned
  *                    pointer begins with `needle`, `NULL` if no such offset
  *                    exists
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 char *libsimple_strrnstr(const char *, const char *, size_t);
@@ -345,6 +385,8 @@ char *libsimple_strrnstr(const char *, const char *, size_t);
  * @return            `haystack` with a maximal offset such that the returned
  *                    pointer begins with `needle`, `NULL` if no such offset
  *                    exists
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 char *libsimple_strrncasestr(const char *, const char *, size_t);
@@ -364,6 +406,8 @@ char *libsimple_strrncasestr(const char *, const char *, size_t);
  * @return     A negative value if `a` is less than `b`,
  *             a positive value if `a` is greater than `b`,
  *             0 otherwise
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
 static inline int libsimple_strncmpnul(const char *__a, const char *__b, size_t __n)
@@ -384,6 +428,8 @@ static inline int libsimple_strncmpnul(const char *__a, const char *__b, size_t 
  * @return     A negative value if `a` is less than `b`,
  *             a positive value if `a` is greater than `b`,
  *             0 otherwise
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
 static inline int libsimple_strncasecmpnul(const char *__a, const char *__b, size_t __n)
@@ -402,6 +448,8 @@ static inline int libsimple_strncasecmpnul(const char *__a, const char *__b, siz
  * @param   n  Truncate each input string that is
  *             longer than this to this length
  * @return     1 if the strings are equal, 0 otherwise
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 static inline int libsimple_strneq(const char *__a, const char *__b, size_t __n)
@@ -420,6 +468,8 @@ static inline int libsimple_strneq(const char *__a, const char *__b, size_t __n)
  * @param   n  Truncate each input string that is
  *             longer than this to this length
  * @return     1 if the strings are equal, 0 otherwise
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
 static inline int libsimple_strneqnul(const char *__a, const char *__b, size_t __n)
@@ -438,6 +488,8 @@ static inline int libsimple_strneqnul(const char *__a, const char *__b, size_t _
  * @param   n  Truncate each input string that is
  *             longer than this to this length
  * @return     1 if the strings are equal, 0 otherwise
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 static inline int libsimple_strncaseeq(const char *__a, const char *__b, size_t __n)
@@ -456,6 +508,8 @@ static inline int libsimple_strncaseeq(const char *__a, const char *__b, size_t 
  * @param   n  Truncate each input string that is
  *             longer than this to this length
  * @return     1 if the strings are equal, 0 otherwise
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __warn_unused_result__)))
 static inline int libsimple_strncaseeqnul(const char *__a, const char *__b, size_t __n)
@@ -474,6 +528,8 @@ static inline int libsimple_strncaseeqnul(const char *__a, const char *__b, size
  *             longer than this to this length
  * @return     The number of bytes `a` and `b` have
  *             in common in their beginnings
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 size_t libsimple_strneqlen(const char *, const char *, size_t);
@@ -491,6 +547,8 @@ size_t libsimple_strneqlen(const char *, const char *, size_t);
  *             longer than this to this length
  * @return     The number of bytes `a` and `b` have
  *             in common in their beginnings
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 size_t libsimple_strncaseeqlen(const char *, const char *, size_t);
@@ -508,6 +566,8 @@ size_t libsimple_strncaseeqlen(const char *, const char *, size_t);
  *             longer than this to this length
  * @return     The number of bytes `a` and `b` have
  *             in common in their ends
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 static inline size_t libsimple_strrneqlen(const char *__a, const char *__b, size_t __n)
@@ -526,6 +586,8 @@ static inline size_t libsimple_strrneqlen(const char *__a, const char *__b, size
  *             longer than this to this length
  * @return     The number of bytes `a` and `b` have
  *             in common in their ends
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 static inline size_t libsimple_strrncaseeqlen(const char *__a, const char *__b, size_t __n)
@@ -543,6 +605,8 @@ static inline size_t libsimple_strrncaseeqlen(const char *__a, const char *__b, 
  * @param   s  The string to move
  * @param   n  The maximum number of bytes to move
  * @return     `d`
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline char *libsimple_strnmove(char *__d, const char *__s, size_t __n)
@@ -560,6 +624,8 @@ static inline char *libsimple_strnmove(char *__d, const char *__s, size_t __n)
  * @param   s  The string to move
  * @param   n  The maximum number of bytes to move
  * @return     `&d[strnlen(s, n)]`
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline char *
@@ -581,6 +647,8 @@ libsimple_stpnmove(char *__d, const char *__s, size_t __n)
  * @param   c  The byte to replace all bytes in `s` with
  * @param   n  The maximum number of bytes to write
  * @return     `s`
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline char *
@@ -602,6 +670,8 @@ libsimple_strnset(char *__s, int __c_, size_t __n)
  * @param   c  The byte to replace all bytes in `s` with
  * @param   n  The maximum number of bytes to write
  * @return     `&s[strnlen(s, n)]`
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline char *
@@ -627,6 +697,8 @@ libsimple_stpnset(char *__s, int __c_, size_t __n)
  * @param   n  The maximum number of bytes to copy
  * @return     `&strchr(d, c)[1]` (after copying) if `c` can be
  *             found in `s`, `NULL` otherwise
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline char *
@@ -660,6 +732,8 @@ libsimple_strnccpy(char *restrict __d, const char *restrict __s, int __c_, size_
  * @return     `&strchr(d, c)[1]` (after copying) if `c` can be
  *             found within the first `n` bytes of `s` (before
  *             copying), `NULL` otherwise
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 char *libsimple_strncmove(char *, const char *, int, size_t);
@@ -677,6 +751,8 @@ char *libsimple_strncmove(char *, const char *, int, size_t);
  * @param   new  The value to replace the characters with
  * @param   n    The maximum length of `s`
  * @return       `strnchr(s, '\0', n)`
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __returns_nonnull__)))
 static inline char *
@@ -705,6 +781,8 @@ libsimple_strnreplace(char *__s, int __old_, int __new_, size_t __n)
  * @param   s  The string to copy
  * @param   n  The maximum number of bytes to copy or convert
  * @return     `strnchrnul(d, '\0', n)` (after copying)
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __returns_nonnull__)))
 char *libsimple_stpntolower(char *, const char *, size_t);
@@ -725,6 +803,8 @@ char *libsimple_stpntolower(char *, const char *, size_t);
  * @param   s  The string to copy
  * @param   n  The maximum number of bytes to copy or convert
  * @return     `strnchrnul(d, '\0', n)` (after copying)
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __returns_nonnull__)))
 char *libsimple_stpntoupper(char *, const char *, size_t);
@@ -745,6 +825,8 @@ char *libsimple_stpntoupper(char *, const char *, size_t);
  * @param   s  The string to copy
  * @param   n  The maximum number of bytes to copy or convert
  * @return     `d`
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __returns_nonnull__)))
 static inline char *libsimple_strntolower(char *__d, const char *__s, size_t __n)
@@ -766,6 +848,8 @@ static inline char *libsimple_strntolower(char *__d, const char *__s, size_t __n
  * @param   s  The string to copy
  * @param   n  The maximum number of bytes to copy or convert
  * @return     `d`
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __returns_nonnull__)))
 static inline char *libsimple_strntoupper(char *__d, const char *__s, size_t __n)
@@ -786,6 +870,8 @@ static inline char *libsimple_strntoupper(char *__d, const char *__s, size_t __n
  * @param   allow_modified_nul  Whether Modified UTF-8 is allowed, which
  *                              allows a two-byte encoding for NUL
  * @return                      1 if good, 0 on encoding error
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__pure__, __nonnull__, __warn_unused_result__)))
 static inline int libsimple_strnisutf8(const char *__string, size_t __n, int __allow_modified_nul)

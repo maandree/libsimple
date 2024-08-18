@@ -17,6 +17,8 @@
  *                  and with page size alignment; `NULL` on failure
  * @throws  EINVAL  `n` is 0
  * @throws  ENOMEM  Could not allocated enough memory
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__)))
 static inline void *
@@ -42,6 +44,8 @@ libsimple_vvalloczn(int __clear, size_t __n, va_list __ap)
  *                  and with page size alignment; `NULL` on failure
  * @throws  EINVAL  `n` is 0
  * @throws  ENOMEM  Could not allocated enough memory
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_size__(2), __warn_unused_result__)))
 static inline void *
@@ -73,6 +77,8 @@ libsimple_vallocz(int __clear, size_t __n)
  *                  and with page size alignment; `NULL` on failure
  * @throws  EINVAL  `n` is 0
  * @throws  ENOMEM  Could not allocated enough memory
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__)))
 static inline void *
@@ -102,6 +108,8 @@ libsimple_valloczn(int __clear, size_t __n, ... /*, (size_t)0 */)
  *                  this function is unspecified for the value 0
  * @return          A unique pointer with at least the specified size
  *                  and with page size alignment
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_size__(3), __warn_unused_result__, __returns_nonnull__)))
 static inline void *
@@ -137,6 +145,8 @@ libsimple_envallocz(int __status, int __clear, size_t __n)
  *                  list must end with 0 (which is not factor)
  * @return          A unique pointer with at least the specified size
  *                  and with page size alignment
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *
@@ -173,6 +183,8 @@ libsimple_envvalloczn(int __status, int __clear, size_t __n, va_list __ap)
  *                  list must end with 0 (which is not factor)
  * @return          A unique pointer with at least the specified size
  *                  and with page size alignment
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *
@@ -201,6 +213,8 @@ libsimple_envalloczn(int __status, int __clear, size_t __n, ... /*, (size_t)0 */
  *                 this function is unspecified for the value 0
  * @return         A unique pointer with at least the specified size
  *                 and with page size alignment
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_size__(2), __warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_evallocz(int __clear, size_t __n)
@@ -228,6 +242,8 @@ static inline void *libsimple_evallocz(int __clear, size_t __n)
  *                 list must end with 0 (which is not factor)
  * @return         A unique pointer with at least the specified size
  *                 and with page size alignment
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_evvalloczn(int __clear, size_t __n, va_list __ap)
@@ -255,6 +271,8 @@ static inline void *libsimple_evvalloczn(int __clear, size_t __n, va_list __ap)
  *                 list must end with 0 (which is not factor)
  * @return         A unique pointer with at least the specified size
  *                 and with page size alignment
+ * 
+ * @since  1.1
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 static inline void *

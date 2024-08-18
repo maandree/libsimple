@@ -88,6 +88,8 @@
  *               be update to -1 if it is non-negative
  * @return       Return value of close(3) (0 on success,
  *               -1 on error), 0 if `*fdp < 0`
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline int
@@ -112,6 +114,8 @@ libsimple_close(int *__fdp)
  * @param  list:non-void pointer  The list
  * @param  i:size_t               The index of the item to remove
  * @param  n:size_t               Pointer to the number of items in the list, will be updated
+ * 
+ * @since  1.0
  */
 #define LIBSIMPLE_UNLIST(LIST, I, NP) libsimple_unlist((LIST), (I), (NP), sizeof(*(LIST)))
 #ifndef UNLIST
@@ -126,6 +130,8 @@ libsimple_close(int *__fdp)
  * @param  i      The index of the item to remove
  * @param  n      Pointer to the number of items in the list, will be updated
  * @param  width  The width, in bytes, of each item in the list
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline void

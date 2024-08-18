@@ -25,6 +25,8 @@
  *                  `alignof(max_align_t)`; `NULL` on failure
  * @throws  EINVAL  `n` is 0
  * @throws  ENOMEM  Could not allocated enough memory
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
 void *libsimple_vreallocn(void *, size_t, va_list);
@@ -57,6 +59,8 @@ void *libsimple_vreallocn(void *, size_t, va_list);
  *                  `alignof(max_align_t)`; `NULL` on failure
  * @throws  EINVAL  `n` is 0
  * @throws  ENOMEM  Could not allocated enough memory
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
 static inline void *
@@ -94,6 +98,8 @@ libsimple_reallocn(void *__ptr, size_t __n, ... /*, (size_t)0 */)
  * @return          Either `ptr` or a unique pointer with at least
  *                  the specified size and with the alignment
  *                  `alignof(max_align_t)`
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_size__(3), __warn_unused_result__, __returns_nonnull__)))
 void *libsimple_enrealloc(int, void *, size_t);
@@ -129,6 +135,8 @@ void *libsimple_enrealloc(int, void *, size_t);
  * @return          Either `ptr` or a unique pointer with at least
  *                  the specified size and with the alignment
  *                  `alignof(max_align_t)`
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
 void *libsimple_envreallocn(int, void *, size_t, va_list);
@@ -164,6 +172,8 @@ void *libsimple_envreallocn(int, void *, size_t, va_list);
  * @return          Either `ptr` or a unique pointer with at least
  *                  the specified size and with the alignment
  *                  `alignof(max_align_t)`
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
 static inline void *
@@ -200,6 +210,8 @@ libsimple_enreallocn(int __status, void *__ptr, size_t __n, ... /*, (size_t)0 */
  * @return       Either `ptr` or a unique pointer with at least
  *               the specified size and with the alignment
  *               `alignof(max_align_t)`
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_size__(2), __warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_erealloc(void *__ptr, size_t __n)
@@ -235,6 +247,8 @@ static inline void *libsimple_erealloc(void *__ptr, size_t __n)
  * @return       Either `ptr` or a unique pointer with at least
  *               the specified size and with the alignment
  *               `alignof(max_align_t)`
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_evreallocn(void *__ptr, size_t __n, va_list __ap)
@@ -270,6 +284,8 @@ static inline void *libsimple_evreallocn(void *__ptr, size_t __n, va_list __ap)
  * @return       Either `ptr` or a unique pointer with at least
  *               the specified size and with the alignment
  *               `alignof(max_align_t)`
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
 static inline void *

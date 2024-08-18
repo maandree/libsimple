@@ -12,6 +12,8 @@
  *                  will be `{.tv_sec = TIME_MAX, .tv_nsec = 999999999L}` if the
  *                  result too large and `{.tv_sec = TIME_MIN, .tv_nsec = 0L}`
  *                  if the result too small
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 int libsimple_sumtimespec(struct timespec *, const struct timespec *, const struct timespec *);
@@ -31,6 +33,8 @@ int libsimple_sumtimespec(struct timespec *, const struct timespec *, const stru
  *                      will be `{.tv_sec = TIME_MAX, .tv_nsec = 999999999L}` if the
  *                      result too large and `{.tv_sec = TIME_MIN, .tv_nsec = 0L}`
  *                      if the result too small
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 int libsimple_difftimespec(struct timespec *, const struct timespec *, const struct timespec *);
@@ -50,6 +54,8 @@ int libsimple_difftimespec(struct timespec *, const struct timespec *, const str
  *                        will be `{.tv_sec = TIME_MAX, .tv_nsec = 999999999L}` if the
  *                        result too large and `{.tv_sec = TIME_MIN, .tv_nsec = 0L}`
  *                        if the result too small
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 int libsimple_multimespec(struct timespec *, const struct timespec *, int);
@@ -64,6 +70,8 @@ int libsimple_multimespec(struct timespec *, const struct timespec *, int);
  * @param   a  One of the `struct timespec`s
  * @param   b  The other `struct timespec`
  * @return     -1 if `a` < `b`, 0 if `a` = `b`, and +1 if `a` > `b`
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __warn_unused_result__)))
 static inline int
@@ -89,6 +97,8 @@ libsimple_cmptimespec(const struct timespec *__a, const struct timespec *__b)
  *                  will be `{.tv_sec = TIME_MAX, .tv_usec = 999999L}` if the
  *                  result too large and `{.tv_sec = TIME_MIN, .tv_usec = 0L}`
  *                  if the result too small
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 int libsimple_sumtimeval(struct timeval *, const struct timeval *, const struct timeval *);
@@ -108,6 +118,8 @@ int libsimple_sumtimeval(struct timeval *, const struct timeval *, const struct 
  *                      will be `{.tv_sec = TIME_MAX, .tv_usec = 999999L}` if the
  *                      result too large and `{.tv_sec = TIME_MIN, .tv_usec = 0L}`
  *                      if the result too small
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 int libsimple_difftimeval(struct timeval *, const struct timeval *, const struct timeval *);
@@ -127,6 +139,8 @@ int libsimple_difftimeval(struct timeval *, const struct timeval *, const struct
  *                        will be `{.tv_sec = TIME_MAX, .tv_usec = 999999L}` if the
  *                        result too large and `{.tv_sec = TIME_MIN, .tv_usec = 0L}`
  *                        if the result too small
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 int libsimple_multimeval(struct timeval *, const struct timeval *, int);
@@ -141,6 +155,8 @@ int libsimple_multimeval(struct timeval *, const struct timeval *, int);
  * @param   a  One of the `struct timeval`s
  * @param   b  The other `struct timeval`
  * @return     -1 if `a` < `b`, 0 if `a` = `b`, and +1 if `a` > `b`
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __warn_unused_result__)))
 static inline int
@@ -160,6 +176,8 @@ libsimple_cmptimeval(const struct timeval *__a, const struct timeval *__b)
  * 
  * @param  ts  Output parameter for the result
  * @param  tv  The value to convert
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline void
@@ -182,6 +200,8 @@ libsimple_timeval2timespec(struct timespec *restrict __ts, const struct timeval 
  * @return             0 on success, -1 on error
  * @throws  EOVERFLOW  The value is too large to be convert, the value will be
  *                     truncated to `{.tv_sec = TIME_MAX, .tv_usec = 999999L}`
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 int libsimple_timespec2timeval(struct timeval *restrict, const struct timespec *restrict);
@@ -207,6 +227,8 @@ int libsimple_timespec2timeval(struct timeval *restrict, const struct timespec *
  *                  will be `{.tv_sec = TIME_MAX, .tv_nsec = 999999999L}` if the
  *                  result too large and `{.tv_sec = TIME_MIN, .tv_nsec = 0L}`
  *                  if the result too small (`*end` is set)
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(1, 2))))
 int libsimple_strtotimespec(struct timespec *restrict, const char *restrict, char **restrict);
@@ -232,6 +254,8 @@ int libsimple_strtotimespec(struct timespec *restrict, const char *restrict, cha
  *                  will be `{.tv_sec = TIME_MAX, .tv_usec = 999999L}` if the
  *                  result too large and `{.tv_sec = TIME_MIN, .tv_usec = 0L}`
  *                  if the result too small (`*end` is set)
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(1, 2))))
 int libsimple_strtotimeval(struct timeval *restrict, const char *restrict, char **restrict);
@@ -251,6 +275,8 @@ int libsimple_strtotimeval(struct timeval *restrict, const char *restrict, char 
  *                  `NULL` on failure
  * @throws  ENOMEM  Output buffer could not be allocated (only if `buf == NULL`)
  * @throws  EINVAL  `ts->tv_nsec` is negative or greater than 999999999
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(2))))
 char *libsimple_timespectostr(char *restrict, const struct timespec *restrict);
@@ -270,6 +296,8 @@ char *libsimple_timespectostr(char *restrict, const struct timespec *restrict);
  *                  `NULL` on failure
  * @throws  ENOMEM  Output buffer could not be allocated (only if `buf == NULL`)
  * @throws  EINVAL  `ts->tv_usec` is negative or greater than 999999
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(2))))
 char *libsimple_timevaltostr(char *restrict, const struct timeval *restrict);
@@ -283,6 +311,8 @@ char *libsimple_timevaltostr(char *restrict, const struct timeval *restrict);
  * 
  * @param   ts  The value to convert
  * @return      The result
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline double
@@ -303,6 +333,8 @@ libsimple_timespectodouble(const struct timespec *__ts)
  * 
  * @param   tv  The value to convert
  * @return      The result
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 static inline double
@@ -325,6 +357,8 @@ libsimple_timevaltodouble(const struct timeval *__tv)
  * 
  * @param  ts  Output parameter for the result
  * @param  d   The value to convert
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 void libsimple_doubletotimespec(struct timespec *, double);
@@ -340,6 +374,8 @@ void libsimple_doubletotimespec(struct timespec *, double);
  * 
  * @param  tv  Output parameter for the result
  * @param  d   The value to convert
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
 void libsimple_doubletotimeval(struct timeval *, double);
@@ -355,6 +391,8 @@ void libsimple_doubletotimeval(struct timeval *, double);
  * 
  * @param   s  The string to minimise
  * @return     `s`
+ * 
+ * @since  1.0
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__returns_nonnull__, __nonnull__)))
 char *libsimple_minimise_number_string(char *);

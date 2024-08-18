@@ -10,6 +10,8 @@
 /**
  * The zeroth command line argument, the name of the process,
  * set by the command line parsing macros
+ * 
+ * @since  1.0
  */
 extern char *argv0;
 
@@ -23,6 +25,8 @@ extern char *argv0;
  * where `.long_flag` does not end with '=' and
  * `.with_arg` is zero. These *cannot* have the same
  * `.short_flag`
+ * 
+ * @since  1.0
  */
 struct longopt {
 	/**
@@ -83,6 +87,8 @@ struct longopt {
  *                 // print usage information for other flags
  *                 usage();
  *         } ARGEND;
+ * 
+ * @since  1.0
  */
 #define ARGBEGIN ARGBEGIN2(1, 0)
 
@@ -91,6 +97,8 @@ struct longopt {
  * `ARGBEGIN {} ARGEND;`, however, `argv0`
  * is not set to `argv[0]`, instead `argv[0]`
  * is handled like any other element in `argv`
+ * 
+ * @since  1.0
  */
 #define SUBARGBEGIN ARGBEGIN2(0, 0)
 
@@ -102,6 +110,8 @@ struct longopt {
  * @param  KEEP_DASHDASH  If and only if 0, "--" is not removed
  *                        `argv` before parsing is stopped when it
  *                        is encountered
+ * 
+ * @since  1.1
  */
 #define ARGBEGIN2(WITH_ARGV0, KEEP_DASHDASH)\
 	do {\
@@ -146,6 +156,8 @@ struct longopt {
  * 
  * @param  LONGOPTS:struct longopt *  The options, list shall end
  *                                    with `NULL` as `.long_flag`
+ * 
+ * @since  1.0
  */
 #define ARGMAPLONG(LONGOPTS)\
 						for (i_ = 0; (LONGOPTS)[i_].long_flag; i_++) {\
@@ -180,6 +192,8 @@ struct longopt {
  *         } ARGEND;
  * 
  * @param  SYMBOL:char  The symbol flags should begin with
+ * 
+ * @since  1.0
  */
 #define ARGALT(SYMBOL)\
 						}\
@@ -204,7 +218,9 @@ struct longopt {
 						switch (flag_) {
 
 /**
- * Refer to `ARGBEGIN`, `SUBARGBEGIN`, and `ARGBEGIN4`
+ * Refer to `ARGBEGIN`, `SUBARGBEGIN`, and `ARGBEGIN2`
+ * 
+ * @since  1.0
  */
 #define ARGEND\
 						}\
@@ -225,6 +241,8 @@ struct longopt {
 
 /**
  * `case ARGNUM` creates a switch statement case for each digit
+ * 
+ * @since  1.0
  */
 #define ARGNUM      '0': case '1': case '2': case '3': case '4':\
                case '5': case '6': case '7': case '8': case '9'
@@ -234,6 +252,8 @@ struct longopt {
  * 'a' is returned
  * 
  * @return  :char  The option's identifying character
+ * 
+ * @since  1.0
  */
 #define FLAG() (flag_)
 
@@ -245,6 +265,8 @@ struct longopt {
  * value can also be in the next argument
  * 
  * @return  :char *  The current command line argument
+ * 
+ * @since  1.0
  */
 #define LFLAG() (lflag_)
 
@@ -257,6 +279,8 @@ struct longopt {
  * that the option has a value
  * 
  * @return  :char *  The option's value, never `NULL`
+ * 
+ * @since  1.0
  */
 #define ARG() (arg_ ? (brk_ = 1, arg_) : (usage(), NULL))
 
@@ -273,6 +297,8 @@ struct longopt {
  * 
  * @return  :char *  The option's value, `NULL` if
  *                   the option does not have a value
+ * 
+ * @since  1.1
  */
 #define ARGNULL() (arg_ ? (brk_ = 1, arg_) : NULL)
 
@@ -308,6 +334,8 @@ struct longopt {
  * 
  * @return  :char *  The option's value include the flag
  *                   character, never `NULL` or ""
+ * 
+ * @since  1.0
  */
 #define ARGHERE() (brk_ = 1, argv[0])
 
@@ -337,6 +365,8 @@ struct longopt {
  *                            must not have side-effects
  * @param  WARG:int           Whether the option takes an argument,
  *                            should not have side-effects
+ * 
+ * @since  1.0
  */
 #define TESTLONG(FLG, WARG)\
 	((WARG)\
@@ -368,6 +398,8 @@ struct longopt {
  * 
  * @param  ...  If non-zero, the `usage` function
  *              will be called
+ * 
+ * @since  1.0
  */
 #define NOFLAGS(...)\
 	do {\
@@ -394,6 +426,8 @@ struct longopt {
  * This macro also defines `char *argv0`
  * 
  * @param  SYNOPSIS:const char *  Description of the command line argument syntax
+ * 
+ * @since  1.0
  */
 #define USAGE(SYNOPSIS)\
 	NUSAGE(1, SYNOPSIS)
@@ -411,6 +445,8 @@ struct longopt {
  * 
  * @param  SYNOPSIS:const char *  Description of the command line argument syntax
  * @parma  STATUS:int             The exit value for the process
+ * 
+ * @since  1.0
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define NUSAGE(STATUS, SYNOPSIS)\

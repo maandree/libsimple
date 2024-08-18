@@ -112,6 +112,8 @@
 /**
  * Defined if two's complement is used
  * for signed number representation
+ * 
+ * @since  1.1
  */
 # ifndef TWOS_COMPLEMENT
 #  define TWOS_COMPLEMENT
@@ -120,6 +122,8 @@
 /**
  * Defined if sign–magnitude is used
  * for signed number representation
+ * 
+ * @since  1.1
  */
 # ifndef SIGN_MAGNITUDE
 #  define SIGN_MAGNITUDE
@@ -128,6 +132,8 @@
 /**
  * Defined if ones' complement is used
  * for signed number representation
+ * 
+ * @since  1.1
  */
 # ifndef ONES_COMPLEMENT
 #  define ONES_COMPLEMENT
@@ -141,6 +147,8 @@
  * @param   A  One of the values
  * @param   B  The other value
  * @return     The smallest of `A` and `B`
+ * 
+ * @since  1.0
  */
 #ifndef MIN
 # define MIN(A, B) ((A) < (B) ? (A) : (B))
@@ -153,6 +161,8 @@
  * @param   A  One of the values
  * @param   B  The other value
  * @return     The largest of `A` and `B`
+ * 
+ * @since  1.0
  */
 #ifndef MAX
 # define MAX(A, B) ((A) > (B) ? (A) : (B))
@@ -166,6 +176,8 @@
  * @param   B  Another one of the values
  * @param   C  The last value
  * @return     The smallest of `A`, `B`, and `C`
+ * 
+ * @since  1.0
  */
 #ifndef MIN3
 # define MIN3(A, B, C) MIN(MIN((A), (B)), (C))
@@ -179,6 +191,8 @@
  * @param   B  Another one of the values
  * @param   C  The last value
  * @return     The largest of `A`, `B`, and `C`
+ * 
+ * @since  1.0
  */
 #ifndef MAX3
 # define MAX3(A, B, C) MAX(MAX((A), (B)), (C))
@@ -191,6 +205,8 @@
  * @param   ARR      The array, must not be a pointer
  * @return  :size_t  The number of elements in `ARR` (constant
  *                   expression, unless its size is dynamic)
+ * 
+ * @since  1.0
  */
 #ifndef ELEMSOF
 # define ELEMSOF(ARR) (sizeof(ARR) / (sizeof(*(ARR))))
@@ -204,6 +220,8 @@
  * 
  * @param   STR:const char []  The string, must be a literal
  * @return  :size_t            The value of `strlen(STR)` as a constant expression
+ * 
+ * @since  1.0
  */
 #ifndef STRLEN
 # define STRLEN(STR) (sizeof(STR) - 1)
@@ -225,6 +243,8 @@
  *                             value of the type `TYPE` can be converted to without any
  *                             superfluous characters (such as explitict '+' or leading zeroes')
  *                             (constant expression)
+ * 
+ * @since  1.0
  */
 #ifndef INTSTRLEN
 # define INTSTRLEN(TYPE) ((sizeof(TYPE) == 1 ? 3 : 5 * (sizeof(TYPE) / 2)) + ((TYPE)-1 < 0))
@@ -236,6 +256,8 @@
  * 
  * @param   TYPE:integer type  The type, must be an integer type, may be signed or unsigned
  * @return  :TYPE              The largest value that can be stored in `TYPE` (constant expression)
+ * 
+ * @since  1.0
  */
 #ifndef TYPE_MAX
 # define TYPE_MAX(TYPE) ((TYPE)(((1ULL << (8 * sizeof(TYPE) - 1)) - 1) << ((TYPE)-1 > 0) | 1))
@@ -247,13 +269,15 @@
  * 
  * @param   TYPE:integer type  The type, must be an integer type, may be signed or unsigned
  * @return  :TYPE              The smallest value that can be stored in `TYPE` (constant expression)
+ * 
+ * @since  1.0
  */
 #ifndef TYPE_MIN
 # define TYPE_MIN(TYPE) ((TYPE)((TYPE)-1 > 0 ? 0 : (TYPE)~0 < (TYPE)-1 ? (TYPE)~0 : (TYPE)(1ULL << (8 * sizeof(TYPE) - 1))))
 #endif
 
 
-/* --- Maximum values --- */
+/* --- Maximum values (since 1.0) --- */
 
 #ifndef BLKCNT64_MAX
 # define BLKCNT64_MAX   TYPE_MAX(blkcnt64_t)
@@ -392,7 +416,7 @@
 #endif
 
 
-/* --- Minimum values --- */
+/* --- Minimum values (since 1.0) --- */
 
 #ifndef BLKCNT64_MIN
 # define BLKCNT64_MIN   TYPE_MIN(blkcnt64_t)
