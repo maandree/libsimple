@@ -281,6 +281,8 @@ libsimple_venprintf(int status__, const char *fmt__, va_list ap__)
  * @param  status  Exit value for the process
  * @param  fmt     The format string
  * @param  ap      The format argument
+ * 
+ * @since  1.6
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __format__(__printf__, 2, 0))))
 inline LIBSIMPLE_NORETURN void
@@ -351,6 +353,8 @@ libsimple_enprintf(int status__, const char *fmt__, ...)
  * @param  status  Exit value for the process
  * @param  fmt     The format string
  * @param  ...     The format argument
+ * 
+ * @since  1.6
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __format__(__printf__, 2, 3))))
 inline LIBSIMPLE_NORETURN void
@@ -421,6 +425,8 @@ libsimple_veprintf(const char *fmt__, va_list ap__)
  * 
  * @param  fmt  The format string
  * @param  ap   The format argument
+ * 
+ * @since  1.6
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __format__(__printf__, 1, 0))))
 inline LIBSIMPLE_NORETURN void
@@ -491,6 +497,8 @@ libsimple_eprintf(const char *fmt__, ...)
  * 
  * @param  fmt  The format string
  * @param  ...  The format argument
+ * 
+ * @since  1.6
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __format__(__printf__, 1, 2))))
 inline LIBSIMPLE_NORETURN void
