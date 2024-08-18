@@ -192,12 +192,14 @@
 #endif
 
 
+/* @since  1.5 */
 #define libsimple_arrayfill(buf, item) libsimple_memsetelem(buf, item, sizeof *(buf), sizeof (buf) / sizeof *(buf))
 #ifndef arrayfill
 # define arrayfill(...) libsimple_arrayfill(__VA_ARGS__)
 #endif
 
 
+/* @since  1.5 */
 #define libsimple_arraynull(buf) libsimple_memsetelem(buf, (void *)0, sizeof *(buf), sizeof (buf) / sizeof *(buf))
 #ifndef arraynull
 # define arraynull(...) libsimple_arraynull(__VA_ARGS__)
