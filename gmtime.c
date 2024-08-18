@@ -26,7 +26,6 @@ libsimple_gmtime(struct tm *tm, struct timespec *ts)
 			if (!gmtime_r(&timex.time.tv_sec, tm))
 				return -1;
 			tm->tm_sec += 1;
-			return 1;
 		} else if (r == TIME_DEL) {
 			timex.time.tv_sec += 1;
 			if (!gmtime_r(&timex.time.tv_sec, tm))
