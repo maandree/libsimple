@@ -7,6 +7,15 @@
 #include <string.h>
 
 
+#ifdef LIBSIMPLY_CONFIG_MULTICALL_BINARY /* Define by the application */
+# define _LIBSIMPLY_IF_MULTICALL_BINARY(...) __VA_ARGS__
+# define _LIBSIMPLY_UNLESS_MULTICALL_BINARY(...)
+#else
+# define _LIBSIMPLY_IF_MULTICALL_BINARY(...)
+# define _LIBSIMPLY_UNLESS_MULTICALL_BINARY(...) __VA_ARGS__
+#endif
+
+
 /**
  * The zeroth command line argument, the name of the process,
  * set by the command line parsing macros
@@ -467,7 +476,8 @@ struct longopt {
 		fprintf(stderr, "usage: %s%s%s\n", argv0, *syn ? " " : "", syn);\
 		exit(STATUS);\
 	}\
-	char *argv0 = NULL
+	_LIBSIMPLY_UNLESS_MULTICALL_BINARY(char *argv0 = NULL)\
+	_LIBSIMPLY_IF_MULTICALL_BINARY(int main(int, char *[]))
 
 
 #endif
