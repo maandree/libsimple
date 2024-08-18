@@ -7,6 +7,8 @@
  * @param   s:const char *  The string to copy
  * @param   n:size_t        The maximum number of bytes to copy
  * @return  :char *         Duplicate of `s` with automatic storage
+ * 
+ * @since  1.0
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define libsimple_strndupa(s, n)\
@@ -33,6 +35,8 @@
  * @param   s       The string to copy
  * @param   n       The maximum number of bytes to copy
  * @return          Duplicate of `s`
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __assume_aligned__(1), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
 char *libsimple_enstrndup(int, const char *, size_t);
@@ -47,6 +51,8 @@ char *libsimple_enstrndup(int, const char *, size_t);
  * @param   s  The string to copy
  * @param   n  The maximum number of bytes to copy
  * @return     Duplicate of `s`
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __assume_aligned__(1), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
 inline char *

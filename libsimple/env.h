@@ -6,6 +6,8 @@
  * 
  * @param   var  The environment variable's name
  * @return       The environment variable's value, `NULL` if empty or not defined
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__, __warn_unused_result__)))
 inline char *
@@ -24,6 +26,8 @@ libsimple_getenv_ne(const char *name__)
  * 
  * @param   var  The environment variable's name
  * @return       The environment variable's value, "" if empty or not defined
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__, __warn_unused_result__, __returns_nonnull__)))
 inline const char *
@@ -49,6 +53,8 @@ libsimple_getenv_e(const char *name__)
  * @param   fmt  Format string, see vsprintf(3)
  * @param   ap   Format arguments, see vsprintf(3)
  * @return       0 on success, -1 on failure
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__, __format__(__printf__, 1, 0))))
 int libsimple_vputenvf(const char *, va_list);
@@ -69,6 +75,8 @@ int libsimple_vputenvf(const char *, va_list);
  * @param   fmt  Format string, see vsprintf(3)
  * @param   ...  Format arguments, see vsprintf(3)
  * @return       0 on success, -1 on failure
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__, __format__(__printf__, 1, 2))))
 inline int
@@ -100,6 +108,8 @@ libsimple_putenvf(const char *fmt__, ...)
  * @param  status  The exit value for the process in case of failure
  * @param  fmt     Format string, see vsprintf(3)
  * @param  ap      Format arguments, see vsprintf(3)
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__, __format__(__printf__, 2, 0))))
 void libsimple_envputenvf(int, const char *, va_list);
@@ -124,6 +134,8 @@ void libsimple_envputenvf(int, const char *, va_list);
  * @param  status  The exit value for the process in case of failure
  * @param  fmt     Format string, see vsprintf(3)
  * @param  ap      Format arguments, see vsprintf(3)
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__, __format__(__printf__, 2, 3))))
 inline void
@@ -154,6 +166,8 @@ libsimple_enputenvf(int status__, const char *fmt__, ...)
  * 
  * @param  fmt  Format string, see vsprintf(3)
  * @param  ap   Format arguments, see vsprintf(3)
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__, __format__(__printf__, 1, 0))))
 inline void
@@ -181,6 +195,8 @@ libsimple_evputenvf(const char *fmt__, va_list ap__)
  * 
  * @param  fmt  Format string, see vsprintf(3)
  * @param  ap   Format arguments, see vsprintf(3)
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__, __format__(__printf__, 1, 2))))
 inline void

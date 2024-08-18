@@ -7,6 +7,8 @@
  * @param   s:const void *  The bytes to copy
  * @param   n:size_t        The number of bytes to copy
  * @return  :void *         Duplicate of `s` with automatic storage
+ * 
+ * @since  1.0
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define libsimple_memdupa(s, n)\
@@ -29,6 +31,8 @@
  * @param   s  The bytes to copy
  * @param   n  The number of bytes to copy
  * @return     Duplicate of `s`, `NULL` on failure
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_size__(2), __nonnull__, __warn_unused_result__)))
 void *libsimple_memdup(const void *, size_t);
@@ -44,6 +48,8 @@ void *libsimple_memdup(const void *, size_t);
  * @param   s       The bytes to copy
  * @param   n       The number of bytes to copy
  * @return          Duplicate of `s`
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_size__(3), __warn_unused_result__, __returns_nonnull__)))
 void *libsimple_enmemdup(int, const void *, size_t);
@@ -58,6 +64,8 @@ void *libsimple_enmemdup(int, const void *, size_t);
  * @param   s  The bytes to copy
  * @param   n  The number of bytes to copy
  * @return     Duplicate of `s`
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_size__(2), __warn_unused_result__, __returns_nonnull__)))
 inline void *

@@ -6,6 +6,8 @@
  * `libsimple__eprintf`
  * 
  * Default value is 1
+ * 
+ * @since  1.0
  */
 extern int libsimple_default_failure_exit;
 
@@ -19,6 +21,8 @@ extern int libsimple_default_failure_exit;
  * it was when `libsimple_vweprintf` was called.
  * 
  * Default value is `NULL`
+ * 
+ * @since  1.1
  */
 extern void (*libsimple_eprintf_preprint)(void);
 
@@ -32,6 +36,8 @@ extern void (*libsimple_eprintf_preprint)(void);
  * it was when `libsimple_vweprintf` was called.
  * 
  * Default value is `NULL`
+ * 
+ * @since  1.1
  */
 extern void (*libsimple_eprintf_postprint)(void);
 
@@ -51,6 +57,8 @@ extern void (*libsimple_eprintf_postprint)(void);
  * @throws  EMFILE  {FOPEN_MAX} streams are currently open in the calling process
  * @throws  ENOMEM  Could not allocate enough memory
  * @throws          Any error specified for `fprintf`
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1, 2), __format__(__printf__, 2, 3))))
 int libsimple_asprintf(char **, const char *, ...);
@@ -74,6 +82,8 @@ int libsimple_asprintf(char **, const char *, ...);
  * @throws  EMFILE  {FOPEN_MAX} streams are currently open in the calling process
  * @throws  ENOMEM  Could not allocate enough memory
  * @throws          Any error specified for `fprintf`
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1, 2), __format__(__printf__, 2, 0))))
 int libsimple_vasprintf(char **, const char *, va_list);
@@ -94,6 +104,8 @@ int libsimple_vasprintf(char **, const char *, va_list);
  * @param   ...  The format argument
  * @return       The formatted string, `NULL` on error
  * @throws       Any error specified for `snprintf`
+ * 
+ * @since  1.0
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define libsimple_asprintfa(fmt__, ...)\
@@ -126,6 +138,8 @@ int libsimple_vasprintf(char **, const char *, va_list);
  * @param   ap   The format argument
  * @return       The formatted string, `NULL` on error
  * @throws       Any error specified for `snprintf`
+ * 
+ * @since  1.0
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define libsimple_vasprintfa(fmt__, ap__)\
@@ -169,6 +183,8 @@ int libsimple_vasprintf(char **, const char *, va_list);
  * 
  * @param  fmt  The format string
  * @param  ap   The format argument
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __format__(__printf__, 1, 0))))
 void libsimple_vweprintf(const char *, va_list);
@@ -193,6 +209,8 @@ void libsimple_vweprintf(const char *, va_list);
  * 
  * @param  fmt  The format string
  * @param  ...  The format argument
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __format__(__printf__, 1, 2))))
 inline void
@@ -227,6 +245,8 @@ libsimple_weprintf(const char *fmt__, ...)
  * @param  status  Exit value for the process
  * @param  fmt     The format string
  * @param  ap      The format argument
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __format__(__printf__, 2, 0))))
 inline LIBSIMPLE_NORETURN void
@@ -261,6 +281,8 @@ libsimple_venprintf(int status__, const char *fmt__, va_list ap__)
  * @param  status  Exit value for the process
  * @param  fmt     The format string
  * @param  ap      The format argument
+ * 
+ * @since  1.6
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __format__(__printf__, 2, 0))))
 inline LIBSIMPLE_NORETURN void
@@ -293,6 +315,8 @@ libsimple__venprintf(int status__, const char *fmt__, va_list ap__)
  * @param  status  Exit value for the process
  * @param  fmt     The format string
  * @param  ...     The format argument
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __format__(__printf__, 2, 3))))
 inline LIBSIMPLE_NORETURN void
@@ -329,6 +353,8 @@ libsimple_enprintf(int status__, const char *fmt__, ...)
  * @param  status  Exit value for the process
  * @param  fmt     The format string
  * @param  ...     The format argument
+ * 
+ * @since  1.6
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __format__(__printf__, 2, 3))))
 inline LIBSIMPLE_NORETURN void
@@ -363,6 +389,8 @@ libsimple__enprintf(int status__, const char *fmt__, ...)
  * 
  * @param  fmt  The format string
  * @param  ap   The format argument
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __format__(__printf__, 1, 0))))
 inline LIBSIMPLE_NORETURN void
@@ -397,6 +425,8 @@ libsimple_veprintf(const char *fmt__, va_list ap__)
  * 
  * @param  fmt  The format string
  * @param  ap   The format argument
+ * 
+ * @since  1.6
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __format__(__printf__, 1, 0))))
 inline LIBSIMPLE_NORETURN void
@@ -429,6 +459,8 @@ libsimple__veprintf(const char *fmt__, va_list ap__)
  * 
  * @param  fmt  The format string
  * @param  ...  The format argument
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __format__(__printf__, 1, 2))))
 inline LIBSIMPLE_NORETURN void
@@ -465,6 +497,8 @@ libsimple_eprintf(const char *fmt__, ...)
  * 
  * @param  fmt  The format string
  * @param  ...  The format argument
+ * 
+ * @since  1.6
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __format__(__printf__, 1, 2))))
 inline LIBSIMPLE_NORETURN void

@@ -12,5 +12,7 @@
  *                       name of the file the socket will be bound to
  * @param   addrlen_out  Output parameter for the size of the socket name (may be `NULL`)
  * @return               0 on success, -1 on failure
+ * 
+ * @since  1.6
  */
 int libsimple_bindtemp_un(int fd, int dir_fd, struct sockaddr_un *addr_out, socklen_t *addrlen_out); /* TODO man */

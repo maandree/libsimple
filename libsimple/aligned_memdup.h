@@ -8,6 +8,8 @@
  * @param   alignment:size_t  The alignment of the returned pointer
  * @param   n:size_t          The number of bytes to copy
  * @return  :void *           Duplicate of `s` with automatic storage
+ * 
+ * @since  1.1
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define libsimple_aligned_memdupa(s, alignment, n)\
@@ -40,6 +42,8 @@
  * @param   alignment  The alignment of the returned pointer
  * @param   n          The number of bytes to copy
  * @return             Duplicate of `s`, `NULL` on failure
+ * 
+ * @since  1.1
  */	
 LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_align__(2), __alloc_size__(3), __nonnull__, __warn_unused_result__)))
 void *libsimple_aligned_memdup(const void *, size_t, size_t);
@@ -56,6 +60,8 @@ void *libsimple_aligned_memdup(const void *, size_t, size_t);
  * @param   alignment  The alignment of the returned pointer
  * @param   n          The number of bytes to copy
  * @return             Duplicate of `s`
+ * 
+ * @since  1.1
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_align__(3), __alloc_size__(4), __warn_unused_result__, __returns_nonnull__)))
 void *libsimple_enaligned_memdup(int, const void *, size_t, size_t);
@@ -71,6 +77,8 @@ void *libsimple_enaligned_memdup(int, const void *, size_t, size_t);
  * @param   alignment  The alignment of the returned pointer
  * @param   n          The number of bytes to copy
  * @return             Duplicate of `s`
+ * 
+ * @since  1.1
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_align__(2), __alloc_size__(3), __warn_unused_result__, __returns_nonnull__)))
 inline void *

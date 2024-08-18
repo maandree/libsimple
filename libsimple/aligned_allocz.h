@@ -19,6 +19,8 @@
  *                     and alignment; `NULL` on failure
  * @throws  EINVAL     `n` is 0 or `alignment` is not a power of 2
  * @throws  ENOMEM     Could not allocated enough memory
+ * 
+ * @since  1.1
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(2), __warn_unused_result__)))
 void *libsimple_valigned_alloczn(int, size_t, size_t, va_list);
@@ -39,6 +41,8 @@ void *libsimple_valigned_alloczn(int, size_t, size_t, va_list);
  *                     and alignment; `NULL` on failure
  * @throws  EINVAL     `n` is 0 or `alignment` is not a power of 2
  * @throws  ENOMEM     Could not allocated enough memory
+ * 
+ * @since  1.1
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(2), __alloc_size__(3), __warn_unused_result__)))
 inline void *
@@ -83,6 +87,8 @@ libsimple_aligned_allocz(int clear__, size_t alignment__, size_t n__)
  *                     and alignment; `NULL` on failure
  * @throws  EINVAL     `n` is 0 or `alignment` is not a power of 2
  * @throws  ENOMEM     Could not allocated enough memory
+ * 
+ * @since  1.1
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(2), __warn_unused_result__)))
 inline void *
@@ -113,6 +119,8 @@ libsimple_aligned_alloczn(int clear__, size_t alignment__, size_t n__, ... /*, (
  *                     this function is unspecified for the value 0
  * @return             A unique pointer with at least the specified size
  *                     and alignment
+ * 
+ * @since  1.1
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(3), __alloc_size__(4), __warn_unused_result__, __returns_nonnull__)))
 void *libsimple_enaligned_allocz(int, int, size_t, size_t);
@@ -142,6 +150,8 @@ void *libsimple_enaligned_allocz(int, int, size_t, size_t);
  *                     list must end with 0 (which is not factor)
  * @return             A unique pointer with at least the specified size
  *                     and alignment
+ * 
+ * @since  1.1
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(3), __warn_unused_result__, __returns_nonnull__)))
 void *libsimple_envaligned_alloczn(int, int, size_t, size_t, va_list);
@@ -171,6 +181,8 @@ void *libsimple_envaligned_alloczn(int, int, size_t, size_t, va_list);
  *                     list must end with 0 (which is not factor)
  * @return             A unique pointer with at least the specified size
  *                     and alignment
+ * 
+ * @since  1.1
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(3), __warn_unused_result__, __returns_nonnull__)))
 inline void *
@@ -199,6 +211,8 @@ libsimple_enaligned_alloczn(int status__, int clear__, size_t alignment__, size_
  *                     this function is unspecified for the value 0
  * @return             A unique pointer with at least the specified size
  *                     and alignment
+ * 
+ * @since  1.1
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(2), __alloc_size__(3), __warn_unused_result__, __returns_nonnull__)))
 inline void *
@@ -231,6 +245,8 @@ libsimple_ealigned_allocz(int clear__, size_t alignment__, size_t n__)
  *                     list must end with 0 (which is not factor)
  * @return             A unique pointer with at least the specified size
  *                     and alignment
+ * 
+ * @since  1.1
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(2), __warn_unused_result__, __returns_nonnull__)))
 inline void *
@@ -263,6 +279,8 @@ libsimple_evaligned_alloczn(int clear__, size_t alignment__, size_t n__, va_list
  *                     list must end with 0 (which is not factor)
  * @return             A unique pointer with at least the specified size
  *                     and alignment
+ * 
+ * @since  1.1
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(2), __warn_unused_result__, __returns_nonnull__)))
 inline void *

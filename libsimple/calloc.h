@@ -17,6 +17,8 @@
  *                  `NULL` on failure
  * @throws  EINVAL  `n` is 0
  * @throws  ENOMEM  Could not allocated enough memory
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__)))
 inline void *
@@ -45,6 +47,8 @@ libsimple_vcallocn(size_t n__, va_list ap__)
  *                  `NULL` on failure
  * @throws  EINVAL  `n` is 0
  * @throws  ENOMEM  Could not allocated enough memory
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__)))
 inline void *
@@ -75,6 +79,8 @@ libsimple_callocn(size_t n__, ... /*, (size_t)0 */)
  *                  this function is unspecified for the value 0
  * @return          A unique pointer with at least the size `n * m`
  *                  and with the alignment `alignof(max_align_t)`
+ * 
+ * @since  1.0
  */
 #ifndef LIBSIMPLE_DEFINED_LIBSIMPLE_ENCALLOC__
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_size__(2, 3), __warn_unused_result__, __returns_nonnull__)))
@@ -104,6 +110,8 @@ void *libsimple_encalloc(int, size_t, size_t);
  *                  list must end with 0 (which is not factor)
  * @return          A unique pointer with at least the specified size
  *                  and with the alignment `alignof(max_align_t)`
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 inline void *
@@ -134,6 +142,8 @@ libsimple_envcallocn(int status__, size_t n__, va_list ap__)
  *                  list must end with 0 (which is not factor)
  * @return          A unique pointer with at least the specified size
  *                  and with the alignment `alignof(max_align_t)`
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 inline void *
@@ -163,6 +173,8 @@ libsimple_encallocn(int status__, size_t n__, ... /*, (size_t)0 */)
  *             this function is unspecified for the value 0
  * @return     A unique pointer with at least the size `n * m`
  *             and with the alignment `alignof(max_align_t)`
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_size__(1, 2), __warn_unused_result__, __returns_nonnull__)))
 inline void *
@@ -192,6 +204,8 @@ libsimple_ecalloc(size_t n__, size_t m__)
  *              list must end with 0 (which is not factor)
  * @return      A unique pointer with at least the specified size
  *              and with the alignment `alignof(max_align_t)`
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 inline void *
@@ -221,6 +235,8 @@ libsimple_evcallocn(size_t n__, va_list ap__)
  *               list must end with 0 (which is not factor)
  * @return       A unique pointer with at least the specified size
  *               and with the alignment `alignof(max_align_t)`
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 inline void *

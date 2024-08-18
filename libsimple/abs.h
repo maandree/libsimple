@@ -41,150 +41,198 @@
 #define LIBSIMPLE_SIGN_(UTYPE, STYPE, VALUE) ((VALUE) >> (sizeof(UTYPE) * CHAR_BIT - 1) ? (STYPE)(VALUE) : -(STYPE)-(VALUE))
 
 
+/* @since  1.6 */
 inline unsigned char libsimple_hhdiff(signed char max, signed char min)
 { return LIBSIMPLE_DIFF_(unsigned char, max, min); }
 
+/* @since  1.6 */
 inline unsigned short int libsimple_hdiff(short int max, short int min)
 { return LIBSIMPLE_DIFF_(unsigned short int, max, min); }
 
+/* @since  1.6 */
 inline unsigned int libsimple_diff(int max, int min)
 { return LIBSIMPLE_DIFF_(unsigned int, max, min); }
 
+/* @since  1.6 */
 inline unsigned long int libsimple_ldiff(long int max, long int min)
 { return LIBSIMPLE_DIFF_(unsigned long int, max, min); }
 
+/* @since  1.6 */
 inline unsigned long long int libsimple_lldiff(long long int max, long long int min)
 { return LIBSIMPLE_DIFF_(unsigned long long int, max, min); }
 
+/* @since  1.6 */
 inline size_t libsimple_zdiff(ssize_t max, ssize_t min)
 { return LIBSIMPLE_DIFF_(size_t, max, min); }
 
+/* @since  1.6 */
 inline uint_least8_t libsimple_i8diff(int_least8_t max, int_least8_t min)
 { return LIBSIMPLE_DIFF_(uint_least8_t, max, min); }
 
+/* @since  1.6 */
 inline uint_least16_t libsimple_i16diff(int_least16_t max, int_least16_t min)
 { return LIBSIMPLE_DIFF_(uint_least16_t, max, min); }
 
+/* @since  1.6 */
 inline uint_least32_t libsimple_i32diff(int_least32_t max, int_least32_t min)
 { return LIBSIMPLE_DIFF_(uint_least32_t, max, min); }
 
+/* @since  1.6 */
 inline uint_least64_t libsimple_i64diff(int_least64_t max, int_least64_t min)
 { return LIBSIMPLE_DIFF_(uint_least64_t, max, min); }
 
+/* @since  1.6 */
 inline uintmax_t libsimple_imaxdiff(intmax_t max, intmax_t min)
 { return LIBSIMPLE_DIFF_(uintmax_t, max, min); }
 
+/* @since  1.6 */
 inline uintptr_t libsimple_iptrdiff(intptr_t max, intptr_t min)
 { return LIBSIMPLE_DIFF_(uintptr_t, max, min); }
 
 
+/* @since  1.6 */
 inline unsigned char libsimple_hhabs(signed char a, signed char b)
 { return LIBSIMPLE_IABS_(unsigned char, a, b); }
 
+/* @since  1.6 */
 inline unsigned short int libsimple_habs(short int a, short int b)
 { return LIBSIMPLE_IABS_(unsigned short int, a, b); }
 
+/* @since  1.6 */
 inline unsigned int libsimple_abs(int a, int b)
 { return LIBSIMPLE_IABS_(unsigned int, a, b); }
 
+/* @since  1.6 */
 inline unsigned long int libsimple_labs(long int a, long int b)
 { return LIBSIMPLE_IABS_(unsigned long int, a, b); }
 
+/* @since  1.6 */
 inline unsigned long long int libsimple_llabs(long long int a, long long int b)
 { return LIBSIMPLE_IABS_(unsigned long long int, a, b); }
 
+/* @since  1.6 */
 inline size_t libsimple_zabs(ssize_t a, ssize_t b)
 { return LIBSIMPLE_IABS_(size_t, a, b); }
 
+/* @since  1.6 */
 inline uint_least8_t libsimple_i8abs(int_least8_t a, int_least8_t b)
 { return LIBSIMPLE_IABS_(uint_least8_t, a, b); }
 
+/* @since  1.6 */
 inline uint_least16_t libsimple_i16abs(int_least16_t a, int_least16_t b)
 { return LIBSIMPLE_IABS_(uint_least16_t, a, b); }
 
+/* @since  1.6 */
 inline uint_least32_t libsimple_i32abs(int_least32_t a, int_least32_t b)
 { return LIBSIMPLE_IABS_(uint_least32_t, a, b); }
 
+/* @since  1.6 */
 inline uint_least64_t libsimple_i64abs(int_least64_t a, int_least64_t b)
 { return LIBSIMPLE_IABS_(uint_least64_t, a, b); }
 
+/* @since  1.6 */
 inline uintmax_t libsimple_imaxabs(intmax_t a, intmax_t b)
 { return LIBSIMPLE_IABS_(uintmax_t, a, b); }
 
+/* @since  1.6 */
 inline uintptr_t libsimple_iptrabs(intptr_t a, intptr_t b)
 { return LIBSIMPLE_IABS_(uintptr_t, a, b); }
 
 
+/* @since  1.6 */
 inline unsigned char libsimple_uhhabs(unsigned char a, unsigned char b)
 { return LIBSIMPLE_UABS_(unsigned char, a, b); }
 
+/* @since  1.6 */
 inline unsigned short int libsimple_uhabs(unsigned short int a, unsigned short int b)
 { return LIBSIMPLE_UABS_(unsigned short int, a, b); }
 
+/* @since  1.6 */
 inline unsigned int libsimple_uabs(unsigned int a, unsigned int b)
 { return LIBSIMPLE_UABS_(unsigned int, a, b); }
 
+/* @since  1.6 */
 inline unsigned long int libsimple_ulabs(unsigned long int a, unsigned long int b)
 { return LIBSIMPLE_UABS_(unsigned long int, a, b); }
 
+/* @since  1.6 */
 inline unsigned long long int libsimple_ullabs(unsigned long long int a, unsigned long long int b)
 { return LIBSIMPLE_UABS_(unsigned long long int, a, b); }
 
+/* @since  1.6 */
 inline size_t libsimple_uzabs(size_t a, size_t b)
 { return LIBSIMPLE_UABS_(size_t, a, b); }
 
+/* @since  1.6 */
 inline uint_least8_t libsimple_u8abs(uint_least8_t a, uint_least8_t b)
 { return LIBSIMPLE_UABS_(uint_least8_t, a, b); }
 
+/* @since  1.6 */
 inline uint_least16_t libsimple_u16abs(uint_least16_t a, uint_least16_t b)
 { return LIBSIMPLE_UABS_(uint_least16_t, a, b); }
 
+/* @since  1.6 */
 inline uint_least32_t libsimple_u32abs(uint_least32_t a, uint_least32_t b)
 { return LIBSIMPLE_UABS_(uint_least32_t, a, b); }
 
+/* @since  1.6 */
 inline uint_least64_t libsimple_u64abs(uint_least64_t a, uint_least64_t b)
 { return LIBSIMPLE_UABS_(uint_least64_t, a, b); }
 
+/* @since  1.6 */
 inline uintmax_t libsimple_umaxabs(uintmax_t a, uintmax_t b)
 { return LIBSIMPLE_UABS_(uintmax_t, a, b); }
 
+/* @since  1.6 */
 inline uintptr_t libsimple_uptrabs(uintptr_t a, uintptr_t b)
 { return LIBSIMPLE_UABS_(uintptr_t, a, b); }
 
 
+/* @since  1.6 */
 inline signed char libsimple_toihh(unsigned char value)
 { return LIBSIMPLE_SIGN_(unsigned char, signed char, value); }
 
+/* @since  1.6 */
 inline short int libsimple_toih(unsigned short int value)
 { return LIBSIMPLE_SIGN_(unsigned short int, short int, value); }
 
+/* @since  1.6 */
 inline int libsimple_toi(unsigned int value)
 { return LIBSIMPLE_SIGN_(unsigned int, int, value); }
 
+/* @since  1.6 */
 inline long int libsimple_toil(unsigned long int value)
 { return LIBSIMPLE_SIGN_(unsigned long int, long int, value); }
 
+/* @since  1.6 */
 inline long long int libsimple_toill(unsigned long long int value)
 { return LIBSIMPLE_SIGN_(unsigned long long int, long long int, value); }
 
+/* @since  1.6 */
 inline ssize_t libsimple_toiz(size_t value)
 { return LIBSIMPLE_SIGN_(size_t, ssize_t, value); }
 
+/* @since  1.6 */
 inline int_least8_t libsimple_toi8(uint_least8_t value)
 { return LIBSIMPLE_SIGN_(uint_least8_t, int_least8_t, value); }
 
+/* @since  1.6 */
 inline int_least16_t libsimple_toi16(uint_least16_t value)
 { return LIBSIMPLE_SIGN_(uint_least16_t, int_least16_t, value); }
 
+/* @since  1.6 */
 inline int_least32_t libsimple_toi32(uint_least32_t value)
 { return LIBSIMPLE_SIGN_(uint_least32_t, int_least32_t, value); }
 
+/* @since  1.6 */
 inline int_least64_t libsimple_toi64(uint_least64_t value)
 { return LIBSIMPLE_SIGN_(uint_least32_t, int_least32_t, value); }
 
+/* @since  1.6 */
 inline intmax_t libsimple_toimax(uintmax_t value)
 { return LIBSIMPLE_SIGN_(uintmax_t, intmax_t, value); }
 
+/* @since  1.6 */
 inline intptr_t libsimple_toiptr(uintptr_t value)
 { return LIBSIMPLE_SIGN_(uintptr_t, intptr_t, value); }
 

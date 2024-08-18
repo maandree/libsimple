@@ -7,6 +7,8 @@
  * @param   s:const wchar_t *  The wide characters to copy
  * @param   n:size_t           The number of wide characters to copy
  * @return  :wchar_t *         Duplicate of `s` with automatic storage
+ * 
+ * @since  1.2
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define libsimple_wmemdupa(s, n)\
@@ -29,6 +31,8 @@
  * @param   s  The wide characters to copy
  * @param   n  The number of wide characters to copy
  * @return     Duplicate of `s`, `NULL` on failure
+ * 
+ * @since  1.2
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, libsimple_assume_aligned_as__(wchar_t), __alloc_size__(2), __warn_unused_result__)))
 wchar_t *libsimple_wmemdup(const wchar_t *, size_t);
@@ -44,6 +48,8 @@ wchar_t *libsimple_wmemdup(const wchar_t *, size_t);
  * @param   s       The wide characters to copy
  * @param   n       The number of wide characters to copy
  * @return          Duplicate of `s`
+ * 
+ * @since  1.2
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, libsimple_assume_aligned_as__(wchar_t), __alloc_size__(3),
                                    __warn_unused_result__, __returns_nonnull__)))
@@ -59,6 +65,8 @@ wchar_t *libsimple_enwmemdup(int, const wchar_t *, size_t);
  * @param   s  The wide characters to copy
  * @param   n  The number of wide characters to copy
  * @return     Duplicate of `s`
+ * 
+ * @since  1.2
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, libsimple_assume_aligned_as__(wchar_t), __alloc_size__(2),
                                    __warn_unused_result__, __returns_nonnull__)))

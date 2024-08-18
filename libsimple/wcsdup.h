@@ -6,6 +6,8 @@
  * 
  * @param   s:const wchar_t *  The string to copy
  * @return  :wchar_t *         Duplicate of `s` with automatic storage
+ * 
+ * @since  1.2
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define libsimple_wcsdupa(s)\
@@ -28,6 +30,8 @@
  * @param   status  Exit value in case of failure
  * @param   s       The string to copy
  * @return          Duplicate of `s`
+ * 
+ * @since  1.2
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, libsimple_assume_aligned_as__(wchar_t), __nonnull__,
                                    __warn_unused_result__, __returns_nonnull__)))
@@ -42,6 +46,8 @@ wchar_t *libsimple_enwcsdup(int, const wchar_t *);
  * 
  * @param   s  The string to copy
  * @return     Duplicate of `s`
+ * 
+ * @since  1.2
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, libsimple_assume_aligned_as__(wchar_t),
                                    __nonnull__, __warn_unused_result__, __returns_nonnull__)))

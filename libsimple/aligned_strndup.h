@@ -8,6 +8,8 @@
  * @param   alignment:size_t  The alignment of the returned pointer
  * @param   n:size_t          The maximum number of bytes to copy
  * @return  :char *           Duplicate of `s` with automatic storage
+ * 
+ * @since  1.2
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define libsimple_aligned_strndupa(s, alignment, n)\
@@ -40,6 +42,8 @@
  * @param   alignment  The alignment of the returned pointer
  * @param   n          The maximum number of bytes to copy
  * @return             Duplicate of `s`, `NULL` on failure
+ * 
+ * @since  1.2
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(2), __nonnull__, __warn_unused_result__)))
 char *libsimple_aligned_strndup(const char * s__, size_t alignment__, size_t n__);
@@ -56,6 +60,8 @@ char *libsimple_aligned_strndup(const char * s__, size_t alignment__, size_t n__
  * @param   alignment  The alignment of the returned pointer
  * @param   n          The maximum number of bytes to copy
  * @return             Duplicate of `s`
+ * 
+ * @since  1.2
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(3), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
 char *libsimple_enaligned_strndup(int, const char *, size_t, size_t);
@@ -71,6 +77,8 @@ char *libsimple_enaligned_strndup(int, const char *, size_t, size_t);
  * @param   alignment  The alignment of the returned pointer
  * @param   n          The maximum number of bytes to copy
  * @return             Duplicate of `s`
+ * 
+ * @since  1.2
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(2), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
 inline char *

@@ -35,6 +35,8 @@ void *libsimple_enmalloc(int, size_t);
  *                  `NULL` on failure
  * @throws  EINVAL  `n` is 0
  * @throws  ENOMEM  Could not allocated enough memory
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__)))
 void *libsimple_vmalloczn(int, size_t, va_list);
@@ -54,6 +56,8 @@ void *libsimple_vmalloczn(int, size_t, va_list);
  *                  `NULL` on failure
  * @throws  EINVAL  `n` is 0
  * @throws  ENOMEM  Could not allocated enough memory
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_size__(2), __warn_unused_result__)))
 inline void *
@@ -83,6 +87,8 @@ libsimple_mallocz(int clear__, size_t n__)
  *                  `NULL` on failure
  * @throws  EINVAL  `n` is 0
  * @throws  ENOMEM  Could not allocated enough memory
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__)))
 inline void *
@@ -111,6 +117,8 @@ libsimple_malloczn(int clear__, size_t n__, ... /*, (size_t)0 */)
  * @param   n       Th number of bytes to allocate
  * @return          A unique pointer with at least the specified size
  *                  and with the alignment `alignof(max_align_t)`
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_size__(3), __warn_unused_result__, __returns_nonnull__)))
 inline void *
@@ -143,6 +151,8 @@ libsimple_enmallocz(int status__, int clear__, size_t n__)
  *                  list must end with 0 (which is not factor)
  * @return          A unique pointer with at least the specified size
  *                  and with the alignment `alignof(max_align_t)`
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 void *libsimple_envmalloczn(int, int, size_t, va_list);
@@ -171,6 +181,8 @@ void *libsimple_envmalloczn(int, int, size_t, va_list);
  *                  list must end with 0 (which is not factor)
  * @return          A unique pointer with at least the specified size
  *                  and with the alignment `alignof(max_align_t)`
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 inline void *
@@ -198,6 +210,8 @@ libsimple_enmalloczn(int status__, int clear__, size_t n__, ... /*, (size_t)0 */
  * @param   n      Th number of bytes to allocate
  * @return         A unique pointer with at least the specified size
  *                 and with the alignment `alignof(max_align_t)`
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_size__(2), __warn_unused_result__, __returns_nonnull__)))
 inline void *
@@ -228,6 +242,8 @@ libsimple_emallocz(int clear__, size_t n__)
  *                 list must end with 0 (which is not factor)
  * @return         A unique pointer with at least the specified size
  *                 and with the alignment `alignof(max_align_t)`
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 inline void *
@@ -258,6 +274,8 @@ libsimple_evmalloczn(int clear__, size_t n__, va_list ap__)
  *                 list must end with 0 (which is not factor)
  * @return         A unique pointer with at least the specified size
  *                 and with the alignment `alignof(max_align_t)`
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
 inline void *

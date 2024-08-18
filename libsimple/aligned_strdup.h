@@ -7,6 +7,8 @@
  * @param   s:const char *    The string to copy
  * @param   alignment:size_t  The alignment of the returned pointer
  * @return  :char *           Duplicate of `s` with automatic storage
+ * 
+ * @since  1.2
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define libsimple_aligned_strdupa(s, alignment)\
@@ -36,6 +38,8 @@
  * @param   s          The string to copy
  * @param   alignment  The alignment of the returned pointer
  * @return             Duplicate of `s`, `NULL` on failure
+ * 
+ * @since  1.2
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(2), __nonnull__, __warn_unused_result__)))
 inline char *
@@ -55,6 +59,8 @@ libsimple_aligned_strdup(const char *s__, size_t alignment__)
  * @param   s          The string to copy
  * @param   alignment  The alignment of the returned pointer
  * @return             Duplicate of `s`
+ * 
+ * @since  1.2
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(3), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
 char *libsimple_enaligned_strdup(int, const char *, size_t);
@@ -69,6 +75,8 @@ char *libsimple_enaligned_strdup(int, const char *, size_t);
  * @param   s          The string to copy
  * @param   alignment  The alignment of the returned pointer
  * @return             Duplicate of `s`
+ * 
+ * @since  1.2
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(2), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
 inline char *

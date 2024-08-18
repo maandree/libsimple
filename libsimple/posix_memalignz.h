@@ -25,6 +25,8 @@
  * @throws  EINVAL     `n` is 0, `alignment` is not a power of 2, or
  *                     `alignment` is not a multiple of `sizeof(void *)`
  * @throws  ENOMEM     Could not allocated enough memory
+ * 
+ * @since  1.1
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1))))
 int libsimple_vposix_memalignzn(void **, int, size_t, size_t, va_list);
@@ -51,6 +53,8 @@ int libsimple_vposix_memalignzn(void **, int, size_t, size_t, va_list);
  * @throws  EINVAL     `n` is 0, `alignment` is not a power of 2, or
  *                     `alignment` is not a multiple of `sizeof(void *)`
  * @throws  ENOMEM     Could not allocated enough memory
+ * 
+ * @since  1.1
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1))))
 inline int
@@ -90,6 +94,8 @@ libsimple_posix_memalignz(void **memptr__, int clear__, size_t alignment__, size
  * @throws  EINVAL     `n` is 0, `alignment` is not a power of 2, or
  *                     `alignment` is not a multiple of `sizeof(void *)`
  * @throws  ENOMEM     Could not allocated enough memory
+ * 
+ * @since  1.1
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1))))
 inline int
@@ -122,6 +128,8 @@ libsimple_posix_memalignzn(void **memptr__, int clear__, size_t alignment__, siz
  *                    of `sizeof(void *)`
  * @param  n          The number of bytes to allocate, the behaviour of
  *                    this function is unspecified for the value 0
+ * 
+ * @since  1.1
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2))))
 void libsimple_enposix_memalignz(int, void **, int, size_t, size_t);
@@ -153,6 +161,8 @@ void libsimple_enposix_memalignz(int, void **, int, size_t, size_t);
  * @param  ap         The rest of the factors for the allocation size,
  *                    all arguments should have the type `size_t`, and
  *                    list must end with 0 (which is not factor)
+ * 
+ * @since  1.1
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2))))
 void libsimple_envposix_memalignzn(int, void **, int, size_t, size_t, va_list);
@@ -184,6 +194,8 @@ void libsimple_envposix_memalignzn(int, void **, int, size_t, size_t, va_list);
  * @param  ...        The rest of the factors for the allocation size,
  *                    all arguments should have the type `size_t`, and
  *                    list must end with 0 (which is not factor)
+ * 
+ * @since  1.1
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2))))
 inline void
@@ -215,6 +227,8 @@ libsimple_enposix_memalignzn(int status__, void **memptr__, int clear__, size_t 
  *                    of `sizeof(void *)`
  * @param  n          The number of bytes to allocate, the behaviour of
  *                    this function is unspecified for the value 0
+ * 
+ * @since  1.1
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1))))
 inline void
@@ -249,6 +263,8 @@ libsimple_eposix_memalignz(void **memptr__, int clear__, size_t alignment__, siz
  * @param  ap         The rest of the factors for the allocation size,
  *                    all arguments should have the type `size_t`, and
  *                    list must end with 0 (which is not factor)
+ * 
+ * @since  1.1
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1))))
 inline void
@@ -283,6 +299,8 @@ libsimple_evposix_memalignzn(void **memptr__, int clear__, size_t alignment__, s
  * @param  ...        The rest of the factors for the allocation size,
  *                    all arguments should have the type `size_t`, and
  *                    list must end with 0 (which is not factor)
+ * 
+ * @since  1.1
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1))))
 inline void

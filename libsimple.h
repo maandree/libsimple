@@ -184,6 +184,8 @@
  *               be update to -1 if it is non-negative
  * @return       Return value of close(3) (0 on success,
  *               -1 on error), 0 if `*fdp < 0`
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__)))
 inline int
@@ -222,6 +224,8 @@ int libsimple_close_range(unsigned int first, unsigned int last, unsigned int *n
  * @param  list:non-void pointer  The list
  * @param  i:size_t               The index of the item to remove
  * @param  n:size_t               Pointer to the number of items in the list, will be updated
+ * 
+ * @since  1.0
  */
 #define LIBSIMPLE_UNLIST(LIST, I, NP) libsimple_unlist((LIST), (I), (NP), sizeof(*(LIST)))
 #ifndef UNLIST
@@ -236,6 +240,8 @@ int libsimple_close_range(unsigned int first, unsigned int last, unsigned int *n
  * @param  i      The index of the item to remove
  * @param  n      Pointer to the number of items in the list, will be updated
  * @param  width  The width, in bytes, of each item in the list
+ * 
+ * @since  1.0
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__)))
 inline void
@@ -250,20 +256,20 @@ libsimple_unlist(void *list__, size_t i__, size_t *np__, size_t width__)
 
 
 #define LIBSIMPLE_REMOVE_CONST__(X, TYPE, ...) (*(TYPE *)(void *)&(X))
-#define LIBSIMPLE_REMOVE_CONST(...) LIBSIMPLE_REMOVE_CONST__(__VA_ARGS__, void *) /* TODO test, doc, man */
+#define LIBSIMPLE_REMOVE_CONST(...) LIBSIMPLE_REMOVE_CONST__(__VA_ARGS__, void *) /* TODO test, doc, man (since 1.2) */
 #ifndef REMOVE_CONST
 # define REMOVE_CONST(...) LIBSIMPLE_REMOVE_CONST(__VA_ARGS__)
 #endif
 
 
-#define LIBSIMPLE_PREFETCH_RDONLY(ADDRESS, LOCALITY) /* void */ /* TODO test, doc, man */\
+#define LIBSIMPLE_PREFETCH_RDONLY(ADDRESS, LOCALITY) /* void */ /* TODO test, doc, man (since 1.2) */\
 	LIBSIMPLE_GCC_ONLY__(__builtin_prefetch(ADDRESS, 0, LOCALITY))
 #ifndef PREFETCH_RDONLY
 # define PREFETCH_RDONLY(...) LIBSIMPLE_PREFETCH_RDONLY(__VA_ARGS__)
 #endif
 
 
-#define LIBSIMPLE_PREFETCH_RDWR(ADDRESS, LOCALITY) /* void */ /* TODO test, doc, man */\
+#define LIBSIMPLE_PREFETCH_RDWR(ADDRESS, LOCALITY) /* void */ /* TODO test, doc, man (since 1.2) */\
 	LIBSIMPLE_GCC_ONLY__(__builtin_prefetch(ADDRESS, 1, LOCALITY))
 #ifndef PREFETCH_RDWR
 # define PREFETCH_RDWR(...) LIBSIMPLE_PREFETCH_RDWR(__VA_ARGS__)
@@ -273,7 +279,7 @@ libsimple_unlist(void *list__, size_t i__, size_t *np__, size_t width__)
 #define LIBSIMPLE_ASSUME_ALIGNED__(PTR, ALIGNMENT, ...)\
 	LIBSIMPLE_GCC_ONLY__(__builtin_assume_aligned(PTR, ALIGNMENT))\
 	LIBSIMPLE_NON_GCC_ONLY__(PTR)
-#define LIBSIMPLE_ASSUME_ALIGNED(PTR, ...) /* returns PTR */ /* TODO test, doc, man */\
+#define LIBSIMPLE_ASSUME_ALIGNED(PTR, ...) /* returns PTR */ /* TODO test, doc, man (since 1.2) */\
 	LIBSIMPLE_ASSUME_ALIGNED__(PTR, ##__VA_ARGS__, LIBSIMPLE_C11_ONLY__(_Alignof(*PTR)) /* no , */\
 	                           LIBSIMPLE_PRE_C11_ONLY__(__alignof(*PTR)))
 #ifndef ASSUME_ALIGNED
@@ -281,20 +287,20 @@ libsimple_unlist(void *list__, size_t i__, size_t *np__, size_t width__)
 #endif
 
 
-#define LIBSIMPLE_ASSUME_MISALIGNED(PTR, ALIGNMENT, OFFSET) /* returns PTR */ /* TODO test, doc, man */\
+#define LIBSIMPLE_ASSUME_MISALIGNED(PTR, ALIGNMENT, OFFSET) /* returns PTR */ /* TODO test, doc, man (since 1.2) */\
 	__builtin_assume_aligned(PTR, ALIGNMENT, OFFSET)
 #ifndef ASSUME_MISALIGNED
 # define ASSUME_MISALIGNED(...) LIBSIMPLE_ASSUME_MISALIGNED(__VA_ARGS__)
 #endif
 
 
-#define LIBSIMPLE_UNROLLED(N) LIBSIMPLE_GCC_ONLY__(LIBSIMPLE_C11_ONLY__(_Pragma("GCC unroll "#N))) /* TODO test, doc, man */
+#define LIBSIMPLE_UNROLLED(N) LIBSIMPLE_GCC_ONLY__(LIBSIMPLE_C11_ONLY__(_Pragma("GCC unroll "#N))) /* TODO test, doc, man (since 1.2) */
 #ifndef UNROLLED
 # define UNROLLED(N) LIBSIMPLE_UNROLLED(N)
 #endif
 
 
-#define LIBSIMPLE_SIMDLOOP LIBSIMPLE_GCC_ONLY__(LIBSIMPLE_C11_ONLY__(_Pragma("GCC ivdep"))) /* TODO test, doc, man */
+#define LIBSIMPLE_SIMDLOOP LIBSIMPLE_GCC_ONLY__(LIBSIMPLE_C11_ONLY__(_Pragma("GCC ivdep"))) /* TODO test, doc, man (since 1.2) */
 #ifndef SIMDLOOP
 # define SIMDLOOP LIBSIMPLE_SIMDLOOP
 #endif

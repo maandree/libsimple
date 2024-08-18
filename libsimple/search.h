@@ -26,6 +26,8 @@
  * 
  * @seealso  bsearch(3p)
  * @seealso  libsimple_bindex_r(3p)
+ * 
+ * @since  1.4
  */
 ssize_t libsimple_bindex(const void *key, const void *base, size_t nel, size_t width, /* TODO man */
                          int (*compar)(const void *, const void *));
@@ -61,6 +63,8 @@ ssize_t libsimple_bindex(const void *key, const void *base, size_t nel, size_t w
  * 
  * @seealso  bsearch(3p)
  * @seealso  libsimple_bindex(3p)
+ * 
+ * @since  1.4
  */
 ssize_t libsimple_bindex_r(const void *key, const void *base, size_t nel, size_t width, /* TODO man */
                            int (*compar)(const void *, const void *, void *), void *arg);
