@@ -16,6 +16,8 @@
  *                  if out of range (`errno` set to `ERANGE`), the
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
+ * 
+ * @since  1.4
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 signed char libsimple_strtohh(const char *restrict, char **restrict, int);
@@ -39,6 +41,8 @@ signed char libsimple_strtohh(const char *restrict, char **restrict, int);
  *                  if out of range (`errno` set to `ERANGE`), the
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
+ * 
+ * @since  1.4
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 unsigned char libsimple_strtouhh(const char *restrict, char **restrict, int);
@@ -62,6 +66,8 @@ unsigned char libsimple_strtouhh(const char *restrict, char **restrict, int);
  *                  if out of range (`errno` set to `ERANGE`), the
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
+ * 
+ * @since  1.4
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 signed short int libsimple_strtoh(const char *restrict, char **restrict, int);
@@ -85,6 +91,8 @@ signed short int libsimple_strtoh(const char *restrict, char **restrict, int);
  *                  if out of range (`errno` set to `ERANGE`), the
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
+ * 
+ * @since  1.4
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 unsigned short int libsimple_strtouh(const char *restrict, char **restrict, int);
@@ -108,6 +116,8 @@ unsigned short int libsimple_strtouh(const char *restrict, char **restrict, int)
  *                  if out of range (`errno` set to `ERANGE`), the
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
+ * 
+ * @since  1.4
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 signed int libsimple_strtoi(const char *restrict, char **restrict, int);
@@ -131,6 +141,8 @@ signed int libsimple_strtoi(const char *restrict, char **restrict, int);
  *                  if out of range (`errno` set to `ERANGE`), the
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
+ * 
+ * @since  1.4
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 unsigned int libsimple_strtou(const char *restrict, char **restrict, int);
@@ -154,6 +166,8 @@ unsigned int libsimple_strtou(const char *restrict, char **restrict, int);
  *                  if out of range (`errno` set to `ERANGE`), the
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
+ * 
+ * @since  1.4
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 inline ssize_t
@@ -181,6 +195,8 @@ libsimple_strtoz(const char *restrict nptr__, char **restrict endptr__, int base
  *                  if out of range (`errno` set to `ERANGE`), the
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
+ * 
+ * @since  1.4
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 inline size_t
@@ -208,6 +224,8 @@ libsimple_strtouz(const char *restrict nptr__, char **restrict endptr__, int bas
  *                  if out of range (`errno` set to `ERANGE`), the
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
+ * 
+ * @since  1.4
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 int_least8_t libsimple_strtoi8(const char *restrict, char **restrict, int);
@@ -231,6 +249,8 @@ int_least8_t libsimple_strtoi8(const char *restrict, char **restrict, int);
  *                  if out of range (`errno` set to `ERANGE`), the
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
+ * 
+ * @since  1.4
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 uint_least8_t libsimple_strtou8(const char *restrict, char **restrict, int);
@@ -254,6 +274,8 @@ uint_least8_t libsimple_strtou8(const char *restrict, char **restrict, int);
  *                  if out of range (`errno` set to `ERANGE`), the
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
+ * 
+ * @since  1.4
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 int_least16_t libsimple_strtoi16(const char *restrict, char **restrict, int);
@@ -277,6 +299,8 @@ int_least16_t libsimple_strtoi16(const char *restrict, char **restrict, int);
  *                  if out of range (`errno` set to `ERANGE`), the
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
+ * 
+ * @since  1.4
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 uint_least16_t libsimple_strtou16(const char *restrict, char **restrict, int);
@@ -300,6 +324,8 @@ uint_least16_t libsimple_strtou16(const char *restrict, char **restrict, int);
  *                  if out of range (`errno` set to `ERANGE`), the
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
+ * 
+ * @since  1.4
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 int_least32_t libsimple_strtoi32(const char *restrict, char **restrict, int);
@@ -323,6 +349,8 @@ int_least32_t libsimple_strtoi32(const char *restrict, char **restrict, int);
  *                  if out of range (`errno` set to `ERANGE`), the
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
+ * 
+ * @since  1.4
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 uint_least32_t libsimple_strtou32(const char *restrict, char **restrict, int);
@@ -346,6 +374,8 @@ uint_least32_t libsimple_strtou32(const char *restrict, char **restrict, int);
  *                  if out of range (`errno` set to `ERANGE`), the
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
+ * 
+ * @since  1.4
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 int_least64_t libsimple_strtoi64(const char *restrict, char **restrict, int);
@@ -369,6 +399,8 @@ int_least64_t libsimple_strtoi64(const char *restrict, char **restrict, int);
  *                  if out of range (`errno` set to `ERANGE`), the
  *                  closed value that can be represented; 0 on
  *                  failure (unless `errno` not set to `ERANGE`)
+ * 
+ * @since  1.4
  */
 LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __warn_unused_result__)))
 uint_least64_t libsimple_strtou64(const char *restrict, char **restrict, int);
