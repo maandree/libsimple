@@ -9,12 +9,12 @@
  * 
  * @since  1.0
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __warn_unused_result__)))
-static inline char *
-libsimple_getenv_ne(const char *__name)
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__, __warn_unused_result__)))
+inline char *
+libsimple_getenv_ne(const char *name__)
 {
-	char *__env = getenv(__name);
-	return (__env && *__env) ? __env : NULL;
+	char *env__ = getenv(name__);
+	return (env__ && *env__) ? env__ : NULL;
 }
 #ifndef getenv_ne
 # define getenv_ne libsimple_getenv_ne
@@ -29,12 +29,12 @@ libsimple_getenv_ne(const char *__name)
  * 
  * @since  1.0
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __warn_unused_result__, __returns_nonnull__)))
-static inline const char *
-libsimple_getenv_e(const char *__name)
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__, __warn_unused_result__, __returns_nonnull__)))
+inline const char *
+libsimple_getenv_e(const char *name__)
 {
-	const char *__env = getenv(__name);
-	return (__env && *__env) ? __env : "";
+	const char *env__ = getenv(name__);
+	return (env__ && *env__) ? env__ : "";
 }
 #ifndef getenv_e
 # define getenv_e libsimple_getenv_e
@@ -56,7 +56,7 @@ libsimple_getenv_e(const char *__name)
  * 
  * @since  1.0
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__, __format__(__printf__, 1, 0))))
 int libsimple_vputenvf(const char *, va_list);
 #ifndef vputenvf
 # define vputenvf libsimple_vputenvf
@@ -78,14 +78,14 @@ int libsimple_vputenvf(const char *, va_list);
  * 
  * @since  1.0
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __format__(__printf__, 1, 2))))
-static inline int
-libsimple_putenvf(const char *__fmt, ...)
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__, __format__(__printf__, 1, 2))))
+inline int
+libsimple_putenvf(const char *fmt__, ...)
 {
-	va_list __ap;
-	va_start(__ap, __fmt);
-	return libsimple_vputenvf(__fmt, __ap);
-	va_end(__ap);
+	va_list ap__;
+	va_start(ap__, fmt__);
+	return libsimple_vputenvf(fmt__, ap__);
+	va_end(ap__);
 }
 #ifndef putenvf
 # define putenvf libsimple_putenvf
@@ -111,7 +111,7 @@ libsimple_putenvf(const char *__fmt, ...)
  * 
  * @since  1.0
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__, __format__(__printf__, 2, 0))))
 void libsimple_envputenvf(int, const char *, va_list);
 #ifndef envputenvf
 # define envputenvf libsimple_envputenvf
@@ -137,14 +137,14 @@ void libsimple_envputenvf(int, const char *, va_list);
  * 
  * @since  1.0
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __format__(__printf__, 2, 3))))
-static inline void
-libsimple_enputenvf(int __status, const char *__fmt, ...)
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__, __format__(__printf__, 2, 3))))
+inline void
+libsimple_enputenvf(int status__, const char *fmt__, ...)
 {
-	va_list __ap;
-	va_start(__ap, __fmt);
-	libsimple_envputenvf(__status, __fmt, __ap);
-	va_end(__ap);
+	va_list ap__;
+	va_start(ap__, fmt__);
+	libsimple_envputenvf(status__, fmt__, ap__);
+	va_end(ap__);
 }
 #ifndef enputenvf
 # define enputenvf libsimple_enputenvf
@@ -169,9 +169,12 @@ libsimple_enputenvf(int __status, const char *__fmt, ...)
  * 
  * @since  1.0
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__)))
-static inline void libsimple_evputenvf(const char *__fmt, va_list __ap)
-{ libsimple_envputenvf(libsimple_default_failure_exit, __fmt, __ap); }
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__, __format__(__printf__, 1, 0))))
+inline void
+libsimple_evputenvf(const char *fmt__, va_list ap__)
+{
+	libsimple_envputenvf(libsimple_default_failure_exit, fmt__, ap__);
+}
 #ifndef evputenvf
 # define evputenvf libsimple_evputenvf
 #endif
@@ -195,14 +198,14 @@ static inline void libsimple_evputenvf(const char *__fmt, va_list __ap)
  * 
  * @since  1.0
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__, __format__(__printf__, 1, 2))))
-static inline void
-libsimple_eputenvf(const char *__fmt, ...)
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__, __format__(__printf__, 1, 2))))
+inline void
+libsimple_eputenvf(const char *fmt__, ...)
 {
-	va_list __ap;
-	va_start(__ap, __fmt);
-	libsimple_evputenvf(__fmt, __ap);
-	va_end(__ap);
+	va_list ap__;
+	va_start(ap__, fmt__);
+	libsimple_evputenvf(fmt__, ap__);
+	va_end(ap__);
 }
 #ifndef eputenvf
 # define eputenvf libsimple_eputenvf

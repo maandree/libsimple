@@ -6,9 +6,9 @@ libsimple_valloc \- allocate memory with page size alignment
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_valloc(size_t \fIn\fP);
-static inline void *libsimple_envalloc(int \fIstatus\fP, size_t \fIn\fP);
-static inline void *libsimple_evalloc(size_t \fIn\fP);
+inline void *libsimple_valloc(size_t \fIn\fP);
+inline void *libsimple_envalloc(int \fIstatus\fP, size_t \fIn\fP);
+inline void *libsimple_evalloc(size_t \fIn\fP);
 
 #ifndef valloc
 # define valloc libsimple_valloc

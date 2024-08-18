@@ -1,16 +1,16 @@
 /* See LICENSE file for copyright and license details. */
-#include "libsimple.h"
+#include "common.h"
 #ifndef TEST
 
 
 void *
 libsimple_memmem(const void *hay_, size_t hayn, const void *sub_, size_t subn)
 {
-	char *hay = (void *)hay_, *end;
+	const char *hay = hay_, *end;
 	const char *sub = sub_;
 
 	if (!subn)
-		return hay;
+		return REMOVE_CONST(hay, char *);
 	if (hayn < subn)
 		return NULL;
 	if (subn == 1)
@@ -18,7 +18,7 @@ libsimple_memmem(const void *hay_, size_t hayn, const void *sub_, size_t subn)
 
 	for (end = &hay[hayn - subn + 1]; hay != end; hay++)
 		if (*hay == *sub && !memcmp(hay, sub, subn))
-			return hay;
+			return REMOVE_CONST(hay, char *);
 
 	return NULL;
 }

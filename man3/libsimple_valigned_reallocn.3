@@ -8,10 +8,10 @@ libsimple_valigned_reallocn \- reallocate memory and customise alignment
 
 void *libsimple_valigned_reallocn(void *\fIptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
 void *libsimple_envaligned_reallocn(int \fIstatus\fP, void *\fIptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
-static inline void *libsimple_evaligned_reallocn(void *\fIptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
-static inline void *libsimple_aligned_reallocn(void *\fIptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
-static inline void *libsimple_enaligned_reallocn(int \fIstatus\fP, void *\fIptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
-static inline void *libsimple_ealigned_reallocn(void *\fIptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_evaligned_reallocn(void *\fIptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
+inline void *libsimple_aligned_reallocn(void *\fIptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_enaligned_reallocn(int \fIstatus\fP, void *\fIptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_ealigned_reallocn(void *\fIptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
 
 #ifndef valigned_reallocn
 # define valigned_reallocn libsimple_valigned_reallocn

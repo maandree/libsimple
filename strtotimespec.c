@@ -1,5 +1,5 @@
 /* See LICENSE file for copyright and license details. */
-#include "libsimple.h"
+#include "common.h"
 #ifndef TEST
 
 
@@ -11,9 +11,12 @@ libsimple_strtotimespec(struct timespec *restrict ts, const char *restrict s, ch
 	long int nsec = 0;
 	long int mul = 100000000L;
 	const char *p;
+	const char *end_s;
 
-	if (end)
-		*end = (void *)s;
+	if (end) {
+		end_s = s;
+		*end = REMOVE_CONST(end_s, char *);
+	}
 
 	while (isspace(*s))
 		s++;
@@ -58,8 +61,10 @@ libsimple_strtotimespec(struct timespec *restrict ts, const char *restrict s, ch
 	if (*s != '.') {
 		ts->tv_sec = sec;
 		ts->tv_nsec = 0;
-		if (end)
-			*end = (void *)s;
+		if (end) {
+			end_s = s;
+			*end = REMOVE_CONST(end_s, char *);
+		}
 		return 0;
 	}
 
@@ -85,7 +90,7 @@ libsimple_strtotimespec(struct timespec *restrict ts, const char *restrict s, ch
 			}
 		}
 		if (end)
-			*end = (void *)p;
+			*end = REMOVE_CONST(p, char *);
 		p = s;
 		while (mul) {
 			for (s = p; mul && isdigit(*s); s++) {
@@ -118,8 +123,10 @@ libsimple_strtotimespec(struct timespec *restrict ts, const char *restrict s, ch
 			while (isdigit(*s))
 				s++;
 		}
-		if (end)
-			*end = (void *)s;
+		if (end) {
+			end_s = s;
+			*end = REMOVE_CONST(end_s, char *);
+		}
 	}
 
 	if (neg && nsec) {
@@ -164,8 +171,10 @@ overflow_periodic:
 	}
 
 overflow:
-	if (end)
-		*end = (void *)s;
+	if (end) {
+		end_s = s;
+		*end = REMOVE_CONST(end_s, char *);
+	}
 	if (neg) {
 		ts->tv_sec = TIME_MIN;
 		ts->tv_nsec = 0;

@@ -7,11 +7,11 @@ libsimple_vputenvf \- change or add a string formatted value to the environment
 #include <libsimple.h>
 
 int libsimple_vputenvf(const char *\fIfmt\fP, va_list \fIap\fP);
-static inline int libsimple_putenvf(const char *\fIfmt\fP, ...);
+inline int libsimple_putenvf(const char *\fIfmt\fP, ...);
 void libsimple_envputenvf(int \fIstatus\fP, const char *\fIfmt\fP, va_list \fIap\fP);
-static inline void libsimple_enputenvf(int \fIstatus\fP, const char *\fIfmt\fP, ...);
-static inline void libsimple_evputenvf(const char *\fIfmt\fP, va_list \fIap\fP);
-static inline void libsimple_eputenvf(const char *\fIfmt\fP, ...);
+inline void libsimple_enputenvf(int \fIstatus\fP, const char *\fIfmt\fP, ...);
+inline void libsimple_evputenvf(const char *\fIfmt\fP, va_list \fIap\fP);
+inline void libsimple_eputenvf(const char *\fIfmt\fP, ...);
 
 #ifndef vputenvf
 # define vputenvf libsimple_vputenvf

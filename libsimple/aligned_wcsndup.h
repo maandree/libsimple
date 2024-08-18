@@ -13,20 +13,21 @@
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define libsimple_aligned_wcsndupa(s, alignment, n)\
+	LIBSIMPLE_EXTENSION__\
 	({\
-		const wchar_t *__s = (s);\
-		size_t __n = wcsnlen(__s, n);\
-		size_t __a = (alignment);\
-		uintptr_t __misalignment;\
-		wchar_t *__r;\
-		__a += !__a;\
-		__r = alloca((__n + 1) * sizeof(wchar_t) + (__a - 1));\
-		__misalignment = (uintptr_t)__r % (uintptr_t)__a;\
-		if (__misalignment)\
-			__r += (uintptr_t)__a - __misalignment;\
-		wmemcpy(__r, __s, __n);\
-		__r[__n] = 0;\
-		__r;\
+		const wchar_t *s__ = (s);\
+		size_t n__ = wcsnlen(s__, n);\
+		size_t a__ = (alignment);\
+		uintptr_t misalignment__;\
+		wchar_t *r__;\
+		a__ += !a__;\
+		r__ = alloca((n__ + 1) * sizeof(wchar_t) + (a__ - 1));\
+		misalignment__ = (uintptr_t)r__ % (uintptr_t)a__;\
+		if (misalignment__)\
+			r__ += (uintptr_t)a__ - misalignment__;\
+		wmemcpy(r__, s__, n__);\
+		r__[n__] = 0;\
+		r__;\
 	})
 # ifndef aligned_wcsndupa
 #  define aligned_wcsndupa(s, alignment, n) libsimple_aligned_wcsndupa(s, alignment, n)
@@ -44,8 +45,8 @@
  * 
  * @since  1.2
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __nonnull__, __warn_unused_result__)))
-wchar_t *libsimple_aligned_wcsndup(const wchar_t * __s, size_t __alignment, size_t __n);
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(2), __nonnull__, __warn_unused_result__)))
+wchar_t *libsimple_aligned_wcsndup(const wchar_t * s__, size_t alignment__, size_t n__);
 #ifndef aligned_wcsndup
 # define aligned_wcsndup libsimple_aligned_wcsndup
 #endif
@@ -62,7 +63,7 @@ wchar_t *libsimple_aligned_wcsndup(const wchar_t * __s, size_t __alignment, size
  * 
  * @since  1.2
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(3), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(3), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
 wchar_t *libsimple_enaligned_wcsndup(int, const wchar_t *, size_t, size_t);
 #ifndef enaligned_wcsndup
 # define enaligned_wcsndup libsimple_enaligned_wcsndup
@@ -79,9 +80,12 @@ wchar_t *libsimple_enaligned_wcsndup(int, const wchar_t *, size_t, size_t);
  * 
  * @since  1.2
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
-static inline wchar_t *libsimple_ealigned_wcsndup(const wchar_t *__s, size_t __alignment, size_t __n)
-{ return libsimple_enaligned_wcsndup(libsimple_default_failure_exit, __s, __alignment, __n); }
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(2), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
+inline wchar_t *
+libsimple_ealigned_wcsndup(const wchar_t *s__, size_t alignment__, size_t n__)
+{
+	return libsimple_enaligned_wcsndup(libsimple_default_failure_exit, s__, alignment__, n__);
+}
 #ifndef ealigned_wcsndup
 # define ealigned_wcsndup libsimple_ealigned_wcsndup
 #endif

@@ -6,7 +6,7 @@ libsimple_memsetelem \- fill an array with a value
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_memsetelem(void *\fIbuf\fP, const void *\fIitem\fP, size_t \fIwidth\fP, size_t \fIn\fP);
+inline void *libsimple_memsetelem(void *\fIbuf\fP, const void *\fIitem\fP, size_t \fIwidth\fP, size_t \fIn\fP);
 
 #ifndef memsetelem
 # define memsetelem libsimple_memsetelem

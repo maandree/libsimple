@@ -59,7 +59,7 @@ extern void (*libsimple_eprintf_postprint)(void);
  * 
  * @since  1.0
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(1, 2), __format__(__printf__, 2, 3))))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1, 2), __format__(__printf__, 2, 3))))
 int libsimple_asprintf(char **, const char *, ...);
 #ifndef asprintf
 # define asprintf libsimple_asprintf
@@ -84,7 +84,7 @@ int libsimple_asprintf(char **, const char *, ...);
  * 
  * @since  1.0
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(1, 2))))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1, 2), __format__(__printf__, 2, 0))))
 int libsimple_vasprintf(char **, const char *, va_list);
 #ifndef vasprintf
 # define vasprintf libsimple_vasprintf
@@ -107,16 +107,17 @@ int libsimple_vasprintf(char **, const char *, va_list);
  * @since  1.0
  */
 #if defined(__GNUC__) || defined(__clang__)
-# define libsimple_asprintfa(__fmt, ...)\
+# define libsimple_asprintfa(fmt__, ...)\
+	LIBSIMPLE_EXTENSION__\
 	({\
-		const char *__f = (__fmt);\
-		char *__ret = NULL;\
-		int __r = snprintf(NULL, 0, __f, __VA_ARGS__);\
-		if (__r >= 0) {\
-			__ret = alloca((size_t)__r + 1);\
-			sprintf(__ret, __f, __VA_ARGS__);\
+		const char *f__ = (fmt__);\
+		char *ret__ = NULL;\
+		int r__ = snprintf(NULL, 0, f__, __VA_ARGS__);\
+		if (r__ >= 0) {\
+			ret__ = alloca((size_t)r__ + 1);\
+			sprintf(ret__, f__, __VA_ARGS__);\
 		}\
-		__ret;\
+		ret__;\
 	})
 # ifndef asprintfa
 #  define asprintfa(...) libsimple_asprintfa(__VA_ARGS__)
@@ -140,23 +141,24 @@ int libsimple_vasprintf(char **, const char *, va_list);
  * @since  1.0
  */
 #if defined(__GNUC__) || defined(__clang__)
-# define libsimple_vasprintfa(__fmt, __ap)\
+# define libsimple_vasprintfa(fmt__, ap__)\
+	LIBSIMPLE_EXTENSION__\
 	({\
-		const char *__f = (__fmt);\
-		va_list __a1;\
-		va_list __a2;\
-		char *__ret = NULL;\
-		int __r;\
-		va_copy(__a1, __ap);\
-		va_copy(__a2, __a1);\
-		__r = vsnprintf(NULL, 0, __f, __a1);\
-		if (__r >= 0) {\
-			__ret = alloca((size_t)__r + 1);\
-			vsprintf(__ret, __f, __a2);\
+		const char *f__ = (fmt__);\
+		va_list a1__;\
+		va_list a2__;\
+		char *ret__ = NULL;\
+		int r__;\
+		va_copy(a1__, ap__);\
+		va_copy(a2__, a1__);\
+		r__ = vsnprintf(NULL, 0, f__, a1__);\
+		if (r__ >= 0) {\
+			ret__ = alloca((size_t)r__ + 1);\
+			vsprintf(ret__, f__, a2__);\
 		}\
-		va_end(__a2);\
-		va_end(__a1);\
-		__ret;\
+		va_end(a2__);\
+		va_end(a1__);\
+		ret__;\
 	})
 # ifndef vasprintfa
 #  define vasprintfa(fmt, ap) libsimple_vasprintfa(fmt, ap)
@@ -183,7 +185,7 @@ int libsimple_vasprintf(char **, const char *, va_list);
  * 
  * @since  1.0
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(1))))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __format__(__printf__, 1, 0))))
 void libsimple_vweprintf(const char *, va_list);
 #ifndef vweprintf
 # define vweprintf libsimple_vweprintf
@@ -209,14 +211,14 @@ void libsimple_vweprintf(const char *, va_list);
  * 
  * @since  1.0
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(1), __format__(__printf__, 1, 2))))
-static inline void
-libsimple_weprintf(const char *__fmt, ...)
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __format__(__printf__, 1, 2))))
+inline void
+libsimple_weprintf(const char *fmt__, ...)
 {
-	va_list __ap;
-	va_start(__ap, __fmt);
-	libsimple_vweprintf(__fmt, __ap);
-	va_end(__ap);
+	va_list ap__;
+	va_start(ap__, fmt__);
+	libsimple_vweprintf(fmt__, ap__);
+	va_end(ap__);
 }
 #ifndef weprintf
 # define weprintf libsimple_weprintf
@@ -245,12 +247,12 @@ libsimple_weprintf(const char *__fmt, ...)
  * 
  * @since  1.0
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(2), __noreturn__)))
-static inline void
-libsimple_venprintf(int __status, const char *__fmt, va_list __ap)
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __format__(__printf__, 2, 0))))
+inline LIBSIMPLE_NORETURN void
+libsimple_venprintf(int status__, const char *fmt__, va_list ap__)
 {
-	libsimple_vweprintf(__fmt, __ap);
-	exit(__status);
+	libsimple_vweprintf(fmt__, ap__);
+	exit(status__);
 }
 #ifndef venprintf
 # define venprintf libsimple_venprintf
@@ -279,14 +281,14 @@ libsimple_venprintf(int __status, const char *__fmt, va_list __ap)
  * 
  * @since  1.0
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(2), __format__(__printf__, 2, 3), __noreturn__)))
-static inline void
-libsimple_enprintf(int __status, const char *__fmt, ...)
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2), __format__(__printf__, 2, 3))))
+inline LIBSIMPLE_NORETURN void
+libsimple_enprintf(int status__, const char *fmt__, ...)
 {
-	va_list __ap;
-	va_start(__ap, __fmt);
-	libsimple_venprintf(__status, __fmt, __ap);
-	va_end(__ap);
+	va_list ap__;
+	va_start(ap__, fmt__);
+	libsimple_venprintf(status__, fmt__, ap__);
+	va_end(ap__);
 }
 #ifndef enprintf
 # define enprintf libsimple_enprintf
@@ -315,11 +317,11 @@ libsimple_enprintf(int __status, const char *__fmt, ...)
  * 
  * @since  1.0
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(1), __noreturn__)))
-static inline void
-libsimple_veprintf(const char *__fmt, va_list __ap)
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __format__(__printf__, 1, 0))))
+inline LIBSIMPLE_NORETURN void
+libsimple_veprintf(const char *fmt__, va_list ap__)
 {
-	libsimple_vweprintf(__fmt, __ap);
+	libsimple_vweprintf(fmt__, ap__);
 	exit(libsimple_default_failure_exit);
 }
 #ifndef veprintf
@@ -349,14 +351,14 @@ libsimple_veprintf(const char *__fmt, va_list __ap)
  * 
  * @since  1.0
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(1), __format__(__printf__, 1, 2), __noreturn__)))
-static inline void
-libsimple_eprintf(const char *__fmt, ...)
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1), __format__(__printf__, 1, 2))))
+inline LIBSIMPLE_NORETURN void
+libsimple_eprintf(const char *fmt__, ...)
 {
-	va_list __ap;
-	va_start(__ap, __fmt);
-	libsimple_veprintf(__fmt, __ap);
-	va_end(__ap);
+	va_list ap__;
+	va_start(ap__, fmt__);
+	libsimple_veprintf(fmt__, ap__);
+	va_end(ap__);
 }
 #ifndef eprintf
 # define eprintf libsimple_eprintf

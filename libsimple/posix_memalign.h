@@ -27,9 +27,12 @@
  * 
  * @since  1.1
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(1))))
-static inline int libsimple_vposix_memalignn(void **__memptr, size_t __alignment, size_t __n, va_list __ap)
-{ return libsimple_vposix_memalignzn(__memptr, 0, __alignment, __n, __ap); }
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1))))
+inline int
+libsimple_vposix_memalignn(void **memptr__, size_t alignment__, size_t n__, va_list ap__)
+{
+	return libsimple_vposix_memalignzn(memptr__, 0, alignment__, n__, ap__);
+}
 #ifndef vposix_memalignn
 # define vposix_memalignn libsimple_vposix_memalignn
 #endif
@@ -61,14 +64,14 @@ static inline int libsimple_vposix_memalignn(void **__memptr, size_t __alignment
  * 
  * @since  1.1
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(1))))
-static inline int
-libsimple_posix_memalignn(void **__memptr, size_t __alignment, size_t __n, ... /*, (size_t)0 */)
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1))))
+inline int
+libsimple_posix_memalignn(void **memptr__, size_t alignment__, size_t n__, ... /*, (size_t)0 */)
 {
-	va_list __ap;
-	va_start(__ap, __n);
-	return libsimple_vposix_memalignn(__memptr, __alignment, __n, __ap);
-	va_end(__ap);
+	va_list ap__;
+	va_start(ap__, n__);
+	return libsimple_vposix_memalignn(memptr__, alignment__, n__, ap__);
+	va_end(ap__);
 }
 #ifndef posix_memalignn
 # define posix_memalignn libsimple_posix_memalignn
@@ -94,9 +97,12 @@ libsimple_posix_memalignn(void **__memptr, size_t __alignment, size_t __n, ... /
  * 
  * @since  1.1
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(2))))
-static inline void libsimple_enposix_memalign(int __status, void **__memptr, size_t __alignment, size_t __n)
-{ libsimple_enposix_memalignz(__status, __memptr, 0, __alignment, __n); }
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2))))
+inline void
+libsimple_enposix_memalign(int status__, void **memptr__, size_t alignment__, size_t n__)
+{
+	libsimple_enposix_memalignz(status__, memptr__, 0, alignment__, n__);
+}
 #ifndef enposix_memalign
 # define enposix_memalign libsimple_enposix_memalign
 #endif
@@ -127,9 +133,12 @@ static inline void libsimple_enposix_memalign(int __status, void **__memptr, siz
  * 
  * @since  1.1
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(2))))
-static inline void libsimple_envposix_memalignn(int __status, void **__memptr, size_t __alignment, size_t __n, va_list __ap)
-{ libsimple_envposix_memalignzn(__status, __memptr, 0, __alignment, __n, __ap); }
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2))))
+inline void
+libsimple_envposix_memalignn(int status__, void **memptr__, size_t alignment__, size_t n__, va_list ap__)
+{
+	libsimple_envposix_memalignzn(status__, memptr__, 0, alignment__, n__, ap__);
+}
 #ifndef envposix_memalignn
 # define envposix_memalignn libsimple_envposix_memalignn
 #endif
@@ -160,14 +169,14 @@ static inline void libsimple_envposix_memalignn(int __status, void **__memptr, s
  * 
  * @since  1.1
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(2))))
-static inline void
-libsimple_enposix_memalignn(int __status, void **__memptr, size_t __alignment, size_t __n, ... /*, (size_t)0 */)
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(2))))
+inline void
+libsimple_enposix_memalignn(int status__, void **memptr__, size_t alignment__, size_t n__, ... /*, (size_t)0 */)
 {
-	va_list __ap;
-	va_start(__ap, __n);
-	libsimple_envposix_memalignzn(__status, __memptr, 0, __alignment, __n, __ap);
-	va_end(__ap);
+	va_list ap__;
+	va_start(ap__, n__);
+	libsimple_envposix_memalignzn(status__, memptr__, 0, alignment__, n__, ap__);
+	va_end(ap__);
 }
 #ifndef enposix_memalignn
 # define enposix_memalignn libsimple_enposix_memalignn
@@ -192,9 +201,12 @@ libsimple_enposix_memalignn(int __status, void **__memptr, size_t __alignment, s
  * 
  * @since  1.1
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(1))))
-static inline void libsimple_eposix_memalign(void **__memptr, size_t __alignment, size_t __n)
-{ libsimple_enposix_memalign(libsimple_default_failure_exit, __memptr, __alignment, __n); }
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1))))
+inline void
+libsimple_eposix_memalign(void **memptr__, size_t alignment__, size_t n__)
+{
+	libsimple_enposix_memalign(libsimple_default_failure_exit, memptr__, alignment__, n__);
+}
 #ifndef eposix_memalign
 # define eposix_memalign libsimple_eposix_memalign
 #endif
@@ -224,9 +236,12 @@ static inline void libsimple_eposix_memalign(void **__memptr, size_t __alignment
  * 
  * @since  1.1
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(1))))
-static inline void libsimple_evposix_memalignn(void **__memptr, size_t __alignment, size_t __n, va_list __ap)
-{ libsimple_envposix_memalignn(libsimple_default_failure_exit, __memptr, __alignment, __n, __ap); }
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1))))
+inline void
+libsimple_evposix_memalignn(void **memptr__, size_t alignment__, size_t n__, va_list ap__)
+{
+	libsimple_envposix_memalignn(libsimple_default_failure_exit, memptr__, alignment__, n__, ap__);
+}
 #ifndef evposix_memalignn
 # define evposix_memalignn libsimple_evposix_memalignn
 #endif
@@ -256,14 +271,14 @@ static inline void libsimple_evposix_memalignn(void **__memptr, size_t __alignme
  * 
  * @since  1.1
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__nonnull__(1))))
-static inline void
-libsimple_eposix_memalignn(void **__memptr, size_t __alignment, size_t __n, ... /*, (size_t)0 */)
+LIBSIMPLE_GCC_ONLY__(__attribute__((__nonnull__(1))))
+inline void
+libsimple_eposix_memalignn(void **memptr__, size_t alignment__, size_t n__, ... /*, (size_t)0 */)
 {
-	va_list __ap;
-	va_start(__ap, __n);
-	libsimple_evposix_memalignn(__memptr, __alignment, __n, __ap);
-	va_end(__ap);
+	va_list ap__;
+	va_start(ap__, n__);
+	libsimple_evposix_memalignn(memptr__, alignment__, n__, ap__);
+	va_end(ap__);
 }
 #ifndef eposix_memalignn
 # define eposix_memalignn libsimple_eposix_memalignn

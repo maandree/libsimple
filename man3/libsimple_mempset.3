@@ -6,7 +6,7 @@ libsimple_mempset \- fill an array of bytes
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_mempset(void *\fIs\fP, int \fIc\fP, size_t \fIn\fP);
+inline void *libsimple_mempset(void *\fIs\fP, int \fIc\fP, size_t \fIn\fP);
 
 #ifndef mempset
 # define mempset libsimple_mempset

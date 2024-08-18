@@ -1,5 +1,5 @@
 /* See LICENSE file for copyright and license details. */
-#include "libsimple.h"
+#include "common.h"
 #include "test.h"
 #include <sys/syscall.h>
 
@@ -159,7 +159,7 @@ realloc(void *ptr, size_t size)
 		return malloc(size);
 	ret = malloc(size);
 	if (!ret)
-		return malloc;
+		return NULL;
 	info = get_allocinfo(ret);
 	n = MIN(size, info->size);
 	info->zeroed = MIN(n, info->zeroed);
@@ -330,6 +330,9 @@ vfprintf(FILE *restrict stream, const char *restrict format, va_list ap)
 }
 
 
+#if defined(__GNUC__)
+__attribute__((__format__(__printf__, 2, 0)))
+#endif
 int
 test_vfprintf(FILE *restrict stream, const char *restrict format, va_list ap)
 {
@@ -337,7 +340,7 @@ test_vfprintf(FILE *restrict stream, const char *restrict format, va_list ap)
 	va_list ap2;
 	int r;
 	char *buf;
-	size_t n;
+	size_t i, n;
 
 	va_copy(ap2, ap);
 	r = vsnprintf(NULL, 0, format, ap2);
@@ -347,13 +350,14 @@ test_vfprintf(FILE *restrict stream, const char *restrict format, va_list ap)
 		n = (size_t)r;
 		alloc_fail_in = 0;
 		assert((buf = malloc(n + 1)));
-		n = vsnprintf(buf, n + 1, format, ap);
+		n = (size_t)vsnprintf(buf, n + 1, format, ap);
 		if (fileno(stream) != STDERR_FILENO || stderr_real) {
 			fwrite(buf, 1, n, stream);
 		} else {
 			assert(stderr_ok);
 			assert(stderr_n + n <= sizeof(stderr_buf));
-			memcpy((char *)(void *)(&stderr_buf[stderr_n]), buf, n);
+			for (i = 0; i < n; i++)
+				stderr_buf[stderr_n + i] = buf[i];
 			stderr_n += n;
 		}
 		free(buf);

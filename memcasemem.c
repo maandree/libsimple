@@ -1,16 +1,17 @@
 /* See LICENSE file for copyright and license details. */
-#include "libsimple.h"
+#include "common.h"
 #ifndef TEST
 
 
 void *
 libsimple_memcasemem(const void *hay_, size_t hayn, const void *sub_, size_t subn)
 {
-	char *hay = (void *)hay_, *end;
+	const char *hay = hay_;
 	const char *sub = sub_;
+	const char *end;
 
 	if (!subn)
-		return hay;
+		return REMOVE_CONST(hay, char *);
 	if (hayn < subn)
 		return NULL;
 	if (subn == 1)
@@ -18,7 +19,7 @@ libsimple_memcasemem(const void *hay_, size_t hayn, const void *sub_, size_t sub
 
 	for (end = &hay[hayn - subn + 1]; hay != end; hay++)
 		if (tolower(*hay) == tolower(*sub) && !libsimple_memcasecmp(hay, sub, subn))
-			return hay;
+			return REMOVE_CONST(hay, char *);
 
 	return NULL;
 }

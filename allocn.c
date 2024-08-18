@@ -1,5 +1,5 @@
 /* See LICENSE file for copyright and license details. */
-#include "libsimple.h"
+#include "common.h"
 #ifndef TEST
 
 
@@ -78,7 +78,7 @@ int
 main(void)
 {
 	struct allocinfo *info;
-	void *ptr, *old;
+	void *ptr;
 
 	assert(!libsimple_malloczn(0, 0) && errno == EINVAL);
 	errno = 0;
@@ -88,17 +88,12 @@ main(void)
 	errno = 0;
 	assert(!libsimple_callocn(0) && errno == EINVAL);
 	errno = 0;
-	assert(!libsimple_reallocn(NULL, 0) && errno == EINVAL);
-	errno = 0;
 	assert(!libsimple_aligned_alloczn(0, 128, 0) && errno == EINVAL);
 	errno = 0;
 	assert(!libsimple_aligned_alloczn(1, 128, 0) && errno == EINVAL);
 	errno = 0;
 	assert(!libsimple_aligned_allocn(128, 0) && errno == EINVAL);
 	errno = 0;
-	assert(libsimple_posix_memalignzn(&ptr, 0, 128, 0) == EINVAL && !errno);
-	assert(libsimple_posix_memalignzn(&ptr, 1, 128, 0) == EINVAL && !errno);
-	assert(libsimple_posix_memalignn(&ptr, 128, 0) == EINVAL && !errno);
 
 	assert(!libsimple_malloczn(0, SIZE_MAX, 2, 0) && errno == ENOMEM);
 	errno = 0;
@@ -108,17 +103,12 @@ main(void)
 	errno = 0;
 	assert(!libsimple_callocn(SIZE_MAX, 2, 0) && errno == ENOMEM);
 	errno = 0;
-	assert(!libsimple_reallocn(NULL, SIZE_MAX, 2, 0) && errno == ENOMEM);
-	errno = 0;
 	assert(!libsimple_aligned_alloczn(0, 1024, SIZE_MAX, 2, 0) && errno == ENOMEM);
 	errno = 0;
 	assert(!libsimple_aligned_alloczn(1, 1024, SIZE_MAX, 2, 0) && errno == ENOMEM);
 	errno = 0;
 	assert(!libsimple_aligned_allocn(1024, SIZE_MAX, 2, 0) && errno == ENOMEM);
 	errno = 0;
-	assert(libsimple_posix_memalignzn(&ptr, 0, 1024, SIZE_MAX, 2, 0) == ENOMEM && !errno);
-	assert(libsimple_posix_memalignzn(&ptr, 1, 1024, SIZE_MAX, 2, 0) == ENOMEM && !errno);
-	assert(libsimple_posix_memalignn(&ptr, 1024, SIZE_MAX, 2, 0) == ENOMEM && !errno);
 
 	assert((ptr = libsimple_malloczn(0, 10, 10, 0)));
 	if (have_custom_malloc()) {
@@ -156,27 +146,6 @@ main(void)
 	}
 	free(ptr);
 
-	assert((ptr = libsimple_reallocn(NULL, 5, 0)));
-	if (have_custom_malloc()) {
-		assert((info = get_allocinfo(ptr)));
-		assert(info->size == 5);
-		assert(!info->zeroed);
-		info->refcount += 1;
-		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
-	}
-	stpcpy(ptr, "test");
-	assert((ptr = libsimple_reallocn(old = ptr, 10, 0)));
-	assert(!strcmp(ptr, "test"));
-	if (have_custom_malloc()) {
-		assert((info = get_allocinfo(ptr)));
-		assert(info->size == 10);
-		assert(!info->zeroed);
-		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
-		assert(ptr != old);
-		free(old);
-	}
-	free(ptr);
-
 	assert((ptr = libsimple_aligned_alloczn(0, 8, 12, 12, 0)));
 	if (have_custom_malloc()) {
 		assert((info = get_allocinfo(ptr)));
@@ -202,36 +171,6 @@ main(void)
 		assert((info = get_allocinfo(ptr)));
 		assert(info->size == 576);
 		assert(info->alignment == 32);
-		assert(!info->zeroed);
-		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
-	}
-	free(ptr);
-
-	assert(!libsimple_posix_memalignzn(&ptr, 0, sizeof(void *), 12, 12, 0));
-	if (have_custom_malloc()) {
-		assert((info = get_allocinfo(ptr)));
-		assert(info->size == 144);
-		assert(info->alignment == sizeof(void *));
-		assert(!info->zeroed);
-		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
-	}
-	free(ptr);
-
-	assert(!libsimple_posix_memalignzn(&ptr, 1, 2 * sizeof(void *), 12, 12, 2, 0));
-	if (have_custom_malloc()) {
-		assert((info = get_allocinfo(ptr)));
-		assert(info->size == 288);
-		assert(info->alignment == 2 * sizeof(void *));
-		assert(info->zeroed == 288);
-		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
-	}
-	free(ptr);
-
-	assert(!libsimple_posix_memalignn(&ptr, 2 * sizeof(void *), 12, 12, 3, 0));
-	if (have_custom_malloc()) {
-		assert((info = get_allocinfo(ptr)));
-		assert(info->size == 432);
-		assert(info->alignment == 2 * sizeof(void *));
 		assert(!info->zeroed);
 		assert(!((uintptr_t)ptr % (uintptr_t)(info->alignment)));
 	}

@@ -1,5 +1,5 @@
 /* See LICENSE file for copyright and license details. */
-#include "libsimple.h"
+#include "common.h"
 #ifndef TEST
 
 
@@ -26,139 +26,166 @@ main(void)
 {
 	struct timeval r, a;
 
-	a.tv_sec = 0, a.tv_usec = 0L;
+	a.tv_sec  = 0;
+	a.tv_usec = 0L;
 	assert(!libsimple_multimeval(&r, &a, 0));
 	assert(r.tv_sec  == 0);
 	assert(r.tv_usec == 0L);
 
-	a.tv_sec = 10, a.tv_usec = 0L;
+	a.tv_sec  = 10;
+	a.tv_usec = 0L;
 	assert(!libsimple_multimeval(&r, &a, 0));
 	assert(r.tv_sec  == 0);
 	assert(r.tv_usec == 0L);
 
-	a.tv_sec = 0, a.tv_usec = 10L;
+	a.tv_sec  = 0;
+	a.tv_usec = 10L;
 	assert(!libsimple_multimeval(&r, &a, 0));
 	assert(r.tv_sec  == 0);
 	assert(r.tv_usec == 0L);
 
-	a.tv_sec = 10, a.tv_usec = 10L;
+	a.tv_sec  = 10;
+	a.tv_usec = 10L;
 	assert(!libsimple_multimeval(&r, &a, 0));
 	assert(r.tv_sec  == 0);
 	assert(r.tv_usec == 0L);
 
-	a.tv_sec = 0, a.tv_usec = 0L;
+	a.tv_sec  = 0;
+	a.tv_usec = 0L;
 	assert(!libsimple_multimeval(&r, &a, 1));
 	assert(r.tv_sec  == 0);
 	assert(r.tv_usec == 0L);
 
-	a.tv_sec = 10, a.tv_usec = 0L;
+	a.tv_sec  = 10;
+	a.tv_usec = 0L;
 	assert(!libsimple_multimeval(&r, &a, 1));
 	assert(r.tv_sec  == 10);
 	assert(r.tv_usec == 0L);
 
-	a.tv_sec = 0, a.tv_usec = 10L;
+	a.tv_sec  = 0;
+	a.tv_usec = 10L;
 	assert(!libsimple_multimeval(&r, &a, 1));
 	assert(r.tv_sec  == 0);
 	assert(r.tv_usec == 10L);
 
-	a.tv_sec = 10, a.tv_usec = 10L;
+	a.tv_sec  = 10;
+	a.tv_usec = 10L;
 	assert(!libsimple_multimeval(&r, &a, 1));
 	assert(r.tv_sec  == 10);
 	assert(r.tv_usec == 10L);
 
-	a.tv_sec = 0, a.tv_usec = 0L;
+	a.tv_sec  = 0;
+	a.tv_usec = 0L;
 	assert(!libsimple_multimeval(&r, &a, 10));
 	assert(r.tv_sec  == 0);
 	assert(r.tv_usec == 0L);
 
-	a.tv_sec = 10, a.tv_usec = 0L;
+	a.tv_sec  = 10;
+	a.tv_usec = 0L;
 	assert(!libsimple_multimeval(&r, &a, 10));
 	assert(r.tv_sec  == 100);
 	assert(r.tv_usec == 0L);
 
-	a.tv_sec = 0, a.tv_usec = 10L;
+	a.tv_sec  = 0;
+	a.tv_usec = 10L;
 	assert(!libsimple_multimeval(&r, &a, 10));
 	assert(r.tv_sec  == 0);
 	assert(r.tv_usec == 100L);
 
-	a.tv_sec = 10, a.tv_usec = 10L;
+	a.tv_sec  = 10;
+	a.tv_usec = 10L;
 	assert(!libsimple_multimeval(&r, &a, 10));
 	assert(r.tv_sec  == 100);
 	assert(r.tv_usec == 100L);
 
-	a.tv_sec = 0, a.tv_usec = 0L;
+	a.tv_sec  = 0;
+	a.tv_usec = 0L;
 	assert(!libsimple_multimeval(&r, &a, -1));
 	assert(r.tv_sec  == 0);
 	assert(r.tv_usec == 0L);
 
-	a.tv_sec = 10, a.tv_usec = 0L;
+	a.tv_sec  = 10;
+	a.tv_usec = 0L;
 	assert(!libsimple_multimeval(&r, &a, -1));
 	assert(r.tv_sec  == -10);
 	assert(r.tv_usec == 0L);
 
-	a.tv_sec = 0, a.tv_usec = 10L;
+	a.tv_sec  = 0;
+	a.tv_usec = 10L;
 	assert(!libsimple_multimeval(&r, &a, -1));
 	assert(r.tv_sec  == -1);
 	assert(r.tv_usec == 1000000L - 10L);
 
-	a.tv_sec = 10, a.tv_usec = 10L;
+	a.tv_sec  = 10;
+	a.tv_usec = 10L;
 	assert(!libsimple_multimeval(&r, &a, -1));
 	assert(r.tv_sec  == -11);
 	assert(r.tv_usec == 1000000L - 10L);
 
-	a.tv_sec = 0, a.tv_usec = 0L;
+	a.tv_sec  = 0;
+	a.tv_usec = 0L;
 	assert(!libsimple_multimeval(&r, &a, -10));
 	assert(r.tv_sec  == 0);
 	assert(r.tv_usec == 0L);
 
-	a.tv_sec = 10, a.tv_usec = 0L;
+	a.tv_sec  = 10;
+	a.tv_usec = 0L;
 	assert(!libsimple_multimeval(&r, &a, -10));
 	assert(r.tv_sec  == -100);
 	assert(r.tv_usec == 0L);
 
-	a.tv_sec = 0, a.tv_usec = 10L;
+	a.tv_sec  = 0;
+	a.tv_usec = 10L;
 	assert(!libsimple_multimeval(&r, &a, -10));
 	assert(r.tv_sec  == -1);
 	assert(r.tv_usec == 1000000L - 100L);
 
-	a.tv_sec = 10, a.tv_usec = 10L;
+	a.tv_sec  = 10;
+	a.tv_usec = 10L;
 	assert(!libsimple_multimeval(&r, &a, -10));
 	assert(r.tv_sec  == -101);
 	assert(r.tv_usec == 1000000L - 100L);
 
-	a.tv_sec = TIME_MAX, a.tv_usec = 999999L;
+	a.tv_sec  = TIME_MAX;
+	a.tv_usec = 999999L;
 	assert(!libsimple_multimeval(&r, &a, 0));
 	assert(r.tv_sec  == 0);
 	assert(r.tv_usec == 0);
 
-	a.tv_sec = TIME_MAX, a.tv_usec = 999999L;
+	a.tv_sec  = TIME_MAX;
+	a.tv_usec = 999999L;
 	assert(!libsimple_multimeval(&r, &a, 1));
 	assert(r.tv_sec  == TIME_MAX);
 	assert(r.tv_usec == 999999L);
 
-	a.tv_sec = TIME_MAX, a.tv_usec = 0L;
+	a.tv_sec  = TIME_MAX;
+	a.tv_usec = 0L;
 	assert(libsimple_multimeval(&r, &a, 2) == -1 && errno == ERANGE);
 	assert(r.tv_sec  == TIME_MAX);
 	assert(r.tv_usec == 999999L);
 
-	a.tv_sec = TIME_MAX, a.tv_usec = 0L;
+	a.tv_sec  = TIME_MAX;
+	a.tv_usec = 0L;
 	assert(libsimple_multimeval(&r, &a, -2) == -1 && errno == ERANGE);
 	assert(r.tv_sec  == TIME_MIN);
 	assert(r.tv_usec == 0L);
 
-	a.tv_sec = TIME_MAX, a.tv_usec = 0L;
+	a.tv_sec  = TIME_MAX;
+	a.tv_usec = 0L;
 	assert(!libsimple_multimeval(&r, &a, -1));
 	assert(r.tv_sec  == -TIME_MAX);
 	assert(r.tv_usec == 0L);
 
 	if (-TIME_MAX > TIME_MIN) {
-		a.tv_sec = TIME_MAX, a.tv_usec = 999999L;
+		a.tv_sec  = TIME_MAX;
+		a.tv_usec = 999999L;
 		assert(!libsimple_multimeval(&r, &a, -1));
 		assert(r.tv_sec  == -TIME_MAX - (time_t)1);
 		assert(r.tv_usec == 1L);
 	}
 
-	a.tv_sec = 10, a.tv_usec = 100001L;
+	a.tv_sec  = 10;
+	a.tv_usec = 100001L;
 	assert(!libsimple_multimeval(&r, &a, 10));
 	assert(r.tv_sec  == 101);
 	assert(r.tv_usec == 10L);

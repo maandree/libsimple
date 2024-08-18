@@ -6,8 +6,8 @@ libsimple_strset, libsimple_stpset \- fill a string with a character
 .nf
 #include <libsimple.h>
 
-static inline char *libsimple_strset(char *\fIs\fP, int \fIc\fP);
-static inline char *libsimple_stpset(char *\fIs\fP, int \fIc\fP);
+inline char *libsimple_strset(char *\fIs\fP, int \fIc\fP);
+inline char *libsimple_stpset(char *\fIs\fP, int \fIc\fP);
 
 #ifndef strset
 # define strset libsimple_strset

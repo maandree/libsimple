@@ -6,7 +6,7 @@ libsimple_strnreplace \- replace characters in a string
 .nf
 #include <libsimple.h>
 
-static inline char *libsimple_strnreplace(char *\fIs\fP, int \fIold\fP, int \fInew\fP, size_t \fIn\fP);
+inline char *libsimple_strnreplace(char *\fIs\fP, int \fIold\fP, int \fInew\fP, size_t \fIn\fP);
 
 #ifndef strnreplace
 # define strnreplace libsimple_strnreplace

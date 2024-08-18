@@ -20,12 +20,12 @@
  * 
  * @since  1.1
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__)))
-static inline void *
-libsimple_vvalloczn(int __clear, size_t __n, va_list __ap)
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__)))
+inline void *
+libsimple_vvalloczn(int clear__, size_t n__, va_list ap__)
 {
-	return libsimple_memalloc(0, LIBSIMPLE_MEMALLOC_1_VA_PRODUCT_SIZE, __n, __ap,
-	                          LIBSIMPLE_MEMALLOC_CONDITIONAL_ZERO_INIT, __clear,
+	return libsimple_memalloc(0, LIBSIMPLE_MEMALLOC_1_VA_PRODUCT_SIZE, n__, ap__,
+	                          LIBSIMPLE_MEMALLOC_CONDITIONAL_ZERO_INIT, clear__,
 	                          LIBSIMPLE_MEMALLOC_PAGE_ALIGNMENT,
 	                          LIBSIMPLE_MEMALLOC_END);
 }
@@ -47,12 +47,12 @@ libsimple_vvalloczn(int __clear, size_t __n, va_list __ap)
  * 
  * @since  1.1
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_size__(2), __warn_unused_result__)))
-static inline void *
-libsimple_vallocz(int __clear, size_t __n)
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_size__(2), __warn_unused_result__)))
+inline void *
+libsimple_vallocz(int clear__, size_t n__)
 {
-	return libsimple_memalloc(__n,
-	                          LIBSIMPLE_MEMALLOC_CONDITIONAL_ZERO_INIT, __clear,
+	return libsimple_memalloc(n__,
+	                          LIBSIMPLE_MEMALLOC_CONDITIONAL_ZERO_INIT, clear__,
 	                          LIBSIMPLE_MEMALLOC_PAGE_ALIGNMENT,
 	                          LIBSIMPLE_MEMALLOC_END);
 }
@@ -80,14 +80,14 @@ libsimple_vallocz(int __clear, size_t __n)
  * 
  * @since  1.1
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__)))
-static inline void *
-libsimple_valloczn(int __clear, size_t __n, ... /*, (size_t)0 */)
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__)))
+inline void *
+libsimple_valloczn(int clear__, size_t n__, ... /*, (size_t)0 */)
 {
-	va_list __ap;
-	va_start(__ap, __n);
-	return libsimple_vvalloczn(__clear, __n, __ap);
-	va_end(__ap);
+	va_list ap__;
+	va_start(ap__, n__);
+	return libsimple_vvalloczn(clear__, n__, ap__);
+	va_end(ap__);
 }
 #ifndef valloczn
 # define valloczn libsimple_valloczn
@@ -111,12 +111,12 @@ libsimple_valloczn(int __clear, size_t __n, ... /*, (size_t)0 */)
  * 
  * @since  1.1
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_size__(3), __warn_unused_result__, __returns_nonnull__)))
-static inline void *
-libsimple_envallocz(int __status, int __clear, size_t __n)
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_size__(3), __warn_unused_result__, __returns_nonnull__)))
+inline void *
+libsimple_envallocz(int status__, int clear__, size_t n__)
 {
-	return libsimple_enmemalloc(__status, __n,
-	                            LIBSIMPLE_MEMALLOC_CONDITIONAL_ZERO_INIT, __clear,
+	return libsimple_enmemalloc(status__, n__,
+	                            LIBSIMPLE_MEMALLOC_CONDITIONAL_ZERO_INIT, clear__,
 	                            LIBSIMPLE_MEMALLOC_PAGE_ALIGNMENT,
 	                            LIBSIMPLE_MEMALLOC_END);
 }
@@ -148,13 +148,13 @@ libsimple_envallocz(int __status, int __clear, size_t __n)
  * 
  * @since  1.1
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
-static inline void *
-libsimple_envvalloczn(int __status, int __clear, size_t __n, va_list __ap)
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
+inline void *
+libsimple_envvalloczn(int status__, int clear__, size_t n__, va_list ap__)
 {
-	return libsimple_enmemalloc(__status,
-	                            0, LIBSIMPLE_MEMALLOC_1_VA_PRODUCT_SIZE, __n, __ap,
-	                            LIBSIMPLE_MEMALLOC_CONDITIONAL_ZERO_INIT, __clear,
+	return libsimple_enmemalloc(status__,
+	                            0, LIBSIMPLE_MEMALLOC_1_VA_PRODUCT_SIZE, n__, ap__,
+	                            LIBSIMPLE_MEMALLOC_CONDITIONAL_ZERO_INIT, clear__,
 	                            LIBSIMPLE_MEMALLOC_PAGE_ALIGNMENT,
 	                            LIBSIMPLE_MEMALLOC_END);
 }
@@ -186,14 +186,14 @@ libsimple_envvalloczn(int __status, int __clear, size_t __n, va_list __ap)
  * 
  * @since  1.1
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
-static inline void *
-libsimple_envalloczn(int __status, int __clear, size_t __n, ... /*, (size_t)0 */)
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
+inline void *
+libsimple_envalloczn(int status__, int clear__, size_t n__, ... /*, (size_t)0 */)
 {
-	va_list __ap;
-	va_start(__ap, __n);
-	return libsimple_envvalloczn(__status, __clear, __n, __ap);
-	va_end(__ap);
+	va_list ap__;
+	va_start(ap__, n__);
+	return libsimple_envvalloczn(status__, clear__, n__, ap__);
+	va_end(ap__);
 }
 #ifndef envalloczn
 # define envalloczn libsimple_envalloczn
@@ -216,9 +216,12 @@ libsimple_envalloczn(int __status, int __clear, size_t __n, ... /*, (size_t)0 */
  * 
  * @since  1.1
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_size__(2), __warn_unused_result__, __returns_nonnull__)))
-static inline void *libsimple_evallocz(int __clear, size_t __n)
-{ return libsimple_envallocz(libsimple_default_failure_exit, __clear, __n); }
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_size__(2), __warn_unused_result__, __returns_nonnull__)))
+inline void *
+libsimple_evallocz(int clear__, size_t n__)
+{
+	return libsimple_envallocz(libsimple_default_failure_exit, clear__, n__);
+}
 #ifndef evallocz
 # define evallocz libsimple_evallocz
 #endif
@@ -245,9 +248,12 @@ static inline void *libsimple_evallocz(int __clear, size_t __n)
  * 
  * @since  1.1
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
-static inline void *libsimple_evvalloczn(int __clear, size_t __n, va_list __ap)
-{ return libsimple_envvalloczn(libsimple_default_failure_exit, __clear, __n, __ap); }
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
+inline void *
+libsimple_evvalloczn(int clear__, size_t n__, va_list ap__)
+{
+	return libsimple_envvalloczn(libsimple_default_failure_exit, clear__, n__, ap__);
+}
 #ifndef evvalloczn
 # define evvalloczn libsimple_evvalloczn
 #endif
@@ -274,14 +280,14 @@ static inline void *libsimple_evvalloczn(int __clear, size_t __n, va_list __ap)
  * 
  * @since  1.1
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
-static inline void *
-libsimple_evalloczn(int __clear, size_t __n, ... /*, (size_t)0 */)
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__, __returns_nonnull__)))
+inline void *
+libsimple_evalloczn(int clear__, size_t n__, ... /*, (size_t)0 */)
 {
-	va_list __ap;
-	va_start(__ap, __n);
-	return libsimple_evvalloczn(__clear, __n, __ap);
-	va_end(__ap);
+	va_list ap__;
+	va_start(ap__, n__);
+	return libsimple_evvalloczn(clear__, n__, ap__);
+	va_end(ap__);
 }
 #ifndef evalloczn
 # define evalloczn libsimple_evalloczn

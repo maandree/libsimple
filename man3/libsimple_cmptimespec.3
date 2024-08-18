@@ -6,8 +6,8 @@ libsimple_cmptimespec, libsimple_cmptimeval \- calculate the sum of two duration
 .nf
 #include <libsimple.h>
 
-static inline int libsimple_cmptimespec(const struct timespec *\fIa\fP, const struct timespec *\fIb\fP);
-static inline int libsimple_cmptimeval(const struct timeval *\fIa\fP, const struct timeval *\fIb\fP);
+inline int libsimple_cmptimespec(const struct timespec *\fIa\fP, const struct timespec *\fIb\fP);
+inline int libsimple_cmptimeval(const struct timeval *\fIa\fP, const struct timeval *\fIb\fP);
 
 #ifndef cmptimespec
 # define cmptimespec libsimple_cmptimespec

@@ -1,6 +1,10 @@
 /* See LICENSE file for copyright and license details. */
-#include "libsimple.h"
+#include "common.h"
 #ifndef TEST
+
+#if defined(__clang__)
+# pragma clang diagnostic ignored "-Wformat-nonliteral"
+#endif
 
 
 int

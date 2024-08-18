@@ -9,7 +9,7 @@ libsimple_aligned_memdup, libsimple_aligned_memdupa \- duplicate bytes in memory
 void *libsimple_aligned_memdupa(const void *\fIs\fP, size_t \fIalignment\fP, size_t \fIn\fP);
 void *libsimple_aligned_memdup(const void *\fIs\fP, size_t \fIalignment\fP, size_t \fIn\fP);
 void *libsimple_enaligned_memdup(int \fIstatus\fP, const void *\fIs\fP, size_t \fIalignment\fP, size_t \fIn\fP);
-static inline void *libsimple_ealigned_memdup(const void *\fIs\fP, size_t \fIalignment\fP, size_t \fIn\fP);
+inline void *libsimple_ealigned_memdup(const void *\fIs\fP, size_t \fIalignment\fP, size_t \fIn\fP);
 
 #ifndef aligned_memdupa
 # define aligned_memdupa libsimple_aligned_memdupa

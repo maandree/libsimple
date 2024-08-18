@@ -1,12 +1,13 @@
 /* See LICENSE file for copyright and license details. */
-#include "libsimple.h"
+#include "common.h"
 #ifndef TEST
 
 
 void
 libsimple_doubletotimespec(struct timespec *ts, double d)
 {
-	double ns = (long long int)d;
+	long long int d_integer = (long long int)d;
+	double ns = (double)d_integer;
 	long int nsi;
 	ns = d - ns;
 	ns *= (double)1000000000L;

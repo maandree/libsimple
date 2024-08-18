@@ -1,5 +1,5 @@
 /* See LICENSE file for copyright and license details. */
-#include "libsimple.h"
+#include "common.h"
 #ifndef TEST
 
 
@@ -10,18 +10,18 @@ libsimple_stptoupper(char *d, const char *s)
 	char *ret;
 	if (d == s) {
 		for (; *d; d++)
-			*d = toupper(*d);
+			*d = (char)toupper(*d);
 		return d;
 	} else if (d < s) {
 		for (; *s; d++, s++)
-			*d = toupper(*s);
+			*d = (char)toupper(*s);
 		*d = '\0';
 		return d;
 	} else {
 		for (n = 0; s[n]; n++);
 		ret = &d[n];
 		do {
-			d[n] = toupper(s[n]);
+			d[n] = (char)toupper(s[n]);
 		} while (n--);
 		return ret;
 	}
@@ -44,15 +44,6 @@ main(void)
 	assert(!strcmp(buf, "DEABCDE12345"));
 	stpcpy(buf, "abcdeABCDE12345");
 	assert(!strcmpnul(libsimple_stptoupper(&buf[0], &buf[0]), ""));
-	assert(!strcmp(buf, "ABCDEABCDE12345"));
-	stpcpy(buf, "abcdeABCDE12345");
-	assert(!strcmpnul(libsimple_strtoupper(&buf[3], &buf[0]), "ABCDEABCDE12345"));
-	assert(!strcmp(buf, "abcABCDEABCDE12345"));
-	stpcpy(buf, "abcdeABCDE12345");
-	assert(!strcmpnul(libsimple_strtoupper(&buf[0], &buf[3]), "DEABCDE12345"));
-	assert(!strcmp(buf, "DEABCDE12345"));
-	stpcpy(buf, "abcdeABCDE12345");
-	assert(!strcmpnul(libsimple_strtoupper(&buf[0], &buf[0]), "ABCDEABCDE12345"));
 	assert(!strcmp(buf, "ABCDEABCDE12345"));
 
 	return 0;

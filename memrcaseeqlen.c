@@ -1,14 +1,20 @@
 /* See LICENSE file for copyright and license details. */
-#include "libsimple.h"
+#include "common.h"
 #ifndef TEST
 
 
 size_t
 libsimple_memrcaseeqlen(const void *a_, size_t n, const void *b_, size_t m)
 {
-	const char *a = &((char *)a_)[n], *b = &((char *)b_)[m];
+	const char *a = &((const char *)a_)[n];
+	const char *b = &((const char *)b_)[m];
 	size_t i = 0, len = n < m ? n : m;
-	for (; i < len && (--a, --b, tolower(*a) == tolower(*b)); i++);
+	for (; i < len; i++) {
+		a--;
+		b--;
+		if (tolower(*a) != tolower(*b))
+			break;
+	}
 	return i;
 }
 

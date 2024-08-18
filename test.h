@@ -1,6 +1,18 @@
 /* See LICENSE file for copyright and license details. */
 
 
+#if defined(__GNUC__) && !defined(__clang__)
+# pragma GCC diagnostic ignored "-Wunsuffixed-float-constants"
+# pragma GCC diagnostic ignored "-Wformat-nonliteral"
+#endif
+
+#if defined(__clang__)
+# pragma clang diagnostic ignored "-Wformat-nonliteral"
+# pragma clang diagnostic ignored "-Wdisabled-macro-expansion"
+# pragma clang diagnostic ignored "-Walloca"
+#endif
+
+
 #define assert(EXPR)\
 	do {\
 		if (EXPR)\
@@ -48,11 +60,15 @@
 	do {\
 		char buf__[1024];\
 		int len__;\
+		size_t i__;\
+		int not_same__ = 0;\
 		len__ = sprintf(buf__, __VA_ARGS__);\
 		assert(len__ >= 0);\
 		assert((size_t)len__ == stderr_n);\
-		assert(!memcmp(buf__, (char **)(void *)(&stderr_buf), stderr_n)); \
-	} while (0);
+		for (i__ = 0; i__ < stderr_n; i__++)\
+			not_same__ |= buf__[i__] ^ stderr_buf[i__];\
+		assert(!not_same__);\
+	} while (0)
 
 
 struct allocinfo {
@@ -66,7 +82,9 @@ struct allocinfo {
 };
 
 
+#ifndef LIBSIMPLE_ARG_H
 extern char *argv0;
+#endif
 
 extern volatile size_t alloc_fail_in;
 extern volatile int exit_real;
@@ -98,17 +116,32 @@ test_fprintf(FILE *restrict stream, const char *restrict format, ...)
 
 
 
+#if defined(__GNUC__)
+__attribute__((__const__))
+#endif
 static size_t
 gcd(size_t u, size_t v)
 {
 	size_t t;
 	int shift = 0;
 	/* Not needed because u>0, v>0: if (!(u | v)) return u + v; */
-	while (!((u | v) & 1)) u >>= 1, v >>= 1, shift++;
-	while (!(u & 1))       u >>= 1;
+	while (!((u | v) & 1)) {
+		u >>= 1;
+		v >>= 1;
+		shift++;
+	}
+	while (!(u & 1)) {
+		u >>= 1;
+	}
 	do {
-		while (!(v & 1)) v >>= 1;
-		if (u > v)       t = u, u = v, v = t;
+		while (!(v & 1)) {
+			v >>= 1;
+		}
+		if (u > v) {
+			t = u;
+			u = v;
+			v = t;
+		}
 	} while (v -= u);
 	return u << shift;
 }

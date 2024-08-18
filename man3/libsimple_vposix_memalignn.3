@@ -6,12 +6,12 @@ libsimple_vposix_memalignn \- allocate memory with custom alignment
 .nf
 #include <libsimple.h>
 
-static inline int libsimple_vposix_memalignn(void **\fImemptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
-static inline void libsimple_envposix_memalignn(int \fIstatus\fP, void **\fImemptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
-static inline void libsimple_evposix_memalignn(void **\fImemptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
-static inline int libsimple_posix_memalignn(void **\fImemptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
-static inline void libsimple_enposix_memalignn(int \fIstatus\fP, void **\fImemptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
-static inline void libsimple_eposix_memalignn(void **\fImemptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline int libsimple_vposix_memalignn(void **\fImemptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
+inline void libsimple_envposix_memalignn(int \fIstatus\fP, void **\fImemptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
+inline void libsimple_evposix_memalignn(void **\fImemptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
+inline int libsimple_posix_memalignn(void **\fImemptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void libsimple_enposix_memalignn(int \fIstatus\fP, void **\fImemptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void libsimple_eposix_memalignn(void **\fImemptr\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
 
 #ifndef vposix_memalignn
 # define vposix_memalignn libsimple_vposix_memalignn

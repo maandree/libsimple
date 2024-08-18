@@ -7,7 +7,7 @@ libsimple_encalloc \- allocate initialised memory or die
 #include <libsimple.h>
 
 void *libsimple_encalloc(int \fIstatus\fP, size_t \fIn\fP, size_t \fIm\fP);
-static inline void *libsimple_ecalloc(size_t \fIn\fP, size_t \fIm\fP);
+inline void *libsimple_ecalloc(size_t \fIn\fP, size_t \fIm\fP);
 
 #ifndef encalloc
 # define encalloc libsimple_encalloc

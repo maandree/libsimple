@@ -1,5 +1,5 @@
 /* See LICENSE file for copyright and license details. */
-#include "libsimple.h"
+#include "common.h"
 #ifndef TEST
 
 
@@ -8,43 +8,43 @@ libsimple_memelemscan(const void *hay_, const void *sub_, size_t width, size_t n
 {
 	switch (width) {
 	case 0:
-		return (void *)hay_;
+		return REMOVE_CONST(hay_, void *);
 	case 1:
-		return libsimple_memscan(hay_, *(char *)sub_, n);
+		return libsimple_memscan(hay_, *(const char *)sub_, n);
 	case 2:
 		{
-			uint16_t *hay = (void *)hay_;
-			uint16_t sub = *(uint16_t *)sub_;
+			const uint16_t *hay = hay_;
+			uint16_t sub = *(const uint16_t *)sub_;
 			for (; n-- && *hay != sub; hay++);
-			return hay;
+			return REMOVE_CONST(hay, uint16_t *);
 		}
 	case 4:
 		{
-			uint32_t *hay = (void *)hay_;
-			uint32_t sub = *(uint32_t *)sub_;
+			const uint32_t *hay = hay_;
+			uint32_t sub = *(const uint32_t *)sub_;
 			for (; n-- && *hay != sub; hay++);
-			return hay;
+			return REMOVE_CONST(hay, uint32_t *);
 		}
 	case 8:
 		{
-			uint64_t *hay = (void *)hay_;
-			uint64_t sub = *(uint64_t *)sub_;
+			const uint64_t *hay = hay_;
+			uint64_t sub = *(const uint64_t *)sub_;
 			for (; n-- && *hay != sub; hay++);
-			return hay;
+			return REMOVE_CONST(hay, uint64_t *);
 		}
 	default:
 		{
-			char *hay = (void *)hay_;
+			const char *hay = hay_;
 			const char *sub = sub_;
 			size_t i;
 			for (; n--; hay += width) {
 				for (i = 0; i < width; i++)
 					if (hay[i] != sub[i])
 						goto next;
-				return hay;
+				return REMOVE_CONST(hay, char *);
 			next:;
 			}
-			return hay;
+			return REMOVE_CONST(hay, char *);
 		}
 	}
 }

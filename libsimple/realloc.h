@@ -28,7 +28,7 @@
  * 
  * @since  1.0
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__warn_unused_result__)))
 void *libsimple_vreallocn(void *, size_t, va_list);
 #ifndef vreallocn
 # define vreallocn libsimple_vreallocn
@@ -62,14 +62,14 @@ void *libsimple_vreallocn(void *, size_t, va_list);
  * 
  * @since  1.0
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
-static inline void *
-libsimple_reallocn(void *__ptr, size_t __n, ... /*, (size_t)0 */)
+LIBSIMPLE_GCC_ONLY__(__attribute__((__warn_unused_result__)))
+inline void *
+libsimple_reallocn(void *ptr__, size_t n__, ... /*, (size_t)0 */)
 {
-	va_list __ap;
-	va_start(__ap, __n);
-	return libsimple_vreallocn(__ptr, __n, __ap);
-	va_end(__ap);
+	va_list ap__;
+	va_start(ap__, n__);
+	return libsimple_vreallocn(ptr__, n__, ap__);
+	va_end(ap__);
 }
 #ifndef reallocn
 # define reallocn libsimple_reallocn
@@ -101,7 +101,7 @@ libsimple_reallocn(void *__ptr, size_t __n, ... /*, (size_t)0 */)
  * 
  * @since  1.0
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_size__(3), __warn_unused_result__, __returns_nonnull__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_size__(3), __warn_unused_result__, __returns_nonnull__)))
 void *libsimple_enrealloc(int, void *, size_t);
 #ifndef enrealloc
 # define enrealloc libsimple_enrealloc
@@ -138,7 +138,7 @@ void *libsimple_enrealloc(int, void *, size_t);
  * 
  * @since  1.0
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__warn_unused_result__, __returns_nonnull__)))
 void *libsimple_envreallocn(int, void *, size_t, va_list);
 #ifndef envreallocn
 # define envreallocn libsimple_envreallocn
@@ -175,14 +175,14 @@ void *libsimple_envreallocn(int, void *, size_t, va_list);
  * 
  * @since  1.0
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
-static inline void *
-libsimple_enreallocn(int __status, void *__ptr, size_t __n, ... /*, (size_t)0 */)
+LIBSIMPLE_GCC_ONLY__(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+inline void *
+libsimple_enreallocn(int status__, void *ptr__, size_t n__, ... /*, (size_t)0 */)
 {
-	va_list __ap;
-	va_start(__ap, __n);
-	return libsimple_envreallocn(__status, __ptr, __n, __ap);
-	va_end(__ap);
+	va_list ap__;
+	va_start(ap__, n__);
+	return libsimple_envreallocn(status__, ptr__, n__, ap__);
+	va_end(ap__);
 }
 #ifndef enreallocn
 # define enreallocn libsimple_enreallocn
@@ -213,9 +213,12 @@ libsimple_enreallocn(int __status, void *__ptr, size_t __n, ... /*, (size_t)0 */
  * 
  * @since  1.0
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_size__(2), __warn_unused_result__, __returns_nonnull__)))
-static inline void *libsimple_erealloc(void *__ptr, size_t __n)
-{ return libsimple_enrealloc(libsimple_default_failure_exit, __ptr, __n); }
+LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_size__(2), __warn_unused_result__, __returns_nonnull__)))
+inline void *
+libsimple_erealloc(void *ptr__, size_t n__)
+{
+	return libsimple_enrealloc(libsimple_default_failure_exit, ptr__, n__);
+}
 #ifndef erealloc
 # define erealloc libsimple_erealloc
 #endif
@@ -250,9 +253,12 @@ static inline void *libsimple_erealloc(void *__ptr, size_t __n)
  * 
  * @since  1.0
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
-static inline void *libsimple_evreallocn(void *__ptr, size_t __n, va_list __ap)
-{ return libsimple_envreallocn(libsimple_default_failure_exit, __ptr, __n, __ap); }
+LIBSIMPLE_GCC_ONLY__(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+inline void *
+libsimple_evreallocn(void *ptr__, size_t n__, va_list ap__)
+{
+	return libsimple_envreallocn(libsimple_default_failure_exit, ptr__, n__, ap__);
+}
 #ifndef evreallocn
 # define evreallocn libsimple_evreallocn
 #endif
@@ -287,14 +293,14 @@ static inline void *libsimple_evreallocn(void *__ptr, size_t __n, va_list __ap)
  * 
  * @since  1.0
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__, __returns_nonnull__)))
-static inline void *
-libsimple_ereallocn(void *__ptr, size_t __n, ... /*, (size_t)0 */)
+LIBSIMPLE_GCC_ONLY__(__attribute__((__warn_unused_result__, __returns_nonnull__)))
+inline void *
+libsimple_ereallocn(void *ptr__, size_t n__, ... /*, (size_t)0 */)
 {
-	va_list __ap;
-	va_start(__ap, __n);
-	return libsimple_evreallocn(__ptr, __n, __ap);
-	va_end(__ap);
+	va_list ap__;
+	va_start(ap__, n__);
+	return libsimple_evreallocn(ptr__, n__, ap__);
+	va_end(ap__);
 }
 #ifndef ereallocn
 # define ereallocn libsimple_ereallocn
@@ -325,14 +331,14 @@ libsimple_ereallocn(void *__ptr, size_t __n, ... /*, (size_t)0 */)
  * 
  * @since  1.2
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_size__(2), __warn_unused_result__)))
-static inline void *
-libsimple_reallocf(void *__ptr, size_t __n) /* TODO test */
+LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_size__(2), __warn_unused_result__)))
+inline void *
+libsimple_reallocf(void *ptr__, size_t n__)
 {
-	void *__new = __n ? realloc(__ptr, __n) : NULL;
-	if (!__new)
-		free(__ptr);
-	return __new;
+	void *new__ = n__ ? realloc(ptr__, n__) : NULL;
+	if (!new__)
+		free(ptr__);
+	return new__;
 }
 #ifndef reallocf
 # define reallocf libsimple_reallocf
@@ -365,15 +371,15 @@ libsimple_reallocf(void *__ptr, size_t __n) /* TODO test */
  * 
  * @since  1.2
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_size__(2, 3), __warn_unused_result__)))
-static inline void *
-libsimple_reallocarray(void *__ptr, size_t __n, size_t __m)
+LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_size__(2, 3), __warn_unused_result__)))
+inline void *
+libsimple_reallocarray(void *ptr__, size_t n__, size_t m__)
 {
-	if (LIBSIMPLE_UMUL_OVERFLOW(__n, __m, &__n, SIZE_MAX)) {
+	if (LIBSIMPLE_UMUL_OVERFLOW(n__, m__, &n__, SIZE_MAX)) {
 		errno = ENOMEM;
 		return NULL;
 	}
-	return realloc(__ptr, __n);
+	return realloc(ptr__, n__);
 }
 #ifndef reallocarray
 # define reallocarray libsimple_reallocarray
@@ -408,7 +414,7 @@ libsimple_reallocarray(void *__ptr, size_t __n, size_t __m)
  * 
  * @since  1.2
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_size__(3, 4), __warn_unused_result__, __returns_nonnull__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_size__(3, 4), __warn_unused_result__, __returns_nonnull__)))
 void *libsimple_enreallocarray(int, void *, size_t, size_t);
 #ifndef enreallocarray
 # define enreallocarray libsimple_enreallocarray
@@ -443,9 +449,12 @@ void *libsimple_enreallocarray(int, void *, size_t, size_t);
  * 
  * @since  1.2
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_size__(2, 3), __warn_unused_result__, __returns_nonnull__)))
-static inline void *libsimple_ereallocarray(void *__ptr, size_t __n, size_t __m)
-{ return libsimple_enreallocarray(libsimple_default_failure_exit, __ptr, __n, __m); }
+LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_size__(2, 3), __warn_unused_result__, __returns_nonnull__)))
+inline void *
+libsimple_ereallocarray(void *ptr__, size_t n__, size_t m__)
+{
+	return libsimple_enreallocarray(libsimple_default_failure_exit, ptr__, n__, m__);
+}
 #ifndef ereallocarray
 # define ereallocarray libsimple_ereallocarray
 #endif
@@ -477,14 +486,14 @@ static inline void *libsimple_ereallocarray(void *__ptr, size_t __n, size_t __m)
  * 
  * @since  1.2
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_size__(2, 3), __warn_unused_result__)))
-static inline void *
-libsimple_reallocarrayf(void *__ptr, size_t __n, size_t __m) /* TODO test */
+LIBSIMPLE_GCC_ONLY__(__attribute__((__alloc_size__(2, 3), __warn_unused_result__)))
+inline void *
+libsimple_reallocarrayf(void *ptr__, size_t n__, size_t m__)
 {
-	void *__new = __n ? libsimple_reallocarray(__ptr, __n, __m) : NULL;
-	if (!__new)
-		free(__ptr);
-	return __new;
+	void *new__ = n__ ? libsimple_reallocarray(ptr__, n__, m__) : NULL;
+	if (!new__)
+		free(ptr__);
+	return new__;
 }
 #ifndef reallocarrayf
 # define reallocarrayf libsimple_reallocarrayf
@@ -518,14 +527,14 @@ libsimple_reallocarrayf(void *__ptr, size_t __n, size_t __m) /* TODO test */
  * 
  * @since  1.2
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
-static inline void *
-libsimple_vreallocfn(void *__ptr, size_t __n, va_list __ap) /* TODO test (reallocfn) */
+LIBSIMPLE_GCC_ONLY__(__attribute__((__warn_unused_result__)))
+inline void *
+libsimple_vreallocfn(void *ptr__, size_t n__, va_list ap__)
 {
-	void *__new = libsimple_vreallocn(__ptr, __n, __ap);
-	if (!__new)
-		free(__ptr);
-	return __new;
+	void *new__ = libsimple_vreallocn(ptr__, n__, ap__);
+	if (!new__)
+		free(ptr__);
+	return new__;
 }
 #ifndef vreallocfn
 # define vreallocfn libsimple_vreallocfn
@@ -559,14 +568,14 @@ libsimple_vreallocfn(void *__ptr, size_t __n, va_list __ap) /* TODO test (reallo
  * 
  * @since  1.2
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__warn_unused_result__)))
-static inline void *
-libsimple_reallocfn(void *__ptr, size_t __n, ... /*, (size_t)0 */)
+LIBSIMPLE_GCC_ONLY__(__attribute__((__warn_unused_result__)))
+inline void *
+libsimple_reallocfn(void *ptr__, size_t n__, ... /*, (size_t)0 */)
 {
-	va_list __ap;
-	va_start(__ap, __n);
-	return libsimple_vreallocfn(__ptr, __n, __ap);
-	va_end(__ap);
+	va_list ap__;
+	va_start(ap__, n__);
+	return libsimple_vreallocfn(ptr__, n__, ap__);
+	va_end(ap__);
 }
 #ifndef reallocfn
 # define reallocfn libsimple_reallocfn

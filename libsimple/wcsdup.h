@@ -11,11 +11,12 @@
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define libsimple_wcsdupa(s)\
+	LIBSIMPLE_EXTENSION__\
 	({\
-		const wchar_t *__s = (s);\
-		size_t __n = wcslen(__s) + 1;\
-		wchar_t *__r = alloca(__n * sizeof(wchar_t));\
-		wmemcpy(__r, __s, __n);\
+		const wchar_t *s__ = (s);\
+		size_t n__ = wcslen(s__) + 1;\
+		wchar_t *r__ = alloca(n__ * sizeof(wchar_t));\
+		wmemcpy(r__, s__, n__);\
 	})
 # ifndef wcsdupa
 #  define wcsdupa(s) libsimple_wcsdupa(s)
@@ -32,7 +33,7 @@
  * 
  * @since  1.2
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, _libsimple_assume_aligned_as(wchar_t), __nonnull__,
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, libsimple_assume_aligned_as__(wchar_t), __nonnull__,
                                    __warn_unused_result__, __returns_nonnull__)))
 wchar_t *libsimple_enwcsdup(int, const wchar_t *);
 #ifndef enwcsdup
@@ -48,10 +49,13 @@ wchar_t *libsimple_enwcsdup(int, const wchar_t *);
  * 
  * @since  1.2
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, _libsimple_assume_aligned_as(wchar_t),
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, libsimple_assume_aligned_as__(wchar_t),
                                    __nonnull__, __warn_unused_result__, __returns_nonnull__)))
-static inline wchar_t *libsimple_ewcsdup(const wchar_t *__s)
-{ return enwcsdup(libsimple_default_failure_exit, __s); }
+inline wchar_t *
+libsimple_ewcsdup(const wchar_t *s__)
+{
+	return enwcsdup(libsimple_default_failure_exit, s__);
+}
 #ifndef ewcsdup
 # define ewcsdup libsimple_ewcsdup
 #endif

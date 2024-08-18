@@ -6,9 +6,9 @@ libsimple_aligned_allocz \- allocate optionally initialised memory with custom a
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_aligned_allocz(int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP);
+inline void *libsimple_aligned_allocz(int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP);
 void *libsimple_enaligned_allocz(int \fIstatus\fP, int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP);
-static inline void *libsimple_ealigned_allocz(int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP);
+inline void *libsimple_ealigned_allocz(int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP);
 
 #ifndef aligned_allocz
 # define aligned_allocz libsimple_aligned_allocz

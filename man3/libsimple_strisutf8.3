@@ -6,8 +6,8 @@ libsimple_strisutf8, libsimple_strnisutf8, libsimple_memisutf8 \- check if a str
 .nf
 #include <libsimple.h>
 
-static inline int libsimple_strisutf8(const char *\fIstring\fP, int \fIallow_modified_nul\fP);
-static inline int libsimple_strnisutf8(const char *\fIstring\fP, size_t \fIn\fP, int \fIallow_modified_nul\fP);
+inline int libsimple_strisutf8(const char *\fIstring\fP, int \fIallow_modified_nul\fP);
+inline int libsimple_strnisutf8(const char *\fIstring\fP, size_t \fIn\fP, int \fIallow_modified_nul\fP);
 int libsimple_memisutf8(const char *\fIstring\fP, size_t \fIn\fP, int \fIallow_modified_nul\fP);
 
 #ifndef strisutf8

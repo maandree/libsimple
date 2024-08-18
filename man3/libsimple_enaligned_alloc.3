@@ -6,8 +6,8 @@ libsimple_enaligned_alloc \- allocate memory with custom alignment or die
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_enaligned_alloc(int \fIstatus\fP, size_t \fIalignment\fP, size_t \fIn\fP);
-static inline void *libsimple_ealigned_alloc(size_t \fIalignment\fP, size_t \fIn\fP);
+inline void *libsimple_enaligned_alloc(int \fIstatus\fP, size_t \fIalignment\fP, size_t \fIn\fP);
+inline void *libsimple_ealigned_alloc(size_t \fIalignment\fP, size_t \fIn\fP);
 
 #ifndef enaligned_alloc
 # define enaligned_alloc libsimple_enaligned_alloc

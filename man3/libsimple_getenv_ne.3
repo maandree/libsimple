@@ -6,7 +6,7 @@ libsimple_getenv_ne \- get non-empty value of an environment variable
 .nf
 #include <libsimple.h>
 
-static inline char *libsimple_getenv_ne(const char *\fIname\fP);
+inline char *libsimple_getenv_ne(const char *\fIname\fP);
 
 #ifndef getenv_ne
 # define getenv_ne libsimple_getenv_ne

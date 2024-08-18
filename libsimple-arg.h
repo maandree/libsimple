@@ -8,11 +8,11 @@
 
 
 #ifdef LIBSIMPLY_CONFIG_MULTICALL_BINARY /* Define by the application */
-# define _LIBSIMPLY_IF_MULTICALL_BINARY(...) __VA_ARGS__
-# define _LIBSIMPLY_UNLESS_MULTICALL_BINARY(...)
+# define LIBSIMPLY_IF_MULTICALL_BINARY__(...) __VA_ARGS__
+# define LIBSIMPLY_UNLESS_MULTICALL_BINARY__(...)
 #else
-# define _LIBSIMPLY_IF_MULTICALL_BINARY(...)
-# define _LIBSIMPLY_UNLESS_MULTICALL_BINARY(...) __VA_ARGS__
+# define LIBSIMPLY_IF_MULTICALL_BINARY__(...)
+# define LIBSIMPLY_UNLESS_MULTICALL_BINARY__(...) __VA_ARGS__
 #endif
 
 
@@ -52,10 +52,19 @@ struct longopt {
 	 */
 	char short_flag;
 
+#if defined(__clang__)
+# pragma clang diagnostic push
+# pragma clang diagnostic ignored "-Wpadded"
+#endif
+
 	/**
 	 * Whether the option takes an argument
 	 */
 	int with_arg;
+
+#if defined(__clang__)
+# pragma clang diagnostic pop
+#endif
 };
 
 
@@ -444,11 +453,11 @@ struct longopt {
 
 /* Intended for internal use only */
 #if __STDC_VERSION__ >= 201112L
-# define _LIBSIMPLE_NORETURN _Noreturn
+# define LIBSIMPLE_NORETURN__ _Noreturn
 #elif defined(__GNUC__) || defined(__clang__)
-# define _LIBSIMPLE_NORETURN __attribute__((noreturn))
+# define LIBSIMPLE_NORETURN__ __attribute__((noreturn))
 #else
-# define _LIBSIMPLE_NORETURN
+# define LIBSIMPLE_NORETURN__
 #endif
 
 
@@ -469,15 +478,15 @@ struct longopt {
  * @since  1.0
  */
 #define NUSAGE(STATUS, SYNOPSIS)\
-	static _LIBSIMPLE_NORETURN void\
+	static LIBSIMPLE_NORETURN__ void\
 	usage(void)\
 	{\
-		const char *syn = SYNOPSIS ? SYNOPSIS : "";\
+		const char *syn = (const char *)SYNOPSIS ? SYNOPSIS : "";\
 		fprintf(stderr, "usage: %s%s%s\n", argv0, *syn ? " " : "", syn);\
 		exit(STATUS);\
 	}\
-	_LIBSIMPLY_UNLESS_MULTICALL_BINARY(char *argv0 = NULL)\
-	_LIBSIMPLY_IF_MULTICALL_BINARY(int main(int, char *[]))
+	LIBSIMPLY_UNLESS_MULTICALL_BINARY__(char *argv0 = NULL)\
+	LIBSIMPLY_IF_MULTICALL_BINARY__(int main(int, char *[]))
 
 
 #endif

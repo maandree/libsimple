@@ -1,16 +1,17 @@
 /* See LICENSE file for copyright and license details. */
-#include "libsimple.h"
+#include "common.h"
 #ifndef TEST
 
 
 void *
 libsimple_memrcasemem(const void *hay_, size_t hayn, const void *sub_, size_t subn)
 {
-	char *hay = (void *)hay_, *start;
+	const char *hay = hay_;
 	const char *sub = sub_;
+	const char *start;
 
 	if (!subn)
-		return &hay[hayn];
+		return &REMOVE_CONST(hay, char *)[hayn];
 	if (hayn < subn)
 		return NULL;
 	if (subn == 1)
@@ -20,7 +21,7 @@ libsimple_memrcasemem(const void *hay_, size_t hayn, const void *sub_, size_t su
 	hay = &hay[hayn - subn];
 	do {
 		if (tolower(*hay) == tolower(*sub) && !libsimple_memcasecmp(hay, sub, subn))
-			return hay;
+			return REMOVE_CONST(hay, char *);
 	} while (hay-- != start);
 
 	return NULL;

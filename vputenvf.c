@@ -1,6 +1,10 @@
 /* See LICENSE file for copyright and license details. */
-#include "libsimple.h"
+#include "common.h"
 #ifndef TEST
+
+#if defined(__clang__)
+# pragma clang diagnostic ignored "-Wformat-nonliteral"
+#endif
 
 
 int
@@ -36,27 +40,7 @@ libsimple_vputenvf(const char *fmt, va_list ap)
 int
 main(void)
 {
-	unsetenv("X");
-	assert(!getenv("X"));
-	unsetenv("Y");
-	assert(!getenv("Y"));
-
-	putenvf("X=xyz");
-	assert(!strcmpnul(getenv("X"), "xyz"));
-	putenvf("Y=xyz");
-	assert(!strcmpnul(getenv("Y"), "xyz"));
-
-	putenvf("X=x%sz", "abc");
-	assert(!strcmpnul(getenv("X"), "xabcz"));
-	putenvf("Y=x%sz", "abc");
-	assert(!strcmpnul(getenv("Y"), "xabcz"));
-
-	putenvf("X=%ix%sz%i", 10, "abc", -11);
-	assert(!strcmpnul(getenv("X"), "10xabcz-11"));
-	putenvf("Y=%ix%sz%i", 10, "abc", -11);
-	assert(!strcmpnul(getenv("Y"), "10xabcz-11"));
-
-	return 0;
+	return 0; /* Tested via libsimple_putenvf */
 }
 
 #endif

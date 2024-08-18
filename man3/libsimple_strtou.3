@@ -1,0 +1,202 @@
+.TH LIBSIMPLE_STRTOU 3 libsimple
+.SH NAME
+libsimple_strto{u,uh,uhh,uz,u8,u16,u32,u64} \- parse a string as an unsigned integer
+
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+unsigned int libsimple_strtou(const char *\fInptr\fP, char **\fIend\fP, int \fIbase\fP);
+unsigned short int libsimple_strtouh(const char *\fInptr\fP, char **\fIend\fP, int \fIbase\fP);
+unsigned char libsimple_strtouhh(const char *\fInptr\fP, char **\fIend\fP, int \fIbase\fP);
+inline size_t libsimple_strtouz(const char *\fInptr\fP, char **\fIend\fP, int \fIbase\fP);
+uint_least8_t libsimple_strtou8(const char *\fInptr\fP, char **\fIend\fP, int \fIbase\fP);
+uint_least16_t libsimple_strtou16(const char *\fInptr\fP, char **\fIend\fP, int \fIbase\fP);
+uint_least32_t libsimple_strtou32(const char *\fInptr\fP, char **\fIend\fP, int \fIbase\fP);
+uint_least64_t libsimple_strtou64(const char *\fInptr\fP, char **\fIend\fP, int \fIbase\fP);
+
+#ifndef strtou
+# define strtou libsimple_strtou
+#endif
+#ifndef strtouh
+# define strtouh libsimple_strtouh
+#endif
+#ifndef strtouhh
+# define strtouhh libsimple_strtouhh
+#endif
+#ifndef strtouz
+# define strtouz libsimple_strtouz
+#endif
+#ifndef strtou8
+# define strtou8 libsimple_strtou8
+#endif
+#ifndef strtou16
+# define strtou16 libsimple_strtou16
+#endif
+#ifndef strtou32
+# define strtou32 libsimple_strtou32
+#endif
+#ifndef strtou64
+# define strtou64 libsimple_strtou64
+#endif
+.fi
+.PP
+Link with
+.IR \-lsimple .
+
+.SH DESCRIPTION
+The
+.BR libsimple_strtou ()
+function is a version of the
+.BR strtoul (3)
+function, that returns au
+.BR "unsigned int" .
+.PP
+The
+.BR libsimple_strtouh ()
+function is a version of the
+.BR strtoul (3)
+function, that returns au
+.BR "unsigned short int" .
+.PP
+The
+.BR libsimple_strtouhh ()
+function is a version of the
+.BR strtoul (3)
+function, that returns au
+.BR "unsigned char" .
+.PP
+The
+.BR libsimple_strtouz ()
+function is a version of the
+.BR strtoul (3)
+function, that returns a
+.BR size_t .
+.PP
+The
+.BR libsimple_strtou8 ()
+function is a version of the
+.BR strtoul (3)
+function, that returns a
+.B uint_least8_t
+restricted to the range of
+.BR uint8_t .
+.PP
+The
+.BR libsimple_strtou16 ()
+function is a version of the
+.BR strtoul (3)
+function, that returns a
+.B uint_least16_t
+restricted to the range of
+.BR uint16_t .
+.PP
+The
+.BR libsimple_strtou32 ()
+function is a version of the
+.BR strtoul (3)
+function, that returns a
+.B uint_least32_t
+restricted to the range of
+.BR uint32_t .
+.PP
+The
+.BR libsimple_strtou64 ()
+function is a version of the
+.BR strtoul (3)
+function, that returns a
+.B uint_least64_t
+restricted to the range of
+.BR uint64_t .
+
+.SH RETURN VALUE
+See
+.BR strtoul (3).
+
+.SH ERRORS
+See
+.BR strtoul (3).
+
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lb lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.BR libsimple_strtou (),
+.br
+.BR libsimple_strtouh (),
+.br
+.BR libsimple_strtouhh (),
+.br
+.BR libsimple_strtouz (),
+.br
+.BR libsimple_strtou8 (),
+.br
+.BR libsimple_strtou16 (),
+.br
+.BR libsimple_strtou32 (),
+.br
+.BR libsimple_strtou64 ()
+T}	Thread safety	MT-Safe
+T{
+.BR libsimple_strtou (),
+.br
+.BR libsimple_strtouh (),
+.br
+.BR libsimple_strtouhh (),
+.br
+.BR libsimple_strtouz (),
+.br
+.BR libsimple_strtou8 (),
+.br
+.BR libsimple_strtou16 (),
+.br
+.BR libsimple_strtou32 (),
+.br
+.BR libsimple_strtou64 ()
+T}	Async-signal safety	AS-Safe
+T{
+.BR libsimple_strtou (),
+.br
+.BR libsimple_strtouh (),
+.br
+.BR libsimple_strtouhh (),
+.br
+.BR libsimple_strtouz (),
+.br
+.BR libsimple_strtou8 (),
+.br
+.BR libsimple_strtou16 (),
+.br
+.BR libsimple_strtou32 (),
+.br
+.BR libsimple_strtou64 ()
+T}	Async-cancel safety	AC-Safe
+.TE
+
+.SH EXAMPLES
+None.
+
+.SH APPLICATION USAGE
+None.
+
+.SH RATIONALE
+None.
+
+.SH FUTURE DIRECTIONS
+None.
+
+.SH NOTES
+None.
+
+.SH BUGS
+None.
+
+.SH SEE ALSO
+.BR libsimple_strtoi (3),
+.BR strtoul (3),
+.BR strtoull (3)

@@ -93,47 +93,50 @@ enum libsimple_memalloc_option {
 	                     __VA_ARGS__)
 
 /* @since  1.1 */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__)))
 void *libsimple_vmemalloc(size_t, va_list);
 
 /* @since  1.1 */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__)))
 void *libsimple_envmemalloc(int, size_t, va_list);
 
 /* @since  1.1 */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__)))
-static inline void *libsimple_evmemalloc(size_t __n, va_list __ap)
-{ return libsimple_envmemalloc(libsimple_default_failure_exit, __n, __ap); }
-
-/* @since  1.1 */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__)))
-static inline void *
-libsimple_memalloc(size_t __n, ... /*, LIBSIMPLE_MEMALLOC_END */)
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__)))
+inline void *
+libsimple_evmemalloc(size_t n__, va_list ap__)
 {
-	va_list __ap;
-	va_start(__ap, __n);
-	return libsimple_vmemalloc(__n, __ap);
-	va_end(__ap);
+	return libsimple_envmemalloc(libsimple_default_failure_exit, n__, ap__);
 }
 
 /* @since  1.1 */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__)))
-static inline void *
-libsimple_enmemalloc(int __status, size_t __n, ... /*, LIBSIMPLE_MEMALLOC_END */)
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__)))
+inline void *
+libsimple_memalloc(size_t n__, ... /*, LIBSIMPLE_MEMALLOC_END */)
 {
-	va_list __ap;
-	va_start(__ap, __n);
-	return libsimple_envmemalloc(__status, __n, __ap);
-	va_end(__ap);
+	va_list ap__;
+	va_start(ap__, n__);
+	return libsimple_vmemalloc(n__, ap__);
+	va_end(ap__);
 }
 
 /* @since  1.1 */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __warn_unused_result__)))
-static inline void *
-libsimple_ememalloc(size_t __n, ... /*, LIBSIMPLE_MEMALLOC_END */)
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__)))
+inline void *
+libsimple_enmemalloc(int status__, size_t n__, ... /*, LIBSIMPLE_MEMALLOC_END */)
 {
-	va_list __ap;
-	va_start(__ap, __n);
-	return libsimple_evmemalloc(__n, __ap);
-	va_end(__ap);
+	va_list ap__;
+	va_start(ap__, n__);
+	return libsimple_envmemalloc(status__, n__, ap__);
+	va_end(ap__);
+}
+
+/* @since  1.1 */
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __warn_unused_result__)))
+inline void *
+libsimple_ememalloc(size_t n__, ... /*, LIBSIMPLE_MEMALLOC_END */)
+{
+	va_list ap__;
+	va_start(ap__, n__);
+	return libsimple_evmemalloc(n__, ap__);
+	va_end(ap__);
 }

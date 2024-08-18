@@ -1,5 +1,5 @@
 /* See LICENSE file for copyright and license details. */
-#include "libsimple.h"
+#include "common.h"
 #ifndef TEST
 
 
@@ -40,64 +40,76 @@ main(void)
 	char buf[1024];
 
 
-	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	memset(buf, '-', sizeof(buf));
+	buf[sizeof(buf) - 1] = '\0';
 	strcpy(&buf[5], "hello");
 	assert(libsimple_strcmove(&buf[5], &buf[5], '\0') == &buf[5 + 6]);
 	assert(!strcmp(buf, "-----hello"));
 
-	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	memset(buf, '-', sizeof(buf));
+	buf[sizeof(buf) - 1] = '\0';
 	strcpy(&buf[5], "hello");
 	assert(libsimple_strcmove(&buf[5], &buf[5], 'o') == &buf[5 + 5]);
 	assert(!strcmp(buf, "-----hello"));
 
-	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	memset(buf, '-', sizeof(buf));
+	buf[sizeof(buf) - 1] = '\0';
 	strcpy(&buf[5], "hello");
 	assert(libsimple_strcmove(&buf[5], &buf[5], 'l') == &buf[5 + 3]);
 	assert(!strcmp(buf, "-----hel"));
 
-	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	memset(buf, '-', sizeof(buf));
+	buf[sizeof(buf) - 1] = '\0';
 	strcpy(&buf[5], "hello");
 	assert(libsimple_strcmove(&buf[5], &buf[5], 'x') == NULL);
 	assert(!strcmp(buf, "-----hello"));
 
 
-	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	memset(buf, '-', sizeof(buf));
+	buf[sizeof(buf) - 1] = '\0';
 	strcpy(&buf[5], "hello");
 	assert(libsimple_strcmove(&buf[3], &buf[5], '\0') == &buf[3 + 6]);
 	assert(!strcmp(buf, "---hello"));
 
-	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	memset(buf, '-', sizeof(buf));
+	buf[sizeof(buf) - 1] = '\0';
 	strcpy(&buf[5], "hello");
 	assert(libsimple_strcmove(&buf[3], &buf[5], 'o') == &buf[3 + 5]);
 	assert(!strcmp(buf, "---hello"));
 
-	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	memset(buf, '-', sizeof(buf));
+	buf[sizeof(buf) - 1] = '\0';
 	strcpy(&buf[5], "hello");
 	assert(libsimple_strcmove(&buf[3], &buf[5], 'l') == &buf[3 + 3]);
 	assert(!strcmp(buf, "---hel"));
 
-	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	memset(buf, '-', sizeof(buf));
+	buf[sizeof(buf) - 1] = '\0';
 	strcpy(&buf[5], "hello");
 	assert(libsimple_strcmove(&buf[3], &buf[5], 'x') == NULL);
 	assert(!strcmp(buf, "---hello"));
 
 
-	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	memset(buf, '-', sizeof(buf));
+	buf[sizeof(buf) - 1] = '\0';
 	strcpy(&buf[5], "hello");
 	assert(libsimple_strcmove(&buf[8], &buf[5], '\0') == &buf[8 + 6]);
 	assert(!strcmp(buf, "-----helhello"));
 
-	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	memset(buf, '-', sizeof(buf));
+	buf[sizeof(buf) - 1] = '\0';
 	strcpy(&buf[5], "hello");
 	assert(libsimple_strcmove(&buf[8], &buf[5], 'o') == &buf[8 + 5]);
 	assert(!strcmp(buf, "-----helhello"));
 
-	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	memset(buf, '-', sizeof(buf));
+	buf[sizeof(buf) - 1] = '\0';
 	strcpy(&buf[5], "hello");
 	assert(libsimple_strcmove(&buf[8], &buf[5], 'l') == &buf[8 + 3]);
 	assert(!strcmp(buf, "-----helhel"));
 
-	memset(buf, '-', sizeof(buf)), buf[sizeof(buf) - 1] = '\0';
+	memset(buf, '-', sizeof(buf));
+	buf[sizeof(buf) - 1] = '\0';
 	strcpy(&buf[5], "hello");
 	assert(libsimple_strcmove(&buf[8], &buf[5], 'x') == NULL);
 	assert(!strcmp(buf, "-----helhello"));

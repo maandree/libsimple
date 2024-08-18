@@ -8,10 +8,10 @@ libsimple_vposix_memalignzn \- allocate optionally initialised memory with custo
 
 int libsimple_vposix_memalignzn(void **\fImemptr\fP, int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
 void libsimple_envposix_memalignzn(int \fIstatus\fP, void **\fImemptr\fP, int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
-static inline void libsimple_evposix_memalignzn(void **\fImemptr\fP, int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
-static inline int libsimple_posix_memalignzn(void **\fImemptr\fP, int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
-static inline void libsimple_enposix_memalignzn(int \fIstatus\fP, void **\fImemptr\fP, int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
-static inline int libsimple_eposix_memalignzn(void **\fImemptr\fP, int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void libsimple_evposix_memalignzn(void **\fImemptr\fP, int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
+inline int libsimple_posix_memalignzn(void **\fImemptr\fP, int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void libsimple_enposix_memalignzn(int \fIstatus\fP, void **\fImemptr\fP, int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline int libsimple_eposix_memalignzn(void **\fImemptr\fP, int \fIclear\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
 
 #ifndef vposix_memalignzn
 # define vposix_memalignzn libsimple_vposix_memalignzn

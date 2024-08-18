@@ -8,10 +8,10 @@ libsimple_vreallocn \- reallocate memory
 
 void *libsimple_vreallocn(void *\fIptr\fP, size_t \fIn\fP, va_list \fIap\fP);
 void *libsimple_envreallocn(int \fIstatus\fP, void *\fIptr\fP, size_t \fIn\fP, va_list \fIap\fP);
-static inline void *libsimple_evreallocn(void *\fIptr\fP, size_t \fIn\fP, va_list \fIap\fP);
-static inline void *libsimple_reallocn(void *\fIptr\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
-static inline void *libsimple_enreallocn(int \fIstatus\fP, void *\fIptr\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
-static inline void *libsimple_ereallocn(void *\fIptr\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_evreallocn(void *\fIptr\fP, size_t \fIn\fP, va_list \fIap\fP);
+inline void *libsimple_reallocn(void *\fIptr\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_enreallocn(int \fIstatus\fP, void *\fIptr\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_ereallocn(void *\fIptr\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
 
 #ifndef vreallocn
 # define vreallocn libsimple_vreallocn

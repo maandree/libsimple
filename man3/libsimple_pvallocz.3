@@ -6,9 +6,9 @@ libsimple_pvallocz \- allocate optionally initialised memory with page size alig
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_pvallocz(int \fIclear\fP, size_t \fIn\fP);
-static inline void *libsimple_enpvallocz(int \fIstatus\fP, int \fIclear\fP, size_t \fIn\fP);
-static inline void *libsimple_epvallocz(int \fIclear\fP, size_t \fIn\fP);
+inline void *libsimple_pvallocz(int \fIclear\fP, size_t \fIn\fP);
+inline void *libsimple_enpvallocz(int \fIstatus\fP, int \fIclear\fP, size_t \fIn\fP);
+inline void *libsimple_epvallocz(int \fIclear\fP, size_t \fIn\fP);
 
 #ifndef pvallocz
 # define pvallocz libsimple_pvallocz

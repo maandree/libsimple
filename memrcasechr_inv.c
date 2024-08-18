@@ -1,5 +1,5 @@
 /* See LICENSE file for copyright and license details. */
-#include "libsimple.h"
+#include "common.h"
 #ifndef TEST
 
 
@@ -7,7 +7,7 @@ void *
 libsimple_memrcasechr_inv(const void *s_, int c, size_t n_)
 {
 	char *s = *(char **)(void *)&s_;
-	ssize_t n = n_;
+	ssize_t n = (ssize_t)n_;
 	c = tolower(c);
 	while (n-- && tolower(s[n]) == c);
 	return n < 0 ? NULL : &s[n];

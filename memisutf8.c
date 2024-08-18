@@ -1,5 +1,5 @@
 /* See LICENSE file for copyright and license details. */
-#include "libsimple.h"
+#include "common.h"
 #ifndef TEST
 
 
@@ -10,6 +10,8 @@ libsimple_memisutf8(const char *string, size_t n, int allow_modified_nul)
         static long BYTES_TO_MAX_BITS[] = {0, 7, 11, 16, 21, 26, 31};
         long int bytes = 0, read_bytes = 0, bits = 0, c, character;
 	size_t i;
+
+	character = 0; /* silence false warning from compiler; `character` is set in `if (!read_bytes)` before `else` */
 
         /*                                                      min bits  max bits
           0.......                                                 0         7
@@ -36,8 +38,10 @@ libsimple_memisutf8(const char *string, size_t n, int allow_modified_nul)
                                 return 0;
 
                         /* Multibyte character. */
-                        while ((c & 0x80))
-                                bytes++, c <<= 1;
+                        while ((c & 0x80)) {
+                                bytes++;
+				c <<= 1;
+			}
                         read_bytes = 1;
 			character = (c & 0xFF) >> bytes;
                         if (bytes > 6)
@@ -59,8 +63,10 @@ libsimple_memisutf8(const char *string, size_t n, int allow_modified_nul)
                                 continue;
 
                         /* Check that the character is not unnecessarily long. */
-                        while (character)
-                                character >>= 1, bits++;
+                        while (character) {
+                                character >>= 1;
+				bits++;
+			}
                         bits = (!bits && bytes == 2 && allow_modified_nul) ? 8 : bits;
                         if (bits < BYTES_TO_MIN_BITS[bytes] || BYTES_TO_MAX_BITS[bytes] < bits)
                                 return 0;
@@ -85,10 +91,6 @@ main(void)
 		assert(libsimple_memisutf8(STRING, sizeof(STRING) - 1, i) == (GOOD));\
 		assert(libsimple_memisutf8(STRING "\xFF", sizeof(STRING) - 1, i) == (GOOD));\
 		assert(libsimple_memisutf8(STRING "\x00", sizeof(STRING) - 1, i) == (GOOD));\
-		assert(libsimple_strisutf8(STRING, i) == (GOOD));\
-		assert(libsimple_strnisutf8(STRING, sizeof(STRING) - 1, i) == (GOOD));\
-		assert(libsimple_strnisutf8(STRING "\xFF", sizeof(STRING) - 1, i) == (GOOD));\
-		assert(libsimple_strnisutf8(STRING "\x00", sizeof(STRING) - 1, i) == (GOOD));\
 	} while (0)
 
 	int i;

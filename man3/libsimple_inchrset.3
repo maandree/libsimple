@@ -6,8 +6,8 @@ libsimple_inchrset, libsimple_inchrcaseset \- the whether a character belongs to
 .nf
 #include <libsimple.h>
 
-static inline int libsimple_inchrset(int \fIc\fP, const char *\fIs\fP);
-static inline int libsimple_inchrcaseset(int \fIc\fP, const char *\fIs\fP);
+inline int libsimple_inchrset(int \fIc\fP, const char *\fIs\fP);
+inline int libsimple_inchrcaseset(int \fIc\fP, const char *\fIs\fP);
 
 #ifndef inchrset
 # define inchrset libsimple_inchrset

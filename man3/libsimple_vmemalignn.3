@@ -6,12 +6,12 @@ libsimple_vmemalignn \- allocate memory with custom alignment
 .nf
 #include <libsimple.h>
 
-static inline void *libsimple_vmemalignn(size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
-static inline void *libsimple_envmemalignn(int \fIstatus\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
-static inline void *libsimple_evmemalignn(size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
-static inline void *libsimple_memalignn(size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
-static inline void *libsimple_enmemalignn(int \fIstatus\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
-static inline void *libsimple_ememalignn(size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_vmemalignn(size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
+inline void *libsimple_envmemalignn(int \fIstatus\fP, size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
+inline void *libsimple_evmemalignn(size_t \fIalignment\fP, size_t \fIn\fP, va_list \fIap\fP);
+inline void *libsimple_memalignn(size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_enmemalignn(int \fIstatus\fP, size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
+inline void *libsimple_ememalignn(size_t \fIalignment\fP, size_t \fIn\fP, ..., /* (size_t)0 */);
 
 #ifndef vmemalignn
 # define vmemalignn libsimple_vmemalignn

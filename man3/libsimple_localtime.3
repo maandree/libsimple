@@ -7,8 +7,8 @@ libsimple_localtime \- get the current local time with leap second adjustment
 #include <libsimple.h>
 
 int libsimple_localtime(struct tm *\fItm\fP, struct timespec *\fIts\fP);
-static inline void libsimple_enlocaltime(int \fIstatus\fPstruct tm *\fItm\fP, struct timespec *\fIts\fP);
-static inline void libsimple_elocaltime(struct tm *\fItm\fP, struct timespec *\fIts\fP);
+inline void libsimple_enlocaltime(int \fIstatus\fP, struct tm *\fItm\fP, struct timespec *\fIts\fP);
+inline void libsimple_elocaltime(struct tm *\fItm\fP, struct timespec *\fIts\fP);
 .fi
 .PP
 Link with
@@ -33,7 +33,7 @@ On failure, the process's exit value will be
 if the
 .BR libsimple_enlocaltime ()
 function is used or
-.IR libsimple_default_failure_exit (3)
+.BR libsimple_default_failure_exit (3)
 if the
 .BR libsimple_elocaltime ()
 fucntion is used.
@@ -49,9 +49,9 @@ is
 .IR NULL .
 .I tm
 may
-.I not
+.B not
 be
-.RI NULL .
+.IR NULL .
 
 .SH RETURN VALUE
 The

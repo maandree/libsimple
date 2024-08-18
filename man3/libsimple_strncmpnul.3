@@ -6,7 +6,7 @@ libsimple_strncmpnul \- compare two strings
 .nf
 #include <libsimple.h>
 
-static inline int libsimple_strncmpnul(const char *\fIa\fP, const char *\fIb\fP, size_t \fIn\fP);
+inline int libsimple_strncmpnul(const char *\fIa\fP, const char *\fIb\fP, size_t \fIn\fP);
 
 #ifndef strncmpnul
 # define strncmpnul libsimple_strncmpnul

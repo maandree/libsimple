@@ -12,11 +12,12 @@
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define libsimple_wmemdupa(s, n)\
+	LIBSIMPLE_EXTENSION__\
 	({\
-		const wchar_t *__s = (s);\
-		size_t __n = (n);\
-		wchar_t *__r = alloca(__n * sizeof(wchar_t) + !__n);\
-		wmemcpy(__r, __s, __n);\
+		const wchar_t *s__ = (s);\
+		size_t n__ = (n);\
+		wchar_t *r__ = alloca(n__ * sizeof(wchar_t) + !n__);\
+		wmemcpy(r__, s__, n__);\
 	})
 # ifndef wmemdupa
 #  define wmemdupa(s, n) libsimple_wmemdupa(s, n)
@@ -33,7 +34,7 @@
  * 
  * @since  1.2
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, _libsimple_assume_aligned_as(wchar_t), __alloc_size__(2), __warn_unused_result__)))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, libsimple_assume_aligned_as__(wchar_t), __alloc_size__(2), __warn_unused_result__)))
 wchar_t *libsimple_wmemdup(const wchar_t *, size_t);
 #ifndef wmemdup
 # define wmemdup libsimple_wmemdup
@@ -50,7 +51,7 @@ wchar_t *libsimple_wmemdup(const wchar_t *, size_t);
  * 
  * @since  1.2
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, _libsimple_assume_aligned_as(wchar_t), __alloc_size__(3),
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, libsimple_assume_aligned_as__(wchar_t), __alloc_size__(3),
                                    __warn_unused_result__, __returns_nonnull__)))
 wchar_t *libsimple_enwmemdup(int, const wchar_t *, size_t);
 #ifndef enwmemdup
@@ -67,10 +68,13 @@ wchar_t *libsimple_enwmemdup(int, const wchar_t *, size_t);
  * 
  * @since  1.2
  */
-_LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, _libsimple_assume_aligned_as(wchar_t), __alloc_size__(2),
+LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, libsimple_assume_aligned_as__(wchar_t), __alloc_size__(2),
                                    __warn_unused_result__, __returns_nonnull__)))
-static inline wchar_t *libsimple_ewmemdup(const wchar_t *__s, size_t __n)
-{ return libsimple_enwmemdup(libsimple_default_failure_exit, __s, __n); }
+inline wchar_t *
+libsimple_ewmemdup(const wchar_t *s__, size_t n__)
+{
+	return libsimple_enwmemdup(libsimple_default_failure_exit, s__, n__);
+}
 #ifndef ewmemdup
 # define ewmemdup libsimple_ewmemdup
 #endif

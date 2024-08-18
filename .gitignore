@@ -12,3 +12,4 @@
 *.gcno
 *.gcov
 *.lo
+*.to
