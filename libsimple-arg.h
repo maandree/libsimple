@@ -473,7 +473,7 @@ struct longopt {
  * This macro also defines `char *argv0`
  * 
  * @param  SYNOPSIS:const char *  Description of the command line argument syntax
- * @parma  STATUS:int             The exit value for the process
+ * @param  STATUS:int             The exit value for the process
  * 
  * @since  1.0
  */

@@ -209,6 +209,8 @@ libsimple_close(int *fdp__)
  * @return          0 on successful completion, -1 on failure
  * @throws  EINVAL  If `first > last`
  * @throws          Any error for close(3) except EBADF
+ *
+ * @since  1.6
  */
 int libsimple_close_range(unsigned int first, unsigned int last, unsigned int *next);
 #define LIBSIMPLE_CLOSE_RANGE_MAX (~0U)
