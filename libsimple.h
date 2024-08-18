@@ -165,6 +165,13 @@
 #include "libsimple/strn.h"
 #include "libsimple/strtoint.h"
 #include "libsimple/search.h"
+#include "libsimple/random.h"
+#include "libsimple/abs.h"
+#include "libsimple/net.h"
+#include "libsimple/path.h"
+#include "libsimple/ascii.h"
+#include "libsimple/exec.h"
+#include "libsimple/sort.h"
 
 
 /**
@@ -190,6 +197,20 @@ libsimple_close(int *fdp__)
 	*fdp__ = -1;
 	return ret__;
 }
+
+
+/**
+ * Close a range of file descriptors
+ *
+ * @param   first   The lowest file descriptor to close
+ * @param   last    The highest file descriptor to close
+ * @param   next    Output parameter for the potentially first unclosed file descriptor; may be `NULL`
+ * @return          0 on successful completion, -1 on failure
+ * @throws  EINVAL  If `first > last`
+ * @throws          Any error for close(3) except EBADF
+ */
+int libsimple_close_range(unsigned int first, unsigned int last, unsigned int *next);
+#define LIBSIMPLE_CLOSE_RANGE_MAX (~0U)
 
 
 /**

@@ -159,6 +159,9 @@ Flexible allocation of memory suitable for allocating arrays.
 .BR libsimple_close (3)
 Close a file and set to stored file descriptor number to mark it file as closed.
 .TP
+.BR libsimple_close_range (3)
+Close a range of file descriptors.
+.TP
 .BR libsimple_default_failure_exit (3)
 Default exit value on failure.
 .TP

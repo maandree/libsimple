@@ -210,3 +210,10 @@ libsimple_eputenvf(const char *fmt__, ...)
 #ifndef eputenvf
 # define eputenvf libsimple_eputenvf
 #endif
+
+
+/*
+ * TODO add getenv_first, getenv_first_ne, getenv_first_e
+ * TODO add getenv_last, getenv_last_ne, getenv_last_e
+ * TODO add unsetenv_first, unsetenv_last, unsetenv_each
+ */

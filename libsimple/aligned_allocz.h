@@ -48,10 +48,21 @@ LIBSIMPLE_GCC_ONLY__(__attribute__((__malloc__, __alloc_align__(2), __alloc_size
 inline void *
 libsimple_aligned_allocz(int clear__, size_t alignment__, size_t n__)
 {
+#if defined(aligned_alloc) || defined(_ISOC11_SOURCE)
 	void *ret__ = aligned_alloc(alignment__, n__);
 	if (ret__ && clear__)
 		memset(ret__, 0, n__);
 	return ret__;
+#else
+	if (!alignment__ || alignment__ % sizeof(void *)) {
+		errno = EINVAL;
+		return NULL;
+	}
+	return libsimple_memalloc(n__,
+	                          LIBSIMPLE_MEMALLOC_CONDITIONAL_ZERO_INIT, clear__,
+	                          LIBSIMPLE_MEMALLOC_ALIGNMENT, alignment__,
+	                          LIBSIMPLE_MEMALLOC_END);
+#endif
 }
 #ifndef aligned_allocz
 # define aligned_allocz libsimple_aligned_allocz

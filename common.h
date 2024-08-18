@@ -9,3 +9,7 @@
 # pragma clang diagnostic ignored "-Wc++98-compat"
 # pragma clang diagnostic ignored "-Wcovered-switch-default"
 #endif
+
+#ifdef execveat
+# undef execveat
+#endif

@@ -1,0 +1,74 @@
+.TH LIBSIMPLE_CLOSE 3 libsimple
+.SH NAME
+libsimple_close_range \- close a range of file descriptors
+
+.SH SYNOPSIS
+.nf
+#include <libsimple.h>
+
+#define LIBSIMPLE_CLOSE_RANGE_MAX (~0U)
+
+int libsimple_close_range(unsigned int first, unsigned int last, unsigned int *next);
+.fi
+.PP
+Link with
+.IR \-lsimple .
+
+.SH DESCRIPTION
+The
+.BR libsimple_close_range ()
+function closes all file descriptors in the
+range inclusive range
+.RI [ *first ", " last ].
+.PP
+Unless
+.I next
+is,
+.IR NULL ,
+the first potentially unclosed file descriptor
+will be written to
+.I *next .
+
+.SH RETURN VALUE
+The
+.BR libsimple_close_range ()
+function returns 0 upon successful completion;
+otherwise \-1 is returned (potentially partially
+successful).
+
+.SH ERRORS
+The
+.BR libsimple_close_range ()
+function fail for the reasons specified for the
+.BR close (3)
+function except
+.BR EBADF ,
+or if
+.TP
+.B EINVAL
+.I first
+is greater than
+.IR last .
+
+.SH EXAMPLES
+None.
+
+.SH APPLICATION USAGE
+None.
+
+.SH RATIONALE
+None.
+
+.SH FUTURE DIRECTIONS
+None.
+
+.SH NOTES
+None.
+
+.SH BUGS
+None.
+
+.SH SEE ALSO
+.BR close_range (2),
+.BR close (3),
+.BR libsimple_close (3)

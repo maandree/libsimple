@@ -70,7 +70,7 @@ test_timeval(double d, time_t sec, long int usec, double rd, const char *s, cons
 }
 
 #ifdef libsimple_vasprintfa
-LIBSIMPLE_GCC_ONLY__(__attribute__((__format__(__printf__, 2, 0))))
+LIBSIMPLE_GCC_ONLY__(__attribute__((__format__(__printf__, 2, 3))))
 static int
 test_vasprintfa(const char *expected, const char *format, ...)
 {

@@ -5,8 +5,8 @@ values for integer data types.
 
 All functions are namespaced with `libsimple_` and aliased with macro
 definitions to unnamespaced names unless there already is a macro with that
-name. However, some functions are seen as libsimple specific and do not
-have unnamespaced.
+name. However, some functions are seen as libsimple specific and are not
+namespaced.
 
 Programs using this library should define `char *argv0` and set it to
 the 0:th command line argument.

@@ -16,6 +16,10 @@ inline void libsimple_venprintf(int \fIstatus\fP, const char *\fIfmt\fP, va_list
 inline void libsimple_enprintf(int \fIstatus\fP, const char *\fIfmt\fP, ...);
 inline void libsimple_veprintf(const char *\fIfmt\fP, va_list \fIap\fP);
 inline void libsimple_eprintf(const char *\fIfmt\fP, ...);
+inline void libsimple__venprintf(int \fIstatus\fP, const char *\fIfmt\fP, va_list \fIap\fP);
+inline void libsimple__enprintf(int \fIstatus\fP, const char *\fIfmt\fP, ...);
+inline void libsimple__veprintf(const char *\fIfmt\fP, va_list \fIap\fP);
+inline void libsimple__eprintf(const char *\fIfmt\fP, ...);
 
 #ifndef vweprintf
 # define vweprintf libsimple_vweprintf
@@ -34,6 +38,18 @@ inline void libsimple_eprintf(const char *\fIfmt\fP, ...);
 #endif
 #ifndef eprintf
 # define eprintf libsimple_eprintf
+#endif
+#ifndef _venprintf
+# define _venprintf libsimple__venprintf
+#endif
+#ifndef _enprintf
+# define _enprintf libsimple__enprintf
+#endif
+#ifndef _veprintf
+# define _veprintf libsimple__veprintf
+#endif
+#ifndef _eprintf
+# define _eprintf libsimple__eprintf
 #endif
 .fi
 .PP
@@ -102,6 +118,19 @@ the exit value of the process will be
 .IR status .
 .PP
 The
+.BR libsimple__venprintf ()
+and
+.BR libsimple__enprintf ()
+functions are versions of the
+.BR libsimple_vweprintf ()
+and
+.BR libsimple_weprintf ()
+functions that terminate the process by calling
+.BR _exit (3),
+the exit value of the process will be
+.IR status .
+.PP
+The
 .BR libsimple_veprintf ()
 and
 .BR libsimple_eprintf ()
@@ -116,13 +145,31 @@ the exit value of the process will be
 which is 1 by default.
 .PP
 The
+.BR libsimple__veprintf ()
+and
+.BR libsimple__eprintf ()
+functions are versions of the
+.BR libsimple_vweprintf ()
+and
+.BR libsimple_weprintf ()
+functions that terminate the process by calling
+.BR _exit (3),
+the exit value of the process will be
+.IR libsimple_default_failure_exit (3),
+which is 1 by default.
+.PP
+The
 .BR libsimple_vweprintf (),
 .BR libsimple_weprintf (),
 .BR libsimple_venprintf (),
 .BR libsimple_enprintf (),
 .BR libsimple_veprintf (),
+.BR libsimple_eprintf (),
+.BR libsimple__venprintf (),
+.BR libsimple__enprintf (),
+.BR libsimple__veprintf (),
 and
-.BR libsimple_eprintf ()
+.BR libsimple__eprintf ()
 functions call
 .I libsimple_eprintf_preprint
 unless it is
@@ -146,8 +193,12 @@ may have a different value from when the
 .BR libsimple_venprintf (),
 .BR libsimple_enprintf (),
 .BR libsimple_veprintf (),
+.BR libsimple_eprintf (),
+.BR libsimple__venprintf (),
+.BR libsimple__enprintf (),
+.BR libsimple__veprintf (),
 or
-.BR libsimple_eprintf ()
+.BR libsimple__eprintf ()
 function called when
 .I libsimple_eprintf_preprint
 or
@@ -179,7 +230,15 @@ T{
 .br
 .BR libsimple_veprintf (),
 .br
-.BR libsimple_eprintf ()
+.BR libsimple_eprintf (),
+.br
+.BR libsimple__venprintf (),
+.br
+.BR libsimple__enprintf (),
+.br
+.BR libsimple__veprintf (),
+.br
+.BR libsimple__eprintf ()
 T}	Thread safety	MT-Unsafe race:strerror
 T{
 .BR libsimple_vweprintf (),
@@ -192,7 +251,15 @@ T{
 .br
 .BR libsimple_veprintf (),
 .br
-.BR libsimple_eprintf ()
+.BR libsimple_eprintf (),
+.br
+.BR libsimple__venprintf (),
+.br
+.BR libsimple__enprintf (),
+.br
+.BR libsimple__veprintf (),
+.br
+.BR libsimple__eprintf ()
 T}	Async-signal safety	AS-Safe
 T{
 .BR libsimple_vweprintf (),
@@ -205,7 +272,15 @@ T{
 .br
 .BR libsimple_veprintf (),
 .br
-.BR libsimple_eprintf ()
+.BR libsimple_eprintf (),
+.br
+.BR libsimple__venprintf (),
+.br
+.BR libsimple__enprintf (),
+.br
+.BR libsimple__veprintf (),
+.br
+.BR libsimple__eprintf ()
 T}	Async-cancel safety	AC-Safe
 .TE
 

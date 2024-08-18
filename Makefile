@@ -11,12 +11,13 @@ include mk/$(OS).mk
 
 
 LIB_MAJOR = 1
-LIB_MINOR = 5
+LIB_MINOR = 6
 LIB_VERSION = $(LIB_MAJOR).$(LIB_MINOR)
 LIB_NAME = simple
 
 
 SUBHDR =\
+	libsimple/abs.h\
 	libsimple/aligned_alloc.h\
 	libsimple/aligned_allocz.h\
 	libsimple/aligned_memdup.h\
@@ -27,9 +28,11 @@ SUBHDR =\
 	libsimple/aligned_wcsndup.h\
 	libsimple/aligned_wmemdup.h\
 	libsimple/array.h\
+	libsimple/ascii.h\
 	libsimple/calloc.h\
 	libsimple/definitions.h\
 	libsimple/env.h\
+	libsimple/exec.h\
 	libsimple/malloc.h\
 	libsimple/mallocz.h\
 	libsimple/mem.h\
@@ -38,14 +41,18 @@ SUBHDR =\
 	libsimple/memalloc.h\
 	libsimple/memdup.h\
 	libsimple/memelem.h\
+	libsimple/net.h\
 	libsimple/overflow.h\
+	libsimple/path.h\
 	libsimple/posix_memalign.h\
 	libsimple/posix_memalignz.h\
 	libsimple/printf.h\
 	libsimple/pvalloc.h\
 	libsimple/pvallocz.h\
+	libsimple/random.h\
 	libsimple/realloc.h\
 	libsimple/search.h\
+	libsimple/sort.h\
 	libsimple/str.h\
 	libsimple/strdup.h\
 	libsimple/strn.h\
@@ -64,6 +71,12 @@ HDR =\
 	common.h
 
 OBJ =\
+	_enprintf.o\
+	_eprintf.o\
+	_venprintf.o\
+	_veprintf.o\
+	abs.o\
+	abspath.o\
 	aligned_allocn.o\
 	aligned_allocz.o\
 	aligned_alloczn.o\
@@ -83,14 +96,306 @@ OBJ =\
 	asprintf.o\
 	bindex.o\
 	bindex_r.o\
+	bindtemp_un.o\
 	callocn.o\
 	close.o\
+	close_range.o\
+	cmp_doublep.o\
+	cmp_doublepp.o\
+	cmp_doublepp_nul.o\
+	cmp_floatp.o\
+	cmp_floatpp.o\
+	cmp_floatpp_nul.o\
+	cmp_int16p.o\
+	cmp_int16pp.o\
+	cmp_int16pp_nul.o\
+	cmp_int32p.o\
+	cmp_int32pp.o\
+	cmp_int32pp_nul.o\
+	cmp_int64p.o\
+	cmp_int64pp.o\
+	cmp_int64pp_nul.o\
+	cmp_int8p.o\
+	cmp_int8pp.o\
+	cmp_int8pp_nul.o\
+	cmp_int_least16p.o\
+	cmp_int_least16pp.o\
+	cmp_int_least16pp_nul.o\
+	cmp_int_least32p.o\
+	cmp_int_least32pp.o\
+	cmp_int_least32pp_nul.o\
+	cmp_int_least64p.o\
+	cmp_int_least64pp.o\
+	cmp_int_least64pp_nul.o\
+	cmp_int_least8p.o\
+	cmp_int_least8pp.o\
+	cmp_int_least8pp_nul.o\
+	cmp_intmaxp.o\
+	cmp_intmaxpp.o\
+	cmp_intmaxpp_nul.o\
+	cmp_intp.o\
+	cmp_intpp.o\
+	cmp_intpp_nul.o\
+	cmp_intptrp.o\
+	cmp_intptrpp.o\
+	cmp_intptrpp_nul.o\
+	cmp_llongp.o\
+	cmp_llongpp.o\
+	cmp_llongpp_nul.o\
+	cmp_longp.o\
+	cmp_longpp.o\
+	cmp_longpp_nul.o\
+	cmp_nul_doublepp.o\
+	cmp_nul_floatpp.o\
+	cmp_nul_int16pp.o\
+	cmp_nul_int32pp.o\
+	cmp_nul_int64pp.o\
+	cmp_nul_int8pp.o\
+	cmp_nul_int_least16pp.o\
+	cmp_nul_int_least32pp.o\
+	cmp_nul_int_least64pp.o\
+	cmp_nul_int_least8pp.o\
+	cmp_nul_intmaxpp.o\
+	cmp_nul_intpp.o\
+	cmp_nul_intptrpp.o\
+	cmp_nul_llongpp.o\
+	cmp_nul_longpp.o\
+	cmp_nul_ptrdiffpp.o\
+	cmp_nul_rev_doublepp.o\
+	cmp_nul_rev_floatpp.o\
+	cmp_nul_rev_int16pp.o\
+	cmp_nul_rev_int32pp.o\
+	cmp_nul_rev_int64pp.o\
+	cmp_nul_rev_int8pp.o\
+	cmp_nul_rev_int_least16pp.o\
+	cmp_nul_rev_int_least32pp.o\
+	cmp_nul_rev_int_least64pp.o\
+	cmp_nul_rev_int_least8pp.o\
+	cmp_nul_rev_intmaxpp.o\
+	cmp_nul_rev_intpp.o\
+	cmp_nul_rev_intptrpp.o\
+	cmp_nul_rev_llongpp.o\
+	cmp_nul_rev_longpp.o\
+	cmp_nul_rev_ptrdiffpp.o\
+	cmp_nul_rev_scharpp.o\
+	cmp_nul_rev_shortpp.o\
+	cmp_nul_rev_sizepp.o\
+	cmp_nul_rev_ssizepp.o\
+	cmp_nul_rev_strpp.o\
+	cmp_nul_rev_ucharpp.o\
+	cmp_nul_rev_uint16pp.o\
+	cmp_nul_rev_uint32pp.o\
+	cmp_nul_rev_uint64pp.o\
+	cmp_nul_rev_uint8pp.o\
+	cmp_nul_rev_uint_least16pp.o\
+	cmp_nul_rev_uint_least32pp.o\
+	cmp_nul_rev_uint_least64pp.o\
+	cmp_nul_rev_uint_least8pp.o\
+	cmp_nul_rev_uintmaxpp.o\
+	cmp_nul_rev_uintpp.o\
+	cmp_nul_rev_uintptrpp.o\
+	cmp_nul_rev_ullongpp.o\
+	cmp_nul_rev_ulongpp.o\
+	cmp_nul_rev_ushortpp.o\
+	cmp_nul_scharpp.o\
+	cmp_nul_shortpp.o\
+	cmp_nul_sizepp.o\
+	cmp_nul_ssizepp.o\
+	cmp_nul_strpp.o\
+	cmp_nul_ucharpp.o\
+	cmp_nul_uint16pp.o\
+	cmp_nul_uint32pp.o\
+	cmp_nul_uint64pp.o\
+	cmp_nul_uint8pp.o\
+	cmp_nul_uint_least16pp.o\
+	cmp_nul_uint_least32pp.o\
+	cmp_nul_uint_least64pp.o\
+	cmp_nul_uint_least8pp.o\
+	cmp_nul_uintmaxpp.o\
+	cmp_nul_uintpp.o\
+	cmp_nul_uintptrpp.o\
+	cmp_nul_ullongpp.o\
+	cmp_nul_ulongpp.o\
+	cmp_nul_ushortpp.o\
+	cmp_ptrdiffp.o\
+	cmp_ptrdiffpp.o\
+	cmp_ptrdiffpp_nul.o\
+	cmp_rev_doublep.o\
+	cmp_rev_doublepp.o\
+	cmp_rev_doublepp_nul.o\
+	cmp_rev_floatp.o\
+	cmp_rev_floatpp.o\
+	cmp_rev_floatpp_nul.o\
+	cmp_rev_int16p.o\
+	cmp_rev_int16pp.o\
+	cmp_rev_int16pp_nul.o\
+	cmp_rev_int32p.o\
+	cmp_rev_int32pp.o\
+	cmp_rev_int32pp_nul.o\
+	cmp_rev_int64p.o\
+	cmp_rev_int64pp.o\
+	cmp_rev_int64pp_nul.o\
+	cmp_rev_int8p.o\
+	cmp_rev_int8pp.o\
+	cmp_rev_int8pp_nul.o\
+	cmp_rev_int_least16p.o\
+	cmp_rev_int_least16pp.o\
+	cmp_rev_int_least16pp_nul.o\
+	cmp_rev_int_least32p.o\
+	cmp_rev_int_least32pp.o\
+	cmp_rev_int_least32pp_nul.o\
+	cmp_rev_int_least64p.o\
+	cmp_rev_int_least64pp.o\
+	cmp_rev_int_least64pp_nul.o\
+	cmp_rev_int_least8p.o\
+	cmp_rev_int_least8pp.o\
+	cmp_rev_int_least8pp_nul.o\
+	cmp_rev_intmaxp.o\
+	cmp_rev_intmaxpp.o\
+	cmp_rev_intmaxpp_nul.o\
+	cmp_rev_intp.o\
+	cmp_rev_intpp.o\
+	cmp_rev_intpp_nul.o\
+	cmp_rev_intptrp.o\
+	cmp_rev_intptrpp.o\
+	cmp_rev_intptrpp_nul.o\
+	cmp_rev_llongp.o\
+	cmp_rev_llongpp.o\
+	cmp_rev_llongpp_nul.o\
+	cmp_rev_longp.o\
+	cmp_rev_longpp.o\
+	cmp_rev_longpp_nul.o\
+	cmp_rev_ptrdiffp.o\
+	cmp_rev_ptrdiffpp.o\
+	cmp_rev_ptrdiffpp_nul.o\
+	cmp_rev_scharp.o\
+	cmp_rev_scharpp.o\
+	cmp_rev_scharpp_nul.o\
+	cmp_rev_shortp.o\
+	cmp_rev_shortpp.o\
+	cmp_rev_shortpp_nul.o\
+	cmp_rev_sizep.o\
+	cmp_rev_sizepp.o\
+	cmp_rev_sizepp_nul.o\
+	cmp_rev_ssizep.o\
+	cmp_rev_ssizepp.o\
+	cmp_rev_ssizepp_nul.o\
+	cmp_rev_strp.o\
+	cmp_rev_strpp.o\
+	cmp_rev_strpp_nul.o\
+	cmp_rev_ucharp.o\
+	cmp_rev_ucharpp.o\
+	cmp_rev_ucharpp_nul.o\
+	cmp_rev_uint16p.o\
+	cmp_rev_uint16pp.o\
+	cmp_rev_uint16pp_nul.o\
+	cmp_rev_uint32p.o\
+	cmp_rev_uint32pp.o\
+	cmp_rev_uint32pp_nul.o\
+	cmp_rev_uint64p.o\
+	cmp_rev_uint64pp.o\
+	cmp_rev_uint64pp_nul.o\
+	cmp_rev_uint8p.o\
+	cmp_rev_uint8pp.o\
+	cmp_rev_uint8pp_nul.o\
+	cmp_rev_uint_least16p.o\
+	cmp_rev_uint_least16pp.o\
+	cmp_rev_uint_least16pp_nul.o\
+	cmp_rev_uint_least32p.o\
+	cmp_rev_uint_least32pp.o\
+	cmp_rev_uint_least32pp_nul.o\
+	cmp_rev_uint_least64p.o\
+	cmp_rev_uint_least64pp.o\
+	cmp_rev_uint_least64pp_nul.o\
+	cmp_rev_uint_least8p.o\
+	cmp_rev_uint_least8pp.o\
+	cmp_rev_uint_least8pp_nul.o\
+	cmp_rev_uintmaxp.o\
+	cmp_rev_uintmaxpp.o\
+	cmp_rev_uintmaxpp_nul.o\
+	cmp_rev_uintp.o\
+	cmp_rev_uintpp.o\
+	cmp_rev_uintpp_nul.o\
+	cmp_rev_uintptrp.o\
+	cmp_rev_uintptrpp.o\
+	cmp_rev_uintptrpp_nul.o\
+	cmp_rev_ullongp.o\
+	cmp_rev_ullongpp.o\
+	cmp_rev_ullongpp_nul.o\
+	cmp_rev_ulongp.o\
+	cmp_rev_ulongpp.o\
+	cmp_rev_ulongpp_nul.o\
+	cmp_rev_ushortp.o\
+	cmp_rev_ushortpp.o\
+	cmp_rev_ushortpp_nul.o\
+	cmp_scharp.o\
+	cmp_scharpp.o\
+	cmp_scharpp_nul.o\
+	cmp_shortp.o\
+	cmp_shortpp.o\
+	cmp_shortpp_nul.o\
+	cmp_sizep.o\
+	cmp_sizepp.o\
+	cmp_sizepp_nul.o\
+	cmp_ssizep.o\
+	cmp_ssizepp.o\
+	cmp_ssizepp_nul.o\
+	cmp_strp.o\
+	cmp_strpp.o\
+	cmp_strpp_nul.o\
+	cmp_ucharp.o\
+	cmp_ucharpp.o\
+	cmp_ucharpp_nul.o\
+	cmp_uint16p.o\
+	cmp_uint16pp.o\
+	cmp_uint16pp_nul.o\
+	cmp_uint32p.o\
+	cmp_uint32pp.o\
+	cmp_uint32pp_nul.o\
+	cmp_uint64p.o\
+	cmp_uint64pp.o\
+	cmp_uint64pp_nul.o\
+	cmp_uint8p.o\
+	cmp_uint8pp.o\
+	cmp_uint8pp_nul.o\
+	cmp_uint_least16p.o\
+	cmp_uint_least16pp.o\
+	cmp_uint_least16pp_nul.o\
+	cmp_uint_least32p.o\
+	cmp_uint_least32pp.o\
+	cmp_uint_least32pp_nul.o\
+	cmp_uint_least64p.o\
+	cmp_uint_least64pp.o\
+	cmp_uint_least64pp_nul.o\
+	cmp_uint_least8p.o\
+	cmp_uint_least8pp.o\
+	cmp_uint_least8pp_nul.o\
+	cmp_uintmaxp.o\
+	cmp_uintmaxpp.o\
+	cmp_uintmaxpp_nul.o\
+	cmp_uintp.o\
+	cmp_uintpp.o\
+	cmp_uintpp_nul.o\
+	cmp_uintptrp.o\
+	cmp_uintptrpp.o\
+	cmp_uintptrpp_nul.o\
+	cmp_ullongp.o\
+	cmp_ullongpp.o\
+	cmp_ullongpp_nul.o\
+	cmp_ulongp.o\
+	cmp_ulongpp.o\
+	cmp_ulongpp_nul.o\
+	cmp_ushortp.o\
+	cmp_ushortpp.o\
+	cmp_ushortpp_nul.o\
 	cmptimespec.o\
 	cmptimeval.o\
+	diff.o\
 	difftimespec.o\
 	difftimeval.o\
 	doubletotimespec.o\
 	doubletotimeval.o\
+	eabspath.o\
 	ealigned_alloc.o\
 	ealigned_allocn.o\
 	ealigned_allocz.o\
@@ -106,6 +411,9 @@ OBJ =\
 	ealigned_wmemdup.o\
 	ecalloc.o\
 	ecallocn.o\
+	efreadlink.o\
+	egetcwd.o\
+	egetexecpath.o\
 	egmtime.o\
 	elocaltime.o\
 	emalloc.o\
@@ -118,6 +426,7 @@ OBJ =\
 	ememalignzn.o\
 	ememalloc.o\
 	ememdup.o\
+	enabspath.o\
 	enaligned_alloc.o\
 	enaligned_allocn.o\
 	enaligned_allocz.o\
@@ -133,6 +442,9 @@ OBJ =\
 	enaligned_wmemdup.o\
 	encalloc.o\
 	encallocn.o\
+	enfreadlink.o\
+	engetcwd.o\
+	engetexecpath.o\
 	engmtime.o\
 	enlocaltime.o\
 	enmalloc.o\
@@ -155,6 +467,9 @@ OBJ =\
 	enpvallocn.o\
 	enpvallocz.o\
 	enpvalloczn.o\
+	enreadlink.o\
+	enreadlinkat.o\
+	enreadmagiclink.o\
 	enrealloc.o\
 	enreallocarray.o\
 	enreallocn.o\
@@ -194,6 +509,9 @@ OBJ =\
 	epvallocn.o\
 	epvallocz.o\
 	epvalloczn.o\
+	ereadlink.o\
+	ereadlinkat.o\
+	ereadmagiclink.o\
 	erealloc.o\
 	ereallocarray.o\
 	ereallocn.o\
@@ -223,11 +541,44 @@ OBJ =\
 	ewcsdup.o\
 	ewcsndup.o\
 	ewmemdup.o\
+	execlat.o\
+	execleat.o\
+	execlpe.o\
+	execvat.o\
+	execveat.o\
+	execvpe.o\
+	fexecl.o\
+	fexecle.o\
+	fexecv.o\
+	freadlink.o\
+	generate_seed.o\
+	getcwd.o\
 	getenv_e.o\
 	getenv_ne.o\
+	getexecpath.o\
 	gmtime.o\
+	habs.o\
+	hdiff.o\
+	hhabs.o\
+	hhdiff.o\
+	i16abs.o\
+	i16diff.o\
+	i32abs.o\
+	i32diff.o\
+	i64abs.o\
+	i64diff.o\
+	i8abs.o\
+	i8diff.o\
+	imaxabs.o\
+	imaxdiff.o\
 	inchrcaseset.o\
 	inchrset.o\
+	iptrabs.o\
+	iptrdiff.o\
+	labs.o\
+	ldiff.o\
+	llabs.o\
+	lldiff.o\
 	localtime.o\
 	mallocn.o\
 	mallocz.o\
@@ -296,6 +647,298 @@ OBJ =\
 	pvallocn.o\
 	pvallocz.o\
 	pvalloczn.o\
+	qsort_double.o\
+	qsort_doublep.o\
+	qsort_doublep_nul.o\
+	qsort_float.o\
+	qsort_floatp.o\
+	qsort_floatp_nul.o\
+	qsort_int.o\
+	qsort_int16.o\
+	qsort_int16p.o\
+	qsort_int16p_nul.o\
+	qsort_int32.o\
+	qsort_int32p.o\
+	qsort_int32p_nul.o\
+	qsort_int64.o\
+	qsort_int64p.o\
+	qsort_int64p_nul.o\
+	qsort_int8.o\
+	qsort_int8p.o\
+	qsort_int8p_nul.o\
+	qsort_int_least16.o\
+	qsort_int_least16p.o\
+	qsort_int_least16p_nul.o\
+	qsort_int_least32.o\
+	qsort_int_least32p.o\
+	qsort_int_least32p_nul.o\
+	qsort_int_least64.o\
+	qsort_int_least64p.o\
+	qsort_int_least64p_nul.o\
+	qsort_int_least8.o\
+	qsort_int_least8p.o\
+	qsort_int_least8p_nul.o\
+	qsort_intmax.o\
+	qsort_intmaxp.o\
+	qsort_intmaxp_nul.o\
+	qsort_intp.o\
+	qsort_intp_nul.o\
+	qsort_intptr.o\
+	qsort_intptrp.o\
+	qsort_intptrp_nul.o\
+	qsort_llong.o\
+	qsort_llongp.o\
+	qsort_llongp_nul.o\
+	qsort_long.o\
+	qsort_longp.o\
+	qsort_longp_nul.o\
+	qsort_nul_doublep.o\
+	qsort_nul_floatp.o\
+	qsort_nul_int16p.o\
+	qsort_nul_int32p.o\
+	qsort_nul_int64p.o\
+	qsort_nul_int8p.o\
+	qsort_nul_int_least16p.o\
+	qsort_nul_int_least32p.o\
+	qsort_nul_int_least64p.o\
+	qsort_nul_int_least8p.o\
+	qsort_nul_intmaxp.o\
+	qsort_nul_intp.o\
+	qsort_nul_intptrp.o\
+	qsort_nul_llongp.o\
+	qsort_nul_longp.o\
+	qsort_nul_ptrdiffp.o\
+	qsort_nul_rev_doublep.o\
+	qsort_nul_rev_floatp.o\
+	qsort_nul_rev_int16p.o\
+	qsort_nul_rev_int32p.o\
+	qsort_nul_rev_int64p.o\
+	qsort_nul_rev_int8p.o\
+	qsort_nul_rev_int_least16p.o\
+	qsort_nul_rev_int_least32p.o\
+	qsort_nul_rev_int_least64p.o\
+	qsort_nul_rev_int_least8p.o\
+	qsort_nul_rev_intmaxp.o\
+	qsort_nul_rev_intp.o\
+	qsort_nul_rev_intptrp.o\
+	qsort_nul_rev_llongp.o\
+	qsort_nul_rev_longp.o\
+	qsort_nul_rev_ptrdiffp.o\
+	qsort_nul_rev_scharp.o\
+	qsort_nul_rev_shortp.o\
+	qsort_nul_rev_sizep.o\
+	qsort_nul_rev_ssizep.o\
+	qsort_nul_rev_strp.o\
+	qsort_nul_rev_ucharp.o\
+	qsort_nul_rev_uint16p.o\
+	qsort_nul_rev_uint32p.o\
+	qsort_nul_rev_uint64p.o\
+	qsort_nul_rev_uint8p.o\
+	qsort_nul_rev_uint_least16p.o\
+	qsort_nul_rev_uint_least32p.o\
+	qsort_nul_rev_uint_least64p.o\
+	qsort_nul_rev_uint_least8p.o\
+	qsort_nul_rev_uintmaxp.o\
+	qsort_nul_rev_uintp.o\
+	qsort_nul_rev_uintptrp.o\
+	qsort_nul_rev_ullongp.o\
+	qsort_nul_rev_ulongp.o\
+	qsort_nul_rev_ushortp.o\
+	qsort_nul_scharp.o\
+	qsort_nul_shortp.o\
+	qsort_nul_sizep.o\
+	qsort_nul_ssizep.o\
+	qsort_nul_strp.o\
+	qsort_nul_ucharp.o\
+	qsort_nul_uint16p.o\
+	qsort_nul_uint32p.o\
+	qsort_nul_uint64p.o\
+	qsort_nul_uint8p.o\
+	qsort_nul_uint_least16p.o\
+	qsort_nul_uint_least32p.o\
+	qsort_nul_uint_least64p.o\
+	qsort_nul_uint_least8p.o\
+	qsort_nul_uintmaxp.o\
+	qsort_nul_uintp.o\
+	qsort_nul_uintptrp.o\
+	qsort_nul_ullongp.o\
+	qsort_nul_ulongp.o\
+	qsort_nul_ushortp.o\
+	qsort_ptrdiff.o\
+	qsort_ptrdiffp.o\
+	qsort_ptrdiffp_nul.o\
+	qsort_rev_double.o\
+	qsort_rev_doublep.o\
+	qsort_rev_doublep_nul.o\
+	qsort_rev_float.o\
+	qsort_rev_floatp.o\
+	qsort_rev_floatp_nul.o\
+	qsort_rev_int.o\
+	qsort_rev_int16.o\
+	qsort_rev_int16p.o\
+	qsort_rev_int16p_nul.o\
+	qsort_rev_int32.o\
+	qsort_rev_int32p.o\
+	qsort_rev_int32p_nul.o\
+	qsort_rev_int64.o\
+	qsort_rev_int64p.o\
+	qsort_rev_int64p_nul.o\
+	qsort_rev_int8.o\
+	qsort_rev_int8p.o\
+	qsort_rev_int8p_nul.o\
+	qsort_rev_int_least16.o\
+	qsort_rev_int_least16p.o\
+	qsort_rev_int_least16p_nul.o\
+	qsort_rev_int_least32.o\
+	qsort_rev_int_least32p.o\
+	qsort_rev_int_least32p_nul.o\
+	qsort_rev_int_least64.o\
+	qsort_rev_int_least64p.o\
+	qsort_rev_int_least64p_nul.o\
+	qsort_rev_int_least8.o\
+	qsort_rev_int_least8p.o\
+	qsort_rev_int_least8p_nul.o\
+	qsort_rev_intmax.o\
+	qsort_rev_intmaxp.o\
+	qsort_rev_intmaxp_nul.o\
+	qsort_rev_intp.o\
+	qsort_rev_intp_nul.o\
+	qsort_rev_intptr.o\
+	qsort_rev_intptrp.o\
+	qsort_rev_intptrp_nul.o\
+	qsort_rev_llong.o\
+	qsort_rev_llongp.o\
+	qsort_rev_llongp_nul.o\
+	qsort_rev_long.o\
+	qsort_rev_longp.o\
+	qsort_rev_longp_nul.o\
+	qsort_rev_ptrdiff.o\
+	qsort_rev_ptrdiffp.o\
+	qsort_rev_ptrdiffp_nul.o\
+	qsort_rev_schar.o\
+	qsort_rev_scharp.o\
+	qsort_rev_scharp_nul.o\
+	qsort_rev_short.o\
+	qsort_rev_shortp.o\
+	qsort_rev_shortp_nul.o\
+	qsort_rev_size.o\
+	qsort_rev_sizep.o\
+	qsort_rev_sizep_nul.o\
+	qsort_rev_ssize.o\
+	qsort_rev_ssizep.o\
+	qsort_rev_ssizep_nul.o\
+	qsort_rev_str.o\
+	qsort_rev_strp.o\
+	qsort_rev_strp_nul.o\
+	qsort_rev_uchar.o\
+	qsort_rev_ucharp.o\
+	qsort_rev_ucharp_nul.o\
+	qsort_rev_uint.o\
+	qsort_rev_uint16.o\
+	qsort_rev_uint16p.o\
+	qsort_rev_uint16p_nul.o\
+	qsort_rev_uint32.o\
+	qsort_rev_uint32p.o\
+	qsort_rev_uint32p_nul.o\
+	qsort_rev_uint64.o\
+	qsort_rev_uint64p.o\
+	qsort_rev_uint64p_nul.o\
+	qsort_rev_uint8.o\
+	qsort_rev_uint8p.o\
+	qsort_rev_uint8p_nul.o\
+	qsort_rev_uint_least16.o\
+	qsort_rev_uint_least16p.o\
+	qsort_rev_uint_least16p_nul.o\
+	qsort_rev_uint_least32.o\
+	qsort_rev_uint_least32p.o\
+	qsort_rev_uint_least32p_nul.o\
+	qsort_rev_uint_least64.o\
+	qsort_rev_uint_least64p.o\
+	qsort_rev_uint_least64p_nul.o\
+	qsort_rev_uint_least8.o\
+	qsort_rev_uint_least8p.o\
+	qsort_rev_uint_least8p_nul.o\
+	qsort_rev_uintmax.o\
+	qsort_rev_uintmaxp.o\
+	qsort_rev_uintmaxp_nul.o\
+	qsort_rev_uintp.o\
+	qsort_rev_uintp_nul.o\
+	qsort_rev_uintptr.o\
+	qsort_rev_uintptrp.o\
+	qsort_rev_uintptrp_nul.o\
+	qsort_rev_ullong.o\
+	qsort_rev_ullongp.o\
+	qsort_rev_ullongp_nul.o\
+	qsort_rev_ulong.o\
+	qsort_rev_ulongp.o\
+	qsort_rev_ulongp_nul.o\
+	qsort_rev_ushort.o\
+	qsort_rev_ushortp.o\
+	qsort_rev_ushortp_nul.o\
+	qsort_schar.o\
+	qsort_scharp.o\
+	qsort_scharp_nul.o\
+	qsort_short.o\
+	qsort_shortp.o\
+	qsort_shortp_nul.o\
+	qsort_size.o\
+	qsort_sizep.o\
+	qsort_sizep_nul.o\
+	qsort_ssize.o\
+	qsort_ssizep.o\
+	qsort_ssizep_nul.o\
+	qsort_str.o\
+	qsort_strp.o\
+	qsort_strp_nul.o\
+	qsort_uchar.o\
+	qsort_ucharp.o\
+	qsort_ucharp_nul.o\
+	qsort_uint.o\
+	qsort_uint16.o\
+	qsort_uint16p.o\
+	qsort_uint16p_nul.o\
+	qsort_uint32.o\
+	qsort_uint32p.o\
+	qsort_uint32p_nul.o\
+	qsort_uint64.o\
+	qsort_uint64p.o\
+	qsort_uint64p_nul.o\
+	qsort_uint8.o\
+	qsort_uint8p.o\
+	qsort_uint8p_nul.o\
+	qsort_uint_least16.o\
+	qsort_uint_least16p.o\
+	qsort_uint_least16p_nul.o\
+	qsort_uint_least32.o\
+	qsort_uint_least32p.o\
+	qsort_uint_least32p_nul.o\
+	qsort_uint_least64.o\
+	qsort_uint_least64p.o\
+	qsort_uint_least64p_nul.o\
+	qsort_uint_least8.o\
+	qsort_uint_least8p.o\
+	qsort_uint_least8p_nul.o\
+	qsort_uintmax.o\
+	qsort_uintmaxp.o\
+	qsort_uintmaxp_nul.o\
+	qsort_uintp.o\
+	qsort_uintp_nul.o\
+	qsort_uintptr.o\
+	qsort_uintptrp.o\
+	qsort_uintptrp_nul.o\
+	qsort_ullong.o\
+	qsort_ullongp.o\
+	qsort_ullongp_nul.o\
+	qsort_ulong.o\
+	qsort_ulongp.o\
+	qsort_ulongp_nul.o\
+	qsort_ushort.o\
+	qsort_ushortp.o\
+	qsort_ushortp_nul.o\
+	random_bits.o\
+	random_float.o\
+	random_signed.o\
+	random_unsigned.o\
 	rawmemcasechr.o\
 	rawmemcasechr_inv.o\
 	rawmemccpy.o\
@@ -312,11 +955,15 @@ OBJ =\
 	rawmemrchr_inv.o\
 	rawmemrelem.o\
 	rawmemrelem_inv.o\
+	readlink.o\
+	readlinkat.o\
+	readmagiclink.o\
 	reallocarray.o\
 	reallocarrayf.o\
 	reallocf.o\
 	reallocfn.o\
 	reallocn.o\
+	srand.o\
 	stpmove.o\
 	stpnmove.o\
 	stpnset.o\
@@ -426,7 +1073,31 @@ OBJ =\
 	timeval2timespec.o\
 	timevaltodouble.o\
 	timevaltostr.o\
+	toi.o\
+	toi16.o\
+	toi32.o\
+	toi64.o\
+	toi8.o\
+	toih.o\
+	toihh.o\
+	toil.o\
+	toill.o\
+	toimax.o\
+	toiptr.o\
+	toiz.o\
+	u16abs.o\
+	u32abs.o\
+	u64abs.o\
+	u8abs.o\
+	uabs.o\
+	uhabs.o\
+	uhhabs.o\
+	ulabs.o\
+	ullabs.o\
+	umaxabs.o\
 	unlist.o\
+	uptrabs.o\
+	uzabs.o\
 	valigned_allocn.o\
 	valigned_reallocfn.o\
 	valloc.o\
@@ -437,6 +1108,14 @@ OBJ =\
 	vcallocn.o\
 	venprintf.o\
 	veprintf.o\
+	vexecl.o\
+	vexeclat.o\
+	vexecle.o\
+	vexecleat.o\
+	vexeclp.o\
+	vexeclpe.o\
+	vfexecl.o\
+	vfexecle.o\
 	vmallocn.o\
 	vmemalignn.o\
 	vmemalignzn.o\
@@ -449,9 +1128,16 @@ OBJ =\
 	vvallocn.o\
 	vvalloczn.o\
 	vweprintf.o\
+	vxexecl.o\
+	vxexecle.o\
 	wcsndup.o\
 	weprintf.o\
+	which.o\
 	wmemdup.o\
+	xexecl.o\
+	xexecv.o\
+	zabs.o\
+	zdiff.o\
 	libsimple.o
 
 MAN0 =\
