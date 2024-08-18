@@ -197,20 +197,20 @@ libsimple_unlist(void *__list, size_t __i, size_t *__np, size_t __width)
 
 
 #define _LIBSIMPLE_REMOVE_CONST(X, TYPE, ...) (*(TYPE *)(void *)&(X))
-#define LIBSIMPLE_REMOVE_CONST(...) _LIBSIMPLE_REMOVE_CONST(__VA_ARGS__, void *) /* TODO test, doc, man */
+#define LIBSIMPLE_REMOVE_CONST(...) _LIBSIMPLE_REMOVE_CONST(__VA_ARGS__, void *) /* TODO test, doc, man (since 1.2) */
 #ifndef REMOVE_CONST
 # define REMOVE_CONST(...) LIBSIMPLE_REMOVE_CONST(__VA_ARGS__)
 #endif
 
 
-#define LIBSIMPLE_PREFETCH_RDONLY(ADDRESS, LOCALITY) /* void */ /* TODO test, doc, man */\
+#define LIBSIMPLE_PREFETCH_RDONLY(ADDRESS, LOCALITY) /* void */ /* TODO test, doc, man (since 1.2) */\
 	_LIBSIMPLE_GCC_ONLY(__builtin_prefetch(ADDRESS, 0, LOCALITY))
 #ifndef PREFETCH_RDONLY
 # define PREFETCH_RDONLY(...) LIBSIMPLE_PREFETCH_RDONLY(__VA_ARGS__)
 #endif
 
 
-#define LIBSIMPLE_PREFETCH_RDWR(ADDRESS, LOCALITY) /* void */ /* TODO test, doc, man */\
+#define LIBSIMPLE_PREFETCH_RDWR(ADDRESS, LOCALITY) /* void */ /* TODO test, doc, man (since 1.2) */\
 	_LIBSIMPLE_GCC_ONLY(__builtin_prefetch(ADDRESS, 1, LOCALITY))
 #ifndef PREFETCH_RDWR
 # define PREFETCH_RDWR(...) LIBSIMPLE_PREFETCH_RDWR(__VA_ARGS__)
@@ -220,7 +220,7 @@ libsimple_unlist(void *__list, size_t __i, size_t *__np, size_t __width)
 #define _LIBSIMPLE_ASSUME_ALIGNED(PTR, ALIGNMENT, ...)\
 	_LIBSIMPLE_GCC_ONLY(__builtin_assume_aligned(PTR, ALIGNMENT))
 #if defined(__GNUC__) && !defined(__clang__)
-# define LIBSIMPLE_ASSUME_ALIGNED(PTR, ...) /* returns PTR */ /* TODO test, doc, man */\
+# define LIBSIMPLE_ASSUME_ALIGNED(PTR, ...) /* returns PTR */ /* TODO test, doc, man (since 1.2) */\
 	_LIBSIMPLE_GCC_ONLY(__builtin_assume_aligned(PTR, ##__VA_ARGS__,\
 	                                             _LIBSIMPLE_C11_ONLY(_Alignof(PTR))\
 	                                             _LIBSIMPLE_PREC11_ONLY(__alignof(PTR))))
@@ -230,20 +230,20 @@ libsimple_unlist(void *__list, size_t __i, size_t *__np, size_t __width)
 #endif
 
 
-#define LIBSIMPLE_ASSUME_MISALIGNED(PTR, ALIGNMENT, OFFSET) /* returns PTR */ /* TODO test, doc, man */\
+#define LIBSIMPLE_ASSUME_MISALIGNED(PTR, ALIGNMENT, OFFSET) /* returns PTR */ /* TODO test, doc, man (since 1.2) */\
 	__builtin_assume_aligned(PTR, ALIGNMENT, OFFSET)
 #ifndef ASSUME_MISALIGNED
 # define ASSUME_MISALIGNED(...) LIBSIMPLE_ASSUME_MISALIGNED(__VA_ARGS__)
 #endif
 
 
-#define LIBSIMPLE_UNROLLED(N) _LIBSIMPLE_GCC_ONLY(_LIBSIMPLE_C11_ONLY(_Pragma("GCC unroll "#N))) /* TODO test, doc, man */
+#define LIBSIMPLE_UNROLLED(N) _LIBSIMPLE_GCC_ONLY(_LIBSIMPLE_C11_ONLY(_Pragma("GCC unroll "#N))) /* TODO test, doc, man (since 1.2) */
 #ifndef UNROLLED
 # define UNROLLED(N) LIBSIMPLE_UNROLLED(N)
 #endif
 
 
-#define LIBSIMPLE_SIMDLOOP _LIBSIMPLE_GCC_ONLY(_LIBSIMPLE_C11_ONLY(_Pragma("GCC ivdep"))) /* TODO test, doc, man */
+#define LIBSIMPLE_SIMDLOOP _LIBSIMPLE_GCC_ONLY(_LIBSIMPLE_C11_ONLY(_Pragma("GCC ivdep"))) /* TODO test, doc, man (since 1.2) */
 #ifndef SIMDLOOP
 # define SIMDLOOP LIBSIMPLE_SIMDLOOP
 #endif

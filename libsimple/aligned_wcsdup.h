@@ -7,6 +7,8 @@
  * @param   s:const wchar_t *  The string to copy
  * @param   alignment:size_t   The alignment of the returned pointer
  * @return  :wchar_t *         Duplicate of `s` with automatic storage
+ * 
+ * @since  1.2
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define libsimple_aligned_wcsdupa(s, alignment)\
@@ -35,6 +37,8 @@
  * @param   s          The string to copy
  * @param   alignment  The alignment of the returned pointer
  * @return             Duplicate of `s`, `NULL` on failure
+ * 
+ * @since  1.2
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __nonnull__, __warn_unused_result__)))
 static inline wchar_t *libsimple_aligned_wcsdup(const wchar_t * __s, size_t __alignment)
@@ -51,6 +55,8 @@ static inline wchar_t *libsimple_aligned_wcsdup(const wchar_t * __s, size_t __al
  * @param   s          The string to copy
  * @param   alignment  The alignment of the returned pointer
  * @return             Duplicate of `s`
+ * 
+ * @since  1.2
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(3), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
 wchar_t *libsimple_enaligned_wcsdup(int, const wchar_t *, size_t);
@@ -65,6 +71,8 @@ wchar_t *libsimple_enaligned_wcsdup(int, const wchar_t *, size_t);
  * @param   s          The string to copy
  * @param   alignment  The alignment of the returned pointer
  * @return             Duplicate of `s`
+ * 
+ * @since  1.2
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __nonnull__, __warn_unused_result__, __returns_nonnull__)))
 static inline wchar_t *libsimple_ealigned_wcsdup(const wchar_t *__s, size_t __alignment)

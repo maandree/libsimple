@@ -8,6 +8,8 @@
  * @param   alignment:size_t   The alignment of the returned pointer
  * @param   n:size_t           The number of wide characters to copy
  * @return  :wchar_t *         Duplicate of `s` with automatic storage
+ * 
+ * @since  1.2
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define libsimple_aligned_wmemdupa(s, alignment, n)\
@@ -39,6 +41,8 @@
  * @param   alignment  The alignment of the returned pointer
  * @param   n          The number of wide characters to copy
  * @return             Duplicate of `s`, `NULL` on failure
+ * 
+ * @since  1.2
  */	
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __alloc_size__(3), __nonnull__, __warn_unused_result__)))
 wchar_t *libsimple_aligned_wmemdup(const wchar_t *, size_t, size_t);
@@ -55,6 +59,8 @@ wchar_t *libsimple_aligned_wmemdup(const wchar_t *, size_t, size_t);
  * @param   alignment  The alignment of the returned pointer
  * @param   n          The number of wide characters to copy
  * @return             Duplicate of `s`
+ * 
+ * @since  1.2
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(3), __alloc_size__(4), __warn_unused_result__, __returns_nonnull__)))
 wchar_t *libsimple_enaligned_wmemdup(int, const wchar_t *, size_t, size_t);
@@ -70,6 +76,8 @@ wchar_t *libsimple_enaligned_wmemdup(int, const wchar_t *, size_t, size_t);
  * @param   alignment  The alignment of the returned pointer
  * @param   n          The number of wide characters to copy
  * @return             Duplicate of `s`
+ * 
+ * @since  1.2
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, __alloc_align__(2), __alloc_size__(3), __warn_unused_result__, __returns_nonnull__)))
 static inline wchar_t *libsimple_ealigned_wmemdup(const wchar_t *__s, size_t __alignment, size_t __n)

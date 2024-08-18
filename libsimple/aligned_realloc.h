@@ -26,6 +26,8 @@
  * @throws  EINVAL     `alignment` is not a valid alignment
  * @throws  ENOMEM     Could not allocated enough memory
  * @throws  ENOSYS     Not implemented (requires non-standard libc functions)
+ * 
+ * @since  1.2
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_align__(2), __alloc_size__(3), __warn_unused_result__)))
 #if defined(__GLIBC__)
@@ -88,6 +90,8 @@ libsimple_aligned_realloc(void *__ptr, size_t __alignment, size_t __n)
  *                     this function is unspecified for the value 0
  * @return             Either `ptr` or a unique pointer with at least
  *                     the specified size
+ * 
+ * @since  1.2
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_align__(3), __alloc_size__(4), __warn_unused_result__, __returns_nonnull__)))
 void *libsimple_enaligned_realloc(int, void *, size_t, size_t);
@@ -120,6 +124,8 @@ void *libsimple_enaligned_realloc(int, void *, size_t, size_t);
  *                     this function is unspecified for the value 0
  * @return             Either `ptr` or a unique pointer with at least
  *                     the specified size
+ * 
+ * @since  1.2
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_align__(2), __alloc_size__(3), __warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_ealigned_realloc(void *__ptr, size_t __alignment, size_t __n)
@@ -154,6 +160,8 @@ static inline void *libsimple_ealigned_realloc(void *__ptr, size_t __alignment, 
  * @throws  EINVAL     `n` is 0
  * @throws  EINVAL     `alignment` is not a valid alignment
  * @throws  ENOMEM     Could not allocated enough memory
+ * 
+ * @since  1.2
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_align__(2), __alloc_size__(3), __warn_unused_result__)))
 static inline void *
@@ -197,6 +205,8 @@ libsimple_aligned_reallocf(void *__ptr, size_t __alignment, size_t __n) /* TODO 
  * @throws  EINVAL     `alignment` is not a valid alignment
  * @throws  ENOMEM     Could not allocated enough memory
  * @throws  ENOSYS     Not implemented (requires non-standard libc functions)
+ * 
+ * @since  1.2
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_align__(2), __alloc_size__(3, 4), __warn_unused_result__)))
 static inline void *
@@ -241,6 +251,8 @@ libsimple_aligned_reallocarray(void *__ptr, size_t __alignment, size_t __n, size
  *                     this function is unspecified for the value 0
  * @return             Either `ptr` or a unique pointer with at least
  *                     the specified size
+ * 
+ * @since  1.2
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_align__(3), __alloc_size__(4, 5), __warn_unused_result__, __returns_nonnull__)))
 void *libsimple_enaligned_reallocarray(int, void *, size_t, size_t, size_t);
@@ -277,6 +289,8 @@ void *libsimple_enaligned_reallocarray(int, void *, size_t, size_t, size_t);
  *                     this function is unspecified for the value 0
  * @return             Either `ptr` or a unique pointer with at least
  *                     the specified size
+ * 
+ * @since  1.2
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_align__(2), __alloc_size__(3, 4), __warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_ealigned_reallocarray(void *__ptr, size_t __alignment, size_t __n, size_t __m)
@@ -310,6 +324,8 @@ static inline void *libsimple_ealigned_reallocarray(void *__ptr, size_t __alignm
  * @throws  EINVAL     `alignment` is not a valid alignment
  * @throws  ENOMEM     Could not allocated enough memory
  * @throws  ENOSYS     Not implemented (requires non-standard libc functions)
+ * 
+ * @since  1.2
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_align__(2), __alloc_size__(3, 4), __warn_unused_result__)))
 static inline void *
@@ -354,6 +370,8 @@ libsimple_aligned_reallocarrayf(void *__ptr, size_t __alignment, size_t __n, siz
  * @throws  EINVAL     `alignment` is not a valid alignment
  * @throws  ENOMEM     Could not allocated enough memory
  * @throws  ENOSYS     Not implemented (requires non-standard libc functions)
+ * 
+ * @since  1.2
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_align__(2), __warn_unused_result__)))
 void *libsimple_valigned_reallocn(void *, size_t, size_t, va_list);
@@ -392,6 +410,8 @@ void *libsimple_valigned_reallocn(void *, size_t, size_t, va_list);
  *                     list must end with 0 (which is not factor)
  * @return             Either `ptr` or a unique pointer with at least
  *                     the specified size
+ * 
+ * @since  1.2
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_align__(3), __warn_unused_result__, __returns_nonnull__)))
 void *libsimple_envaligned_reallocn(int, void *, size_t, size_t, va_list);
@@ -429,6 +449,8 @@ void *libsimple_envaligned_reallocn(int, void *, size_t, size_t, va_list);
  *                     list must end with 0 (which is not factor)
  * @return             Either `ptr` or a unique pointer with at least
  *                     the specified size
+ * 
+ * @since  1.2
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_align__(2), __warn_unused_result__, __returns_nonnull__)))
 static inline void *libsimple_evaligned_reallocn(void *__ptr, size_t __alignment, size_t __n, va_list __ap)
@@ -463,6 +485,8 @@ static inline void *libsimple_evaligned_reallocn(void *__ptr, size_t __alignment
  * @throws  EINVAL     `alignment` is not a valid alignment
  * @throws  ENOMEM     Could not allocated enough memory
  * @throws  ENOSYS     Not implemented (requires non-standard libc functions)
+ * 
+ * @since  1.2
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_align__(2), __warn_unused_result__)))
 static inline void *
@@ -507,6 +531,8 @@ libsimple_valigned_reallocfn(void *__ptr, size_t __alignment, size_t __n, va_lis
  * @throws  EINVAL     `alignment` is not a valid alignment
  * @throws  ENOMEM     Could not allocated enough memory
  * @throws  ENOSYS     Not implemented (requires non-standard libc functions)
+ * 
+ * @since  1.2
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_align__(2), __warn_unused_result__)))
 static inline void *
@@ -552,6 +578,8 @@ libsimple_aligned_reallocn(void *__ptr, size_t __alignment, size_t __n, ... /*, 
  *                     list must end with 0 (which is not factor)
  * @return             Either `ptr` or a unique pointer with at least
  *                     the specified size
+ * 
+ * @since  1.2
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_align__(3), __warn_unused_result__, __returns_nonnull__)))
 static inline void *
@@ -596,6 +624,8 @@ libsimple_enaligned_reallocn(int __status, void *__ptr, size_t __alignment, size
  *                     list must end with 0 (which is not factor)
  * @return             Either `ptr` or a unique pointer with at least
  *                     the specified size
+ * 
+ * @since  1.2
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_align__(2), __warn_unused_result__, __returns_nonnull__)))
 static inline void *
@@ -640,6 +670,8 @@ libsimple_ealigned_reallocn(void *__ptr, size_t __alignment, size_t __n, ... /*,
  * @throws  EINVAL     `alignment` is not a valid alignment
  * @throws  ENOMEM     Could not allocated enough memory
  * @throws  ENOSYS     Not implemented (requires non-standard libc functions)
+ * 
+ * @since  1.2
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__alloc_align__(2), __warn_unused_result__)))
 static inline void *

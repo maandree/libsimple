@@ -7,6 +7,8 @@
  * @param   s:const wchar_t *  The string to copy
  * @param   n:size_t           The maximum number of wide characters to copy
  * @return  :wchar_t *         Duplicate of `s` with automatic storage
+ * 
+ * @since  1.2
  */
 #if defined(__GNUC__) || defined(__clang__)
 # define libsimple_wcsndupa(s, n)\
@@ -31,6 +33,8 @@
  * @param   s  The string to copy
  * @param   n  The maximum number of wide characters to copy
  * @return     Duplicate of `s`
+ * 
+ * @since  1.2
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, _libsimple_assume_aligned_as(wchar_t), __nonnull__,
                                    __warn_unused_result__)))
@@ -47,6 +51,8 @@ wchar_t *libsimple_wcsndup(const wchar_t *, size_t);
  * @param   s       The string to copy
  * @param   n       The maximum number of wide characters to copy
  * @return          Duplicate of `s`
+ * 
+ * @since  1.2
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, _libsimple_assume_aligned_as(wchar_t), __nonnull__,
                                    __warn_unused_result__, __returns_nonnull__)))
@@ -62,6 +68,8 @@ wchar_t *libsimple_enwcsndup(int, const wchar_t *, size_t);
  * @param   s  The string to copy
  * @param   n  The maximum number of wide characters to copy
  * @return     Duplicate of `s`
+ * 
+ * @since  1.2
  */
 _LIBSIMPLE_GCC_ONLY(__attribute__((__malloc__, _libsimple_assume_aligned_as(wchar_t),
                                    __nonnull__, __warn_unused_result__, __returns_nonnull__)))
