@@ -31,3 +31,6 @@ uintmax_t libsimple_random_bits(size_t bits, void *unused);
 uintmax_t libsimple_random_unsigned(uintmax_t (*rng)(size_t bits, void *user), void *user, uintmax_t min, uintmax_t max);
 intmax_t libsimple_random_signed(uintmax_t (*rng)(size_t bits, void *user), void *user, intmax_t min, intmax_t max);
 long double libsimple_random_float(uintmax_t (*rng)(size_t bits, void *user), void *user, long double min, long double postmax);
+
+/* TODO doc, man (since 1.7) */
+void *libsimple_random_bytes(uintmax_t (*rng)(size_t bits, void *user), void *user, void *buffer, size_t bytes);

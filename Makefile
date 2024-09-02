@@ -941,6 +941,7 @@ OBJ =\
 	qsort_ushortp.o\
 	qsort_ushortp_nul.o\
 	random_bits.o\
+	random_bytes.o\
 	random_float.o\
 	random_signed.o\
 	random_unsigned.o\

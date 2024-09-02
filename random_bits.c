@@ -14,8 +14,10 @@ libsimple_random_bits(size_t bits, void *unused)
 		bits -= 8;
 	}
 
-	ret <<= bits;
-	ret |= (uintmax_t)(rand() & ((1 << bits) - 1));
+	if (bits) {
+		ret <<= bits;
+		ret |= (uintmax_t)(rand() & ((1 << bits) - 1));
+	}
 
 	(void) unused;
 	return ret;
