@@ -10,7 +10,8 @@ libsimple_random_bytes(uintmax_t (*rng)(size_t bits, void *user), void *user, vo
 	uintmax_t rnd;
 
 	while (bytes >= sizeof(uintmax_t)) {
-		*(uintmax_t *)buf = (*rng)(sizeof(uintmax_t) * 8U, user);
+		rnd = (*rng)(sizeof(uintmax_t) * 8U, user);
+		memcpy(buf, &rnd, sizeof(uintmax_t));
 		bytes -= sizeof(uintmax_t);
 		buf = &buf[sizeof(uintmax_t)];
 	}
@@ -19,6 +20,7 @@ libsimple_random_bytes(uintmax_t (*rng)(size_t bits, void *user), void *user, vo
 		rnd = (*rng)(bytes * 8U, user);
 		while (bytes) {
 			*buf++ = (char)(rnd & 255U);
+			bytes--;
 			rnd >>= 8;
 		}
 	}
