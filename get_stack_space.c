@@ -41,9 +41,8 @@ libsimple_get_stack_space(uintptr_t *restrict low, uintptr_t *restrict high)
 				if (!strcmp(&line[linelen - (sizeof(" [stack]\n") - 1U)], " [stack]\n"))
 					goto line_found;
 		}
-		
 	}
-	
+
 line_found:
 	close(fd);
 

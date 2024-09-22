@@ -41,9 +41,8 @@ libsimple_get_stack_limit(size_t *restrict soft, size_t *restrict hard)
 				if (!strcmp(line, "Max stack size  "))
 					goto line_found;
 		}
-		
 	}
-	
+
 line_found:
 	close(fd);
 	line = &line[sizeof("Max stack size  ") - 1U];
