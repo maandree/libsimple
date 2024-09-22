@@ -12,7 +12,7 @@ libsimple_get_stack_space(uintptr_t *restrict low, uintptr_t *restrict high)
 	size_t off = 0;
 	size_t lineoff, linelen;
 
-	fd = open("/proc/self/maps", O_RDONLY);
+	fd = open("/proc/thread-self/maps", O_RDONLY);
 	if (fd < 0)
 		return -1;
 

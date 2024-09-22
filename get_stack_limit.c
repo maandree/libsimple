@@ -12,7 +12,7 @@ libsimple_get_stack_limit(size_t *restrict soft, size_t *restrict hard)
 	size_t off = 0;
 	size_t lineoff, linelen;
 
-	fd = open("/proc/self/limits", O_RDONLY);
+	fd = open("/proc/thread-self/limits", O_RDONLY);
 	if (fd < 0)
 		return -1;
 
@@ -47,15 +47,24 @@ line_found:
 	close(fd);
 	line = &line[sizeof("Max stack size  ") - 1U];
 
-	while (*line == ' ')
+	while (*line == ' ' || *line == '\t')
 		line++;
-	if (soft)
-		*soft = (size_t)strtoull(line, NULL, 10);
+	if (soft) {
+		*soft = SIZE_MAX;
+		if (isdigit(*line))
+			*soft = (size_t)strtoull(line, NULL, 10);
+	}
 
-	while (*line == ' ')
+	while (*line != ' ' && *line != '\t' && *line && *line != '\n')
 		line++;
-	if (hard)
-		*hard = (size_t)strtoull(line, NULL, 10);
+
+	while (*line == ' ' || *line == '\t')
+		line++;
+	if (hard) {
+		*hard = SIZE_MAX;
+		if (isdigit(*line))
+			*hard = (size_t)strtoull(line, NULL, 10);
+	}
 
 	return 0;
 }
